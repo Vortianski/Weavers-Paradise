@@ -1,51 +1,31 @@
-name: "💡 Feature Request"
-description: Suggest a new idea or improvement for Weaver's Paradise
-title: "[Feature]: "
+name: "Suggestion"
+description: Suggest a new idea for Weaver’s Paradise
+title: "[Suggestion]: "
 labels: [enhancement]
 
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Thank you for suggesting a new feature! Please fill out the form below so we can understand your idea clearly.
-
   - type: dropdown
-    id: type_of_suggestion
+    id: suggestion-type
     attributes:
-      label: "Type of Suggestion"
-      description: "Select the category that best describes your suggestion"
+      label: "Type of suggestion"
+      description: "Select what category your suggestion fits into"
       options:
-        - Gameplay
-        - Items
-        - Blocks
-        - Mechanics
-        - Quality of Life
+        - New material
+        - New dye
+        - New crafting station
+        - Gameplay mechanic
         - Other
-      placeholder: "Choose one"
     validations:
       required: true
 
   - type: input
-    id: short_description
+    id: short-description
     attributes:
-      label: "Short Description"
-      description: "Give a brief summary of your idea"
-      placeholder: "e.g., Add a rainbow-colored dye that changes based on biome"
-    validations:
-      required: true
+      label: "Short description"
+      description: "Summarize your idea in one sentence"
 
   - type: textarea
-    id: idea_fitting
+    id: detailed-description
     attributes:
-      label: "How this idea fits into Weaver's Paradise"
-      description: "Explain why this would be a good addition or improvement"
-      placeholder: "e.g., This dye complements existing aesthetic dyes and encourages exploration of biomes"
-    validations:
-      required: true
-
-  - type: textarea
-    id: additional_context
-    attributes:
-      label: "Additional Context / Examples"
-      description: "Optional: Add screenshots, links, or any extra details"
-      placeholder: "Anything else you think would help us understand your suggestion"
+      label: "How do you see this idea fitting into the mod?"
+      description: "Explain how this suggestion improves or expands the mod"
