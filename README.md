@@ -4,7 +4,7 @@ NeoForge mod about expressing yourself through clothing
 Available for: NeoForge 1.21.1
 
 ## Links:
-CurseForge: Pending
+CurseForge: [CLICK](https://www.curseforge.com/minecraft/mc-mods/weavers-paradise)
 
 Modrinth: [CLICK](https://modrinth.com/project/weavers-paradise)
 
