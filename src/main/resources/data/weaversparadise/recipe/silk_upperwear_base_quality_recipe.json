@@ -1,0 +1,21 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "aaa",
+    "aaa"
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:silk_cloth"
+    },
+    "b": {
+      "item": "weaversparadise:needle_with_thread"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:silk_upperwear_base",
+    "count": 1
+  }
+}

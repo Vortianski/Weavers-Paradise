@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "weaversparadise:chromatic_bloom"
+    }
+  ],
+  "result": {
+    "id": "weaversparadise:chromatic_bloom_fruit",
+    "count": 1
+  }
+}

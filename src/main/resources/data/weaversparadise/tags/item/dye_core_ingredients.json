@@ -1,0 +1,31 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:echo_shard",
+    "minecraft:moss_block",
+    "minecraft:ender_eye",
+    "minecraft:glowstone_dust",
+    "minecraft:sugar",
+    "minecraft:phantom_membrane",
+    "minecraft:prismarine_crystals",
+    "weaversparadise:chromatic_bloom_fruit",
+    "minecraft:redstone",
+    "weaversparadise:flag_agender",
+    "weaversparadise:flag_aroace",
+    "weaversparadise:flag_aromantic",
+    "weaversparadise:flag_asexual",
+    "weaversparadise:flag_bisexual",
+    "weaversparadise:flag_demiboy",
+    "weaversparadise:flag_demigender",
+    "weaversparadise:flag_demigirl",
+    "weaversparadise:flag_gay",
+    "weaversparadise:flag_genderfluid",
+    "weaversparadise:flag_genderqueer",
+    "weaversparadise:flag_intersex",
+    "weaversparadise:flag_lesbian",
+    "weaversparadise:flag_nonbinary",
+    "weaversparadise:flag_pansexual",
+    "weaversparadise:flag_pride",
+    "weaversparadise:flag_trans"
+  ]
+}

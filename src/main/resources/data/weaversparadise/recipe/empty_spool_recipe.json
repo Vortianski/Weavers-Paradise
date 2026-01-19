@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "b",
+    "a",
+    "b"
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:stick"
+    },
+    "b": {
+      "tag": "weaversparadise:wood_buttons"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:empty_spool",
+    "count": 1
+  }
+}

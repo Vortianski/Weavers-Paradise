@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "xox.labvorty.weaversparadise.mixins",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "SculkBlockEntityMixin",
+    "PlayerMixin",
+    "GameEventListenerMixin",
+    "LivingRendererMixin",
+    "BlockStateClassMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

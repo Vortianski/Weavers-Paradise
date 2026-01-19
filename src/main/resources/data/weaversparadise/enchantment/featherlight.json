@@ -1,0 +1,23 @@
+{
+  "description": {
+    "translate": "enchantment.weaversparadise.featherlight"
+  },
+  "supported_items": [
+    "weaversparadise:thigh_highs_cotton"
+  ],
+  "weight": 10,
+  "max_level": 5,
+  "min_cost": {
+    "base": 1,
+    "per_level_above_first": 10
+  },
+  "max_cost": {
+    "base": 6,
+    "per_level_above_first": 10
+  },
+  "anvil_cost": 1,
+  "slots": [
+    "any"
+  ],
+  "exclusive_set": []
+}

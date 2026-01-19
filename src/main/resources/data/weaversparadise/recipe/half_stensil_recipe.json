@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "weaversparadise:base_stensil"
+  },
+  "result": {
+    "id": "weaversparadise:half_stensil",
+    "count": 1
+  }
+}

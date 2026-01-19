@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    { "item": "weaversparadise:wool_cloth" },
+    { "item": "weaversparadise:wool_cloth" },
+    { "item": "weaversparadise:wool_cloth" },
+    { "item": "weaversparadise:wool_cloth" },
+    { "item": "weaversparadise:wool_cloth" },
+    { "item": "weaversparadise:wool_cloth" },
+    { "item": "weaversparadise:wool_cloth" },
+    { "item": "weaversparadise:wool_cloth" },
+    { "item": "weaversparadise:wool_cloth" }
+  ],
+  "result": { "id": "weaversparadise:wool_cloth_block", "count": 1 }
+}

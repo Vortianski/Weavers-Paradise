@@ -1,0 +1,16 @@
+{
+  "type": "weaversparadise:dye_crushing",
+  "group": "dye_crushing",
+  "category": "misc",
+  "ingredients": [
+    { "item": "weaversparadise:mortar_and_pestle" },
+    { "item": "minecraft:bone" }
+  ],
+  "result": {
+    "id": "weaversparadise:pure_dye",
+    "count": 1
+  },
+  "red": 255,
+  "green": 255,
+  "blue": 185
+}

@@ -1,0 +1,16 @@
+{
+  "type": "weaversparadise:dye_core",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "tag": "weaversparadise:dye_core_ingredients"
+    }
+  ],
+  "result": {
+    "id": "weaversparadise:dye_core",
+    "count": 1
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "weaversparadise:block/spinning_jenny"
+    },
+    "facing=east": {
+      "model": "weaversparadise:block/spinning_jenny",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "weaversparadise:block/spinning_jenny",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "weaversparadise:block/spinning_jenny",
+      "y": 270
+    }
+  }
+}

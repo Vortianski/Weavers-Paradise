@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "minecraft:pink_dye" },
+    { "item": "minecraft:pink_dye" },
+    { "item": "minecraft:purple_dye" },
+    { "item": "minecraft:blue_dye" },
+    { "item": "minecraft:blue_dye" },
+    { "item": "weaversparadise:flag_base" }
+  ],
+  "result": { "id": "weaversparadise:flag_bisexual", "count": 1 }
+}

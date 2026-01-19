@@ -1,0 +1,33 @@
+{
+  "required_mods": [
+    "weaversparadise"
+  ],
+  "type": "curio",
+  "item": {
+    "items": [
+      "weaversparadise:sweater_wool"
+    ]
+  },
+  "insulation": {
+    "heat": 0,
+    "cold": 0
+  },
+  "entity": {
+    "entities": ["*"]
+  },
+  "attributes": {
+    "cold_sweat:cold_resistance": [
+      {
+        "name": "weaversparadise:sweater_wool",
+        "amount": 0.2,
+        "operation": "add_value"
+      }
+    ]
+  },
+  "immune_temp_modifiers": {
+    "cold_sweat:fire": 1.0
+  },
+  "hint": {
+    "key": "tooltip.hint.heat_or_cold_item"
+  }
+}

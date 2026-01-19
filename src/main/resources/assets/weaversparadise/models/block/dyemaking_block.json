@@ -1,0 +1,9 @@
+{
+  "parent": "weaversparadise:block/dyemaking_table_model",
+  "textures": {
+    "all": "weaversparadise:block/dyemaking_table_texture",
+    "particle": "weaversparadise:block/dyemaking_table_texture",
+    "1": "weaversparadise:block/dyemaking_table_texture"
+  },
+  "render_type": "solid"
+}

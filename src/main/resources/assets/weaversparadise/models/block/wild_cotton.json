@@ -1,0 +1,8 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "weaversparadise:block/wild_cotton",
+    "particle": "weaversparadise:block/wild_cotton"
+  },
+  "render_type": "cutout"
+}

@@ -1,0 +1,60 @@
+name: "🐛 Bug Report"
+description: Report a bug with Weaver's Paradise
+title: "[Bug]: "
+labels: [bug]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug!  
+        Please fill out the sections below.
+
+  - type: input
+    id: mc_version
+    attributes:
+      label: "Minecraft Version"
+      placeholder: "e.g. 1.21.1"
+    validations:
+      required: true
+
+  - type: input
+    id: mod_version
+    attributes:
+      label: "Weaver's Paradise Version"
+      placeholder: "e.g. 0.1.0"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "Describe the Bug"
+      description: "What happened? What did you expect instead?"
+      placeholder: "When I use the Bottled Dye on a dedicated server..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Steps to Reproduce"
+      description: "Step-by-step instructions"
+      placeholder: |
+        1. Start NeoForge server  
+        2. Join world  
+        3. Use Bottled Dye  
+        4. Crash happens
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: "Logs/Crash Report"
+      description: "Paste the relevant part of the log or link a gist/pastebin"
+      render: shell
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: "Additional Context"
+      description: "Anything else we should know?"

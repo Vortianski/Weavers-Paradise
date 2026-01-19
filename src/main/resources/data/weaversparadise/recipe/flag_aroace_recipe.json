@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "minecraft:orange_dye" },
+    { "item": "minecraft:yellow_dye" },
+    { "item": "minecraft:white_dye" },
+    { "item": "minecraft:light_blue_dye" },
+    { "item": "minecraft:purple_dye" },
+    { "item": "weaversparadise:flag_base" }
+  ],
+  "result": { "id": "weaversparadise:flag_aroace", "count": 1 }
+}

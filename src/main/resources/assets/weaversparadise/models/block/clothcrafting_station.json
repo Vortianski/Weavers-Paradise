@@ -1,0 +1,9 @@
+{
+  "parent": "weaversparadise:block/clothcrafting_station_model",
+  "textures": {
+    "all": "weaversparadise:block/clothcrafting_station_texture",
+    "particle": "weaversparadise:block/clothcrafting_station_texture",
+    "1": "weaversparadise:block/clothcrafting_station_texture"
+  },
+  "render_type": "cutout"
+}

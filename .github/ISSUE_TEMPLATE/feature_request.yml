@@ -1,0 +1,31 @@
+name: "Suggestion"
+description: Suggest a new idea for Weaver’s Paradise
+title: "[Suggestion]: "
+labels: [enhancement]
+
+body:
+  - type: dropdown
+    id: suggestion-type
+    attributes:
+      label: "Type of suggestion"
+      description: "Select what category your suggestion fits into"
+      options:
+        - New material
+        - New dye
+        - New crafting station
+        - Gameplay mechanic
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: short-description
+    attributes:
+      label: "Short description"
+      description: "Summarize your idea in one sentence"
+
+  - type: textarea
+    id: detailed-description
+    attributes:
+      label: "How do you see this idea fitting into the mod?"
+      description: "Explain how this suggestion improves or expands the mod"

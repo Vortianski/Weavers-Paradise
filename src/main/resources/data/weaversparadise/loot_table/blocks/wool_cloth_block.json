@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "weaversparadise:blocks/wool_cloth_block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "weaversparadise:wool_cloth_block"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "loader": "neoforge:item_layers",
+  "textures": {
+    "layer0": "weaversparadise:item/randompattern"
+  },
+  "render_types": {
+    "minecraft:end_portal": [0]
+  }
+}

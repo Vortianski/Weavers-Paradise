@@ -1,0 +1,44 @@
+{
+  "loader": "neoforge:item_layers",
+  "textures": {
+    "layer0": "weaversparadise:item/chromatic_bloom_fruit_layer_0",
+    "layer1": "weaversparadise:item/chromatic_bloom_fruit_layer_1",
+    "layer2": "weaversparadise:item/chromatic_bloom_fruit_layer_2",
+    "layer3": "weaversparadise:item/chromatic_bloom_fruit_layer_3",
+    "layer4": "weaversparadise:item/chromatic_bloom_fruit_layer_4",
+    "layer5": "weaversparadise:item/chromatic_bloom_fruit_layer_5",
+    "layer6": "weaversparadise:item/chromatic_bloom_fruit_layer_6",
+    "layer7": "weaversparadise:item/chromatic_bloom_fruit_layer_7",
+    "layer8": "weaversparadise:item/chromatic_bloom_fruit_layer_8"
+  },
+  "render_types": {
+    "minecraft:cutout": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+  },
+  "gui_light": "front",
+  "display": {
+    "ground": {
+      "rotation": [ 0, 0, 0 ],
+      "translation": [ 0, 2, 0],
+      "scale":[ 0.5, 0.5, 0.5 ]
+    },
+    "head": {
+      "rotation": [ 0, 180, 0 ],
+      "translation": [ 0, 13, 7],
+      "scale":[ 1, 1, 1]
+    },
+    "thirdperson_righthand": {
+      "rotation": [ 0, 0, 0 ],
+      "translation": [ 0, 3, 1 ],
+      "scale": [ 0.55, 0.55, 0.55 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ 0, -90, 25 ],
+      "translation": [ 1.13, 3.2, 1.13],
+      "scale": [ 0.68, 0.68, 0.68 ]
+    },
+    "fixed": {
+      "rotation": [ 0, 180, 0 ],
+      "scale": [ 1, 1, 1 ]
+    }
+  }
+}

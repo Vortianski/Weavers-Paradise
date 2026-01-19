@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "weaversparadise:cotton_boll"
+    }
+  ],
+  "result": {
+    "id": "weaversparadise:raw_cotton",
+    "count": 3
+  }
+}
