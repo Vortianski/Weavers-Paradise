@@ -1,20 +1,16 @@
 package xox.labvorty.weaversparadise.curios;
 
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
-import xox.labvorty.weaversparadise.model.ModelHandWarmers;
-import xox.labvorty.weaversparadise.model.ModelUpperWear;
-import xox.labvorty.weaversparadise.model.Modelastolfo_armor;
-import xox.labvorty.weaversparadise.renderers.SweaterWoolRenderer;
+import xox.labvorty.weaversparadise.model.*;
+import xox.labvorty.weaversparadise.renderers.models.SweaterWoolRenderer;
 import xox.labvorty.weaversparadise.renderers.models.*;
-import xox.labvorty.weaversparadise.model.ThighHighsModel;
-import xox.labvorty.weaversparadise.curios.WeaversParadiseMobLayers;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public class WeaversParadiseCurioRenderers {
     @SubscribeEvent
     public static void registerLayers(final EntityRenderersEvent.RegisterLayerDefinitions evt) {
@@ -22,6 +18,8 @@ public class WeaversParadiseCurioRenderers {
         evt.registerLayerDefinition(Modelastolfo_armor.LAYER_LOCATION, Modelastolfo_armor::createBodyLayer);
         evt.registerLayerDefinition(WeaversParadiseMobLayers.HAND_WARMERS, ModelHandWarmers::createBodyLayer);
         evt.registerLayerDefinition(WeaversParadiseMobLayers.UPPER_WEAR, ModelUpperWear::createBodyLayer);
+        evt.registerLayerDefinition(WeaversParadiseMobLayers.SLIM_PLUSHIE, SlimPlushieModel::createBodyLayer);
+        evt.registerLayerDefinition(WeaversParadiseMobLayers.WIDE_PLUSHIE, WidePlushieModel::createBodyLayer);
     }
 
     @SubscribeEvent

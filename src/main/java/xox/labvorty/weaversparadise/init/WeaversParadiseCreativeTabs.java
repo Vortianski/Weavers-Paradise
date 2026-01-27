@@ -10,9 +10,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import xox.labvorty.weaversparadise.items.CottonCloth;
+import xox.labvorty.weaversparadise.items.PlushieItem;
 
 import java.util.List;
+import java.util.UUID;
 
 public class WeaversParadiseCreativeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, "weaversparadise");
@@ -232,6 +233,15 @@ public class WeaversParadiseCreativeTabs {
                     output.accept(redstoneDye);
                 }
 
+                ItemStack polychromaticDye = baseDye.copy();
+                CustomData.update(DataComponents.CUSTOM_DATA, polychromaticDye, (tag) -> {
+                    tag.putString("dyeType", "polychromatic");
+                    tag.putInt("colorRedOne", 255);
+                    tag.putInt("colorGreenOne", 0);
+                    tag.putInt("colorBlueOne", 0);
+                });
+                output.accept(polychromaticDye);
+
                 for (String entry : dyeTypes) {
                     ItemStack stack = baseDyeCore.copy();
                     CustomData.update(DataComponents.CUSTOM_DATA, stack, (tag) -> {
@@ -267,6 +277,15 @@ public class WeaversParadiseCreativeTabs {
                     });
                     output.accept(redstoneDye);
                 }
+
+                ItemStack polychromaticCore = baseDyeCore.copy();
+                CustomData.update(DataComponents.CUSTOM_DATA, polychromaticCore, (tag) -> {
+                    tag.putString("dyeType", "polychromatic");
+                    tag.putInt("colorRedOne", 255);
+                    tag.putInt("colorGreenOne", 0);
+                    tag.putInt("colorBlueOne", 0);
+                });
+                output.accept(polychromaticCore);
             }).build());
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CLOTHING_TAB = CREATIVE_MODE_TABS.register("clothing_tab", () -> CreativeModeTab.builder()
@@ -452,16 +471,17 @@ public class WeaversParadiseCreativeTabs {
                         WeaversParadiseItems.WOOL_SPOOL_BLOCK.get(),
                         WeaversParadiseItems.WOOL_CLOTH_BLOCK.get(),
                         WeaversParadiseItems.BUTTON.get(),
-                        WeaversParadiseItems.BASIC_STENSIL.get(),
-                        WeaversParadiseItems.HALF_STENSIL.get(),
-                        WeaversParadiseItems.CHECKERS_STENSIL.get(),
-                        WeaversParadiseItems.LINES_SMALL_STENSIL.get(),
-                        WeaversParadiseItems.LINES_BIG_STENSIL.get(),
-                        WeaversParadiseItems.LINES_VERTICAL_STENSIL.get(),
-                        WeaversParadiseItems.CROSS_STENSIL.get(),
-                        WeaversParadiseItems.PAWS_STENSIL.get(),
+                        WeaversParadiseItems.BASIC_STENCIL.get(),
+                        WeaversParadiseItems.HALF_STENCIL.get(),
+                        WeaversParadiseItems.CHECKERS_STENCIL.get(),
+                        WeaversParadiseItems.LINES_SMALL_STENCIL.get(),
+                        WeaversParadiseItems.LINES_BIG_STENCIL.get(),
+                        WeaversParadiseItems.LINES_VERTICAL_STENCIL.get(),
+                        WeaversParadiseItems.CROSS_STENCIL.get(),
+                        WeaversParadiseItems.PAWS_STENCIL.get(),
                         WeaversParadiseItems.CHROMATIC_BLOOM.get(),
                         WeaversParadiseItems.CHROMATIC_BLOOM_FRUIT.get(),
+                        WeaversParadiseItems.CHROMATIC_DUST.get(),
                         WeaversParadiseItems.COTTON_SEEDS.get(),
                         WeaversParadiseItems.KOZINAKI.get(),
                         WeaversParadiseItems.COTTON_BOLL.get(),
@@ -495,6 +515,10 @@ public class WeaversParadiseCreativeTabs {
                     ItemStack stack = new ItemStack(entry);
                     output.accept(stack);
                 }
+
+                //Can use both null and preset UUID. If none are given defaults
+                output.accept(PlushieItem.createPreMadePlushieAsync("Vortianski", UUID.fromString("383b1ab0-ae8f-4342-b94d-b4f3d2cfc9c0")));
+                output.accept(PlushieItem.createPreMadePlushieAsync("Pelemeshek", null));
             }).build()
     );
 }

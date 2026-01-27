@@ -1,0 +1,16 @@
+{
+  "type": "weaversparadise:plushie_renaming",
+  "group": "plushie_renaming",
+  "category": "misc",
+  "ingredients": [
+    { "item": "weaversparadise:player_plushie" },
+    { "item": "weaversparadise:player_plushie_rename_token" }
+  ],
+  "result": {
+    "id": "weaversparadise:player_plushie",
+    "count": 1
+  },
+  "red": 15,
+  "green": 15,
+  "blue": 15
+}

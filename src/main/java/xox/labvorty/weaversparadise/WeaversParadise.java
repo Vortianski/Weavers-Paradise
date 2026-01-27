@@ -41,6 +41,7 @@ public class WeaversParadise {
         WeaversParadiseInterfaces.MENUS.register(modEventBus);
         WeaversParadiseRecipes.RECIPE_SERIALIZERS.register(modEventBus);
         WeaversParadiseLootModifiers.LOOT_MODIFIERS.register(modEventBus);
+        WeaversParadiseEntityTypes.ENTITY_TYPES.register(modEventBus);
         NeoForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
     }

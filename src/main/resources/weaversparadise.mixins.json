@@ -9,6 +9,10 @@
     "LivingRendererMixin",
     "BlockStateClassMixin"
   ],
+  "client": [
+    "client.PlayerRendererMixin",
+    "client.HumanModelMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },

@@ -18,7 +18,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.CustomData;
@@ -202,19 +201,19 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                     }
                 } else if (slot2.is(ItemTags.create(ResourceLocation.parse("weaversparadise:thigh_highs_stensils")))) {
                     final String stensilLeft;
-                    if (slot2.is(WeaversParadiseItems.HALF_STENSIL)) {
+                    if (slot2.is(WeaversParadiseItems.HALF_STENCIL)) {
                         stensilLeft = "half";
-                    } else if (slot2.is(WeaversParadiseItems.CHECKERS_STENSIL)) {
+                    } else if (slot2.is(WeaversParadiseItems.CHECKERS_STENCIL)) {
                         stensilLeft = "checkers";
-                    } else if (slot2.is(WeaversParadiseItems.LINES_VERTICAL_STENSIL)) {
+                    } else if (slot2.is(WeaversParadiseItems.LINES_VERTICAL_STENCIL)) {
                         stensilLeft = "vertical_lines";
-                    } else if (slot2.is(WeaversParadiseItems.LINES_SMALL_STENSIL)) {
+                    } else if (slot2.is(WeaversParadiseItems.LINES_SMALL_STENCIL)) {
                         stensilLeft = "small_lines";
-                    } else if (slot2.is(WeaversParadiseItems.LINES_BIG_STENSIL)) {
+                    } else if (slot2.is(WeaversParadiseItems.LINES_BIG_STENCIL)) {
                         stensilLeft = "big_lines";
-                    } else if (slot2.is(WeaversParadiseItems.CROSS_STENSIL)) {
+                    } else if (slot2.is(WeaversParadiseItems.CROSS_STENCIL)) {
                         stensilLeft = "cross";
-                    } else if (slot2.is(WeaversParadiseItems.PAWS_STENSIL)) {
+                    } else if (slot2.is(WeaversParadiseItems.PAWS_STENCIL)) {
                         stensilLeft = "paws";
                     } else {
                         stensilLeft = "default";
@@ -442,19 +441,19 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                     }
                 } else if (slot3.is(ItemTags.create(ResourceLocation.parse("weaversparadise:thigh_highs_stensils")))) {
                     final String stensilRight;
-                    if (slot3.is(WeaversParadiseItems.HALF_STENSIL)) {
+                    if (slot3.is(WeaversParadiseItems.HALF_STENCIL)) {
                         stensilRight = "half";
-                    } else if (slot3.is(WeaversParadiseItems.CHECKERS_STENSIL)) {
+                    } else if (slot3.is(WeaversParadiseItems.CHECKERS_STENCIL)) {
                         stensilRight = "checkers";
-                    } else if (slot3.is(WeaversParadiseItems.LINES_VERTICAL_STENSIL)) {
+                    } else if (slot3.is(WeaversParadiseItems.LINES_VERTICAL_STENCIL)) {
                         stensilRight = "vertical_lines";
-                    } else if (slot3.is(WeaversParadiseItems.LINES_SMALL_STENSIL)) {
+                    } else if (slot3.is(WeaversParadiseItems.LINES_SMALL_STENCIL)) {
                         stensilRight = "small_lines";
-                    } else if (slot3.is(WeaversParadiseItems.LINES_BIG_STENSIL)) {
+                    } else if (slot3.is(WeaversParadiseItems.LINES_BIG_STENCIL)) {
                         stensilRight = "big_lines";
-                    } else if (slot3.is(WeaversParadiseItems.CROSS_STENSIL)) {
+                    } else if (slot3.is(WeaversParadiseItems.CROSS_STENCIL)) {
                         stensilRight = "cross";
-                    } else if (slot3.is(WeaversParadiseItems.PAWS_STENSIL)) {
+                    } else if (slot3.is(WeaversParadiseItems.PAWS_STENCIL)) {
                         stensilRight = "paws";
                     } else {
                         stensilRight = "default";
@@ -618,7 +617,7 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
             } else if (slot0.is(WeaversParadiseItems.SHIRT_COTTON) || slot0.is(WeaversParadiseItems.SHIRT_SILK) || slot0.is(WeaversParadiseItems.SWEATER_WOOL)) {
                 ItemStack stack = slot0.copy();
 
-                if (slot2.is(WeaversParadiseItems.PAWS_STENSIL) || slot2.is(WeaversParadiseItems.CROSS_STENSIL)) {
+                if (slot2.is(WeaversParadiseItems.PAWS_STENCIL) || slot2.is(WeaversParadiseItems.CROSS_STENCIL)) {
                     Containers.dropItemStack(serverLevel, pos.getX(), pos.getY(), pos.getZ(), slot2);
                     slot2 = ItemStack.EMPTY;
                 }
@@ -712,15 +711,15 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                     }
                 } else if (slot2.is(ItemTags.create(ResourceLocation.parse("weaversparadise:shirts_stensils")))) {
                     final String stensil;
-                    if (slot2.is(WeaversParadiseItems.HALF_STENSIL)) {
+                    if (slot2.is(WeaversParadiseItems.HALF_STENCIL)) {
                         stensil = "half";
-                    } else if (slot2.is(WeaversParadiseItems.CHECKERS_STENSIL)) {
+                    } else if (slot2.is(WeaversParadiseItems.CHECKERS_STENCIL)) {
                         stensil = "checkers";
-                    } else if (slot2.is(WeaversParadiseItems.LINES_VERTICAL_STENSIL)) {
+                    } else if (slot2.is(WeaversParadiseItems.LINES_VERTICAL_STENCIL)) {
                         stensil = "vertical_lines";
-                    } else if (slot2.is(WeaversParadiseItems.LINES_SMALL_STENSIL)) {
+                    } else if (slot2.is(WeaversParadiseItems.LINES_SMALL_STENCIL)) {
                         stensil = "small_lines";
-                    } else if (slot2.is(WeaversParadiseItems.LINES_BIG_STENSIL)) {
+                    } else if (slot2.is(WeaversParadiseItems.LINES_BIG_STENCIL)) {
                         stensil = "big_lines";
                     } else {
                         stensil = "default";

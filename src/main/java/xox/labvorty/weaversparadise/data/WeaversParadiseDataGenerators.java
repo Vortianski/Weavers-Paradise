@@ -12,7 +12,7 @@ import xox.labvorty.weaversparadise.curios.WeaversParadiseCuriosRegistry;
 
 import java.util.concurrent.CompletableFuture;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = WeaversParadise.MODID)
+@EventBusSubscriber(modid = WeaversParadise.MODID)
 public class WeaversParadiseDataGenerators {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {

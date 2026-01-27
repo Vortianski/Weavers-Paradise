@@ -1,7 +1,5 @@
 package xox.labvorty.weaversparadise.items;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -16,12 +14,7 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
-import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
-import xox.labvorty.weaversparadise.data.ThighHighsRenderer;
 import xox.labvorty.weaversparadise.data.WeaversParadiseDyeIconHandler;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.tooltips.ImageTooltipComponent;
@@ -30,9 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@SuppressWarnings("deprecated")
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
-public class ThighHighsSilk extends Item implements ICurioItem {
+public class ThighHighsSilk extends Item implements ICurioItem, ThighHighsInterface {
     private static final ResourceKey<Enchantment> enchantment = ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath("weaversparadise", "water_strider"));
     public ThighHighsSilk() {
         super(new Item.Properties()
@@ -84,20 +75,6 @@ public class ThighHighsSilk extends Item implements ICurioItem {
                     putInt("lightValueRightOne", 15);
                     putInt("lightValueRightTwo", 15);
                 }}))
-        );
-    }
-
-    @SubscribeEvent
-    public static void registerItemExtensions(RegisterClientExtensionsEvent event) {
-        event.registerItem(
-                new IClientItemExtensions() {
-                    @Override
-                    public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                        return new ThighHighsRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(),
-                                Minecraft.getInstance().getEntityModels());
-                    }
-                },
-                WeaversParadiseItems.THIGH_HIGHS_SILK.get()
         );
     }
 

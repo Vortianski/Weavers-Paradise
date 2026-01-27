@@ -8,10 +8,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import xox.labvorty.weaversparadise.WeaversParadise;
-import xox.labvorty.weaversparadise.data.loot_modifiers.AstolfoBootsLootModifier;
-import xox.labvorty.weaversparadise.data.loot_modifiers.AstolfoChestplateLootModifier;
-import xox.labvorty.weaversparadise.data.loot_modifiers.AstolfoSkirtLootModifier;
-import xox.labvorty.weaversparadise.data.loot_modifiers.AstolfoWigLootModifier;
+import xox.labvorty.weaversparadise.data.loot_modifiers.*;
 
 import java.util.function.Supplier;
 
@@ -27,4 +24,6 @@ public class WeaversParadiseLootModifiers {
             LOOT_MODIFIERS.register("astolfo_skirt_loot_modifier", () -> AstolfoSkirtLootModifier.CODEC);
     public static final Supplier<MapCodec<AstolfoBootsLootModifier>> ASTOLFO_BOOTS_LOOT_MODIFIER =
             LOOT_MODIFIERS.register("astolfo_boots_loot_modifier", () -> AstolfoBootsLootModifier.CODEC);
+    public static final Supplier<MapCodec<PlushieLootModifier>> PLUSHIE_LOOT_MODIFIER =
+            LOOT_MODIFIERS.register("plushie_loot_modifier", () -> PlushieLootModifier.CODEC);
 }

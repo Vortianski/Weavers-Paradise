@@ -16,7 +16,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import xox.labvorty.weaversparadise.WeaversParadise;
 import xox.labvorty.weaversparadise.renderers.WeaversParadiseGlobalRendererDataHolder;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public record RendererDataSync(int dataID, int x, int y, int z, int sculkPulse) implements CustomPacketPayload {
     public static final Type<RendererDataSync> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(WeaversParadise.MODID, "renderer_data_sync"));
     public static final StreamCodec<RegistryFriendlyByteBuf, RendererDataSync> STREAM_CODEC = StreamCodec.of((RegistryFriendlyByteBuf buf, RendererDataSync message) -> {

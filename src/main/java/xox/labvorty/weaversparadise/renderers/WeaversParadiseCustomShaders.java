@@ -13,9 +13,10 @@ import net.minecraft.client.Minecraft;
 import net.neoforged.neoforge.client.event.RenderFrameEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
+@EventBusSubscriber(value = Dist.CLIENT)
 public class WeaversParadiseCustomShaders {
     public static ShaderInstance VOID_ARMOR_SHADER;
+    public static ShaderInstance POLYCHROMATIC;
 
     public static int renderTime;
     public static float renderFrame;
@@ -34,6 +35,11 @@ public class WeaversParadiseCustomShaders {
                 endPortalLayers.set(15);
 
                 VOID_ARMOR_SHADER.apply();
+            });
+
+            POLYCHROMATIC = new ShaderInstance(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath("weaversparadise", "polychromatic"), DefaultVertexFormat.NEW_ENTITY);
+            event.registerShader(POLYCHROMATIC, shaderInstance -> {
+                POLYCHROMATIC.apply();
             });
         } catch (IOException e) {
             throw new RuntimeException(e);

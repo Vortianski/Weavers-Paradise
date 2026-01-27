@@ -7,4 +7,6 @@ public class WeaversParadiseMobLayers {
     public static final ModelLayerLocation THIGH_HIGHS = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("weaversparadise", "thigh_highs"), "thigh_highs");
     public static final ModelLayerLocation HAND_WARMERS = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("weaversparadise", "hand_warmers"), "hand_warmers");
     public static final ModelLayerLocation UPPER_WEAR = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("weaversparadise", "upperwear"), "upperwear");
+    public static final ModelLayerLocation SLIM_PLUSHIE = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("weaversparadise", "slimplushiemodel"), "main");
+    public static final ModelLayerLocation WIDE_PLUSHIE = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("weaversparadise", "wideplushiemodel"), "main");
 }

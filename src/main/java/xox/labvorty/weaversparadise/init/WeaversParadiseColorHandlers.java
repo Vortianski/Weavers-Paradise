@@ -15,6 +15,7 @@ import xox.labvorty.weaversparadise.WeaversParadise;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.BottledDyeItem;
 import xox.labvorty.weaversparadise.items.ChromaticBloomFruit;
+import xox.labvorty.weaversparadise.items.ChromaticDustItem;
 import xox.labvorty.weaversparadise.items.PureDyeItem;
 
 import java.util.List;
@@ -490,6 +491,27 @@ public class WeaversParadiseColorHandlers {
 
             return -1;
         }, WeaversParadiseItems.PURE_DYE);
+
+        event.register((stack, layer) -> {
+            if (stack.getItem() instanceof ChromaticDustItem chromaticDustItem) {
+                Minecraft mc = Minecraft.getInstance();
+                int ticks = (int)mc.level.getGameTime();
+
+                float speed = 0.05F;
+
+                float red = Mth.clamp((float)(Math.sin(ticks * speed) * 0.5 + 0.5), 0, 1);
+                float green = Mth.clamp((float)(Math.sin(ticks * speed + 2 * Math.PI / 3) * 0.5 + 0.5), 0, 1);
+                float blue = Mth.clamp((float)(Math.sin(ticks * speed + 4 * Math.PI / 3) * 0.5 + 0.5), 0, 1);
+
+                int truered = (int)(red * 255);
+                int truegreen = (int)(green * 255);
+                int trueblue = (int)(blue * 255);
+
+                return 255 << 24 | truered << 16 | truegreen << 8 | trueblue;
+            }
+
+            return -1;
+        }, WeaversParadiseItems.CHROMATIC_DUST);
     }
 
 

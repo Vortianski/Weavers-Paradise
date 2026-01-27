@@ -21,7 +21,7 @@ import xox.labvorty.weaversparadise.blocks.entities.DyemakingBlockEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public record DyemakingNetworkMessage(int slotID, int x, int y, int z, int changeType, int meta) implements CustomPacketPayload {
     public static final Type<DyemakingNetworkMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(WeaversParadise.MODID, "dyemaking_network_message"));
     public static final StreamCodec<RegistryFriendlyByteBuf, DyemakingNetworkMessage> STREAM_CODEC = StreamCodec.of((RegistryFriendlyByteBuf buf, DyemakingNetworkMessage message) -> {

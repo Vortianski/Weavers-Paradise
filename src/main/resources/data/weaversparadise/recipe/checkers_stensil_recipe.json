@@ -1,10 +1,10 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": {
-    "item": "weaversparadise:base_stensil"
+    "item": "weaversparadise:base_stencil"
   },
   "result": {
-    "id": "weaversparadise:checkers_stensil",
+    "id": "weaversparadise:checkers_stencil",
     "count": 1
   }
 }

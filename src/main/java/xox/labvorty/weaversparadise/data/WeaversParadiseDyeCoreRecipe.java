@@ -220,6 +220,13 @@ public class WeaversParadiseDyeCoreRecipe extends ShapelessRecipe {
                     });
                     break;
                 }
+
+                if (inputItem.is(WeaversParadiseItems.CHROMATIC_DUST.get())) {
+                    CustomData.update(DataComponents.CUSTOM_DATA, stack, (tag) -> {
+                        tag.putString("dyeType", "polychromatic");
+                    });
+                    break;
+                }
             }
         }
 

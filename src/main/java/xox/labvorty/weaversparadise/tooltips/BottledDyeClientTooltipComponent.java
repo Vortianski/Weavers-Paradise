@@ -451,6 +451,15 @@ public class BottledDyeClientTooltipComponent implements ClientTooltipComponent 
             component = flagText(text, pansexualColors, ticks);
         } else if (type.equals("trans")) {
             component = flagText(text, transColors, ticks);
+        } else if (type.equals("polychromatic")) {
+            List<Integer> polychromisedColor = List.of(
+                    primaryColor,
+                    hueShift(primaryColor, 0.33f),
+                    hueShift(primaryColor, 0.66f),
+                    hueShift(primaryColor, 1)
+            );
+
+            component = flagText(text, polychromisedColor, ticks);
         }
 
         return component;
@@ -540,5 +549,26 @@ public class BottledDyeClientTooltipComponent implements ClientTooltipComponent 
         int b = (int)(b1 * ratio + b2 * (1 - ratio));
 
         return 255 << 24 | (r << 16) | (g << 8) | b;
+    }
+
+    public static int hueShift(int color, float hueShift) {
+        // Extract ARGB
+        int a = (color >> 24) & 0xFF;
+        int r = (color >> 16) & 0xFF;
+        int g = (color >> 8) & 0xFF;
+        int b = color & 0xFF;
+
+        // Convert to HSB
+        float[] hsb = java.awt.Color.RGBtoHSB(r, g, b, null);
+
+        // Shift hue (wraps around automatically)
+        hsb[0] = (hsb[0] + hueShift) % 1.0f;
+        if (hsb[0] < 0) hsb[0] += 1.0f;
+
+        // Convert back to RGB
+        int rgb = java.awt.Color.HSBtoRGB(hsb[0], hsb[1], hsb[2]);
+
+        // Restore alpha
+        return (a << 24) | (rgb & 0x00FFFFFF);
     }
 }

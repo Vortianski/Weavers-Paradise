@@ -23,7 +23,7 @@ import xox.labvorty.weaversparadise.blocks.entities.DyeingBarrelBlockEntity;
 import xox.labvorty.weaversparadise.blocks.entities.DyemakingBlockEntity;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public record DyeingNetworkMessage(int x, int y, int z, boolean leftdyes, boolean rightdyes) implements CustomPacketPayload {
     public static final Type<DyeingNetworkMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(WeaversParadise.MODID, "dyeing_network_message"));
     public static final StreamCodec<RegistryFriendlyByteBuf, DyeingNetworkMessage> STREAM_CODEC = StreamCodec.of((RegistryFriendlyByteBuf buf, DyeingNetworkMessage message) -> {

@@ -82,9 +82,39 @@ public class WeaversParadiseRenderTypes {
         return VOID_ARMOR.apply(data);
     }
 
-
-
     public static RenderType getGlintyInstance() {
         return GLINTY_INSTANCE;
+    }
+
+    public static final Function<List<ResourceLocation>, RenderType> POLYCHROMATIC = Util.memoize(
+            data -> {
+                ResourceLocation texture1 = data.get(0);
+                return createPolychromatic("polychromatic", texture1);
+            }
+    );
+
+    public static RenderType createPolychromatic(String name, ResourceLocation texture1) {
+        RenderType.CompositeState rendertype$compositestate = RenderType.CompositeState.builder()
+                .setShaderState(new RenderStateShard.ShaderStateShard(() -> WeaversParadiseCustomShaders.POLYCHROMATIC))
+                .setTextureState(
+                        new RenderStateShard.TextureStateShard(
+                                texture1, false, false
+                        )
+                )
+                .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
+                .setCullState(RenderStateShard.NO_CULL)
+                .setLightmapState(RenderStateShard.LIGHTMAP)
+                .setOverlayState(RenderStateShard.OVERLAY)
+                .createCompositeState(true);
+
+
+        return RenderType.create(name, DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 1536, true, true, rendertype$compositestate);
+    }
+
+    public static RenderType getPolychromatic(ResourceLocation texture1) {
+        List<ResourceLocation> data = new ArrayList();
+        data.add(texture1);
+
+        return POLYCHROMATIC.apply(data);
     }
 }

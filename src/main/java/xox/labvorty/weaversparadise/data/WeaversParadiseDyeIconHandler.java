@@ -122,6 +122,11 @@ public enum WeaversParadiseDyeIconHandler {
             ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/tooltips/flag_trans.png")
+    ),
+    POLYCHROMATIC_ICON("polychromatic",
+            ResourceLocation.fromNamespaceAndPath(
+                    "weaversparadise",
+                    "textures/tooltips/flag_empty.png")
     );
 
     private static final Map<String, WeaversParadiseDyeIconHandler> HANDLER_MAP =
