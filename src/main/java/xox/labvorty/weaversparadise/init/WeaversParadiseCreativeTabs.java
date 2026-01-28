@@ -187,7 +187,8 @@ public class WeaversParadiseCreativeTabs {
                         "ender",
                         "speed",
                         "height_bedrock",
-                        "height_sea"
+                        "height_sea",
+                        "invisible"
                 );
                 ItemStack baseDye = new ItemStack(WeaversParadiseItems.BOTTLED_DYE.get());
 

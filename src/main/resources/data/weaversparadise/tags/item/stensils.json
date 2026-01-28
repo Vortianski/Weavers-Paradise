@@ -1,12 +1,12 @@
 {
   "replace": false,
   "values": [
-    "weaversparadise:half_stensil",
-    "weaversparadise:checkers_stensil",
-    "weaversparadise:lines_vertical_stensil",
-    "weaversparadise:lines_small_stensil",
-    "weaversparadise:lines_big_stensil",
-    "weaversparadise:cross_stensil",
-    "weaversparadise:paws_stensil"
+    "weaversparadise:half_stencil",
+    "weaversparadise:checkers_stencil",
+    "weaversparadise:lines_vertical_stencil",
+    "weaversparadise:lines_small_stencil",
+    "weaversparadise:lines_big_stencil",
+    "weaversparadise:cross_stencil",
+    "weaversparadise:paws_stencil"
   ]
 }

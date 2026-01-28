@@ -336,6 +336,10 @@ public class HandWarmersModelRenderer {
             finalLight = lightValue << 20 | lightValue << 4;
         }
 
+        if (dyeType.equals("invisible")) {
+            finalColor = 0;
+        }
+
         switch (order) {
             case "leftOne" -> {
                 finalCLO = finalColor;

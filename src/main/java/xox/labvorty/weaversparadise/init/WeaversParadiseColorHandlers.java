@@ -20,7 +20,7 @@ import xox.labvorty.weaversparadise.items.PureDyeItem;
 
 import java.util.List;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public class WeaversParadiseColorHandlers {
     private static final List<String> dyeTypes = List.of(
             "agender",

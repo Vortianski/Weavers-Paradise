@@ -9,7 +9,7 @@ import xox.labvorty.weaversparadise.tooltips.BottledDyeTooltipComponent;
 import xox.labvorty.weaversparadise.tooltips.ImageTooltipComponent;
 import xox.labvorty.weaversparadise.tooltips.ImageClientTooltipComponent;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(value = Dist.CLIENT)
 public class WeaversParadiseClientRegisterEvents {
     @SubscribeEvent
     public static void registerTooltipComponents(RegisterClientTooltipComponentFactoriesEvent event) {

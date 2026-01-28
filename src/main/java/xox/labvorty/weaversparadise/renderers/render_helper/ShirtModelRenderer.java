@@ -265,6 +265,10 @@ public class ShirtModelRenderer {
             finalLight = lightValue << 20 | lightValue << 4;
         }
 
+        if (dyeType.equals("invisible")) {
+            finalColor = 0;
+        }
+
         switch (order) {
             case "one" -> {
                 finalCO = finalColor;

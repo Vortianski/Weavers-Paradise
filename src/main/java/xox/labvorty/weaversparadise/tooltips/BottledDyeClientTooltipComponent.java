@@ -460,6 +460,8 @@ public class BottledDyeClientTooltipComponent implements ClientTooltipComponent 
             );
 
             component = flagText(text, polychromisedColor, ticks);
+        } else if (type.equals("invisible")) {
+            component = Component.literal(text);
         }
 
         return component;

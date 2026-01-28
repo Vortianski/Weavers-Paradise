@@ -96,6 +96,9 @@ public enum WeaversParadiseDyeTextHandler {
     ),
     POLYCHROMATIC_TEXT("polychromatic",
             Component.translatable("weaversparadise.dye_text.polychromatic").getString()
+    ),
+    INVISIBLE_TEXT("invisible",
+            Component.translatable("weaversparadise.dye_text.invisible").getString()
     );
 
     private static final Map<String, WeaversParadiseDyeTextHandler> HANDLER_MAP =
