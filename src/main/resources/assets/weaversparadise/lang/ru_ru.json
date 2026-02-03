@@ -175,5 +175,8 @@
 
   "emi.category.weaversparadise.clothcrafting": "Тканеделие",
   "emi.category.weaversparadise.spinning_jenny": "Прялка Дженни",
-  "emi.category.weaversparadise.dyemaking": "Изготовление Красителей"
+  "emi.category.weaversparadise.dyemaking": "Изготовление Красителей",
+
+  "weaversparadise.tooltip.hold": "Удерживайте [%s] для дополнительной информации",
+  "weaversparadise.tooltip.applicable_to": "Можно применить к:"
 }

@@ -175,5 +175,8 @@
 
   "emi.category.weaversparadise.clothcrafting": "Clothcrafting",
   "emi.category.weaversparadise.spinning_jenny": "Spinning Jenny",
-  "emi.category.weaversparadise.dyemaking": "Dyemaking"
+  "emi.category.weaversparadise.dyemaking": "Dyemaking",
+
+  "weaversparadise.tooltip.hold": "Hold [%s] for additional information",
+  "weaversparadise.tooltip.applicable_to": "Can be applied to:"
 }

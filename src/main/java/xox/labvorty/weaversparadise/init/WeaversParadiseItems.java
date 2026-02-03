@@ -9,6 +9,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import xox.labvorty.weaversparadise.items.*;
 import xox.labvorty.weaversparadise.items.armor.AstolfoArmor;
 import xox.labvorty.weaversparadise.items.flags.*;
+import xox.labvorty.weaversparadise.items.stencil.*;
 
 public class WeaversParadiseItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems("weaversparadise");
@@ -53,14 +54,14 @@ public class WeaversParadiseItems {
     public static final DeferredItem<Item> WOOL_SLEEVE_LONG = ITEMS.register("wool_sleeve_long", WoolSleeveLong::new);
 
     //stencils
-    public static final DeferredItem<Item> BASIC_STENCIL = ITEMS.register("base_stencil", StensilBase::new);
-    public static final DeferredItem<Item> HALF_STENCIL = ITEMS.register("half_stencil", StensilHalf::new);
-    public static final DeferredItem<Item> CHECKERS_STENCIL = ITEMS.register("checkers_stencil", StensilCheckers::new);
-    public static final DeferredItem<Item> LINES_VERTICAL_STENCIL = ITEMS.register("lines_vertical_stencil", StensilLinesVertical::new);
-    public static final DeferredItem<Item> LINES_SMALL_STENCIL = ITEMS.register("lines_small_stencil", StensilLinesSmall::new);
-    public static final DeferredItem<Item> LINES_BIG_STENCIL = ITEMS.register("lines_big_stencil", StensilLinesBig::new);
-    public static final DeferredItem<Item> CROSS_STENCIL = ITEMS.register("cross_stencil", StensilCross::new);
-    public static final DeferredItem<Item> PAWS_STENCIL = ITEMS.register("paws_stencil", StensilPaws::new);
+    public static final DeferredItem<Item> BASIC_STENCIL = ITEMS.register("base_stencil", StencilBase::new);
+    public static final DeferredItem<Item> HALF_STENCIL = ITEMS.register("half_stencil", StencilHalf::new);
+    public static final DeferredItem<Item> CHECKERS_STENCIL = ITEMS.register("checkers_stencil", StencilCheckers::new);
+    public static final DeferredItem<Item> LINES_VERTICAL_STENCIL = ITEMS.register("lines_vertical_stencil", StencilLinesVertical::new);
+    public static final DeferredItem<Item> LINES_SMALL_STENCIL = ITEMS.register("lines_small_stencil", StencilLinesSmall::new);
+    public static final DeferredItem<Item> LINES_BIG_STENCIL = ITEMS.register("lines_big_stencil", StencilLinesBig::new);
+    public static final DeferredItem<Item> CROSS_STENCIL = ITEMS.register("cross_stencil", StencilCross::new);
+    public static final DeferredItem<Item> PAWS_STENCIL = ITEMS.register("paws_stencil", StencilPaws::new);
 
     //blocks
     public static final DeferredItem<Item> CHROMATIC_BLOOM = ITEMS.register(WeaversParadiseBlocks.CHROMATIC_BLOOM.getId().getPath(), () -> new BlockItem(WeaversParadiseBlocks.CHROMATIC_BLOOM.get(), new Item.Properties()));
