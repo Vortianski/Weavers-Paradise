@@ -8,9 +8,12 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import oshi.util.tuples.Pair;
 import xox.labvorty.weaversparadise.items.PlushieItem;
+import xox.labvorty.weaversparadise.items.PureDyeItem;
 
 import java.util.List;
 import java.util.UUID;
@@ -43,6 +46,14 @@ public class WeaversParadiseCreativeTabs {
                     CustomData.update(DataComponents.CUSTOM_DATA, woolStack, (tag) -> tag.putInt("quality", quality));
 
                     output.accept(woolStack);
+                }
+
+                for (int i = 0; i <= 10; i++) {
+                    final int quality = i;
+                    ItemStack jeansStack = new ItemStack(WeaversParadiseItems.JEANS_CLOTH.get());
+                    CustomData.update(DataComponents.CUSTOM_DATA, jeansStack, (tag) -> tag.putInt("quality", quality));
+
+                    output.accept(jeansStack);
                 }
 
                 for (int i = 0; i <= 10; i++) {
@@ -80,6 +91,14 @@ public class WeaversParadiseCreativeTabs {
                 for (int i = 0; i <= 10; i++) {
                     final int quality = i;
                     ItemStack stack = new ItemStack(WeaversParadiseItems.COTTON_SLEEVE_LONG.get());
+                    CustomData.update(DataComponents.CUSTOM_DATA, stack, (tag) -> tag.putInt("quality", quality));
+
+                    output.accept(stack);
+                }
+
+                for (int i = 0; i <= 10; i++) {
+                    final int quality = i;
+                    ItemStack stack = new ItemStack(WeaversParadiseItems.COTTON_PANT_LEG.get());
                     CustomData.update(DataComponents.CUSTOM_DATA, stack, (tag) -> tag.putInt("quality", quality));
 
                     output.accept(stack);
@@ -127,6 +146,14 @@ public class WeaversParadiseCreativeTabs {
 
                 for (int i = 0; i <= 10; i++) {
                     final int quality = i;
+                    ItemStack stack = new ItemStack(WeaversParadiseItems.SILK_PANT_LEG.get());
+                    CustomData.update(DataComponents.CUSTOM_DATA, stack, (tag) -> tag.putInt("quality", quality));
+
+                    output.accept(stack);
+                }
+
+                for (int i = 0; i <= 10; i++) {
+                    final int quality = i;
                     ItemStack stack = new ItemStack(WeaversParadiseItems.WOOL_UPPERWEAR_BASE.get());
                     CustomData.update(DataComponents.CUSTOM_DATA, stack, (tag) -> tag.putInt("quality", quality));
 
@@ -152,6 +179,14 @@ public class WeaversParadiseCreativeTabs {
                 for (int i = 0; i <= 10; i++) {
                     final int quality = i;
                     ItemStack stack = new ItemStack(WeaversParadiseItems.WOOL_SLEEVE_LONG.get());
+                    CustomData.update(DataComponents.CUSTOM_DATA, stack, (tag) -> tag.putInt("quality", quality));
+
+                    output.accept(stack);
+                }
+
+                for (int i = 0; i <= 10; i++) {
+                    final int quality = i;
+                    ItemStack stack = new ItemStack(WeaversParadiseItems.JEANS_PANT_LEG.get());
                     CustomData.update(DataComponents.CUSTOM_DATA, stack, (tag) -> tag.putInt("quality", quality));
 
                     output.accept(stack);
@@ -188,7 +223,9 @@ public class WeaversParadiseCreativeTabs {
                         "speed",
                         "height_bedrock",
                         "height_sea",
-                        "invisible"
+                        "invisible",
+                        "static",
+                        "crystal"
                 );
                 ItemStack baseDye = new ItemStack(WeaversParadiseItems.BOTTLED_DYE.get());
 
@@ -323,6 +360,10 @@ public class WeaversParadiseCreativeTabs {
                 ItemStack shirtSilk = new ItemStack(WeaversParadiseItems.SHIRT_SILK.get());
                 ItemStack sweaterWool = new ItemStack(WeaversParadiseItems.SWEATER_WOOL.get());
 
+                ItemStack pantsJeans = new ItemStack(WeaversParadiseItems.PANTS_JEANS.get());
+                ItemStack pantsCotton = new ItemStack(WeaversParadiseItems.PANTS_COTTON.get());
+                ItemStack pantsSilk = new ItemStack(WeaversParadiseItems.PANTS_SILK.get());
+
                 ItemStack handWarmersCotton = new ItemStack(WeaversParadiseItems.HAND_WARMERS_COTTON.get());
                 ItemStack handWarmersSilk = new ItemStack(WeaversParadiseItems.HAND_WARMERS_SILK.get());
                 ItemStack handWarmersWool = new ItemStack(WeaversParadiseItems.HAND_WARMERS_WOOL.get());
@@ -331,6 +372,8 @@ public class WeaversParadiseCreativeTabs {
                 ItemStack baseThighHighsSilk = new ItemStack(WeaversParadiseItems.THIGH_HIGHS_SILK.get());
                 ItemStack baseThighHighsWool = new ItemStack(WeaversParadiseItems.THIGH_HIGHS_WOOL.get());
 
+                ItemStack baseChoker = new ItemStack(WeaversParadiseItems.CHOKER.get());
+
                 output.accept(baseThighHighsCotton);
                 output.accept(baseThighHighsSilk);
                 output.accept(baseThighHighsWool);
@@ -338,8 +381,6 @@ public class WeaversParadiseCreativeTabs {
                 for (String entry : thighHighsTypes) {
                     ItemStack thighHighsCotton = baseThighHighsCotton.copy();
                     CustomData.update(DataComponents.CUSTOM_DATA, thighHighsCotton, (tag) -> {
-                        tag.putString("stensilTypeLeft", entry);
-                        tag.putString("stensilTypeRight", entry);
                         tag.putString("dyeTypeLeftOne", entry);
                         tag.putString("dyeTypeLeftTwo", entry);
                         tag.putString("dyeTypeRightOne", entry);
@@ -348,8 +389,6 @@ public class WeaversParadiseCreativeTabs {
 
                     ItemStack thighHighsSilk = baseThighHighsSilk.copy();
                     CustomData.update(DataComponents.CUSTOM_DATA, thighHighsSilk, (tag) -> {
-                        tag.putString("stensilTypeLeft", entry);
-                        tag.putString("stensilTypeRight", entry);
                         tag.putString("dyeTypeLeftOne", entry);
                         tag.putString("dyeTypeLeftTwo", entry);
                         tag.putString("dyeTypeRightOne", entry);
@@ -358,8 +397,6 @@ public class WeaversParadiseCreativeTabs {
 
                     ItemStack thighHighsWool = baseThighHighsWool.copy();
                     CustomData.update(DataComponents.CUSTOM_DATA, thighHighsWool, (tag) -> {
-                        tag.putString("stensilTypeLeft", entry);
-                        tag.putString("stensilTypeRight", entry);
                         tag.putString("dyeTypeLeftOne", entry);
                         tag.putString("dyeTypeLeftTwo", entry);
                         tag.putString("dyeTypeRightOne", entry);
@@ -378,21 +415,18 @@ public class WeaversParadiseCreativeTabs {
                 for (String entry : thighHighsTypes) {
                     ItemStack shirtCottonS = shirtCotton.copy();
                     CustomData.update(DataComponents.CUSTOM_DATA, shirtCottonS, (tag) -> {
-                        tag.putString("stensilType", entry);
                         tag.putString("dyeTypeOne", entry);
                         tag.putString("dyeTypeTwo", entry);
                     });
 
                     ItemStack shirtSilkS = shirtSilk.copy();
                     CustomData.update(DataComponents.CUSTOM_DATA, shirtSilkS, (tag) -> {
-                        tag.putString("stensilType", entry);
                         tag.putString("dyeTypeOne", entry);
                         tag.putString("dyeTypeTwo", entry);
                     });
 
                     ItemStack sweaterWoolS = sweaterWool.copy();
                     CustomData.update(DataComponents.CUSTOM_DATA, sweaterWoolS, (tag) -> {
-                        tag.putString("stensilType", entry);
                         tag.putString("dyeTypeOne", entry);
                         tag.putString("dyeTypeTwo", entry);
                     });
@@ -409,8 +443,6 @@ public class WeaversParadiseCreativeTabs {
                 for (String entry : thighHighsTypes) {
                     ItemStack handWarmersCottonS = handWarmersCotton.copy();
                     CustomData.update(DataComponents.CUSTOM_DATA, handWarmersCottonS, (tag) -> {
-                        tag.putString("stensilTypeLeft", entry);
-                        tag.putString("stensilTypeRight", entry);
                         tag.putString("dyeTypeLeftOne", entry);
                         tag.putString("dyeTypeLeftTwo", entry);
                         tag.putString("dyeTypeRightOne", entry);
@@ -419,8 +451,6 @@ public class WeaversParadiseCreativeTabs {
 
                     ItemStack handWarmersSilkS = handWarmersSilk.copy();
                     CustomData.update(DataComponents.CUSTOM_DATA, handWarmersSilkS, (tag) -> {
-                        tag.putString("stensilTypeLeft", entry);
-                        tag.putString("stensilTypeRight", entry);
                         tag.putString("dyeTypeLeftOne", entry);
                         tag.putString("dyeTypeLeftTwo", entry);
                         tag.putString("dyeTypeRightOne", entry);
@@ -429,8 +459,6 @@ public class WeaversParadiseCreativeTabs {
 
                     ItemStack handWarmersWoolS = handWarmersWool.copy();
                     CustomData.update(DataComponents.CUSTOM_DATA, handWarmersWoolS, (tag) -> {
-                        tag.putString("stensilTypeLeft", entry);
-                        tag.putString("stensilTypeRight", entry);
                         tag.putString("dyeTypeLeftOne", entry);
                         tag.putString("dyeTypeLeftTwo", entry);
                         tag.putString("dyeTypeRightOne", entry);
@@ -440,6 +468,119 @@ public class WeaversParadiseCreativeTabs {
                     output.accept(handWarmersCottonS);
                     output.accept(handWarmersSilkS);
                     output.accept(handWarmersWoolS);
+                }
+
+                output.accept(pantsJeans);
+                output.accept(pantsCotton);
+                output.accept(pantsSilk);
+
+                for (String entry : thighHighsTypes) {
+                    ItemStack pantsJeansS = pantsJeans.copy();
+                    CustomData.update(DataComponents.CUSTOM_DATA, pantsJeansS, (tag) -> {
+                        tag.putString("dyeTypeOne", entry);
+                        tag.putString("dyeTypeTwo", entry);
+                    });
+
+                    ItemStack pantsCottonS = pantsCotton.copy();
+                    CustomData.update(DataComponents.CUSTOM_DATA, pantsCottonS, (tag) -> {
+                        tag.putString("dyeTypeOne", entry);
+                        tag.putString("dyeTypeTwo", entry);
+                    });
+
+                    ItemStack pantsSilkS = pantsSilk.copy();
+                    CustomData.update(DataComponents.CUSTOM_DATA, pantsSilkS, (tag) -> {
+                        tag.putString("dyeTypeOne", entry);
+                        tag.putString("dyeTypeTwo", entry);
+                    });
+
+                    output.accept(pantsJeansS);
+                    output.accept(pantsCottonS);
+                    output.accept(pantsSilkS);
+                }
+
+                output.accept(baseChoker);
+
+                for (String entry : thighHighsTypes) {
+                    ItemStack chokerS = baseChoker.copy();
+                    CustomData.update(DataComponents.CUSTOM_DATA, chokerS, (tag) -> {
+                        tag.putString("dyeTypeLeftOne", entry);
+                        tag.putString("dyeTypeLeftTwo", entry);
+                        tag.putString("dyeTypeRightOne", entry);
+                        tag.putString("dyeTypeRightTwo", entry);
+                        tag.putInt("colorPriRedLeftOne", 255);
+                        tag.putInt("colorPriGreenLeftOne", 255);
+                        tag.putInt("colorPriBlueLeftOne", 255);
+                        tag.putInt("colorPriRedLeftTwo", 255);
+                        tag.putInt("colorPriGreenLeftTwo", 255);
+                        tag.putInt("colorPriBlueLeftTwo", 255);
+                        tag.putInt("colorSecRedLeftOne", 255);
+                        tag.putInt("colorSecGreenLeftOne", 255);
+                        tag.putInt("colorSecBlueLeftOne", 255);
+                        tag.putInt("colorSecRedLeftTwo", 255);
+                        tag.putInt("colorSecGreenLeftTwo", 255);
+                        tag.putInt("colorSecBlueLeftTwo", 255);
+                        tag.putInt("colorPriRedRightOne", 255);
+                        tag.putInt("colorPriGreenRightOne", 255);
+                        tag.putInt("colorPriBlueRightOne", 255);
+                        tag.putInt("colorPriRedRightTwo", 255);
+                        tag.putInt("colorPriGreenRightTwo", 255);
+                        tag.putInt("colorPriBlueRightTwo", 255);
+                        tag.putInt("colorSecRedRightOne", 255);
+                        tag.putInt("colorSecGreenRightOne", 255);
+                        tag.putInt("colorSecBlueRightOne", 255);
+                        tag.putInt("colorSecRedRightTwo", 255);
+                        tag.putInt("colorSecGreenRightTwo", 255);
+                        tag.putInt("colorSecBlueRightTwo", 255);
+                    });
+
+
+                    output.accept(chokerS);
+                }
+
+                List<Pair<String, Pair<Integer, Integer>>> metalTypes = List.of(
+                        new Pair<>("minecraft:iron_ingot", new Pair<>(-1, 100)),
+                        new Pair<>("minecraft:gold_ingot", new Pair<>(-1, 25)),
+                        new Pair<>("minecraft:copper_ingot", new Pair<>(-4035764, 50))
+                );
+
+                for (Pair<String, Pair<Integer, Integer>> type : metalTypes) {
+                    ItemStack bell = new ItemStack(WeaversParadiseItems.BELL.get());
+                    ItemStack plate = new ItemStack(WeaversParadiseItems.PLATE.get());
+                    ItemStack ring = new ItemStack(WeaversParadiseItems.RING.get());
+                    ItemStack cat_ring = new ItemStack(WeaversParadiseItems.CAT_RING.get());
+                    ItemStack heart = new ItemStack(WeaversParadiseItems.HEART.get());
+
+                    CustomData.update(DataComponents.CUSTOM_DATA, bell, (tag) -> {
+                        tag.putString("metalType", type.getA());
+                        tag.putInt("color", type.getB().getA());
+                        tag.putInt("damage", type.getB().getB());
+                    });
+                    CustomData.update(DataComponents.CUSTOM_DATA, plate, (tag) -> {
+                        tag.putString("metalType", type.getA());
+                        tag.putInt("color", type.getB().getA());
+                        tag.putInt("damage", type.getB().getB());
+                    });
+                    CustomData.update(DataComponents.CUSTOM_DATA, ring, (tag) -> {
+                        tag.putString("metalType", type.getA());
+                        tag.putInt("color", type.getB().getA());
+                        tag.putInt("damage", type.getB().getB());
+                    });
+                    CustomData.update(DataComponents.CUSTOM_DATA, cat_ring, (tag) -> {
+                        tag.putString("metalType", type.getA());
+                        tag.putInt("color", type.getB().getA());
+                        tag.putInt("damage", type.getB().getB());
+                    });
+                    CustomData.update(DataComponents.CUSTOM_DATA, heart, (tag) -> {
+                        tag.putString("metalType", type.getA());
+                        tag.putInt("color", type.getB().getA());
+                        tag.putInt("damage", type.getB().getB());
+                    });
+
+                    output.accept(bell);
+                    output.accept(ring);
+                    output.accept(cat_ring);
+                    output.accept(heart);
+                    output.accept(plate);
                 }
 
                 output.accept(astolfoHead);
@@ -461,6 +602,7 @@ public class WeaversParadiseCreativeTabs {
                         WeaversParadiseItems.PESTLE.get(),
                         WeaversParadiseItems.NEEDLE.get(),
                         WeaversParadiseItems.NEEDLE_WITH_THREAD.get(),
+                        WeaversParadiseItems.LEATHER_STRIPS.get(),
                         WeaversParadiseItems.EMPTY_SPOOL.get(),
                         WeaversParadiseItems.COTTON_SPOOL.get(),
                         WeaversParadiseItems.COTTON_SPOOL_BLOCK.get(),
@@ -471,15 +613,20 @@ public class WeaversParadiseCreativeTabs {
                         WeaversParadiseItems.WOOL_SPOOL.get(),
                         WeaversParadiseItems.WOOL_SPOOL_BLOCK.get(),
                         WeaversParadiseItems.WOOL_CLOTH_BLOCK.get(),
+                        WeaversParadiseItems.JEANS_SPOOL.get(),
                         WeaversParadiseItems.BUTTON.get(),
                         WeaversParadiseItems.BASIC_STENCIL.get(),
                         WeaversParadiseItems.HALF_STENCIL.get(),
                         WeaversParadiseItems.CHECKERS_STENCIL.get(),
+                        WeaversParadiseItems.CHECKERS_SMALL_STENCIL.get(),
                         WeaversParadiseItems.LINES_SMALL_STENCIL.get(),
                         WeaversParadiseItems.LINES_BIG_STENCIL.get(),
                         WeaversParadiseItems.LINES_VERTICAL_STENCIL.get(),
                         WeaversParadiseItems.CROSS_STENCIL.get(),
                         WeaversParadiseItems.PAWS_STENCIL.get(),
+                        WeaversParadiseItems.DIRT_STENCIL.get(),
+                        WeaversParadiseItems.FLOWER_STENCIL.get(),
+                        WeaversParadiseItems.STAR_STENCIL.get(),
                         WeaversParadiseItems.CHROMATIC_BLOOM.get(),
                         WeaversParadiseItems.CHROMATIC_BLOOM_FRUIT.get(),
                         WeaversParadiseItems.CHROMATIC_DUST.get(),
@@ -514,7 +661,30 @@ public class WeaversParadiseCreativeTabs {
 
                 for (Item entry : items) {
                     ItemStack stack = new ItemStack(entry);
-                    output.accept(stack);
+
+                    if (stack.getItem() instanceof PureDyeItem pureDyeItem) {
+                        List<Vec3> values = List.of(
+                                new Vec3(0, 0, 0),
+                                new Vec3(255, 0, 0),
+                                new Vec3(0, 255, 0),
+                                new Vec3(0, 0, 255),
+                                new Vec3(255, 0, 255),
+                                new Vec3(255, 255, 0),
+                                new Vec3(255, 255, 255)
+                        );
+
+                        for (Vec3 vec3 : values) {
+                            ItemStack s = stack.copy();
+                            CustomData.update(DataComponents.CUSTOM_DATA, s, (tag) -> {
+                                tag.putInt("red", (int)vec3.x);
+                                tag.putInt("green", (int)vec3.y);
+                                tag.putInt("blue", (int)vec3.z);
+                            });
+                            output.accept(s);
+                        }
+                    } else {
+                        output.accept(stack);
+                    }
                 }
 
                 //Can use both null and preset UUID. If none are given defaults

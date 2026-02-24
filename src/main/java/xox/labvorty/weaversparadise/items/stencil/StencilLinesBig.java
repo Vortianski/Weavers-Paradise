@@ -47,6 +47,18 @@ public class StencilLinesBig extends Item {
             tooltipComponents.add(
                     Component.translatable("item.weaversparadise.sweater_wool")
             );
+            tooltipComponents.add(
+                    Component.translatable("item.weaversparadise.choker")
+            );
+            tooltipComponents.add(
+                    Component.translatable("item.weaversparadise.pants_jeans")
+            );
+            tooltipComponents.add(
+                    Component.translatable("item.weaversparadise.pants_cotton")
+            );
+            tooltipComponents.add(
+                    Component.translatable("item.weaversparadise.pants_silk")
+            );
         } else {
             tooltipComponents.add(
                     Component.translatable("weaversparadise.tooltip.hold", "SHIFT").withStyle(ChatFormatting.GRAY)

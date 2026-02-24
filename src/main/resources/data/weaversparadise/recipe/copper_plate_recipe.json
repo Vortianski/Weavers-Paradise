@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:copper_ingot"
+  },
+  "result": {
+    "id": "weaversparadise:plate",
+    "count": 1,
+    "components": {
+      "minecraft:custom_data": {
+        "metalType": "minecraft:copper_ingot",
+        "color": -4035764,
+        "damage": 50
+      }
+    }
+  }
+}

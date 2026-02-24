@@ -14,10 +14,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import org.jetbrains.annotations.NotNull;
-import xox.labvorty.weaversparadise.data.HandWarmersRenderer;
-import xox.labvorty.weaversparadise.data.PlushieItemRenderer;
-import xox.labvorty.weaversparadise.data.ShirtRenderer;
-import xox.labvorty.weaversparadise.data.ThighHighsRenderer;
+import xox.labvorty.weaversparadise.data.*;
 import xox.labvorty.weaversparadise.model.Modelastolfo_armor;
 
 import java.util.Collections;
@@ -136,6 +133,85 @@ public class WeaversParadiseClientItemExtensions {
                     }
                 },
                 WeaversParadiseItems.PLAYER_PLUSHIE
+        );
+
+        event.registerItem(
+                new IClientItemExtensions() {
+                    @Override
+                    public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                        return new ChokerRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(),
+                                Minecraft.getInstance().getEntityModels());
+                    }
+                },
+                WeaversParadiseItems.CHOKER
+        );
+
+        event.registerItem(
+                new IClientItemExtensions() {
+                    @Override
+                    public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                        return new BellRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(),
+                                Minecraft.getInstance().getEntityModels());
+                    }
+                },
+                WeaversParadiseItems.BELL
+        );
+
+        event.registerItem(
+                new IClientItemExtensions() {
+                    @Override
+                    public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                        return new RingRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(),
+                                Minecraft.getInstance().getEntityModels());
+                    }
+                },
+                WeaversParadiseItems.RING
+        );
+
+        event.registerItem(
+                new IClientItemExtensions() {
+                    @Override
+                    public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                        return new CatRingRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(),
+                                Minecraft.getInstance().getEntityModels());
+                    }
+                },
+                WeaversParadiseItems.CAT_RING
+        );
+
+        event.registerItem(
+                new IClientItemExtensions() {
+                    @Override
+                    public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                        return new HeartRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(),
+                                Minecraft.getInstance().getEntityModels());
+                    }
+                },
+                WeaversParadiseItems.HEART
+        );
+
+        event.registerItem(
+                new IClientItemExtensions() {
+                    @Override
+                    public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                        return new PlateRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(),
+                                Minecraft.getInstance().getEntityModels());
+                    }
+                },
+                WeaversParadiseItems.PLATE
+        );
+
+        event.registerItem(
+                new IClientItemExtensions() {
+                    @Override
+                    public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                        return new PantsRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(),
+                                Minecraft.getInstance().getEntityModels());
+                    }
+                },
+                WeaversParadiseItems.PANTS_JEANS,
+                WeaversParadiseItems.PANTS_COTTON,
+                WeaversParadiseItems.PANTS_SILK
         );
     }
 }

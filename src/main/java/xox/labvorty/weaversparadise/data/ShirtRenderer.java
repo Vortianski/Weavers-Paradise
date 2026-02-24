@@ -6,8 +6,10 @@ import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import xox.labvorty.weaversparadise.curios.WeaversParadiseMobLayers;
 import xox.labvorty.weaversparadise.items.*;
 import xox.labvorty.weaversparadise.model.ModelUpperWear;
@@ -90,6 +92,7 @@ public class ShirtRenderer extends BlockEntityWithoutLevelRenderer {
                 buffer,
                 model,
                 new ShirtRenderingData(
+                        stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("is_open"),
                         primaryColorOne,
                         secondaryColorOne,
                         primaryColorTwo,

@@ -11,6 +11,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -38,6 +39,7 @@ public class SweaterWool extends Item implements ICurioItem, ShirtInterface {
                 .durability(1)
                 .component(DataComponents.CUSTOM_DATA, CustomData.of(new CompoundTag() {{
                     putInt("quality", 0);
+                    putBoolean("is_open", false);
                     putString("dyeTypeOne", "default");
                     putString("dyeTypeTwo", "default");
                     putString("stensilType", "default");
@@ -281,15 +283,31 @@ public class SweaterWool extends Item implements ICurioItem, ShirtInterface {
 
     @Override
     public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-        return enchantment.is(Enchantments.UNBREAKING) || enchantment.is(Enchantments.VANISHING_CURSE) || enchantment.is(Enchantments.MENDING);
+        return enchantment.is(Enchantments.UNBREAKING) || enchantment.is(Enchantments.VANISHING_CURSE) || enchantment.is(Enchantments.MENDING) || enchantment.is(Enchantments.BINDING_CURSE);
     }
 
     @Override
     public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
         return EnchantmentHelper.getEnchantmentsForCrafting(book).keySet().stream().anyMatch(holder -> {
-            if (holder.is(Enchantments.MENDING) || holder.is(Enchantments.UNBREAKING) || holder.is(Enchantments.VANISHING_CURSE)) {
+            if (holder.is(Enchantments.MENDING) || holder.is(Enchantments.UNBREAKING) || holder.is(Enchantments.VANISHING_CURSE) || holder.is(Enchantments.BINDING_CURSE)) {
                 return true;
             }
+            return false;
+        });
+    }
+
+    @Override
+    public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
+        LivingEntity livingEntity = slotContext.entity();
+        if (livingEntity instanceof Player player && player.isCreative()) {
+            return true;
+        }
+
+        return EnchantmentHelper.getEnchantmentsForCrafting(stack).keySet().stream().anyMatch(holder -> {
+            if (holder.is(Enchantments.BINDING_CURSE)) {
+                return true;
+            }
+
             return false;
         });
     }

@@ -1,5 +1,7 @@
-// 1.21.1	2025-09-20T12:39:53.7884872	Curios for weaversparadise
-8088ef94fa80416d3c2bca5827564e5ef06d514e data/weaversparadise/curios/entities/weavers_entities.json
+// 1.21.1	2026-02-23T21:39:36.4978377	Curios for weaversparadise
+f369cb894791f9c50759841a56bac7d12b3b580c data/weaversparadise/curios/entities/weavers_entities.json
+624a62d6f16714c4e653520cf62874884c0849b2 data/weaversparadise/curios/slots/choker_trinket.json
 5c712c048c96b6b6fcb00ca9e1ecd659c8083468 data/weaversparadise/curios/slots/gloves.json
 bb845638d6f18438c39522bac9ec610b5cf09697 data/weaversparadise/curios/slots/legwear.json
+4b64a830e1a7fe7d43d6d617eb455b497f68cca1 data/weaversparadise/curios/slots/pants.json
 406b2b60634d6032f93d3962075baba13076a8a4 data/weaversparadise/curios/slots/upperwear.json

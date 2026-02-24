@@ -4,7 +4,10 @@
   ],
   "slots": [
     "legwear",
+    "choker_trinket",
     "gloves",
-    "upperwear"
+    "pants",
+    "upperwear",
+    "necklace"
   ]
 }

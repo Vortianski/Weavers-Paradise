@@ -153,7 +153,7 @@ public class WeaversParadiseClothingEvents {
                     }).orElse(Collections.emptyList());
                     for (SlotResult entry : curios) {
                         ItemStack itemStack = entry.stack();
-                        int receivedDamage = durabilityDamageFeet;
+                        int receivedDamage = durabilityDamageBody;
 
                         if (hasUnbreaking(itemStack)) {
                             receivedDamage = 0;
@@ -189,7 +189,7 @@ public class WeaversParadiseClothingEvents {
                         ItemStack itemStack = entry.stack();
 
                         if (!(itemStack.getItem() instanceof LeatherGloves leatherGloves)) {
-                            int receivedDamage = durabilityDamageFeet;
+                            int receivedDamage = durabilityDamageBody;
 
                             if (hasUnbreaking(itemStack)) {
                                 receivedDamage = 0;

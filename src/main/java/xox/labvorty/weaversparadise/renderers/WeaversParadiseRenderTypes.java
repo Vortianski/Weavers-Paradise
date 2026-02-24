@@ -1,8 +1,10 @@
 package xox.labvorty.weaversparadise.renderers;
 
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.blockentity.TheEndPortalRenderer;
 import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.api.distmarker.Dist;
 import net.minecraft.client.renderer.RenderType;
@@ -116,5 +118,124 @@ public class WeaversParadiseRenderTypes {
         data.add(texture1);
 
         return POLYCHROMATIC.apply(data);
+    }
+
+    public static final Function<List<ResourceLocation>, RenderType> ENTITY_TRANSLUCENT_MASK = Util.memoize(
+            data -> {
+                ResourceLocation resourceLocation = data.get(0);
+                ResourceLocation maskLocation = data.get(1);
+
+                return createEntityTranslucentMask("entity_translucent_mask", resourceLocation, maskLocation);
+            }
+    );
+
+    public static RenderType createEntityTranslucentMask(String name, ResourceLocation resourceLocation, ResourceLocation maskLocation) {
+        RenderType.CompositeState rendertype$compositestate = RenderType.CompositeState.builder()
+                .setShaderState(new RenderStateShard.ShaderStateShard(() -> WeaversParadiseCustomShaders.ENTITY_TRANSLUCENT_MASK))
+                .setTextureState(
+                        RenderStateShard.MultiTextureStateShard.builder()
+                                .add(
+                                        resourceLocation,
+                                        false,
+                                        false
+                                )
+                                .add(
+                                        ResourceLocation.fromNamespaceAndPath("minecraft", "textures/block/debug.png"),
+                                        false,
+                                        false
+                                )
+                                .add(
+                                        ResourceLocation.fromNamespaceAndPath("minecraft", "textures/block/debug.png"),
+                                        false,
+                                        false
+                                )
+                                .add(
+                                        maskLocation,
+                                        false,
+                                        false
+                                )
+                                .build()
+                )
+                .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
+                .setCullState(RenderStateShard.NO_CULL)
+                .setLightmapState(RenderStateShard.LIGHTMAP)
+                .setOverlayState(RenderStateShard.OVERLAY)
+                .createCompositeState(true);
+
+        return RenderType.create(name, DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 1536, true, true, rendertype$compositestate);
+    }
+
+    public static RenderType getEntityTranslucentMask(ResourceLocation resourceLocation, ResourceLocation maskLocation) {
+        List<ResourceLocation> data = new ArrayList<>();
+        data.add(resourceLocation);
+        data.add(maskLocation);
+
+        return ENTITY_TRANSLUCENT_MASK.apply(data);
+    }
+
+    public static final Function<List<ResourceLocation>, RenderType> ENTITY_STATIC = Util.memoize(
+            data -> {
+                ResourceLocation resourceLocation = data.get(0);
+
+                return createEntityStatic("entity_static", resourceLocation);
+            }
+    );
+
+    public static RenderType createEntityStatic(String name, ResourceLocation resourceLocation) {
+        RenderType.CompositeState rendertype$compositestate = RenderType.CompositeState.builder()
+                .setShaderState(new RenderStateShard.ShaderStateShard(() -> WeaversParadiseCustomShaders.ENTITY_STATIC))
+                .setTextureState(
+                        new RenderStateShard.TextureStateShard(
+                                resourceLocation,
+                                false,
+                                false
+                        )
+                )
+                .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
+                .setCullState(RenderStateShard.NO_CULL)
+                .setLightmapState(RenderStateShard.LIGHTMAP)
+                .setOverlayState(RenderStateShard.OVERLAY)
+                .createCompositeState(true);
+
+        return RenderType.create(name, DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 1536, true, true, rendertype$compositestate);
+    }
+
+    public static RenderType getEntityStatic(ResourceLocation resourceLocation) {
+        List<ResourceLocation> data = new ArrayList<>();
+        data.add(resourceLocation);
+
+        return ENTITY_STATIC.apply(data);
+    }
+
+    public static final Function<List<ResourceLocation>, RenderType> ENTITY_CRYSTAL = Util.memoize(
+            data -> {
+                ResourceLocation texture1 = data.get(0);
+                return createCrystal("entity_crystal", texture1);
+            }
+    );
+
+    public static RenderType createCrystal(String name, ResourceLocation texture1) {
+        RenderType.CompositeState rendertype$compositestate = RenderType.CompositeState.builder()
+                .setShaderState(new RenderStateShard.ShaderStateShard(() -> WeaversParadiseCustomShaders.ENTITY_CRYSTAL))
+                .setTextureState(
+                        new RenderStateShard.TextureStateShard(
+                                texture1, false, false
+                        )
+                )
+                .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
+                .setCullState(RenderStateShard.NO_CULL)
+                .setLightmapState(RenderStateShard.LIGHTMAP)
+                .setOverlayState(RenderStateShard.OVERLAY)
+                .createCompositeState(true);
+
+
+        return RenderType.create(name, DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 1536, true, true, rendertype$compositestate);
+    }
+
+    public static RenderType getCrystal(ResourceLocation texture1) {
+        List<ResourceLocation> data = new ArrayList();
+        data.add(texture1);
+
+        return ENTITY_CRYSTAL.apply(data);
     }
 }

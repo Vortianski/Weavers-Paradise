@@ -4,10 +4,11 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "SculkBlockEntityMixin",
-    "PlayerMixin",
     "GameEventListenerMixin",
     "LivingRendererMixin",
-    "BlockStateClassMixin"
+    "BlockStateClassMixin",
+    "EntityMixin",
+    "PlayerMixin"
   ],
   "client": [
     "client.PlayerRendererMixin",

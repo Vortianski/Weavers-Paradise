@@ -92,7 +92,7 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
 
             @Override
             public boolean mayPlace(ItemStack stack) {
-                if (stack.is(WeaversParadiseItems.RAW_COTTON) || stack.is(Items.STRING) || stack.is(ItemTags.create(ResourceLocation.parse("minecraft:wool")))) {
+                if (stack.is(WeaversParadiseItems.COTTON_SPOOL) || stack.is(WeaversParadiseItems.RAW_COTTON) || stack.is(Items.STRING) || stack.is(ItemTags.create(ResourceLocation.parse("minecraft:wool")))) {
                     return true;
                 }
 

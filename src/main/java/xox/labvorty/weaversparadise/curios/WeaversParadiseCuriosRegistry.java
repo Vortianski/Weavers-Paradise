@@ -28,8 +28,16 @@ public class WeaversParadiseCuriosRegistry extends CuriosDataProvider {
                 .size(1)
                 .addCosmetic(false)
                 .icon(ResourceLocation.parse("curios:slot/upperwear"));
+        createSlot("choker_trinket")
+                .size(0)
+                .addCosmetic(false)
+                .icon(ResourceLocation.parse("curios:slot/choker_trinket"));
+        createSlot("pants")
+                .size(1)
+                .addCosmetic(false)
+                .icon(ResourceLocation.parse("curios:slot/pants"));
         createEntities("weavers_entities")
                 .addPlayer()
-                .addSlots("legwear", "gloves", "upperwear");
+                .addSlots("legwear", "gloves", "upperwear", "necklace", "choker_trinket", "pants");
     }
 }

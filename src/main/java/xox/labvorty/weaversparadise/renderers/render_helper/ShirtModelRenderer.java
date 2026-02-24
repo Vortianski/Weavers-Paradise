@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
+import xox.labvorty.weaversparadise.data.WeaversParadiseOpenShirtTextureHandler;
 import xox.labvorty.weaversparadise.data.WeaversParadiseShirtTextureHandler;
 import xox.labvorty.weaversparadise.model.ModelUpperWear;
 import xox.labvorty.weaversparadise.renderers.WeaversParadiseGlobalRendererDataHolder;
@@ -23,6 +24,7 @@ public class ShirtModelRenderer {
     private Minecraft minecraft;
     private int ticks;
 
+    private boolean isOpen;
     private int pCO;
     private int sCO;
     private int pCT;
@@ -41,6 +43,7 @@ public class ShirtModelRenderer {
     private int finalL2;
 
     public void initData(ShirtRenderingData renderingData) {
+        this.isOpen = renderingData.isOpen();
         this.pCO = renderingData.getPrimaryColorOne();
         this.sCO = renderingData.getSecondaryColorOne();
         this.pCT = renderingData.getPrimaryColorTwo();
@@ -75,16 +78,21 @@ public class ShirtModelRenderer {
     ) {
         initData(renderingData);
 
-        handleColor(dTO, "one", livingEntity, packedLight);
-        handleColor(dTT, "two", livingEntity, packedLight);
-
         RenderingUtils renderingUtils = new RenderingUtils();
         minecraft = Minecraft.getInstance();
         ticks = (int)minecraft.level.getGameTime();
 
+        handleColor(dTO, "one", livingEntity, packedLight);
+        handleColor(dTT, "two", livingEntity, packedLight);
+
         String renderType = WeaversParadiseShirtTextureHandler.getByTypeAndMaterial(sT, mat).getRenderType();
         ResourceLocation tex1 = WeaversParadiseShirtTextureHandler.getByTypeAndMaterial(sT, mat).getTextureOne();
         ResourceLocation tex2 = WeaversParadiseShirtTextureHandler.getByTypeAndMaterial(sT, mat).getTextureTwo();
+        if (isOpen) {
+            WeaversParadiseOpenShirtTextureHandler weaversParadiseOpenShirtTextureHandler = WeaversParadiseOpenShirtTextureHandler.getByTypeAndMaterial(sT, mat);
+            tex1 = weaversParadiseOpenShirtTextureHandler.getTextureOne();
+            tex2 = weaversParadiseOpenShirtTextureHandler.getTextureTwo();
+        }
 
         poseStack.pushPose();
 
@@ -104,7 +112,7 @@ public class ShirtModelRenderer {
 
         poseStack.mulPose(Axis.ZP.rotationDegrees(zRot));
 
-        VertexConsumer vc1 = renderingUtils.parseVC(multiBufferSource, dTO, tex1);
+        VertexConsumer vc1 = renderingUtils.parseVC(multiBufferSource, dTO, tex1, "shirt");
         model.renderToBuffer(
                 poseStack,
                 vc1,
@@ -113,7 +121,7 @@ public class ShirtModelRenderer {
                 finalCO
         );
 
-        VertexConsumer vc2 = renderingUtils.parseVC(multiBufferSource, dTT, tex2);
+        VertexConsumer vc2 = renderingUtils.parseVC(multiBufferSource, dTT, tex2, "shirt");
         model.renderToBuffer(
                 poseStack,
                 vc2,
@@ -289,10 +297,6 @@ public class ShirtModelRenderer {
         float green = Mth.clamp((float)(Math.sin(ticks * speed + 2 * Math.PI / 3) * 0.5 + 0.5), 0, 1);
         float blue = Mth.clamp((float)(Math.sin(ticks * speed + 4 * Math.PI / 3) * 0.5 + 0.5), 0, 1);
 
-        int truered = (int)(red * 255);
-        int truegreen = (int)(green * 255);
-        int trueblue = (int)(blue * 255);
-
-        return 255 << 24 | truered << 16 | truegreen << 8 | trueblue;
+        return 255 << 24 | (int)(red * 255) << 16 | (int)(green * 255) << 8 | (int)(blue * 255);
     }
 }

@@ -127,6 +127,11 @@ public enum WeaversParadiseDyeIconHandler {
             ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/tooltips/flag_empty.png")
+    ),
+    CRYSTAL_ICON("crystal",
+            ResourceLocation.fromNamespaceAndPath(
+                    "minecraft",
+                    "textures/item/amethyst_shard.png")
     );
 
     private static final Map<String, WeaversParadiseDyeIconHandler> HANDLER_MAP =

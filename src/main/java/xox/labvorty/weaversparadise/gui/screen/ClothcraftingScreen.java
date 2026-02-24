@@ -34,6 +34,7 @@ import xox.labvorty.weaversparadise.gui.menu.ClothcraftingMenu;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.init.WeaversParadiseKeyMappings;
 import xox.labvorty.weaversparadise.items.CottonSpool;
+import xox.labvorty.weaversparadise.items.JeansSpool;
 import xox.labvorty.weaversparadise.items.SilkSpool;
 import xox.labvorty.weaversparadise.items.WoolSpool;
 
@@ -172,7 +173,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
             List<Component> components = new ArrayList<>();
 
             for (ItemStack itemStack : items) {
-                if (itemStack.getItem().equals(WeaversParadiseItems.COTTON_CLOTH.get()) || itemStack.getItem().equals(WeaversParadiseItems.WOOL_CLOTH.get()) || itemStack.getItem().equals(WeaversParadiseItems.SILK_CLOTH.get())) {
+                if (itemStack.getItem().equals(WeaversParadiseItems.JEANS_CLOTH.get()) || itemStack.getItem().equals(WeaversParadiseItems.COTTON_CLOTH.get()) || itemStack.getItem().equals(WeaversParadiseItems.WOOL_CLOTH.get()) || itemStack.getItem().equals(WeaversParadiseItems.SILK_CLOTH.get())) {
                     int quality = itemStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getInt("quality");
                     components.add(Component.literal(itemStack.getItem().getName(itemStack).getString() + " Q" + quality + " x" + itemStack.getCount()));
                 } else {
@@ -795,6 +796,10 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
             if (slot.getItem().is(WeaversParadiseItems.COTTON_SPOOL.get()) && slot.getItem().getCount() > 5) {
                 return true;
             }
+
+            if (slot.getItem().is(WeaversParadiseItems.JEANS_SPOOL.get()) && slot.getItem().getCount() > 5) {
+                return true;
+            }
         }
 
         return false;
@@ -814,6 +819,10 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
 
         if (stack.getItem() instanceof CottonSpool cottonSpool) {
             return "COTTON";
+        }
+
+        if (stack.getItem() instanceof JeansSpool jeansSpool) {
+            return "JEANS";
         }
 
         return "";

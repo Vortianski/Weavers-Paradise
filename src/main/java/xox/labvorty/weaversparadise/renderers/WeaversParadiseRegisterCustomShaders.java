@@ -6,7 +6,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.RegisterShadersEvent;
 import net.neoforged.bus.api.EventPriority;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(value = Dist.CLIENT)
 public class WeaversParadiseRegisterCustomShaders {
     @SubscribeEvent
             (priority = EventPriority.HIGHEST)

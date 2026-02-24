@@ -1,14 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " ##",
-    "RP#",
+    " ii",
+    "RPi",
     "PR "
   ],
   "key": {
-    "#": "minecraft:string",
-    "R": "minecraft:red_dye",
-    "P": "minecraft:paper"
+    "i": { "item": "minecraft:string" },
+    "R": { "item": "minecraft:red_dye" },
+    "P": { "item": "minecraft:paper" }
   },
   "result": {
     "id": "weaversparadise:player_plushie_rename_token",

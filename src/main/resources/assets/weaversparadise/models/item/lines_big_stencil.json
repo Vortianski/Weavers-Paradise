@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "weaversparadise:item/stensil_big_lines"
+    "layer0": "weaversparadise:item/stencil_big_lines"
   }
 }

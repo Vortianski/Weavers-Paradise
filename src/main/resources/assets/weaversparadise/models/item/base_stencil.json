@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "weaversparadise:item/base_stensil"
+    "layer0": "weaversparadise:item/stencil_base"
   }
 }

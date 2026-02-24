@@ -67,26 +67,6 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
             ItemStack slot6 = dyeingBarrelBlock.getItemHandler().getStackInSlot(6);
             ItemStack slot7 = dyeingBarrelBlock.getItemHandler().getStackInSlot(7);
 
-            List<String> dyeTypes = List.of(
-                    "agender",
-                    "aroace",
-                    "aromantic",
-                    "asexual",
-                    "bisexual",
-                    "demiboy",
-                    "demigender",
-                    "demigirl",
-                    "gay",
-                    "genderfluid",
-                    "genderqueer",
-                    "intersex",
-                    "lesbian",
-                    "nonbinary",
-                    "pansexual",
-                    "pride",
-                    "trans"
-            );
-
             if (slot4.is(WeaversParadiseItems.BOTTLED_DYE)) {
                 CompoundTag slotdata = slot4.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
 
@@ -130,6 +110,7 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                             || slot0.is(WeaversParadiseItems.HAND_WARMERS_COTTON)
                             || slot0.is(WeaversParadiseItems.HAND_WARMERS_SILK)
                             || slot0.is(WeaversParadiseItems.HAND_WARMERS_WOOL)
+                            || slot0.is(WeaversParadiseItems.CHOKER)
             ) {
                 ItemStack stack = slot0.copy();
 
@@ -148,37 +129,7 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                             slot4 = new ItemStack(Items.GLASS_BOTTLE);
                         } else {
 
-                            boolean isPride = false;
-
-                            for (String entry : dyeTypes) {
-                                if (tag.getString("dyeType").equals(entry)) {
-                                    isPride = true;
-                                    break;
-                                }
-                            }
-
-                            if (isPride) {
-                                CustomData.update(DataComponents.CUSTOM_DATA, stack, (tags) -> {
-                                    tags.putInt("colorPriRedLeftOne", 255);
-                                    tags.putInt("colorPriGreenLeftOne", 255);
-                                    tags.putInt("colorPriBlueLeftOne", 255);
-                                    tags.putInt("colorSecRedLeftOne", 255);
-                                    tags.putInt("colorSecGreenLeftOne", 255);
-                                    tags.putInt("colorSecBlueLeftOne", 255);
-                                    tags.putInt("colorPriRedLeftTwo", 255);
-                                    tags.putInt("colorPriGreenLeftTwo", 255);
-                                    tags.putInt("colorPriBlueLeftTwo", 255);
-                                    tags.putInt("colorSecRedLeftTwo", 255);
-                                    tags.putInt("colorSecGreenLeftTwo", 255);
-                                    tags.putInt("colorSecBlueLeftTwo", 255);
-                                    tags.putString("stensilTypeLeft", tag.getString("dyeType"));
-                                    tags.putString("dyeTypeLeftOne", tag.getString("dyeType"));
-                                    tags.putString("dyeTypeLeftTwo", tag.getString("dyeType"));
-                                    tags.putInt("lightValueLeftOne", 15);
-                                    tags.putInt("lightValueLeftTwo", 15);
-                                });
-                            } else {
-                                CustomData.update(DataComponents.CUSTOM_DATA, stack, (tags) -> {
+                            CustomData.update(DataComponents.CUSTOM_DATA, stack, (tags) -> {
                                     tags.putInt("colorPriRedLeftOne", tag.getInt("colorRedOne"));
                                     tags.putInt("colorPriGreenLeftOne", tag.getInt("colorGreenOne"));
                                     tags.putInt("colorPriBlueLeftOne", tag.getInt("colorBlueOne"));
@@ -195,8 +146,7 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                                     tags.putString("dyeTypeLeftTwo", tag.getString("dyeType"));
                                     tags.putInt("lightValueLeftOne", tag.getInt("lightValue"));
                                     tags.putInt("lightValueLeftTwo", tag.getInt("lightValue"));
-                                });
-                            }
+                            });
                         }
                     }
                 } else if (slot2.is(ItemTags.create(ResourceLocation.parse("weaversparadise:thigh_highs_stensils")))) {
@@ -205,6 +155,8 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                         stensilLeft = "half";
                     } else if (slot2.is(WeaversParadiseItems.CHECKERS_STENCIL)) {
                         stensilLeft = "checkers";
+                    } else if (slot2.is(WeaversParadiseItems.CHECKERS_SMALL_STENCIL)) {
+                        stensilLeft = "checkers_small";
                     } else if (slot2.is(WeaversParadiseItems.LINES_VERTICAL_STENCIL)) {
                         stensilLeft = "vertical_lines";
                     } else if (slot2.is(WeaversParadiseItems.LINES_SMALL_STENCIL)) {
@@ -215,6 +167,12 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                         stensilLeft = "cross";
                     } else if (slot2.is(WeaversParadiseItems.PAWS_STENCIL)) {
                         stensilLeft = "paws";
+                    } else if (slot2.is(WeaversParadiseItems.STAR_STENCIL)) {
+                        stensilLeft = "stars";
+                    } else if (slot2.is(WeaversParadiseItems.DIRT_STENCIL)) {
+                        stensilLeft = "dirt";
+                    } else if (slot2.is(WeaversParadiseItems.FLOWER_STENCIL)) {
+                        stensilLeft = "flowers";
                     } else {
                         stensilLeft = "default";
                     }
@@ -237,7 +195,6 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                     final int blueLeftPriTwo;
                     final int blueLeftSecTwo;
 
-                    boolean isPride4 = false;
                     if (slot4.is(WeaversParadiseItems.BOTTLED_DYE)) {
                         CompoundTag dyetag = slot4.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
 
@@ -255,34 +212,13 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                             blueLeftSecOne = datatag.getInt("colorSecBlueLeftOne");
                             dyeTypeLeftOne = datatag.getString("dyeTypeLeftOne");
                         } else {
-
-                            for (String entry : dyeTypes) {
-                                if (dyetag.getString("dyeType").equals(entry)) {
-                                    isPride4 = true;
-                                    break;
-                                }
-                            }
-
-                            if (isPride4) {
-                                Containers.dropItemStack(serverLevel, pos.getX(), pos.getY(), pos.getZ(), slot4);
-                                dyeingBarrelBlock.getItemHandler().setStackInSlot(4, ItemStack.EMPTY);
-                                slot4 = ItemStack.EMPTY;
-                                redLeftPriOne = 255;
-                                redLeftSecOne = 255;
-                                greenLeftPriOne = 255;
-                                greenLeftSecOne = 255;
-                                blueLeftPriOne = 255;
-                                blueLeftSecOne = 255;
-                                dyeTypeLeftOne = "default";
-                            } else {
-                                redLeftPriOne = dyetag.getInt("colorRedOne");
-                                redLeftSecOne = dyetag.getInt("colorRedTwo");
-                                greenLeftPriOne = dyetag.getInt("colorGreenOne");
-                                greenLeftSecOne = dyetag.getInt("colorGreenTwo");
-                                blueLeftPriOne = dyetag.getInt("colorBlueOne");
-                                blueLeftSecOne = dyetag.getInt("colorBlueTwo");
-                                dyeTypeLeftOne = dyetag.getString("dyeType");
-                            }
+                            redLeftPriOne = dyetag.getInt("colorRedOne");
+                            redLeftSecOne = dyetag.getInt("colorRedTwo");
+                            greenLeftPriOne = dyetag.getInt("colorGreenOne");
+                            greenLeftSecOne = dyetag.getInt("colorGreenTwo");
+                            blueLeftPriOne = dyetag.getInt("colorBlueOne");
+                            blueLeftSecOne = dyetag.getInt("colorBlueTwo");
+                            dyeTypeLeftOne = dyetag.getString("dyeType");
                         }
                     } else {
                         CompoundTag datatag = slot0.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
@@ -296,7 +232,6 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                         dyeTypeLeftOne = datatag.getString("dyeTypeLeftOne");
                     }
 
-                    boolean isPride5 = false;
                     if (slot5.is(WeaversParadiseItems.BOTTLED_DYE)) {
                         CompoundTag dyetag = slot5.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
 
@@ -314,34 +249,13 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                             blueLeftSecTwo = datatag.getInt("colorSecBlueLeftTwo");
                             dyeTypeLeftTwo = datatag.getString("dyeTypeLeftTwo");
                         } else {
-
-                            for (String entry : dyeTypes) {
-                                if (dyetag.getString("dyeType").equals(entry)) {
-                                    isPride5 = true;
-                                    break;
-                                }
-                            }
-
-                            if (isPride5) {
-                                Containers.dropItemStack(serverLevel, pos.getX(), pos.getY(), pos.getZ(), slot5);
-                                dyeingBarrelBlock.getItemHandler().setStackInSlot(5, ItemStack.EMPTY);
-                                slot5 = ItemStack.EMPTY;
-                                redLeftPriTwo = 255;
-                                redLeftSecTwo = 255;
-                                greenLeftPriTwo = 255;
-                                greenLeftSecTwo = 255;
-                                blueLeftPriTwo = 255;
-                                blueLeftSecTwo = 255;
-                                dyeTypeLeftTwo = "default";
-                            } else {
-                                redLeftPriTwo = dyetag.getInt("colorRedOne");
-                                redLeftSecTwo = dyetag.getInt("colorRedTwo");
-                                greenLeftPriTwo = dyetag.getInt("colorGreenOne");
-                                greenLeftSecTwo = dyetag.getInt("colorGreenTwo");
-                                blueLeftPriTwo = dyetag.getInt("colorBlueOne");
-                                blueLeftSecTwo = dyetag.getInt("colorBlueTwo");
-                                dyeTypeLeftTwo = dyetag.getString("dyeType");
-                            }
+                            redLeftPriTwo = dyetag.getInt("colorRedOne");
+                            redLeftSecTwo = dyetag.getInt("colorRedTwo");
+                            greenLeftPriTwo = dyetag.getInt("colorGreenOne");
+                            greenLeftSecTwo = dyetag.getInt("colorGreenTwo");
+                            blueLeftPriTwo = dyetag.getInt("colorBlueOne");
+                            blueLeftSecTwo = dyetag.getInt("colorBlueTwo");
+                            dyeTypeLeftTwo = dyetag.getString("dyeType");
                         }
                     } else {
                         CompoundTag datatag = slot0.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
@@ -388,55 +302,24 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                             dyeingBarrelBlock.getItemHandler().setStackInSlot(6, new ItemStack(Items.GLASS_BOTTLE));
                             slot6 = new ItemStack(Items.GLASS_BOTTLE);
                         } else {
-                            boolean isPride = false;
-
-                            for (String entry : dyeTypes) {
-                                if (tag.getString("dyeType").equals(entry)) {
-                                    isPride = true;
-                                    break;
-                                }
-                            }
-
-                            if (isPride) {
-                                CustomData.update(DataComponents.CUSTOM_DATA, stack, (tags) -> {
-                                    tags.putInt("colorPriRedRightOne", 255);
-                                    tags.putInt("colorPriGreenRightOne", 255);
-                                    tags.putInt("colorPriBlueRightOne", 255);
-                                    tags.putInt("colorSecRedRightOne", 255);
-                                    tags.putInt("colorSecGreenRightOne", 255);
-                                    tags.putInt("colorSecBlueRightOne", 255);
-                                    tags.putInt("colorPriRedRightTwo", 255);
-                                    tags.putInt("colorPriGreenRightTwo", 255);
-                                    tags.putInt("colorPriBlueRightTwo", 255);
-                                    tags.putInt("colorSecRedRightTwo", 255);
-                                    tags.putInt("colorSecGreenRightTwo", 255);
-                                    tags.putInt("colorSecBlueRightTwo", 255);
-                                    tags.putString("stensilTypeRight", tag.getString("dyeType"));
-                                    tags.putString("dyeTypeRightOne", tag.getString("dyeType"));
-                                    tags.putString("dyeTypeRightTwo", tag.getString("dyeType"));
-                                    tags.putInt("lightValueRightOne", 15);
-                                    tags.putInt("lightValueRightTwo", 15);
-                                });
-                            } else {
-                                CustomData.update(DataComponents.CUSTOM_DATA, stack, (tags) -> {
-                                    tags.putInt("colorPriRedRightOne", tag.getInt("colorRedOne"));
-                                    tags.putInt("colorPriGreenRightOne", tag.getInt("colorGreenOne"));
-                                    tags.putInt("colorPriBlueRightOne", tag.getInt("colorBlueOne"));
-                                    tags.putInt("colorSecRedRightOne", tag.getInt("colorRedTwo"));
-                                    tags.putInt("colorSecGreenRightOne", tag.getInt("colorGreenTwo"));
-                                    tags.putInt("colorSecBlueRightOne", tag.getInt("colorBlueTwo"));
-                                    tags.putInt("colorPriRedRightTwo", tag.getInt("colorRedOne"));
-                                    tags.putInt("colorPriGreenRightTwo", tag.getInt("colorGreenOne"));
-                                    tags.putInt("colorPriBlueRightTwo", tag.getInt("colorBlueOne"));
-                                    tags.putInt("colorSecRedRightTwo", tag.getInt("colorRedTwo"));
-                                    tags.putInt("colorSecGreenRightTwo", tag.getInt("colorGreenTwo"));
-                                    tags.putInt("colorSecBlueRightTwo", tag.getInt("colorBlueTwo"));
-                                    tags.putString("dyeTypeRightOne", tag.getString("dyeType"));
-                                    tags.putString("dyeTypeRightTwo", tag.getString("dyeType"));
-                                    tags.putInt("lightValueRightOne", tag.getInt("lightValue"));
-                                    tags.putInt("lightValueRightTwo", tag.getInt("lightValue"));
-                                });
-                            }
+                            CustomData.update(DataComponents.CUSTOM_DATA, stack, (tags) -> {
+                                tags.putInt("colorPriRedRightOne", tag.getInt("colorRedOne"));
+                                tags.putInt("colorPriGreenRightOne", tag.getInt("colorGreenOne"));
+                                tags.putInt("colorPriBlueRightOne", tag.getInt("colorBlueOne"));
+                                tags.putInt("colorSecRedRightOne", tag.getInt("colorRedTwo"));
+                                tags.putInt("colorSecGreenRightOne", tag.getInt("colorGreenTwo"));
+                                tags.putInt("colorSecBlueRightOne", tag.getInt("colorBlueTwo"));
+                                tags.putInt("colorPriRedRightTwo", tag.getInt("colorRedOne"));
+                                tags.putInt("colorPriGreenRightTwo", tag.getInt("colorGreenOne"));
+                                tags.putInt("colorPriBlueRightTwo", tag.getInt("colorBlueOne"));
+                                tags.putInt("colorSecRedRightTwo", tag.getInt("colorRedTwo"));
+                                tags.putInt("colorSecGreenRightTwo", tag.getInt("colorGreenTwo"));
+                                tags.putInt("colorSecBlueRightTwo", tag.getInt("colorBlueTwo"));
+                                tags.putString("dyeTypeRightOne", tag.getString("dyeType"));
+                                tags.putString("dyeTypeRightTwo", tag.getString("dyeType"));
+                                tags.putInt("lightValueRightOne", tag.getInt("lightValue"));
+                                tags.putInt("lightValueRightTwo", tag.getInt("lightValue"));
+                            });
                         }
                     }
                 } else if (slot3.is(ItemTags.create(ResourceLocation.parse("weaversparadise:thigh_highs_stensils")))) {
@@ -445,6 +328,8 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                         stensilRight = "half";
                     } else if (slot3.is(WeaversParadiseItems.CHECKERS_STENCIL)) {
                         stensilRight = "checkers";
+                    } else if (slot3.is(WeaversParadiseItems.CHECKERS_SMALL_STENCIL)) {
+                        stensilRight = "checkers_small";
                     } else if (slot3.is(WeaversParadiseItems.LINES_VERTICAL_STENCIL)) {
                         stensilRight = "vertical_lines";
                     } else if (slot3.is(WeaversParadiseItems.LINES_SMALL_STENCIL)) {
@@ -477,7 +362,6 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                     final int blueRightPriTwo;
                     final int blueRightSecTwo;
 
-                    boolean isPride6 = false;
                     if (slot6.is(WeaversParadiseItems.BOTTLED_DYE)) {
                         CompoundTag dyetag = slot6.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
                         if (dyetag.getInt("amount") < 1) {
@@ -494,34 +378,13 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                             blueRightSecOne = datatag.getInt("colorSecBlueRightOne");
                             dyeTypeRightOne = datatag.getString("dyeTypeRightOne");
                         } else {
-
-                            for (String entry : dyeTypes) {
-                                if (dyetag.getString("dyeType").equals(entry)) {
-                                    isPride6 = true;
-                                    break;
-                                }
-                            }
-
-                            if (isPride6) {
-                                Containers.dropItemStack(serverLevel, pos.getX(), pos.getY(), pos.getZ(), slot6);
-                                dyeingBarrelBlock.getItemHandler().setStackInSlot(6, ItemStack.EMPTY);
-                                slot6 = ItemStack.EMPTY;
-                                redRightPriOne = 255;
-                                redRightSecOne = 255;
-                                greenRightPriOne = 255;
-                                greenRightSecOne = 255;
-                                blueRightPriOne = 255;
-                                blueRightSecOne = 255;
-                                dyeTypeRightOne = "default";
-                            } else {
-                                redRightPriOne = dyetag.getInt("colorRedOne");
-                                redRightSecOne = dyetag.getInt("colorRedTwo");
-                                greenRightPriOne = dyetag.getInt("colorGreenOne");
-                                greenRightSecOne = dyetag.getInt("colorGreenTwo");
-                                blueRightPriOne = dyetag.getInt("colorBlueOne");
-                                blueRightSecOne = dyetag.getInt("colorBlueTwo");
-                                dyeTypeRightOne = dyetag.getString("dyeType");
-                            }
+                            redRightPriOne = dyetag.getInt("colorRedOne");
+                            redRightSecOne = dyetag.getInt("colorRedTwo");
+                            greenRightPriOne = dyetag.getInt("colorGreenOne");
+                            greenRightSecOne = dyetag.getInt("colorGreenTwo");
+                            blueRightPriOne = dyetag.getInt("colorBlueOne");
+                            blueRightSecOne = dyetag.getInt("colorBlueTwo");
+                            dyeTypeRightOne = dyetag.getString("dyeType");
                         }
                     } else {
                         CompoundTag datatag = slot0.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
@@ -535,7 +398,6 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                         dyeTypeRightOne = datatag.getString("dyeTypeRightOne");
                     }
 
-                    boolean isPride7 = false;
                     if (slot7.is(WeaversParadiseItems.BOTTLED_DYE)) {
                         CompoundTag dyetag = slot7.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
 
@@ -554,33 +416,13 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                             dyeTypeRightTwo = datatag.getString("dyeTypeRightTwo");
                         } else {
 
-                            for (String entry : dyeTypes) {
-                                if (dyetag.getString("dyeType").equals(entry)) {
-                                    isPride7 = true;
-                                    break;
-                                }
-                            }
-
-                            if (isPride7) {
-                                Containers.dropItemStack(serverLevel, pos.getX(), pos.getY(), pos.getZ(), slot7);
-                                dyeingBarrelBlock.getItemHandler().setStackInSlot(7, ItemStack.EMPTY);
-                                slot7 = ItemStack.EMPTY;
-                                redRightPriTwo = 255;
-                                redRightSecTwo = 255;
-                                greenRightPriTwo = 255;
-                                greenRightSecTwo = 255;
-                                blueRightPriTwo = 255;
-                                blueRightSecTwo = 255;
-                                dyeTypeRightTwo = "default";
-                            } else {
-                                redRightPriTwo = dyetag.getInt("colorRedOne");
-                                redRightSecTwo = dyetag.getInt("colorRedTwo");
-                                greenRightPriTwo = dyetag.getInt("colorGreenOne");
-                                greenRightSecTwo = dyetag.getInt("colorGreenTwo");
-                                blueRightPriTwo = dyetag.getInt("colorBlueOne");
-                                blueRightSecTwo = dyetag.getInt("colorBlueTwo");
-                                dyeTypeRightTwo = dyetag.getString("dyeType");
-                            }
+                            redRightPriTwo = dyetag.getInt("colorRedOne");
+                            redRightSecTwo = dyetag.getInt("colorRedTwo");
+                            greenRightPriTwo = dyetag.getInt("colorGreenOne");
+                            greenRightSecTwo = dyetag.getInt("colorGreenTwo");
+                            blueRightPriTwo = dyetag.getInt("colorBlueOne");
+                            blueRightSecTwo = dyetag.getInt("colorBlueTwo");
+                            dyeTypeRightTwo = dyetag.getString("dyeType");
                         }
                     } else {
                         CompoundTag datatag = slot0.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
@@ -614,7 +456,14 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                 }
 
                 dyeingBarrelBlock.getItemHandler().setStackInSlot(1, stack);
-            } else if (slot0.is(WeaversParadiseItems.SHIRT_COTTON) || slot0.is(WeaversParadiseItems.SHIRT_SILK) || slot0.is(WeaversParadiseItems.SWEATER_WOOL)) {
+            } else if (
+                    slot0.is(WeaversParadiseItems.SHIRT_COTTON)
+                            || slot0.is(WeaversParadiseItems.SHIRT_SILK)
+                            || slot0.is(WeaversParadiseItems.SWEATER_WOOL)
+                            || slot0.is(WeaversParadiseItems.PANTS_JEANS)
+                            || slot0.is(WeaversParadiseItems.PANTS_COTTON)
+                            || slot0.is(WeaversParadiseItems.PANTS_SILK)
+            ) {
                 ItemStack stack = slot0.copy();
 
                 if (slot2.is(WeaversParadiseItems.PAWS_STENCIL) || slot2.is(WeaversParadiseItems.CROSS_STENCIL)) {
@@ -650,77 +499,46 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                             dyeingBarrelBlock.getItemHandler().setStackInSlot(4, new ItemStack(Items.GLASS_BOTTLE));
                             slot4 = new ItemStack(Items.GLASS_BOTTLE);
                         } else {
-                            boolean isPride = false;
-
-                            for (String entry : dyeTypes) {
-                                if (tag.getString("dyeType").equals(entry)) {
-                                    isPride = true;
-                                    break;
-                                }
-                            }
-
-                            if (isPride) {
-                                CustomData.update(DataComponents.CUSTOM_DATA, stack, (tags) -> {
-                                    // Primary colors for both halves
-                                    tags.putInt("colorPriRedOne", 255);
-                                    tags.putInt("colorPriGreenOne", 255);
-                                    tags.putInt("colorPriBlueOne", 255);
-                                    tags.putInt("colorPriRedTwo", 255);
-                                    tags.putInt("colorPriGreenTwo", 255);
-                                    tags.putInt("colorPriBlueTwo", 255);
-
-                                    // Secondary colors for both halves
-                                    tags.putInt("colorSecRedOne", 255);
-                                    tags.putInt("colorSecGreenOne", 255);
-                                    tags.putInt("colorSecBlueOne", 255);
-                                    tags.putInt("colorSecRedTwo", 255);
-                                    tags.putInt("colorSecGreenTwo", 255);
-                                    tags.putInt("colorSecBlueTwo", 255);
-
-                                    tags.putString("stensilType", tag.getString("dyeType"));
-                                    tags.putString("dyeTypeOne", tag.getString("dyeType"));
-                                    tags.putString("dyeTypeTwo", tag.getString("dyeType"));
-                                    tags.putInt("lightValueOne", 15);
-                                    tags.putInt("lightValueTwo", 15);
-                                });
-                            } else {
-                                CustomData.update(DataComponents.CUSTOM_DATA, stack, (tags) -> {
-                                    // First half colors
-                                    tags.putInt("colorPriRedOne", tag.getInt("colorRedOne"));
-                                    tags.putInt("colorPriGreenOne", tag.getInt("colorGreenOne"));
-                                    tags.putInt("colorPriBlueOne", tag.getInt("colorBlueOne"));
-                                    tags.putInt("colorSecRedOne", tag.getInt("colorRedTwo"));
-                                    tags.putInt("colorSecGreenOne", tag.getInt("colorGreenTwo"));
-                                    tags.putInt("colorSecBlueOne", tag.getInt("colorBlueTwo"));
-
-                                    // Second half colors (same as first for solid dye)
-                                    tags.putInt("colorPriRedTwo", tag.getInt("colorRedOne"));
-                                    tags.putInt("colorPriGreenTwo", tag.getInt("colorGreenOne"));
-                                    tags.putInt("colorPriBlueTwo", tag.getInt("colorBlueOne"));
-                                    tags.putInt("colorSecRedTwo", tag.getInt("colorRedTwo"));
-                                    tags.putInt("colorSecGreenTwo", tag.getInt("colorGreenTwo"));
-                                    tags.putInt("colorSecBlueTwo", tag.getInt("colorBlueTwo"));
-
-                                    tags.putString("dyeTypeOne", tag.getString("dyeType"));
-                                    tags.putString("dyeTypeTwo", tag.getString("dyeType"));
-                                    tags.putInt("lightValueOne", tag.getInt("lightValue"));
-                                    tags.putInt("lightValueTwo", tag.getInt("lightValue"));
-                                });
-                            }
+                            CustomData.update(DataComponents.CUSTOM_DATA, stack, (tags) -> {
+                                tags.putInt("colorPriRedOne", tag.getInt("colorRedOne"));
+                                tags.putInt("colorPriGreenOne", tag.getInt("colorGreenOne"));
+                                tags.putInt("colorPriBlueOne", tag.getInt("colorBlueOne"));
+                                tags.putInt("colorSecRedOne", tag.getInt("colorRedTwo"));
+                                tags.putInt("colorSecGreenOne", tag.getInt("colorGreenTwo"));
+                                tags.putInt("colorSecBlueOne", tag.getInt("colorBlueTwo"));
+                                tags.putInt("colorPriRedTwo", tag.getInt("colorRedOne"));
+                                tags.putInt("colorPriGreenTwo", tag.getInt("colorGreenOne"));
+                                tags.putInt("colorPriBlueTwo", tag.getInt("colorBlueOne"));
+                                tags.putInt("colorSecRedTwo", tag.getInt("colorRedTwo"));
+                                tags.putInt("colorSecGreenTwo", tag.getInt("colorGreenTwo"));
+                                tags.putInt("colorSecBlueTwo", tag.getInt("colorBlueTwo"));
+                                tags.putString("dyeTypeOne", tag.getString("dyeType"));
+                                tags.putString("dyeTypeTwo", tag.getString("dyeType"));
+                                tags.putInt("lightValueOne", tag.getInt("lightValue"));
+                                tags.putInt("lightValueTwo", tag.getInt("lightValue"));
+                            });
                         }
                     }
-                } else if (slot2.is(ItemTags.create(ResourceLocation.parse("weaversparadise:shirts_stensils")))) {
+                } else if (slot2.is(ItemTags.create(ResourceLocation.parse("weaversparadise:shirts_stensils"))) || slot2.is(ItemTags.create(ResourceLocation.parse("weaversparadise:pants_stencils")))) {
                     final String stensil;
                     if (slot2.is(WeaversParadiseItems.HALF_STENCIL)) {
                         stensil = "half";
                     } else if (slot2.is(WeaversParadiseItems.CHECKERS_STENCIL)) {
                         stensil = "checkers";
+                    } else if (slot2.is(WeaversParadiseItems.CHECKERS_SMALL_STENCIL)) {
+                        stensil = "checkers_small";
                     } else if (slot2.is(WeaversParadiseItems.LINES_VERTICAL_STENCIL)) {
                         stensil = "vertical_lines";
                     } else if (slot2.is(WeaversParadiseItems.LINES_SMALL_STENCIL)) {
                         stensil = "small_lines";
                     } else if (slot2.is(WeaversParadiseItems.LINES_BIG_STENCIL)) {
                         stensil = "big_lines";
+                    } else if (slot2.is(WeaversParadiseItems.STAR_STENCIL)) {
+                        stensil = "stars";
+                    } else if (slot2.is(WeaversParadiseItems.DIRT_STENCIL)) {
+                        stensil = "dirt";
+                    } else if (slot2.is(WeaversParadiseItems.FLOWER_STENCIL)) {
+                        stensil = "flowers";
                     } else {
                         stensil = "default";
                     }
@@ -743,7 +561,6 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                     final int bluePriTwo;
                     final int blueSecTwo;
 
-                    boolean isPride4 = false;
                     if (slot4.is(WeaversParadiseItems.BOTTLED_DYE)) {
                         CompoundTag dyetag = slot4.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
                         if (dyetag.getInt("amount") < 1) {
@@ -760,34 +577,13 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                             blueSecOne = datatag.getInt("colorSecBlueOne");
                             dyeTypeOne = datatag.getString("dyeTypeOne");
                         } else {
-
-                            for (String entry : dyeTypes) {
-                                if (dyetag.getString("dyeType").equals(entry)) {
-                                    isPride4 = true;
-                                    break;
-                                }
-                            }
-
-                            if (isPride4) {
-                                Containers.dropItemStack(serverLevel, pos.getX(), pos.getY(), pos.getZ(), slot4);
-                                dyeingBarrelBlock.getItemHandler().setStackInSlot(4, ItemStack.EMPTY);
-                                slot4 = ItemStack.EMPTY;
-                                redPriOne = 255;
-                                redSecOne = 255;
-                                greenPriOne = 255;
-                                greenSecOne = 255;
-                                bluePriOne = 255;
-                                blueSecOne = 255;
-                                dyeTypeOne = "default";
-                            } else {
-                                redPriOne = dyetag.getInt("colorRedOne");
-                                redSecOne = dyetag.getInt("colorRedTwo");
-                                greenPriOne = dyetag.getInt("colorGreenOne");
-                                greenSecOne = dyetag.getInt("colorGreenTwo");
-                                bluePriOne = dyetag.getInt("colorBlueOne");
-                                blueSecOne = dyetag.getInt("colorBlueTwo");
-                                dyeTypeOne = dyetag.getString("dyeType");
-                            }
+                            redPriOne = dyetag.getInt("colorRedOne");
+                            redSecOne = dyetag.getInt("colorRedTwo");
+                            greenPriOne = dyetag.getInt("colorGreenOne");
+                            greenSecOne = dyetag.getInt("colorGreenTwo");
+                            bluePriOne = dyetag.getInt("colorBlueOne");
+                            blueSecOne = dyetag.getInt("colorBlueTwo");
+                            dyeTypeOne = dyetag.getString("dyeType");
                         }
                     } else {
                         CompoundTag datatag = slot0.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
@@ -801,7 +597,6 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                         dyeTypeOne = datatag.getString("dyeTypeOne");
                     }
 
-                    boolean isPride5 = false;
                     if (slot5.is(WeaversParadiseItems.BOTTLED_DYE)) {
                         CompoundTag dyetag = slot5.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
 
@@ -819,34 +614,13 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                             blueSecTwo = datatag.getInt("colorSecBlueTwo");
                             dyeTypeTwo = datatag.getString("dyeTypeTwo");
                         } else {
-
-                            for (String entry : dyeTypes) {
-                                if (dyetag.getString("dyeType").equals(entry)) {
-                                    isPride5 = true;
-                                    break;
-                                }
-                            }
-
-                            if (isPride5) {
-                                Containers.dropItemStack(serverLevel, pos.getX(), pos.getY(), pos.getZ(), slot7);
-                                dyeingBarrelBlock.getItemHandler().setStackInSlot(5, ItemStack.EMPTY);
-                                slot5 = ItemStack.EMPTY;
-                                redPriTwo = 255;
-                                redSecTwo = 255;
-                                greenPriTwo = 255;
-                                greenSecTwo = 255;
-                                bluePriTwo = 255;
-                                blueSecTwo = 255;
-                                dyeTypeTwo = "default";
-                            } else {
-                                redPriTwo = dyetag.getInt("colorRedOne");
-                                redSecTwo = dyetag.getInt("colorRedTwo");
-                                greenPriTwo = dyetag.getInt("colorGreenOne");
-                                greenSecTwo = dyetag.getInt("colorGreenTwo");
-                                bluePriTwo = dyetag.getInt("colorBlueOne");
-                                blueSecTwo = dyetag.getInt("colorBlueTwo");
-                                dyeTypeTwo = dyetag.getString("dyeType");
-                            }
+                            redPriTwo = dyetag.getInt("colorRedOne");
+                            redSecTwo = dyetag.getInt("colorRedTwo");
+                            greenPriTwo = dyetag.getInt("colorGreenOne");
+                            greenSecTwo = dyetag.getInt("colorGreenTwo");
+                            bluePriTwo = dyetag.getInt("colorBlueOne");
+                            blueSecTwo = dyetag.getInt("colorBlueTwo");
+                            dyeTypeTwo = dyetag.getString("dyeType");
                         }
                     } else {
                         CompoundTag datatag = slot0.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();

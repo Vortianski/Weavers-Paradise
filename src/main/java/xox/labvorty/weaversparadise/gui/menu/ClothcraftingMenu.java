@@ -89,7 +89,7 @@ public class ClothcraftingMenu extends AbstractContainerMenu implements Supplier
 
             @Override
             public boolean mayPlace(ItemStack stack) {
-                if (stack.is(WeaversParadiseItems.COTTON_SPOOL) || stack.is(WeaversParadiseItems.SILK_SPOOL) || stack.is(WeaversParadiseItems.WOOL_SPOOL)) {
+                if (stack.is(WeaversParadiseItems.JEANS_SPOOL) || stack.is(WeaversParadiseItems.COTTON_SPOOL) || stack.is(WeaversParadiseItems.SILK_SPOOL) || stack.is(WeaversParadiseItems.WOOL_SPOOL)) {
                     return true;
                 }
 

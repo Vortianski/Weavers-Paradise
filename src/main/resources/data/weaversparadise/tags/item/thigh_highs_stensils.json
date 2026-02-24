@@ -3,6 +3,7 @@
   "values": [
     "weaversparadise:half_stencil",
     "weaversparadise:checkers_stencil",
+    "weaversparadise:checkers_small_stencil",
     "weaversparadise:lines_vertical_stencil",
     "weaversparadise:lines_small_stencil",
     "weaversparadise:lines_big_stencil",

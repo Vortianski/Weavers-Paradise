@@ -92,6 +92,11 @@ public class EmiCompat implements EmiPlugin {
             CustomData.update(DataComponents.CUSTOM_DATA, stack3, tag -> tag.putInt("quality", quality));
             emiStacks3.add(EmiStack.of(stack3, 1));
 
+            List<EmiStack> emiStacks4 = new ArrayList<>();
+            ItemStack stack4 = new ItemStack(WeaversParadiseItems.JEANS_CLOTH.get());
+            CustomData.update(DataComponents.CUSTOM_DATA, stack4, tag -> tag.putInt("quality", quality));
+            emiStacks4.add(EmiStack.of(stack4, 1));
+
             registry.addDeferredRecipes((deferred) -> {
                 deferred.accept(new ClothcraftingEmiRecipe(
                         ResourceLocation.fromNamespaceAndPath("weaversparadise", ("/clothcrafting_cotton_cloth" + "_" + quality)),
@@ -113,6 +118,14 @@ public class EmiCompat implements EmiPlugin {
                         ResourceLocation.fromNamespaceAndPath("weaversparadise", ("/clothcrafting_wool_cloth" + "_" + quality)),
                         List.of(EmiIngredient.of(Ingredient.of(WeaversParadiseItems.WOOL_SPOOL.get())).setAmount(6)),
                         emiStacks3
+                ));
+            });
+
+            registry.addDeferredRecipes((deferred) -> {
+                deferred.accept(new ClothcraftingEmiRecipe(
+                        ResourceLocation.fromNamespaceAndPath("weaversparadise", ("/clothcrafting_jeans_cloth" + "_" + quality)),
+                        List.of(EmiIngredient.of(Ingredient.of(WeaversParadiseItems.JEANS_SPOOL.get())).setAmount(6)),
+                        emiStacks4
                 ));
             });
         }
@@ -150,6 +163,18 @@ public class EmiCompat implements EmiPlugin {
                     ),
                     List.of(
                             EmiStack.of(new ItemStack(WeaversParadiseItems.COTTON_SPOOL.get()), 1)
+                    )
+            ));
+        });
+        registry.addDeferredRecipes((deferred) -> {
+            deferred.accept(new SpinningJennyEmiRecipe(
+                    ResourceLocation.fromNamespaceAndPath("weaversparadise", "/spinning_jenny_jeans_spool"),
+                    List.of(
+                            EmiIngredient.of(Ingredient.of(WeaversParadiseItems.EMPTY_SPOOL.get())).setAmount(1),
+                            EmiIngredient.of(Ingredient.of(WeaversParadiseItems.COTTON_SPOOL.get())).setAmount(3)
+                    ),
+                    List.of(
+                            EmiStack.of(new ItemStack(WeaversParadiseItems.JEANS_SPOOL.get()), 1)
                     )
             ));
         });

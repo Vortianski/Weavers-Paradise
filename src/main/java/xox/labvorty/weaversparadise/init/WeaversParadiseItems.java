@@ -28,7 +28,18 @@ public class WeaversParadiseItems {
     public static final DeferredItem<Item> SHIRT_SILK = ITEMS.register("shirt_silk", ShirtSilk::new);
     public static final DeferredItem<Item> SWEATER_WOOL = ITEMS.register("sweater_wool", SweaterWool::new);
 
+    public static final DeferredItem<Item> PANTS_JEANS = ITEMS.register("pants_jeans", PantsJeans::new);
+    public static final DeferredItem<Item> PANTS_COTTON = ITEMS.register("pants_cotton", PantsCotton::new);
+    public static final DeferredItem<Item> PANTS_SILK = ITEMS.register("pants_silk", PantsSilk::new);
+
     public static final DeferredItem<Item> LEATHER_GLOVES = ITEMS.register("leather_gloves", LeatherGloves::new);
+
+    public static final DeferredItem<Item> CHOKER = ITEMS.register("choker", ChokerItem::new);
+    public static final DeferredItem<Item> BELL = ITEMS.register("bell", BellItem::new);
+    public static final DeferredItem<Item> HEART = ITEMS.register("heart", HeartItem::new);
+    public static final DeferredItem<Item> RING = ITEMS.register("ring", RingItem::new);
+    public static final DeferredItem<Item> CAT_RING = ITEMS.register("cat_ring", CatRingItem::new);
+    public static final DeferredItem<Item> PLATE = ITEMS.register("plate", PlateItem::new);
 
     public static final DeferredItem<Item> ASTOLFO_ARMOR_WIG = ITEMS.register("astolfo_armor_wig", AstolfoArmor.Helmet::new);
     public static final DeferredItem<Item> ASTOLFO_ARMOR_CHESTPLATE = ITEMS.register("astolfo_armor_chestplate", AstolfoArmor.Chestplate::new);
@@ -41,27 +52,35 @@ public class WeaversParadiseItems {
     public static final DeferredItem<Item> COTTON_UPPERWEAR_BASE_ZIPPER = ITEMS.register("cotton_upperwear_base_zipper", CottonUpperwearBaseZipper::new);
     public static final DeferredItem<Item> COTTON_SLEEVE_SHORT = ITEMS.register("cotton_sleeve_short", CottonSleeveShort::new);
     public static final DeferredItem<Item> COTTON_SLEEVE_LONG = ITEMS.register("cotton_sleeve_long", CottonSleeveLong::new);
+    public static final DeferredItem<Item> COTTON_PANT_LEG = ITEMS.register("cotton_pant_leg", CottonPantLeg::new);
 
     public static final DeferredItem<Item> SILK_UPPERWEAR_BASE = ITEMS.register("silk_upperwear_base", SilkUpperwearBase::new);
     public static final DeferredItem<Item> SILK_UPPERWEAR_BASE_BUTTONS = ITEMS.register("silk_upperwear_base_buttons", SilkUpperwearBaseButtons::new);
     public static final DeferredItem<Item> SILK_UPPERWEAR_BASE_ZIPPER = ITEMS.register("silk_upperwear_base_zipper", SilkUpperwearBaseZipper::new);
     public static final DeferredItem<Item> SILK_SLEEVE_SHORT = ITEMS.register("silk_sleeve_short", SilkSleeveShort::new);
     public static final DeferredItem<Item> SILK_SLEEVE_LONG = ITEMS.register("silk_sleeve_long", SilkSleeveLong::new);
+    public static final DeferredItem<Item> SILK_PANT_LEG = ITEMS.register("silk_pant_leg", SilkPantLeg::new);
 
     public static final DeferredItem<Item> WOOL_UPPERWEAR_BASE = ITEMS.register("wool_upperwear_base", WoolUpperwearBase::new);
     public static final DeferredItem<Item> WOOL_UPPERWEAR_BASE_BUTTONS = ITEMS.register("wool_upperwear_base_buttons", WoolUpperwearBaseButtons::new);
     public static final DeferredItem<Item> WOOL_SLEEVE_SHORT = ITEMS.register("wool_sleeve_short", WoolSleeveShort::new);
     public static final DeferredItem<Item> WOOL_SLEEVE_LONG = ITEMS.register("wool_sleeve_long", WoolSleeveLong::new);
 
+    public static final DeferredItem<Item> JEANS_PANT_LEG = ITEMS.register("jeans_pant_leg", JeansPantLeg::new);
+
     //stencils
     public static final DeferredItem<Item> BASIC_STENCIL = ITEMS.register("base_stencil", StencilBase::new);
     public static final DeferredItem<Item> HALF_STENCIL = ITEMS.register("half_stencil", StencilHalf::new);
     public static final DeferredItem<Item> CHECKERS_STENCIL = ITEMS.register("checkers_stencil", StencilCheckers::new);
+    public static final DeferredItem<Item> CHECKERS_SMALL_STENCIL = ITEMS.register("checkers_small_stencil", StencilCheckersSmall::new);
     public static final DeferredItem<Item> LINES_VERTICAL_STENCIL = ITEMS.register("lines_vertical_stencil", StencilLinesVertical::new);
     public static final DeferredItem<Item> LINES_SMALL_STENCIL = ITEMS.register("lines_small_stencil", StencilLinesSmall::new);
     public static final DeferredItem<Item> LINES_BIG_STENCIL = ITEMS.register("lines_big_stencil", StencilLinesBig::new);
     public static final DeferredItem<Item> CROSS_STENCIL = ITEMS.register("cross_stencil", StencilCross::new);
     public static final DeferredItem<Item> PAWS_STENCIL = ITEMS.register("paws_stencil", StencilPaws::new);
+    public static final DeferredItem<Item> STAR_STENCIL = ITEMS.register("star_stencil", StarStencil::new);
+    public static final DeferredItem<Item> DIRT_STENCIL = ITEMS.register("dirt_stencil", DirtStencil::new);
+    public static final DeferredItem<Item> FLOWER_STENCIL = ITEMS.register("flower_stencil", FlowerStencil::new);
 
     //blocks
     public static final DeferredItem<Item> CHROMATIC_BLOOM = ITEMS.register(WeaversParadiseBlocks.CHROMATIC_BLOOM.getId().getPath(), () -> new BlockItem(WeaversParadiseBlocks.CHROMATIC_BLOOM.get(), new Item.Properties()));
@@ -112,13 +131,16 @@ public class WeaversParadiseItems {
     public static final DeferredItem<Item> COTTON_CLOTH = ITEMS.register("cotton_cloth", () -> new CottonCloth(0));
     public static final DeferredItem<Item> WOOL_CLOTH = ITEMS.register("wool_cloth", () -> new WoolCloth(0));
     public static final DeferredItem<Item> SILK_CLOTH = ITEMS.register("silk_cloth", () -> new SilkCloth(0));
+    public static final DeferredItem<Item> JEANS_CLOTH = ITEMS.register("jeans_cloth", () -> new JeansCloth(0));
     public static final DeferredItem<Item> EMPTY_SPOOL = ITEMS.register("empty_spool", EmptySpool::new);
     public static final DeferredItem<Item> COTTON_SPOOL = ITEMS.register("cotton_spool", CottonSpool::new);
     public static final DeferredItem<Item> WOOL_SPOOL = ITEMS.register("wool_spool", WoolSpool::new);
     public static final DeferredItem<Item> SILK_SPOOL = ITEMS.register("silk_spool", SilkSpool::new);
+    public static final DeferredItem<Item> JEANS_SPOOL = ITEMS.register("jeans_spool", JeansSpool::new);
     public static final DeferredItem<Item> NEEDLE = ITEMS.register("needle", Needle::new);
     public static final DeferredItem<Item> NEEDLE_WITH_THREAD = ITEMS.register("needle_with_thread", NeedleWithThread::new);
     public static final DeferredItem<Item> BUTTON = ITEMS.register("button", Button::new);
     public static final DeferredItem<Item> PLAYER_PLUSHIE = ITEMS.register("player_plushie", PlushieItem::new);
     public static final DeferredItem<Item> PLAYER_PLUSHIE_RENAME_TOKEN = ITEMS.register("player_plushie_rename_token", PlayerPlushieRenameTokenItem::new);
+    public static final DeferredItem<Item> LEATHER_STRIPS = ITEMS.register("leather_strips", LeatherStrips::new);
 }

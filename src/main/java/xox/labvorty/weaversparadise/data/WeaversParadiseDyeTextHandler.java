@@ -99,6 +99,12 @@ public enum WeaversParadiseDyeTextHandler {
     ),
     INVISIBLE_TEXT("invisible",
             Component.translatable("weaversparadise.dye_text.invisible").getString()
+    ),
+    STATIC_TEXT("static",
+            Component.translatable("weaversparadise.dye_text.static").getString()
+    ),
+    CRYSTAL_TEXT("crystal",
+            Component.translatable("weaversparadise.dye_text.crystal").getString()
     );
 
     private static final Map<String, WeaversParadiseDyeTextHandler> HANDLER_MAP =

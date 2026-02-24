@@ -356,6 +356,57 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
                     }
                 }
             }
+
+            if (mainStack.is(WeaversParadiseItems.COTTON_SPOOL)) {
+                if (stack1.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 3) {
+                    if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
+                        itemHandlerModifiable.setStackInSlot(1, new ItemStack(WeaversParadiseItems.JEANS_SPOOL.get()));
+                        mainStack.shrink(4);
+                        itemHandlerModifiable.setStackInSlot(0, mainStack);
+                    }
+                }
+
+                if (stack2.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 3) {
+                    if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
+                        itemHandlerModifiable.setStackInSlot(2, new ItemStack(WeaversParadiseItems.JEANS_SPOOL.get()));
+                        mainStack.shrink(4);
+                        itemHandlerModifiable.setStackInSlot(0, mainStack);
+                    }
+                }
+
+                if (stack3.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 3) {
+                    if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
+                        itemHandlerModifiable.setStackInSlot(3, new ItemStack(WeaversParadiseItems.JEANS_SPOOL.get()));
+                        mainStack.shrink(4);
+                        itemHandlerModifiable.setStackInSlot(0, mainStack);
+                    }
+                }
+
+                if (stack4.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 3) {
+                    if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
+                        itemHandlerModifiable.setStackInSlot(4, new ItemStack(WeaversParadiseItems.JEANS_SPOOL.get()));
+                        mainStack.shrink(4);
+                        itemHandlerModifiable.setStackInSlot(0, mainStack);
+                    }
+                }
+
+                if (stack5.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 3) {
+                    if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
+                        itemHandlerModifiable.setStackInSlot(5, new ItemStack(WeaversParadiseItems.JEANS_SPOOL.get()));
+                        mainStack.shrink(4);
+                        itemHandlerModifiable.setStackInSlot(0, mainStack);
+                    }
+                }
+
+                if (stack6.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 3) {
+                    if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
+                        itemHandlerModifiable.setStackInSlot(6, new ItemStack(WeaversParadiseItems.JEANS_SPOOL.get()));
+                        mainStack.shrink(4);
+                        itemHandlerModifiable.setStackInSlot(0, mainStack);
+                    }
+                }
+            }
+
             if (canChange) {
                 if (bEntity instanceof SpinningJennyBlockEntity spinningJennyBlockEntity) {
                     spinningJennyBlockEntity.setWorkingState(0);
@@ -376,6 +427,8 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
         } else if (mainStack.is(Items.STRING) && mainStack.getCount() > 4 && stack.is(WeaversParadiseItems.EMPTY_SPOOL.get())) {
             return true;
         } else if (mainStack.is(WeaversParadiseItems.RAW_COTTON.get()) && mainStack.getCount() > 3 && stack.is(WeaversParadiseItems.EMPTY_SPOOL.get())) {
+            return true;
+        } else if (mainStack.is(WeaversParadiseItems.COTTON_SPOOL) && mainStack.getCount() > 3 && stack.is(WeaversParadiseItems.EMPTY_SPOOL.get())) {
             return true;
         }
 

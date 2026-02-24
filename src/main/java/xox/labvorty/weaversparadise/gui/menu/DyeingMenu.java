@@ -49,25 +49,6 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
     private Supplier<Boolean> boundItemMatcher = null;
     private Entity boundEntity = null;
     private BlockEntity boundBlockEntity = null;
-    private static final List<String> dyeTypes = List.of(
-            "agender",
-            "aroace",
-            "aromantic",
-            "asexual",
-            "bisexual",
-            "demiboy",
-            "demigender",
-            "demigirl",
-            "gay",
-            "genderfluid",
-            "genderqueer",
-            "intersex",
-            "lesbian",
-            "nonbinary",
-            "pansexual",
-            "pride",
-            "trans"
-    );
 
     public DyeingMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
         super(WeaversParadiseInterfaces.DYEING_MENU.get(), id);
@@ -169,6 +150,18 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
                     if (stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:shirts_stensils")))) {
                         return true;
                     }
+                } else if (internal.getStackInSlot(0).is(WeaversParadiseItems.CHOKER)) {
+                    if (stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:choker_stencils")))) {
+                        return true;
+                    }
+                } else if (
+                        internal.getStackInSlot(0).is(WeaversParadiseItems.PANTS_JEANS)
+                                || internal.getStackInSlot(0).is(WeaversParadiseItems.PANTS_COTTON)
+                                || internal.getStackInSlot(0).is(WeaversParadiseItems.PANTS_SILK)
+                ) {
+                    if (stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:pants_stencils")))) {
+                        return true;
+                    }
                 }
 
                 return false;
@@ -190,6 +183,10 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
                                 || internal.getStackInSlot(0).is(WeaversParadiseItems.HAND_WARMERS_WOOL)
                 ) {
                     if (stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:thigh_highs_stensils")))) {
+                        return true;
+                    }
+                } else if (internal.getStackInSlot(0).is(WeaversParadiseItems.CHOKER)) {
+                    if (stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:choker_stencils")))) {
                         return true;
                     }
                 }
@@ -218,14 +215,7 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
 
                 if (internal.getStackInSlot(2).is(ItemTags.create(ResourceLocation.parse("weaversparadise:stensils")))) {
                     if (stack.is(WeaversParadiseItems.BOTTLED_DYE)) {
-                        boolean isPride = false;
-                        for (String entry : dyeTypes) {
-                            if (tags.getString("dyeType").equals(entry)) {
-                                isPride = true;
-                                break;
-                            }
-                        }
-                        return !isPride;
+                        return true;
                     }
                 }
 
@@ -243,14 +233,7 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
 
                 if (internal.getStackInSlot(3).is(ItemTags.create(ResourceLocation.parse("weaversparadise:stensils")))) {
                     if (stack.is(WeaversParadiseItems.BOTTLED_DYE)) {
-                        boolean isPride = false;
-                        for (String entry : dyeTypes) {
-                            if (tags.getString("dyeType").equals(entry)) {
-                                isPride = true;
-                                break;
-                            }
-                        }
-                        return !isPride;
+                        return true;
                     }
                 }
 
@@ -276,14 +259,7 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
 
                 if (internal.getStackInSlot(3).is(ItemTags.create(ResourceLocation.parse("weaversparadise:stensils")))) {
                     if (stack.is(WeaversParadiseItems.BOTTLED_DYE)) {
-                        boolean isPride = false;
-                        for (String entry : dyeTypes) {
-                            if (tags.getString("dyeType").equals(entry)) {
-                                isPride = true;
-                                break;
-                            }
-                        }
-                        return !isPride;
+                        return true;
                     }
                 }
 

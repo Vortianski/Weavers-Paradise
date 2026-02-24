@@ -604,6 +604,28 @@ public class ImageClientTooltipComponent implements ClientTooltipComponent {
             component = flagText(text, polychromisedColor, ticks);
         } else if (type.equals("invisible")) {
             component = Component.literal(text);
+        } else if (type.equals("static")) {
+            int baseRed = 255;
+            int baseGreen = 255;
+            int baseBlue = 255;
+            int glowRed = 170;
+            int glowGreen = 170;
+            int glowBlue = 170;
+
+            for (int i = 0; i < text.length(); i++) {
+                char c = text.charAt(i);
+
+                float t = (float)(Math.sin((ticks + FIXED_SEQUENCE[i]) * 0.5) + 1.0f) / 2.0f;
+                int colorRed = Mth.lerpInt(t, baseRed, glowRed);
+                int colorGreen = Mth.lerpInt(t, baseGreen, glowGreen);
+                int colorBlue = Mth.lerpInt(t, baseBlue, glowBlue);
+
+                int color = 255 << 24 | colorRed << 16 | colorGreen << 8 | colorBlue;
+
+                component.append(Component.literal(String.valueOf(c)).withStyle(style -> style.withColor(color)));
+            }
+        } else if (type.equals("crystal")) {
+            component = Component.literal(text).withStyle(style -> style.withColor(primaryColor));
         }
 
         return component;

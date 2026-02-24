@@ -141,7 +141,7 @@ public class HandWarmersSpecialModelRenderer {
 
         poseStack.mulPose(Axis.ZP.rotationDegrees(zRot));
 
-        VertexConsumer vc1 = renderingUtils.parseVC(multiBufferSource, dTLO, tex1left);
+        VertexConsumer vc1 = renderingUtils.parseVC(multiBufferSource, dTLO, tex1left, "hand_warmers");
         model.LeftLeg.render(
                 poseStack,
                 vc1,
@@ -151,7 +151,7 @@ public class HandWarmersSpecialModelRenderer {
         );
 
         if (renderTypeLeft.equals("double")) {
-            VertexConsumer vc2 = renderingUtils.parseVC(multiBufferSource, dTLT, tex2left);
+            VertexConsumer vc2 = renderingUtils.parseVC(multiBufferSource, dTLT, tex2left, "hand_warmers");
             model.LeftLeg.render(
                     poseStack,
                     vc2,
@@ -161,7 +161,7 @@ public class HandWarmersSpecialModelRenderer {
             );
         }
 
-        VertexConsumer vc3 = renderingUtils.parseVC(multiBufferSource, dTRO, tex1right);
+        VertexConsumer vc3 = renderingUtils.parseVC(multiBufferSource, dTRO, tex1right, "hand_warmers");
         model.RightLeg.render(
                 poseStack,
                 vc3,
@@ -171,7 +171,7 @@ public class HandWarmersSpecialModelRenderer {
         );
 
         if (renderTypeRight.equals("double")) {
-            VertexConsumer vc4 = renderingUtils.parseVC(multiBufferSource, dTRT, tex2right);
+            VertexConsumer vc4 = renderingUtils.parseVC(multiBufferSource, dTRT, tex2right, "hand_warmers");
             model.RightLeg.render(
                     poseStack,
                     vc4,

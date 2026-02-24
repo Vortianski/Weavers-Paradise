@@ -140,7 +140,7 @@ public class ThighHighModelRenderer {
 
         poseStack.mulPose(Axis.ZP.rotationDegrees(zRot));
 
-        VertexConsumer vc1 = renderingUtils.parseVC(multiBufferSource, dTLO, tex1left);
+        VertexConsumer vc1 = renderingUtils.parseVC(multiBufferSource, dTLO, tex1left, "thigh_highs");
         model.LeftLeg.render(
                 poseStack,
                 vc1,
@@ -150,7 +150,7 @@ public class ThighHighModelRenderer {
         );
 
         if (renderTypeLeft.equals("double")) {
-            VertexConsumer vc2 = renderingUtils.parseVC(multiBufferSource, dTLT, tex2left);
+            VertexConsumer vc2 = renderingUtils.parseVC(multiBufferSource, dTLT, tex2left, "thigh_highs");
             model.LeftLeg.render(
                     poseStack,
                     vc2,
@@ -160,7 +160,7 @@ public class ThighHighModelRenderer {
             );
         }
 
-        VertexConsumer vc3 = renderingUtils.parseVC(multiBufferSource, dTRO, tex1right);
+        VertexConsumer vc3 = renderingUtils.parseVC(multiBufferSource, dTRO, tex1right, "thigh_highs");
         model.RightLeg.render(
                 poseStack,
                 vc3,
@@ -170,7 +170,7 @@ public class ThighHighModelRenderer {
         );
 
         if (renderTypeRight.equals("double")) {
-            VertexConsumer vc4 = renderingUtils.parseVC(multiBufferSource, dTRT, tex2right);
+            VertexConsumer vc4 = renderingUtils.parseVC(multiBufferSource, dTRT, tex2right, "thigh_highs");
             model.RightLeg.render(
                     poseStack,
                     vc4,

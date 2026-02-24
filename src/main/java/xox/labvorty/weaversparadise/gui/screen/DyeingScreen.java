@@ -11,11 +11,13 @@ import net.minecraft.client.renderer.blockentity.TheEndPortalRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
@@ -39,7 +41,9 @@ import xox.labvorty.weaversparadise.data.WeaversParadiseThighHighsTextureHandler
 import xox.labvorty.weaversparadise.gui.menu.DyeingMenu;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.*;
+import xox.labvorty.weaversparadise.model.ModelChoker;
 import xox.labvorty.weaversparadise.model.ModelUpperWear;
+import xox.labvorty.weaversparadise.model.PantsModel;
 import xox.labvorty.weaversparadise.model.ThighHighsModel;
 import xox.labvorty.weaversparadise.renderers.WeaversParadiseGlobalRendererDataHolder;
 import xox.labvorty.weaversparadise.renderers.WeaversParadiseRenderTypes;
@@ -57,6 +61,8 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
     private static final ThighHighsModel model = new ThighHighsModel(Minecraft.getInstance().getEntityModels().bakeLayer(WeaversParadiseMobLayers.THIGH_HIGHS));
     private static final ThighHighsModel model1 = new ThighHighsModel(Minecraft.getInstance().getEntityModels().bakeLayer(WeaversParadiseMobLayers.THIGH_HIGHS));
     private static final ModelUpperWear model2 = new ModelUpperWear(Minecraft.getInstance().getEntityModels().bakeLayer(WeaversParadiseMobLayers.UPPER_WEAR));
+    private static final ModelChoker model3 = new ModelChoker(Minecraft.getInstance().getEntityModels().bakeLayer(WeaversParadiseMobLayers.CHOKER));
+    private static final PantsModel model4 = new PantsModel(Minecraft.getInstance().getEntityModels().bakeLayer(WeaversParadiseMobLayers.PANTS));
 
     public DyeingScreen(DyeingMenu container, Inventory inventory, Component text) {
         super(container, inventory, text);
@@ -80,6 +86,8 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
         ThighHighModelRenderer thighHighModelRenderer = new ThighHighModelRenderer();
         HandWarmersSpecialModelRenderer handWarmersSpecialModelRenderer = new HandWarmersSpecialModelRenderer();
         ShirtModelRenderer shirtModelRenderer = new ShirtModelRenderer();
+        ChokerModelRenderer chokerModelRenderer = new ChokerModelRenderer();
+        PantsModelRenderer pantsModelRenderer = new PantsModelRenderer();
 
         if (stack.getItem() instanceof ThighHighsCotton cottonThighHighs) {
             Minecraft mc = Minecraft.getInstance();
@@ -145,6 +153,8 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
                     poseStack,
                     LightTexture.FULL_BRIGHT
             );
+
+            buffer.endBatch();
         } else if (stack.getItem() instanceof ThighHighsSilk silkThighHighs) {
             Minecraft mc = Minecraft.getInstance();
 
@@ -209,6 +219,8 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
                     poseStack,
                     LightTexture.FULL_BRIGHT
             );
+
+            buffer.endBatch();
         } else if (stack.getItem() instanceof ThighHighsWool woolThighHighs) {
             Minecraft mc = Minecraft.getInstance();
 
@@ -273,6 +285,8 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
                     poseStack,
                     LightTexture.FULL_BRIGHT
             );
+
+            buffer.endBatch();
         } else if (stack.getItem() instanceof ShirtCotton shirtCotton) {
             Minecraft mc = Minecraft.getInstance();
 
@@ -292,6 +306,7 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
                     buffer,
                     model2,
                     new ShirtRenderingData(
+                            stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("is_open"),
                             primaryColorOne,
                             secondaryColorOne,
                             primaryColorTwo,
@@ -319,6 +334,8 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
                     poseStack,
                     LightTexture.FULL_BRIGHT
             );
+
+            buffer.endBatch();
         } else if (stack.getItem() instanceof ShirtSilk shirtSilk) {
             Minecraft mc = Minecraft.getInstance();
 
@@ -338,6 +355,7 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
                     buffer,
                     model2,
                     new ShirtRenderingData(
+                            stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("is_open"),
                             primaryColorOne,
                             secondaryColorOne,
                             primaryColorTwo,
@@ -365,6 +383,8 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
                     poseStack,
                     LightTexture.FULL_BRIGHT
             );
+
+            buffer.endBatch();
         } else if (stack.getItem() instanceof SweaterWool sweaterWool) {
             Minecraft mc = Minecraft.getInstance();
 
@@ -384,6 +404,7 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
                     buffer,
                     model2,
                     new ShirtRenderingData(
+                            stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("is_open"),
                             primaryColorOne,
                             secondaryColorOne,
                             primaryColorTwo,
@@ -411,6 +432,8 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
                     poseStack,
                     LightTexture.FULL_BRIGHT
             );
+
+            buffer.endBatch();
         } else if (stack.getItem() instanceof HandWarmersCotton handWarmersCotton) {
             Minecraft mc = Minecraft.getInstance();
 
@@ -475,6 +498,8 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
                     poseStack,
                     LightTexture.FULL_BRIGHT
             );
+
+            buffer.endBatch();
         } else if (stack.getItem() instanceof HandWarmersSilk handWarmersSilk) {
             Minecraft mc = Minecraft.getInstance();
 
@@ -539,6 +564,8 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
                     poseStack,
                     LightTexture.FULL_BRIGHT
             );
+
+            buffer.endBatch();
         } else if (stack.getItem() instanceof HandWarmersWool handWarmersWool) {
             Minecraft mc = Minecraft.getInstance();
 
@@ -603,6 +630,218 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
                     poseStack,
                     LightTexture.FULL_BRIGHT
             );
+
+            buffer.endBatch();
+        } else if (stack.getItem() instanceof ChokerItem chokerItem) {
+            Minecraft mc = Minecraft.getInstance();
+
+            MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
+            int ticks = (int) mc.level.getGameTime();
+            int primaryColorLeftOne = chokerItem.getItemMainColor(stack, "left", 1);
+            int secondaryColorLeftOne = chokerItem.getItemSecondaryColor(stack, "left", 1);
+            int primaryColorRightOne = chokerItem.getItemMainColor(stack, "right", 1);
+            int secondaryColorRightOne = chokerItem.getItemSecondaryColor(stack, "right", 1);
+            int primaryColorLeftTwo = chokerItem.getItemMainColor(stack, "left", 2);
+            int secondaryColorLeftTwo = chokerItem.getItemSecondaryColor(stack, "left", 2);
+            int primaryColorRightTwo = chokerItem.getItemMainColor(stack, "right", 2);
+            int secondaryColorRightTwo = chokerItem.getItemSecondaryColor(stack, "right", 2);
+            String dyeTypeLeftOne = chokerItem.getItemDyeType(stack, "left", 1);
+            String dyeTypeRightOne = chokerItem.getItemDyeType(stack, "right", 1);
+            String dyeTypeLeftTwo = chokerItem.getItemDyeType(stack, "left", 2);
+            String dyeTypeRightTwo = chokerItem.getItemDyeType(stack, "right", 2);
+            String stensilTypeLeft = chokerItem.getStensilType(stack, "left");
+            String stensilTypeRight = chokerItem.getStensilType(stack, "right");
+            int lightValueLeftOne = chokerItem.getItemLightValue(stack, "left", 1);
+            int lightValueLeftTwo = chokerItem.getItemLightValue(stack, "left", 2);
+            int lightValueRightOne = chokerItem.getItemLightValue(stack, "right", 1);
+            int lightValueRightTwo = chokerItem.getItemLightValue(stack, "right", 2);
+
+            chokerModelRenderer.renderModel(
+                    buffer,
+                    model3,
+                    new ChokerRenderingData(
+                            primaryColorLeftOne,
+                            secondaryColorLeftOne,
+                            primaryColorRightOne,
+                            secondaryColorRightOne,
+                            primaryColorLeftTwo,
+                            secondaryColorLeftTwo,
+                            primaryColorRightTwo,
+                            secondaryColorRightTwo,
+                            dyeTypeLeftOne,
+                            dyeTypeRightOne,
+                            dyeTypeLeftTwo,
+                            dyeTypeRightTwo,
+                            stensilTypeLeft,
+                            stensilTypeRight,
+                            lightValueLeftOne,
+                            lightValueLeftTwo,
+                            lightValueRightOne,
+                            lightValueRightTwo,
+                            "base"
+                    ),
+                    mc.player,
+                    48,
+                    48,
+                    48,
+                    0,
+                    0,
+                    0,
+                    this.leftPos + 87,
+                    this.topPos + 30,
+                    50,
+                    0,
+                    modelYaw,
+                    0,
+                    poseStack,
+                    LightTexture.FULL_BRIGHT
+            );
+
+            buffer.endBatch();
+        } else if (stack.getItem() instanceof PantsJeans pantsJeans) {
+            Minecraft mc = Minecraft.getInstance();
+
+            MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
+            int ticks = (int)mc.level.getGameTime();
+            int primaryColorOne = pantsJeans.getItemMainColor(stack, 1);
+            int secondaryColorOne = pantsJeans.getItemSecondaryColor(stack, 1);
+            int primaryColorTwo = pantsJeans.getItemMainColor(stack, 2);
+            int secondaryColorTwo = pantsJeans.getItemSecondaryColor(stack, 2);
+            String dyeTypeOne = pantsJeans.getItemDyeType(stack, 1);
+            String dyeTypeTwo = pantsJeans.getItemDyeType(stack, 2);
+            String stensilType = pantsJeans.getStensilType(stack);
+            int lightValueOne = pantsJeans.getItemLightValue(stack, 1);
+            int lightValueTwo = pantsJeans.getItemLightValue(stack, 2);
+
+            pantsModelRenderer.renderModel(
+                    buffer,
+                    model4,
+                    new PantsRenderingData(
+                            primaryColorOne,
+                            secondaryColorOne,
+                            primaryColorTwo,
+                            secondaryColorTwo,
+                            dyeTypeOne,
+                            dyeTypeTwo,
+                            stensilType,
+                            lightValueOne,
+                            lightValueTwo,
+                            "jeans"
+                    ),
+                    mc.player,
+                    36,
+                    36,
+                    36,
+                    0,
+                    0,
+                    0,
+                    this.leftPos + 88,
+                    this.topPos + 20,
+                    50,
+                    0,
+                    modelYaw,
+                    0,
+                    poseStack,
+                    LightTexture.FULL_BRIGHT
+            );
+
+            buffer.endBatch();
+        } else if (stack.getItem() instanceof PantsCotton pantsCotton) {
+            Minecraft mc = Minecraft.getInstance();
+
+            MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
+            int ticks = (int)mc.level.getGameTime();
+            int primaryColorOne = pantsCotton.getItemMainColor(stack, 1);
+            int secondaryColorOne = pantsCotton.getItemSecondaryColor(stack, 1);
+            int primaryColorTwo = pantsCotton.getItemMainColor(stack, 2);
+            int secondaryColorTwo = pantsCotton.getItemSecondaryColor(stack, 2);
+            String dyeTypeOne = pantsCotton.getItemDyeType(stack, 1);
+            String dyeTypeTwo = pantsCotton.getItemDyeType(stack, 2);
+            String stensilType = pantsCotton.getStensilType(stack);
+            int lightValueOne = pantsCotton.getItemLightValue(stack, 1);
+            int lightValueTwo = pantsCotton.getItemLightValue(stack, 2);
+
+            pantsModelRenderer.renderModel(
+                    buffer,
+                    model4,
+                    new PantsRenderingData(
+                            primaryColorOne,
+                            secondaryColorOne,
+                            primaryColorTwo,
+                            secondaryColorTwo,
+                            dyeTypeOne,
+                            dyeTypeTwo,
+                            stensilType,
+                            lightValueOne,
+                            lightValueTwo,
+                            "cotton"
+                    ),
+                    mc.player,
+                    36,
+                    36,
+                    36,
+                    0,
+                    0,
+                    0,
+                    this.leftPos + 88,
+                    this.topPos + 20,
+                    50,
+                    0,
+                    modelYaw,
+                    0,
+                    poseStack,
+                    LightTexture.FULL_BRIGHT
+            );
+
+            buffer.endBatch();
+        } else if (stack.getItem() instanceof PantsSilk pantsSilk) {
+            Minecraft mc = Minecraft.getInstance();
+
+            MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
+            int ticks = (int)mc.level.getGameTime();
+            int primaryColorOne = pantsSilk.getItemMainColor(stack, 1);
+            int secondaryColorOne = pantsSilk.getItemSecondaryColor(stack, 1);
+            int primaryColorTwo = pantsSilk.getItemMainColor(stack, 2);
+            int secondaryColorTwo = pantsSilk.getItemSecondaryColor(stack, 2);
+            String dyeTypeOne = pantsSilk.getItemDyeType(stack, 1);
+            String dyeTypeTwo = pantsSilk.getItemDyeType(stack, 2);
+            String stensilType = pantsSilk.getStensilType(stack);
+            int lightValueOne = pantsSilk.getItemLightValue(stack, 1);
+            int lightValueTwo = pantsSilk.getItemLightValue(stack, 2);
+
+            pantsModelRenderer.renderModel(
+                    buffer,
+                    model4,
+                    new PantsRenderingData(
+                            primaryColorOne,
+                            secondaryColorOne,
+                            primaryColorTwo,
+                            secondaryColorTwo,
+                            dyeTypeOne,
+                            dyeTypeTwo,
+                            stensilType,
+                            lightValueOne,
+                            lightValueTwo,
+                            "silk"
+                    ),
+                    mc.player,
+                    36,
+                    36,
+                    36,
+                    0,
+                    0,
+                    0,
+                    this.leftPos + 88,
+                    this.topPos + 20,
+                    50,
+                    0,
+                    modelYaw,
+                    0,
+                    poseStack,
+                    LightTexture.FULL_BRIGHT
+            );
+
+            buffer.endBatch();
         }
     }
 

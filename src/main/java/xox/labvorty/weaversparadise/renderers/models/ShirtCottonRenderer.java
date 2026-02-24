@@ -12,11 +12,13 @@ import net.minecraft.client.renderer.blockentity.TheEndPortalRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.phys.Vec3;
 import org.codehaus.plexus.util.dag.Vertex;
 import top.theillusivec4.curios.api.SlotContext;
@@ -73,6 +75,7 @@ public class ShirtCottonRenderer implements ICurioRenderer {
                     renderTypeBuffer,
                     model,
                     new ShirtRenderingData(
+                            stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("is_open"),
                             primaryColorOne,
                             secondaryColorOne,
                             primaryColorTwo,

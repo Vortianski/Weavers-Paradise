@@ -15,5 +15,8 @@ public class WeaversParadiseRegisterRenderers {
         event.registerRenderBuffer(WeaversParadiseRenderTypes.getVoidArmor(TEXTURE, TEXTURE, TEXTURE));
         event.registerRenderBuffer(WeaversParadiseRenderTypes.getGlintyInstance());
         event.registerRenderBuffer(WeaversParadiseRenderTypes.getPolychromatic(TEXTURE));
+        event.registerRenderBuffer(WeaversParadiseRenderTypes.getEntityTranslucentMask(TEXTURE, TEXTURE));
+        event.registerRenderBuffer(WeaversParadiseRenderTypes.getEntityStatic(TEXTURE));
+        event.registerRenderBuffer(WeaversParadiseRenderTypes.getCrystal(TEXTURE));
     }
 }

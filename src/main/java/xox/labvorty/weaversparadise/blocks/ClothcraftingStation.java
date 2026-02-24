@@ -146,6 +146,11 @@ public class ClothcraftingStation extends Block implements EntityBlock {
                         spoolStack.setCount(6);
                         stack = new ItemStack(WeaversParadiseItems.COTTON_CLOTH.get());
                         CustomData.update(DataComponents.CUSTOM_DATA, stack, (tag) -> tag.putInt("quality", quality));
+                    } else if (clothType.equals("JEANS")) {
+                        spoolStack = new ItemStack(WeaversParadiseItems.EMPTY_SPOOL.get());
+                        spoolStack.setCount(6);
+                        stack = new ItemStack(WeaversParadiseItems.JEANS_CLOTH.get());
+                        CustomData.update(DataComponents.CUSTOM_DATA, stack, (tag) -> tag.putInt("quality", quality));
                     }
 
                     boolean spoolInjected = false;

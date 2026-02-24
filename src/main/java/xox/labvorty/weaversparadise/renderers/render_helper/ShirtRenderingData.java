@@ -1,6 +1,7 @@
 package xox.labvorty.weaversparadise.renderers.render_helper;
 
 public class ShirtRenderingData {
+    private boolean isOpen;
     private int pCO;
     private int sCO;
     private int pCT;
@@ -13,6 +14,7 @@ public class ShirtRenderingData {
     private String mat;
 
     public ShirtRenderingData(
+            boolean isOpen,
             int pCO,
             int sCO,
             int pCT,
@@ -24,6 +26,7 @@ public class ShirtRenderingData {
             int lVT,
             String mat
     ) {
+        this.isOpen = isOpen;
         this.pCO = pCO;
         this.sCO = sCO;
         this.pCT = pCT;
@@ -34,6 +37,10 @@ public class ShirtRenderingData {
         this.lVO = lVO;
         this.lVT = lVT;
         this.mat = mat;
+    }
+
+    public boolean isOpen() {
+        return isOpen;
     }
 
     public int getPrimaryColorOne() {

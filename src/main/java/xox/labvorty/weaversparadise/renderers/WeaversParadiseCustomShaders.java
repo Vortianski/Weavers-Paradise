@@ -17,12 +17,20 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 public class WeaversParadiseCustomShaders {
     public static ShaderInstance VOID_ARMOR_SHADER;
     public static ShaderInstance POLYCHROMATIC;
+    public static ShaderInstance ENTITY_TRANSLUCENT_MASK;
+    public static ShaderInstance ENTITY_STATIC;
+    public static ShaderInstance ENTITY_CRYSTAL;
 
     public static int renderTime;
     public static float renderFrame;
 
     public static Uniform endPortalTime;
     public static Uniform endPortalLayers;
+
+    public static Uniform staticTime;
+    public static Uniform staticLayers;
+
+    public static Uniform crystalTime;
 
     public static void onRegisterShaders(RegisterShadersEvent event) {
         try {
@@ -40,6 +48,31 @@ public class WeaversParadiseCustomShaders {
             POLYCHROMATIC = new ShaderInstance(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath("weaversparadise", "polychromatic"), DefaultVertexFormat.NEW_ENTITY);
             event.registerShader(POLYCHROMATIC, shaderInstance -> {
                 POLYCHROMATIC.apply();
+            });
+
+            ENTITY_TRANSLUCENT_MASK = new ShaderInstance(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath("weaversparadise", "entity_translucent_mask"), DefaultVertexFormat.NEW_ENTITY);
+            event.registerShader(ENTITY_TRANSLUCENT_MASK, shaderInstance -> {
+                ENTITY_TRANSLUCENT_MASK.apply();
+            });
+
+            ENTITY_STATIC = new ShaderInstance(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath("weaversparadise", "entity_static_noise"), DefaultVertexFormat.NEW_ENTITY);
+            event.registerShader(ENTITY_STATIC, shaderInstance -> {
+
+                staticTime = shaderInstance.getUniform("GameTime");
+                staticLayers = shaderInstance.getUniform("StaticLayers");
+                staticTime.set((float) renderTime + renderFrame);
+                staticLayers.set(15);
+
+                ENTITY_STATIC.apply();
+            });
+
+            ENTITY_CRYSTAL = new ShaderInstance(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath("weaversparadise", "entity_crystal"), DefaultVertexFormat.NEW_ENTITY);
+            event.registerShader(ENTITY_CRYSTAL, shaderInstance -> {
+
+                crystalTime = shaderInstance.getUniform("Time");
+                crystalTime.set((float) renderTime + renderFrame);
+
+                ENTITY_CRYSTAL.apply();
             });
         } catch (IOException e) {
             throw new RuntimeException(e);
