@@ -64,6 +64,24 @@ public class RenderingUtils {
                             texture
                     )
             );
+        } else if (dyeType.equals("negative")) {
+            return multiBufferSource.getBuffer(
+                    WeaversParadiseRenderTypes.getNegative(
+                            texture
+                    )
+            );
+        } else if (dyeType.equals("true_negative")) {
+            return multiBufferSource.getBuffer(
+                    WeaversParadiseRenderTypes.getTrueNegative(
+                            texture
+                    )
+            );
+        } else if (dyeType.equals("nebula")) {
+            return multiBufferSource.getBuffer(
+                    WeaversParadiseRenderTypes.getNebula(
+                            texture
+                    )
+            );
         }
 
         if (pride.contains(dyeType)) {

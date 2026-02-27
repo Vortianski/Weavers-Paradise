@@ -855,7 +855,14 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
 
         NonNullList<Slot> slots = this.menu.slots;
 
-        if (slots.get(0).getItem().is(WeaversParadiseItems.SHIRT_COTTON)) {
+        if (
+                slots.get(0).getItem().is(WeaversParadiseItems.SHIRT_COTTON) ||
+                        slots.get(0).getItem().is(WeaversParadiseItems.SHIRT_SILK) ||
+                        slots.get(0).getItem().is(WeaversParadiseItems.SWEATER_WOOL) ||
+                        slots.get(0).getItem().is(WeaversParadiseItems.PANTS_JEANS) ||
+                        slots.get(0).getItem().is(WeaversParadiseItems.PANTS_COTTON) ||
+                        slots.get(0).getItem().is(WeaversParadiseItems.PANTS_SILK)
+        ) {
             guiGraphics.blit(
                     ResourceLocation.parse("weaversparadise:textures/screens/nope.png"),
                     this.leftPos + 126,

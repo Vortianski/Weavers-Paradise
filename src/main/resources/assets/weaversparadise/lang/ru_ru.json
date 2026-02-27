@@ -194,6 +194,9 @@
   "weaversparadise.dye_text.polychromatic": "Тип: Полихроматический",
   "weaversparadise.dye_text.invisible": "Тип: Невидимый",
   "weaversparadise.dye_text.static": "Тип: Статика",
+  "weaversparadise.dye_text.negative": "Тип: Негатив",
+  "weaversparadise.dye_text.true_negative": "Тип: Истинный Негатив",
+  "weaversparadise.dye_text.nebula": "Тип: Туманность",
 
   "emi.category.weaversparadise.clothcrafting": "Тканеделие",
   "emi.category.weaversparadise.spinning_jenny": "Прялка Дженни",

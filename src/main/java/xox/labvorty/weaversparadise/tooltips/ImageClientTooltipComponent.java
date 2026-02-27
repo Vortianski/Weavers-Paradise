@@ -626,6 +626,30 @@ public class ImageClientTooltipComponent implements ClientTooltipComponent {
             }
         } else if (type.equals("crystal")) {
             component = Component.literal(text).withStyle(style -> style.withColor(primaryColor));
+        } else if (type.equals("negative")) {
+            List<Integer> colors = List.of(
+                    primaryColor,
+                    (255 << 24 | (255 - primRed) << 16 | (255 - primGreen) << 8 | (255 - primBlue))
+            );
+
+            component = flagText(text, colors, ticks);
+        } else if (type.equals("true_negative")) {
+            List<Integer> colors = List.of(
+                    primaryColor,
+                    (255 << 24 | (255 - primRed) << 16 | (255 - primGreen) << 8 | (255 - primBlue))
+            );
+
+            component = flagText(text, colors, ticks);
+        } else if (type.equals("nebula")) {
+            List<Integer> colors = List.of(
+                    0x26103F,
+                    0x26103F,
+                    0xE673B2,
+                    0x4CCCCD,
+                    0x8C40A6
+            );
+
+            component = flagText(text, colors, ticks);
         }
 
         return component;

@@ -125,6 +125,7 @@
   "curios.identifier.upperwear": "Upperwear",
   "curios.identifier.choker_trinket": "Choker Trinket",
   "curios.identifier.garter": "Garter Belt",
+  "curios.identifier.pants": "Pants",
 
   "curios.modifiers.legwear": "Legwear:",
   "curios.modifiers.gloves": "Gloves:",
@@ -195,6 +196,9 @@
   "weaversparadise.dye_text.invisible": "Type: Invisible",
   "weaversparadise.dye_text.static": "Type: Static",
   "weaversparadise.dye_text.crystal": "Type: Crystal",
+  "weaversparadise.dye_text.negative": "Type: Negative",
+  "weaversparadise.dye_text.true_negative": "Type: True Negative",
+  "weaversparadise.dye_text.nebula": "Type: Nebula",
 
   "emi.category.weaversparadise.clothcrafting": "Clothcrafting",
   "emi.category.weaversparadise.spinning_jenny": "Spinning Jenny",

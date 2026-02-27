@@ -225,7 +225,10 @@ public class WeaversParadiseCreativeTabs {
                         "height_sea",
                         "invisible",
                         "static",
-                        "crystal"
+                        "crystal",
+                        "negative",
+                        "true_negative",
+                        "nebula"
                 );
                 ItemStack baseDye = new ItemStack(WeaversParadiseItems.BOTTLED_DYE.get());
 

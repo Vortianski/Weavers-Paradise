@@ -105,6 +105,15 @@ public enum WeaversParadiseDyeTextHandler {
     ),
     CRYSTAL_TEXT("crystal",
             Component.translatable("weaversparadise.dye_text.crystal").getString()
+    ),
+    NEGATIVE_TEXT("negative",
+            Component.translatable("weaversparadise.dye_text.negative").getString()
+    ),
+    TRUE_NEGATIVE_TEXT("true_negative",
+            Component.translatable("weaversparadise.dye_text.true_negative").getString()
+    ),
+    NEBULA_TEXT("nebula",
+            Component.translatable("weaversparadise.dye_text.nebula").getString()
     );
 
     private static final Map<String, WeaversParadiseDyeTextHandler> HANDLER_MAP =

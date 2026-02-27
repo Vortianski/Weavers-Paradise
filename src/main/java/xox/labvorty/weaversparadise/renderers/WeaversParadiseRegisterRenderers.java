@@ -18,5 +18,8 @@ public class WeaversParadiseRegisterRenderers {
         event.registerRenderBuffer(WeaversParadiseRenderTypes.getEntityTranslucentMask(TEXTURE, TEXTURE));
         event.registerRenderBuffer(WeaversParadiseRenderTypes.getEntityStatic(TEXTURE));
         event.registerRenderBuffer(WeaversParadiseRenderTypes.getCrystal(TEXTURE));
+        event.registerRenderBuffer(WeaversParadiseRenderTypes.getNegative(TEXTURE));
+        event.registerRenderBuffer(WeaversParadiseRenderTypes.getTrueNegative(TEXTURE));
+        event.registerRenderBuffer(WeaversParadiseRenderTypes.getNebula(TEXTURE));
     }
 }

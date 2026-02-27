@@ -238,4 +238,100 @@ public class WeaversParadiseRenderTypes {
 
         return ENTITY_CRYSTAL.apply(data);
     }
+
+    public static final Function<List<ResourceLocation>, RenderType> NEGATIVE = Util.memoize(
+            data -> {
+                ResourceLocation texture1 = data.get(0);
+                return createNegative("negative", texture1);
+            }
+    );
+
+    public static RenderType createNegative(String name, ResourceLocation texture1) {
+        RenderType.CompositeState rendertype$compositestate = RenderType.CompositeState.builder()
+                .setShaderState(new RenderStateShard.ShaderStateShard(() -> WeaversParadiseCustomShaders.NEGATIVE))
+                .setTextureState(
+                        new RenderStateShard.TextureStateShard(
+                                texture1, false, false
+                        )
+                )
+                .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
+                .setCullState(RenderStateShard.NO_CULL)
+                .setLightmapState(RenderStateShard.LIGHTMAP)
+                .setOverlayState(RenderStateShard.OVERLAY)
+                .createCompositeState(true);
+
+
+        return RenderType.create(name, DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 1536, true, true, rendertype$compositestate);
+    }
+
+    public static RenderType getNegative(ResourceLocation texture1) {
+        List<ResourceLocation> data = new ArrayList();
+        data.add(texture1);
+
+        return NEGATIVE.apply(data);
+    }
+
+    public static final Function<List<ResourceLocation>, RenderType> TRUE_NEGATIVE = Util.memoize(
+            data -> {
+                ResourceLocation texture1 = data.get(0);
+                return createTrueNegative("true_negative", texture1);
+            }
+    );
+
+    public static RenderType createTrueNegative(String name, ResourceLocation texture1) {
+        RenderType.CompositeState rendertype$compositestate = RenderType.CompositeState.builder()
+                .setShaderState(new RenderStateShard.ShaderStateShard(() -> WeaversParadiseCustomShaders.TRUE_NEGATIVE))
+                .setTextureState(
+                        new RenderStateShard.TextureStateShard(
+                                texture1, false, false
+                        )
+                )
+                .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
+                .setCullState(RenderStateShard.NO_CULL)
+                .setLightmapState(RenderStateShard.LIGHTMAP)
+                .setOverlayState(RenderStateShard.OVERLAY)
+                .createCompositeState(true);
+
+
+        return RenderType.create(name, DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 1536, true, true, rendertype$compositestate);
+    }
+
+    public static RenderType getTrueNegative(ResourceLocation texture1) {
+        List<ResourceLocation> data = new ArrayList();
+        data.add(texture1);
+
+        return TRUE_NEGATIVE.apply(data);
+    }
+
+    public static final Function<List<ResourceLocation>, RenderType> NEBULA = Util.memoize(
+            data -> {
+                ResourceLocation texture1 = data.get(0);
+                return createNebula("nebula", texture1);
+            }
+    );
+
+    public static RenderType createNebula(String name, ResourceLocation texture1) {
+        RenderType.CompositeState rendertype$compositestate = RenderType.CompositeState.builder()
+                .setShaderState(new RenderStateShard.ShaderStateShard(() -> WeaversParadiseCustomShaders.NEBULA))
+                .setTextureState(
+                        new RenderStateShard.TextureStateShard(
+                                texture1, false, false
+                        )
+                )
+                .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
+                .setCullState(RenderStateShard.NO_CULL)
+                .setLightmapState(RenderStateShard.LIGHTMAP)
+                .setOverlayState(RenderStateShard.OVERLAY)
+                .createCompositeState(true);
+
+
+        return RenderType.create(name, DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 1536, true, true, rendertype$compositestate);
+    }
+
+    public static RenderType getNebula(ResourceLocation texture1) {
+        List<ResourceLocation> data = new ArrayList();
+        data.add(texture1);
+
+        return NEBULA.apply(data);
+    }
 }

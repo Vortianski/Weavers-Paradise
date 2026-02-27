@@ -20,6 +20,9 @@ public class WeaversParadiseCustomShaders {
     public static ShaderInstance ENTITY_TRANSLUCENT_MASK;
     public static ShaderInstance ENTITY_STATIC;
     public static ShaderInstance ENTITY_CRYSTAL;
+    public static ShaderInstance NEGATIVE;
+    public static ShaderInstance TRUE_NEGATIVE;
+    public static ShaderInstance NEBULA;
 
     public static int renderTime;
     public static float renderFrame;
@@ -29,6 +32,8 @@ public class WeaversParadiseCustomShaders {
 
     public static Uniform staticTime;
     public static Uniform staticLayers;
+
+    public static Uniform nebulaTime;
 
     public static Uniform crystalTime;
 
@@ -73,6 +78,25 @@ public class WeaversParadiseCustomShaders {
                 crystalTime.set((float) renderTime + renderFrame);
 
                 ENTITY_CRYSTAL.apply();
+            });
+
+            NEGATIVE = new ShaderInstance(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath("weaversparadise", "negative"), DefaultVertexFormat.NEW_ENTITY);
+            event.registerShader(NEGATIVE, shaderInstance -> {
+                NEGATIVE.apply();
+            });
+
+            TRUE_NEGATIVE = new ShaderInstance(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath("weaversparadise", "true_negative"), DefaultVertexFormat.NEW_ENTITY);
+            event.registerShader(TRUE_NEGATIVE, shaderInstance -> {
+                TRUE_NEGATIVE.apply();
+            });
+
+            NEBULA = new ShaderInstance(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath("weaversparadise", "nebula"), DefaultVertexFormat.NEW_ENTITY);
+            event.registerShader(NEBULA, shaderInstance -> {
+
+                nebulaTime = shaderInstance.getUniform("GameTime");
+                nebulaTime.set((float) renderTime + renderFrame);
+
+                NEBULA.apply();
             });
         } catch (IOException e) {
             throw new RuntimeException(e);
