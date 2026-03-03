@@ -5,7 +5,6 @@
   "itemGroup.weaversparadise.clothing": "Weavers Paradise: Одежда",
   "itemGroup.weaversparadise.items": "Weavers Paradise: Предметы",
 
-  "block.weaversparadise.example_block": "Example Block",
   "block.weaversparadise.cotton_bush": "Хлопковый Куст",
   "block.weaversparadise.chromatic_bloom": "Хроматоцвет",
   "block.weaversparadise.spinning_jenny": "Прялка Дженни",
@@ -20,8 +19,7 @@
   "block.weaversparadise.wool_spool_block": "Блок из Шерстяных Катушек",
   "block.weaversparadise.wool_cloth_block": "Блок из Шерстяной Ткани",
 
-  "item.weaversparadise.example_item": "Example Item",
-  "item.weaversparadise.pure_dye": "Чистый Краситель",
+  "item.weaversparadise.pure_dye": "Пигмент",
   "item.weaversparadise.button": "Пуговица",
   "item.weaversparadise.needle": "Иголка",
   "item.weaversparadise.needle_with_thread": "Иголка с Ниткой",
@@ -125,20 +123,15 @@
   "curios.identifier.upperwear": "Одежда для верха",
   "curios.identifier.choker_trinket": "Подвеска для Чокера",
   "curios.identifier.garter": "Пояс для чулков",
+  "curios.identifier.pants": "Штаны",
 
   "curios.modifiers.legwear": "Одежда для ног:",
   "curios.modifiers.gloves": "Перчатки:",
   "curios.modifiers.upperwear": "Одежда для верха:",
 
-  "enchantment.weaversparadise.sound_muffler": "Шумоподавление",
-  "enchantment.weaversparadise.water_strider": "Водомерка",
-  "enchantment.weaversparadise.featherlight": "Пушинка",
-
   "effect.weaversparadise.chromatic_shift": "Цветовой Сдвиг",
 
   "attribute.name.weaversparadise.lifesteal": "Вампиризм",
-
-  "key.weaversparadise.disable_ability": "Disable ability",
 
   "key.categories.weaversparadise": "Weavers Paradise",
 
@@ -152,15 +145,6 @@
   "weaversparadise.clothcrafting.claim_items": "Забрать Предметы",
   "weaversparadise.clothcrafting.time": "Время:",
   "weaversparadise.clothcrafting.score": "Счёт:",
-
-  "weaversparadise.configuration.title": "Weavers Paradise Configs",
-  "weaversparadise.configuration.section.weaversparadise.common.toml": "Weavers Paradise Configs",
-  "weaversparadise.configuration.section.weaversparadise.common.toml.title": "Weavers Paradise Configs",
-  "weaversparadise.configuration.items": "Item List",
-  "weaversparadise.configuration.logDirtBlock": "Log Dirt Block",
-  "weaversparadise.configuration.magicNumberIntroduction": "Magic Number Text",
-  "weaversparadise.configuration.magicNumber": "Magic Number",
-  "item.weaversparadise.test_item": "Test Item",
 
   "weaversparadise.dye_text.default": "Тип:Стандартный",
   "weaversparadise.dye_text.rainbow": "Тип:Радуга",
@@ -197,6 +181,7 @@
   "weaversparadise.dye_text.negative": "Тип: Негатив",
   "weaversparadise.dye_text.true_negative": "Тип: Истинный Негатив",
   "weaversparadise.dye_text.nebula": "Тип: Туманность",
+  "weaversparadise.dye_text.crystal": "Тип: Кристал",
 
   "emi.category.weaversparadise.clothcrafting": "Тканеделие",
   "emi.category.weaversparadise.spinning_jenny": "Прялка Дженни",

@@ -5,7 +5,6 @@
   "itemGroup.weaversparadise.clothing": "Weavers Paradise: Clothing",
   "itemGroup.weaversparadise.items": "Weavers Paradise: Items",
 
-  "block.weaversparadise.example_block": "Example Block",
   "block.weaversparadise.cotton_bush": "Cotton Bush",
   "block.weaversparadise.chromatic_bloom": "Chromatic Bloom",
   "block.weaversparadise.spinning_jenny": "Spinning Jenny",
@@ -20,8 +19,7 @@
   "block.weaversparadise.wool_spool_block": "Wool Spindle Block",
   "block.weaversparadise.wool_cloth_block": "Wool Cloth Block",
 
-  "item.weaversparadise.example_item": "Example Item",
-  "item.weaversparadise.pure_dye": "Pure Dye",
+  "item.weaversparadise.pure_dye": "Pigment",
   "item.weaversparadise.button": "Button",
   "item.weaversparadise.needle": "Needle",
   "item.weaversparadise.needle_with_thread": "Needle with Thread",
@@ -131,15 +129,9 @@
   "curios.modifiers.gloves": "Gloves:",
   "curios.modifiers.upperwear": "Upperwear:",
 
-  "enchantment.weaversparadise.sound_muffler": "Sound Muffler",
-  "enchantment.weaversparadise.water_strider": "Water Strider",
-  "enchantment.weaversparadise.featherlight": "Featherlight",
-
   "effect.weaversparadise.chromatic_shift": "Chromatic Shift",
 
   "attribute.name.weaversparadise.lifesteal": "Lifesteal",
-
-  "key.weaversparadise.disable_ability": "Disable ability",
 
   "key.categories.weaversparadise": "Weavers Paradise",
 
@@ -153,15 +145,6 @@
   "weaversparadise.clothcrafting.claim_items": "Claim Items",
   "weaversparadise.clothcrafting.time": "Time:",
   "weaversparadise.clothcrafting.score": "Score:",
-
-  "weaversparadise.configuration.title": "Weavers Paradise Configs",
-  "weaversparadise.configuration.section.weaversparadise.common.toml": "Weavers Paradise Configs",
-  "weaversparadise.configuration.section.weaversparadise.common.toml.title": "Weavers Paradise Configs",
-  "weaversparadise.configuration.items": "Item List",
-  "weaversparadise.configuration.logDirtBlock": "Log Dirt Block",
-  "weaversparadise.configuration.magicNumberIntroduction": "Magic Number Text",
-  "weaversparadise.configuration.magicNumber": "Magic Number",
-  "item.weaversparadise.test_item": "Test Item",
 
   "weaversparadise.dye_text.default": "Type:Default",
   "weaversparadise.dye_text.rainbow": "Type:Rainbow",
