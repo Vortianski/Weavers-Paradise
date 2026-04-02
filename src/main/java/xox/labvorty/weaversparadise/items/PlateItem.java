@@ -72,13 +72,10 @@ public class PlateItem extends Item implements ICurioItem {
             return true;
         }
 
-        return EnchantmentHelper.getEnchantmentsForCrafting(stack).keySet().stream().anyMatch(holder -> {
-            if (holder.is(Enchantments.BINDING_CURSE)) {
-                return true;
-            }
-
-            return false;
-        });
+        return EnchantmentHelper.getEnchantmentsForCrafting(stack)
+                .keySet()
+                .stream()
+                .noneMatch(holder -> holder.is(Enchantments.BINDING_CURSE));
     }
 
     @Override

@@ -66,10 +66,7 @@ public class ClothcraftingStation extends Block implements EntityBlock {
     @Override
     public InteractionResult useWithoutItem(BlockState blockstate, Level world, BlockPos pos, Player entity, BlockHitResult hit) {
         super.useWithoutItem(blockstate, world, pos, entity, hit);
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof ClothcraftingStationBlockEntity clothEntity) {
-            //
-        }
+
         if (entity instanceof ServerPlayer player) {
             player.openMenu(new MenuProvider() {
                 @Override
@@ -90,12 +87,14 @@ public class ClothcraftingStation extends Block implements EntityBlock {
     public void onPlace(BlockState blockstate, Level world, BlockPos pos, BlockState oldState, boolean moving) {
         super.onPlace(blockstate, world, pos, oldState, moving);
         BlockEntity blockEntity = world.getBlockEntity(pos);
+
         if (blockEntity instanceof ClothcraftingStationBlockEntity clothEntity) {
             List<ItemStack> items = new ArrayList<>();
             clothEntity.setItems(items);
             clothEntity.setGameOn(false);
             clothEntity.setClothType("");
         }
+
         world.scheduleTick(pos, this, 1);
     }
 

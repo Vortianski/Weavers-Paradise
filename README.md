@@ -19,6 +19,15 @@ Minecraft mod that adds new clothing items, allowing you to express yourself by 
 
 > TBD (To Be Determined) - currently thinking about porting my mod to this version/loader
 
+
+Supported languages
+
+| Language | Translator |
+|----------|------------|
+| English | Vortianski |
+| Russian | Vortianski | 
+| Ukrainian | Vortianski |
+
 ## Features
 <details><summary>Spinning Jenny</summary>
 This new crafting station allows you to process certain items into spools of the corresponding material.
@@ -58,6 +67,13 @@ A **Dye Core** is used to define the dye’s behavior. Different dye types can d
 <details><summary>Dyeing Barrel</summary>
 This new station allows you to dye items using stencils and dyes. Certain stencils can only be applied to specific items, which is shown in the stencil tooltip.
 </details>
+
+## Q&A
+**Q: I want to help translate the mod into X language.**  
+**A:** Feel free to contact me through any of my social links and we can discuss it.
+
+**Q: Can I port your mod to another loader/version?**  
+**A:** Yes, as long as you credit me as the original creator. You are also welcome to fork this repository or suggest a merge/pull request.
 
 ## Links
 CurseForge page: [View project](https://www.curseforge.com/minecraft/mc-mods/weavers-paradise)

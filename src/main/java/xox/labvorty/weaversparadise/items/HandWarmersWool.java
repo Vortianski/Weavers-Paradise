@@ -355,13 +355,10 @@ public class HandWarmersWool extends Item implements ICurioItem, HandWarmersInte
             return true;
         }
 
-        return EnchantmentHelper.getEnchantmentsForCrafting(stack).keySet().stream().anyMatch(holder -> {
-            if (holder.is(Enchantments.BINDING_CURSE)) {
-                return true;
-            }
-
-            return false;
-        });
+        return EnchantmentHelper.getEnchantmentsForCrafting(stack)
+                .keySet()
+                .stream()
+                .noneMatch(holder -> holder.is(Enchantments.BINDING_CURSE));
     }
 
     @Override

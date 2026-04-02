@@ -1,6 +1,5 @@
 package xox.labvorty.weaversparadise.mixins;
 
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
@@ -17,7 +16,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
-import xox.labvorty.weaversparadise.data.WeaversParadiseStatHandler;
 import xox.labvorty.weaversparadise.items.ThighHighsSilk;
 
 import java.util.Optional;
@@ -40,7 +38,6 @@ public class EntityMixin {
         }
 
         Optional<ICuriosItemHandler> handler = CuriosApi.getCuriosInventory(entity);
-        Pair<String, Double> ability = WeaversParadiseStatHandler.calculateStaticType(entity);
 
         if (original.y > 0 || !handler.isPresent() || entity.isShiftKeyDown()) {
             return original;
@@ -82,7 +79,7 @@ public class EntityMixin {
             return original;
         }
 
-        if (ability.getFirst().equals("silk") && ability.getSecond() > 0) {
+        if (false) {
             if (handler.get().isEquipped(stack -> {
                 if (stack.getItem() instanceof ThighHighsSilk thighHighsSilk) {
                     return true;

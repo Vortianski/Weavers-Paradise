@@ -25,9 +25,7 @@ import top.theillusivec4.curios.api.SlotAttribute;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import xox.labvorty.weaversparadise.data.WeaversParadiseDyeIconHandler;
-import xox.labvorty.weaversparadise.data.WeaversParadiseStatHandler;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
-import xox.labvorty.weaversparadise.init.WeaversParadiseModAttributes;
 import xox.labvorty.weaversparadise.tooltips.ImageTooltipComponent;
 
 import java.util.ArrayList;
@@ -373,13 +371,10 @@ public class ChokerItem extends Item implements ICurioItem {
             return true;
         }
 
-        return EnchantmentHelper.getEnchantmentsForCrafting(stack).keySet().stream().anyMatch(holder -> {
-            if (holder.is(Enchantments.BINDING_CURSE)) {
-                return true;
-            }
-
-            return false;
-        });
+        return EnchantmentHelper.getEnchantmentsForCrafting(stack)
+                .keySet()
+                .stream()
+                .noneMatch(holder -> holder.is(Enchantments.BINDING_CURSE));
     }
 
     @Override

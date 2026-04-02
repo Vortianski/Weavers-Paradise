@@ -1,8 +1,5 @@
 package xox.labvorty.weaversparadise.items;
 
-import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Multimap;
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -10,9 +7,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
@@ -25,7 +19,6 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import xox.labvorty.weaversparadise.data.WeaversParadiseDyeIconHandler;
-import xox.labvorty.weaversparadise.data.WeaversParadiseStatHandler;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.tooltips.ImageTooltipComponent;
 import java.util.ArrayList;
@@ -85,37 +78,6 @@ public class ThighHighsCotton extends Item implements ICurioItem, ThighHighsInte
                     putInt("lightValueRightTwo", 15);
                 }}))
         );
-    }
-
-    @Override
-    public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = LinkedHashMultimap.create();
-
-        LivingEntity entity = slotContext.entity();
-
-        Pair<String, Double> stat = WeaversParadiseStatHandler.calculateStaticType(entity);
-
-        if (stat.getFirst().equals("cotton")) {
-            modifiers.put(
-                    Attributes.FALL_DAMAGE_MULTIPLIER,
-                    new AttributeModifier(
-                            ResourceLocation.fromNamespaceAndPath("weaversparadise", "thigh_highs_cotton"),
-                            stat.getSecond() * -0.1,
-                            AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
-                    )
-            );
-
-            modifiers.put(
-                    Attributes.MOVEMENT_EFFICIENCY,
-                    new AttributeModifier(
-                            ResourceLocation.fromNamespaceAndPath("weaversparadise", "thigh_highs_cotton"),
-                            stat.getSecond() * -0.1,
-                            AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
-                    )
-            );
-        }
-
-        return modifiers;
     }
 
     @Override
@@ -395,13 +357,10 @@ public class ThighHighsCotton extends Item implements ICurioItem, ThighHighsInte
             return true;
         }
 
-        return EnchantmentHelper.getEnchantmentsForCrafting(stack).keySet().stream().anyMatch(holder -> {
-            if (holder.is(Enchantments.BINDING_CURSE)) {
-                return true;
-            }
-
-            return false;
-        });
+        return EnchantmentHelper.getEnchantmentsForCrafting(stack)
+                .keySet()
+                .stream()
+                .noneMatch(holder -> holder.is(Enchantments.BINDING_CURSE));
     }
 
     @Override

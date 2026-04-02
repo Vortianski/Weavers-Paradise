@@ -11,7 +11,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.lwjgl.glfw.GLFW;
 import xox.labvorty.weaversparadise.data.keybinds.*;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, value = {Dist.CLIENT})
+@EventBusSubscriber(value = Dist.CLIENT)
 public class WeaversParadiseKeyMappings {
     public static KeyMapping MINIGAME_UP_BUTTON = new KeyMapping("weaversparadise.keybind.up_minigame", GLFW.GLFW_KEY_W, "key.categories.weaversparadise"){
         private boolean isDownOld = false;

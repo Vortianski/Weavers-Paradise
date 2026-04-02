@@ -12,7 +12,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import xox.labvorty.weaversparadise.WeaversParadise;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber
 public class WeaversParadiseModAttributes {
     public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(Registries.ATTRIBUTE, WeaversParadise.MODID);
     public static final DeferredHolder<Attribute, Attribute> LIFESTEAL = ATTRIBUTES.register("lifesteal",() -> new RangedAttribute(

@@ -6,7 +6,6 @@
     "SculkBlockEntityMixin",
     "GameEventListenerMixin",
     "LivingRendererMixin",
-    "BlockStateClassMixin",
     "EntityMixin",
     "PlayerMixin"
   ],

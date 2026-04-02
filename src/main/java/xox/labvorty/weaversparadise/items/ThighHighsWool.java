@@ -357,13 +357,10 @@ public class ThighHighsWool extends Item implements ICurioItem, ThighHighsInterf
             return true;
         }
 
-        return EnchantmentHelper.getEnchantmentsForCrafting(stack).keySet().stream().anyMatch(holder -> {
-            if (holder.is(Enchantments.BINDING_CURSE)) {
-                return true;
-            }
-
-            return false;
-        });
+        return EnchantmentHelper.getEnchantmentsForCrafting(stack)
+                .keySet()
+                .stream()
+                .noneMatch(holder -> holder.is(Enchantments.BINDING_CURSE));
     }
 
     @Override
