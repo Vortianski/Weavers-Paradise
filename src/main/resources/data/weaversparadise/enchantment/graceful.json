@@ -1,0 +1,28 @@
+{
+  "description": {
+    "translate": "enchantment.weaversparadise.graceful"
+  },
+  "supported_items": [
+    "weaversparadise:shirt_silk",
+    "weaversparadise:hand_warmers_silk",
+    "weaversparadise:pants_silk"
+  ],
+  "primary_items": [
+    "weaversparadise:shirt_silk",
+    "weaversparadise:hand_warmers_silk",
+    "weaversparadise:pants_silk"
+  ],
+  "weight": 8,
+  "max_level": 5,
+  "min_cost": {
+    "base": 8,
+    "per_level_above_first": 10
+  },
+  "max_cost": {
+    "base": 18,
+    "per_level_above_first": 10
+  },
+  "anvil_cost": 3,
+  "slots": [],
+  "effects": {}
+}

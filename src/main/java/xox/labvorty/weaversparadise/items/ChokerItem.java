@@ -5,6 +5,7 @@ import com.google.common.collect.Multimap;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,6 +26,7 @@ import top.theillusivec4.curios.api.SlotAttribute;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import xox.labvorty.weaversparadise.data.WeaversParadiseDyeIconHandler;
+import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.tooltips.ImageTooltipComponent;
 
@@ -99,6 +101,22 @@ public class ChokerItem extends Item implements ICurioItem {
                         AttributeModifier.Operation.ADD_VALUE
                 )
         );
+
+        LivingEntity livingEntity = slotContext.entity();
+        int durabilityLeft = stack.getMaxDamage() - stack.getDamageValue();
+
+        if (livingEntity != null && durabilityLeft > 1) {
+            int level = stack.getEnchantmentLevel(livingEntity.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(WeaversParadiseEnchantments.BREATHING_EXERCISE));
+
+            modifiers.put(
+                    Attributes.OXYGEN_BONUS,
+                    new AttributeModifier(
+                            ResourceLocation.fromNamespaceAndPath("weaversparadise", "choker"),
+                            (level / 6.0f),
+                            AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+                    )
+            );
+        }
 
         return modifiers;
     }
@@ -351,13 +369,13 @@ public class ChokerItem extends Item implements ICurioItem {
 
     @Override
     public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-        return enchantment.is(Enchantments.UNBREAKING) || enchantment.is(Enchantments.VANISHING_CURSE) || enchantment.is(Enchantments.MENDING) || enchantment.is(Enchantments.BINDING_CURSE);
+        return enchantment.is(Enchantments.UNBREAKING) || enchantment.is(Enchantments.VANISHING_CURSE) || enchantment.is(Enchantments.MENDING) || enchantment.is(Enchantments.BINDING_CURSE) || enchantment.is(WeaversParadiseEnchantments.BREATHING_EXERCISE);
     }
 
     @Override
     public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
         return EnchantmentHelper.getEnchantmentsForCrafting(book).keySet().stream().anyMatch(holder -> {
-            if (holder.is(Enchantments.MENDING) || holder.is(Enchantments.UNBREAKING) || holder.is(Enchantments.VANISHING_CURSE) || holder.is(Enchantments.BINDING_CURSE)) {
+            if (holder.is(Enchantments.MENDING) || holder.is(Enchantments.UNBREAKING) || holder.is(Enchantments.VANISHING_CURSE) || holder.is(Enchantments.BINDING_CURSE) || holder.is(WeaversParadiseEnchantments.BREATHING_EXERCISE)) {
                 return true;
             }
             return false;

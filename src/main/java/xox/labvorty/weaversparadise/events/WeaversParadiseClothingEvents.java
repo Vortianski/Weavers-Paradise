@@ -32,10 +32,7 @@ import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.LeatherGloves;
 
 import javax.swing.text.html.Option;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @EventBusSubscriber
 public class WeaversParadiseClothingEvents {
@@ -65,190 +62,155 @@ public class WeaversParadiseClothingEvents {
             DamageTypes.WITHER
     );
 
+    private static final Set<String> DAMAGEABLE_CURIO_SLOTS = Set.of(
+            "legwear",
+            "gloves",
+            "pants",
+            "upperwear",
+            "necklace",
+            "choker_trinket"
+    );
+
     @SubscribeEvent
-    public static void entityHurt(LivingDamageEvent.Post event) {
+    public static void entityHurtNew(LivingDamageEvent.Post event) {
         ResourceKey<DamageType> damageType = event.getSource().typeHolder().getKey();
-        LivingEntity receivingEntity = event.getEntity();
-        Entity sourceEntity = event.getSource().getEntity();
+        LivingEntity entity = event.getEntity();
         float damage = event.getOriginalDamage();
-        int durabilityDamageHead = 0;
-        int durabilityDamageBody = 0;
-        int durabilityDamageLegs = 0;
-        int durabilityDamageFeet = 0;
-        Optional<ICuriosItemHandler> curiohandler = CuriosApi.getCuriosInventory(receivingEntity);
+
+        int durabilityDamageHead;
+        int durabilityDamageBody;
+        int durabilityDamageLegs;
+        int durabilityDamageFeet;
 
         if (damageType.equals(DamageTypes.FALLING_ANVIL)
                 || damageType.equals(DamageTypes.FALLING_BLOCK)
-                || damageType.equals(DamageTypes.FALLING_STALACTITE)
-        ) {
-            durabilityDamageHead = Mth.clamp((int)(damage * 0.3), 1, Integer.MAX_VALUE);
-            durabilityDamageBody = Mth.clamp((int)(damage * 0.1), 1, Integer.MAX_VALUE);
-            durabilityDamageLegs = Mth.clamp((int)(damage * 0.1), 1, Integer.MAX_VALUE);
-            durabilityDamageFeet = Mth.clamp((int)(damage * 0.1), 1, Integer.MAX_VALUE);
+                || damageType.equals(DamageTypes.FALLING_STALACTITE)) {
+            durabilityDamageHead = Mth.clamp((int)(damage * 0.3F), 1, Integer.MAX_VALUE);
+            durabilityDamageBody = Mth.clamp((int)(damage * 0.1F), 1, Integer.MAX_VALUE);
+            durabilityDamageLegs = Mth.clamp((int)(damage * 0.1F), 1, Integer.MAX_VALUE);
+            durabilityDamageFeet = Mth.clamp((int)(damage * 0.1F), 1, Integer.MAX_VALUE);
         } else {
-            durabilityDamageHead = Mth.clamp((int)(damage * 0.2), 1, Integer.MAX_VALUE);
-            durabilityDamageBody = Mth.clamp((int)(damage * 0.2), 1, Integer.MAX_VALUE);
-            durabilityDamageLegs = Mth.clamp((int)(damage * 0.2), 1, Integer.MAX_VALUE);
-            durabilityDamageFeet = Mth.clamp((int)(damage * 0.2), 1, Integer.MAX_VALUE);
+            durabilityDamageHead = Mth.clamp((int)(damage * 0.2F), 1, Integer.MAX_VALUE);
+            durabilityDamageBody = Mth.clamp((int)(damage * 0.2F), 1, Integer.MAX_VALUE);
+            durabilityDamageLegs = Mth.clamp((int)(damage * 0.2F), 1, Integer.MAX_VALUE);
+            durabilityDamageFeet = Mth.clamp((int)(damage * 0.2F), 1, Integer.MAX_VALUE);
         }
 
+        Optional<ICuriosItemHandler> optionalHandler = CuriosApi.getCuriosInventory(entity);
+        if (optionalHandler.isEmpty()) {
+            return;
+        }
+
+        ICuriosItemHandler handler = optionalHandler.get();
 
         if (!vanillaDurabilityFriendly.contains(damageType)) {
-            if (!receivingEntity.hasItemInSlot(EquipmentSlot.FEET) && !receivingEntity.hasItemInSlot(EquipmentSlot.LEGS)) {
-                if (curiohandler.isPresent()) {
-                    Optional<ICuriosItemHandler> itemInventory = CuriosApi.getCuriosInventory(receivingEntity);
-                    String slotType = "legwear";
-                    List<SlotResult> curios = itemInventory.map(handler -> {
-                        ICurioStacksHandler stacksHandler = handler.getCurios().get(slotType);
-                        if (stacksHandler == null) {
-                            return Collections.<SlotResult>emptyList();
-                        }
-                        List<SlotResult> results = new ArrayList<>();
-                        for (int i = 0; i < stacksHandler.getSlots(); i++) {
-                            results.add(new SlotResult(
-                                    new SlotContext(slotType, receivingEntity, i, false, true),
-                                    stacksHandler.getStacks().getStackInSlot(i)
-                            ));
-                        }
-                        return results;
-                    }).orElse(Collections.emptyList());
-                    for (SlotResult entry : curios) {
-                        ItemStack itemStack = entry.stack();
-                        int receivedDamage = durabilityDamageFeet;
-
-                        if (hasUnbreaking(itemStack)) {
-                            receivedDamage = 0;
-                            int unbreakingLevel = getUnbreakingLevel(itemStack);
-                            for (int i = 0; i < unbreakingLevel; i++) {
-                                RandomSource randomSource = RandomSource.create();
-                                if (shouldReceiveDamage(itemStack, randomSource)) {
-                                    receivedDamage += 1;
-                                }
-                            }
-                        }
-
-                        itemStack.hurtAndBreak(receivedDamage, receivingEntity, EquipmentSlot.MAINHAND);
-                        curiohandler.get().setEquippedCurio(entry.slotContext().identifier(), entry.slotContext().index(), itemStack);
-                    }
-                }
+            // legwear
+            if (!entity.hasItemInSlot(EquipmentSlot.FEET) && !entity.hasItemInSlot(EquipmentSlot.LEGS)) {
+                damageCurioSlot(entity, handler, "legwear", durabilityDamageFeet);
+                damageCurioSlot(entity, handler, "pants", durabilityDamageLegs);
             }
 
-            if (!receivingEntity.hasItemInSlot(EquipmentSlot.CHEST)) {
-                if (curiohandler.isPresent()) {
-                    Optional<ICuriosItemHandler> itemInventory = CuriosApi.getCuriosInventory(receivingEntity);
-                    String slotType = "upperwear";
-                    List<SlotResult> curios = itemInventory.map(handler -> {
-                        ICurioStacksHandler stacksHandler = handler.getCurios().get(slotType);
-                        if (stacksHandler == null) {
-                            return Collections.<SlotResult>emptyList();
-                        }
-                        List<SlotResult> results = new ArrayList<>();
-                        for (int i = 0; i < stacksHandler.getSlots(); i++) {
-                            results.add(new SlotResult(
-                                    new SlotContext(slotType, receivingEntity, i, false, true),
-                                    stacksHandler.getStacks().getStackInSlot(i)
-                            ));
-                        }
-                        return results;
-                    }).orElse(Collections.emptyList());
-                    for (SlotResult entry : curios) {
-                        ItemStack itemStack = entry.stack();
-                        int receivedDamage = durabilityDamageBody;
-
-                        if (hasUnbreaking(itemStack)) {
-                            receivedDamage = 0;
-                            int unbreakingLevel = getUnbreakingLevel(itemStack);
-                            for (int i = 0; i < unbreakingLevel; i++) {
-                                RandomSource randomSource = RandomSource.create();
-                                if (shouldReceiveDamage(itemStack, randomSource)) {
-                                    receivedDamage += 1;
-                                }
-                            }
-                        }
-
-                        itemStack.hurtAndBreak(receivedDamage, receivingEntity, EquipmentSlot.MAINHAND);
-                        curiohandler.get().setEquippedCurio(entry.slotContext().identifier(), entry.slotContext().index(), itemStack);
-                    }
-
-                    String glovesslotType = "gloves";
-                    List<SlotResult> glovescurios = itemInventory.map(handler -> {
-                        ICurioStacksHandler stacksHandler = handler.getCurios().get(glovesslotType);
-                        if (stacksHandler == null) {
-                            return Collections.<SlotResult>emptyList();
-                        }
-                        List<SlotResult> results = new ArrayList<>();
-                        for (int i = 0; i < stacksHandler.getSlots(); i++) {
-                            results.add(new SlotResult(
-                                    new SlotContext(glovesslotType, receivingEntity, i, false, true),
-                                    stacksHandler.getStacks().getStackInSlot(i)
-                            ));
-                        }
-                        return results;
-                    }).orElse(Collections.emptyList());
-                    for (SlotResult entry : glovescurios) {
-                        ItemStack itemStack = entry.stack();
-
-                        if (!(itemStack.getItem() instanceof LeatherGloves leatherGloves)) {
-                            int receivedDamage = durabilityDamageBody;
-
-                            if (hasUnbreaking(itemStack)) {
-                                receivedDamage = 0;
-                                int unbreakingLevel = getUnbreakingLevel(itemStack);
-                                for (int i = 0; i < unbreakingLevel; i++) {
-                                    RandomSource randomSource = RandomSource.create();
-                                    if (shouldReceiveDamage(itemStack, randomSource)) {
-                                        receivedDamage += 1;
-                                    }
-                                }
-                            }
-
-                            itemStack.hurtAndBreak(receivedDamage, receivingEntity, EquipmentSlot.MAINHAND);
-                            curiohandler.get().setEquippedCurio(entry.slotContext().identifier(), entry.slotContext().index(), itemStack);
-                        }
-                    }
-                }
-            }
-        }
-
-        if (damageType.equals(DamageTypes.FALL)) {
-            if (curiohandler.isPresent()) {
-                Optional<ICuriosItemHandler> itemInventory = CuriosApi.getCuriosInventory(receivingEntity);
-                String slotType = "legwear";
-                List<SlotResult> curios = itemInventory.map(handler -> {
-                    ICurioStacksHandler stacksHandler = handler.getCurios().get(slotType);
-                    if (stacksHandler == null) {
-                        return Collections.<SlotResult>emptyList();
-                    }
-                    List<SlotResult> results = new ArrayList<>();
-                    for (int i = 0; i < stacksHandler.getSlots(); i++) {
-                        results.add(new SlotResult(
-                                new SlotContext(slotType, receivingEntity, i, false, true),
-                                stacksHandler.getStacks().getStackInSlot(i)
-                        ));
-                    }
-                    return results;
-                }).orElse(Collections.emptyList());
+            // upper body
+            if (!entity.hasItemInSlot(EquipmentSlot.CHEST)) {
+                damageCurioSlot(entity, handler, "upperwear", durabilityDamageBody);
+                damageCurioSlot(entity, handler, "gloves", durabilityDamageBody);
+                damageCurioSlot(entity, handler, "necklace", durabilityDamageBody);
+                damageCurioSlot(entity, handler, "choker_trinket", durabilityDamageBody);
             }
         }
     }
 
-    public static boolean hasUnbreaking(ItemStack stack) {
-        if (stack.isEnchanted()) {
-            boolean hasUnbreaking = false;
-            ItemEnchantments itemEnchantments = stack.getTagEnchantments();
-
-            for (var entry : itemEnchantments.entrySet()) {
-                Holder<Enchantment> enchantmentHolder = entry.getKey();
-                if (enchantmentHolder.is(Enchantments.UNBREAKING)) {
-                    hasUnbreaking = true;
-                    break;
-                }
-            }
-
-            return hasUnbreaking;
+    private static void damageCurioSlot(
+            LivingEntity entity,
+            ICuriosItemHandler handler,
+            String slotType,
+            int durabilityDamage
+    ) {
+        ICurioStacksHandler stacksHandler = handler.getCurios().get(slotType);
+        if (stacksHandler == null) {
+            return;
         }
 
-        return false;
+        RandomSource random = entity.getRandom();
+
+        for (int i = 0; i < stacksHandler.getSlots(); i++) {
+            ItemStack stack = stacksHandler.getStacks().getStackInSlot(i);
+
+            if (!canClothingTakeDurabilityDamage(stack)) {
+                continue;
+            }
+
+            int finalDamage = applyUnbreakingReduction(stack, durabilityDamage, random);
+            damageClothingButKeepOneDurability(stack, finalDamage);
+
+            handler.setEquippedCurio(slotType, i, stack);
+        }
+    }
+
+    private static void damageClothingButKeepOneDurability(ItemStack stack, int amount) {
+        if (stack.isEmpty() || !stack.isDamageableItem() || amount <= 0) {
+            return;
+        }
+
+        int currentDamage = stack.getDamageValue();
+        int maxDamage = stack.getMaxDamage();
+
+        int maxAllowedDamage = maxDamage - 1;
+
+        if (currentDamage >= maxAllowedDamage) {
+            return;
+        }
+
+        int newDamage = Math.min(currentDamage + amount, maxAllowedDamage);
+        stack.setDamageValue(newDamage);
+    }
+
+    private static boolean canClothingTakeDurabilityDamage(ItemStack stack) {
+        Set<Item> DAMAGEABLE_CLOTHING_ITEMS = Set.of(
+                WeaversParadiseItems.THIGH_HIGHS_COTTON.get(),
+                WeaversParadiseItems.THIGH_HIGHS_SILK.get(),
+                WeaversParadiseItems.THIGH_HIGHS_WOOL.get(),
+                WeaversParadiseItems.HAND_WARMERS_COTTON.get(),
+                WeaversParadiseItems.HAND_WARMERS_SILK.get(),
+                WeaversParadiseItems.HAND_WARMERS_WOOL.get(),
+                WeaversParadiseItems.PANTS_COTTON.get(),
+                WeaversParadiseItems.PANTS_SILK.get(),
+                WeaversParadiseItems.PANTS_JEANS.get(),
+                WeaversParadiseItems.SHIRT_COTTON.get(),
+                WeaversParadiseItems.SHIRT_SILK.get(),
+                WeaversParadiseItems.SWEATER_WOOL.get(),
+                WeaversParadiseItems.CHOKER.get()
+        );
+
+        if (stack.isEmpty() || !stack.isDamageableItem()) {
+            return false;
+        }
+
+        if (!DAMAGEABLE_CLOTHING_ITEMS.contains(stack.getItem())) {
+            return false;
+        }
+
+        return !(stack.getItem() instanceof LeatherGloves);
+    }
+
+    private static int applyUnbreakingReduction(ItemStack stack, int incomingDamage, RandomSource random) {
+        if (incomingDamage <= 0) {
+            return 0;
+        }
+
+        int unbreakingLevel = getUnbreakingLevel(stack);
+        if (unbreakingLevel <= 0) {
+            return incomingDamage;
+        }
+
+        int finalDamage = 0;
+        for (int i = 0; i < incomingDamage; i++) {
+            if (random.nextInt(unbreakingLevel + 1) == 0) {
+                finalDamage++;
+            }
+        }
+
+        return finalDamage;
     }
 
     public static int getUnbreakingLevel(ItemStack stack) {
@@ -268,22 +230,5 @@ public class WeaversParadiseClothingEvents {
         }
 
         return 0;
-    }
-
-    public static boolean shouldReceiveDamage(ItemStack stack, RandomSource randomSource) {
-        if (stack.isEnchanted()) {
-            int level = 0;
-            ItemEnchantments itemEnchantments = stack.getTagEnchantments();
-            for (var entry : itemEnchantments.entrySet()) {
-                Holder<Enchantment> enchantmentHolder = entry.getKey();
-                if (enchantmentHolder.is(Enchantments.UNBREAKING)) {
-                    level = stack.getEnchantmentLevel(enchantmentHolder);
-                }
-            }
-
-            return randomSource.nextIntBetweenInclusive(0, level) == 0;
-        }
-
-        return true;
     }
 }

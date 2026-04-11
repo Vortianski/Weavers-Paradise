@@ -1,10 +1,16 @@
 package xox.labvorty.weaversparadise.items;
 
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Multimap;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
@@ -17,6 +23,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import xox.labvorty.weaversparadise.data.WeaversParadiseDyeIconHandler;
+import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.tooltips.ImageTooltipComponent;
 
@@ -64,6 +71,28 @@ public class ShirtCotton extends Item implements ICurioItem, ShirtInterface {
         int maxdamage = 100 + (20 * quality);
 
         return maxdamage;
+    }
+
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = LinkedHashMultimap.create();
+        LivingEntity livingEntity = slotContext.entity();
+        int durabilityLeft = stack.getMaxDamage() - stack.getDamageValue();
+
+        if (livingEntity != null && durabilityLeft > 1) {
+            int level = stack.getEnchantmentLevel(livingEntity.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(WeaversParadiseEnchantments.SOFT_AND_COZY));
+
+            modifiers.put(
+                    Attributes.BURNING_TIME,
+                    new AttributeModifier(
+                            ResourceLocation.fromNamespaceAndPath("weaversparadise", "shirt_cotton"),
+                            -((level / 5.0f) * 0.1),
+                            AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+                    )
+            );
+        }
+
+        return modifiers;
     }
 
     @Override
@@ -254,13 +283,13 @@ public class ShirtCotton extends Item implements ICurioItem, ShirtInterface {
 
     @Override
     public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-        return enchantment.is(Enchantments.UNBREAKING) || enchantment.is(Enchantments.VANISHING_CURSE) || enchantment.is(Enchantments.MENDING) || enchantment.is(Enchantments.BINDING_CURSE);
+        return enchantment.is(Enchantments.UNBREAKING) || enchantment.is(Enchantments.VANISHING_CURSE) || enchantment.is(Enchantments.MENDING) || enchantment.is(Enchantments.BINDING_CURSE) || enchantment.is(WeaversParadiseEnchantments.SOFT_AND_COZY);
     }
 
     @Override
     public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
         return EnchantmentHelper.getEnchantmentsForCrafting(book).keySet().stream().anyMatch(holder -> {
-            if (holder.is(Enchantments.MENDING) || holder.is(Enchantments.UNBREAKING) || holder.is(Enchantments.VANISHING_CURSE) || holder.is(Enchantments.BINDING_CURSE)) {
+            if (holder.is(Enchantments.MENDING) || holder.is(Enchantments.UNBREAKING) || holder.is(Enchantments.VANISHING_CURSE) || holder.is(Enchantments.BINDING_CURSE) || holder.is(WeaversParadiseEnchantments.SOFT_AND_COZY)) {
                 return true;
             }
             return false;

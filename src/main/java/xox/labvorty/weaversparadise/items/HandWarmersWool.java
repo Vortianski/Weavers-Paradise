@@ -17,6 +17,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import xox.labvorty.weaversparadise.data.WeaversParadiseDyeIconHandler;
+import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.tooltips.ImageTooltipComponent;
 
@@ -335,13 +336,13 @@ public class HandWarmersWool extends Item implements ICurioItem, HandWarmersInte
 
     @Override
     public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-        return enchantment.is(Enchantments.UNBREAKING) || enchantment.is(Enchantments.VANISHING_CURSE) || enchantment.is(Enchantments.MENDING) || enchantment.is(Enchantments.BINDING_CURSE);
+        return enchantment.is(Enchantments.UNBREAKING) || enchantment.is(Enchantments.VANISHING_CURSE) || enchantment.is(Enchantments.MENDING) || enchantment.is(Enchantments.BINDING_CURSE) || enchantment.is(WeaversParadiseEnchantments.SOUND_MUFFLER);
     }
 
     @Override
     public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
         return EnchantmentHelper.getEnchantmentsForCrafting(book).keySet().stream().anyMatch(holder -> {
-            if (holder.is(Enchantments.MENDING) || holder.is(Enchantments.UNBREAKING) || holder.is(Enchantments.VANISHING_CURSE) || holder.is(Enchantments.BINDING_CURSE)) {
+            if (holder.is(Enchantments.MENDING) || holder.is(Enchantments.UNBREAKING) || holder.is(Enchantments.VANISHING_CURSE) || holder.is(Enchantments.BINDING_CURSE) || holder.is(WeaversParadiseEnchantments.SOUND_MUFFLER)) {
                 return true;
             }
             return false;

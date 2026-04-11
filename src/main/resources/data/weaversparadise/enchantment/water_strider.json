@@ -1,0 +1,24 @@
+{
+  "description": {
+    "translate": "enchantment.weaversparadise.water_strider"
+  },
+  "supported_items": [
+    "weaversparadise:thigh_highs_silk"
+  ],
+  "primary_items": [
+    "weaversparadise:thigh_highs_silk"
+  ],
+  "weight": 8,
+  "max_level": 1,
+  "min_cost": {
+    "base": 18,
+    "per_level_above_first": 0
+  },
+  "max_cost": {
+    "base": 32,
+    "per_level_above_first": 0
+  },
+  "slots": [],
+  "anvil_cost": 6,
+  "effects": {}
+}

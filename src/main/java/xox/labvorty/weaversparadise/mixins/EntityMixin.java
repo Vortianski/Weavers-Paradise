@@ -2,6 +2,7 @@ package xox.labvorty.weaversparadise.mixins;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
+import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
 import xox.labvorty.weaversparadise.items.ThighHighsSilk;
 
 import java.util.Optional;
@@ -79,19 +81,30 @@ public class EntityMixin {
             return original;
         }
 
-        if (false) {
-            if (handler.get().isEquipped(stack -> {
-                if (stack.getItem() instanceof ThighHighsSilk thighHighsSilk) {
-                    return true;
-                }
-                return false;
-            })) {
-                entity.fallDistance = 0F;
-                entity.setOnGround(true);
 
-                return new Vec3(original.x, highestValue, original.z);
+        if (handler.get().isEquipped(stack -> {
+            if (stack.getItem() instanceof ThighHighsSilk thighHighsSilk) {
+                int durabilityLeft = stack.getMaxDamage() - stack.getDamageValue();
+                if (!(durabilityLeft > 1)) {
+                    return false;
+                }
+
+                return stack.getAllEnchantments(entity.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT))
+                        .keySet()
+                        .stream()
+                        .anyMatch((holder) -> {
+                            return holder.is(WeaversParadiseEnchantments.WATER_STRIDER);
+                        });
             }
+
+            return false;
+        })) {
+            entity.fallDistance = 0F;
+            entity.setOnGround(true);
+
+            return new Vec3(original.x, highestValue, original.z);
         }
+
 
         return original;
     }

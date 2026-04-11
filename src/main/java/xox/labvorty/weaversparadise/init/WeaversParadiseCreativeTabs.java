@@ -693,6 +693,7 @@ public class WeaversParadiseCreativeTabs {
                 //Can use both null and preset UUID. If none are given defaults
                 output.accept(PlushieItem.createPreMadePlushieAsync("Vortianski", UUID.fromString("383b1ab0-ae8f-4342-b94d-b4f3d2cfc9c0")));
                 output.accept(PlushieItem.createPreMadePlushieAsync("Pelemeshek", null));
+                output.accept(WeaversParadiseItems.PLAYER_PLUSHIE_RENAME_TOKEN);
             }).build()
     );
 }

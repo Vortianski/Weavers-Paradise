@@ -5,13 +5,13 @@ ENGLISH / <a href="https://github.com/Vortianski/Weavers-Paradise/blob/master/RE
 # Weavers-Paradise
 Minecraft mod that adds new clothing items, allowing you to express yourself by dyeing them however you like.
 
-| Loader       |Version| State              |
-|--------------|-----|--------------------|
-| NeoForge     |1.21.1| Actively supported |
-| NeoForge     |1.21| Planned            |
-| Forge        |1.20.1| Planned            |
-| Forge        |1.19.2| TBD                |
-| Fabric/Quilt |X.X.X| TBD                |
+| Loader       | Version | State              |
+|--------------|---------|--------------------|
+| NeoForge     | 1.21.1  | Actively supported |
+| NeoForge     | 1.21    | Planned            |
+| Forge        | 1.20.1  | Planned            |
+| Forge        | 1.19.2  | TBD                |
+| Fabric/Quilt | X.X.X   | TBD                |
 
 > Actively supported - this version/loader will receive active updates frequently
 
@@ -22,10 +22,10 @@ Minecraft mod that adds new clothing items, allowing you to express yourself by 
 
 Supported languages
 
-| Language | Translator |
-|----------|------------|
-| English | Vortianski |
-| Russian | Vortianski | 
+| Language  | Translator |
+|-----------|------------|
+| English   | Vortianski |
+| Russian   | Vortianski | 
 | Ukrainian | Vortianski |
 
 ## Features
@@ -46,21 +46,21 @@ A **Dye Core** is used to define the dye’s behavior. Different dye types can d
 
 ### Dye Types
 
-| Dye type | Description |
-|---------|-------------|
-| **Default** | Basic dye that displays a single static color. |
-| **Rainbow** | Cycles through all rainbow colors, changing every tick. |
-| **Polychromatic** | Displays the base color while applying a shader that shifts hue depending on the viewing angle. |
-| **Ender** | Renders with an end-portal-like parallax effect. |
-| **Sculk** | Uses the base color as the main color and the secondary color as a pulse, triggering whenever nearby sounds occur. |
-| **Biome** | Automatically uses the grass color of the current biome. |
-| **Glowstone** | Displays the base color at full brightness, creating a glow-in-the-dark effect when used with dynamic lighting mods. |
-| **Redstone** | Displays red color. Redstone can be added to the dye core up to 15 times to increase intensity. |
-| **Lamp** | Combines Redstone and Glowstone behavior, emitting light based on the dye core’s redstone power level. |
-| **Speed** | Color shifts based on player movement speed, using the primary and secondary colors. |
-| **Height (Bedrock)** | Color transitions from the primary color at the lowest world height to the secondary color at the highest build limit. |
-| **Height (Sea Level)** | Similar to Height (Bedrock), but calculated relative to sea level instead. |
-| **Pride (16)** | Displays a pride flag pattern. These dyes do not use or store colors. |
+| Dye type               | Description                                                                                                            |
+|------------------------|------------------------------------------------------------------------------------------------------------------------|
+| **Default**            | Basic dye that displays a single static color.                                                                         |
+| **Rainbow**            | Cycles through all rainbow colors, changing every tick.                                                                |
+| **Polychromatic**      | Displays the base color while applying a shader that shifts hue depending on the viewing angle.                        |
+| **Ender**              | Renders with an end-portal-like parallax effect.                                                                       |
+| **Sculk**              | Uses the base color as the main color and the secondary color as a pulse, triggering whenever nearby sounds occur.     |
+| **Biome**              | Automatically uses the grass color of the current biome.                                                               |
+| **Glowstone**          | Displays the base color at full brightness, creating a glow-in-the-dark effect when used with dynamic lighting mods.   |
+| **Redstone**           | Displays red color. Redstone can be added to the dye core up to 15 times to increase intensity.                        |
+| **Lamp**               | Combines Redstone and Glowstone behavior, emitting light based on the dye core’s redstone power level.                 |
+| **Speed**              | Color shifts based on player movement speed, using the primary and secondary colors.                                   |
+| **Height (Bedrock)**   | Color transitions from the primary color at the lowest world height to the secondary color at the highest build limit. |
+| **Height (Sea Level)** | Similar to Height (Bedrock), but calculated relative to sea level instead.                                             |
+| **Pride (16)**         | Displays a pride flag pattern. These dyes do not use or store colors.                                                  |
 
 </details>
 
