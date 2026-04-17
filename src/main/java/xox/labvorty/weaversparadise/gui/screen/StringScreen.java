@@ -1,23 +1,20 @@
 package xox.labvorty.weaversparadise.gui.screen;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.network.chat.Component;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.GuiGraphics;
-import java.util.HashMap;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
-import xox.labvorty.weaversparadise.blocks.entities.SpinningJennyBlockEntity;
-import xox.labvorty.weaversparadise.data.StringNetworkMessage;
+import xox.labvorty.weaversparadise.data.network.StringNetworkMessage;
 import xox.labvorty.weaversparadise.gui.menu.StringMenu;
+
+import java.util.HashMap;
 
 @OnlyIn(Dist.CLIENT)
 public class StringScreen extends AbstractContainerScreen<StringMenu> {

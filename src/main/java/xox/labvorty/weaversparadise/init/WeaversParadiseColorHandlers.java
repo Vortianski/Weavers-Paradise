@@ -3,20 +3,17 @@ package xox.labvorty.weaversparadise.init;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TextColor;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
-import xox.labvorty.weaversparadise.WeaversParadise;
-import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
-import xox.labvorty.weaversparadise.items.BottledDyeItem;
-import xox.labvorty.weaversparadise.items.ChromaticBloomFruit;
-import xox.labvorty.weaversparadise.items.ChromaticDustItem;
-import xox.labvorty.weaversparadise.items.PureDyeItem;
+import xox.labvorty.weaversparadise.items.dye.BottledDyeItem;
+import xox.labvorty.weaversparadise.items.dye.PigmentItem;
+import xox.labvorty.weaversparadise.items.materials.ChromaticBloomFruitItem;
+import xox.labvorty.weaversparadise.items.materials.ChromaticDustItem;
 
 import java.util.List;
 
@@ -191,6 +188,7 @@ public class WeaversParadiseColorHandlers {
                 return -1;
             }
             if (stack.getItem() instanceof BottledDyeItem dye) {
+                Minecraft minecraft = Minecraft.getInstance();
                 CompoundTag compoundTag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
 
                 if (compoundTag.getString("dyeType").equals("redstone")) {
@@ -204,8 +202,7 @@ public class WeaversParadiseColorHandlers {
                 }
 
                 if (compoundTag.getString("dyeType").equals("rainbow")) {
-                    Minecraft mc = Minecraft.getInstance();
-                    int ticks = (int)mc.level.getGameTime();
+                    int ticks = (int)minecraft.level.getGameTime();
 
                     float speed = 0.05F;
 
@@ -225,8 +222,7 @@ public class WeaversParadiseColorHandlers {
                 }
 
                 if (compoundTag.getString("dyeType").equals("speed")) {
-                    Minecraft mc = Minecraft.getInstance();
-                    Vec3 vec3 = mc.player.getDeltaMovement();
+                    Vec3 vec3 = minecraft.player.getDeltaMovement();
                     double velocity = vec3.lengthSqr();
 
                     int colorOne = dye.getItemMainColor(stack);
@@ -250,10 +246,9 @@ public class WeaversParadiseColorHandlers {
                 }
 
                 if (compoundTag.getString("dyeType").equals("height_bedrock")) {
-                    Minecraft mc = Minecraft.getInstance();
-                    int absoluteMinimum = mc.level.getMinBuildHeight();
-                    int absoluteMaximum = mc.level.getMaxBuildHeight();
-                    int height = (int)mc.player.getY();
+                    int absoluteMinimum = minecraft.level.getMinBuildHeight();
+                    int absoluteMaximum = minecraft.level.getMaxBuildHeight();
+                    int height = (int)minecraft.player.getY();
 
                     float value = Mth.clamp(((float)height - (float)absoluteMinimum) / ((float)absoluteMaximum - (float)absoluteMinimum), 0, 1);
 
@@ -278,12 +273,10 @@ public class WeaversParadiseColorHandlers {
                 }
 
                 if (compoundTag.getString("dyeType").equals("height_sea")) {
-                    Minecraft mc = Minecraft.getInstance();
-
-                    double minY = mc.level.getMinBuildHeight();
-                    double maxY = mc.level.getMaxBuildHeight();
-                    double seaY = mc.level.getSeaLevel();
-                    double playerY = mc.player.getY();
+                    double minY = minecraft.level.getMinBuildHeight();
+                    double maxY = minecraft.level.getMaxBuildHeight();
+                    double seaY = minecraft.level.getSeaLevel();
+                    double playerY = minecraft.player.getY();
 
                     double distanceAbove = maxY - seaY;
                     double distanceBelow = seaY - minY;
@@ -310,8 +303,7 @@ public class WeaversParadiseColorHandlers {
                 }
 
                 if (compoundTag.getString("dyeType").equals("sculk")) {
-                    Minecraft mc = Minecraft.getInstance();
-                    int ticks = (int)mc.level.getGameTime();
+                    int ticks = (int)minecraft.level.getGameTime();
                     int pulseInterval = 70;
                     int pulseDuration = 20;
                     int timeInCycle = ticks % pulseInterval;
@@ -328,6 +320,112 @@ public class WeaversParadiseColorHandlers {
                     } else {
                         return baseColor;
                     }
+                }
+
+                if (compoundTag.getString("dyeType").equals("colored_sculk")) {
+                    int ticks = (int)minecraft.level.getGameTime();
+                    int pulseInterval = 70;
+                    int pulseDuration = 20;
+                    int timeInCycle = ticks % pulseInterval;
+
+                    int pulseStartTick = 0;
+
+                    int baseColor = dye.getItemMainColor(stack);
+                    int pulseColorValue = dye.getItemSecondaryColor(stack);
+
+                    if (timeInCycle >= pulseStartTick && timeInCycle <= pulseStartTick + pulseDuration) {
+                        float fade = 1.0f - (float)(timeInCycle - pulseStartTick) / pulseDuration;
+
+                        return blendColors(pulseColorValue, baseColor, fade);
+                    } else {
+                        return baseColor;
+                    }
+                }
+
+                if (compoundTag.getString("dyeType").equals("hunger")) {
+                    Player player = minecraft.player;
+                    int hunger = 20;
+                    int maxHunger = 20;
+                    if (player != null) {
+                        hunger = player.getFoodData().getFoodLevel();
+                    }
+                    float l = hunger / (float)maxHunger;
+
+                    int primaryColor = dye.getItemMainColor(stack);
+                    int secondaryColor = dye.getItemSecondaryColor(stack);
+
+                    int redOne = (primaryColor >> 16) & 0xFF;
+                    int greenOne = (primaryColor >> 8) & 0xFF;
+                    int blueOne = primaryColor & 0xFF;
+
+                    int redTwo = (secondaryColor >> 16) & 0xFF;
+                    int greenTwo = (secondaryColor >> 8) & 0xFF;
+                    int blueTwo = secondaryColor & 0xFF;
+
+                    int colorRed = Mth.lerpInt(l, redTwo, redOne);
+                    int colorGreen = Mth.lerpInt(l, greenTwo, greenOne);
+                    int colorBlue = Mth.lerpInt(l, blueTwo, blueOne);
+
+                    return 255 << 24 | colorRed << 16 | colorGreen << 8 | colorBlue;
+                }
+
+                if (compoundTag.getString("dyeType").equals("health")) {
+                    Player player = minecraft.player;
+                    float health = 20;
+                    float maxHealth = 20;
+                    if (player != null) {
+                        health = player.getHealth();
+                        maxHealth = player.getMaxHealth();
+                    }
+                    float l = health / maxHealth;
+
+                    int primaryColor = dye.getItemMainColor(stack);
+                    int secondaryColor = dye.getItemSecondaryColor(stack);
+
+                    int redOne = (primaryColor >> 16) & 0xFF;
+                    int greenOne = (primaryColor >> 8) & 0xFF;
+                    int blueOne = primaryColor & 0xFF;
+
+                    int redTwo = (secondaryColor >> 16) & 0xFF;
+                    int greenTwo = (secondaryColor >> 8) & 0xFF;
+                    int blueTwo = secondaryColor & 0xFF;
+
+                    int colorRed = Mth.lerpInt(l, redTwo, redOne);
+                    int colorGreen = Mth.lerpInt(l, greenTwo, greenOne);
+                    int colorBlue = Mth.lerpInt(l, blueTwo, blueOne);
+
+                    return 255 << 24 | colorRed << 16 | colorGreen << 8 | colorBlue;
+                }
+
+                if (compoundTag.getString("dyeType").equals("day_time")) {
+                    int time = (int)minecraft.level.getDayTime() % 24000;
+
+                    float t;
+                    if (time >= 6000 && time <= 18000) {
+                        t = (time - 6000) / 12000.0f;
+                    } else {
+                        int wrappedTime = time < 6000 ? time + 24000 : time;
+                        t = 1.0f - ((wrappedTime - 18000) / 12000.0f);
+                    }
+
+                    return lerpColor(0xffdd40, 0x191970, t);
+                }
+
+                if (compoundTag.getString("dyeType").equals("colored_day_time")) {
+                    int time = (int)minecraft.level.getDayTime() % 24000;
+
+                    int primaryColor = dye.getItemMainColor(stack);
+                    int secondaryColor = dye.getItemSecondaryColor(stack);
+
+                    float t;
+                    if (time >= 6000 && time <= 18000) {
+                        t = (time - 6000) / 12000.0f;
+                    } else {
+                        int wrappedTime = time < 6000 ? time + 24000 : time;
+                        t = 1.0f - ((wrappedTime - 18000) / 12000.0f);
+                    }
+
+                    return lerpColor(primaryColor, secondaryColor, t);
                 }
 
                 if (compoundTag.getString("dyeType").equals("lamp")) {
@@ -352,104 +450,87 @@ public class WeaversParadiseColorHandlers {
                 }
 
                 if (compoundTag.getString("dyeType").equals("pride")) {
-                    Minecraft mc = Minecraft.getInstance();
-                    int ticks = (int)mc.level.getGameTime();
+                    int ticks = (int)minecraft.level.getGameTime();
                     return getCycledColor(prideColors, ticks);
                 }
 
                 if (compoundTag.getString("dyeType").equals("asexual")) {
-                    Minecraft mc = Minecraft.getInstance();
-                    int ticks = (int)mc.level.getGameTime();
+                    int ticks = (int)minecraft.level.getGameTime();
                     return getCycledColor(asexualColors, ticks);
                 }
 
                 if (compoundTag.getString("dyeType").equals("aromantic")) {
-                    Minecraft mc = Minecraft.getInstance();
-                    int ticks = (int)mc.level.getGameTime();
+                    int ticks = (int)minecraft.level.getGameTime();
                     return getCycledColor(aromanticColors, ticks);
                 }
 
                 if (compoundTag.getString("dyeType").equals("aroace")) {
-                    Minecraft mc = Minecraft.getInstance();
-                    int ticks = (int)mc.level.getGameTime();
+                    int ticks = (int)minecraft.level.getGameTime();
                     return getCycledColor(aroaceColors, ticks);
                 }
 
                 if (compoundTag.getString("dyeType").equals("agender")) {
-                    Minecraft mc = Minecraft.getInstance();
-                    int ticks = (int)mc.level.getGameTime();
+                    int ticks = (int)minecraft.level.getGameTime();
                     return getCycledColor(agenderColors, ticks);
                 }
 
                 if (compoundTag.getString("dyeType").equals("bisexual")) {
-                    Minecraft mc = Minecraft.getInstance();
-                    int ticks = (int)mc.level.getGameTime();
+                    int ticks = (int)minecraft.level.getGameTime();
                     return getCycledColor(bisexualColors, ticks);
                 }
 
                 if (compoundTag.getString("dyeType").equals("demiboy")) {
-                    Minecraft mc = Minecraft.getInstance();
-                    int ticks = (int)mc.level.getGameTime();
+                    int ticks = (int)minecraft.level.getGameTime();
                     return getCycledColor(demiboyColors, ticks);
                 }
 
                 if (compoundTag.getString("dyeType").equals("demigender")) {
-                    Minecraft mc = Minecraft.getInstance();
-                    int ticks = (int)mc.level.getGameTime();
+                    int ticks = (int)minecraft.level.getGameTime();
                     return getCycledColor(demigenderColors, ticks);
                 }
 
                 if (compoundTag.getString("dyeType").equals("demigirl")) {
-                    Minecraft mc = Minecraft.getInstance();
-                    int ticks = (int)mc.level.getGameTime();
+                    int ticks = (int)minecraft.level.getGameTime();
                     return getCycledColor(demigirlColors, ticks);
                 }
 
                 if (compoundTag.getString("dyeType").equals("gay")) {
-                    Minecraft mc = Minecraft.getInstance();
-                    int ticks = (int)mc.level.getGameTime();
+                    int ticks = (int)minecraft.level.getGameTime();
                     return getCycledColor(gayColors, ticks);
                 }
 
                 if (compoundTag.getString("dyeType").equals("genderfluid")) {
-                    Minecraft mc = Minecraft.getInstance();
-                    int ticks = (int)mc.level.getGameTime();
+                    int ticks = (int)minecraft.level.getGameTime();
                     return getCycledColor(genderfluidColors, ticks);
                 }
 
                 if (compoundTag.getString("dyeType").equals("genderqueer")) {
-                    Minecraft mc = Minecraft.getInstance();
-                    int ticks = (int)mc.level.getGameTime();
+                    int ticks = (int)minecraft.level.getGameTime();
                     return getCycledColor(genderqueerColors, ticks);
                 }
 
                 if (compoundTag.getString("dyeType").equals("intersex")) {
-                    Minecraft mc = Minecraft.getInstance();
-                    int ticks = (int)mc.level.getGameTime();
+                    int ticks = (int)minecraft.level.getGameTime();
                     return getCycledColor(intersexColors, ticks);
                 }
 
                 if (compoundTag.getString("dyeType").equals("lesbian")) {
-                    Minecraft mc = Minecraft.getInstance();
-                    int ticks = (int)mc.level.getGameTime();
+                    int ticks = (int)minecraft.level.getGameTime();
                     return getCycledColor(lesbianColors, ticks);
                 }
 
                 if (compoundTag.getString("dyeType").equals("nonbinary")) {
-                    Minecraft mc = Minecraft.getInstance();
-                    int ticks = (int)mc.level.getGameTime();
+                    int ticks = (int)minecraft.level.getGameTime();
                     return getCycledColor(nonbinaryColors, ticks);
                 }
 
                 if (compoundTag.getString("dyeType").equals("pansexual")) {
-                    Minecraft mc = Minecraft.getInstance();
-                    int ticks = (int)mc.level.getGameTime();
+                    int ticks = (int)minecraft.level.getGameTime();
                     return getCycledColor(pansexualColors, ticks);
                 }
 
                 if (compoundTag.getString("dyeType").equals("trans")) {
-                    Minecraft mc = Minecraft.getInstance();
-                    int ticks = (int)mc.level.getGameTime();
+                    int ticks = (int)minecraft.level.getGameTime();
                     return getCycledColor(transColors, ticks);
                 }
 
@@ -464,7 +545,7 @@ public class WeaversParadiseColorHandlers {
                 return -1;
             }
 
-            if (stack.getItem() instanceof ChromaticBloomFruit bloomFruit) {
+            if (stack.getItem() instanceof ChromaticBloomFruitItem bloomFruit) {
                 Minecraft mc = Minecraft.getInstance();
                 int ticks = (int)mc.level.getGameTime() + (layer * 2);
 
@@ -485,7 +566,7 @@ public class WeaversParadiseColorHandlers {
         }, WeaversParadiseItems.CHROMATIC_BLOOM_FRUIT);
 
         event.register((stack, layer) -> {
-            if (stack.getItem() instanceof PureDyeItem pureDyeItem) {
+            if (stack.getItem() instanceof PigmentItem pureDyeItem) {
                 return pureDyeItem.getDyeColor(stack);
             }
 

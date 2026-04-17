@@ -1,40 +1,39 @@
 package xox.labvorty.weaversparadise.gui.menu;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.component.CustomData;
-import net.neoforged.neoforge.items.wrapper.InvWrapper;
-import net.neoforged.neoforge.items.SlotItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.capabilities.Capabilities;
-
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.items.wrapper.InvWrapper;
 import net.neoforged.neoforge.network.PacketDistributor;
-import xox.labvorty.weaversparadise.data.DyeingNetworkMessage;
-import xox.labvorty.weaversparadise.data.DyemakingNetworkMessage;
+import xox.labvorty.weaversparadise.data.network.DyeingNetworkMessage;
 import xox.labvorty.weaversparadise.init.WeaversParadiseInterfaces;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 
-import java.util.List;
-import java.util.function.Supplier;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Supplier;
 
 
 public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<Integer, Slot>> {
@@ -49,6 +48,18 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
     private Supplier<Boolean> boundItemMatcher = null;
     private Entity boundEntity = null;
     private BlockEntity boundBlockEntity = null;
+
+    private List<Item> singleItems = List.of(
+            WeaversParadiseItems.SHIRT_COTTON.get(),
+            WeaversParadiseItems.SHIRT_SILK.get(),
+            WeaversParadiseItems.SWEATER_WOOL.get(),
+            WeaversParadiseItems.PANTS_COTTON.get(),
+            WeaversParadiseItems.PANTS_JEANS.get(),
+            WeaversParadiseItems.PANTS_SILK.get(),
+            WeaversParadiseItems.COTTON_CAPE.get(),
+            WeaversParadiseItems.SILK_CAPE.get(),
+            WeaversParadiseItems.WOOL_CAPE.get()
+    );
 
     public DyeingMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
         super(WeaversParadiseInterfaces.DYEING_MENU.get(), id);
@@ -150,6 +161,14 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
                     if (stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:shirts_stensils")))) {
                         return true;
                     }
+                } else if (
+                        internal.getStackInSlot(0).is(WeaversParadiseItems.COTTON_CAPE)
+                                || internal.getStackInSlot(0).is(WeaversParadiseItems.SILK_CAPE)
+                                || internal.getStackInSlot(0).is(WeaversParadiseItems.WOOL_CAPE)
+                ) {
+                    if (stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:cape_stensils")))) {
+                        return true;
+                    }
                 } else if (internal.getStackInSlot(0).is(WeaversParadiseItems.CHOKER)) {
                     if (stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:choker_stencils")))) {
                         return true;
@@ -231,14 +250,14 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
             public boolean mayPlace(ItemStack stack) {
                 CompoundTag tags = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
 
+                if (singleItems.contains(internal.getStackInSlot(0).getItem())) {
+                    return false;
+                }
+
                 if (internal.getStackInSlot(3).is(ItemTags.create(ResourceLocation.parse("weaversparadise:stensils")))) {
                     if (stack.is(WeaversParadiseItems.BOTTLED_DYE)) {
                         return true;
                     }
-                }
-
-                if (internal.getStackInSlot(0).is(WeaversParadiseItems.SHIRT_COTTON) || internal.getStackInSlot(0).is(WeaversParadiseItems.SHIRT_SILK) || internal.getStackInSlot(0).is(WeaversParadiseItems.SWEATER_WOOL)) {
-                    return false;
                 }
 
                 return stack.is(WeaversParadiseItems.BOTTLED_DYE);
@@ -257,14 +276,14 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
 
                 CompoundTag tags = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
 
+                if (singleItems.contains(internal.getStackInSlot(0).getItem())) {
+                    return false;
+                }
+
                 if (internal.getStackInSlot(3).is(ItemTags.create(ResourceLocation.parse("weaversparadise:stensils")))) {
                     if (stack.is(WeaversParadiseItems.BOTTLED_DYE)) {
                         return true;
                     }
-                }
-
-                if (internal.getStackInSlot(0).is(WeaversParadiseItems.SHIRT_COTTON) || internal.getStackInSlot(0).is(WeaversParadiseItems.SHIRT_SILK) || internal.getStackInSlot(0).is(WeaversParadiseItems.SWEATER_WOOL)) {
-                    return false;
                 }
 
                 return stack.is(WeaversParadiseItems.BOTTLED_DYE);

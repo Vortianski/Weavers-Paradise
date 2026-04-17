@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
-import xox.labvorty.weaversparadise.items.HandWarmersWool;
-import xox.labvorty.weaversparadise.items.ThighHighsWool;
+import xox.labvorty.weaversparadise.items.clothing.HandWarmersWoolItem;
+import xox.labvorty.weaversparadise.items.clothing.ThighHighsWoolItem;
 
 import java.util.Optional;
 
@@ -42,7 +42,7 @@ public class SculkBlockEntityMixin {
 
             if (handler.isPresent()) {
                     if (handler.get().isEquipped(stack -> {
-                        if (stack.getItem() instanceof ThighHighsWool thighHighsWool) {
+                        if (stack.getItem() instanceof ThighHighsWoolItem thighHighsWool) {
                             int durabilityLeft = stack.getMaxDamage() - stack.getDamageValue();
                             if (!(durabilityLeft > 1)) {
                                 return false;
@@ -70,7 +70,7 @@ public class SculkBlockEntityMixin {
                     }
 
                     if (handler.get().isEquipped(stack -> {
-                        if (stack.getItem() instanceof HandWarmersWool handWarmersWool) {
+                        if (stack.getItem() instanceof HandWarmersWoolItem handWarmersWool) {
                             int durabilityLeft = stack.getMaxDamage() - stack.getDamageValue();
                             if (!(durabilityLeft > 1)) {
                                 return false;

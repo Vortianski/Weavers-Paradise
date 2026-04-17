@@ -1,52 +1,42 @@
 package xox.labvorty.weaversparadise.blocks;
 
 import io.netty.buffer.Unpooled;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.Containers;
-import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.extensions.ILevelExtension;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
-import xox.labvorty.weaversparadise.WeaversParadise;
 import xox.labvorty.weaversparadise.blocks.entities.DyemakingBlockEntity;
-import xox.labvorty.weaversparadise.data.WeaversParadiseDyeHandler;
+import xox.labvorty.weaversparadise.data.tooltip_components.data.DyeHandler;
 import xox.labvorty.weaversparadise.gui.menu.DyemakingMenu;
-import xox.labvorty.weaversparadise.init.WeaversParadiseInterfaces;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
-import xox.labvorty.weaversparadise.items.PureDyeItem;
+import xox.labvorty.weaversparadise.items.dye.PigmentItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -184,13 +174,13 @@ public class DyemakingBlock extends Block implements EntityBlock {
 
             for (ItemStack itemStack : itemStacks) {
                 if (itemStack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:vanilla_dyes")))) {
-                    WeaversParadiseDyeHandler dyeHandler = WeaversParadiseDyeHandler.getOrDefault(itemStack.getItem());
+                    DyeHandler dyeHandler = DyeHandler.getOrDefault(itemStack.getItem());
 
                     reds.add(dyeHandler.getRed());
                     greens.add(dyeHandler.getGreen());
                     blues.add(dyeHandler.getBlue());
                 } else if (itemStack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:custom_dyes")))) {
-                    if (itemStack.getItem() instanceof PureDyeItem pureDyeItem) {
+                    if (itemStack.getItem() instanceof PigmentItem pureDyeItem) {
                         reds.add(pureDyeItem.getRed(itemStack));
                         greens.add(pureDyeItem.getGreen(itemStack));
                         blues.add(pureDyeItem.getBlue(itemStack));

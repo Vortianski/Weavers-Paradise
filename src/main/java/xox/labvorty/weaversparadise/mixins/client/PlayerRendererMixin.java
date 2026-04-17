@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import xox.labvorty.weaversparadise.items.Plushie;
+import xox.labvorty.weaversparadise.items.misc.Plushie;
 
 @Mixin(PlayerRenderer.class)
 public class PlayerRendererMixin {

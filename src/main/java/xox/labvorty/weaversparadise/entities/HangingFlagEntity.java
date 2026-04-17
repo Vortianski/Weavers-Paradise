@@ -22,6 +22,7 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import xox.labvorty.weaversparadise.init.WeaversParadiseEntityTypes;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
+
 import java.util.Optional;
 
 public class HangingFlagEntity extends HangingEntity {

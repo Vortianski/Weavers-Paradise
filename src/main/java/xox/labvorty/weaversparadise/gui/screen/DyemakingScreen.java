@@ -1,15 +1,16 @@
 package xox.labvorty.weaversparadise.gui.screen;
 
-import net.minecraft.world.level.Level;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.network.chat.Component;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.GuiGraphics;
-import java.util.HashMap;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import xox.labvorty.weaversparadise.gui.menu.DyemakingMenu;
+
+import java.util.HashMap;
 
 public class DyemakingScreen extends AbstractContainerScreen<DyemakingMenu>{
     private final static HashMap<String, Object> guistate = DyemakingMenu.guistate;

@@ -1,38 +1,35 @@
 package xox.labvorty.weaversparadise.blocks;
 
+import io.netty.buffer.Unpooled;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.HopperBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.Containers;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.core.BlockPos;
-import io.netty.buffer.Unpooled;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -42,10 +39,7 @@ import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import xox.labvorty.weaversparadise.blocks.entities.SpinningJennyBlockEntity;
 import xox.labvorty.weaversparadise.gui.menu.StringMenu;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
-import xox.labvorty.weaversparadise.items.EmptyCottonSpool;
-import xox.labvorty.weaversparadise.items.EmptySilkSpool;
-import xox.labvorty.weaversparadise.items.EmptySpool;
-import xox.labvorty.weaversparadise.items.EmptyWoolSpool;
+import xox.labvorty.weaversparadise.items.materials.EmptySpoolItem;
 
 public class SpinningJennyBlock extends Block implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -208,7 +202,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
 
         if (state >= 100) {
             if (mainStack.is(ItemTags.create(ResourceLocation.parse("minecraft:wool")))) {
-                if (stack1.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 0) {
+                if (stack1.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 0) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(1, new ItemStack(WeaversParadiseItems.WOOL_SPOOL.get()));
                         mainStack.shrink(1);
@@ -216,7 +210,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
                     }
                 }
 
-                if (stack2.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 0) {
+                if (stack2.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 0) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(2, new ItemStack(WeaversParadiseItems.WOOL_SPOOL.get()));
                         mainStack.shrink(1);
@@ -224,7 +218,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
                     }
                 }
 
-                if (stack3.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 0) {
+                if (stack3.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 0) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(3, new ItemStack(WeaversParadiseItems.WOOL_SPOOL.get()));
                         mainStack.shrink(1);
@@ -232,7 +226,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
                     }
                 }
 
-                if (stack4.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 0) {
+                if (stack4.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 0) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(4, new ItemStack(WeaversParadiseItems.WOOL_SPOOL.get()));
                         mainStack.shrink(1);
@@ -240,7 +234,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
                     }
                 }
 
-                if (stack5.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 0) {
+                if (stack5.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 0) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(5, new ItemStack(WeaversParadiseItems.WOOL_SPOOL.get()));
                         mainStack.shrink(1);
@@ -248,7 +242,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
                     }
                 }
 
-                if (stack6.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 0) {
+                if (stack6.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 0) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(6, new ItemStack(WeaversParadiseItems.WOOL_SPOOL.get()));
                         mainStack.shrink(1);
@@ -258,7 +252,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
             }
 
             if (mainStack.is(Items.STRING)) {
-                if (stack1.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 4) {
+                if (stack1.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 4) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(1, new ItemStack(WeaversParadiseItems.SILK_SPOOL.get()));
                         mainStack.shrink(5);
@@ -266,7 +260,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
                     }
                 }
 
-                if (stack2.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 4) {
+                if (stack2.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 4) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(2, new ItemStack(WeaversParadiseItems.SILK_SPOOL.get()));
                         mainStack.shrink(5);
@@ -274,7 +268,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
                     }
                 }
 
-                if (stack3.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 4) {
+                if (stack3.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 4) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(3, new ItemStack(WeaversParadiseItems.SILK_SPOOL.get()));
                         mainStack.shrink(5);
@@ -282,7 +276,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
                     }
                 }
 
-                if (stack4.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 4) {
+                if (stack4.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 4) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(4, new ItemStack(WeaversParadiseItems.SILK_SPOOL.get()));
                         mainStack.shrink(5);
@@ -290,7 +284,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
                     }
                 }
 
-                if (stack5.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 4) {
+                if (stack5.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 4) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(5, new ItemStack(WeaversParadiseItems.SILK_SPOOL.get()));
                         mainStack.shrink(5);
@@ -298,7 +292,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
                     }
                 }
 
-                if (stack6.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 4) {
+                if (stack6.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 4) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(6, new ItemStack(WeaversParadiseItems.SILK_SPOOL.get()));
                         mainStack.shrink(5);
@@ -308,7 +302,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
             }
 
             if (mainStack.is(WeaversParadiseItems.RAW_COTTON)) {
-                if (stack1.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 3) {
+                if (stack1.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 3) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(1, new ItemStack(WeaversParadiseItems.COTTON_SPOOL.get()));
                         mainStack.shrink(4);
@@ -316,7 +310,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
                     }
                 }
 
-                if (stack2.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 3) {
+                if (stack2.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 3) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(2, new ItemStack(WeaversParadiseItems.COTTON_SPOOL.get()));
                         mainStack.shrink(4);
@@ -324,7 +318,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
                     }
                 }
 
-                if (stack3.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 3) {
+                if (stack3.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 3) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(3, new ItemStack(WeaversParadiseItems.COTTON_SPOOL.get()));
                         mainStack.shrink(4);
@@ -332,7 +326,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
                     }
                 }
 
-                if (stack4.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 3) {
+                if (stack4.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 3) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(4, new ItemStack(WeaversParadiseItems.COTTON_SPOOL.get()));
                         mainStack.shrink(4);
@@ -340,7 +334,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
                     }
                 }
 
-                if (stack5.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 3) {
+                if (stack5.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 3) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(5, new ItemStack(WeaversParadiseItems.COTTON_SPOOL.get()));
                         mainStack.shrink(4);
@@ -348,7 +342,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
                     }
                 }
 
-                if (stack6.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 3) {
+                if (stack6.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 3) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(6, new ItemStack(WeaversParadiseItems.COTTON_SPOOL.get()));
                         mainStack.shrink(4);
@@ -358,7 +352,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
             }
 
             if (mainStack.is(WeaversParadiseItems.COTTON_SPOOL)) {
-                if (stack1.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 3) {
+                if (stack1.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 3) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(1, new ItemStack(WeaversParadiseItems.JEANS_SPOOL.get()));
                         mainStack.shrink(4);
@@ -366,7 +360,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
                     }
                 }
 
-                if (stack2.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 3) {
+                if (stack2.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 3) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(2, new ItemStack(WeaversParadiseItems.JEANS_SPOOL.get()));
                         mainStack.shrink(4);
@@ -374,7 +368,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
                     }
                 }
 
-                if (stack3.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 3) {
+                if (stack3.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 3) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(3, new ItemStack(WeaversParadiseItems.JEANS_SPOOL.get()));
                         mainStack.shrink(4);
@@ -382,7 +376,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
                     }
                 }
 
-                if (stack4.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 3) {
+                if (stack4.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 3) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(4, new ItemStack(WeaversParadiseItems.JEANS_SPOOL.get()));
                         mainStack.shrink(4);
@@ -390,7 +384,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
                     }
                 }
 
-                if (stack5.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 3) {
+                if (stack5.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 3) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(5, new ItemStack(WeaversParadiseItems.JEANS_SPOOL.get()));
                         mainStack.shrink(4);
@@ -398,7 +392,7 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
                     }
                 }
 
-                if (stack6.getItem() instanceof EmptySpool emptyWoolSpool && mainStack.getCount() > 3) {
+                if (stack6.getItem() instanceof EmptySpoolItem emptyWoolSpool && mainStack.getCount() > 3) {
                     if (world instanceof ILevelExtension _ext && _ext.getCapability(Capabilities.ItemHandler.BLOCK, pos, null) instanceof IItemHandlerModifiable itemHandlerModifiable) {
                         itemHandlerModifiable.setStackInSlot(6, new ItemStack(WeaversParadiseItems.JEANS_SPOOL.get()));
                         mainStack.shrink(4);

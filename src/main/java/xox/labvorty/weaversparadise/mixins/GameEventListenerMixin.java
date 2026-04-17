@@ -8,7 +8,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import xox.labvorty.weaversparadise.data.WeaversParadiseSculkPlayerListener;
+import xox.labvorty.weaversparadise.data.listeners.WeaversParadiseSculkPlayerListener;
+
 import java.util.function.BiConsumer;
 
 @Mixin(Entity.class)

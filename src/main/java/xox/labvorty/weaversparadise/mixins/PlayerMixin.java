@@ -15,8 +15,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
-import xox.labvorty.weaversparadise.items.BellItem;
-import xox.labvorty.weaversparadise.items.CatRingItem;
+import xox.labvorty.weaversparadise.items.clothing.BellItem;
+import xox.labvorty.weaversparadise.items.clothing.CatRingItem;
 
 import java.util.Optional;
 

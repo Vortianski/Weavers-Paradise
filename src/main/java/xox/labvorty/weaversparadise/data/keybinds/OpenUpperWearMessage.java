@@ -21,8 +21,6 @@ import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 import xox.labvorty.weaversparadise.WeaversParadise;
-import xox.labvorty.weaversparadise.items.ShirtInterface;
-import xox.labvorty.weaversparadise.items.ShirtSilk;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,17 +1,16 @@
 package xox.labvorty.weaversparadise;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.slf4j.Logger;
-
-import com.mojang.logging.LogUtils;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.ModContainer;
 import xox.labvorty.weaversparadise.init.*;
 
 import java.util.HashMap;
@@ -28,7 +27,6 @@ public class WeaversParadise {
         WeaversParadiseItems.ITEMS.register(modEventBus);
         WeaversParadiseBlocks.BLOCKS.register(modEventBus);
         WeaversParadiseBlockEntities.BLOCK_ENTITIES.register(modEventBus);
-        WeaversParadiseModAttributes.ATTRIBUTES.register(modEventBus);
         WeaversParadiseCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         WeaversParadiseInterfaces.MENUS.register(modEventBus);
         WeaversParadiseRecipes.RECIPE_SERIALIZERS.register(modEventBus);

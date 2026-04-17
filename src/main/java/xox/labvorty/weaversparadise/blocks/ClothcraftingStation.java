@@ -13,8 +13,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.Rabbit;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -35,14 +33,10 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import xox.labvorty.weaversparadise.WeaversParadise;
 import xox.labvorty.weaversparadise.blocks.entities.ClothcraftingStationBlockEntity;
-import xox.labvorty.weaversparadise.blocks.entities.SpinningJennyBlockEntity;
 import xox.labvorty.weaversparadise.gui.menu.ClothcraftingMenu;
-import xox.labvorty.weaversparadise.gui.menu.StringMenu;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 

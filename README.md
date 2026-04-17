@@ -9,7 +9,7 @@ Minecraft mod that adds new clothing items, allowing you to express yourself by 
 |--------------|---------|--------------------|
 | NeoForge     | 1.21.1  | Actively supported |
 | NeoForge     | 1.21    | Planned            |
-| Forge        | 1.20.1  | Planned            |
+| Forge        | 1.20.1  | Actively supported |
 | Forge        | 1.19.2  | TBD                |
 | Fabric/Quilt | X.X.X   | TBD                |
 
@@ -60,7 +60,7 @@ A **Dye Core** is used to define the dye’s behavior. Different dye types can d
 | **Speed**              | Color shifts based on player movement speed, using the primary and secondary colors.                                   |
 | **Height (Bedrock)**   | Color transitions from the primary color at the lowest world height to the secondary color at the highest build limit. |
 | **Height (Sea Level)** | Similar to Height (Bedrock), but calculated relative to sea level instead.                                             |
-| **Pride (16)**         | Displays a pride flag pattern. These dyes do not use or store colors.                                                  |
+| **Pride (18)**         | Displays a pride flag pattern. These dyes do not use or store colors.                                                  |
 
 </details>
 

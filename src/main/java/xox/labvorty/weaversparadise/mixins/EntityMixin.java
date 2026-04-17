@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
-import xox.labvorty.weaversparadise.items.ThighHighsSilk;
+import xox.labvorty.weaversparadise.items.clothing.ThighHighsSilkItem;
 
 import java.util.Optional;
 
@@ -83,7 +83,7 @@ public class EntityMixin {
 
 
         if (handler.get().isEquipped(stack -> {
-            if (stack.getItem() instanceof ThighHighsSilk thighHighsSilk) {
+            if (stack.getItem() instanceof ThighHighsSilkItem thighHighsSilk) {
                 int durabilityLeft = stack.getMaxDamage() - stack.getDamageValue();
                 if (!(durabilityLeft > 1)) {
                     return false;

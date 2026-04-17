@@ -1,42 +1,41 @@
 package xox.labvorty.weaversparadise.gui.screen;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.WidgetSprites;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.sounds.SoundEvent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.inventory.tooltip.TooltipComponent;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.network.chat.Component;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.GuiGraphics;
-
-import java.util.*;
-
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
-import xox.labvorty.weaversparadise.data.ClothcraftingNetworkMultiMessage;
+import xox.labvorty.weaversparadise.data.network.ClothcraftingNetworkMultiMessage;
 import xox.labvorty.weaversparadise.gui.menu.ClothcraftingMenu;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.init.WeaversParadiseKeyMappings;
-import xox.labvorty.weaversparadise.items.CottonSpool;
-import xox.labvorty.weaversparadise.items.JeansSpool;
-import xox.labvorty.weaversparadise.items.SilkSpool;
-import xox.labvorty.weaversparadise.items.WoolSpool;
+import xox.labvorty.weaversparadise.items.materials.CottonSpoolItem;
+import xox.labvorty.weaversparadise.items.materials.JeansSpoolItem;
+import xox.labvorty.weaversparadise.items.materials.SilkSpoolItem;
+import xox.labvorty.weaversparadise.items.materials.WoolSpooltem;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 
 @OnlyIn(Dist.CLIENT)
 public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMenu> {
@@ -809,19 +808,19 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         Slot slot = this.menu.slots.get(0);
         ItemStack stack = slot.getItem();
 
-        if (stack.getItem() instanceof SilkSpool silkSpool) {
+        if (stack.getItem() instanceof SilkSpoolItem silkSpool) {
             return "SILK";
         }
 
-        if (stack.getItem() instanceof WoolSpool woolSpool) {
+        if (stack.getItem() instanceof WoolSpooltem woolSpool) {
             return "WOOL";
         }
 
-        if (stack.getItem() instanceof CottonSpool cottonSpool) {
+        if (stack.getItem() instanceof CottonSpoolItem cottonSpool) {
             return "COTTON";
         }
 
-        if (stack.getItem() instanceof JeansSpool jeansSpool) {
+        if (stack.getItem() instanceof JeansSpoolItem jeansSpool) {
             return "JEANS";
         }
 

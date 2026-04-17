@@ -12,7 +12,11 @@
   ],
   "client": [
     "client.PlayerRendererMixin",
-    "client.HumanModelMixin"
+    "client.PlayerModelMixin",
+    "client.HumanModelMixin",
+    "client.ItemRendererMixin",
+    "client.ElytraLayerMixin",
+    "client.CapeLayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

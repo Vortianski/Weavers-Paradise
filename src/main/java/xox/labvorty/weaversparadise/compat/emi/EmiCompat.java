@@ -1,7 +1,6 @@
 package xox.labvorty.weaversparadise.compat.emi;
 
 import dev.emi.emi.api.EmiEntrypoint;
-import dev.emi.emi.api.EmiExclusionArea;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
@@ -12,7 +11,6 @@ import dev.emi.emi.api.widget.Bounds;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.CustomData;
@@ -22,7 +20,6 @@ import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 @EmiEntrypoint
 public class EmiCompat implements EmiPlugin {
@@ -180,6 +177,7 @@ public class EmiCompat implements EmiPlugin {
         });
 
         List<String> dyeTypes = List.of(
+                "default",
                 "agender",
                 "aroace",
                 "aromantic",
@@ -197,7 +195,14 @@ public class EmiCompat implements EmiPlugin {
                 "pansexual",
                 "pride",
                 "trans",
+                "redstone",
+                "lamp",
                 "sculk",
+                "colored_sculk",
+                "hunger",
+                "health",
+                "day_time",
+                "colored_day_time",
                 "glowstone",
                 "rainbow",
                 "biome",
@@ -205,8 +210,13 @@ public class EmiCompat implements EmiPlugin {
                 "speed",
                 "height_bedrock",
                 "height_sea",
-                "redstone",
-                "lamp"
+                "invisible",
+                "static",
+                "crystal",
+                "negative",
+                "true_negative",
+                "nebula",
+                "polychromatic"
         );
 
         List<ItemStack> dyeCores = new ArrayList<>();

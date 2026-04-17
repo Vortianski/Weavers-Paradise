@@ -2,7 +2,6 @@ package xox.labvorty.weaversparadise.mixins;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -18,7 +17,7 @@ import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
-import xox.labvorty.weaversparadise.items.PantsJeans;
+import xox.labvorty.weaversparadise.items.clothing.PantsJeansItem;
 
 import java.util.Optional;
 
@@ -37,7 +36,7 @@ public class AbstractArrowMixin {
         if (handler.isEmpty()) return;
 
         Optional<SlotResult> slotResult = handler.get().findFirstCurio(stack ->
-                stack.getItem() instanceof PantsJeans
+                stack.getItem() instanceof PantsJeansItem
         );
         if (slotResult.isEmpty()) return;
 

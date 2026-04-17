@@ -5,7 +5,9 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import xox.labvorty.weaversparadise.WeaversParadise;
-import xox.labvorty.weaversparadise.data.*;
+import xox.labvorty.weaversparadise.data.recipes.WeaversParadiseDyeCoreUpgradeRecipe;
+import xox.labvorty.weaversparadise.data.recipes.WeaversParadisePlushieRenameRecipe;
+import xox.labvorty.weaversparadise.data.recipes.WeaversParadiseQualityResultRecipe;
 
 public class WeaversParadiseRecipes {
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, WeaversParadise.MODID);

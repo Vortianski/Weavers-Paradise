@@ -3,7 +3,6 @@ package xox.labvorty.weaversparadise.blocks;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -12,11 +11,9 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -25,10 +22,8 @@ import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
-import xox.labvorty.weaversparadise.items.LeatherGloves;
+import xox.labvorty.weaversparadise.items.clothing.LeatherGlovesItem;
 
-import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Optional;
 
 public class CottonBush extends CropBlock {
@@ -66,7 +61,7 @@ public class CottonBush extends CropBlock {
         Optional<ICuriosItemHandler> handler = CuriosApi.getCuriosInventory(player);
         if (handler.isPresent() && state.getValue(AGE) == MAX_AGE) {
             if (handler.get().isEquipped(stack -> {
-                if (stack.getItem() instanceof LeatherGloves leatherGloves) {
+                if (stack.getItem() instanceof LeatherGlovesItem leatherGloves) {
                     return true;
                 }
                 return false;
@@ -74,7 +69,7 @@ public class CottonBush extends CropBlock {
                 RandomSource randomSource = RandomSource.create();
                 SlotResult slotResult = handler.get().findFirstCurio(WeaversParadiseItems.LEATHER_GLOVES.get()).get();
                 ItemStack stack = slotResult.stack();
-                if (stack.getItem() instanceof LeatherGloves leatherGloves && leatherGloves.shouldReceiveDamage(stack, randomSource)) {
+                if (stack.getItem() instanceof LeatherGlovesItem leatherGloves && leatherGloves.shouldReceiveDamage(stack, randomSource)) {
                     stack.setDamageValue(stack.getDamageValue() + 1);
                     handler.get().setEquippedCurio(slotResult.slotContext().identifier(), slotResult.slotContext().index(),stack);
                 }

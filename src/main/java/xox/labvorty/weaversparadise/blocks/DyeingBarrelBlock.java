@@ -34,8 +34,6 @@ import xox.labvorty.weaversparadise.blocks.entities.DyeingBarrelBlockEntity;
 import xox.labvorty.weaversparadise.gui.menu.DyeingMenu;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 
-import java.util.List;
-
 public class DyeingBarrelBlock extends Block implements EntityBlock {
     public DyeingBarrelBlock() {
         super(BlockBehaviour.Properties.of().sound(SoundType.WOOD).strength(1f, 10f));
@@ -463,6 +461,9 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                             || slot0.is(WeaversParadiseItems.PANTS_JEANS)
                             || slot0.is(WeaversParadiseItems.PANTS_COTTON)
                             || slot0.is(WeaversParadiseItems.PANTS_SILK)
+                            || slot0.is(WeaversParadiseItems.COTTON_CAPE)
+                            || slot0.is(WeaversParadiseItems.SILK_CAPE)
+                            || slot0.is(WeaversParadiseItems.WOOL_CAPE)
             ) {
                 ItemStack stack = slot0.copy();
 
