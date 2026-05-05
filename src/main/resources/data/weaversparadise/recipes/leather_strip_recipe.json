@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:leather"
+  },
+  "result": "weaversparadise:leather_strips",
+  "count": 1
+}

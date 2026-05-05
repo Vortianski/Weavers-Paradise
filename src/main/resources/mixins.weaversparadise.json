@@ -1,0 +1,25 @@
+{
+  "required": true,
+  "minVersion": "0.8.5",
+  "compatibilityLevel": "JAVA_17",
+  "package": "xox.labvorty.weaversparadise.mixins",
+  "refmap": "weaversparadise.refmap.json",
+  "mixins": [
+    "GameEventListenerMixin",
+    "PlayerMixin",
+    "SculkBlockEntityMixin",
+    "AbstractArrowMixin",
+    "EntityMixin"
+  ],
+  "client": [
+    "client.ItemRendererMixin",
+    "client.PlayerModelMixin",
+    "client.CapeLayerMixin",
+    "client.ElytraLayerMixin",
+    "client.HumanModelMixin",
+    "client.PlayerRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

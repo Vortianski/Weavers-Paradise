@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "weaversparadise:wood_buttons"
+    }
+  ],
+  "result": {
+    "item": "weaversparadise:button",
+    "count": 4
+  }
+}

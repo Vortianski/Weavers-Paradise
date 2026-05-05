@@ -1,0 +1,8 @@
+{
+  "type": "weaversparadise:stonecutter_crafting",
+  "ingredient": {
+    "item": "minecraft:copper_ingot"
+  },
+  "result": "weaversparadise:heart",
+  "nbt": "{metalType:\"minecraft:copper_ingot\",color:-4035764,damage:50}"
+}

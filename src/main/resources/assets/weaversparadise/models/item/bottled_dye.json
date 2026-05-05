@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "weaversparadise:item/ink_bottle_base",
+    "layer1": "weaversparadise:item/ink_bottle_colorable"
+  }
+}

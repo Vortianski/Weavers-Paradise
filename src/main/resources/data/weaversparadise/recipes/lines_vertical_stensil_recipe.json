@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "weaversparadise:base_stencil"
+  },
+  "result": "weaversparadise:lines_vertical_stencil",
+  "count": 1
+}

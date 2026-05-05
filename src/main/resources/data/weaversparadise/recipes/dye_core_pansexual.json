@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "weaversparadise:flag_pansexual"
+    }
+  ],
+  "result": {
+    "item": "weaversparadise:dye_core",
+    "count": 1,
+    "nbt": "{dyeType:\"pansexual\"}"
+  }
+}

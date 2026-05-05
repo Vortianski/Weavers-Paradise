@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "weaversparadise:mortar_and_pestle"
+    },
+    {
+      "item": "minecraft:charcoal"
+    }
+  ],
+  "result": {
+    "item": "weaversparadise:pigment",
+    "count": 1,
+    "nbt": "{red:20,green:20,blue:10}"
+  }
+}

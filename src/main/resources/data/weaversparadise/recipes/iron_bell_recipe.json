@@ -1,0 +1,8 @@
+{
+  "type": "weaversparadise:stonecutter_crafting",
+  "ingredient": {
+    "item": "minecraft:iron_ingot"
+  },
+  "result": "weaversparadise:bell",
+  "nbt": "{metalType:\"minecraft:iron_ingot\",color:-1,damage:100}"
+}

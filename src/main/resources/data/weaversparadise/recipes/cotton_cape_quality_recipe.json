@@ -1,0 +1,21 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    "aa ",
+    "aab",
+    "aa "
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:cotton_cloth"
+    },
+    "b": {
+      "item": "weaversparadise:needle_with_thread"
+    }
+  },
+  "result": {
+    "item": "weaversparadise:cotton_cape",
+    "count": 1
+  }
+}

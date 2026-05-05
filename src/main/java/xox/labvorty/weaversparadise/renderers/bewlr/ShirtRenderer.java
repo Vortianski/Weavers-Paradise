@@ -1,0 +1,125 @@
+package xox.labvorty.weaversparadise.renderers.bewlr;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
+import xox.labvorty.weaversparadise.items.clothing.ShirtCottonItem;
+import xox.labvorty.weaversparadise.items.clothing.ShirtInterface;
+import xox.labvorty.weaversparadise.items.clothing.ShirtSilkItem;
+import xox.labvorty.weaversparadise.items.clothing.SweaterWoolItem;
+import xox.labvorty.weaversparadise.models.UpperWearModel;
+import xox.labvorty.weaversparadise.renderers.helpers.ShirtRenderingData;
+import xox.labvorty.weaversparadise.renderers.models.ShirtModelRenderer;
+
+public class ShirtRenderer extends BlockEntityWithoutLevelRenderer {
+    private final UpperWearModel model;
+
+    public ShirtRenderer(BlockEntityRenderDispatcher dispatcher, EntityModelSet entityModels) {
+        super(dispatcher, entityModels);
+        this.model = new UpperWearModel(entityModels.bakeLayer(UpperWearModel.LAYER_LOCATION));
+    }
+
+    @Override
+    public void renderByItem(
+            ItemStack stack,
+            ItemDisplayContext transformType,
+            PoseStack poseStack,
+            MultiBufferSource buffer,
+            int packedLight,
+            int packedOverlay
+    ) {
+        String material;
+
+        if (!(stack.getItem() instanceof ShirtInterface shirtInterface)) return;
+
+        if (stack.getItem() instanceof ShirtCottonItem shirtCotton) {
+            material = "cotton";
+        } else if (stack.getItem() instanceof ShirtSilkItem shirtSilk) {
+            material = "silk";
+        } else if (stack.getItem() instanceof SweaterWoolItem sweaterWool) {
+            material = "wool";
+        } else {
+            material = "cotton";
+        }
+
+        float scale = 1.0f;
+
+        float ytranslation = 0.85f;
+
+        float additionalXrot = 0;
+        float additionalYrot = 0;
+        float additionalZrot = 0;
+
+        switch (transformType) {
+            case GUI -> {
+                scale = 0.9f;
+                ytranslation = 0.8f;
+                additionalYrot = 135f;
+                additionalXrot = -22.5f;
+            }
+            case THIRD_PERSON_LEFT_HAND, THIRD_PERSON_RIGHT_HAND, FIRST_PERSON_LEFT_HAND, FIRST_PERSON_RIGHT_HAND -> {
+                scale = 0.5f;
+                ytranslation = 0.9f;
+                additionalYrot = 180f;
+            }
+            case FIXED -> {
+                additionalYrot = 0f;
+            }
+            case GROUND -> {
+                ytranslation = 0.75f;
+                scale = 0.5f;
+            }
+        }
+
+        int primaryColorOne = shirtInterface.getItemMainColor(stack, 1);
+        int secondaryColorOne = shirtInterface.getItemSecondaryColor(stack, 1);
+        int primaryColorTwo = shirtInterface.getItemMainColor(stack, 2);
+        int secondaryColorTwo = shirtInterface.getItemSecondaryColor(stack, 2);
+        String dyeTypeOne = shirtInterface.getItemDyeType(stack, 1);
+        String dyeTypeTwo = shirtInterface.getItemDyeType(stack, 2);
+        String stensilType = shirtInterface.getStensilType(stack);
+        int lightValueOne = shirtInterface.getItemLightValue(stack, 1);
+        int lightValueTwo = shirtInterface.getItemLightValue(stack, 2);
+        Minecraft mc = Minecraft.getInstance();
+
+        ShirtModelRenderer shirtModelRenderer = new ShirtModelRenderer();
+
+        shirtModelRenderer.renderModel(
+                buffer,
+                model,
+                new ShirtRenderingData(
+                        stack.getOrCreateTag().getBoolean("is_open"),
+                        primaryColorOne,
+                        secondaryColorOne,
+                        primaryColorTwo,
+                        secondaryColorTwo,
+                        dyeTypeOne,
+                        dyeTypeTwo,
+                        stensilType,
+                        lightValueOne,
+                        lightValueTwo,
+                        material
+                ),
+                mc.player,
+                scale,
+                -scale,
+                -scale,
+                0,
+                180,
+                0,
+                -0.5f,
+                ytranslation,
+                -0.5f,
+                additionalXrot,
+                additionalYrot,
+                additionalZrot,
+                poseStack,
+                packedLight
+        );
+    }
+}

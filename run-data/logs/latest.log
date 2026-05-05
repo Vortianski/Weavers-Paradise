@@ -1,0 +1,57 @@
+[04May2026 21:45:38.217] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 5, --assetsDir, C:\Users\vorti\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 47.2.32, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mod, weaversparadise, --all, --output, C:\Users\vorti\Desktop\Projects\weavers paradise forge 1.20.1\src\generated\resources, --existing, C:\Users\vorti\Desktop\Projects\weavers paradise forge 1.20.1\src\main\resources, --mixin.config, mixins.weaversparadise.json]
+[04May2026 21:45:38.227] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.12 by Oracle Corporation; OS Windows 11 arch amd64 version 10.0
+[04May2026 21:45:38.368] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgedatauserdev
+[04May2026 21:45:38.426] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/vorti/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23128!/ Service=ModLauncher Env=CLIENT
+[04May2026 21:45:38.819] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\vorti\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.2.32\9d7e04e58b558bf95759e2d94b77944a0845d1cb\javafmllanguage-1.20.1-47.2.32.jar is missing mods.toml file
+[04May2026 21:45:38.824] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\vorti\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.2.32\38d24291ba53d0eebaa2830618f331bc728d4b90\lowcodelanguage-1.20.1-47.2.32.jar is missing mods.toml file
+[04May2026 21:45:38.827] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\vorti\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.2.32\63a076b8fcbb860cfddb7cec5c1374338a5043da\mclanguage-1.20.1-47.2.32.jar is missing mods.toml file
+[04May2026 21:45:38.830] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\vorti\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.2.32\cb79ea145f390bce56ce90e2cc62eb6928911801\fmlcore-1.20.1-47.2.32.jar is missing mods.toml file
+[04May2026 21:45:38.950] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[04May2026 21:45:41.521] [main/WARN] [mixin/]: Compatibility level JAVA_17 specified by mixins.weaversparadise.json is higher than the maximum level supported by this version of mixin (JAVA_13).
+[04May2026 21:45:41.523] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[04May2026 21:45:41.624] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, C:\Users\vorti\.gradle\caches\forge_gradle\assets, --assetIndex, 5, --mod, weaversparadise, --all, --output, C:\Users\vorti\Desktop\Projects\weavers paradise forge 1.20.1\src\generated\resources, --existing, C:\Users\vorti\Desktop\Projects\weavers paradise forge 1.20.1\src\main\resources]
+[04May2026 21:45:41.743] [main/INFO] [mixin/]: Attempting to load Fernflower decompiler (Threaded mode)
+[04May2026 21:45:41.746] [main/INFO] [mixin/]: Fernflower could not be loaded, exported classes will not be decompiled. NoClassDefFoundError: org/jetbrains/java/decompiler/main/extern/IResultSaver
+[04May2026 21:45:41.782] [main/INFO] [mixin/]: Preparing mixins for MixinEnvironment[DEFAULT]
+[04May2026 21:45:41.784] [main/INFO] [mixin/]: Selecting config mixins.weaversparadise.json
+[04May2026 21:45:41.794] [main/WARN] [mixin/]: Reference map 'weaversparadise.refmap.json' for mixins.weaversparadise.json could not be read. If this is a development environment you can ignore this message
+[04May2026 21:45:41.799] [main/INFO] [mixin/]: Selecting config emi.mixins.json
+[04May2026 21:45:42.388] [main/INFO] [mixin/]: Remapping refMap emi-xplat-refmap.json using C:\Users\vorti\Desktop\Projects\weavers paradise forge 1.20.1\build\createSrgToMcp\output.srg
+[04May2026 21:45:42.388] [main/INFO] [mixin/]: Selecting config emi-forge.mixins.json
+[04May2026 21:45:42.390] [main/INFO] [mixin/]: Selecting config curios.mixins.json
+[04May2026 21:45:42.392] [main/INFO] [mixin/]: Remapping refMap curios.refmap.json using C:\Users\vorti\Desktop\Projects\weavers paradise forge 1.20.1\build\createSrgToMcp\output.srg
+[04May2026 21:45:42.392] [main/INFO] [mixin/]: Preparing mixins.weaversparadise.json (3)
+[04May2026 21:45:42.602] [main/INFO] [mixin/]: Preparing emi.mixins.json (24)
+[04May2026 21:45:42.678] [main/WARN] [mixin/]: Error loading class: mezz/jei/library/load/PluginCaller (java.lang.ClassNotFoundException: mezz.jei.library.load.PluginCaller)
+[04May2026 21:45:42.814] [main/INFO] [mixin/]: Preparing emi-forge.mixins.json (0)
+[04May2026 21:45:42.814] [main/INFO] [mixin/]: Preparing curios.mixins.json (13)
+[04May2026 21:45:43.038] [main/INFO] [mixin/]: Prepared 39 mixins in 1.253 sec (32.1ms avg) (0ms load, 0ms transform, 0ms plugin)
+[04May2026 21:45:43.891] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [weaversparadise]
+[04May2026 21:45:44.287] [main/INFO] [mixin/]: Mixing AccessorEntity from curios.mixins.json into net.minecraft.world.entity.Entity
+[04May2026 21:45:44.435] [main/INFO] [mixin/]: Mixing MixinLivingEntity from curios.mixins.json into net.minecraft.world.entity.LivingEntity
+[04May2026 21:45:46.208] [main/INFO] [mixin/]: Mixing MixinPowderSnowBlock from curios.mixins.json into net.minecraft.world.level.block.PowderSnowBlock
+[04May2026 21:45:47.561] [main/INFO] [mixin/]: Mixing ItemStackMixin from emi.mixins.json into net.minecraft.world.item.ItemStack
+[04May2026 21:45:48.729] [main/INFO] [mixin/]: Mixing accessor.ShovelItemAccessor from emi.mixins.json into net.minecraft.world.item.ShovelItem
+[04May2026 21:45:48.734] [main/INFO] [mixin/]: Renaming @Accessor method getPathStates()Ljava/util/Map; to getPathStates_$md$bb2957$0 in emi.mixins.json:accessor.ShovelItemAccessor
+[04May2026 21:45:48.761] [main/INFO] [mixin/]: Mixing accessor.AxeItemAccessor from emi.mixins.json into net.minecraft.world.item.AxeItem
+[04May2026 21:45:48.762] [main/INFO] [mixin/]: Renaming @Accessor method getStrippedBlocks()Ljava/util/Map; to getStrippedBlocks_$md$bb2957$0 in emi.mixins.json:accessor.AxeItemAccessor
+[04May2026 21:45:48.775] [main/INFO] [mixin/]: Mixing accessor.HoeItemAccessor from emi.mixins.json into net.minecraft.world.item.HoeItem
+[04May2026 21:45:48.776] [main/INFO] [mixin/]: Renaming @Accessor method getTillingActions()Ljava/util/Map; to getTillingActions_$md$bb2957$0 in emi.mixins.json:accessor.HoeItemAccessor
+[04May2026 21:45:48.783] [main/INFO] [mixin/]: Mixing HoeItemMixin from emi.mixins.json into net.minecraft.world.item.HoeItem
+[04May2026 21:45:48.880] [main/INFO] [mixin/]: Mixing MixinShearsItem from curios.mixins.json into net.minecraft.world.item.ShearsItem
+[04May2026 21:45:51.707] [main/INFO] [mixin/]: Mixing MixinInventory from curios.mixins.json into net.minecraft.world.entity.player.Inventory
+[04May2026 21:45:51.758] [main/INFO] [mixin/]: Mixing accessor.CraftingResultSlotAccessor from emi.mixins.json into net.minecraft.world.inventory.ResultSlot
+[04May2026 21:45:51.762] [main/INFO] [mixin/]: Mixing CraftingResultSlotMixin from emi.mixins.json into net.minecraft.world.inventory.ResultSlot
+[04May2026 21:45:52.005] [main/INFO] [mixin/]: Mixing MixinApplyBonusCount from curios.mixins.json into net.minecraft.world.level.storage.loot.functions.ApplyBonusCount
+[04May2026 21:45:53.295] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.2.32, for MC 1.20.1 with MCP 20230612.114412
+[04May2026 21:45:53.305] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.2.32 Initialized
+[04May2026 21:45:53.452] [modloading-worker-0/INFO] [mixin/]: Mixing ScreenMixin from emi.mixins.json into net.minecraft.client.gui.screens.Screen
+[04May2026 21:45:53.528] [modloading-worker-0/INFO] [mixin/]: Mixing accessor.HandledScreenAccessor from emi.mixins.json into net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
+[04May2026 21:45:53.566] [modloading-worker-0/INFO] [mixin/]: Mixing HandledScreenMixin from emi.mixins.json into net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
+[04May2026 21:45:54.848] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/vorti/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.2.32_mapped_parchment_2023.06.26-1.20.1/forge-1.20.1-47.2.32_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23191!/assets/.mcassetsroot' uses unexpected schema
+[04May2026 21:45:54.850] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/vorti/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.2.32_mapped_parchment_2023.06.26-1.20.1/forge-1.20.1-47.2.32_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23191!/data/.mcassetsroot' uses unexpected schema
+[04May2026 21:45:55.292] [main/INFO] [mixin/]: Mixing MixinCuriosDataProvider from curios.mixins.json into top.theillusivec4.curios.api.CuriosDataProvider
+[04May2026 21:45:55.428] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Curios for weaversparadise
+[04May2026 21:45:55.801] [main/INFO] [net.minecraft.data.DataGenerator/]: Curios for weaversparadise finished after 369 ms
+[04May2026 21:45:55.801] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 375 ms
+[04May2026 21:45:55.811] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 7, old count: 4, new count: 8, removed stale: 0, written: 4
