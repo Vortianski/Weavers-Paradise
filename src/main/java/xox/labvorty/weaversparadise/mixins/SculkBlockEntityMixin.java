@@ -6,6 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.entity.SculkSensorBlockEntity;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.common.util.LazyOptional;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,15 +19,12 @@ import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
 import xox.labvorty.weaversparadise.items.clothing.HandWarmersWoolItem;
 import xox.labvorty.weaversparadise.items.clothing.ThighHighsWoolItem;
 
-import java.util.Optional;
-
-@Mixin(targets = "net.minecraft.world.level.block.entity.SculkSensorBlockEntity$VibrationUser")
+@Mixin(SculkSensorBlockEntity.VibrationUser.class)
 public class SculkBlockEntityMixin {
     @Inject(
             method = "canReceiveVibration",
             at = @At("HEAD"),
-            cancellable = true,
-            remap = false
+            cancellable = true
     )
     private void disableVibration(
             ServerLevel pLevel, BlockPos pPos, GameEvent gameEvent, GameEvent.Context context, CallbackInfoReturnable<Boolean> cir
