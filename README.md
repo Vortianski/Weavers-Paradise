@@ -10,7 +10,7 @@ Minecraft mod that adds new clothing items, allowing you to express yourself by 
 | NeoForge     | 1.21.1  | Actively supported |
 | NeoForge     | 1.21    | Planned            |
 | Forge        | 1.20.1  | Actively supported |
-| Forge        | 1.19.2  | TBD                |
+| Forge        | 1.19.2  | Not planned        |
 | Fabric/Quilt | X.X.X   | TBD                |
 
 > Actively supported - this version/loader will receive active updates frequently
@@ -18,6 +18,8 @@ Minecraft mod that adds new clothing items, allowing you to express yourself by 
 > Planned - planning to port my mod to this version/loader
 
 > TBD (To Be Determined) - currently thinking about porting my mod to this version/loader
+
+> Not planned - currently this version is not planned
 
 
 Supported languages
