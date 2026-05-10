@@ -7,6 +7,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
@@ -17,7 +18,7 @@ import xox.labvorty.weaversparadise.items.materials.ChromaticDustItem;
 
 import java.util.List;
 
-@EventBusSubscriber
+@EventBusSubscriber(value = Dist.CLIENT)
 public class WeaversParadiseColorHandlers {
     private static final List<String> dyeTypes = List.of(
             "agender",

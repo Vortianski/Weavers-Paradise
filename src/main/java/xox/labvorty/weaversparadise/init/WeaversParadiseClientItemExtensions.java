@@ -22,7 +22,7 @@ import xox.labvorty.weaversparadise.renderers.bewlr.*;
 import java.util.Collections;
 import java.util.Map;
 
-@EventBusSubscriber
+@EventBusSubscriber(value = Dist.CLIENT)
 public class WeaversParadiseClientItemExtensions {
     @SubscribeEvent
     public static void registerItemExtensions(RegisterClientExtensionsEvent event) {
