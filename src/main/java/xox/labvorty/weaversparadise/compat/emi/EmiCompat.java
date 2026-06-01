@@ -95,7 +95,7 @@ public class EmiCompat implements EmiPlugin {
             emiStacks4.add(EmiStack.of(stack4, 1));
 
             registry.addDeferredRecipes((deferred) -> {
-                deferred.accept(new ClothcraftingEmiRecipe(
+                deferred.accept(new ClothcraftingEMIRecipe(
                         ResourceLocation.fromNamespaceAndPath("weaversparadise", ("/clothcrafting_cotton_cloth" + "_" + quality)),
                         List.of(EmiIngredient.of(Ingredient.of(WeaversParadiseItems.COTTON_SPOOL.get())).setAmount(6)),
                         emiStacks1
@@ -103,7 +103,7 @@ public class EmiCompat implements EmiPlugin {
             });
 
             registry.addDeferredRecipes((deferred) -> {
-                deferred.accept(new ClothcraftingEmiRecipe(
+                deferred.accept(new ClothcraftingEMIRecipe(
                         ResourceLocation.fromNamespaceAndPath("weaversparadise", ("/clothcrafting_silk_cloth" + "_" + quality)),
                         List.of(EmiIngredient.of(Ingredient.of(WeaversParadiseItems.SILK_SPOOL.get())).setAmount(6)),
                         emiStacks2
@@ -111,7 +111,7 @@ public class EmiCompat implements EmiPlugin {
             });
 
             registry.addDeferredRecipes((deferred) -> {
-                deferred.accept(new ClothcraftingEmiRecipe(
+                deferred.accept(new ClothcraftingEMIRecipe(
                         ResourceLocation.fromNamespaceAndPath("weaversparadise", ("/clothcrafting_wool_cloth" + "_" + quality)),
                         List.of(EmiIngredient.of(Ingredient.of(WeaversParadiseItems.WOOL_SPOOL.get())).setAmount(6)),
                         emiStacks3
@@ -119,7 +119,7 @@ public class EmiCompat implements EmiPlugin {
             });
 
             registry.addDeferredRecipes((deferred) -> {
-                deferred.accept(new ClothcraftingEmiRecipe(
+                deferred.accept(new ClothcraftingEMIRecipe(
                         ResourceLocation.fromNamespaceAndPath("weaversparadise", ("/clothcrafting_jeans_cloth" + "_" + quality)),
                         List.of(EmiIngredient.of(Ingredient.of(WeaversParadiseItems.JEANS_SPOOL.get())).setAmount(6)),
                         emiStacks4
@@ -128,7 +128,7 @@ public class EmiCompat implements EmiPlugin {
         }
 
         registry.addDeferredRecipes((deferred) -> {
-            deferred.accept(new SpinningJennyEmiRecipe(
+            deferred.accept(new SpinningJennyEMIRecipe(
                     ResourceLocation.fromNamespaceAndPath("weaversparadise", "/spinning_jenny_cotton_spool"),
                     List.of(
                             EmiIngredient.of(Ingredient.of(WeaversParadiseItems.EMPTY_SPOOL.get())).setAmount(1),
@@ -140,7 +140,7 @@ public class EmiCompat implements EmiPlugin {
             ));
         });
         registry.addDeferredRecipes((deferred) -> {
-            deferred.accept(new SpinningJennyEmiRecipe(
+            deferred.accept(new SpinningJennyEMIRecipe(
                     ResourceLocation.fromNamespaceAndPath("weaversparadise", "/spinning_jenny_silk_spool"),
                     List.of(
                             EmiIngredient.of(Ingredient.of(WeaversParadiseItems.EMPTY_SPOOL.get())).setAmount(1),
@@ -152,7 +152,7 @@ public class EmiCompat implements EmiPlugin {
             ));
         });
         registry.addDeferredRecipes((deferred) -> {
-            deferred.accept(new SpinningJennyEmiRecipe(
+            deferred.accept(new SpinningJennyEMIRecipe(
                     ResourceLocation.fromNamespaceAndPath("weaversparadise", "/spinning_jenny_wool_spool"),
                     List.of(
                             EmiIngredient.of(Ingredient.of(WeaversParadiseItems.EMPTY_SPOOL.get())).setAmount(1),
@@ -164,7 +164,7 @@ public class EmiCompat implements EmiPlugin {
             ));
         });
         registry.addDeferredRecipes((deferred) -> {
-            deferred.accept(new SpinningJennyEmiRecipe(
+            deferred.accept(new SpinningJennyEMIRecipe(
                     ResourceLocation.fromNamespaceAndPath("weaversparadise", "/spinning_jenny_jeans_spool"),
                     List.of(
                             EmiIngredient.of(Ingredient.of(WeaversParadiseItems.EMPTY_SPOOL.get())).setAmount(1),
@@ -242,7 +242,7 @@ public class EmiCompat implements EmiPlugin {
         for (int i = 0; i < dyeCores.size(); i++) {
             final int j = i;
             registry.addDeferredRecipes((deferred) -> {
-                deferred.accept(new DyemakingEmiRecipe(
+                deferred.accept(new DyemakingEMIRecipe(
                         ResourceLocation.fromNamespaceAndPath("weaversparadise", "/dyemaking_" + dyeTypes.get(j)),
                         List.of(
                                 EmiIngredient.of(Ingredient.of(dyeCores.get(j))),

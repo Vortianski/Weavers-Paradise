@@ -37,6 +37,16 @@ repositories {
         name = "TerraformersMC"
         url = "https://maven.terraformersmc.com/"
     }
+
+    maven {
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
+
+    maven {
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }
 }
 
 base {
@@ -105,6 +115,10 @@ dependencies {
 
     compileOnlyApi(("top.theillusivec4.curios:curios-neoforge:${property("curios_version")}"))
     runtimeOnly(("top.theillusivec4.curios:curios-neoforge:${property("curios_version")}"))
+
+    //JEI
+    compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
+    //runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
 
     compileOnly "curse.maven:cold-sweat-506194:7370181"
 }

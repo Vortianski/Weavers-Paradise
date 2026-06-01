@@ -10,12 +10,12 @@ import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 
 import java.util.List;
 
-public class DyemakingEmiRecipe implements EmiRecipe {
+public class DyemakingEMIRecipe implements EmiRecipe {
     private final ResourceLocation id;
     private final List<EmiIngredient> input;
     private final List<EmiIngredient> output;
 
-    public DyemakingEmiRecipe(ResourceLocation id, List<EmiIngredient> inputs, List<EmiIngredient> outputs) {
+    public DyemakingEMIRecipe(ResourceLocation id, List<EmiIngredient> inputs, List<EmiIngredient> outputs) {
         this.id = id;
         this.input = inputs;
         this.output = outputs;

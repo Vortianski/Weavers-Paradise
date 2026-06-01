@@ -13,11 +13,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
+import xox.labvorty.weaversparadise.configs.ClientConfig;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.clothing.SweaterWoolItem;
 import xox.labvorty.weaversparadise.model.UpperWearModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ShirtRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.ShirtModelRenderer;
+
+import java.util.List;
 
 public class SweaterWoolRenderer implements ICurioRenderer {
     public static UpperWearModel model;
@@ -27,11 +30,26 @@ public class SweaterWoolRenderer implements ICurioRenderer {
     }
 
     @Override
-    public <T extends LivingEntity, M extends EntityModel<T>> void render(ItemStack stack, SlotContext slotContext, PoseStack matrixStack, RenderLayerParent<T, M> renderLayerParent, MultiBufferSource renderTypeBuffer, int light, float limbSwing,
-                                                                          float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+    public <T extends LivingEntity, M extends EntityModel<T>> void render(ItemStack stack, SlotContext slotContext, PoseStack matrixStack, RenderLayerParent<T, M> renderLayerParent, MultiBufferSource renderTypeBuffer, int light, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         LivingEntity entity = slotContext.entity();
 
-        if (stack.getItem() instanceof SweaterWoolItem sweaterWool && !entity.getItemBySlot(EquipmentSlot.BODY).is(WeaversParadiseItems.ASTOLFO_ARMOR_CHESTPLATE)) {
+        List<? extends String> configValues = ClientConfig.SHIRT_RESTRICTOR.get();
+        ItemStack FEET = entity.getItemBySlot(EquipmentSlot.FEET);
+        ItemStack LEGS = entity.getItemBySlot(EquipmentSlot.LEGS);
+        ItemStack BODY = entity.getItemBySlot(EquipmentSlot.BODY);
+        ItemStack HEAD = entity.getItemBySlot(EquipmentSlot.HEAD);
+
+        if (!FEET.isEmpty() && ClientConfig.containsItem(configValues, FEET.getItem())) {
+            return;
+        } else if (!LEGS.isEmpty() && ClientConfig.containsItem(configValues, LEGS.getItem())) {
+            return;
+        } else if (!BODY.isEmpty() && ClientConfig.containsItem(configValues, BODY.getItem())) {
+            return;
+        } else if (!HEAD.isEmpty() && ClientConfig.containsItem(configValues, HEAD.getItem())) {
+            return;
+        }
+
+        if (stack.getItem() instanceof SweaterWoolItem sweaterWool) {
             int primaryColorOne = sweaterWool.getItemMainColor(stack, 1);
             int secondaryColorOne = sweaterWool.getItemSecondaryColor(stack, 1);
             int primaryColorTwo = sweaterWool.getItemMainColor(stack, 2);

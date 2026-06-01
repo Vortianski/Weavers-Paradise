@@ -6,10 +6,7 @@ import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import xox.labvorty.weaversparadise.items.armor.ArmorLootboxItem;
-import xox.labvorty.weaversparadise.items.armor.AstolfoArmorItem;
-import xox.labvorty.weaversparadise.items.armor.BridgetClothingArmorItem;
-import xox.labvorty.weaversparadise.items.armor.FelixClothingArmorItem;
+import xox.labvorty.weaversparadise.items.armor.*;
 import xox.labvorty.weaversparadise.items.clothing.*;
 import xox.labvorty.weaversparadise.items.dye.BottledDyeItem;
 import xox.labvorty.weaversparadise.items.dye.DyeCoreItem;
@@ -72,6 +69,30 @@ public class WeaversParadiseItems {
     public static final DeferredItem<Item> FELIX_ARMOR_JACKET = ITEMS.register("felix_armor_jacket", FelixClothingArmorItem.Chestplate::new);
     public static final DeferredItem<Item> FELIX_ARMOR_SKIRT = ITEMS.register("felix_armor_skirt", FelixClothingArmorItem.Leggings::new);
     public static final DeferredItem<Item> FELIX_ARMOR_BOOTS = ITEMS.register("felix_armor_boots", FelixClothingArmorItem.Boots::new);
+
+    public static final DeferredItem<Item> GRIFFITH_ARMOR_WIG = ITEMS.register("griffith_armor_wig", GriffithArmorItem.Helmet::new);
+    public static final DeferredItem<Item> GRIFFITH_ARMOR_CHESTPLATE = ITEMS.register("griffith_armor_chestplate", GriffithArmorItem.Chestplate::new);
+    public static final DeferredItem<Item> GRIFFITH_ARMOR_LEGGINGS = ITEMS.register("griffith_armor_leggings", GriffithArmorItem.Leggings::new);
+    public static final DeferredItem<Item> GRIFFITH_ARMOR_BOOTS = ITEMS.register("griffith_armor_boots", GriffithArmorItem.Boots::new);
+
+    public static final DeferredItem<Item> NIKO_ARMOR_HAT = ITEMS.register("niko_armor_hat", NikoArmorItem.Helmet::new);
+    public static final DeferredItem<Item> NIKO_ARMOR_CHESTPLATE = ITEMS.register("niko_armor_chestplate", NikoArmorItem.Chestplate::new);
+    public static final DeferredItem<Item> NIKO_ARMOR_LEGGINGS = ITEMS.register("niko_armor_leggings", NikoArmorItem.Leggings::new);
+    public static final DeferredItem<Item> NIKO_ARMOR_BOOTS = ITEMS.register("niko_armor_boots", NikoArmorItem.Boots::new);
+
+    public static final DeferredItem<Item> GABRIEL_ARMOR_HELMET = ITEMS.register("gabriel_armor_helmet", GabrielArmorItem.Helmet::new);
+    public static final DeferredItem<Item> GABRIEL_ARMOR_CHESTPLATE = ITEMS.register("gabriel_armor_chestplate", GabrielArmorItem.Chestplate::new);
+    public static final DeferredItem<Item> GABRIEL_ARMOR_LEGGINGS = ITEMS.register("gabriel_armor_leggings", GabrielArmorItem.Leggings::new);
+    public static final DeferredItem<Item> GABRIEL_ARMOR_BOOTS = ITEMS.register("gabriel_armor_boots", GabrielArmorItem.Boots::new);
+
+    public static final DeferredItem<Item> GISELLE_ARMOR_HAT = ITEMS.register("giselle_armor_wig", GiselleArmorItem.Helmet::new);
+    public static final DeferredItem<Item> GISELLE_ARMOR_CHESTPLATE = ITEMS.register("giselle_armor_chestplate", GiselleArmorItem.Chestplate::new);
+    public static final DeferredItem<Item> GISELLE_ARMOR_LEGGINGS = ITEMS.register("giselle_armor_leggings", GiselleArmorItem.Leggings::new);
+    public static final DeferredItem<Item> GISELLE_ARMOR_BOOTS = ITEMS.register("giselle_armor_boots", GiselleArmorItem.Boots::new);
+
+    public static final DeferredItem<Item> MIKKELA_ARMOR_HAT = ITEMS.register("mikkela_armor_wig", MikkelaArmorItem.Helmet::new);
+    public static final DeferredItem<Item> MIKKELA_ARMOR_CHESTPLATE = ITEMS.register("mikkela_armor_chestplate", MikkelaArmorItem.Chestplate::new);
+    public static final DeferredItem<Item> MIKKELA_ARMOR_LEGGINGS = ITEMS.register("mikkela_armor_leggings", MikkelaArmorItem.Leggings::new);
 
     //complex items
     public static final DeferredItem<Item> COTTON_UPPERWEAR_BASE = ITEMS.register("cotton_upperwear_base", CottonUpperwearBaseItem::new);

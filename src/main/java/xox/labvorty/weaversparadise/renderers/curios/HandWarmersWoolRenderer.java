@@ -6,14 +6,18 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
+import xox.labvorty.weaversparadise.configs.ClientConfig;
 import xox.labvorty.weaversparadise.items.clothing.HandWarmersWoolItem;
 import xox.labvorty.weaversparadise.model.HandWarmersModel;
 import xox.labvorty.weaversparadise.renderers.helpers.HandWarmersRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.HandWarmersModelRenderer;
+
+import java.util.List;
 
 public class HandWarmersWoolRenderer implements ICurioRenderer {
     private final HandWarmersModel model;
@@ -23,8 +27,25 @@ public class HandWarmersWoolRenderer implements ICurioRenderer {
     }
 
     @Override
-    public <T extends LivingEntity, M extends EntityModel<T>> void render(ItemStack stack, SlotContext slotContext, PoseStack matrixStack, RenderLayerParent<T, M> renderLayerParent, MultiBufferSource renderTypeBuffer, int light, float limbSwing,
-                                                                          float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+    public <T extends LivingEntity, M extends EntityModel<T>> void render(ItemStack stack, SlotContext slotContext, PoseStack matrixStack, RenderLayerParent<T, M> renderLayerParent, MultiBufferSource renderTypeBuffer, int light, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+        LivingEntity entity = slotContext.entity();
+
+        List<? extends String> configValues = ClientConfig.HAND_WARMERS_RESTRICTOR.get();
+        ItemStack FEET = entity.getItemBySlot(EquipmentSlot.FEET);
+        ItemStack LEGS = entity.getItemBySlot(EquipmentSlot.LEGS);
+        ItemStack BODY = entity.getItemBySlot(EquipmentSlot.BODY);
+        ItemStack HEAD = entity.getItemBySlot(EquipmentSlot.HEAD);
+
+        if (!FEET.isEmpty() && ClientConfig.containsItem(configValues, FEET.getItem())) {
+            return;
+        } else if (!LEGS.isEmpty() && ClientConfig.containsItem(configValues, LEGS.getItem())) {
+            return;
+        } else if (!BODY.isEmpty() && ClientConfig.containsItem(configValues, BODY.getItem())) {
+            return;
+        } else if (!HEAD.isEmpty() && ClientConfig.containsItem(configValues, HEAD.getItem())) {
+            return;
+        }
+
         if (stack.getItem() instanceof HandWarmersWoolItem handWarmersWool) {
             int primaryColorLeftOne = handWarmersWool.getItemMainColor(stack, "left", 1);
             int secondaryColorLeftOne = handWarmersWool.getItemSecondaryColor(stack, "left", 1);
@@ -44,8 +65,6 @@ public class HandWarmersWoolRenderer implements ICurioRenderer {
             int lightValueLeftTwo = handWarmersWool.getItemLightValue(stack, "left", 2);
             int lightValueRightOne = handWarmersWool.getItemLightValue(stack, "right", 1);
             int lightValueRightTwo = handWarmersWool.getItemLightValue(stack, "right", 2);
-
-            LivingEntity entity = slotContext.entity();
 
             M playerModel = renderLayerParent.getModel();
             if (playerModel instanceof HumanoidModel<?>) {

@@ -7,10 +7,13 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.slf4j.Logger;
+import xox.labvorty.weaversparadise.configs.ClientConfig;
+import xox.labvorty.weaversparadise.configs.CommonConfig;
 import xox.labvorty.weaversparadise.init.*;
 
 import java.util.HashMap;
@@ -32,6 +35,17 @@ public class WeaversParadise {
         WeaversParadiseRecipes.RECIPE_SERIALIZERS.register(modEventBus);
         WeaversParadiseLootModifiers.LOOT_MODIFIERS.register(modEventBus);
         WeaversParadiseEntityTypes.ENTITY_TYPES.register(modEventBus);
+
+        modContainer.registerConfig(
+                ModConfig.Type.CLIENT,
+                ClientConfig.SPEC,
+                "weaversparadise-client.toml"
+        );
+        modContainer.registerConfig(
+                ModConfig.Type.COMMON,
+                CommonConfig.SPEC,
+                "weaversparadise-common.toml"
+        );
     }
 
     private static boolean networkingRegistered = false;

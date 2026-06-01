@@ -14,12 +14,12 @@ import net.minecraft.world.item.component.CustomData;
 
 import java.util.List;
 
-public class ClothcraftingEmiRecipe implements EmiRecipe {
+public class ClothcraftingEMIRecipe implements EmiRecipe {
     private final ResourceLocation id;
     private final List<EmiIngredient> input;
     private final List<EmiStack> output;
 
-    public ClothcraftingEmiRecipe(ResourceLocation id, List<EmiIngredient> inputs, List<EmiStack> outputs) {
+    public ClothcraftingEMIRecipe(ResourceLocation id, List<EmiIngredient> inputs, List<EmiStack> outputs) {
         this.id = id;
         this.input = inputs;
         this.output = outputs;

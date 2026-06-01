@@ -28,7 +28,26 @@ public class ArmorLootboxItem extends Item {
             WeaversParadiseItems.FELIX_ARMOR_HAT.get(),
             WeaversParadiseItems.FELIX_ARMOR_JACKET.get(),
             WeaversParadiseItems.FELIX_ARMOR_SKIRT.get(),
-            WeaversParadiseItems.FELIX_ARMOR_BOOTS.get()
+            WeaversParadiseItems.FELIX_ARMOR_BOOTS.get(),
+            WeaversParadiseItems.NIKO_ARMOR_HAT.get(),
+            WeaversParadiseItems.NIKO_ARMOR_CHESTPLATE.get(),
+            WeaversParadiseItems.NIKO_ARMOR_LEGGINGS.get(),
+            WeaversParadiseItems.NIKO_ARMOR_BOOTS.get(),
+            WeaversParadiseItems.GRIFFITH_ARMOR_WIG.get(),
+            WeaversParadiseItems.GRIFFITH_ARMOR_CHESTPLATE.get(),
+            WeaversParadiseItems.GRIFFITH_ARMOR_LEGGINGS.get(),
+            WeaversParadiseItems.GRIFFITH_ARMOR_BOOTS.get(),
+            WeaversParadiseItems.GABRIEL_ARMOR_HELMET.get(),
+            WeaversParadiseItems.GABRIEL_ARMOR_CHESTPLATE.get(),
+            WeaversParadiseItems.GABRIEL_ARMOR_LEGGINGS.get(),
+            WeaversParadiseItems.GABRIEL_ARMOR_BOOTS.get(),
+            WeaversParadiseItems.GISELLE_ARMOR_HAT.get(),
+            WeaversParadiseItems.GISELLE_ARMOR_CHESTPLATE.get(),
+            WeaversParadiseItems.GISELLE_ARMOR_LEGGINGS.get(),
+            WeaversParadiseItems.GISELLE_ARMOR_BOOTS.get(),
+            WeaversParadiseItems.MIKKELA_ARMOR_HAT.get(),
+            WeaversParadiseItems.MIKKELA_ARMOR_CHESTPLATE.get(),
+            WeaversParadiseItems.MIKKELA_ARMOR_LEGGINGS.get()
     );
     int MAX_ITEMS_PER_PAGE = 6;
     int TICKS_PER_PAGE = 40;

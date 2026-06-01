@@ -5,6 +5,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
+import xox.labvorty.weaversparadise.items.armor.GriffithArmorItem;
+import xox.labvorty.weaversparadise.items.armor.NikoArmorItem;
 import xox.labvorty.weaversparadise.model.*;
 import xox.labvorty.weaversparadise.renderers.curios.*;
 
@@ -16,6 +18,11 @@ public class WeaversParadiseCurioRenderers {
         event.registerLayerDefinition(AstolfoArmorModel.LAYER_LOCATION, AstolfoArmorModel::createBodyLayer);
         event.registerLayerDefinition(BridgetClothingModel.LAYER_LOCATION, BridgetClothingModel::createBodyLayer);
         event.registerLayerDefinition(FelixClothingModel.LAYER_LOCATION, FelixClothingModel::createBodyLayer);
+        event.registerLayerDefinition(GriffithArmorModel.LAYER_LOCATION, GriffithArmorModel::createBodyLayer);
+        event.registerLayerDefinition(NikoArmorModel.LAYER_LOCATION, NikoArmorModel::createBodyLayer);
+        event.registerLayerDefinition(GiselleArmorModel.LAYER_LOCATION, GiselleArmorModel::createBodyLayer);
+        event.registerLayerDefinition(GabrielArmorModel.LAYER_LOCATION, GabrielArmorModel::createBodyLayer);
+        event.registerLayerDefinition(MikkelaArmorModel.LAYER_LOCATION, MikkelaArmorModel::createBodyLayer);
         event.registerLayerDefinition(HandWarmersModel.LAYER_LOCATION, HandWarmersModel::createBodyLayer);
         event.registerLayerDefinition(UpperWearModel.LAYER_LOCATION, UpperWearModel::createBodyLayer);
         event.registerLayerDefinition(SlimPlushieModel.LAYER_LOCATION, SlimPlushieModel::createBodyLayer);

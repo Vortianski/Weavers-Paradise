@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
+import xox.labvorty.weaversparadise.configs.CommonConfig;
 import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
 import xox.labvorty.weaversparadise.items.clothing.HandWarmersWoolItem;
 import xox.labvorty.weaversparadise.items.clothing.ThighHighsWoolItem;
@@ -34,6 +35,10 @@ public class SculkBlockEntityMixin {
             GameEvent.Context context,
             CallbackInfoReturnable<Boolean> cir
     ) {
+        if (CommonConfig.ITEM_SPECIAL_ABILITIES.get()) {
+            return;
+        }
+
         if (context != null) {
             Entity entity = context.sourceEntity();
 

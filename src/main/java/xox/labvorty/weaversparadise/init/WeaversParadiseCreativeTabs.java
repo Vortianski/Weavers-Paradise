@@ -343,6 +343,30 @@ public class WeaversParadiseCreativeTabs {
                 output.accept(WeaversParadiseItems.FELIX_ARMOR_SKIRT);
                 output.accept(WeaversParadiseItems.FELIX_ARMOR_BOOTS);
 
+                output.accept(WeaversParadiseItems.GRIFFITH_ARMOR_WIG);
+                output.accept(WeaversParadiseItems.GRIFFITH_ARMOR_CHESTPLATE);
+                output.accept(WeaversParadiseItems.GRIFFITH_ARMOR_LEGGINGS);
+                output.accept(WeaversParadiseItems.GRIFFITH_ARMOR_BOOTS);
+
+                output.accept(WeaversParadiseItems.NIKO_ARMOR_HAT);
+                output.accept(WeaversParadiseItems.NIKO_ARMOR_CHESTPLATE);
+                output.accept(WeaversParadiseItems.NIKO_ARMOR_LEGGINGS);
+                output.accept(WeaversParadiseItems.NIKO_ARMOR_BOOTS);
+
+                output.accept(WeaversParadiseItems.GABRIEL_ARMOR_HELMET);
+                output.accept(WeaversParadiseItems.GABRIEL_ARMOR_CHESTPLATE);
+                output.accept(WeaversParadiseItems.GABRIEL_ARMOR_LEGGINGS);
+                output.accept(WeaversParadiseItems.GABRIEL_ARMOR_BOOTS);
+
+                output.accept(WeaversParadiseItems.GISELLE_ARMOR_HAT);
+                output.accept(WeaversParadiseItems.GISELLE_ARMOR_CHESTPLATE);
+                output.accept(WeaversParadiseItems.GISELLE_ARMOR_LEGGINGS);
+                output.accept(WeaversParadiseItems.GISELLE_ARMOR_BOOTS);
+
+                output.accept(WeaversParadiseItems.MIKKELA_ARMOR_HAT);
+                output.accept(WeaversParadiseItems.MIKKELA_ARMOR_CHESTPLATE);
+                output.accept(WeaversParadiseItems.MIKKELA_ARMOR_LEGGINGS);
+
                 output.accept(WeaversParadiseItems.LEATHER_GLOVES);
             })
     .build());

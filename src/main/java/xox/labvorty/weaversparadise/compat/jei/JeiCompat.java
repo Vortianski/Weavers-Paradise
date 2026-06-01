@@ -1,0 +1,86 @@
+package xox.labvorty.weaversparadise.compat.jei;
+
+import mezz.jei.api.IModPlugin;
+import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.registration.IRecipeCatalystRegistration;
+import mezz.jei.api.registration.IRecipeCategoryRegistration;
+import mezz.jei.api.registration.IRecipeRegistration;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.crafting.Ingredient;
+import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@JeiPlugin
+public class JeiCompat implements IModPlugin {
+    @Override
+    public void registerCategories(IRecipeCategoryRegistration categoryRegistration) {
+        categoryRegistration.addRecipeCategories(
+                new ClothcraftingJEICategory(categoryRegistration.getJeiHelpers().getGuiHelper())
+        );
+        categoryRegistration.addRecipeCategories(
+                new DyemakingJEICategory(categoryRegistration.getJeiHelpers().getGuiHelper())
+        );
+        categoryRegistration.addRecipeCategories(
+                new SpinningJennyJEICategory(categoryRegistration.getJeiHelpers().getGuiHelper())
+        );
+    }
+
+    @Override
+    public void registerRecipes(IRecipeRegistration recipeRegistration) {
+        recipeRegistration.addRecipes(
+                ClothcraftingJEICategory.TYPE,
+                ClothcraftingJEIRecipe.makeCottonRecipes()
+        );
+        recipeRegistration.addRecipes(
+                ClothcraftingJEICategory.TYPE,
+                ClothcraftingJEIRecipe.makeSilkRecipes()
+        );
+        recipeRegistration.addRecipes(
+                ClothcraftingJEICategory.TYPE,
+                ClothcraftingJEIRecipe.makeWoolRecipes()
+        );
+        recipeRegistration.addRecipes(
+                ClothcraftingJEICategory.TYPE,
+                ClothcraftingJEIRecipe.makeJeansRecipes()
+        );
+
+        recipeRegistration.addRecipes(
+                DyemakingJEICategory.TYPE,
+                DyemakingJEIRecipe.makeDyeRecipes()
+        );
+
+        recipeRegistration.addRecipes(
+                SpinningJennyJEICategory.TYPE,
+                SpinningJennyJEIRecipe.generateRecipes()
+        );
+    }
+
+    @Override
+    public void registerRecipeCatalysts(IRecipeCatalystRegistration recipeCatalystRegistration) {
+        recipeCatalystRegistration.addRecipeCatalyst(
+                new ItemStack(WeaversParadiseItems.CLOTHCRAFTING_STATION.get()),
+                ClothcraftingJEICategory.TYPE
+        );
+
+        recipeCatalystRegistration.addRecipeCatalyst(
+                new ItemStack(WeaversParadiseItems.DYEMAKING_BLOCK.get()),
+                DyemakingJEICategory.TYPE
+        );
+
+        recipeCatalystRegistration.addRecipeCatalyst(
+                new ItemStack(WeaversParadiseItems.SPINNING_JENNY.get()),
+                SpinningJennyJEICategory.TYPE
+        );
+    }
+
+    @Override
+    public ResourceLocation getPluginUid() {
+        return ResourceLocation.fromNamespaceAndPath("weaversparadise", "jei_plugin");
+    }
+}

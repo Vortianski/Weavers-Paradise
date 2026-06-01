@@ -24,6 +24,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import top.theillusivec4.curios.api.SlotAttribute;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
+import xox.labvorty.weaversparadise.configs.CommonConfig;
 import xox.labvorty.weaversparadise.data.tooltip_components.ClothingTooltipComponent;
 import xox.labvorty.weaversparadise.data.tooltip_components.data.DyeIconHandler;
 import xox.labvorty.weaversparadise.data.tooltip_components.helper.DyeTooltipEntry;
@@ -106,7 +107,7 @@ public class ChokerItem extends Item implements ICurioItem {
         LivingEntity livingEntity = slotContext.entity();
         int durabilityLeft = stack.getMaxDamage() - stack.getDamageValue();
 
-        if (livingEntity != null && durabilityLeft > 1) {
+        if (livingEntity != null && durabilityLeft > 1 && CommonConfig.ITEM_SPECIAL_ABILITIES.get()) {
             int level = stack.getEnchantmentLevel(livingEntity.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(WeaversParadiseEnchantments.BREATHING_EXERCISE));
 
             modifiers.put(

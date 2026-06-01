@@ -13,12 +13,12 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
 
-public class SpinningJennyEmiRecipe implements EmiRecipe {
+public class SpinningJennyEMIRecipe implements EmiRecipe {
     private final ResourceLocation id;
     private final List<EmiIngredient> input;
     private final List<EmiStack> output;
 
-    public SpinningJennyEmiRecipe(ResourceLocation id, List<EmiIngredient> inputs, List<EmiStack> outputs) {
+    public SpinningJennyEMIRecipe(ResourceLocation id, List<EmiIngredient> inputs, List<EmiStack> outputs) {
         this.id = id;
         this.input = inputs;
         this.output = outputs;
