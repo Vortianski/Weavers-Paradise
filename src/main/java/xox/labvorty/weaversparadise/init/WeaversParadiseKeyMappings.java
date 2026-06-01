@@ -1,14 +1,11 @@
 package xox.labvorty.weaversparadise.init;
 
 import net.minecraft.client.KeyMapping;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.glfw.GLFW;
-import xox.labvorty.weaversparadise.WeaversParadiseMod;
-import xox.labvorty.weaversparadise.data.network.*;
 
 public class WeaversParadiseKeyMappings {
     public static KeyMapping MINIGAME_UP_BUTTON = new KeyMapping("weaversparadise.keybind.up_minigame", GLFW.GLFW_KEY_W, "key.categories.weaversparadise"){

@@ -28,7 +28,6 @@ import oshi.util.tuples.Pair;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
-import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 import xox.labvorty.weaversparadise.data.texture.CapeTextures;
 import xox.labvorty.weaversparadise.items.clothing.CapeCottonItem;
 import xox.labvorty.weaversparadise.items.clothing.CapeInterface;

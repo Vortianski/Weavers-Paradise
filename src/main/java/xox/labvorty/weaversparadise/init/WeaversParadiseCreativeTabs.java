@@ -16,7 +16,6 @@ import xox.labvorty.weaversparadise.items.dye.PigmentItem;
 import xox.labvorty.weaversparadise.items.misc.PlushieItem;
 
 import java.util.List;
-import java.util.UUID;
 
 public class WeaversParadiseCreativeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, WeaversParadiseMod.MOD_ID);
@@ -350,6 +349,30 @@ public class WeaversParadiseCreativeTabs {
                         output.accept(WeaversParadiseItems.FELIX_ARMOR_JACKET.get());
                         output.accept(WeaversParadiseItems.FELIX_ARMOR_SKIRT.get());
                         output.accept(WeaversParadiseItems.FELIX_ARMOR_BOOTS.get());
+
+                        output.accept(WeaversParadiseItems.GRIFFITH_ARMOR_WIG.get());
+                        output.accept(WeaversParadiseItems.GRIFFITH_ARMOR_CHESTPLATE.get());
+                        output.accept(WeaversParadiseItems.GRIFFITH_ARMOR_LEGGINGS.get());
+                        output.accept(WeaversParadiseItems.GRIFFITH_ARMOR_BOOTS.get());
+
+                        output.accept(WeaversParadiseItems.NIKO_ARMOR_HAT.get());
+                        output.accept(WeaversParadiseItems.NIKO_ARMOR_JACKET.get());
+                        output.accept(WeaversParadiseItems.NIKO_ARMOR_LEGGINGS.get());
+                        output.accept(WeaversParadiseItems.NIKO_ARMOR_BOOTS.get());
+
+                        output.accept(WeaversParadiseItems.GABRIEL_ARMOR_HELMET.get());
+                        output.accept(WeaversParadiseItems.GABRIEL_ARMOR_CHESTPLATE.get());
+                        output.accept(WeaversParadiseItems.GABRIEL_ARMOR_LEGGINGS.get());
+                        output.accept(WeaversParadiseItems.GABRIEL_ARMOR_BOOTS.get());
+
+                        output.accept(WeaversParadiseItems.GISELLE_ARMOR_HAT.get());
+                        output.accept(WeaversParadiseItems.GISELLE_ARMOR_JACKET.get());
+                        output.accept(WeaversParadiseItems.GISELLE_ARMOR_LEGGINGS.get());
+                        output.accept(WeaversParadiseItems.GISELLE_ARMOR_BOOTS.get());
+
+                        output.accept(WeaversParadiseItems.MIKKELA_ARMOR_WIG.get());
+                        output.accept(WeaversParadiseItems.MIKKELA_ARMOR_CHESTPLATE.get());
+                        output.accept(WeaversParadiseItems.MIKKELA_ARMOR_LEGGINGS.get());
 
                         output.accept(WeaversParadiseItems.LEATHER_GLOVES.get());
                     })

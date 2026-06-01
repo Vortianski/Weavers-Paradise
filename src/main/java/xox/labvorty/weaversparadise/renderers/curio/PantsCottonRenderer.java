@@ -12,10 +12,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
+import xox.labvorty.weaversparadise.configs.ClientConfig;
 import xox.labvorty.weaversparadise.items.clothing.PantsCottonItem;
 import xox.labvorty.weaversparadise.models.PantsModel;
 import xox.labvorty.weaversparadise.renderers.helpers.PantsRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.PantsModelRenderer;
+
+import java.util.List;
 
 public class PantsCottonRenderer implements ICurioRenderer {
     public static PantsModel model;
@@ -25,9 +28,24 @@ public class PantsCottonRenderer implements ICurioRenderer {
     }
 
     @Override
-    public <T extends LivingEntity, M extends EntityModel<T>> void render(ItemStack stack, SlotContext slotContext, PoseStack matrixStack, RenderLayerParent<T, M> renderLayerParent, MultiBufferSource renderTypeBuffer, int light, float limbSwing,
-                                                                          float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+    public <T extends LivingEntity, M extends EntityModel<T>> void render(ItemStack stack, SlotContext slotContext, PoseStack matrixStack, RenderLayerParent<T, M> renderLayerParent, MultiBufferSource renderTypeBuffer, int light, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         LivingEntity entity = slotContext.entity();
+
+        List<? extends String> configValues = ClientConfig.PANTS_RESTRICTOR.get();
+        ItemStack FEET = entity.getItemBySlot(EquipmentSlot.FEET);
+        ItemStack LEGS = entity.getItemBySlot(EquipmentSlot.LEGS);
+        ItemStack BODY = entity.getItemBySlot(EquipmentSlot.CHEST);
+        ItemStack HEAD = entity.getItemBySlot(EquipmentSlot.HEAD);
+
+        if (!FEET.isEmpty() && ClientConfig.containsItem(configValues, FEET.getItem())) {
+            return;
+        } else if (!LEGS.isEmpty() && ClientConfig.containsItem(configValues, LEGS.getItem())) {
+            return;
+        } else if (!BODY.isEmpty() && ClientConfig.containsItem(configValues, BODY.getItem())) {
+            return;
+        } else if (!HEAD.isEmpty() && ClientConfig.containsItem(configValues, HEAD.getItem())) {
+            return;
+        }
 
         if (stack.getItem() instanceof PantsCottonItem pantsCotton && !entity.getItemBySlot(EquipmentSlot.LEGS).is(Items.DIAMOND /**WeaversParadiseItems.ASTOLFO_ARMOR_LEGGINGS**/)) {
             int primaryColorOne = pantsCotton.getItemMainColor(stack, 1);

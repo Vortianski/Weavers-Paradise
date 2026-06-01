@@ -72,6 +72,21 @@ repositories {
         name = "CurseMaven"
         url = "https://cursemaven.com"
     }
+
+    maven {
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+
+    maven {
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
+
+    maven {
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }
 }
 
 dependencies {
@@ -80,6 +95,12 @@ dependencies {
 
     compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curiosVersion}:api"))
     runtimeOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curiosVersion}"))
+
+    //JEI compat
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 
     runtimeOnly(fg.deobf("curse.maven:emi-580555:6420945"))
 }

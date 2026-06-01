@@ -14,7 +14,6 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
-import xox.labvorty.weaversparadise.WeaversParadiseMod;
 import xox.labvorty.weaversparadise.data.tooltip_components.ClothingTooltipComponent;
 import xox.labvorty.weaversparadise.data.tooltip_components.data.DyeIconHandler;
 import xox.labvorty.weaversparadise.data.tooltip_components.helper.DyeTooltipEntry;

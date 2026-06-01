@@ -19,9 +19,9 @@ import xox.labvorty.weaversparadise.items.clothing.CapeCottonItem;
 import xox.labvorty.weaversparadise.items.clothing.CapeInterface;
 import xox.labvorty.weaversparadise.items.clothing.CapeSilkItem;
 import xox.labvorty.weaversparadise.items.clothing.CapeWoolItem;
-import xox.labvorty.weaversparadise.utils.PlayerModelInterface;
 import xox.labvorty.weaversparadise.renderers.helpers.ColorHandlers;
 import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
+import xox.labvorty.weaversparadise.utils.PlayerModelInterface;
 
 public class CapeRenderer extends BlockEntityWithoutLevelRenderer {
     private final PlayerModel playerModel;

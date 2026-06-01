@@ -1,6 +1,5 @@
 package xox.labvorty.weaversparadise.data.loot_modifiers;
 
-import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;

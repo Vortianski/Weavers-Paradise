@@ -1,15 +1,9 @@
 package xox.labvorty.weaversparadise.items.clothing;
 
-import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Multimap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
@@ -20,7 +14,6 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
-import xox.labvorty.weaversparadise.WeaversParadiseMod;
 import xox.labvorty.weaversparadise.data.tooltip_components.ClothingTooltipComponent;
 import xox.labvorty.weaversparadise.data.tooltip_components.data.DyeIconHandler;
 import xox.labvorty.weaversparadise.data.tooltip_components.helper.DyeTooltipEntry;
@@ -29,7 +22,9 @@ import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.renderers.bewlr.HandWarmersRenderer;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public class HandWarmersSilkItem extends Item implements ICurioItem, HandWarmersInterface {

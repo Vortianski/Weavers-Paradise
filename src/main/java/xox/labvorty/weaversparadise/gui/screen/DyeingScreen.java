@@ -29,13 +29,13 @@ import xox.labvorty.weaversparadise.data.texture.CapeTextures;
 import xox.labvorty.weaversparadise.gui.menu.DyeingMenu;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.clothing.*;
-import xox.labvorty.weaversparadise.renderers.models.*;
-import xox.labvorty.weaversparadise.utils.PlayerModelInterface;
 import xox.labvorty.weaversparadise.models.ChokerModel;
 import xox.labvorty.weaversparadise.models.PantsModel;
 import xox.labvorty.weaversparadise.models.ThighHighsModel;
 import xox.labvorty.weaversparadise.models.UpperWearModel;
 import xox.labvorty.weaversparadise.renderers.helpers.*;
+import xox.labvorty.weaversparadise.renderers.models.*;
+import xox.labvorty.weaversparadise.utils.PlayerModelInterface;
 
 import java.util.HashMap;
 

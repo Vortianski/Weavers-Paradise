@@ -12,12 +12,10 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-
 import net.minecraftforge.common.util.LazyOptional;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
-
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.clothing.LeatherGlovesItem;
 

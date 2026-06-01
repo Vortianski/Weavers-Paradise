@@ -1,13 +1,13 @@
 package xox.labvorty.weaversparadise.items.materials;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import xox.labvorty.weaversparadise.data.tooltip_components.QualityTooltipComponent;
 import xox.labvorty.weaversparadise.data.tooltip_components.helper.QualityTooltipData;
+
 import java.util.Optional;
 
 public class CottonClothItem extends Item {

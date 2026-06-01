@@ -2,7 +2,6 @@ package xox.labvorty.weaversparadise.items.clothing;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
-import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -11,7 +10,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
@@ -21,10 +19,8 @@ import xox.labvorty.weaversparadise.data.tooltip_components.ClothingTooltipCompo
 import xox.labvorty.weaversparadise.data.tooltip_components.data.DyeIconHandler;
 import xox.labvorty.weaversparadise.data.tooltip_components.helper.DyeTooltipEntry;
 import xox.labvorty.weaversparadise.data.tooltip_components.helper.QualityTooltipData;
-import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.renderers.bewlr.CapeRenderer;
-import xox.labvorty.weaversparadise.renderers.bewlr.HandWarmersRenderer;
 
 import java.util.ArrayList;
 import java.util.List;

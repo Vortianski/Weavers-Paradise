@@ -4,7 +4,6 @@ import com.mojang.authlib.GameProfile;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
@@ -14,13 +13,9 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
-import xox.labvorty.weaversparadise.renderers.bewlr.CapeRenderer;
 import xox.labvorty.weaversparadise.renderers.bewlr.PlushieItemRenderer;
 
-import java.util.Optional;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 public class PlushieItem extends Item implements Plushie {

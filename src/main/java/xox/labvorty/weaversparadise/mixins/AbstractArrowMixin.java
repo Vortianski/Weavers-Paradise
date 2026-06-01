@@ -1,12 +1,9 @@
 package xox.labvorty.weaversparadise.mixins;
 
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.LazyOptional;
@@ -17,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
+import xox.labvorty.weaversparadise.configs.CommonConfig;
 import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
 import xox.labvorty.weaversparadise.items.clothing.PantsJeansItem;
 
@@ -32,6 +30,8 @@ public class AbstractArrowMixin {
     private void weaversparadise$deflectOnHit(EntityHitResult hitResult, CallbackInfo ci) {
         Entity target = hitResult.getEntity();
         if (!(target instanceof Player player)) return;
+
+        if (!CommonConfig.ITEM_SPECIAL_ABILITIES.get()) return;
 
         LazyOptional<ICuriosItemHandler> handler = CuriosApi.getCuriosInventory(player);
         if (!handler.isPresent()) return;

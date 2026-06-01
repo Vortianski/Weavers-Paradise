@@ -6,13 +6,17 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.util.thread.SidedThreadGroups;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import org.slf4j.Logger;
+import xox.labvorty.weaversparadise.configs.ClientConfig;
+import xox.labvorty.weaversparadise.configs.CommonConfig;
 import xox.labvorty.weaversparadise.init.*;
 
 import java.util.AbstractMap;
@@ -42,6 +46,9 @@ public class WeaversParadiseMod {
         WeaversParadiseRecipes.RECIPES.register(modEventBus);
         WeaversParadiseMobEffects.MOB_EFFECTS.register(modEventBus);
         WeaversParadiseLootModifiers.LOOT_MODIFIERS.register(modEventBus);
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CommonConfig.SPEC);
     }
 
     private static final String PROTOCOL_VERSION = "1";

@@ -12,7 +12,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import xox.labvorty.weaversparadise.entities.HangingFlagEntity;
 
-import java.util.List;
 import java.util.Set;
 
 public class HangingFlagEntityRenderer extends EntityRenderer<HangingFlagEntity> {

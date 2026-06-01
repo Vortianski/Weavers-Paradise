@@ -1,13 +1,13 @@
 package xox.labvorty.weaversparadise.items.clothing;
 
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Multimap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
@@ -28,11 +28,11 @@ import xox.labvorty.weaversparadise.data.tooltip_components.helper.QualityToolti
 import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.renderers.bewlr.ChokerRenderer;
-import xox.labvorty.weaversparadise.renderers.bewlr.HandWarmersRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.function.Consumer;
 
 public class ChokerItem extends Item implements ICurioItem {
@@ -43,6 +43,22 @@ public class ChokerItem extends Item implements ICurioItem {
                         .rarity(Rarity.COMMON)
                         .durability(1)
         );
+    }
+
+    @Override
+    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+        Multimap<Attribute, AttributeModifier> modifiers = LinkedHashMultimap.create();
+
+        modifiers.put(
+                SlotAttribute.getOrCreate("choker_trinket"),
+                new AttributeModifier(
+                        "weaversparadise:choker",
+                        1,
+                        AttributeModifier.Operation.ADDITION
+                )
+        );
+
+        return modifiers;
     }
 
     @Override

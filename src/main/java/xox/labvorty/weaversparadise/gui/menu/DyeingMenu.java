@@ -24,11 +24,10 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
-import net.minecraftforge.network.PacketDistributor;
 import xox.labvorty.weaversparadise.WeaversParadiseMod;
 import xox.labvorty.weaversparadise.data.network.DyeingNetworkMessage;
-import xox.labvorty.weaversparadise.init.WeaversParadiseMenus;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
+import xox.labvorty.weaversparadise.init.WeaversParadiseMenus;
 
 import java.util.HashMap;
 import java.util.List;

@@ -19,10 +19,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
+import xox.labvorty.weaversparadise.configs.CommonConfig;
 import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
 import xox.labvorty.weaversparadise.items.clothing.ThighHighsSilkItem;
-
-import java.util.concurrent.atomic.AtomicReference;
 
 @Mixin(Entity.class)
 public class EntityMixin {
@@ -38,6 +37,10 @@ public class EntityMixin {
     )
     public Vec3 weaversparadise$walkOnWater(Vec3 original) throws Throwable {
         if (!((Object) this instanceof LivingEntity entity)) {
+            return original;
+        }
+
+        if (!CommonConfig.ITEM_SPECIAL_ABILITIES.get()) {
             return original;
         }
 

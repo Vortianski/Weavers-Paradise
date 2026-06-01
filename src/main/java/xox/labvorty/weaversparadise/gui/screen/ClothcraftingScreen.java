@@ -17,16 +17,20 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.network.PacketDistributor;
 import xox.labvorty.weaversparadise.WeaversParadiseMod;
 import xox.labvorty.weaversparadise.data.network.ClothcraftingNetworkMessage;
 import xox.labvorty.weaversparadise.gui.menu.ClothcraftingMenu;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.init.WeaversParadiseKeyMappings;
-import xox.labvorty.weaversparadise.items.materials.*;
+import xox.labvorty.weaversparadise.items.materials.CottonSpoolItem;
+import xox.labvorty.weaversparadise.items.materials.JeansSpoolItem;
+import xox.labvorty.weaversparadise.items.materials.SilkSpoolItem;
+import xox.labvorty.weaversparadise.items.materials.WoolSpooltem;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 
 public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMenu> {
     private final static HashMap<String, Object> guistate = ClothcraftingMenu.guistate;

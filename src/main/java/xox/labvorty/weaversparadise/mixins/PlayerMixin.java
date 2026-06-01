@@ -19,8 +19,6 @@ import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 import xox.labvorty.weaversparadise.items.clothing.BellItem;
 import xox.labvorty.weaversparadise.items.clothing.CatRingItem;
 
-import java.util.Optional;
-
 @Mixin(Player.class)
 public class PlayerMixin {
     @Inject(

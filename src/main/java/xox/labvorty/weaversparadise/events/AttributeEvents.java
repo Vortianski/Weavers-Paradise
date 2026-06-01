@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
+import xox.labvorty.weaversparadise.configs.CommonConfig;
 import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
 import xox.labvorty.weaversparadise.items.clothing.HandWarmersCottonItem;
 import xox.labvorty.weaversparadise.items.clothing.HandWarmersSilkItem;
@@ -24,7 +25,7 @@ public class AttributeEvents {
         Entity source = event.getSource().getEntity();
         Entity receiver = event.getEntity();
 
-        if (source instanceof Player player) {
+        if (source instanceof Player player && CommonConfig.ITEM_SPECIAL_ABILITIES.get()) {
             LazyOptional<ICuriosItemHandler> handler = CuriosApi.getCuriosInventory(player);
 
             if (handler.isPresent()) {
@@ -61,7 +62,7 @@ public class AttributeEvents {
 
         LazyOptional<ICuriosItemHandler> handler = CuriosApi.getCuriosInventory(player);
 
-        if (handler.isPresent()) {
+        if (handler.isPresent() && CommonConfig.ITEM_SPECIAL_ABILITIES.get()) {
             handler.ifPresent(curiosHandler -> {
                 Optional<SlotResult> optionalSlotResult = curiosHandler.findFirstCurio(stack -> stack.getItem() instanceof HandWarmersSilkItem handWarmersSilkItem);
 

@@ -18,7 +18,6 @@ import xox.labvorty.weaversparadise.data.tooltip_components.ClothingTooltipCompo
 import xox.labvorty.weaversparadise.data.tooltip_components.data.DyeIconHandler;
 import xox.labvorty.weaversparadise.data.tooltip_components.helper.DyeTooltipEntry;
 import xox.labvorty.weaversparadise.data.tooltip_components.helper.QualityTooltipData;
-import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.renderers.bewlr.ShirtRenderer;
 
