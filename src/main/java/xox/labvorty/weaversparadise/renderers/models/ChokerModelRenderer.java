@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import org.joml.Vector4f;
 import oshi.util.tuples.Pair;
-import xox.labvorty.weaversparadise.data.texture.ChokerTextures;
+import xox.labvorty.weaversparadise.data.texture.deprecated.ChokerTextures;
 import xox.labvorty.weaversparadise.models.ChokerModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ChokerRenderingData;
 import xox.labvorty.weaversparadise.renderers.helpers.ColorHandlers;

@@ -6,8 +6,6 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import xox.labvorty.weaversparadise.WeaversParadiseMod;
@@ -19,24 +17,23 @@ import java.util.HashMap;
 @OnlyIn(Dist.CLIENT)
 public class StringScreen extends AbstractContainerScreen<StringMenu> {
     private final static HashMap<String, Object> guistate = StringMenu.guistate;
-    private final Level world;
     private final int x, y, z;
-    private final Player entity;
     private static int progress = 0;
+    private static int maxProgress = 100;
 
     public StringScreen(StringMenu container, Inventory inventory, Component text) {
         super(container, inventory, text);
-        this.world = container.world;
+
         this.x = container.x;
         this.y = container.y;
         this.z = container.z;
-        this.entity = container.entity;
         this.imageWidth = 176;
         this.imageHeight = 200;
     }
 
-    public static void updateProgress(int prog) {
+    public static void updateProgress(int prog, int max) {
         progress = prog;
+        maxProgress = max > 0 ? max : 100;
     }
 
     @Override
@@ -52,12 +49,12 @@ public class StringScreen extends AbstractContainerScreen<StringMenu> {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
 
-        float percentage = (progress == 0 ? 1 : progress) / 100.0f;
+        float percentage = (float) progress / (float) maxProgress;
         float realPercentage = 1.0f - percentage;
 
-        guiGraphics.blit(new ResourceLocation("weaversparadise:textures/screens/string_ui.png"), this.leftPos + -8, this.topPos + -16, 0, 0, 240, 216, 240, 216);
-        guiGraphics.blit(new ResourceLocation("weaversparadise:textures/screens/arrow_full.png"), this.leftPos + -8 + 152, this.topPos + -16 + 88, 0, 0, 31, 20, 31, 20);
-        guiGraphics.blit(new ResourceLocation("weaversparadise:textures/screens/arrow_empty.png"), this.leftPos + -8 + 152, this.topPos + -16 + 88, 0, 0, (int)(31 * realPercentage), 20, 31, 20);
+        guiGraphics.blit(new ResourceLocation("weaversparadise:textures/screens/string_ui.png"), this.leftPos - 8, this.topPos - 16, 0, 0, 240, 216, 240, 216);
+        guiGraphics.blit(new ResourceLocation("weaversparadise:textures/screens/arrow_full.png"), this.leftPos - 8 + 152, this.topPos - 16 + 88, 0, 0, 31, 20, 31, 20);
+        guiGraphics.blit(new ResourceLocation("weaversparadise:textures/screens/arrow_empty.png"), this.leftPos - 8 + 152, this.topPos - 16 + 88, 0, 0, (int)(31 * realPercentage), 20, 31, 20);
 
         RenderSystem.disableBlend();
     }
@@ -82,6 +79,6 @@ public class StringScreen extends AbstractContainerScreen<StringMenu> {
 
     @Override
     protected void containerTick() {
-        WeaversParadiseMod.PACKET_HANDLER.sendToServer(new StringNetworkMessage(0, x, y, z, 0));
+        WeaversParadiseMod.PACKET_HANDLER.sendToServer(new StringNetworkMessage(0, x, y, z, 0, 0));
     }
 }

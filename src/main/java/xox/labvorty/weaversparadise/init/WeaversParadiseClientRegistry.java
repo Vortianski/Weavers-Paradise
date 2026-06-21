@@ -192,7 +192,7 @@ public class WeaversParadiseClientRegistry {
                 data.getQualityTextures(),
                 data.getEntries()
         ));
-        event.register(DyeTooltipComponent.class, data -> new DyeClientTooltipComponent(data.getTexture(), data.getText(), data.getType(), data.getLightValue(), data.getPrimaryColor(), data.getSecondaryColor()));
+        event.register(DyeTooltipComponent.class, data -> new DyeClientTooltipComponent(data.getDyeIcon(), data.getText(), data.getType(), data.getLightValue(), data.getPrimaryColor(), data.getSecondaryColor()));
         event.register(QualityTooltipComponent.class, data -> new QualityClientTooltipComponent(data.getTextures()));
     }
 

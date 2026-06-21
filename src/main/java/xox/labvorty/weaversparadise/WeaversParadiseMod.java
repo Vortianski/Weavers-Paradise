@@ -44,6 +44,7 @@ public class WeaversParadiseMod {
         WeaversParadiseCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         WeaversParadiseEnchantments.ENCHANTMENTS.register(modEventBus);
         WeaversParadiseRecipes.RECIPES.register(modEventBus);
+        WeaversParadiseRecipes.RECIPE_TYPE.register(modEventBus);
         WeaversParadiseMobEffects.MOB_EFFECTS.register(modEventBus);
         WeaversParadiseLootModifiers.LOOT_MODIFIERS.register(modEventBus);
 

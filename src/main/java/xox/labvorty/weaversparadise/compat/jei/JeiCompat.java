@@ -7,6 +7,7 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 
 @JeiPlugin
@@ -28,29 +29,17 @@ public class JeiCompat implements IModPlugin {
     public void registerRecipes(IRecipeRegistration recipeRegistration) {
         recipeRegistration.addRecipes(
                 ClothcraftingJEICategory.TYPE,
-                ClothcraftingJEIRecipe.makeCottonRecipes()
-        );
-        recipeRegistration.addRecipes(
-                ClothcraftingJEICategory.TYPE,
-                ClothcraftingJEIRecipe.makeSilkRecipes()
-        );
-        recipeRegistration.addRecipes(
-                ClothcraftingJEICategory.TYPE,
-                ClothcraftingJEIRecipe.makeWoolRecipes()
-        );
-        recipeRegistration.addRecipes(
-                ClothcraftingJEICategory.TYPE,
-                ClothcraftingJEIRecipe.makeJeansRecipes()
-        );
-
-        recipeRegistration.addRecipes(
-                DyemakingJEICategory.TYPE,
-                DyemakingJEIRecipe.makeDyeRecipes()
+                ClothcraftingJEIRecipe.buildAll()
         );
 
         recipeRegistration.addRecipes(
                 SpinningJennyJEICategory.TYPE,
                 SpinningJennyJEIRecipe.generateRecipes()
+        );
+
+        recipeRegistration.addRecipes(
+                DyemakingJEICategory.TYPE,
+                DyemakingJEIRecipe.makeDyeRecipes()
         );
     }
 
@@ -73,7 +62,7 @@ public class JeiCompat implements IModPlugin {
     }
 
     @Override
-    public ResourceLocation getPluginUid() {
+    public @NotNull ResourceLocation getPluginUid() {
         return ResourceLocation.fromNamespaceAndPath("weaversparadise", "jei_plugin");
     }
 }

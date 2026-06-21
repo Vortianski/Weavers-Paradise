@@ -25,7 +25,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.joml.Vector4f;
 import oshi.util.tuples.Pair;
-import xox.labvorty.weaversparadise.data.texture.CapeTextures;
+import xox.labvorty.weaversparadise.data.texture.deprecated.CapeTextures;
 import xox.labvorty.weaversparadise.gui.menu.DyeingMenu;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.clothing.*;

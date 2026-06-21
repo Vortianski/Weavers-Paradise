@@ -10,8 +10,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import org.joml.Vector4f;
 import oshi.util.tuples.Pair;
-import xox.labvorty.weaversparadise.data.texture.ShirtOpenTextures;
-import xox.labvorty.weaversparadise.data.texture.ShirtTextures;
+import xox.labvorty.weaversparadise.data.texture.ItemTexture;
+import xox.labvorty.weaversparadise.data.texture.TextureRegistry;
 import xox.labvorty.weaversparadise.models.UpperWearModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ColorHandlers;
 import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
@@ -86,14 +86,14 @@ public class ShirtModelRenderer {
         finalCT = colorIntToVector4f(fCT.getA());
         finalL2 = fCT.getB();
 
-        String renderType = ShirtTextures.getByTypeAndMaterial(sT, mat).getRenderType();
-        ResourceLocation tex1 = ShirtTextures.getByTypeAndMaterial(sT, mat).getTextureOne();
-        ResourceLocation tex2 = ShirtTextures.getByTypeAndMaterial(sT, mat).getTextureTwo();
+        ItemTexture texture = TextureRegistry.find("shirt", sT, mat);
+
         if (isOpen) {
-            ShirtOpenTextures weaversParadiseOpenShirtTextureHandler = ShirtOpenTextures.getByTypeAndMaterial(sT, mat);
-            tex1 = weaversParadiseOpenShirtTextureHandler.getTextureOne();
-            tex2 = weaversParadiseOpenShirtTextureHandler.getTextureTwo();
+            texture = TextureRegistry.find("shirt_open", sT, mat);
         }
+        boolean renderType = texture.getRenderType();
+        ResourceLocation tex1 = texture.getTextureOne();
+        ResourceLocation tex2 = texture.getTextureTwo();
 
         poseStack.pushPose();
 
@@ -125,7 +125,7 @@ public class ShirtModelRenderer {
                 finalCO.w
         );
 
-        if (renderType.equals("double")) {
+        if (renderType) {
             VertexConsumer vc2 = renderingUtils.parseVC(multiBufferSource, dTT, tex2, "shirt");
             model.renderToBuffer(
                     poseStack,

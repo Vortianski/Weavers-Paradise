@@ -7,7 +7,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -33,13 +32,18 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.blocks.entities.ClothcraftingStationBlockEntity;
+import xox.labvorty.weaversparadise.data.recipe.ClothcraftingRecipe;
+import xox.labvorty.weaversparadise.data.recipe.ClothcraftingRecipeInput;
 import xox.labvorty.weaversparadise.gui.menu.ClothcraftingMenu;
-import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
+import xox.labvorty.weaversparadise.init.WeaversParadiseRecipes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+@SuppressWarnings({"deprecated"})
 public class ClothcraftingStationBlock extends Block implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
@@ -53,42 +57,52 @@ public class ClothcraftingStationBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (!world.isClientSide && player instanceof ServerPlayer serverPlayer) {
+    public @NotNull InteractionResult use(
+            @NotNull BlockState blockState,
+            @NotNull Level level,
+            @NotNull BlockPos blockPos,
+            @NotNull Player player,
+            @NotNull InteractionHand interactionHand,
+            @NotNull BlockHitResult blockHitResult
+    ) {
+        if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
             NetworkHooks.openScreen(
                     serverPlayer,
                     new MenuProvider() {
                         @Override
-                        public Component getDisplayName() {
+                        public @NotNull Component getDisplayName() {
                             return Component.literal("Clothcrafting Station");
                         }
 
                         @Override
-                        public AbstractContainerMenu createMenu(int id, Inventory inv, Player player) {
-                            return new ClothcraftingMenu(id, inv, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(pos));
+                        public AbstractContainerMenu createMenu(int id, @NotNull Inventory inventory, @NotNull Player player) {
+                            return new ClothcraftingMenu(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(blockPos));
                         }
                     },
-                    pos
+                    blockPos
             );
         }
 
-        return InteractionResult.sidedSuccess(world.isClientSide);
+        return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
     @Override
-    public void onPlace(BlockState state, Level world, BlockPos pos,
-                        BlockState oldState, boolean moving) {
+    public void onPlace(
+            @NotNull BlockState blockState,
+            @NotNull Level level,
+            @NotNull BlockPos blockPos,
+            @NotNull BlockState blockStateOld,
+            boolean moving
+    ) {
+        super.onPlace(blockState, level, blockPos, blockStateOld, moving);
 
-        super.onPlace(state, world, pos, oldState, moving);
-
-        BlockEntity be = world.getBlockEntity(pos);
-        if (be instanceof ClothcraftingStationBlockEntity cloth) {
-            cloth.setItems(new ArrayList<>());
-            cloth.setGameOn(false);
-            cloth.setClothType("");
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+        if (blockEntity instanceof ClothcraftingStationBlockEntity clothcraftingStationBlockEntity) {
+            clothcraftingStationBlockEntity.setItems(new ArrayList<>());
+            clothcraftingStationBlockEntity.setGameOn(false);
         }
 
-        world.scheduleTick(pos, this, 1);
+        level.scheduleTick(blockPos, this, 1);
     }
 
     @Override
@@ -99,126 +113,114 @@ public class ClothcraftingStationBlock extends Block implements EntityBlock {
     @Override
     public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         BlockEntity be = world.getBlockEntity(pos);
+        if (!(be instanceof ClothcraftingStationBlockEntity cloth)) {
+            world.scheduleTick(pos, this, 1);
+            return;
+        }
 
-        if (be instanceof ClothcraftingStationBlockEntity cloth) {
+        if (cloth.getGameOn()) {
+            if (cloth.getGameTime() > 0) {
+                cloth.setGameTime(cloth.getGameTime() - 1);
+            } else {
+                ItemStack spoolInSlot = cloth.getClothType();
+                ClothcraftingRecipeInput input = new ClothcraftingRecipeInput(spoolInSlot);
 
-            if (cloth.getGameOn()) {
-                if (cloth.getGameTime() > 0) {
-                    cloth.setGameTime(cloth.getGameTime() - 1);
-                } else {
-                    List<ItemStack> items = cloth.getItemsList();
-                    if (items == null) items = new ArrayList<>();
+                Optional<ClothcraftingRecipe> recipeOpt = world.getRecipeManager()
+                        .getAllRecipesFor(WeaversParadiseRecipes.CLOTHCRAFTING_TYPE.get())
+                        .stream()
+                        .filter(r -> r.matches(input, world))
+                        .findFirst();
 
-                    String clothType = cloth.getClothType();
+                if (recipeOpt.isPresent()) {
+                    ClothcraftingRecipe recipe = recipeOpt.get();
+                    int score = cloth.getGameScore();
+                    List<ItemStack> outputList = cloth.getItemsList();
 
-                    ItemStack spool = new ItemStack(WeaversParadiseItems.EMPTY_SPOOL.get(), 6);
-                    ItemStack result = ItemStack.EMPTY;
+                    ItemStack returnSpool = recipe.getSpoolReturn().copy();
+                    returnSpool.setCount(recipe.getSpoolReturnCount());
+                    mergeIntoOutputList(outputList, returnSpool);
 
-                    int quality = Mth.clamp(cloth.getGameScore() / 2, 0, 10);
+                    recipe.resolve(score).ifPresent(tier -> {
+                        ItemStack result = tier.result().copy();
+                        result.setCount(tier.count());
+                        mergeIntoOutputList(outputList, result);
+                    });
 
-                    if ("WOOL".equals(clothType)) {
-                        result = new ItemStack(WeaversParadiseItems.WOOL_CLOTH.get());
-                    } else if ("SILK".equals(clothType)) {
-                        result = new ItemStack(WeaversParadiseItems.SILK_CLOTH.get());
-                    } else if ("COTTON".equals(clothType)) {
-                        result = new ItemStack(WeaversParadiseItems.COTTON_CLOTH.get());
-                    } else if ("JEANS".equals(clothType)) {
-                        result = new ItemStack(WeaversParadiseItems.JEANS_CLOTH.get());
-                    }
-
-                    if (!result.isEmpty()) {
-                        result.getOrCreateTag().putInt("quality", quality);
-                    }
-
-                    boolean spoolAdded = false;
-                    boolean resultAdded = false;
-
-                    for (ItemStack stack : items) {
-
-                        if (!spoolAdded && stack.is(spool.getItem()) && stack.getCount() <= 58) {
-                            stack.grow(6);
-                            spoolAdded = true;
-                        }
-
-                        if (!resultAdded && stack.is(result.getItem())) {
-                            int existingQuality = stack.getOrCreateTag().getInt("quality");
-
-                            if (existingQuality == quality) {
-                                stack.grow(1);
-                                resultAdded = true;
-                            }
-                        }
-
-                        if (spoolAdded && resultAdded) break;
-                    }
-
-                    if (!resultAdded && !result.isEmpty()) {
-                        items.add(result);
-                    }
-
-                    if (!spoolAdded) {
-                        items.add(spool);
-                    }
-
-                    cloth.setItems(items);
+                    cloth.setItems(outputList);
                     cloth.setGameScore(0);
                     cloth.setGameOn(false);
                 }
-            } else {
-                cloth.setGameScore(0);
-                cloth.setGameTime(0);
             }
+        } else {
+            cloth.setGameScore(0);
+            cloth.setGameTime(0);
+        }
 
-            // Hopper interaction
-            BlockEntity below = world.getBlockEntity(pos.below());
-
-            if (below instanceof HopperBlockEntity hopper) {
-                List<ItemStack> items = cloth.getItemsList();
-                if (items == null) items = new ArrayList<>();
-
-                for (int i = 0; i < hopper.getContainerSize(); i++) {
-                    if (hopper.getItem(i).isEmpty()) {
-
-                        for (ItemStack entry : items) {
-                            if (!entry.isEmpty()) {
-                                ItemStack extract = entry.copy();
-                                extract.setCount(1);
-
-                                entry.shrink(1);
-                                hopper.setItem(i, extract);
-                                break;
-                            }
+        BlockEntity below = world.getBlockEntity(pos.below());
+        if (below instanceof HopperBlockEntity hopper) {
+            List<ItemStack> items = cloth.getItemsList();
+            for (int i = 0; i < hopper.getContainerSize(); i++) {
+                if (hopper.getItem(i).isEmpty()) {
+                    for (ItemStack entry : items) {
+                        if (!entry.isEmpty()) {
+                            ItemStack extract = entry.copy();
+                            extract.setCount(1);
+                            entry.shrink(1);
+                            hopper.setItem(i, extract);
+                            break;
                         }
                     }
                 }
-
-                cloth.setItems(items);
             }
+            cloth.setItems(items);
         }
 
         world.scheduleTick(pos, this, 1);
     }
 
+    private void mergeIntoOutputList(List<ItemStack> list, ItemStack incoming) {
+        if (incoming.isEmpty()) return;
+        for (ItemStack existing : list) {
+            if (ItemStack.isSameItemSameTags(existing, incoming)) {
+                int space = existing.getMaxStackSize() - existing.getCount();
+                if (space > 0) {
+                    int toAdd = Math.min(space, incoming.getCount());
+                    existing.grow(toAdd);
+                    incoming.shrink(toAdd);
+                    if (incoming.isEmpty()) return;
+                }
+            }
+        }
+
+        list.add(incoming.copy());
+    }
+
     @Override
-    public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moving) {
-        if (state.getBlock() != newState.getBlock()) {
-            BlockEntity be = world.getBlockEntity(pos);
+    public void onRemove(
+            @NotNull BlockState blockState,
+            @NotNull Level level,
+            @NotNull BlockPos blockPos,
+            @NotNull BlockState blockStateNew,
+            boolean moving
+    ) {
+        if (blockState.getBlock() != blockStateNew.getBlock()) {
+            BlockEntity be = level.getBlockEntity(blockPos);
 
             if (be instanceof ClothcraftingStationBlockEntity cloth) {
-                Containers.dropContents(world, pos, cloth);
+                Containers.dropContents(level, blockPos, cloth);
 
                 List<ItemStack> items = cloth.getItemsList();
                 if (items != null) {
                     for (ItemStack stack : items) {
-                        world.addFreshEntity(new ItemEntity(
-                                world, pos.getX(), pos.getY(), pos.getZ(), stack
+                        level.addFreshEntity(new ItemEntity(
+                                level, blockPos.getX(), blockPos.getY(), blockPos.getZ(), stack
                         ));
                     }
                 }
             }
         }
 
-        super.onRemove(state, world, pos, newState, moving);
+        super.onRemove(blockState, level, blockPos, blockStateNew, moving);
     }
 
     @Override
@@ -227,28 +229,27 @@ public class ClothcraftingStationBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return switch (state.getValue(FACING)) {
-            default -> box(1, 0.01, 1, 15, 7, 15);
-            case NORTH -> box(1, 0.01, 1, 15, 7, 15);
-            case EAST -> box(1, 0.01, 1, 15, 7, 15);
-            case WEST -> box(1, 0.01, 1, 15, 7, 15);
-        };
+    public @NotNull VoxelShape getShape(
+            @NotNull BlockState blockState,
+            @NotNull BlockGetter blockGetter,
+            @NotNull BlockPos blockPos,
+            @NotNull CollisionContext collisionContext
+    ) {
+        return box(1, 0.01, 1, 15, 7, 15);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        return this.defaultBlockState()
-                .setValue(FACING, ctx.getHorizontalDirection().getOpposite());
+        return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite());
     }
 
     @Override
-    public BlockState rotate(BlockState state, Rotation rot) {
+    public @NotNull BlockState rotate(BlockState state, Rotation rot) {
         return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     @Override
-    public BlockState mirror(BlockState state, Mirror mirror) {
+    public @NotNull BlockState mirror(BlockState state, Mirror mirror) {
         return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }
 }

@@ -16,16 +16,16 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import xox.labvorty.weaversparadise.WeaversParadiseMod;
 import xox.labvorty.weaversparadise.data.network.ClothcraftingNetworkMessage;
+import xox.labvorty.weaversparadise.data.recipe.ClothcraftingRecipe;
+import xox.labvorty.weaversparadise.data.recipe.ClothcraftingRecipeInput;
 import xox.labvorty.weaversparadise.gui.menu.ClothcraftingMenu;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.init.WeaversParadiseKeyMappings;
-import xox.labvorty.weaversparadise.items.materials.CottonSpoolItem;
-import xox.labvorty.weaversparadise.items.materials.JeansSpoolItem;
-import xox.labvorty.weaversparadise.items.materials.SilkSpoolItem;
-import xox.labvorty.weaversparadise.items.materials.WoolSpooltem;
+import xox.labvorty.weaversparadise.init.WeaversParadiseRecipes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -83,9 +83,9 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
     private String inputThree = "";
     private String inputFour = "";
     private String inputFive = "";
-    private static String clothType = "";
+    private static ItemStack clothType = new ItemStack(Items.STONE);
 
-    public static void updateData(int time, int score, boolean ison, List<ItemStack> item, String type) {
+    public static void updateData(int time, int score, boolean ison, List<ItemStack> item, ItemStack type) {
         gameTime = time;
         gameScore = score;
         gameStarted = ison;
@@ -177,7 +177,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
             guiGraphics.renderTooltip(this.font, components, Optional.empty(), gx, gy);
         }
 
-        guiGraphics.blit(new ResourceLocation("weaversparadise:textures/screens/clothcrafting_main.png"), this.leftPos, this.topPos, 0, 0, 192, 209, 192, 209);
+        guiGraphics.blit(ResourceLocation.parse("weaversparadise:textures/screens/clothcrafting_main.png"), this.leftPos, this.topPos, 0, 0, 192, 209, 192, 209);
 
         RenderSystem.disableBlend();
     }
@@ -257,12 +257,12 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         int minutes = totalSeconds / 60;
         int seconds = totalSeconds % 60;
 
-        guiGraphics.blit(new ResourceLocation("weaversparadise:textures/screens/clothcrafting_minigame.png"), this.leftPos - 38, this.topPos - 26, 0, 0, 269, 255, 269, 255);
+        guiGraphics.blit(ResourceLocation.parse("weaversparadise:textures/screens/clothcrafting_minigame.png"), this.leftPos - 38, this.topPos - 26, 0, 0, 269, 255, 269, 255);
         guiGraphics.drawString(this.font, Component.literal(Component.translatable("weaversparadise.clothcrafting.time").getString() + " " + String.format("%02d:%02d", minutes, seconds)), this.leftPos + 10, this.topPos - 8, 0x000000, false);
         guiGraphics.drawString(this.font, Component.literal(Component.translatable("weaversparadise.clothcrafting.score").getString() + " " + gameScore), this.leftPos - 38 + 183, this.topPos - 6, 0xFFFFFF, false);
 
         guiGraphics.blit(
-                new ResourceLocation(renderInputAssist(pretypeOne, inputOne)),
+                ResourceLocation.parse(renderInputAssist(pretypeOne, inputOne)),
                 this.leftPos - 3,
                 this.topPos + 135,
                 0,
@@ -274,7 +274,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(renderInputAssist(pretypeTwo, inputTwo)),
+                ResourceLocation.parse(renderInputAssist(pretypeTwo, inputTwo)),
                 this.leftPos - 38 + 76,
                 this.topPos + 135,
                 0,
@@ -286,7 +286,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(renderInputAssist(pretypeThree, inputThree)),
+                ResourceLocation.parse(renderInputAssist(pretypeThree, inputThree)),
                 this.leftPos - 38 + 117,
                 this.topPos + 135,
                 0,
@@ -298,7 +298,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(renderInputAssist(pretypeFour, inputFour)),
+                ResourceLocation.parse(renderInputAssist(pretypeFour, inputFour)),
                 this.leftPos - 38 + 158,
                 this.topPos + 135,
                 0,
@@ -310,7 +310,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(renderInputAssist(pretypeFive, inputFive)),
+                ResourceLocation.parse(renderInputAssist(pretypeFive, inputFive)),
                 this.leftPos - 38 + 199,
                 this.topPos + 135,
                 0,
@@ -322,7 +322,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(renderArrowsMainHelper(pretypeOne)),
+                ResourceLocation.parse(renderArrowsMainHelper(pretypeOne)),
                 this.leftPos - 3,
                 this.topPos + 135,
                 0,
@@ -334,7 +334,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(renderArrowsMainHelper(pretypeTwo)),
+                ResourceLocation.parse(renderArrowsMainHelper(pretypeTwo)),
                 this.leftPos - 38 + 76,
                 this.topPos + 135,
                 0,
@@ -346,7 +346,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(renderArrowsMainHelper(pretypeThree)),
+                ResourceLocation.parse(renderArrowsMainHelper(pretypeThree)),
                 this.leftPos - 38 + 117,
                 this.topPos + 135,
                 0,
@@ -358,7 +358,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(renderArrowsMainHelper(pretypeFour)),
+                ResourceLocation.parse(renderArrowsMainHelper(pretypeFour)),
                 this.leftPos - 38 + 158,
                 this.topPos + 135,
                 0,
@@ -370,7 +370,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(renderArrowsMainHelper(pretypeFive)),
+                ResourceLocation.parse(renderArrowsMainHelper(pretypeFive)),
                 this.leftPos - 38 + 199,
                 this.topPos + 135,
                 0,
@@ -382,7 +382,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(assistersRender(previewL1One)),
+                ResourceLocation.parse(assistersRender(previewL1One)),
                 this.leftPos - 38 + 75,
                 this.topPos - 26 + 128,
                 0,
@@ -394,7 +394,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(assistersRender(previewL1Two)),
+                ResourceLocation.parse(assistersRender(previewL1Two)),
                 this.leftPos - 38 + 100,
                 this.topPos - 26 + 128,
                 0,
@@ -406,7 +406,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(assistersRender(previewL1Three)),
+                ResourceLocation.parse(assistersRender(previewL1Three)),
                 this.leftPos - 38 + 125,
                 this.topPos - 26 + 128,
                 0,
@@ -418,7 +418,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(assistersRender(previewL1Four)),
+                ResourceLocation.parse(assistersRender(previewL1Four)),
                 this.leftPos - 38 + 150,
                 this.topPos - 26 + 128,
                 0,
@@ -430,7 +430,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(assistersRender(previewL1Five)),
+                ResourceLocation.parse(assistersRender(previewL1Five)),
                 this.leftPos - 38 + 175,
                 this.topPos - 26 + 128,
                 0,
@@ -442,7 +442,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(assistersRender(previewL2One)),
+                ResourceLocation.parse(assistersRender(previewL2One)),
                 this.leftPos - 38 + 75,
                 this.topPos - 26 + 103,
                 0,
@@ -454,7 +454,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(assistersRender(previewL2Two)),
+                ResourceLocation.parse(assistersRender(previewL2Two)),
                 this.leftPos - 38 + 100,
                 this.topPos - 26 + 103,
                 0,
@@ -466,7 +466,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(assistersRender(previewL2Three)),
+                ResourceLocation.parse(assistersRender(previewL2Three)),
                 this.leftPos - 38 + 125,
                 this.topPos - 26 + 103,
                 0,
@@ -478,7 +478,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(assistersRender(previewL2Four)),
+                ResourceLocation.parse(assistersRender(previewL2Four)),
                 this.leftPos - 38 + 150,
                 this.topPos - 26 + 103,
                 0,
@@ -490,7 +490,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(assistersRender(previewL2Five)),
+                ResourceLocation.parse(assistersRender(previewL2Five)),
                 this.leftPos - 38 + 175,
                 this.topPos - 26 + 103,
                 0,
@@ -502,7 +502,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(assistersRender(previewL3One)),
+                ResourceLocation.parse(assistersRender(previewL3One)),
                 this.leftPos - 38 + 75,
                 this.topPos - 26 + 78,
                 0,
@@ -514,7 +514,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(assistersRender(previewL3Two)),
+                ResourceLocation.parse(assistersRender(previewL3Two)),
                 this.leftPos - 38 + 100,
                 this.topPos - 26 + 78,
                 0,
@@ -526,7 +526,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(assistersRender(previewL3Three)),
+                ResourceLocation.parse(assistersRender(previewL3Three)),
                 this.leftPos - 38 + 125,
                 this.topPos - 26 + 78,
                 0,
@@ -538,7 +538,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(assistersRender(previewL3Four)),
+                ResourceLocation.parse(assistersRender(previewL3Four)),
                 this.leftPos - 38 + 150,
                 this.topPos - 26 + 78,
                 0,
@@ -550,7 +550,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(assistersRender(previewL3Five)),
+                ResourceLocation.parse(assistersRender(previewL3Five)),
                 this.leftPos - 38 + 175,
                 this.topPos - 26 + 78,
                 0,
@@ -562,7 +562,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(assistersRender(previewL4One)),
+                ResourceLocation.parse(assistersRender(previewL4One)),
                 this.leftPos - 38 + 75,
                 this.topPos - 26 + 53,
                 0,
@@ -574,7 +574,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(assistersRender(previewL4Two)),
+                ResourceLocation.parse(assistersRender(previewL4Two)),
                 this.leftPos - 38 + 100,
                 this.topPos - 26 + 53,
                 0,
@@ -586,7 +586,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(assistersRender(previewL4Three)),
+                ResourceLocation.parse(assistersRender(previewL4Three)),
                 this.leftPos - 38 + 125,
                 this.topPos - 26 + 53,
                 0,
@@ -598,7 +598,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(assistersRender(previewL4Four)),
+                ResourceLocation.parse(assistersRender(previewL4Four)),
                 this.leftPos - 38 + 150,
                 this.topPos - 26 + 53,
                 0,
@@ -610,7 +610,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         );
 
         guiGraphics.blit(
-                new ResourceLocation(assistersRender(previewL4Five)),
+                ResourceLocation.parse(assistersRender(previewL4Five)),
                 this.leftPos - 38 + 175,
                 this.topPos - 26 + 53,
                 0,
@@ -776,49 +776,19 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
 
     public boolean hasCraftItemsInSlot() {
         Slot slot = this.menu.slots.get(0);
-
-        if (slot != null) {
-            if (slot.getItem().is(WeaversParadiseItems.SILK_SPOOL.get()) && slot.getItem().getCount() > 5) {
-                return true;
-            }
-
-            if (slot.getItem().is(WeaversParadiseItems.WOOL_SPOOL.get()) && slot.getItem().getCount() > 5) {
-                return true;
-            }
-
-            if (slot.getItem().is(WeaversParadiseItems.COTTON_SPOOL.get()) && slot.getItem().getCount() > 5) {
-                return true;
-            }
-
-            if (slot.getItem().is(WeaversParadiseItems.JEANS_SPOOL.get()) && slot.getItem().getCount() > 5) {
-                return true;
-            }
-        }
-
-        return false;
+        if (slot == null || slot.getItem().isEmpty()) return false;
+        ItemStack stack = slot.getItem();
+        return stack.getCount() >= world.getRecipeManager()
+                .getAllRecipesFor(WeaversParadiseRecipes.CLOTHCRAFTING_TYPE.get())
+                .stream()
+                .filter(r -> r.matches(new ClothcraftingRecipeInput(stack), world))
+                .mapToInt(ClothcraftingRecipe::getSpoolCost)
+                .findFirst()
+                .orElse(Integer.MAX_VALUE);
     }
 
-    public String getClothType() {
-        Slot slot = this.menu.slots.get(0);
-        ItemStack stack = slot.getItem();
-
-        if (stack.getItem() instanceof SilkSpoolItem silkSpool) {
-            return "SILK";
-        }
-
-        if (stack.getItem() instanceof WoolSpooltem woolSpool) {
-            return "WOOL";
-        }
-
-        if (stack.getItem() instanceof CottonSpoolItem cottonSpool) {
-            return "COTTON";
-        }
-
-        if (stack.getItem() instanceof JeansSpoolItem jeansSpool) {
-            return "JEANS";
-        }
-
-        return "";
+    public ItemStack getClothType() {
+        return clothType;
     }
 
     @Override
@@ -831,11 +801,11 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
                 25,
                 0,
                 0,
-                new ResourceLocation("weaversparadise:textures/screens/clothcrafting_button.png"),
+                ResourceLocation.parse("weaversparadise:textures/screens/clothcrafting_button.png"),
                 e -> {
                     if (hasCraftItemsInSlot()) {
-                        WeaversParadiseMod.PACKET_HANDLER.sendToServer(new ClothcraftingNetworkMessage(1, x, y, z, 900, 0, true, items, getClothType()));
-                        WeaversParadiseMod.PACKET_HANDLER.sendToServer(new ClothcraftingNetworkMessage(5, x, y, z, gameTime, gameScore, gameStarted, items, clothType));
+                        WeaversParadiseMod.PACKET_HANDLER.sendToServer(
+                                new ClothcraftingNetworkMessage(4, x, y, z, 0, 0, false, items, ItemStack.EMPTY));
                         guistate.remove("startMinigame");
                         guistate.remove("claimItems");
                         this.removeWidget(startMinigame);
@@ -845,7 +815,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
         ) {
             @Override
             public void render(GuiGraphics guiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-                guiGraphics.blit(new ResourceLocation("weaversparadise:textures/screens/clothcrafting_button.png"), this.getX(), this.getY(), 0, 0, width, height, width, height);
+                guiGraphics.blit(ResourceLocation.parse("weaversparadise:textures/screens/clothcrafting_button.png"), this.getX(), this.getY(), 0, 0, width, height, width, height);
             }
         };
         guistate.put("startMinigame", startMinigame);
@@ -858,14 +828,14 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
                 25,
                 0,
                 0,
-                new ResourceLocation("weaversparadise:textures/screens/clothcrafting_button.png"),
+                ResourceLocation.parse("weaversparadise:textures/screens/clothcrafting_button.png"),
                 e -> {
                     WeaversParadiseMod.PACKET_HANDLER.sendToServer(new ClothcraftingNetworkMessage(3, x, y, z, gameTime, gameScore, gameStarted, items, clothType));
                 }
         ) {
             @Override
             public void render(GuiGraphics guiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-                guiGraphics.blit(new ResourceLocation("weaversparadise:textures/screens/clothcrafting_button.png"), this.getX(), this.getY(), 0, 0, width, height, width, height);
+                guiGraphics.blit(ResourceLocation.parse("weaversparadise:textures/screens/clothcrafting_button.png"), this.getX(), this.getY(), 0, 0, width, height, width, height);
             }
         };
         guistate.put("claimItems", claimItems);

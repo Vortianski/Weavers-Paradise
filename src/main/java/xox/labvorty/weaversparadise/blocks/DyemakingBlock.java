@@ -34,7 +34,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import xox.labvorty.weaversparadise.blocks.entities.DyemakingBlockEntity;
-import xox.labvorty.weaversparadise.data.tooltip_components.data.DyeHandler;
+import xox.labvorty.weaversparadise.data.tooltip_components.DyeHandler;
 import xox.labvorty.weaversparadise.gui.menu.DyemakingMenu;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.dye.PigmentItem;
@@ -145,8 +145,8 @@ public class DyemakingBlock extends Block implements EntityBlock {
                 overrideDyeType = false;
             }
 
-            ResourceLocation vanillaTag = new ResourceLocation("weaversparadise", "vanilla_dyes");
-            ResourceLocation customTag = new ResourceLocation("weaversparadise", "custom_dyes");
+            ResourceLocation vanillaTag = ResourceLocation.fromNamespaceAndPath("weaversparadise", "vanilla_dyes");
+            ResourceLocation customTag = ResourceLocation.fromNamespaceAndPath("weaversparadise", "custom_dyes");
 
             for (ItemStack stack : inputs) {
                 if (stack.is(ItemTags.create(vanillaTag))) {

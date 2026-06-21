@@ -18,9 +18,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
 import org.joml.Vector4f;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -28,11 +26,12 @@ import oshi.util.tuples.Pair;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
-import xox.labvorty.weaversparadise.data.texture.CapeTextures;
+import xox.labvorty.weaversparadise.data.texture.ItemTexture;
+import xox.labvorty.weaversparadise.data.texture.TextureRegistry;
 import xox.labvorty.weaversparadise.items.clothing.CapeCottonItem;
-import xox.labvorty.weaversparadise.items.clothing.CapeInterface;
 import xox.labvorty.weaversparadise.items.clothing.CapeSilkItem;
 import xox.labvorty.weaversparadise.items.clothing.CapeWoolItem;
+import xox.labvorty.weaversparadise.items.clothing.defined.CapeInterface;
 import xox.labvorty.weaversparadise.renderers.helpers.ColorHandlers;
 import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
 
@@ -40,6 +39,8 @@ import java.util.Optional;
 
 @Mixin(ElytraLayer.class)
 public abstract class ElytraLayerMixin extends RenderLayer<LivingEntity, EntityModel<LivingEntity>> {
+    @Mutable
+    @Final
     @Shadow
     private final ElytraModel<LivingEntity> elytraModel;
 
@@ -107,14 +108,19 @@ public abstract class ElytraLayerMixin extends RenderLayer<LivingEntity, EntityM
                                     }
                                 }
 
-                                Pair<Integer, Integer> col1 = ColorHandlers.handle(dyeTypeOne, primaryColorOne, secondaryColorOne, lightValueOne, minecraft.player, packedLight, (int)minecraft.level.getGameTime());
-                                Pair<Integer, Integer> col2 = ColorHandlers.handle(dyeTypeTwo, primaryColorTwo, secondaryColorTwo, lightValueTwo, minecraft.player, packedLight, (int)minecraft.level.getGameTime());
-                                Vector4f finalColorOne = colorIntToVector4f(col1.getA());
-                                Vector4f finalColorTwo = colorIntToVector4f(col2.getA());
+                                int ticks = 0;
+                                if (minecraft.level != null) {
+                                    ticks = (int)minecraft.level.getGameTime();
+                                }
+
+                                Pair<Integer, Integer> col1 = ColorHandlers.handle(dyeTypeOne, primaryColorOne, secondaryColorOne, lightValueOne, minecraft.player, packedLight, ticks);
+                                Pair<Integer, Integer> col2 = ColorHandlers.handle(dyeTypeTwo, primaryColorTwo, secondaryColorTwo, lightValueTwo, minecraft.player, packedLight, ticks);
+                                Vector4f finalColorOne = weaversParadiseForge1_20_1$colorIntToVector4f(col1.getA());
+                                Vector4f finalColorTwo = weaversParadiseForge1_20_1$colorIntToVector4f(col2.getA());
                                 int finalLightOne = col1.getB();
                                 int finalLightTwo = col2.getB();
 
-                                CapeTextures capeTextures = CapeTextures.getByTypeAndMaterial(stencilType, type);
+                                ItemTexture texture = TextureRegistry.find("cape", stencilType, type);
                                 RenderingUtils renderingUtils = new RenderingUtils();
 
                                 poseStack.pushPose();
@@ -122,11 +128,11 @@ public abstract class ElytraLayerMixin extends RenderLayer<LivingEntity, EntityM
                                 this.getParentModel().copyPropertiesTo(this.elytraModel);
                                 this.elytraModel.setupAnim(livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
-                                VertexConsumer vertexConsumer1 = itemstack.hasFoil() ? VertexMultiConsumer.create(multiBufferSource.getBuffer(RenderType.armorEntityGlint()), renderingUtils.parseVC(multiBufferSource, dyeTypeOne, capeTextures.getTextureOne(),"cape")) : renderingUtils.parseVC(multiBufferSource, dyeTypeOne, capeTextures.getTextureOne(),"cape");
+                                VertexConsumer vertexConsumer1 = itemstack.hasFoil() ? VertexMultiConsumer.create(multiBufferSource.getBuffer(RenderType.armorEntityGlint()), renderingUtils.parseVC(multiBufferSource, dyeTypeOne, texture.getTextureOne(),"cape")) : renderingUtils.parseVC(multiBufferSource, dyeTypeOne, texture.getTextureOne(),"cape");
                                 this.elytraModel.renderToBuffer(poseStack, vertexConsumer1, finalLightOne, OverlayTexture.NO_OVERLAY, finalColorOne.x, finalColorOne.y, finalColorOne.z, finalColorOne.w);
 
-                                if (capeTextures.getRenderType().equals("double")) {
-                                    VertexConsumer vertexConsumer2 = itemstack.hasFoil() ? VertexMultiConsumer.create(multiBufferSource.getBuffer(RenderType.armorEntityGlint()), renderingUtils.parseVC(multiBufferSource, dyeTypeTwo, capeTextures.getTextureTwo(),"cape")) : renderingUtils.parseVC(multiBufferSource, dyeTypeTwo, capeTextures.getTextureTwo(),"cape");
+                                if (texture.getRenderType()) {
+                                    VertexConsumer vertexConsumer2 = itemstack.hasFoil() ? VertexMultiConsumer.create(multiBufferSource.getBuffer(RenderType.armorEntityGlint()), renderingUtils.parseVC(multiBufferSource, dyeTypeTwo, texture.getTextureTwo(),"cape")) : renderingUtils.parseVC(multiBufferSource, dyeTypeTwo, texture.getTextureTwo(),"cape");
                                     this.elytraModel.renderToBuffer(poseStack, vertexConsumer2, finalLightTwo, OverlayTexture.NO_OVERLAY, finalColorTwo.x, finalColorTwo.y, finalColorTwo.z, finalColorTwo.w);
                                 }
                                 poseStack.popPose();
@@ -142,7 +148,7 @@ public abstract class ElytraLayerMixin extends RenderLayer<LivingEntity, EntityM
     }
 
     @Unique
-    private static Vector4f colorIntToVector4f(int color) {
+    private static Vector4f weaversParadiseForge1_20_1$colorIntToVector4f(int color) {
         float a = ((color >> 24) & 0xFF) / 255.0f;
         float r = ((color >> 16) & 0xFF) / 255.0f;
         float g = ((color >> 8) & 0xFF) / 255.0f;

@@ -13,6 +13,7 @@ import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
@@ -28,10 +29,10 @@ public class ClothcraftingStationBlockEntity extends RandomizableContainerBlockE
     private NonNullList<ItemStack> stacks = NonNullList.withSize(1, ItemStack.EMPTY);
     private final SidedInvWrapper handler = new SidedInvWrapper(this, null);
 
-    private int gameTime;
-    private int gameScore;
-    private boolean isGameOn;
-    private String clothType = "";
+    private int gameTime = 0;
+    private int gameScore = 0;
+    private boolean isGameOn = false;
+    private ItemStack clothType = new ItemStack(Items.STONE);
 
     private List<ItemStack> items = new ArrayList<>();
 
@@ -48,12 +49,21 @@ public class ClothcraftingStationBlockEntity extends RandomizableContainerBlockE
         tag.putInt("gameTime", gameTime);
         tag.putInt("gameScore", gameScore);
         tag.putBoolean("isGameOn", isGameOn);
-        tag.putString("clothType", clothType);
 
         for (int i = 0; i < items.size(); i++) {
             CompoundTag itemTag = new CompoundTag();
             items.get(i).save(itemTag);
             tag.put("item" + i, itemTag);
+        }
+
+        if (clothType != null && !clothType.isEmpty()) {
+            CompoundTag compoundTag = new CompoundTag();
+            clothType.save(compoundTag);
+            tag.put("clothType", compoundTag);
+        } else {
+            CompoundTag compoundTag = new CompoundTag();
+            new ItemStack(Items.STONE).save(compoundTag);
+            tag.put("clothType", compoundTag);
         }
 
         tag.putInt("itemsSize", items.size());
@@ -69,9 +79,12 @@ public class ClothcraftingStationBlockEntity extends RandomizableContainerBlockE
         this.gameTime = tag.getInt("gameTime");
         this.gameScore = tag.getInt("gameScore");
         this.isGameOn = tag.getBoolean("isGameOn");
-        this.clothType = tag.getString("clothType");
+        if (tag.contains("clothType")) {
+            this.clothType = ItemStack.of(tag.getCompound("clothType"));
+        } else {
+            this.clothType = new ItemStack(Items.STONE);
+        }
 
-        // load items list safely
         this.items = new ArrayList<>();
         int size = tag.getInt("itemsSize");
 
@@ -114,7 +127,7 @@ public class ClothcraftingStationBlockEntity extends RandomizableContainerBlockE
         setChanged();
     }
 
-    public void setClothType(String type) {
+    public void setClothType(ItemStack type) {
         this.clothType = type;
         setChanged();
     }
@@ -135,7 +148,7 @@ public class ClothcraftingStationBlockEntity extends RandomizableContainerBlockE
         return items;
     }
 
-    public String getClothType() {
+    public ItemStack getClothType() {
         return clothType;
     }
 

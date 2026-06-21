@@ -14,11 +14,11 @@
 
   "block.weaversparadise.cotton_bush": "Cotton Bush",
   "block.weaversparadise.chromatic_bloom": "Chromatic Bloom",
-  "block.weaversparadise.spinning_jenny": "Spinning Jenny",
+  "block.weaversparadise.spinning_jenny_block": "Spinning Jenny",
   "block.weaversparadise.wild_cotton": "Wild Cotton",
-  "block.weaversparadise.clothcrafting_station": "Clothcrafting Station",
+  "block.weaversparadise.clothcrafting_station_block": "Clothcrafting Station",
   "block.weaversparadise.dyemaking_block": "Dyemaking Table",
-  "block.weaversparadise.dyeing_barrel": "Dyeing Barrel",
+  "block.weaversparadise.dyeing_barrel_block": "Dyeing Barrel",
   "block.weaversparadise.cotton_spool_block": "Cotton Spool Block",
   "block.weaversparadise.cotton_cloth_block": "Cotton Cloth Block",
   "block.weaversparadise.silk_spool_block": "Silk Spool Block",
@@ -26,7 +26,7 @@
   "block.weaversparadise.wool_spool_block": "Wool Spindle Block",
   "block.weaversparadise.wool_cloth_block": "Wool Cloth Block",
 
-  "item.weaversparadise.pure_dye": "Pigment",
+  "item.weaversparadise.pigment": "Pigment",
   "item.weaversparadise.button": "Button",
   "item.weaversparadise.needle": "Needle",
   "item.weaversparadise.needle_with_thread": "Needle with Thread",

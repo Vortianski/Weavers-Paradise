@@ -10,7 +10,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import org.joml.Vector4f;
 import oshi.util.tuples.Pair;
-import xox.labvorty.weaversparadise.data.texture.HandWarmersTextures;
+import xox.labvorty.weaversparadise.data.texture.ItemTexture;
+import xox.labvorty.weaversparadise.data.texture.TextureRegistry;
 import xox.labvorty.weaversparadise.models.HandWarmersModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ColorHandlers;
 import xox.labvorty.weaversparadise.renderers.helpers.HandWarmersRenderingData;
@@ -116,15 +117,15 @@ public class HandWarmersModelRenderer {
         finalCRT = colorIntToVector4f(fCRT.getA());
         finalL4 = fCRT.getB();
 
-        HandWarmersTextures leftHandler = HandWarmersTextures.getByTypeAndMaterial(sTL, mat);
-        String renderTypeLeft = leftHandler.getRenderType();
-        ResourceLocation tex1left = leftHandler.getTextureOne();
-        ResourceLocation tex2left = leftHandler.getTextureTwo();
+        ItemTexture leftTexture = TextureRegistry.find("hand_warmers", sTL, mat);
+        boolean renderTypeLeft = leftTexture.getRenderType();
+        ResourceLocation tex1left = leftTexture.getTextureOne();
+        ResourceLocation tex2left = leftTexture.getTextureTwo();
 
-        HandWarmersTextures rightHandler = HandWarmersTextures.getByTypeAndMaterial(sTR, mat);
-        String renderTypeRight = rightHandler.getRenderType();
-        ResourceLocation tex1right = rightHandler.getTextureOne();
-        ResourceLocation tex2right = rightHandler.getTextureTwo();
+        ItemTexture rightTexture = TextureRegistry.find("hand_warmers", sTL, mat);
+        boolean renderTypeRight = rightTexture.getRenderType();
+        ResourceLocation tex1right = rightTexture.getTextureOne();
+        ResourceLocation tex2right = rightTexture.getTextureTwo();
 
         poseStack.pushPose();
 
@@ -156,7 +157,7 @@ public class HandWarmersModelRenderer {
                 finalCLO.w
         );
 
-        if (renderTypeLeft.equals("double")) {
+        if (renderTypeLeft) {
             VertexConsumer vc2 = renderingUtils.parseVC(multiBufferSource, dTLT, tex2left, "hand_warmers");
             model.LeftArm.render(
                     poseStack,
@@ -182,7 +183,7 @@ public class HandWarmersModelRenderer {
                 finalCRO.w
         );
 
-        if (renderTypeRight.equals("double")) {
+        if (renderTypeRight) {
             VertexConsumer vc4 = renderingUtils.parseVC(multiBufferSource, dTRT, tex2right, "hand_warmers");
             model.RightArm.render(
                     poseStack,

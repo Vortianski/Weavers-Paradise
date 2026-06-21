@@ -7,7 +7,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
-import xox.labvorty.weaversparadise.data.tooltip_components.data.DyeTextHandler;
+import xox.labvorty.weaversparadise.data.tooltip_components.DyeTypeRegistry;
 
 import java.util.List;
 
@@ -172,7 +172,7 @@ public class DyeTooltipData {
         MutableComponent component = Component.empty();
         Minecraft minecraft = Minecraft.getInstance();
 
-        Component dyeText = DyeTextHandler.getOrDefault(s).getText();
+        Component dyeText = DyeTypeRegistry.getDyeType(type).getB();
 
         if (type.equals("default") || type.equals("crystal") || type.equals("invisible")) {
             component = dyeText.copy().withStyle(style -> style.withColor(primaryColor));

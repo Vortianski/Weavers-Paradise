@@ -1,21 +1,20 @@
 package xox.labvorty.weaversparadise.data.tooltip_components;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class DyeTooltipComponent implements TooltipComponent {
-    private final ResourceLocation texture;
+    private final DyeIcon dyeIcon;
     private final String text;
     private final String type;
     private final int lightValue;
     private final int primaryColor;
     private final int secondaryColor;
 
-    public DyeTooltipComponent(ResourceLocation texture, String text, String type, int lightValue, int primaryColor, int secondaryColor) {
-        this.texture = texture;
+    public DyeTooltipComponent(DyeIcon dyeIcon, String text, String type, int lightValue, int primaryColor, int secondaryColor) {
+        this.dyeIcon = dyeIcon;
         this.text = text;
         this.type = type;
         this.lightValue = lightValue;
@@ -31,8 +30,8 @@ public class DyeTooltipComponent implements TooltipComponent {
         return 8;
     }
 
-    public ResourceLocation getTexture() {
-        return this.texture;
+    public DyeIcon getDyeIcon() {
+        return this.dyeIcon;
     }
 
     public String getText() {

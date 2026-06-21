@@ -27,11 +27,12 @@ import oshi.util.tuples.Pair;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
-import xox.labvorty.weaversparadise.data.texture.CapeTextures;
+import xox.labvorty.weaversparadise.data.texture.ItemTexture;
+import xox.labvorty.weaversparadise.data.texture.TextureRegistry;
 import xox.labvorty.weaversparadise.items.clothing.CapeCottonItem;
-import xox.labvorty.weaversparadise.items.clothing.CapeInterface;
 import xox.labvorty.weaversparadise.items.clothing.CapeSilkItem;
 import xox.labvorty.weaversparadise.items.clothing.CapeWoolItem;
+import xox.labvorty.weaversparadise.items.clothing.defined.CapeInterface;
 import xox.labvorty.weaversparadise.renderers.helpers.ColorHandlers;
 import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
 import xox.labvorty.weaversparadise.utils.PlayerModelInterface;
@@ -107,7 +108,7 @@ public abstract class CapeLayerMixin extends RenderLayer<AbstractClientPlayer, P
                                 int finalLightOne = col1.getB();
                                 int finalLightTwo = col2.getB();
 
-                                CapeTextures capeTextures = CapeTextures.getByTypeAndMaterial(stencilType, type);
+                                ItemTexture texture = TextureRegistry.find("cape", stencilType, type);
                                 RenderingUtils renderingUtils = new RenderingUtils();
 
                                 poseStack.pushPose();
@@ -137,10 +138,10 @@ public abstract class CapeLayerMixin extends RenderLayer<AbstractClientPlayer, P
                                 poseStack.mulPose(Axis.XP.rotationDegrees(6.0F + f2 / 2.0F + f1));
                                 poseStack.mulPose(Axis.ZP.rotationDegrees(f3 / 2.0F));
                                 poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - f3 / 2.0F));
-                                VertexConsumer vertexConsumer1 = renderingUtils.parseVC(bufferSource, dyeTypeOne, capeTextures.getTextureOne(),"cape");
+                                VertexConsumer vertexConsumer1 = renderingUtils.parseVC(bufferSource, dyeTypeOne, texture.getTextureOne(),"cape");
                                 ((PlayerModelInterface)this.getParentModel()).getCloak().render(poseStack, vertexConsumer1, finalLightOne, OverlayTexture.NO_OVERLAY, finalColorOne.x, finalColorOne.y, finalColorOne.z, finalColorOne.w);
-                                if (capeTextures.getRenderType().equals("double")) {
-                                    VertexConsumer vertexConsumer2 = renderingUtils.parseVC(bufferSource, dyeTypeTwo, capeTextures.getTextureTwo(),"cape");
+                                if (texture.getRenderType()) {
+                                    VertexConsumer vertexConsumer2 = renderingUtils.parseVC(bufferSource, dyeTypeTwo, texture.getTextureTwo(),"cape");
                                     ((PlayerModelInterface)this.getParentModel()).getCloak().render(poseStack, vertexConsumer2, finalLightTwo, OverlayTexture.NO_OVERLAY, finalColorTwo.x, finalColorTwo.y, finalColorTwo.z, finalColorTwo.w);
                                 }
                                 poseStack.popPose();

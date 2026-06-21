@@ -149,7 +149,7 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                             stack.setTag(tags);
                         }
                     }
-                } else if (slot2.is(ItemTags.create(new ResourceLocation("weaversparadise:thigh_highs_stensils")))) {
+                } else if (slot2.is(ItemTags.create(ResourceLocation.parse("weaversparadise:thigh_highs_stensils")))) {
                     final String stensilLeft;
                     if (slot2.is(WeaversParadiseItems.HALF_STENCIL.get())) {
                         stensilLeft = "half";
@@ -326,7 +326,7 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                             stack.setTag(tags);
                         }
                     }
-                } else if (slot3.is(ItemTags.create(new ResourceLocation("weaversparadise:thigh_highs_stensils")))) {
+                } else if (slot3.is(ItemTags.create(ResourceLocation.parse("weaversparadise:thigh_highs_stensils")))) {
                     final String stensilRight;
                     if (slot3.is(WeaversParadiseItems.HALF_STENCIL.get())) {
                         stensilRight = "half";
@@ -530,7 +530,7 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                             stack.setTag(tags);
                         }
                     }
-                } else if (slot2.is(ItemTags.create(new ResourceLocation("weaversparadise:shirts_stensils"))) || slot2.is(ItemTags.create(new ResourceLocation("weaversparadise:pants_stencils")))) {
+                } else if (slot2.is(ItemTags.create(ResourceLocation.parse("weaversparadise:shirts_stensils"))) || slot2.is(ItemTags.create(ResourceLocation.parse("weaversparadise:pants_stencils")))) {
                     final String stensil;
                     if (slot2.is(WeaversParadiseItems.HALF_STENCIL.get())) {
                         stensil = "half";
@@ -676,9 +676,7 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos,
-                                 Player player, InteractionHand hand, BlockHitResult hit) {
-
+    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!world.isClientSide && player instanceof ServerPlayer serverPlayer) {
             NetworkHooks.openScreen(serverPlayer, new MenuProvider() {
                 @Override

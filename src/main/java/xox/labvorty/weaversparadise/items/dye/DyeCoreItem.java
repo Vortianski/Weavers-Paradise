@@ -6,7 +6,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import xox.labvorty.weaversparadise.data.tooltip_components.DyeTooltipComponent;
-import xox.labvorty.weaversparadise.data.tooltip_components.data.DyeIconHandler;
+import xox.labvorty.weaversparadise.data.tooltip_components.DyeTypeRegistry;
 
 import java.util.Optional;
 
@@ -37,9 +37,7 @@ public class DyeCoreItem extends Item {
 
         return Optional.of(
                 new DyeTooltipComponent(
-                        DyeIconHandler.getOrDefault(
-                                data.getString("dyeType")
-                        ).getTexture(),
+                        DyeTypeRegistry.getDyeType(data.getString("dyeType")).getA(),
                         data.getString("dyeType"),
                         data.getString("dyeType"),
                         data.getInt("lightValue"),

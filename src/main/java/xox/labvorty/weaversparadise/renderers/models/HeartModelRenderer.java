@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.entity.LivingEntity;
 import org.joml.Vector4f;
-import xox.labvorty.weaversparadise.data.texture.HeartTextures;
+import xox.labvorty.weaversparadise.data.texture.deprecated.HeartTextures;
 import xox.labvorty.weaversparadise.models.HeartModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ChokerTrinketRenderingData;
 import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;

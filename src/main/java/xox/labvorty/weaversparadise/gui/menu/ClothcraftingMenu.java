@@ -20,8 +20,9 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
-import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
+import xox.labvorty.weaversparadise.data.recipe.ClothcraftingRecipeInput;
 import xox.labvorty.weaversparadise.init.WeaversParadiseMenus;
+import xox.labvorty.weaversparadise.init.WeaversParadiseRecipes;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -60,7 +61,6 @@ public class ClothcraftingMenu extends AbstractContainerMenu implements Supplier
 
         if (pos != null) {
             if (extraData.readableBytes() == 1) {
-                // bound to item
                 byte hand = extraData.readByte();
                 ItemStack itemstack = hand == 0 ? this.entity.getMainHandItem() : this.entity.getOffhandItem();
                 this.boundItemMatcher = () -> itemstack == (hand == 0 ? this.entity.getMainHandItem() : this.entity.getOffhandItem());
@@ -72,8 +72,7 @@ public class ClothcraftingMenu extends AbstractContainerMenu implements Supplier
                 });
 
             } else if (extraData.readableBytes() > 1) {
-                // bound to entity
-                extraData.readByte(); // drop padding
+                extraData.readByte();
                 this.boundEntity = this.world.getEntity(extraData.readVarInt());
 
                 if (this.boundEntity != null) {
@@ -85,7 +84,6 @@ public class ClothcraftingMenu extends AbstractContainerMenu implements Supplier
                 }
 
             } else {
-                // might be bound to block
                 this.boundBlockEntity = this.world.getBlockEntity(pos);
                 if (this.boundBlockEntity instanceof BaseContainerBlockEntity baseContainerBlockEntity) {
                     this.internal = new InvWrapper(baseContainerBlockEntity);
@@ -103,21 +101,19 @@ public class ClothcraftingMenu extends AbstractContainerMenu implements Supplier
         this.customSlots.put(0, this.addSlot(new SlotItemHandler(this.internal, 0, 47, 1) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return stack.is(WeaversParadiseItems.JEANS_SPOOL.get())
-                        || stack.is(WeaversParadiseItems.COTTON_SPOOL.get())
-                        || stack.is(WeaversParadiseItems.SILK_SPOOL.get())
-                        || stack.is(WeaversParadiseItems.WOOL_SPOOL.get());
+                return world.getRecipeManager()
+                        .getAllRecipesFor(WeaversParadiseRecipes.CLOTHCRAFTING_TYPE.get())
+                        .stream()
+                        .anyMatch(r -> r.matches(new ClothcraftingRecipeInput(stack), world));
             }
         }));
 
-        // Player inventory
         for (int row = 0; row < 3; ++row) {
             for (int col = 0; col < 9; ++col) {
                 this.addSlot(new Slot(inv, col + (row + 1) * 9, 8 + col * 18, 127 + row * 18));
             }
         }
 
-        // Hotbar
         for (int col = 0; col < 9; ++col) {
             this.addSlot(new Slot(inv, col, 8 + col * 18, 185));
         }

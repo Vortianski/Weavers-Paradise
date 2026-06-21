@@ -5,15 +5,16 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import xox.labvorty.weaversparadise.data.tooltip_components.data.DyeTextHandler;
+import org.jetbrains.annotations.NotNull;
+import xox.labvorty.weaversparadise.data.tooltip_components.DyeIcon;
+import xox.labvorty.weaversparadise.data.tooltip_components.DyeTypeRegistry;
 import xox.labvorty.weaversparadise.data.tooltip_components.helper.DyeTooltipData;
 
 @OnlyIn(Dist.CLIENT)
 public class DyeClientTooltipComponent implements ClientTooltipComponent {
-    private final ResourceLocation texture;
+    private final DyeIcon dyeIcon;
     private final String text;
     private final String type;
     private final int width;
@@ -22,12 +23,12 @@ public class DyeClientTooltipComponent implements ClientTooltipComponent {
     private final int primaryColor;
     private final int secondaryColor;
 
-    public DyeClientTooltipComponent(ResourceLocation texture, String text, String type, int lightValue, int primaryColor, int secondaryColor) {
-        this(texture, text, type, lightValue, 8, 8, primaryColor, secondaryColor);
+    public DyeClientTooltipComponent(DyeIcon dyeIcon, String text, String type, int lightValue, int primaryColor, int secondaryColor) {
+        this(dyeIcon, text, type, lightValue, 8, 8, primaryColor, secondaryColor);
     }
 
-    public DyeClientTooltipComponent(ResourceLocation texture, String text, String type, int lightValue, int width, int height, int primaryColor, int secondaryColor) {
-        this.texture = texture;
+    public DyeClientTooltipComponent(DyeIcon dyeIcon, String text, String type, int lightValue, int width, int height, int primaryColor, int secondaryColor) {
+        this.dyeIcon = dyeIcon;
         this.text = text;
         this.type = type;
         this.lightValue = lightValue;
@@ -44,17 +45,17 @@ public class DyeClientTooltipComponent implements ClientTooltipComponent {
 
     @Override
     public int getWidth(Font font) {
-        return (width + 2 + font.width(DyeTextHandler.getOrDefault(this.text).getText()));
+        return (width + 2 + font.width(DyeTypeRegistry.getDyeType(this.text).getB()));
     }
 
     @Override
-    public void renderImage(Font font, int x, int y, GuiGraphics guiGraphics) {
+    public void renderImage(@NotNull Font font, int x, int y, @NotNull GuiGraphics guiGraphics) {
         RenderSystem.enableBlend();
 
         Minecraft mc = Minecraft.getInstance();
         int ticks = (int)mc.level.getGameTime();
 
-        guiGraphics.blit(this.texture, x, y, 0, 0, width, height, width, height);
+        dyeIcon.render(guiGraphics, x, y);
         guiGraphics.drawString(font, DyeTooltipData.parse(text, type, ticks, primaryColor, secondaryColor, lightValue), x + (width + 2), y + 1, 0xFFFFFF);
 
         RenderSystem.disableBlend();

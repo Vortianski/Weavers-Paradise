@@ -1,310 +1,59 @@
 package xox.labvorty.weaversparadise.data.texture;
 
 import net.minecraft.resources.ResourceLocation;
-import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+public class CapeTextures {
+    private static final String CLOTHING_TYPE = "cape";
 
-public enum CapeTextures {
-    DEFAULT_COTTON("default",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/cape_cotton.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/cape_cotton.png"
-            ),
-            "single",
-            "cotton"
-    ),
-    DEFAULT_WOOL("default",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/cape_wool.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/cape_wool.png"
-            ),
-            "single",
-            "wool"
-    ),
-    DEFAULT_SILK("default",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/cape_silk.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/cape_silk.png"
-            ),
-            "single",
-            "silk"
-    ),
-    HALF_COTTON("half",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/cotton_cape_half_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/cotton_cape_half_2.png"
-            ),
-            "double",
-            "cotton"
-    ),
-    HALF_WOOL("half",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/wool_cape_half_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/wool_cape_half_2.png"
-            ),
-            "double",
-            "wool"
-    ),
-    HALF_SILK("half",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/silk_cape_half_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/silk_cape_half_2.png"
-            ),
-            "double",
-            "silk"
-    ),
-    CHECKERS_COTTON("checkers",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/cotton_cape_checkers_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/cotton_cape_checkers_2.png"
-            ),
-            "double",
-            "cotton"
-    ),
-    CHECKERS_WOOL("checkers",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/wool_cape_checkers_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/wool_cape_checkers_2.png"
-            ),
-            "double",
-            "wool"
-    ),
-    CHECKERS_SILK("checkers",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/silk_cape_checkers_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/silk_cape_checkers_2.png"
-            ),
-            "double",
-            "silk"
-    ),
-    VERTICAL_LINE_COTTON("vertical_lines",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/cotton_cape_vertical_lines_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/cotton_cape_vertical_lines_2.png"
-            ),
-            "double",
-            "cotton"
-    ),
-    VERTICAL_LINE_WOOL("vertical_lines",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/wool_cape_vertical_lines_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/wool_cape_vertical_lines_2.png"
-            ),
-            "double",
-            "wool"
-    ),
-    VERTICAL_LINE_SILK("vertical_lines",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/silk_cape_vertical_lines_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/silk_cape_vertical_lines_2.png"
-            ),
-            "double",
-            "silk"
-    ),
-    SMALL_LINE_COTTON("small_lines",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/cotton_cape_small_lines_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/cotton_cape_small_lines_2.png"
-            ),
-            "double",
-            "cotton"
-    ),
-    SMALL_LINE_WOOL("small_lines",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/wool_cape_small_lines_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/wool_cape_small_lines_2.png"
-            ),
-            "double",
-            "wool"
-    ),
-    SMALL_LINE_SILK("small_lines",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/silk_cape_small_lines_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/silk_cape_small_lines_2.png"
-            ),
-            "double",
-            "silk"
-    ),
-    BIG_LINE_COTTON("big_lines",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/cotton_cape_big_lines_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/cotton_cape_big_lines_2.png"
-            ),
-            "double",
-            "cotton"
-    ),
-    BIG_LINE_WOOL("big_lines",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/wool_cape_big_lines_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/wool_cape_big_lines_2.png"
-            ),
-            "double",
-            "wool"
-    ),
-    BIG_LINE_SILK("big_lines",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/silk_cape_big_lines_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/silk_cape_big_lines_2.png"
-            ),
-            "double",
-            "silk"
-    ),
-    CHECKERS_SMALL_COTTON("checkers_small",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/cotton_cape_checkers_small_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/cotton_cape_checkers_small_2.png"
-            ),
-            "double",
-            "cotton"
-    ),
-    CHECKERS_SMALL_WOOL("checkers_small",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/wool_cape_checkers_small_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/wool_cape_checkers_small_2.png"
-            ),
-            "double",
-            "wool"
-    ),
-    CHECKERS_SMALL_SILK("checkers_small",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/silk_cape_checkers_small_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/cape/silk_cape_checkers_small_2.png"
-            ),
-            "double",
-            "silk"
-    );
+    private static final String STENCIL_DEFAULT = "default";
+    private static final String STENCIL_HALF = "half";
+    private static final String STENCIL_CHECKERS = "checkers";
+    private static final String STENCIL_VERTICAL_LINES = "vertical_lines";
+    private static final String STENCIL_SMALL_LINES = "small_lines";
+    private static final String STENCIL_BIG_LINES = "big_lines";
+    private static final String STENCIL_CHECKERS_SMALL = "checkers_small";
 
-    private final String type;
-    private final ResourceLocation textureOne;
-    private final ResourceLocation textureTwo;
-    private final String renderType;
-    private final String material;
+    private static final String MATERIAL_COTTON = "cotton";
+    private static final String MATERIAL_WOOL = "wool";
+    private static final String MATERIAL_SILK = "silk";
 
-    CapeTextures(String type, ResourceLocation textureOne, ResourceLocation textureTwo, String renderType, String material) {
-        this.type = type;
-        this.textureOne = textureOne;
-        this.textureTwo = textureTwo;
-        this.renderType = renderType;
-        this.material = material;
+    private static final String TEXTURE_BASE_PATH = "textures/clothing/";
+    private static final String VARIANT_PATH = TEXTURE_BASE_PATH + "variants/cape/";
+
+    public static void register() {
+        registerDefaultVariants();
+        registerPatternVariants();
     }
 
-    public String getType() {
-        return type;
+    private static void registerDefaultVariants() {
+        registerTexture(STENCIL_DEFAULT, MATERIAL_COTTON, "cape_cotton.png", "cape_cotton.png", false);
+        registerTexture(STENCIL_DEFAULT, MATERIAL_WOOL, "cape_wool.png", "cape_wool.png", false);
+        registerTexture(STENCIL_DEFAULT, MATERIAL_SILK, "cape_silk.png", "cape_silk.png", false);
     }
 
-    public ResourceLocation getTextureOne() {
-        return textureOne;
+    private static void registerPatternVariants() {
+        registerPattern(STENCIL_HALF, "cotton_cape_half_1.png", "cotton_cape_half_2.png", "wool_cape_half_1.png", "wool_cape_half_2.png", "silk_cape_half_1.png", "silk_cape_half_2.png");
+        registerPattern(STENCIL_CHECKERS, "cotton_cape_checkers_1.png", "cotton_cape_checkers_2.png", "wool_cape_checkers_1.png", "wool_cape_checkers_2.png", "silk_cape_checkers_1.png", "silk_cape_checkers_2.png");
+        registerPattern(STENCIL_VERTICAL_LINES, "cotton_cape_vertical_lines_1.png", "cotton_cape_vertical_lines_2.png", "wool_cape_vertical_lines_1.png", "wool_cape_vertical_lines_2.png", "silk_cape_vertical_lines_1.png", "silk_cape_vertical_lines_2.png");
+        registerPattern(STENCIL_SMALL_LINES, "cotton_cape_small_lines_1.png", "cotton_cape_small_lines_2.png", "wool_cape_small_lines_1.png", "wool_cape_small_lines_2.png", "silk_cape_small_lines_1.png", "silk_cape_small_lines_2.png");
+        registerPattern(STENCIL_BIG_LINES, "cotton_cape_big_lines_1.png", "cotton_cape_big_lines_2.png", "wool_cape_big_lines_1.png", "wool_cape_big_lines_2.png", "silk_cape_big_lines_1.png", "silk_cape_big_lines_2.png");
+        registerPattern(STENCIL_CHECKERS_SMALL, "cotton_cape_checkers_small_1.png", "cotton_cape_checkers_small_2.png", "wool_cape_checkers_small_1.png", "wool_cape_checkers_small_2.png", "silk_cape_checkers_small_1.png", "silk_cape_checkers_small_2.png");
     }
 
-    public ResourceLocation getTextureTwo() {
-        return textureTwo;
+    private static void registerPattern(String stencil, String cotton1, String cotton2, String wool1, String wool2, String silk1, String silk2) {
+        registerTexture(stencil, MATERIAL_COTTON, cotton1, cotton2, true);
+        registerTexture(stencil, MATERIAL_WOOL, wool1, wool2, true);
+        registerTexture(stencil, MATERIAL_SILK, silk1, silk2, true);
     }
 
-    public String getRenderType() {
-        return renderType;
-    }
-
-    public String getMaterial() {
-        return material;
-    }
-
-    private static final Map<Pair<String, String>, CapeTextures> HANDLER_MAP =
-            Stream.of(values())
-                    .collect(Collectors.toMap(
-                            e -> Pair.of(e.getType(), e.getMaterial()),
-                            e -> e
-                    ));
-
-    public static CapeTextures getByTypeAndMaterial(String type, String material) {
-        Pair<String, String> typematPair = Pair.of(type, material);
-
-        return HANDLER_MAP.getOrDefault(typematPair, DEFAULT_COTTON);
+    private static void registerTexture(String stencil, String material, String textureOneFile, String textureTwoFile, boolean renderType) {
+        TextureRegistry.registerTexture(
+                CLOTHING_TYPE,
+                stencil,
+                material,
+                ResourceLocation.fromNamespaceAndPath("weaversparadise", stencil.equals(STENCIL_DEFAULT) ? TEXTURE_BASE_PATH + textureOneFile : VARIANT_PATH + textureOneFile),
+                ResourceLocation.fromNamespaceAndPath("weaversparadise", stencil.equals(STENCIL_DEFAULT) ? TEXTURE_BASE_PATH + textureTwoFile : VARIANT_PATH + textureTwoFile),
+                renderType
+        );
     }
 }

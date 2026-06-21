@@ -1,388 +1,65 @@
 package xox.labvorty.weaversparadise.data.texture;
 
 import net.minecraft.resources.ResourceLocation;
-import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+public class PantsTextures {
+    private static final String CLOTHING_TYPE = "pants";
 
-public enum PantsTextures {
-    DEFAULT_JEANS("default",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/pants_jeans.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/pants_jeans.png"
-            ),
-            "single",
-            "jeans"),
-    DEFAULT_COTTON("default",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/pants_cotton.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/pants_cotton.png"
-            ),
-            "single",
-            "cotton"),
-    DEFAULT_SILK("default",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/pants_silk.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/pants_silk.png"
-            ),
-            "single",
-            "silk"),
-    HALF_JEANS("half",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_jeans_half_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_jeans_half_2.png"
-            ),
-            "double",
-            "jeans"),
-    HALF_COTTON("half",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_cotton_half_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_cotton_half_2.png"
-            ),
-            "double",
-            "cotton"),
-    HALF_SILK("half",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_silk_half_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_silk_half_2.png"
-            ),
-            "double",
-            "silk"),
-    CHECKERS_JEANS("checkers",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_jeans_checkers_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_jeans_checkers_2.png"
-            ),
-            "double",
-            "jeans"),
-    CHECKERS_COTTON("checkers",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_cotton_checkers_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_cotton_checkers_2.png"
-            ),
-            "double",
-            "cotton"),
-    CHECKERS_SILK("checkers",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_silk_checkers_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_silk_checkers_2.png"
-            ),
-            "double",
-            "silk"),
-    CHECKERS_SMALL_JEANS("checkers_small",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_jeans_checkers_small_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_jeans_checkers_small_2.png"
-            ),
-            "double",
-            "jeans"),
-    CHECKERS_SMALL_COTTON("checkers_small",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_cotton_checkers_small_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_cotton_checkers_small_2.png"
-            ),
-            "double",
-            "cotton"),
-    CHECKERS_SMALL_SILK("checkers_small",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_silk_checkers_small_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_silk_checkers_small_2.png"
-            ),
-            "double",
-            "silk"),
-    LINES_SMALL_JEANS("small_lines",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_jeans_small_lines_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_jeans_small_lines_2.png"
-            ),
-            "double",
-            "jeans"),
-    LINES_SMALL_COTTON("small_lines",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_cotton_small_lines_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_cotton_small_lines_2.png"
-            ),
-            "double",
-            "cotton"),
-    LINES_SMALL_SILK("small_lines",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_silk_small_lines_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_silk_small_lines_2.png"
-            ),
-            "double",
-            "silk"),
-    LINES_BIG_JEANS("big_lines",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_jeans_big_lines_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_jeans_big_lines_2.png"
-            ),
-            "double",
-            "jeans"),
-    LINES_BIG_COTTON("big_lines",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_cotton_big_lines_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_cotton_big_lines_2.png"
-            ),
-            "double",
-            "cotton"),
-    LINES_BIG_SILK("big_lines",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_silk_big_lines_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_silk_big_lines_2.png"
-            ),
-            "double",
-            "silk"),
-    LINES_VERTICAL_JEANS("vertical_lines",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_jeans_vertical_lines_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_jeans_vertical_lines_2.png"
-            ),
-            "double",
-            "jeans"),
-    LINES_VERTICAL_COTTON("vertical_lines",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_cotton_vertical_lines_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_cotton_vertical_lines_2.png"
-            ),
-            "double",
-            "cotton"),
-    LINES_VERTICAL_SILK("vertical_lines",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_silk_vertical_lines_1.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_silk_vertical_lines_2.png"
-            ),
-            "double",
-            "silk"),
-    STARS_JEANS("stars",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_jeans_stars.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_basic_stars.png"
-            ),
-            "double",
-            "jeans"),
-    STARS_COTTON("stars",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_cotton_stars.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_basic_stars.png"
-            ),
-            "double",
-            "cotton"),
-    STARS_SILK("stars",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_silk_stars.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_basic_stars.png"
-            ),
-            "double",
-            "silk"),
-    DIRT_JEANS("dirt",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_jeans_dirt.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_basic_dirt.png"
-            ),
-            "double",
-            "jeans"),
-    DIRT_COTTON("dirt",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_cotton_dirt.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_basic_dirt.png"
-            ),
-            "double",
-            "cotton"),
-    DIRT_SILK("dirt",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_silk_dirt.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_basic_dirt.png"
-            ),
-            "double",
-            "silk"),
-    FLOWERS_JEANS("flowers",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_jeans_flowers.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_basic_flowers.png"
-            ),
-            "double",
-            "jeans"),
-    FLOWERS_COTTON("flowers",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_cotton_flowers.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_basic_flowers.png"
-            ),
-            "double",
-            "cotton"),
-    FLOWERS_SILK("flowers",
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_silk_flowers.png"
-            ),
-            new ResourceLocation(
-                    "weaversparadise",
-                    "textures/clothing/variants/pants/pants_basic_flowers.png"
-            ),
-            "double",
-            "silk");
+    private static final String STENCIL_DEFAULT = "default";
+    private static final String STENCIL_HALF = "half";
+    private static final String STENCIL_CHECKERS = "checkers";
+    private static final String STENCIL_CHECKERS_SMALL = "checkers_small";
+    private static final String STENCIL_SMALL_LINES = "small_lines";
+    private static final String STENCIL_BIG_LINES = "big_lines";
+    private static final String STENCIL_VERTICAL_LINES = "vertical_lines";
+    private static final String STENCIL_STARS = "stars";
+    private static final String STENCIL_DIRT = "dirt";
+    private static final String STENCIL_FLOWERS = "flowers";
 
-    private final String type;
-    private final ResourceLocation textureOne;
-    private final ResourceLocation textureTwo;
-    private final String renderType;
-    private final String material;
+    private static final String MATERIAL_JEANS = "jeans";
+    private static final String MATERIAL_COTTON = "cotton";
+    private static final String MATERIAL_SILK = "silk";
 
-    PantsTextures(String type, ResourceLocation textureOne, ResourceLocation textureTwo, String renderType, String material) {
-        this.type = type;
-        this.textureOne = textureOne;
-        this.textureTwo = textureTwo;
-        this.renderType = renderType;
-        this.material = material;
+    private static final String TEXTURE_BASE_PATH = "textures/clothing/";
+    private static final String VARIANT_PATH = TEXTURE_BASE_PATH + "variants/pants/";
+
+    public static void register() {
+        registerDefaultVariants();
+        registerPatternVariants();
     }
 
-    public String getType() {
-        return type;
+    private static void registerDefaultVariants() {
+        registerTexture(STENCIL_DEFAULT, MATERIAL_JEANS, "pants_jeans.png", "pants_jeans.png", false);
+        registerTexture(STENCIL_DEFAULT, MATERIAL_COTTON, "pants_cotton.png", "pants_cotton.png", false);
+        registerTexture(STENCIL_DEFAULT, MATERIAL_SILK, "pants_silk.png", "pants_silk.png", false);
     }
 
-    public ResourceLocation getTextureOne() {
-        return textureOne;
+    private static void registerPatternVariants() {
+        registerPattern(STENCIL_HALF, "pants_jeans_half_1.png", "pants_jeans_half_2.png", "pants_cotton_half_1.png", "pants_cotton_half_2.png", "pants_silk_half_1.png", "pants_silk_half_2.png");
+        registerPattern(STENCIL_CHECKERS, "pants_jeans_checkers_1.png", "pants_jeans_checkers_2.png", "pants_cotton_checkers_1.png", "pants_cotton_checkers_2.png", "pants_silk_checkers_1.png", "pants_silk_checkers_2.png");
+        registerPattern(STENCIL_CHECKERS_SMALL, "pants_jeans_checkers_small_1.png", "pants_jeans_checkers_small_2.png", "pants_cotton_checkers_small_1.png", "pants_cotton_checkers_small_2.png", "pants_silk_checkers_small_1.png", "pants_silk_checkers_small_2.png");
+        registerPattern(STENCIL_SMALL_LINES, "pants_jeans_small_lines_1.png", "pants_jeans_small_lines_2.png", "pants_cotton_small_lines_1.png", "pants_cotton_small_lines_2.png", "pants_silk_small_lines_1.png", "pants_silk_small_lines_2.png");
+        registerPattern(STENCIL_BIG_LINES, "pants_jeans_big_lines_1.png", "pants_jeans_big_lines_2.png", "pants_cotton_big_lines_1.png", "pants_cotton_big_lines_2.png", "pants_silk_big_lines_1.png", "pants_silk_big_lines_2.png");
+        registerPattern(STENCIL_VERTICAL_LINES, "pants_jeans_vertical_lines_1.png", "pants_jeans_vertical_lines_2.png", "pants_cotton_vertical_lines_1.png", "pants_cotton_vertical_lines_2.png", "pants_silk_vertical_lines_1.png", "pants_silk_vertical_lines_2.png");
+        registerPattern(STENCIL_STARS, "pants_jeans_stars.png", "pants_basic_stars.png", "pants_cotton_stars.png", "pants_basic_stars.png", "pants_silk_stars.png", "pants_basic_stars.png");
+        registerPattern(STENCIL_DIRT, "pants_jeans_dirt.png", "pants_basic_dirt.png", "pants_cotton_dirt.png", "pants_basic_dirt.png", "pants_silk_dirt.png", "pants_basic_dirt.png");
+        registerPattern(STENCIL_FLOWERS, "pants_jeans_flowers.png", "pants_basic_flowers.png", "pants_cotton_flowers.png", "pants_basic_flowers.png", "pants_silk_flowers.png", "pants_basic_flowers.png");
     }
 
-    public ResourceLocation getTextureTwo() {
-        return textureTwo;
+    private static void registerPattern(String stencil, String jeans1, String jeans2, String cotton1, String cotton2, String silk1, String silk2) {
+        registerTexture(stencil, MATERIAL_JEANS, jeans1, jeans2, true);
+        registerTexture(stencil, MATERIAL_COTTON, cotton1, cotton2, true);
+        registerTexture(stencil, MATERIAL_SILK, silk1, silk2, true);
     }
 
-    public String getRenderType() {
-        return renderType;
-    }
-
-    public String getMaterial() {
-        return material;
-    }
-
-    private static final Map<Pair<String, String>, PantsTextures> HANDLER_MAP =
-            Stream.of(values())
-                    .collect(Collectors.toMap(
-                            e -> Pair.of(e.getType(), e.getMaterial()),
-                            e -> e
-                    ));
-
-    public static PantsTextures getByTypeAndMaterial(String type, String material) {
-        Pair<String, String> typematPair = Pair.of(type, material);
-
-        return HANDLER_MAP.getOrDefault(typematPair, DEFAULT_COTTON);
+    private static void registerTexture(String stencil, String material, String textureOneFile, String textureTwoFile, boolean renderType) {
+        TextureRegistry.registerTexture(
+                CLOTHING_TYPE,
+                stencil,
+                material,
+                ResourceLocation.fromNamespaceAndPath("weaversparadise", stencil.equals(STENCIL_DEFAULT) ? TEXTURE_BASE_PATH + textureOneFile : VARIANT_PATH + textureOneFile),
+                ResourceLocation.fromNamespaceAndPath("weaversparadise", stencil.equals(STENCIL_DEFAULT) ? TEXTURE_BASE_PATH + textureTwoFile : VARIANT_PATH + textureTwoFile),
+                renderType
+        );
     }
 }

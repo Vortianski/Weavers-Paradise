@@ -1,0 +1,12 @@
+{
+  "type": "weaversparadise:spinning_jenny",
+  "input": {
+    "tag": "minecraft:wool"
+  },
+  "result": {
+    "item": "weaversparadise:wool_spool",
+    "count": 1
+  },
+  "count_required": 1,
+  "craft_time": 100
+}

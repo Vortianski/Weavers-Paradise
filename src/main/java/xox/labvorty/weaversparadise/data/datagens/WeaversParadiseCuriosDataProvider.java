@@ -19,27 +19,27 @@ public class WeaversParadiseCuriosDataProvider extends CuriosDataProvider {
         createSlot("legwear")
                 .size(1)
                 .addCosmetic(false)
-                .icon(new ResourceLocation("curios:slot/legwear"));
+                .icon(ResourceLocation.parse("curios:slot/legwear"));
         createSlot("gloves")
                 .size(1)
                 .addCosmetic(false)
-                .icon(new ResourceLocation("curios:slot/gloves"));
+                .icon(ResourceLocation.parse("curios:slot/gloves"));
         createSlot("upperwear")
                 .size(1)
                 .addCosmetic(false)
-                .icon(new ResourceLocation("curios:slot/upperwear"));
+                .icon(ResourceLocation.parse("curios:slot/upperwear"));
         createSlot("choker_trinket")
                 .size(0)
                 .addCosmetic(false)
-                .icon(new ResourceLocation("curios:slot/choker_trinket"));
+                .icon(ResourceLocation.parse("curios:slot/choker_trinket"));
         createSlot("pants")
                 .size(1)
                 .addCosmetic(false)
-                .icon(new ResourceLocation("curios:slot/pants"));
+                .icon(ResourceLocation.parse("curios:slot/pants"));
         createSlot("cape")
                 .size(1)
                 .addCosmetic(false)
-                .icon(new ResourceLocation("curios:slot/cape"));
+                .icon(ResourceLocation.parse("curios:slot/cape"));
         createEntities("weaversparadise_entities")
                 .addPlayer()
                 .addSlots("legwear", "gloves", "upperwear", "necklace", "choker_trinket", "pants", "cape");

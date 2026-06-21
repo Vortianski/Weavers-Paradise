@@ -10,7 +10,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import org.joml.Vector4f;
 import oshi.util.tuples.Pair;
-import xox.labvorty.weaversparadise.data.texture.ThighHighsTextures;
+import xox.labvorty.weaversparadise.data.texture.ItemTexture;
+import xox.labvorty.weaversparadise.data.texture.TextureRegistry;
 import xox.labvorty.weaversparadise.models.ThighHighsModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ColorHandlers;
 import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
@@ -116,15 +117,15 @@ public class ThighHighsModelRenderer {
         finalCRT = colorIntToVector4f(fCRT.getA());
         finalL4 = fCRT.getB();
 
-        ThighHighsTextures leftHandler = ThighHighsTextures.getByTypeAndMaterial(sTL, mat);
-        String renderTypeLeft = leftHandler.getRenderType();
-        ResourceLocation tex1left = leftHandler.getTextureOne();
-        ResourceLocation tex2left = leftHandler.getTextureTwo();
+        ItemTexture leftTexture = TextureRegistry.find("thigh_highs", sTL, mat);
+        boolean renderTypeLeft = leftTexture.getRenderType();
+        ResourceLocation tex1left = leftTexture.getTextureOne();
+        ResourceLocation tex2left = leftTexture.getTextureTwo();
 
-        ThighHighsTextures rightHandler = ThighHighsTextures.getByTypeAndMaterial(sTR, mat);
-        String renderTypeRight = rightHandler.getRenderType();
-        ResourceLocation tex1right = rightHandler.getTextureOne();
-        ResourceLocation tex2right = rightHandler.getTextureTwo();
+        ItemTexture rightTexture = TextureRegistry.find("thigh_highs", sTR, mat);
+        boolean renderTypeRight = rightTexture.getRenderType();
+        ResourceLocation tex1right = rightTexture.getTextureOne();
+        ResourceLocation tex2right = rightTexture.getTextureTwo();
 
         poseStack.pushPose();
 
@@ -156,7 +157,7 @@ public class ThighHighsModelRenderer {
                 finalCLO.w
         );
 
-        if (renderTypeLeft.equals("double")) {
+        if (renderTypeLeft) {
             VertexConsumer vc2 = renderingUtils.parseVC(multiBufferSource, dTLT, tex2left, "thigh_highs");
             model.LeftLeg.render(
                     poseStack,
@@ -182,7 +183,7 @@ public class ThighHighsModelRenderer {
                 finalCRO.w
         );
 
-        if (renderTypeRight.equals("double")) {
+        if (renderTypeRight) {
             VertexConsumer vc4 = renderingUtils.parseVC(multiBufferSource, dTRT, tex2right, "thigh_highs");
             model.RightLeg.render(
                     poseStack,

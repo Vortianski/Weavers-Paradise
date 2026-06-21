@@ -14,11 +14,11 @@
 
   "block.weaversparadise.cotton_bush": "Хлопковый Куст",
   "block.weaversparadise.chromatic_bloom": "Хроматоцвет",
-  "block.weaversparadise.spinning_jenny": "Прялка Дженни",
+  "block.weaversparadise.spinning_jenny_block": "Прялка Дженни",
   "block.weaversparadise.wild_cotton": "Дикий Хлопок",
-  "block.weaversparadise.clothcrafting_station": "Станция Тканеделия",
+  "block.weaversparadise.clothcrafting_station_block": "Станция Тканеделия",
   "block.weaversparadise.dyemaking_block": "Станция Изготовления Красителей",
-  "block.weaversparadise.dyeing_barrel": "Покрасочная Бочка",
+  "block.weaversparadise.dyeing_barrel_block": "Покрасочная Бочка",
   "block.weaversparadise.cotton_spool_block": "Блок из Хлопковых Катушек",
   "block.weaversparadise.cotton_cloth_block": "Блок из Хлопковой Ткани",
   "block.weaversparadise.silk_spool_block": "Блок из Шёлковых Катушек",
@@ -26,7 +26,7 @@
   "block.weaversparadise.wool_spool_block": "Блок из Шерстяных Катушек",
   "block.weaversparadise.wool_cloth_block": "Блок из Шерстяной Ткани",
 
-  "item.weaversparadise.pure_dye": "Пигмент",
+  "item.weaversparadise.pigment": "Пигмент",
   "item.weaversparadise.button": "Пуговица",
   "item.weaversparadise.needle": "Иголка",
   "item.weaversparadise.needle_with_thread": "Иголка с Ниткой",

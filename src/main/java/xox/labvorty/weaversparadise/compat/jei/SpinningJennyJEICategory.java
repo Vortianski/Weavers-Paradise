@@ -12,31 +12,25 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 
 public class SpinningJennyJEICategory implements IRecipeCategory<SpinningJennyJEIRecipe> {
-    private final IDrawable icon;
     public static final RecipeType<SpinningJennyJEIRecipe> TYPE = RecipeType.create("weaversparadise", "spinning_jenny", SpinningJennyJEIRecipe.class);
+    private final IDrawable icon;
 
-    public SpinningJennyJEICategory(
-            IGuiHelper guiHelper
-    ) {
-        icon = guiHelper.createDrawableItemStack(
-                new ItemStack(
-                        WeaversParadiseItems.SPINNING_JENNY.get()
-                )
-        );
+    public SpinningJennyJEICategory(IGuiHelper guiHelper) {
+        icon = guiHelper.createDrawableItemStack(new ItemStack(WeaversParadiseItems.SPINNING_JENNY.get()));
     }
 
-
     @Override
-    public RecipeType<SpinningJennyJEIRecipe> getRecipeType() {
+    public @NotNull RecipeType<SpinningJennyJEIRecipe> getRecipeType() {
         return TYPE;
     }
 
     @Override
-    public Component getTitle() {
+    public @NotNull Component getTitle() {
         return Component.translatable("jei.weaversparadise.spinning_jenny");
     }
 
@@ -56,38 +50,23 @@ public class SpinningJennyJEICategory implements IRecipeCategory<SpinningJennyJE
     }
 
     @Override
-    public void draw(SpinningJennyJEIRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        guiGraphics.blit(
-                ResourceLocation.fromNamespaceAndPath(
-                        "weaversparadise",
-                        "textures/recipes/spinning_jenny.png"
-                ),
-                0,
-                0,
-                240,
-                155,
-                0,
-                0,
-                240, 155,
-                240, 155
-        );
+    public void draw(@NotNull SpinningJennyJEIRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        guiGraphics.blit(ResourceLocation.fromNamespaceAndPath("weaversparadise", "textures/recipes/spinning_jenny.png"), 0, 0, 240, 155, 0, 0, 240, 155, 240, 155);
 
         Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft != null && minecraft.level != null) {
-            int ticks = (int)minecraft.level.getGameTime();
-
-            int cycleticks = ticks % 100;
+        if (minecraft.level != null) {
+            int cycleticks = (int)(minecraft.level.getGameTime() % 100);
 
             guiGraphics.blit(ResourceLocation.parse("weaversparadise:textures/screens/arrow_full.png"), 152, 93, 0, 0, 31, 20, 31, 20);
-            guiGraphics.blit(ResourceLocation.parse("weaversparadise:textures/screens/arrow_empty.png"), 152, 93, 0, 0, (int)(31 * (1 - (cycleticks / 100.0))), 20, 31, 20);
+            guiGraphics.blit(ResourceLocation.parse("weaversparadise:textures/screens/arrow_empty.png"), 152, 93, 0, 0, (int)(31 * (1 - cycleticks / 100.0)), 20, 31, 20);
         }
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, SpinningJennyJEIRecipe recipe, IFocusGroup focuses) {
+    public void setRecipe(IRecipeLayoutBuilder builder, SpinningJennyJEIRecipe recipe, @NotNull IFocusGroup focuses) {
         builder.addInputSlot(36 + 8, 80 + 15).addIngredients(recipe.getInput().get(0));
-        builder.addInputSlot(183 + 8, 82 + 15).addIngredients(recipe.getInput().get(1));
-
+        builder.addInputSlot(183 + 8, 82 + 15).addIngredients(recipe.getInput().get(1))
+                .setSlotName("count_" + recipe.getCountRequired());
         builder.addOutputSlot(53 + 8, 80 + 15).addItemStack(recipe.getOutput());
     }
 }

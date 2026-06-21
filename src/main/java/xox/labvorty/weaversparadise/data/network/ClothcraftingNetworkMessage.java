@@ -10,7 +10,9 @@ import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.PacketDistributor;
 import xox.labvorty.weaversparadise.WeaversParadiseMod;
 import xox.labvorty.weaversparadise.blocks.entities.ClothcraftingStationBlockEntity;
+import xox.labvorty.weaversparadise.data.recipe.ClothcraftingRecipeInput;
 import xox.labvorty.weaversparadise.gui.screen.ClothcraftingScreen;
+import xox.labvorty.weaversparadise.init.WeaversParadiseRecipes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,7 @@ public class ClothcraftingNetworkMessage {
     private final int gameScore;
     private final boolean isGameOn;
     private final List<ItemStack> items;
-    private final String clothType;
+    private final ItemStack clothType;
 
     public ClothcraftingNetworkMessage(
             int buttonID,
@@ -33,7 +35,7 @@ public class ClothcraftingNetworkMessage {
             int gameScore,
             boolean isGameOn,
             List<ItemStack> items,
-            String clothType
+            ItemStack clothType
     ) {
         this.buttonID = buttonID;
         this.x = x;
@@ -54,31 +56,27 @@ public class ClothcraftingNetworkMessage {
         this.gameTime = buf.readInt();
         this.gameScore = buf.readInt();
         this.isGameOn = buf.readBoolean();
-
         int size = buf.readInt();
         this.items = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             this.items.add(buf.readItem());
         }
-
-        this.clothType = buf.readUtf();
+        this.clothType = buf.readItem();
     }
 
-    public void buffer(FriendlyByteBuf buf) {
-        buf.writeInt(buttonID);
-        buf.writeInt(x);
-        buf.writeInt(y);
-        buf.writeInt(z);
-        buf.writeInt(gameTime);
-        buf.writeInt(gameScore);
-        buf.writeBoolean(isGameOn);
-
-        buf.writeInt(items.size());
-        for (ItemStack stack : items) {
+    public static void buffer(ClothcraftingNetworkMessage message, FriendlyByteBuf buf) {
+        buf.writeInt(message.buttonID);
+        buf.writeInt(message.x);
+        buf.writeInt(message.y);
+        buf.writeInt(message.z);
+        buf.writeInt(message.gameTime);
+        buf.writeInt(message.gameScore);
+        buf.writeBoolean(message.isGameOn);
+        buf.writeInt(message.items.size());
+        for (ItemStack stack : message.items) {
             buf.writeItem(stack);
         }
-
-        buf.writeUtf(clothType == null ? "" : clothType);
+        buf.writeItem(message.clothType.isEmpty() ? ItemStack.EMPTY : message.clothType);
     }
 
     public static void handler(ClothcraftingNetworkMessage message, Supplier<NetworkEvent.Context> ctxSupplier) {
@@ -90,7 +88,6 @@ public class ClothcraftingNetworkMessage {
 
                 BlockPos pos = new BlockPos(message.x, message.y, message.z);
                 BlockEntity be = player.level().getBlockEntity(pos);
-
                 if (!(be instanceof ClothcraftingStationBlockEntity clothEntity)) return;
 
                 List<ItemStack> filteredItems = clothEntity.getItemsList().stream()
@@ -116,26 +113,8 @@ public class ClothcraftingNetworkMessage {
                     }
 
                     case 1 -> {
-                        clothEntity.setGameOn(message.isGameOn);
+                        // Score update only — server owns game state
                         clothEntity.setGameScore(message.gameScore);
-                        clothEntity.setGameTime(message.gameTime);
-                        clothEntity.setItems(filteredItems);
-                        clothEntity.setClothType(message.clothType);
-
-                        if (player instanceof ServerPlayer serverPlayer) {
-                            WeaversParadiseMod.PACKET_HANDLER.send(
-                                    PacketDistributor.PLAYER.with(() -> serverPlayer),
-                                    new ClothcraftingNetworkMessage(
-                                            0,
-                                            message.x, message.y, message.z,
-                                            clothEntity.getGameTime(),
-                                            clothEntity.getGameScore(),
-                                            clothEntity.getGameOn(),
-                                            filteredItems,
-                                            clothEntity.getClothType()
-                                    )
-                            );
-                        }
                     }
 
                     case 3 -> {
@@ -146,25 +125,37 @@ public class ClothcraftingNetworkMessage {
                         clothEntity.setItems(filteredItems);
                     }
 
-                    case 5 -> {
+                    case 4 -> {
+                        // Start game — look up recipe from spool in slot 0
                         ItemStack stack = clothEntity.getItem(0);
-                        stack.shrink(6);
+                        ClothcraftingRecipeInput input = new ClothcraftingRecipeInput(stack.copy());
+
+                        int cost = player.level().getRecipeManager()
+                                .getAllRecipesFor(WeaversParadiseRecipes.CLOTHCRAFTING_TYPE.get())
+                                .stream()
+                                .filter(r -> r.matches(input, player.level()))
+                                .mapToInt(r -> r.getSpoolCost())
+                                .findFirst()
+                                .orElse(6);
+
+                        int duration = player.level().getRecipeManager()
+                                .getAllRecipesFor(WeaversParadiseRecipes.CLOTHCRAFTING_TYPE.get())
+                                .stream()
+                                .filter(r -> r.matches(input, player.level()))
+                                .mapToInt(r -> r.getGameDuration())
+                                .findFirst()
+                                .orElse(900);
+
+                        // Store spool as clothType so tick() can re-derive the recipe
+                        clothEntity.setClothType(stack.copy());
+
+                        stack.shrink(cost);
                         clothEntity.setItem(0, stack);
 
-                        if (player instanceof ServerPlayer serverPlayer) {
-                            WeaversParadiseMod.PACKET_HANDLER.send(
-                                    PacketDistributor.PLAYER.with(() -> serverPlayer),
-                                    new ClothcraftingNetworkMessage(
-                                            0,
-                                            message.x, message.y, message.z,
-                                            clothEntity.getGameTime(),
-                                            clothEntity.getGameScore(),
-                                            clothEntity.getGameOn(),
-                                            filteredItems,
-                                            clothEntity.getClothType()
-                                    )
-                            );
-                        }
+                        clothEntity.setGameOn(true);
+                        clothEntity.setGameScore(0);
+                        clothEntity.setGameTime(duration);
+                        clothEntity.setChanged();
                     }
                 }
 
@@ -173,22 +164,17 @@ public class ClothcraftingNetworkMessage {
             }
 
             if (context.getDirection().getReceptionSide().isClient()) {
-                int buttonID = message.buttonID;
-                int x = message.x;
-                int y = message.y;
-                int z = message.z;
-                int gameTime = message.gameTime;
-                int gameScore = message.gameScore;
-                List<ItemStack> stackList = message.items;
-                boolean isGameOn = message.isGameOn;
-                String clothType = message.clothType;
-
-                if (buttonID == 0 || buttonID == 4) {
-                    ClothcraftingScreen.updateData(gameTime, gameScore, isGameOn, stackList, clothType);
+                if (message.buttonID == 0) {
+                    ClothcraftingScreen.updateData(
+                            message.gameTime,
+                            message.gameScore,
+                            message.isGameOn,
+                            message.items,
+                            message.clothType
+                    );
                 }
             }
         });
-
         context.setPacketHandled(true);
     }
 }
