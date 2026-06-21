@@ -33,6 +33,7 @@ public class WeaversParadise {
         WeaversParadiseCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         WeaversParadiseInterfaces.MENUS.register(modEventBus);
         WeaversParadiseRecipes.RECIPE_SERIALIZERS.register(modEventBus);
+        WeaversParadiseRecipes.RECIPE_TYPES.register(modEventBus);
         WeaversParadiseLootModifiers.LOOT_MODIFIERS.register(modEventBus);
         WeaversParadiseEntityTypes.ENTITY_TYPES.register(modEventBus);
 

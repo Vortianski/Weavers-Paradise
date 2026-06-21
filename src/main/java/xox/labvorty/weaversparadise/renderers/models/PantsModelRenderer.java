@@ -9,7 +9,8 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import oshi.util.tuples.Pair;
-import xox.labvorty.weaversparadise.data.texture.PantsTextures;
+import xox.labvorty.weaversparadise.data.texture.ItemTexture;
+import xox.labvorty.weaversparadise.data.texture.TextureRegistry;
 import xox.labvorty.weaversparadise.model.PantsModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ColorHandlers;
 import xox.labvorty.weaversparadise.renderers.helpers.PantsRenderingData;
@@ -82,9 +83,10 @@ public class PantsModelRenderer {
         finalCT = fCT.getA();
         finalL2 = fCT.getB();
 
-        String renderType = PantsTextures.getByTypeAndMaterial(sT, mat).getRenderType();
-        ResourceLocation tex1 = PantsTextures.getByTypeAndMaterial(sT, mat).getTextureOne();
-        ResourceLocation tex2 = PantsTextures.getByTypeAndMaterial(sT, mat).getTextureTwo();
+        ItemTexture texture = TextureRegistry.find("pants", sT, mat);
+        boolean renderType = texture.getRenderType();
+        ResourceLocation tex1 = texture.getTextureOne();
+        ResourceLocation tex2 = texture.getTextureTwo();
 
         poseStack.pushPose();
 
@@ -113,7 +115,7 @@ public class PantsModelRenderer {
                 finalCO
         );
 
-        if (renderType.equals("double")) {
+        if (renderType) {
             VertexConsumer vc2 = renderingUtils.parseVC(multiBufferSource, dTT, tex2, "pants");
             model.renderToBuffer(
                     poseStack,

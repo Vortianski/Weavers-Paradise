@@ -14,8 +14,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 import oshi.util.tuples.Pair;
 import xox.labvorty.weaversparadise.data.rendering.GlobalRenderingData;
-import xox.labvorty.weaversparadise.data.texture.ShirtOpenTextures;
-import xox.labvorty.weaversparadise.data.texture.ShirtTextures;
+import xox.labvorty.weaversparadise.data.texture.ItemTexture;
+import xox.labvorty.weaversparadise.data.texture.TextureRegistry;
 import xox.labvorty.weaversparadise.model.UpperWearModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ColorHandlers;
 import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
@@ -90,14 +90,13 @@ public class ShirtModelRenderer {
         finalCT = fCT.getA();
         finalL2 = fCT.getB();
 
-        String renderType = ShirtTextures.getByTypeAndMaterial(sT, mat).getRenderType();
-        ResourceLocation tex1 = ShirtTextures.getByTypeAndMaterial(sT, mat).getTextureOne();
-        ResourceLocation tex2 = ShirtTextures.getByTypeAndMaterial(sT, mat).getTextureTwo();
+        ItemTexture itemTexture = TextureRegistry.find("shirt", sT, mat);
         if (isOpen) {
-            ShirtOpenTextures weaversParadiseOpenShirtTextureHandler = ShirtOpenTextures.getByTypeAndMaterial(sT, mat);
-            tex1 = weaversParadiseOpenShirtTextureHandler.getTextureOne();
-            tex2 = weaversParadiseOpenShirtTextureHandler.getTextureTwo();
+            itemTexture = TextureRegistry.find("shirt_open", sT, mat);
         }
+        ResourceLocation tex1 = itemTexture.getTextureOne();
+        ResourceLocation tex2 = itemTexture.getTextureTwo();
+        boolean renderType = itemTexture.getRenderType();
 
         poseStack.pushPose();
 
@@ -126,7 +125,7 @@ public class ShirtModelRenderer {
                 finalCO
         );
 
-        if (renderType.equals("double")) {
+        if (renderType) {
             VertexConsumer vc2 = renderingUtils.parseVC(multiBufferSource, dTT, tex2, "shirt");
             model.renderToBuffer(
                     poseStack,

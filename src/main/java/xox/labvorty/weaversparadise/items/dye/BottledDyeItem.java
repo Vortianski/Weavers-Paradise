@@ -13,7 +13,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import xox.labvorty.weaversparadise.data.tooltip_components.DyeTooltipComponent;
-import xox.labvorty.weaversparadise.data.tooltip_components.data.DyeIconHandler;
+import xox.labvorty.weaversparadise.data.tooltip_components.DyeTypeRegistry;
 
 import java.util.Optional;
 
@@ -61,9 +61,7 @@ public class BottledDyeItem extends Item {
 
         return Optional.of(
                 new DyeTooltipComponent(
-                        DyeIconHandler.getOrDefault(
-                                data.getString("dyeType")
-                        ).getTexture(),
+                        DyeTypeRegistry.getDyeType(data.getString("dyeType")).getA(),
                         data.getString("dyeType"),
                         data.getString("dyeType"),
                         data.getInt("lightValue"),

@@ -8,9 +8,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 import xox.labvorty.weaversparadise.configs.ClientConfig;
@@ -19,7 +17,6 @@ import xox.labvorty.weaversparadise.model.ThighHighsModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ThighHighsRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.ThighHighModelRenderer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ThighsHighsCottonRenderer implements ICurioRenderer {

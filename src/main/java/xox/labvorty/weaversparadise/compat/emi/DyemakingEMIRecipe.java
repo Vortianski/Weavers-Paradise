@@ -92,6 +92,6 @@ public class DyemakingEMIRecipe implements EmiRecipe {
         widgets.addSlot(input.get(10), 77, 11).drawBack(false);
         widgets.addSlot(input.get(11), 59, 11).drawBack(false);
 
-        widgets.addSlot(output.get(0), 146, 32).drawBack(false);
+        widgets.addSlot(output.getFirst(), 146, 32).drawBack(false);
     }
 }

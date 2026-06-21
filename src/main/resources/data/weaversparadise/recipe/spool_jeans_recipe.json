@@ -1,0 +1,12 @@
+{
+  "type": "weaversparadise:spinning_jenny",
+  "input": {
+    "item": "weaversparadise:cotton_spool"
+  },
+  "result": {
+    "id": "weaversparadise:jeans_spool",
+    "count": 1
+  },
+  "count_required": 4,
+  "craft_time": 100
+}

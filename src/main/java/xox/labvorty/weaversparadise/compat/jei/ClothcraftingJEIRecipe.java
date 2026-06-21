@@ -1,28 +1,43 @@
 package xox.labvorty.weaversparadise.compat.jei;
 
-import net.minecraft.core.component.DataComponents;
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.Ingredient;
-import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
+import xox.labvorty.weaversparadise.data.recipes.ClothcraftingRecipe;
+import xox.labvorty.weaversparadise.init.WeaversParadiseRecipes;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class ClothcraftingJEIRecipe {
     private final ResourceLocation id;
     private final Ingredient input;
+    private final int inputCount;
     private final ItemStack output;
+    private final ItemStack spoolReturn;
+    private final int minScore;
+    private final int maxScore;
 
     public ClothcraftingJEIRecipe(
             ResourceLocation id,
             Ingredient input,
-            ItemStack output
+            int inputCount,
+            ItemStack output,
+            ItemStack spoolReturn,
+            int minScore,
+            int maxScore
     ) {
         this.id = id;
         this.input = input;
+        this.inputCount = inputCount;
         this.output = output;
+        this.spoolReturn = spoolReturn;
+        this.minScore = minScore;
+        this.maxScore = maxScore;
     }
 
     public ResourceLocation getId() {
@@ -33,127 +48,61 @@ public class ClothcraftingJEIRecipe {
         return input;
     }
 
+    public int getInputCount() {
+        return inputCount;
+    }
+
     public ItemStack getOutput() {
         return output;
     }
 
-    public static List<ClothcraftingJEIRecipe> makeCottonRecipes() {
-        List<ClothcraftingJEIRecipe> recipes = new ArrayList<>();
-
-        for (int i = 0; i <= 10; i++) {
-            final int j = i;
-            ItemStack stack = new ItemStack(WeaversParadiseItems.COTTON_CLOTH.get());
-
-            CustomData.update(
-                    DataComponents.CUSTOM_DATA,
-                    stack,
-                    tag -> tag.putInt("quality", j)
-            );
-
-            recipes.add(
-                    new ClothcraftingJEIRecipe(
-                            ResourceLocation.fromNamespaceAndPath(
-                                    "weaversparadise",
-                                    "clothcrafting_cotton_" + i
-                            ),
-                            Ingredient.of(
-                                    WeaversParadiseItems.COTTON_SPOOL.get()
-                            ),
-                            stack
-                    )
-            );
-        }
-
-        return recipes;
+    public ItemStack getSpoolReturn() {
+        return spoolReturn;
     }
 
-    public static List<ClothcraftingJEIRecipe> makeSilkRecipes() {
-        List<ClothcraftingJEIRecipe> recipes = new ArrayList<>();
-
-        for (int i = 0; i <= 10; i++) {
-            final int j = i;
-            ItemStack stack = new ItemStack(WeaversParadiseItems.SILK_CLOTH.get());
-
-            CustomData.update(
-                    DataComponents.CUSTOM_DATA,
-                    stack,
-                    tag -> tag.putInt("quality", j)
-            );
-
-            recipes.add(
-                    new ClothcraftingJEIRecipe(
-                            ResourceLocation.fromNamespaceAndPath(
-                                    "weaversparadise",
-                                    "clothcrafting_silk_" + i
-                            ),
-                            Ingredient.of(
-                                    WeaversParadiseItems.SILK_SPOOL.get()
-                            ),
-                            stack
-                    )
-            );
-        }
-
-        return recipes;
+    public int getMinScore() {
+        return minScore;
     }
 
-    public static List<ClothcraftingJEIRecipe> makeWoolRecipes() {
-        List<ClothcraftingJEIRecipe> recipes = new ArrayList<>();
-
-        for (int i = 0; i <= 10; i++) {
-            final int j = i;
-            ItemStack stack = new ItemStack(WeaversParadiseItems.WOOL_CLOTH.get());
-
-            CustomData.update(
-                    DataComponents.CUSTOM_DATA,
-                    stack,
-                    tag -> tag.putInt("quality", j)
-            );
-
-            recipes.add(
-                    new ClothcraftingJEIRecipe(
-                            ResourceLocation.fromNamespaceAndPath(
-                                    "weaversparadise",
-                                    "clothcrafting_wool_" + i
-                            ),
-                            Ingredient.of(
-                                    WeaversParadiseItems.WOOL_SPOOL.get()
-                            ),
-                            stack
-                    )
-            );
-        }
-
-        return recipes;
+    public int getMaxScore() {
+        return maxScore;
     }
 
-    public static List<ClothcraftingJEIRecipe> makeJeansRecipes() {
-        List<ClothcraftingJEIRecipe> recipes = new ArrayList<>();
+    public static List<ClothcraftingJEIRecipe> buildAll() {
+        List<ClothcraftingJEIRecipe> result = new ArrayList<>();
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.level == null) return result;
 
-        for (int i = 0; i <= 10; i++) {
-            final int j = i;
-            ItemStack stack = new ItemStack(WeaversParadiseItems.JEANS_CLOTH.get());
+        RecipeManager rm = Minecraft.getInstance().level.getRecipeManager();
+        Collection<RecipeHolder<ClothcraftingRecipe>> holders =
+                rm.getAllRecipesFor(WeaversParadiseRecipes.CLOTHCRAFTING_TYPE.get());
 
-            CustomData.update(
-                    DataComponents.CUSTOM_DATA,
-                    stack,
-                    tag -> tag.putInt("quality", j)
-            );
+        for (RecipeHolder<ClothcraftingRecipe> holder : holders) {
+            ClothcraftingRecipe recipe = holder.value();
+            ResourceLocation recipeId = holder.id();
 
-            recipes.add(
-                    new ClothcraftingJEIRecipe(
-                            ResourceLocation.fromNamespaceAndPath(
-                                    "weaversparadise",
-                                    "clothcrafting_jeans_" + i
-                            ),
-                            Ingredient.of(
-                                    WeaversParadiseItems.JEANS_SPOOL.get()
-                            ),
-                            stack
-                    )
-            );
+            ItemStack returnSpool = recipe.getSpoolReturn().copy();
+            returnSpool.setCount(recipe.getSpoolReturnCount());
+
+            List<ClothcraftingRecipe.OutputTier> tiers = recipe.getTiers();
+            for (int i = 0; i < tiers.size(); i++) {
+                ClothcraftingRecipe.OutputTier tier = tiers.get(i);
+
+                ItemStack output = tier.result().copy();
+                output.setCount(tier.count());
+
+                result.add(new ClothcraftingJEIRecipe(
+                        recipeId.withSuffix("_tier_" + i),
+                        recipe.getIngredient(),
+                        recipe.getSpoolCost(),
+                        output,
+                        returnSpool.copy(),
+                        tier.minScore(),
+                        tier.maxScore()
+                ));
+            }
         }
 
-        return recipes;
+        return result;
     }
 }

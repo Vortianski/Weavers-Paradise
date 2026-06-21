@@ -5,8 +5,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
-import xox.labvorty.weaversparadise.items.armor.GriffithArmorItem;
-import xox.labvorty.weaversparadise.items.armor.NikoArmorItem;
 import xox.labvorty.weaversparadise.model.*;
 import xox.labvorty.weaversparadise.renderers.curios.*;
 

@@ -14,7 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 import oshi.util.tuples.Pair;
 import xox.labvorty.weaversparadise.data.rendering.GlobalRenderingData;
-import xox.labvorty.weaversparadise.data.texture.ChokerTextures;
+import xox.labvorty.weaversparadise.data.texture.deprecated.ChokerTextures;
 import xox.labvorty.weaversparadise.model.ChokerModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ChokerRenderingData;
 import xox.labvorty.weaversparadise.renderers.helpers.ColorHandlers;

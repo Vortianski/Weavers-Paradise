@@ -5,16 +5,10 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.component.CustomData;
-import net.minecraft.world.item.crafting.Ingredient;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @JeiPlugin
 public class JeiCompat implements IModPlugin {
@@ -35,19 +29,7 @@ public class JeiCompat implements IModPlugin {
     public void registerRecipes(IRecipeRegistration recipeRegistration) {
         recipeRegistration.addRecipes(
                 ClothcraftingJEICategory.TYPE,
-                ClothcraftingJEIRecipe.makeCottonRecipes()
-        );
-        recipeRegistration.addRecipes(
-                ClothcraftingJEICategory.TYPE,
-                ClothcraftingJEIRecipe.makeSilkRecipes()
-        );
-        recipeRegistration.addRecipes(
-                ClothcraftingJEICategory.TYPE,
-                ClothcraftingJEIRecipe.makeWoolRecipes()
-        );
-        recipeRegistration.addRecipes(
-                ClothcraftingJEICategory.TYPE,
-                ClothcraftingJEIRecipe.makeJeansRecipes()
+                ClothcraftingJEIRecipe.buildAll()
         );
 
         recipeRegistration.addRecipes(
@@ -80,7 +62,7 @@ public class JeiCompat implements IModPlugin {
     }
 
     @Override
-    public ResourceLocation getPluginUid() {
+    public @NotNull ResourceLocation getPluginUid() {
         return ResourceLocation.fromNamespaceAndPath("weaversparadise", "jei_plugin");
     }
 }

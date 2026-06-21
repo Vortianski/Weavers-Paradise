@@ -4,46 +4,36 @@ import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.CustomData;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.neoforged.neoforge.common.crafting.IngredientType;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 
 public class ClothcraftingJEICategory implements IRecipeCategory<ClothcraftingJEIRecipe> {
-    private final IDrawable icon;
-    public static final RecipeType<ClothcraftingJEIRecipe> TYPE = RecipeType.create("weaversparadise", "clothcrafting", ClothcraftingJEIRecipe.class);
+    public static final RecipeType<ClothcraftingJEIRecipe> TYPE =
+            RecipeType.create("weaversparadise", "clothcrafting", ClothcraftingJEIRecipe.class);
 
-    public ClothcraftingJEICategory(
-        IGuiHelper guiHelper
-    ) {
+    private final IDrawable icon;
+
+    public ClothcraftingJEICategory(IGuiHelper guiHelper) {
         icon = guiHelper.createDrawableItemStack(
-                new ItemStack(
-                        WeaversParadiseItems.CLOTHCRAFTING_STATION.get()
-                )
-        );
+                new ItemStack(WeaversParadiseItems.CLOTHCRAFTING_STATION.get()));
     }
 
     @Override
-    public RecipeType<ClothcraftingJEIRecipe> getRecipeType() {
+    public @NotNull RecipeType<ClothcraftingJEIRecipe> getRecipeType() {
         return TYPE;
     }
 
     @Override
-    public Component getTitle() {
+    public @NotNull Component getTitle() {
         return Component.translatable("jei.weaversparadise.clothcrafting");
     }
 
@@ -63,53 +53,23 @@ public class ClothcraftingJEICategory implements IRecipeCategory<ClothcraftingJE
     }
 
     @Override
-    public void draw(ClothcraftingJEIRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        CompoundTag tag = recipe.getOutput()
-                .getOrDefault(
-                        DataComponents.CUSTOM_DATA,
-                        CustomData.EMPTY
-                ).copyTag();
-
-        int score = Mth.clamp(
-                tag.getInt("quality") * 2,
-                0,
-                40
-        );
-
-        int maxscore = score + 1;
-
+    public void draw(ClothcraftingJEIRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         guiGraphics.blit(
-                ResourceLocation.fromNamespaceAndPath(
-                        "weaversparadise",
-                        "textures/recipes/clothcrafting_recipe_support.png"
-                ),
-                0,
-                0,
-                0,
-                0,
-                192,
-                118,
-                192,
-                118
+                ResourceLocation.fromNamespaceAndPath("weaversparadise", "textures/recipes/clothcrafting_recipe_support.png"),
+                0, 0, 0, 0, 192, 118, 192, 118
         );
 
-        guiGraphics.drawString(
-                Minecraft.getInstance().font,
-                Component.literal(
-                        "Score: " +
-                                score +
-                                "-" +
-                                (maxscore > 20 ? "20+" : maxscore)
-                ),
-                47,
-                54,
-                0xFFFFFF
-        );
+        int max = recipe.getMaxScore();
+        String scoreText = Component.translatable("weaversparadise.clothcrafting.score").getString()
+                + " " + recipe.getMinScore() + "-" + (max >= 999 ? "∞" : max);
+
+        guiGraphics.drawString(Minecraft.getInstance().font, scoreText, 47, 54, 0x000000, false);
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, ClothcraftingJEIRecipe recipe, IFocusGroup focuses) {
-        builder.addInputSlot(46, 0).addIngredients(recipe.getInput());
-        builder.addOutputSlot(146, 101).addItemStack(recipe.getOutput());
+    public void setRecipe(IRecipeLayoutBuilder builder, ClothcraftingJEIRecipe recipe, @NotNull IFocusGroup focuses) {
+        builder.addInputSlot(46, 0).addIngredients(recipe.getInput()).setSlotName("input");
+        builder.addOutputSlot(146, 101).addItemStack(recipe.getOutput()).setSlotName("output");
+        builder.addOutputSlot(120, 101).addItemStack(recipe.getSpoolReturn()).setSlotName("spool_return");
     }
 }

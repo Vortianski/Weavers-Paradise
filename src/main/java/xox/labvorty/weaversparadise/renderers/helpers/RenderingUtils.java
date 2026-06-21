@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.TheEndPortalRenderer;
 import net.minecraft.resources.ResourceLocation;
-import xox.labvorty.weaversparadise.init.WeaversParadiseRenderTypes;
+import xox.labvorty.vortylib.init.VortyLibRenderTypes;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class RenderingUtils {
 
         if (dyeType.equals("ender")) {
             return multiBufferSource.getBuffer(
-                    WeaversParadiseRenderTypes.getVoidArmor(
+                    VortyLibRenderTypes.getEntityEndPortal(
                             TheEndPortalRenderer.END_SKY_LOCATION,
                             texture,
                             TheEndPortalRenderer.END_PORTAL_LOCATION
@@ -48,37 +48,37 @@ public class RenderingUtils {
             );
         } else if (dyeType.equals("polychromatic")) {
             return multiBufferSource.getBuffer(
-                    WeaversParadiseRenderTypes.getPolychromatic(
+                    VortyLibRenderTypes.getEntityPolychromatic(
                             texture
                     )
             );
         } else if (dyeType.equals("static")) {
             return multiBufferSource.getBuffer(
-                    WeaversParadiseRenderTypes.getEntityStatic(
+                    VortyLibRenderTypes.getEntityStaticNoise(
                             texture
                     )
             );
         } else if (dyeType.equals("crystal")) {
             return multiBufferSource.getBuffer(
-                    WeaversParadiseRenderTypes.getCrystal(
+                    VortyLibRenderTypes.getEntityCrystal(
                             texture
                     )
             );
         } else if (dyeType.equals("negative")) {
             return multiBufferSource.getBuffer(
-                    WeaversParadiseRenderTypes.getNegative(
+                    VortyLibRenderTypes.getEntityNegative(
                             texture
                     )
             );
         } else if (dyeType.equals("true_negative")) {
             return multiBufferSource.getBuffer(
-                    WeaversParadiseRenderTypes.getTrueNegative(
+                    VortyLibRenderTypes.getEntityTrueNegative(
                             texture
                     )
             );
         } else if (dyeType.equals("nebula")) {
             return multiBufferSource.getBuffer(
-                    WeaversParadiseRenderTypes.getNebula(
+                    VortyLibRenderTypes.getEntityNebula(
                             texture
                     )
             );
@@ -91,7 +91,7 @@ public class RenderingUtils {
             );
 
             return multiBufferSource.getBuffer(
-                    WeaversParadiseRenderTypes.getEntityTranslucentMask(
+                    VortyLibRenderTypes.getEntityTranslucentMask(
                             texture,
                             mask
                     )

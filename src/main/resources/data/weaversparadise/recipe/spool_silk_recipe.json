@@ -1,0 +1,12 @@
+{
+  "type": "weaversparadise:spinning_jenny",
+  "input": {
+    "item": "minecraft:string"
+  },
+  "result": {
+    "id": "weaversparadise:silk_spool",
+    "count": 1
+  },
+  "count_required": 5,
+  "craft_time": 100
+}

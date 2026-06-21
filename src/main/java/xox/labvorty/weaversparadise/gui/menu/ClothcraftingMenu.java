@@ -19,8 +19,9 @@ import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
+import xox.labvorty.weaversparadise.data.recipes.ClothcraftingRecipeInput;
 import xox.labvorty.weaversparadise.init.WeaversParadiseInterfaces;
-import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
+import xox.labvorty.weaversparadise.init.WeaversParadiseRecipes;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,7 +55,7 @@ public class ClothcraftingMenu extends AbstractContainerMenu implements Supplier
             access = ContainerLevelAccess.create(world, pos);
         }
         if (pos != null) {
-            if (extraData.readableBytes() == 1) { // bound to item
+            if (extraData.readableBytes() == 1) {
                 byte hand = extraData.readByte();
                 ItemStack itemstack = hand == 0 ? this.entity.getMainHandItem() : this.entity.getOffhandItem();
                 this.boundItemMatcher = () -> itemstack == (hand == 0 ? this.entity.getMainHandItem() : this.entity.getOffhandItem());
@@ -63,8 +64,8 @@ public class ClothcraftingMenu extends AbstractContainerMenu implements Supplier
                     this.internal = cap;
                     this.bound = true;
                 }
-            } else if (extraData.readableBytes() > 1) { // bound to entity
-                extraData.readByte(); // drop padding
+            } else if (extraData.readableBytes() > 1) {
+                extraData.readByte();
                 boundEntity = world.getEntity(extraData.readVarInt());
                 if (boundEntity != null) {
                     IItemHandler cap = boundEntity.getCapability(Capabilities.ItemHandler.ENTITY);
@@ -73,7 +74,7 @@ public class ClothcraftingMenu extends AbstractContainerMenu implements Supplier
                         this.bound = true;
                     }
                 }
-            } else { // might be bound to block
+            } else {
                 boundBlockEntity = this.world.getBlockEntity(pos);
                 if (boundBlockEntity instanceof BaseContainerBlockEntity baseContainerBlockEntity) {
                     this.internal = new InvWrapper(baseContainerBlockEntity);
@@ -82,17 +83,14 @@ public class ClothcraftingMenu extends AbstractContainerMenu implements Supplier
             }
         }
         this.customSlots.put(0, this.addSlot(new SlotItemHandler(internal, 0, 47, 1) {
-            private final int slot = 0;
-            private int x = ClothcraftingMenu.this.x;
-            private int y = ClothcraftingMenu.this.y;
-
             @Override
             public boolean mayPlace(ItemStack stack) {
-                if (stack.is(WeaversParadiseItems.JEANS_SPOOL) || stack.is(WeaversParadiseItems.COTTON_SPOOL) || stack.is(WeaversParadiseItems.SILK_SPOOL) || stack.is(WeaversParadiseItems.WOOL_SPOOL)) {
-                    return true;
-                }
-
-                return false;
+                return world.getRecipeManager()
+                        .getRecipeFor(
+                                WeaversParadiseRecipes.CLOTHCRAFTING_TYPE.get(),
+                                new ClothcraftingRecipeInput(stack),
+                                world
+                        ).isPresent();
             }
         }));
         for (int si = 0; si < 3; ++si)

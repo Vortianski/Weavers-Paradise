@@ -111,16 +111,24 @@ configurations {
 dependencies {
     // EMI
     compileOnlyApi(("dev.emi:emi-neoforge:1.1.22+1.21.1:api"))
-    runtimeOnly(("dev.emi:emi-neoforge:1.1.22+1.21.1"))
+    //runtimeOnly(("dev.emi:emi-neoforge:1.1.22+1.21.1"))
 
     compileOnlyApi(("top.theillusivec4.curios:curios-neoforge:${property("curios_version")}"))
     runtimeOnly(("top.theillusivec4.curios:curios-neoforge:${property("curios_version")}"))
 
     //JEI
     compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
-    //runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
+    runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
 
-    compileOnly "curse.maven:cold-sweat-506194:7370181"
+    //Cold Sweat
+    compileOnly("curse.maven:cold-sweat-506194:7370181")
+
+    //Iris Shaders
+    runtimeOnly("curse.maven:sodium-394468:6382651")
+    implementation("curse.maven:irisshaders-455508:6661598")
+
+    //VortyLib
+    implementation("curse.maven:vortylib-1578928:8268462")
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

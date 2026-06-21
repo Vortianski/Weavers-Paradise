@@ -7,10 +7,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import oshi.util.tuples.Pair;
-import xox.labvorty.weaversparadise.data.texture.HandWarmersTextures;
+import xox.labvorty.weaversparadise.data.texture.ItemTexture;
+import xox.labvorty.weaversparadise.data.texture.TextureRegistry;
 import xox.labvorty.weaversparadise.model.ThighHighsModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ColorHandlers;
 import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
@@ -118,15 +118,15 @@ public class HandWarmersSpecialModelRenderer {
         finalCRT = fCRT.getA();
         finalL4 = fCRT.getB();
 
-        HandWarmersTextures leftHandler = HandWarmersTextures.getByTypeAndMaterial(sTL, mat);
-        String renderTypeLeft = leftHandler.getRenderType();
-        ResourceLocation tex1left = leftHandler.getTextureOne();
-        ResourceLocation tex2left = leftHandler.getTextureTwo();
+        ItemTexture leftTexture = TextureRegistry.find("hand_warmers", sTL, mat);
+        boolean renderTypeLeft = leftTexture.getRenderType();
+        ResourceLocation tex1left = leftTexture.getTextureOne();
+        ResourceLocation tex2left = leftTexture.getTextureTwo();
 
-        HandWarmersTextures rightHandler = HandWarmersTextures.getByTypeAndMaterial(sTR, mat);
-        String renderTypeRight = rightHandler.getRenderType();
-        ResourceLocation tex1right = rightHandler.getTextureOne();
-        ResourceLocation tex2right = rightHandler.getTextureTwo();
+        ItemTexture rightTexture = TextureRegistry.find("hand_warmers", sTR, mat);
+        boolean renderTypeRight = rightTexture.getRenderType();
+        ResourceLocation tex1right = rightTexture.getTextureOne();
+        ResourceLocation tex2right = rightTexture.getTextureTwo();
 
         poseStack.pushPose();
 
@@ -155,7 +155,7 @@ public class HandWarmersSpecialModelRenderer {
                 finalCLO
         );
 
-        if (renderTypeLeft.equals("double")) {
+        if (renderTypeLeft) {
             VertexConsumer vc2 = renderingUtils.parseVC(multiBufferSource, dTLT, tex2left, "hand_warmers");
             model.LeftLeg.render(
                     poseStack,
@@ -175,7 +175,7 @@ public class HandWarmersSpecialModelRenderer {
                 finalCRO
         );
 
-        if (renderTypeRight.equals("double")) {
+        if (renderTypeRight) {
             VertexConsumer vc4 = renderingUtils.parseVC(multiBufferSource, dTRT, tex2right, "hand_warmers");
             model.RightLeg.render(
                     poseStack,
@@ -187,15 +187,5 @@ public class HandWarmersSpecialModelRenderer {
         }
 
         poseStack.popPose();
-    }
-
-    public int getRainbowColor(int ticks) {
-        float speed = 0.05F;
-
-        float red = Mth.clamp((float)(Math.sin(ticks * speed) * 0.5 + 0.5), 0, 1);
-        float green = Mth.clamp((float)(Math.sin(ticks * speed + 2 * Math.PI / 3) * 0.5 + 0.5), 0, 1);
-        float blue = Mth.clamp((float)(Math.sin(ticks * speed + 4 * Math.PI / 3) * 0.5 + 0.5), 0, 1);
-
-        return 255 << 24 | (int)(red * 255) << 16 | (int)(green * 255) << 8 | (int)(blue * 255);
     }
 }

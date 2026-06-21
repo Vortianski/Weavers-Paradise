@@ -8,6 +8,7 @@ import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.Bounds;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
@@ -15,10 +16,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
+import xox.labvorty.weaversparadise.data.recipes.ClothcraftingRecipe;
+import xox.labvorty.weaversparadise.data.recipes.SpinningJennyRecipe;
 import xox.labvorty.weaversparadise.gui.screen.StringScreen;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
+import xox.labvorty.weaversparadise.init.WeaversParadiseRecipes;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @EmiEntrypoint
@@ -52,8 +59,6 @@ public class EmiCompat implements EmiPlugin {
         registry.addExclusionArea(StringScreen.class, (screen, consumer) -> {
             int sx = screen.getGuiLeft() + 184 - 8;
             int sy = screen.getGuiTop() + 39 - 16;
-            //int ex = screen.getGuiLeft() + 184 + 56 - 8;
-            //int ey = screen.getGuiTop() + 39 + 105 - 16;
 
             consumer.accept(new Bounds(
                     sx,
@@ -71,109 +76,67 @@ public class EmiCompat implements EmiPlugin {
         registry.addWorkstation(SPINNINGJENNY_RECIPE_CATEGORY, SPINNINGJENNY_WORKSTATION);
         registry.addWorkstation(DYEMAKING_RECIPE_CATEGORY, DYEMAKING_WORKSTATION);
 
-        for (int i = 0; i <= 10; i++) {
-            final int quality = i;
+        registry.addDeferredRecipes(deferred -> {
+            Minecraft minecraft = Minecraft.getInstance();
+            if (minecraft.level == null) return;
+            RecipeManager rm = minecraft.level.getRecipeManager();
+            Collection<RecipeHolder<ClothcraftingRecipe>> holders = rm.getAllRecipesFor(WeaversParadiseRecipes.CLOTHCRAFTING_TYPE.get());
 
-            List<EmiStack> emiStacks1 = new ArrayList<>();
-            ItemStack stack1 = new ItemStack(WeaversParadiseItems.COTTON_CLOTH.get());
-            CustomData.update(DataComponents.CUSTOM_DATA, stack1, tag -> tag.putInt("quality", quality));
-            emiStacks1.add(EmiStack.of(stack1, 1));
+            for (RecipeHolder<ClothcraftingRecipe> holder : holders) {
+                ClothcraftingRecipe recipe = holder.value();
+                ResourceLocation recipeId = holder.id();
 
-            List<EmiStack> emiStacks2 = new ArrayList<>();
-            ItemStack stack2 = new ItemStack(WeaversParadiseItems.SILK_CLOTH.get());
-            CustomData.update(DataComponents.CUSTOM_DATA, stack2, tag -> tag.putInt("quality", quality));
-            emiStacks2.add(EmiStack.of(stack2, 1));
+                EmiIngredient ingredient = EmiIngredient.of(recipe.getIngredient()).setAmount(recipe.getSpoolCost());
 
-            List<EmiStack> emiStacks3 = new ArrayList<>();
-            ItemStack stack3 = new ItemStack(WeaversParadiseItems.WOOL_CLOTH.get());
-            CustomData.update(DataComponents.CUSTOM_DATA, stack3, tag -> tag.putInt("quality", quality));
-            emiStacks3.add(EmiStack.of(stack3, 1));
+                List<ClothcraftingRecipe.OutputTier> tiers = recipe.getTiers();
+                for (int i = 0; i < tiers.size(); i++) {
+                    ClothcraftingRecipe.OutputTier tier = tiers.get(i);
 
-            List<EmiStack> emiStacks4 = new ArrayList<>();
-            ItemStack stack4 = new ItemStack(WeaversParadiseItems.JEANS_CLOTH.get());
-            CustomData.update(DataComponents.CUSTOM_DATA, stack4, tag -> tag.putInt("quality", quality));
-            emiStacks4.add(EmiStack.of(stack4, 1));
+                    ItemStack result = tier.result().copy();
+                    result.setCount(tier.count());
 
-            registry.addDeferredRecipes((deferred) -> {
-                deferred.accept(new ClothcraftingEMIRecipe(
-                        ResourceLocation.fromNamespaceAndPath("weaversparadise", ("/clothcrafting_cotton_cloth" + "_" + quality)),
-                        List.of(EmiIngredient.of(Ingredient.of(WeaversParadiseItems.COTTON_SPOOL.get())).setAmount(6)),
-                        emiStacks1
-                ));
-            });
+                    List<EmiStack> outputs = new ArrayList<>();
+                    outputs.add(EmiStack.of(result));
 
-            registry.addDeferredRecipes((deferred) -> {
-                deferred.accept(new ClothcraftingEMIRecipe(
-                        ResourceLocation.fromNamespaceAndPath("weaversparadise", ("/clothcrafting_silk_cloth" + "_" + quality)),
-                        List.of(EmiIngredient.of(Ingredient.of(WeaversParadiseItems.SILK_SPOOL.get())).setAmount(6)),
-                        emiStacks2
-                ));
-            });
+                    ItemStack returnSpool = recipe.getSpoolReturn().copy();
+                    returnSpool.setCount(recipe.getSpoolReturnCount());
+                    outputs.add(EmiStack.of(returnSpool));
 
-            registry.addDeferredRecipes((deferred) -> {
-                deferred.accept(new ClothcraftingEMIRecipe(
-                        ResourceLocation.fromNamespaceAndPath("weaversparadise", ("/clothcrafting_wool_cloth" + "_" + quality)),
-                        List.of(EmiIngredient.of(Ingredient.of(WeaversParadiseItems.WOOL_SPOOL.get())).setAmount(6)),
-                        emiStacks3
-                ));
-            });
+                    ResourceLocation emiId = recipeId.withPrefix("/").withSuffix("_tier_" + i);
 
-            registry.addDeferredRecipes((deferred) -> {
-                deferred.accept(new ClothcraftingEMIRecipe(
-                        ResourceLocation.fromNamespaceAndPath("weaversparadise", ("/clothcrafting_jeans_cloth" + "_" + quality)),
-                        List.of(EmiIngredient.of(Ingredient.of(WeaversParadiseItems.JEANS_SPOOL.get())).setAmount(6)),
-                        emiStacks4
-                ));
-            });
-        }
-
-        registry.addDeferredRecipes((deferred) -> {
-            deferred.accept(new SpinningJennyEMIRecipe(
-                    ResourceLocation.fromNamespaceAndPath("weaversparadise", "/spinning_jenny_cotton_spool"),
-                    List.of(
-                            EmiIngredient.of(Ingredient.of(WeaversParadiseItems.EMPTY_SPOOL.get())).setAmount(1),
-                            EmiIngredient.of(Ingredient.of(WeaversParadiseItems.RAW_COTTON.get())).setAmount(4)
-                    ),
-                    List.of(
-                            EmiStack.of(new ItemStack(WeaversParadiseItems.COTTON_SPOOL.get()), 1)
-                    )
-            ));
+                    deferred.accept(new ClothcraftingEMIRecipe(
+                            emiId,
+                            List.of(ingredient),
+                            outputs,
+                            tier.minScore(),
+                            tier.maxScore()
+                    ));
+                }
+            }
         });
-        registry.addDeferredRecipes((deferred) -> {
-            deferred.accept(new SpinningJennyEMIRecipe(
-                    ResourceLocation.fromNamespaceAndPath("weaversparadise", "/spinning_jenny_silk_spool"),
-                    List.of(
-                            EmiIngredient.of(Ingredient.of(WeaversParadiseItems.EMPTY_SPOOL.get())).setAmount(1),
-                            EmiIngredient.of(Ingredient.of(Items.STRING)).setAmount(5)
-                    ),
-                    List.of(
-                            EmiStack.of(new ItemStack(WeaversParadiseItems.SILK_SPOOL.get()), 1)
-                    )
-            ));
-        });
-        registry.addDeferredRecipes((deferred) -> {
-            deferred.accept(new SpinningJennyEMIRecipe(
-                    ResourceLocation.fromNamespaceAndPath("weaversparadise", "/spinning_jenny_wool_spool"),
-                    List.of(
-                            EmiIngredient.of(Ingredient.of(WeaversParadiseItems.EMPTY_SPOOL.get())).setAmount(1),
-                            EmiIngredient.of(Ingredient.of(Items.WHITE_WOOL)).setAmount(1)
-                    ),
-                    List.of(
-                            EmiStack.of(new ItemStack(WeaversParadiseItems.COTTON_SPOOL.get()), 1)
-                    )
-            ));
-        });
-        registry.addDeferredRecipes((deferred) -> {
-            deferred.accept(new SpinningJennyEMIRecipe(
-                    ResourceLocation.fromNamespaceAndPath("weaversparadise", "/spinning_jenny_jeans_spool"),
-                    List.of(
-                            EmiIngredient.of(Ingredient.of(WeaversParadiseItems.EMPTY_SPOOL.get())).setAmount(1),
-                            EmiIngredient.of(Ingredient.of(WeaversParadiseItems.COTTON_SPOOL.get())).setAmount(3)
-                    ),
-                    List.of(
-                            EmiStack.of(new ItemStack(WeaversParadiseItems.JEANS_SPOOL.get()), 1)
-                    )
-            ));
+
+        registry.addDeferredRecipes(deferred -> {
+            Minecraft minecraft = Minecraft.getInstance();
+            if (minecraft.level == null) return;
+            RecipeManager rm = minecraft.level.getRecipeManager();
+            Collection<RecipeHolder<SpinningJennyRecipe>> holders =
+                    rm.getAllRecipesFor(WeaversParadiseRecipes.SPINNING_JENNY_TYPE.get());
+
+            for (RecipeHolder<SpinningJennyRecipe> holder : holders) {
+                SpinningJennyRecipe recipe = holder.value();
+
+                EmiIngredient baseIngredient = EmiIngredient.of(recipe.getInput());
+                EmiIngredient countedIngredient = EmiIngredient.of(recipe.getInput())
+                        .setAmount(recipe.getCountRequired());
+
+                ItemStack output = recipe.getResultItem(minecraft.level.registryAccess()).copy();
+
+                deferred.accept(new SpinningJennyEMIRecipe(
+                        holder.id(),
+                        List.of(baseIngredient, countedIngredient),
+                        List.of(EmiStack.of(output))
+                ));
+            }
         });
 
         List<String> dyeTypes = List.of(

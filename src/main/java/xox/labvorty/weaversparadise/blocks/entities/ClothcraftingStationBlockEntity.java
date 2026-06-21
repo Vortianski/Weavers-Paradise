@@ -14,10 +14,14 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
+import org.checkerframework.checker.units.qual.C;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.gui.menu.ClothcraftingMenu;
 import xox.labvorty.weaversparadise.init.WeaversParadiseBlockEntities;
 
@@ -30,43 +34,47 @@ import java.util.stream.IntStream;
 public class ClothcraftingStationBlockEntity extends RandomizableContainerBlockEntity implements WorldlyContainer {
     private NonNullList<ItemStack> stacks = NonNullList.<ItemStack>withSize(1, ItemStack.EMPTY);
     private final SidedInvWrapper handler = new SidedInvWrapper(this, null);
-    private int gameTime;
-    private int gameScore;
-    private boolean isGameOn;
-    private List<ItemStack> items;
-    private String clothType;
+    private int gameTime = 0;
+    private int gameScore = 0;
+    private boolean isGameOn = false;
+    private List<ItemStack> items = new ArrayList<>();
+    private ItemStack clothType = new ItemStack(Items.STONE, 1);
 
     public ClothcraftingStationBlockEntity(BlockPos position, BlockState state) {
         super(WeaversParadiseBlockEntities.CLOTHCRAFTING_STATION_BE.get(), position, state);
     }
 
     @Override
-    public void loadAdditional(CompoundTag compound, HolderLookup.Provider lookupProvider) {
+    public void loadAdditional(@NotNull CompoundTag compound, HolderLookup.@NotNull Provider lookupProvider) {
         super.loadAdditional(compound, lookupProvider);
         if (!this.tryLoadLootTable(compound))
             this.stacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
         ContainerHelper.loadAllItems(compound, this.stacks, lookupProvider);
-        if (compound != null) {
-            List<ItemStack> itemStacks = new ArrayList<>();
-            int amount = compound.getInt("amountOfItems");
-            for (int i = 0; i < amount; i++) {
-                Tag tag = compound.get("item" + i);
-                if (tag instanceof CompoundTag compoundTag) {
-                    ItemStack.parse(lookupProvider, compoundTag).ifPresentOrElse(
-                            itemStacks::add,
-                            () -> itemStacks.add(ItemStack.EMPTY)
-                    );
-                } else {
-                    itemStacks.add(ItemStack.EMPTY);
-                }
-            }
-            this.items = itemStacks;
 
-            this.gameTime = compound.getInt("gameTime");
-            this.gameScore = compound.getInt("gameScore");
-            this.isGameOn = compound.getBoolean("isGameOn");
-            this.clothType = compound.getString("clothType");
+        List<ItemStack> itemStacks = new ArrayList<>();
+        int amount = compound.getInt("amountOfItems");
+        for (int i = 0; i < amount; i++) {
+            Tag tag = compound.get("item" + i);
+            if (tag instanceof CompoundTag compoundTag) {
+                ItemStack.parse(lookupProvider, compoundTag).ifPresentOrElse(
+                        itemStacks::add,
+                        () -> itemStacks.add(ItemStack.EMPTY)
+                );
+            } else {
+                itemStacks.add(ItemStack.EMPTY);
+            }
         }
+        this.gameTime = compound.getInt("gameTime");
+        this.gameScore = compound.getInt("gameScore");
+        this.isGameOn = compound.getBoolean("isGameOn");
+
+        if (compound.contains("clothType")) {
+            this.clothType = ItemStack.parseOptional(lookupProvider, compound.getCompound("clothType"));
+        } else {
+            this.clothType = new ItemStack(Items.STONE, 1);
+        }
+
+        this.items = itemStacks;
     }
 
     @Override
@@ -91,8 +99,17 @@ public class ClothcraftingStationBlockEntity extends RandomizableContainerBlockE
         compound.putInt("gameTime", gameTime);
         compound.putInt("gameScore", gameScore);
         compound.putBoolean("isGameOn", isGameOn);
-        if (clothType != null) {
-            compound.putString("clothType", clothType);
+
+        if (clothType != null && !clothType.isEmpty()) {
+            CompoundTag tag = new CompoundTag();
+            clothType.save(lookupProvider, tag);
+
+            compound.put("clothType", tag);
+        } else {
+            CompoundTag tag = new CompoundTag();
+            new ItemStack(Items.STONE, 1).save(lookupProvider, tag);
+
+            compound.put("clothType", tag);
         }
     }
 
@@ -116,7 +133,7 @@ public class ClothcraftingStationBlockEntity extends RandomizableContainerBlockE
         setChanged();
     }
 
-    public void setClothType(String type) {
+    public void setClothType(ItemStack type) {
         clothType = type;
         setChanged();
     }
@@ -137,7 +154,7 @@ public class ClothcraftingStationBlockEntity extends RandomizableContainerBlockE
         return items;
     }
 
-    public String getClothType() {
+    public ItemStack getClothType() {
         return clothType;
     }
 

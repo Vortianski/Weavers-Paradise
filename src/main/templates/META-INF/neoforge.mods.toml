@@ -1,7 +1,7 @@
 modLoader="javafml"
 loaderVersion="${loader_version_range}"
 license="${mod_license}"
-#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
+#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/"
 
 [[mods]]
 modId="${mod_id}"
@@ -10,7 +10,7 @@ displayName="${mod_name}"
 displayURL="https://modrinth.com/user/vortianski"
 #updateJSONURL="https://change.me.example.invalid/updates.json"
 logoFile="logo.png"
-#credits="" #optional
+#credits=""
 authors="${mod_authors}"
 
 description='''${mod_description}'''
@@ -39,5 +39,12 @@ side="BOTH"
 modId="curios"
 type="required"
 versionRange="[9.3.1+1.21.1,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.${mod_id}]]
+modId="vortylib"
+type="required"
+versionRange="[1.0,)"
 ordering="NONE"
 side="BOTH"

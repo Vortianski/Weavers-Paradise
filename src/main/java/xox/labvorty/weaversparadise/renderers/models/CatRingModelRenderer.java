@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.entity.LivingEntity;
-import xox.labvorty.weaversparadise.data.texture.CatRingTextures;
+import xox.labvorty.weaversparadise.data.texture.deprecated.CatRingTextures;
 import xox.labvorty.weaversparadise.model.CatRingModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ChokerTrinketRenderingData;
 import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;

@@ -5,24 +5,30 @@ import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import net.minecraft.world.item.component.CustomData;
 
 import java.util.List;
 
 public class ClothcraftingEMIRecipe implements EmiRecipe {
     private final ResourceLocation id;
-    private final List<EmiIngredient> input;
-    private final List<EmiStack> output;
+    private final List<EmiIngredient> inputs;
+    private final List<EmiStack> outputs;
+    private final int minScore;
+    private final int maxScore;
 
-    public ClothcraftingEMIRecipe(ResourceLocation id, List<EmiIngredient> inputs, List<EmiStack> outputs) {
+    public ClothcraftingEMIRecipe(
+            ResourceLocation id,
+            List<EmiIngredient> inputs,
+            List<EmiStack> outputs,
+            int minScore,
+            int maxScore
+    ) {
         this.id = id;
-        this.input = inputs;
-        this.output = outputs;
+        this.inputs = inputs;
+        this.outputs = outputs;
+        this.minScore = minScore;
+        this.maxScore = maxScore;
     }
 
     @Override
@@ -42,12 +48,12 @@ public class ClothcraftingEMIRecipe implements EmiRecipe {
 
     @Override
     public List<EmiIngredient> getInputs() {
-        return input;
+        return inputs;
     }
 
     @Override
     public List<EmiStack> getOutputs() {
-        return output;
+        return outputs;
     }
 
     @Override
@@ -63,27 +69,18 @@ public class ClothcraftingEMIRecipe implements EmiRecipe {
     @Override
     public void addWidgets(WidgetHolder widgets) {
         widgets.addTexture(
-                ResourceLocation.fromNamespaceAndPath(
-                        "weaversparadise",
-                        "textures/recipes/clothcrafting_recipe_support.png"
-                ),
-                0,
-                0,
-                192,
-                118,
-                0,
-                0,
-                192, 118,
-                192, 118
+                ResourceLocation.fromNamespaceAndPath("weaversparadise", "textures/recipes/clothcrafting_recipe_support.png"),
+                0, 0, 192, 118, 0, 0, 192, 118, 192, 118
         );
-        widgets.addSlot(input.get(0), 46, 0).drawBack(false);
 
-        CompoundTag tag = output.get(0).getItemStack().getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-        int score = Mth.clamp(tag.getInt("quality") * 2, 0, 40);
-        int maxscore = score + 1;
+        widgets.addSlot(inputs.getFirst(), 46, 0).drawBack(false);
+        widgets.addSlot(outputs.get(0), 146, 101).recipeContext(this);
 
-        widgets.addText(Component.literal(Component.translatable("weaversparadise.clothcrafting.score").getString() + " " + score + "-" + (maxscore > 20 ? "20+" : maxscore)), 47, 54, 0, false);
+        if (outputs.size() > 1) {
+            widgets.addSlot(outputs.get(1), 120, 101).recipeContext(this);
+        }
 
-        widgets.addSlot(output.get(0), 146, 101).recipeContext(this);
+        String scoreText = Component.translatable("weaversparadise.clothcrafting.score").getString() + " " + minScore + "-" + (maxScore >= 999 ? "∞" : maxScore);
+        widgets.addText(Component.literal(scoreText), 47, 54, 0x000000, false);
     }
 }

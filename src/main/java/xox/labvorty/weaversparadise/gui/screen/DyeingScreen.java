@@ -26,7 +26,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import oshi.util.tuples.Pair;
-import xox.labvorty.weaversparadise.data.texture.CapeTextures;
+import xox.labvorty.weaversparadise.data.texture.deprecated.CapeTextures;
 import xox.labvorty.weaversparadise.gui.menu.DyeingMenu;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.clothing.*;

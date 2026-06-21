@@ -1,23 +1,29 @@
 package xox.labvorty.weaversparadise.compat.jei;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
+import xox.labvorty.weaversparadise.data.recipes.SpinningJennyRecipe;
+import xox.labvorty.weaversparadise.init.WeaversParadiseRecipes;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class SpinningJennyJEIRecipe {
     private final ResourceLocation id;
-    private final List<Ingredient> input;
+    private final List<Ingredient> inputs;
     private final ItemStack output;
+    private final int countRequired;
 
-    public SpinningJennyJEIRecipe(ResourceLocation id, List<Ingredient> input, ItemStack output) {
+    public SpinningJennyJEIRecipe(ResourceLocation id, List<Ingredient> inputs, ItemStack output, int countRequired) {
         this.id = id;
-        this.input = input;
+        this.inputs = inputs;
         this.output = output;
+        this.countRequired = countRequired;
     }
 
     public ResourceLocation getId() {
@@ -25,72 +31,40 @@ public class SpinningJennyJEIRecipe {
     }
 
     public List<Ingredient> getInput() {
-        return input;
+        return inputs;
     }
 
     public ItemStack getOutput() {
         return output;
     }
 
+    public int getCountRequired() {
+        return countRequired;
+    }
+
     public static List<SpinningJennyJEIRecipe> generateRecipes() {
-        List<SpinningJennyJEIRecipe> recipes = new ArrayList<>();
+        List<SpinningJennyJEIRecipe> result = new ArrayList<>();
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.level == null) return result;
 
-        recipes.add(
-                new SpinningJennyJEIRecipe(
-                        ResourceLocation.fromNamespaceAndPath(
-                                "weaversparadise",
-                                "cotton_spool"
-                        ),
-                        List.of(
-                                Ingredient.of(WeaversParadiseItems.EMPTY_SPOOL.get()),
-                                Ingredient.of(WeaversParadiseItems.RAW_COTTON.get())
-                        ),
-                        new ItemStack(WeaversParadiseItems.COTTON_SPOOL.get())
-                )
-        );
+        RecipeManager rm = minecraft.level.getRecipeManager();
+        Collection<RecipeHolder<SpinningJennyRecipe>> holders =
+                rm.getAllRecipesFor(WeaversParadiseRecipes.SPINNING_JENNY_TYPE.get());
 
-        recipes.add(
-                new SpinningJennyJEIRecipe(
-                        ResourceLocation.fromNamespaceAndPath(
-                                "weaversparadise",
-                                "silk_spool"
-                        ),
-                        List.of(
-                                Ingredient.of(WeaversParadiseItems.EMPTY_SPOOL.get()),
-                                Ingredient.of(Items.STRING)
-                        ),
-                        new ItemStack(WeaversParadiseItems.SILK_SPOOL.get())
-                )
-        );
+        for (RecipeHolder<SpinningJennyRecipe> holder : holders) {
+            SpinningJennyRecipe recipe = holder.value();
 
-        recipes.add(
-                new SpinningJennyJEIRecipe(
-                        ResourceLocation.fromNamespaceAndPath(
-                                "weaversparadise",
-                                "wool_spool"
-                        ),
-                        List.of(
-                                Ingredient.of(WeaversParadiseItems.EMPTY_SPOOL.get()),
-                                Ingredient.of(Items.WHITE_WOOL)
-                        ),
-                        new ItemStack(WeaversParadiseItems.WOOL_SPOOL.get())
-                )
-        );
+            Ingredient ingredient = recipe.getInput();
+            Ingredient countedIngredient = recipe.getInput();
 
-        recipes.add(
-                new SpinningJennyJEIRecipe(
-                        ResourceLocation.fromNamespaceAndPath(
-                                "weaversparadise",
-                                "jeans_spool"
-                        ),
-                        List.of(
-                                Ingredient.of(WeaversParadiseItems.EMPTY_SPOOL.get()),
-                                Ingredient.of(WeaversParadiseItems.COTTON_SPOOL.get())
-                        ),
-                        new ItemStack(WeaversParadiseItems.JEANS_SPOOL.get())
-                )
-        );
+            result.add(new SpinningJennyJEIRecipe(
+                    holder.id(),
+                    List.of(ingredient, countedIngredient),
+                    recipe.getResultItem(minecraft.level.registryAccess()).copy(),
+                    recipe.getCountRequired()
+            ));
+        }
 
-        return recipes;
+        return result;
     }
 }

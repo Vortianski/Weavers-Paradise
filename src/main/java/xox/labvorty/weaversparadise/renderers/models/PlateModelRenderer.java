@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.entity.LivingEntity;
-import xox.labvorty.weaversparadise.data.texture.PlateTextures;
+import xox.labvorty.weaversparadise.data.texture.deprecated.PlateTextures;
 import xox.labvorty.weaversparadise.model.BasicPlateModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ChokerTrinketRenderingData;
 import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;

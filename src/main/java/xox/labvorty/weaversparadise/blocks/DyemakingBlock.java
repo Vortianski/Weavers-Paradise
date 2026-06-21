@@ -33,7 +33,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import xox.labvorty.weaversparadise.blocks.entities.DyemakingBlockEntity;
-import xox.labvorty.weaversparadise.data.tooltip_components.data.DyeHandler;
+import xox.labvorty.weaversparadise.data.tooltip_components.DyeHandler;
 import xox.labvorty.weaversparadise.gui.menu.DyemakingMenu;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.dye.PigmentItem;

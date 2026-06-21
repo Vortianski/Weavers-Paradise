@@ -85,7 +85,10 @@ public class SpinningJennyEMIRecipe implements EmiRecipe {
             @Override
             public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
                 Minecraft minecraft = Minecraft.getInstance();
-                int ticks = (int)minecraft.level.getGameTime();
+                int ticks = 0;
+                if (minecraft.level != null) {
+                    ticks = (int)minecraft.level.getGameTime();
+                }
 
                 int cycleticks = ticks % 100;
 
@@ -96,7 +99,7 @@ public class SpinningJennyEMIRecipe implements EmiRecipe {
 
         widgets.addSlot(input.get(0), 36 + 7, 73 + 15).drawBack(false);
 
-        widgets.addSlot(output.get(0), 53 + 7, 73 + 15).drawBack(false).recipeContext(this);
+        widgets.addSlot(output.getFirst(), 53 + 7, 73 + 15).drawBack(false).recipeContext(this);
 
         widgets.addSlot(input.get(1), 183 + 7, 74 + 15).drawBack(false);
     }

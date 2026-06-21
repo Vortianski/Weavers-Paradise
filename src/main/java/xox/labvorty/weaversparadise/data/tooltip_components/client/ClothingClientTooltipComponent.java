@@ -8,7 +8,7 @@ import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import xox.labvorty.weaversparadise.data.tooltip_components.data.DyeTextHandler;
+import xox.labvorty.weaversparadise.data.tooltip_components.DyeTypeRegistry;
 import xox.labvorty.weaversparadise.data.tooltip_components.helper.DyeTooltipData;
 import xox.labvorty.weaversparadise.data.tooltip_components.helper.DyeTooltipEntry;
 
@@ -34,7 +34,7 @@ public class ClothingClientTooltipComponent implements ClientTooltipComponent {
         int maxTextWidth = 0;
 
         for (DyeTooltipEntry entry : entries) {
-            maxTextWidth = Math.max(maxTextWidth, font.width(DyeTextHandler.getOrDefault(entry.textKey()).getText()));
+            maxTextWidth = Math.max(maxTextWidth, font.width(DyeTypeRegistry.getDyeType(entry.textKey()).getB()));
         }
 
         return 8 + 2 + maxTextWidth;
@@ -55,7 +55,7 @@ public class ClothingClientTooltipComponent implements ClientTooltipComponent {
             DyeTooltipEntry entry = entries.get(i);
             int rowY = y + 9 + (i * 9);
 
-            guiGraphics.blit(entry.texture(), x, rowY, 0, 0, 8, 8, 8, 8);
+            entry.dyeIcon().render(guiGraphics, x, rowY);
             guiGraphics.drawString(
                     font,
                     DyeTooltipData.parse(

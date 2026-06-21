@@ -11,6 +11,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 
@@ -29,12 +30,12 @@ public class DyemakingJEICategory implements IRecipeCategory<DyemakingJEIRecipe>
     }
 
     @Override
-    public RecipeType<DyemakingJEIRecipe> getRecipeType() {
+    public @NotNull RecipeType<DyemakingJEIRecipe> getRecipeType() {
         return TYPE;
     }
 
     @Override
-    public Component getTitle() {
+    public @NotNull Component getTitle() {
         return Component.translatable("jei.weaversparadise.dyemaking");
     }
 
@@ -54,12 +55,12 @@ public class DyemakingJEICategory implements IRecipeCategory<DyemakingJEIRecipe>
     }
 
     @Override
-    public void draw(DyemakingJEIRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void draw(@NotNull DyemakingJEIRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         guiGraphics.blit(ResourceLocation.fromNamespaceAndPath("weaversparadise", "textures/recipes/dyemaking.png"), 0, 0, 176, 111, 0, 0, 176, 111, 176, 111);
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, DyemakingJEIRecipe recipe, IFocusGroup focuses) {
+    public void setRecipe(IRecipeLayoutBuilder builder, DyemakingJEIRecipe recipe, @NotNull IFocusGroup focuses) {
         builder.addInputSlot(138, 70).addIngredients(recipe.getInputs().get(0));
         builder.addInputSlot(21, 76).addIngredients(recipe.getInputs().get(1));
         builder.addInputSlot(21, 58).addIngredients(recipe.getInputs().get(2));

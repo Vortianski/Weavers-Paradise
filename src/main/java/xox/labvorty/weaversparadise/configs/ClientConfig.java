@@ -14,9 +14,7 @@ public class ClientConfig {
             .comment("Items that will prevent Thigh Highs from rendering")
             .defineListAllowEmpty(
                     "thighHighsRestrictors",
-                    List.of(
-                            ""
-                    ),
+                    List.of(),
                     () -> "", ClientConfig::validateItemName
             );
 
@@ -24,9 +22,7 @@ public class ClientConfig {
             .comment("Items that will prevent Hand Warmers from rendering")
             .defineListAllowEmpty(
                     "handWarmersRestrictors",
-                    List.of(
-                            ""
-                    ),
+                    List.of(),
                     () -> "", ClientConfig::validateItemName
             );
 
@@ -34,9 +30,7 @@ public class ClientConfig {
             .comment("Items that will prevent Pants from rendering")
             .defineListAllowEmpty(
                     "pantsRestrictors",
-                    List.of(
-                            ""
-                    ),
+                    List.of(),
                     () -> "", ClientConfig::validateItemName
             );
 
