@@ -20,14 +20,14 @@
       {
         "name": "weaversparadise:thigh_highs_cotton",
         "amount": 0.1,
-        "operation": "add_value"
+        "operation": "addition"
       }
     ],
     "cold_sweat:cold_resistance": [
       {
         "name": "weaversparadise:thigh_highs_cotton",
         "amount": 0.1,
-        "operation": "add_value"
+        "operation": "addition"
       }
     ]
   },

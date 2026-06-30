@@ -1,0 +1,51 @@
+{
+  "name": "Cosmetic Armor",
+  "icon": "weaversparadise:armor_lootbox",
+  "category": "weaversparadise:interesting_stuff",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Some chests in the world may contain an Armor Lootbox. From said lootbox you can obtain one of the pieces of cosmetic armor. This armor has the same defence as iron armor, but it has diamond armor durability."
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Astolfo",
+      "entity": "minecraft:armor_stand{ShowArms:1b,ArmorItems:[{id:\"weaversparadise:astolfo_armor_boots\",Count:1b},{id:\"weaversparadise:astolfo_armor_skirt\",Count:1b},{id:\"weaversparadise:astolfo_armor_chestplate\",Count:1b},{id:\"weaversparadise:astolfo_armor_wig\",Count:1b}]}"
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Bridget",
+      "entity": "minecraft:armor_stand{ShowArms:1b,ArmorItems:[{id:\"weaversparadise:bridget_armor_boots\",Count:1b},{id:\"weaversparadise:bridget_armor_skirt\",Count:1b},{id:\"weaversparadise:bridget_armor_jacket\",Count:1b},{id:\"weaversparadise:bridget_armor_hat\",Count:1b}]}"
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Felix",
+      "entity": "minecraft:armor_stand{ShowArms:1b,ArmorItems:[{id:\"weaversparadise:felix_armor_boots\",Count:1b},{id:\"weaversparadise:felix_armor_skirt\",Count:1b},{id:\"weaversparadise:felix_armor_jacket\",Count:1b},{id:\"weaversparadise:felix_armor_hat\",Count:1b}]}"
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Griffith",
+      "entity": "minecraft:armor_stand{ShowArms:1b,ArmorItems:[{id:\"weaversparadise:griffith_armor_boots\",Count:1b},{id:\"weaversparadise:griffith_armor_leggings\",Count:1b},{id:\"weaversparadise:griffith_armor_chestplate\",Count:1b},{id:\"weaversparadise:griffith_armor_wig\",Count:1b}]}"
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Niko",
+      "entity": "minecraft:armor_stand{ShowArms:1b,ArmorItems:[{id:\"weaversparadise:niko_armor_boots\",Count:1b},{id:\"weaversparadise:niko_armor_leggings\",Count:1b},{id:\"weaversparadise:niko_armor_chestplate\",Count:1b},{id:\"weaversparadise:niko_armor_hat\",Count:1b}]}"
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Gabriel",
+      "entity": "minecraft:armor_stand{ShowArms:1b,ArmorItems:[{id:\"weaversparadise:gabriel_armor_boots\",Count:1b},{id:\"weaversparadise:gabriel_armor_leggings\",Count:1b},{id:\"weaversparadise:gabriel_armor_chestplate\",Count:1b},{id:\"weaversparadise:gabriel_armor_helmet\",Count:1b}]}"
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Giselle",
+      "entity": "minecraft:armor_stand{ShowArms:1b,ArmorItems:[{id:\"weaversparadise:giselle_armor_boots\",Count:1b},{id:\"weaversparadise:giselle_armor_leggings\",Count:1b},{id:\"weaversparadise:giselle_armor_chestplate\",Count:1b},{id:\"weaversparadise:giselle_armor_wig\",Count:1b}]}"
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Mikkela",
+      "entity": "minecraft:armor_stand{ShowArms:1b,ArmorItems:[{id:\"minecraft:air\",Count:1b},{id:\"weaversparadise:mikkela_armor_leggings\",Count:1b},{id:\"weaversparadise:mikkela_armor_chestplate\",Count:1b},{id:\"weaversparadise:mikkela_armor_wig\",Count:1b}]}"
+    }
+  ]
+}

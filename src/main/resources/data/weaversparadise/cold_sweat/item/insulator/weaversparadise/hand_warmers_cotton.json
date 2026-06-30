@@ -20,14 +20,14 @@
       {
         "name": "weaversparadise:hand_warmers_cotton",
         "amount": 0.05,
-        "operation": "add_value"
+        "operation": "addition"
       }
     ],
     "cold_sweat:cold_resistance": [
       {
         "name": "weaversparadise:hand_warmers_cotton",
         "amount": 0.05,
-        "operation": "add_value"
+        "operation": "addition"
       }
     ]
   },

@@ -1,0 +1,156 @@
+{
+  "name": "Типы Красителей",
+  "icon": "weaversparadise:dye_core",
+  "category": "weaversparadise:dyemaking",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Устали от обычных цветов? Тогда Типы Красителей как раз то, что нужно! Большинство из них полностью меняют отображение предмета, изменяя рендеринг, и эта запись объяснит большую часть типов.$(br2)Некоторые Типы Красителей используют $(l:weaversparadise:dyemaking/learning_the_basics#double_dye)вторичные цвета$()"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Стандартный",
+      "item": "weaversparadise:dye_core",
+      "text": "Стандартный рендеринг, использует только один цвет."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Гордость",
+      "item": "weaversparadise:flag_agender,weaversparadise:flag_aroace,weaversparadise:flag_aromantic,weaversparadise:flag_asexual,weaversparadise:flag_bisexual,weaversparadise:flag_demiboy,weaversparadise:flag_demigender,weaversparadise:flag_demigirl,weaversparadise:flag_gay,weaversparadise:flag_genderfluid,weaversparadise:flag_genderqueer,weaversparadise:flag_intersex,weaversparadise:flag_lesbian,weaversparadise:flag_nonbinary,weaversparadise:flag_pansexual,weaversparadise:flag_pride,weaversparadise:flag_trans",
+      "text": "$(bold)Двойной цвет:$() Нет$(br2)Использует прайд флаг как маску и накладывает цвет на текстуру одежды."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Редстоун",
+      "item": "minecraft:redstone",
+      "text": "$(bold)Двойной цвет:$() Нет$(br2)Имеет силу от 0 до 15 которая обозначает его цвет (#640000-#FF0000). Не может использовать цвета, всегда красный."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Светокамень",
+      "item": "minecraft:glowstone_dust",
+      "text": "$(bold)Двойной цвет:$() Нет$(br2)Тип красителя который использует цвет но всегда имеет максимальный цвет, и поэтому светится в темноте."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Лампа",
+      "item": "minecraft:redstone_lamp",
+      "text": "$(bold)Двойной цвет:$() Нет$(br2)Работает схоже с светокаменным, но его силу можно настроить используя редстоун. Создаётся либо применяя редстоун к Ядру Красителя с типом Светокамень, либо применяя светокамень к Ядру Красителя с типом Редстоун."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Скалк",
+      "item": "minecraft:sculk",
+      "text": "$(bold)Двойной Цвет:$() Нет$(br2)Не может использовать цвета. Пульсирует когда возле игрока воспроизводится звук."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Цветной Скалк",
+      "item": "minecraft:echo_shard",
+      "text": "$(bold)Двойной Цвет:$() Да$(br2)Работает схоже с типом Скалк но использует цвета."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Голод",
+      "item": "minecraft:rotten_flesh",
+      "text": "$(bold)Двойной Цвет:$() Да$(br2)Использует цвета чтобы показать насколько игрок голодный, используя интерполяцию от первого до второго цвета."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Здоровье",
+      "item": "minecraft:glistering_melon_slice",
+      "text": "$(bold)Двойной Цвет:$() Да$(br2)Использует цвета чтобы показать сколько здоровья у игрока, используя интерполяцию от первого до второго цвета."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Время Дня",
+      "item": "minecraft:sunflower",
+      "text": "$(bold)Двойной Цвет:$() Нет$(br2)Не может использовать цвета. Использует интерполяцию между неизменными цветами чтобы показать время дня."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Цветное Время Дня",
+      "item": "minecraft:clock",
+      "text": "$(bold)Двойной Цвет:$() Да$(br2)Использует цвета чтобы показать время дня, используя интерполяцию от первого до второго цвета."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Радуга",
+      "item": "weaversparadise:chromatic_bloom_fruit",
+      "text": "$(bold)Двойной Цвет:$() Нет$(br2)Не может использовать цвета. Использует игровое время чтобы выбрать один из цветов RGB спектра."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Биом",
+      "item": "minecraft:moss_block",
+      "text": "$(bold)Двойной цвет:$() Нет$(br2)Не может использовать выбранные цвета. Использует цвета листвы."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Эндер",
+      "item": "minecraft:ender_eye",
+      "text": "$(bold)Двойной цвет:$() Нет$(br2)Не может использовать выбранные цвета. Отображается так же, как портал в Энд."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Скорость",
+      "item": "minecraft:sugar",
+      "text": "$(bold)Двойной цвет:$() Да$(br2)Использует выбранные цвета. Интерполирует первый цвет во второй в зависимости от скорости."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Высота (бедрок)",
+      "item": "minecraft:phantom_membrane",
+      "text": "$(bold)Двойной цвет:$() Да$(br2)Использует выбранные цвета. Интерполирует первый цвет во второй в зависимости от расстояния до бедрока."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Высота (море)",
+      "item": "minecraft:prismarine_crystals",
+      "text": "$(bold)Двойной цвет:$() Да$(br2)Использует выбранные цвета. Интерполирует первый цвет во второй в зависимости от расстояния до уровня моря (обычно y:63)."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Невидимый",
+      "item": "minecraft:air",
+      "text": "$(bold)Двойной цвет:$() Нет$(br2)Не может использовать выбранные цвета. Ничего не отображает."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Статика",
+      "item": "minecraft:powder_snow_bucket",
+      "text": "$(bold)Двойной цвет:$() Нет$(br2)Не может использовать выбранные цвета. Отображается как статический шум."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Кристалл",
+      "item": "minecraft:amethyst_shard",
+      "text": "$(bold)Двойной цвет:$() Нет$(br2)Использует выбранные цвета. Рендерер смещает пиксели с помощью шума Вороного."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Негатив",
+      "item": "minecraft:barrier",
+      "text": "$(bold)Двойной цвет:$() Нет$(br2)Использует выбранные цвета. Применяет негатив после освещения."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Истинный негатив",
+      "item": "minecraft:barrier",
+      "text": "$(bold)Двойной цвет:$() Нет$(br2)Использует выбранные цвета. Применяет негатив до освещения."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Туманность",
+      "item": "minecraft:dragon_breath",
+      "text": "$(bold)Двойной цвет:$() Нет$(br2)Не может использовать выбранные цвета. Отображает фиолетовую туманность."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Полихроматический",
+      "item": "weaversparadise:chromatic_dust",
+      "text": "$(bold)Двойной цвет:$() Нет$(br2)Использует выбранные цвета. Определяет сдвиг оттенка по углу и позиции камеры."
+    }
+  ]
+}

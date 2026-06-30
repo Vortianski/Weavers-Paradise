@@ -14,7 +14,8 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import org.joml.Vector4f;
 import oshi.util.tuples.Pair;
-import xox.labvorty.weaversparadise.data.texture.deprecated.CapeTextures;
+import xox.labvorty.weaversparadise.data.texture.ItemTexture;
+import xox.labvorty.weaversparadise.data.texture.TextureRegistry;
 import xox.labvorty.weaversparadise.items.clothing.CapeCottonItem;
 import xox.labvorty.weaversparadise.items.clothing.CapeSilkItem;
 import xox.labvorty.weaversparadise.items.clothing.CapeWoolItem;
@@ -109,7 +110,7 @@ public class CapeRenderer extends BlockEntityWithoutLevelRenderer {
         int finalLightOne = col1.getB();
         int finalLightTwo = col2.getB();
 
-        CapeTextures capeTextures = CapeTextures.getByTypeAndMaterial(stencilType, material);
+        ItemTexture texture = TextureRegistry.find("cape", stencilType, material);
 
         RenderingUtils renderingUtils = new RenderingUtils();
 
@@ -124,11 +125,11 @@ public class CapeRenderer extends BlockEntityWithoutLevelRenderer {
         poseStack.mulPose(Axis.YP.rotationDegrees(additionalYRot));
         poseStack.mulPose(Axis.ZP.rotationDegrees(additionalZRot));
 
-        VertexConsumer vertexConsumer1 = renderingUtils.parseVC(buffer, dyeTypeOne, capeTextures.getTextureOne(),"cape");
+        VertexConsumer vertexConsumer1 = renderingUtils.parseVC(buffer, dyeTypeOne, texture.getTextureOne(),"cape");
         ((PlayerModelInterface)playerModel).getCloak().render(poseStack, vertexConsumer1, finalLightOne, packedOverlay, finalColorOne.x, finalColorOne.y, finalColorOne.z, finalColorOne.w);
 
-        if (capeTextures.getRenderType().equals("double")) {
-            VertexConsumer vertexConsumer2 = renderingUtils.parseVC(buffer, dyeTypeTwo, capeTextures.getTextureTwo(), "cape");
+        if (texture.getRenderType()) {
+            VertexConsumer vertexConsumer2 = renderingUtils.parseVC(buffer, dyeTypeTwo, texture.getTextureTwo(), "cape");
             ((PlayerModelInterface)playerModel).getCloak().render(poseStack, vertexConsumer2, finalLightTwo, packedOverlay, finalColorTwo.x, finalColorTwo.y, finalColorTwo.z, finalColorTwo.w);
         }
 

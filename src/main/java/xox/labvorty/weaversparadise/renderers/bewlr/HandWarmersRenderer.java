@@ -14,6 +14,7 @@ import xox.labvorty.weaversparadise.items.clothing.HandWarmersWoolItem;
 import xox.labvorty.weaversparadise.items.clothing.defined.HandWarmersInterface;
 import xox.labvorty.weaversparadise.models.ThighHighsModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ThighHighsRenderingData;
+import xox.labvorty.weaversparadise.renderers.models.HandWarmersSpecialModelRenderer;
 import xox.labvorty.weaversparadise.renderers.models.ThighHighsModelRenderer;
 
 public class HandWarmersRenderer extends BlockEntityWithoutLevelRenderer {
@@ -97,7 +98,7 @@ public class HandWarmersRenderer extends BlockEntityWithoutLevelRenderer {
 
         Minecraft minecraft = Minecraft.getInstance();
 
-        ThighHighsModelRenderer handWarmersSpecialModelRenderer = new ThighHighsModelRenderer();
+        HandWarmersSpecialModelRenderer handWarmersSpecialModelRenderer = new HandWarmersSpecialModelRenderer();
 
         handWarmersSpecialModelRenderer.renderModel(
                 buffer,

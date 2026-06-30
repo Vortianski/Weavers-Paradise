@@ -1,0 +1,78 @@
+{
+  "name": "Просунуті матеріали",
+  "icon": "weaversparadise:needle_with_thread",
+  "category": "weaversparadise:getting_started",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Для створення деяких предметів одягу потрібні складніші матеріали. Для більшості таких рецептів потрібно використовувати голку з ниткою. Предмети з якістю використовуються для розрахунку середньої якості фінального результату."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:needle_recipe",
+      "recipe2": "weaversparadise:needle_threading_recipe"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:button_recipe"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:upperwear_base_cotton_recipe",
+      "recipe2": "weaversparadise:upperwear_base_buttons_cotton_recipe",
+      "title": "Бавовняна основа",
+      "anchor": "cotton_base"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:upperwear_base_silk_recipe",
+      "recipe2": "weaversparadise:upperwear_base_buttons_silk_recipe",
+      "title": "Шовкова основа",
+      "anchor": "silk_base"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:upperwear_base_wool_recipe",
+      "recipe2": "weaversparadise:upperwear_base_buttons_wool_recipe",
+      "title": "Вовняна основа",
+      "anchor": "wool_base"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:sleeve_long_cotton_recipe",
+      "recipe2": "weaversparadise:sleeve_short_cotton_recipe",
+      "title": "Бавовняні рукави",
+      "anchor": "cotton_sleeves"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:sleeve_long_silk_recipe",
+      "recipe2": "weaversparadise:sleeve_short_silk_recipe",
+      "title": "Шовкові рукави",
+      "anchor": "silk_sleeves"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:sleeve_long_wool_recipe",
+      "recipe2": "weaversparadise:sleeve_short_wool_recipe",
+      "title": "Вовняні рукави",
+      "anchor": "wool_sleeves"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:pant_leg_cotton_recipe",
+      "anchor": "cotton_pant_legs"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:pant_leg_silk_recipe",
+      "anchor": "silk_pant_legs"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:pant_leg_jeans_recipe",
+      "anchor": "jeans_pant_legs"
+    }
+  ]
+}

@@ -1,10 +1,21 @@
 {
+  "blend": {
+    "func": "add",
+    "srcrgb": "srcalpha",
+    "dstrgb": "1-srcalpha"
+  },
   "vertex": "weaversparadise:entity_static_noise",
   "fragment": "weaversparadise:entity_static_noise",
+  "attributes": [
+    "Position",
+    "Color",
+    "UV0",
+    "UV1",
+    "UV2",
+    "Normal"
+  ],
   "samplers": [
-    { "name": "Sampler0" },
-    { "name": "Sampler1" },
-    { "name": "Sampler2" }
+    { "name": "Sampler0" }
   ],
   "uniforms": [
     { "name": "ModelViewMat", "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },

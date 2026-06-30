@@ -93,16 +93,27 @@ dependencies {
     annotationProcessor('org.spongepowered:mixin:0.8.5:processor')
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
+    //Curios API | Client + Compilation Side
     compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curiosVersion}:api"))
     runtimeOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curiosVersion}"))
 
-    //JEI compat
-    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
-    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+    //JEI | Client + Compilation Side
+    compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
+    compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
+    runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
 
-    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+    //Cold Sweat | Client Side
+    //runtimeOnly(fg.deobf("curse.maven:cold-sweat-506194:8302213"))
 
+    //Legendary Survival Overhaul | Client Side
+    runtimeOnly(fg.deobf("curse.maven:legendary-survival-overhaul-840254:7603852"))
+
+    //EMI | Client Side
     runtimeOnly(fg.deobf("curse.maven:emi-580555:6420945"))
+
+    //Patchouli | Client Side
+    compileOnly(fg.deobf("curse.maven:patchouli-306770:7731017"))
+    runtimeOnly(fg.deobf("curse.maven:patchouli-306770:7731017"))
 }
 
 mixin {

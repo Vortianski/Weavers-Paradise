@@ -1,0 +1,28 @@
+{
+  "name": "Чокер",
+  "icon": "weaversparadise:choker",
+  "category": "weaversparadise:clothing_items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Слот Curio: Ожерелье$(br)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Зачарования",
+      "text": "$(br)$(#FF5555)$(bold)> Проклятие Утраты$()$(br)$(#FF5555)$(bold)> Проклятие Несъёмности$()$(br)$(#FF55FF)$(bold)> Прочность I-V$()$(br)$(#FF55FF)$(bold)> Починка$()$(br)$(#FF55FF)$(bold)> Дыхательные Упражнения I-III - добавляет до +50% дополнительного кислорода пока под водой$()"
+    },
+    {
+      "type": "weaversparadise:double_sided_clothing_list",
+      "name": "Чокер",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:choker\", Count:1b}}",
+      "scale": 2,
+      "offset": -0.5
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:choker_recipe",
+      "text": "Предмет для данного рецепта можно получить положив кожу в Камнерез"
+    }
+  ]
+}

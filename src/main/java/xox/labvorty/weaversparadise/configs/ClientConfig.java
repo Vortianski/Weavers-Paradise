@@ -14,6 +14,7 @@ public class ClientConfig {
     public static final ForgeConfigSpec.ConfigValue<List<? extends String>> PANTS_RESTRICTOR;
     public static final ForgeConfigSpec.ConfigValue<List<? extends String>> SHIRT_RESTRICTOR;
     public static final ForgeConfigSpec.ConfigValue<List<? extends String>> CHOKER_RESTRICTOR;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> PATCHOULI_WARNING;
 
     static {
         ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
@@ -71,6 +72,10 @@ public class ClientConfig {
                         ),
                         ClientConfig::validateItemName
                 );
+
+        PATCHOULI_WARNING = BUILDER
+                .comment("Display a message if Patchouli is not installed when joining the game")
+                .define("patchouliWarning", true);
 
         BUILDER.pop();
 

@@ -20,14 +20,14 @@
       {
         "name": "weaversparadise:shirt_cotton",
         "amount": 0.1,
-        "operation": "add_value"
+        "operation": "addition"
       }
     ],
     "cold_sweat:cold_resistance": [
       {
         "name": "weaversparadise:shirt_cotton",
         "amount": 0.1,
-        "operation": "add_value"
+        "operation": "addition"
       }
     ]
   },

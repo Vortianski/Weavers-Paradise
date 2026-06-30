@@ -158,29 +158,29 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
                         || internal.getStackInSlot(0).is(WeaversParadiseItems.HAND_WARMERS_SILK.get())
                         || internal.getStackInSlot(0).is(WeaversParadiseItems.HAND_WARMERS_WOOL.get())) {
 
-                    return stack.is(ItemTags.create(new ResourceLocation("weaversparadise", "thigh_highs_stensils")));
+                    return stack.is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("weaversparadise", "thigh_highs_stensils")));
 
                 } else if (internal.getStackInSlot(0).is(WeaversParadiseItems.SHIRT_COTTON.get())
                         || internal.getStackInSlot(0).is(WeaversParadiseItems.SHIRT_SILK.get())
                         || internal.getStackInSlot(0).is(WeaversParadiseItems.SWEATER_WOOL.get())) {
 
-                    return stack.is(ItemTags.create(new ResourceLocation("weaversparadise", "shirts_stensils")));
+                    return stack.is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("weaversparadise", "shirts_stensils")));
 
                 } else if (internal.getStackInSlot(0).is(WeaversParadiseItems.COTTON_CAPE.get())
                         || internal.getStackInSlot(0).is(WeaversParadiseItems.SILK_CAPE.get())
                         || internal.getStackInSlot(0).is(WeaversParadiseItems.WOOL_CAPE.get())) {
 
-                    return stack.is(ItemTags.create(new ResourceLocation("weaversparadise", "cape_stensils")));
+                    return stack.is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("weaversparadise", "cape_stensils")));
 
                 } else if (internal.getStackInSlot(0).is(WeaversParadiseItems.CHOKER.get())) {
 
-                    return stack.is(ItemTags.create(new ResourceLocation("weaversparadise", "choker_stencils")));
+                    return stack.is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("weaversparadise", "choker_stencils")));
 
                 } else if (internal.getStackInSlot(0).is(WeaversParadiseItems.PANTS_JEANS.get())
                         || internal.getStackInSlot(0).is(WeaversParadiseItems.PANTS_COTTON.get())
                         || internal.getStackInSlot(0).is(WeaversParadiseItems.PANTS_SILK.get())) {
 
-                    return stack.is(ItemTags.create(new ResourceLocation("weaversparadise", "pants_stencils")));
+                    return stack.is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("weaversparadise", "pants_stencils")));
                 }
 
                 return false;
@@ -197,11 +197,11 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
                         || internal.getStackInSlot(0).is(WeaversParadiseItems.HAND_WARMERS_SILK.get())
                         || internal.getStackInSlot(0).is(WeaversParadiseItems.HAND_WARMERS_WOOL.get())) {
 
-                    return stack.is(ItemTags.create(new ResourceLocation("weaversparadise", "thigh_highs_stensils")));
+                    return stack.is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("weaversparadise", "thigh_highs_stensils")));
 
                 } else if (internal.getStackInSlot(0).is(WeaversParadiseItems.CHOKER.get())) {
 
-                    return stack.is(ItemTags.create(new ResourceLocation("weaversparadise", "choker_stencils")));
+                    return stack.is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("weaversparadise", "choker_stencils")));
                 }
 
                 return false;
@@ -220,7 +220,7 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
             public boolean mayPlace(ItemStack stack) {
                 CompoundTag tags = stack.getOrCreateTag();
 
-                if (internal.getStackInSlot(2).is(ItemTags.create(new ResourceLocation("weaversparadise", "stensils")))) {
+                if (internal.getStackInSlot(2).is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("weaversparadise", "stensils")))) {
                     if (stack.is(WeaversParadiseItems.BOTTLED_DYE.get())) {
                         return true;
                     }
@@ -239,7 +239,7 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
                     return false;
                 }
 
-                if (internal.getStackInSlot(3).is(ItemTags.create(new ResourceLocation("weaversparadise", "stensils")))) {
+                if (internal.getStackInSlot(3).is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("weaversparadise", "stensils")))) {
                     if (stack.is(WeaversParadiseItems.BOTTLED_DYE.get())) {
                         return true;
                     }
@@ -262,7 +262,7 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
                     return false;
                 }
 
-                if (internal.getStackInSlot(3).is(ItemTags.create(new ResourceLocation("weaversparadise", "stensils")))) {
+                if (internal.getStackInSlot(3).is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("weaversparadise", "stensils")))) {
                     if (stack.is(WeaversParadiseItems.BOTTLED_DYE.get())) {
                         return true;
                     }

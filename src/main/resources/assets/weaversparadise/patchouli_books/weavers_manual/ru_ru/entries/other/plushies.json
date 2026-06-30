@@ -1,0 +1,19 @@
+{
+  "name": "Плюшевые игрушки!",
+  "icon": "weaversparadise:player_plushie",
+  "category": "weaversparadise:interesting_stuff",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Плюшевые игрушки!",
+      "item": "weaversparadise:player_plushie",
+      "text": "В некоторых сундуках в мире можно найти плюшевые игрушки игрока!$(br)Чтобы изменить скин такой игрушки, переименуйте Жетон переименования плюшевой игрушки игрока на наковальне в имя нужного игрока, а затем совместите его с игрушкой в верстаке.$(br2)Иногда рецепт может выдать неправильный скин. В таком случае выньте один из ингредиентов и положите его обратно. Не моя вина, что оно так работает :("
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Рецепты",
+      "recipe": "weaversparadise:player_plushie_rename_token_recipe",
+      "recipe2": "weaversparadise:plushie_renaming_recipe"
+    }
+  ]
+}

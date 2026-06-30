@@ -1,0 +1,31 @@
+{
+  "name": "Начнём с основ",
+  "icon": "weaversparadise:mortar_and_pestle",
+  "category": "weaversparadise:dyemaking",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:dyemaking_table_recipe",
+      "title": "Начнём с основ",
+      "text": "Для начала работы с красителями понадобится Станция Изготовления Красителей и 2 Бутылочки"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:pestle_recipe",
+      "recipe2": "weaversparadise:mortar_and_pestle_recipe"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Стандартный Бутилированный Краситель создаётся из: Бутылочки с водой, Бутылочки, и любых красителей и/или пигментов. Чтобы создать более специализированные красители, добавьте Ядро Красителя во время создания которое обозначит $(l:weaversparadise:dyemaking/dye_types)Тип Красителя$()."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "weaversparadise:dye_core",
+      "title": "Двойные Цвета",
+      "anchor": "double_dye",
+      "text": "Некоторые Типы Красителей требуют второй цвет. Чтобы добавить второй цвет к существующему Бутилированному Красителю, положите его в Станция Изготовления Красителей в слот для Бутылочки с водой, и добавьте второй краситель или пигмент."
+    }
+  ]
+}
+

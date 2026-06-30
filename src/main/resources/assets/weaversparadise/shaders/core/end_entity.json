@@ -1,9 +1,21 @@
 {
+  "blend": {
+    "func": "add",
+    "srcrgb": "srcalpha",
+    "dstrgb": "1-srcalpha"
+  },
   "vertex": "weaversparadise:end_entity",
   "fragment": "weaversparadise:end_entity",
+  "attributes": [
+    "Position",
+    "Color",
+    "UV0",
+    "UV1",
+    "UV2",
+    "Normal"
+  ],
   "samplers": [
     { "name": "Sampler0" },
-    { "name": "Sampler1" },
     { "name": "Sampler2" },
     { "name": "Sampler3" }
   ],

@@ -1,0 +1,31 @@
+{
+  "name": "Learning the Basics",
+  "icon": "weaversparadise:mortar_and_pestle",
+  "category": "weaversparadise:dyemaking",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:dyemaking_table_recipe",
+      "title": "Learning the Basics",
+      "text": "To start working with dyes you will have to craft a Dyemaking Table, and get your hands on 2 Glass Bottles"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:pestle_recipe",
+      "recipe2": "weaversparadise:mortar_and_pestle_recipe"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Basic Bottled Dye is made from just three ingredients: a Water Bottle, an empty Glass Bottle, and any dyes or pigments. To create more specialized dyes, add a Dye Core during crafting to determine the $(l:weaversparadise:dyemaking/dye_types)Dye Type$()."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "weaversparadise:dye_core",
+      "title": "Double Colors",
+      "anchor": "double_dye",
+      "text": "Some Dye Types require a secondary color. To add one, place the Bottled Dye back into the Dyemaking Table in the Water Bottle slot, then add the second dyes to complete the recipe."
+    }
+  ]
+}
+

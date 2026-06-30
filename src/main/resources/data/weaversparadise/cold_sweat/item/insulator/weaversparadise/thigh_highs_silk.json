@@ -20,7 +20,7 @@
       {
         "name": "weaversparadise:thigh_highs_silk",
         "amount": 0.2,
-        "operation": "add_value"
+        "operation": "addition"
       }
     ]
   },

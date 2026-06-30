@@ -17,9 +17,12 @@
     "client.CapeLayerMixin",
     "client.ElytraLayerMixin",
     "client.HumanModelMixin",
-    "client.PlayerRendererMixin"
+    "client.PlayerRendererMixin",
+    "client.ItemEntityRendererMixin",
+    "compat.ClientBookRegistryMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "plugin": "xox.labvorty.weaversparadise.mixins.compat.WeaversParadiseMixinPlugin"
 }

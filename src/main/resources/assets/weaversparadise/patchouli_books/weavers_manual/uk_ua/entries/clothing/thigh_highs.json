@@ -1,0 +1,49 @@
+{
+  "name": "Панчохи",
+  "icon": "weaversparadise:thigh_highs_cotton",
+  "category": "weaversparadise:clothing_items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Слот Curio: Одяг для ніг$(br)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Зачарування",
+      "text": "$(br)$(#FF5555)$(bold)> Прокляття зникнення$()$(br)$(#FF5555)$(bold)> Прокляття прив’язки$()$(br)$(#FF55FF)$(bold)> Незламність I-V$()$(br)$(#FF55FF)$(bold)> Лагодження$()$(br2)$(bold)Бавовна:$()$(br)$(#FF55FF)$(bold)> М’яко й затишно I-V - до +1.25 блока безпечної дистанції падіння$(bold)$()$(br2)$(bold)Шовк:$()$(br)$(#FF55FF)$(bold)> Водомірка - можливість ходити по воді$()$(br2)$(bold)Вовна:$()$(br)$(#FF55FF)$(bold)Шумопоглинання - вимикає виявлення скалк-сенсорами під час ходьби, бігу або падіння.$()"
+    },
+    {
+      "type": "weaversparadise:double_sided_clothing_list",
+      "name": "Бавовняні панчохи",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:thigh_highs_cotton\", Count:1b}}",
+      "scale": 2,
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:thigh_highs_cotton_recipe"
+    },
+    {
+      "type": "weaversparadise:double_sided_clothing_list",
+      "name": "Шовкові панчохи",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:thigh_highs_silk\", Count:1b}}",
+      "scale": 2,
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:thigh_highs_silk_recipe"
+    },
+    {
+      "type": "weaversparadise:double_sided_clothing_list",
+      "name": "Вовняні панчохи",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:thigh_highs_wool\", Count:1b}}",
+      "scale": 2,
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:thigh_highs_wool_recipe"
+    }
+  ]
+}

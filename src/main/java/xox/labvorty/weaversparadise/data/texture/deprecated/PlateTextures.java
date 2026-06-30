@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 public enum PlateTextures {
     DEFAULT(
             "default",
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/plate.png"
             ),
@@ -17,7 +17,7 @@ public enum PlateTextures {
     ),
     GOLDEN(
             "minecraft:gold_ingot",
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/plate_golden.png"
             ),

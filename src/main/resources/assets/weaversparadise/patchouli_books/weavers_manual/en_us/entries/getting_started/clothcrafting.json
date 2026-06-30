@@ -1,0 +1,27 @@
+{
+  "name": "Clothcrafting",
+  "icon": "weaversparadise:clothcrafting_station_block",
+  "category": "weaversparadise:getting_started",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:clothcrafting_table_recipe",
+      "text": "Clothcrafting Station is needed to process spools into certain fabric types. This crafting station uses minigame to check your skills, the better you perform - the better $(l:weaversparadise:getting_started/clothcrafting#quality)$(bold)quality$() fabric you will get!"
+    },
+    {
+      "type": "patchouli:image",
+      "title": "Minigame",
+      "images": [
+        "weaversparadise:textures/patchouli/clothcrafting_preview.png"
+      ],
+      "text": "Minigame itself :D"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Quality",
+      "anchor": "quality",
+      "text": "Quality of fabric only affects how durable the clothing crafted from it will be. Base item durability is 100, material types get bonus durability as follows:$(br)$(bold)Cotton$() - 20 durability per half a star$(br)$(bold)Silk$() - 15 durability per half a star$(br)$(bold)Wool$() - 25 durability per half a star$(br)$(bold)Jeans$() - 25 durability per half a star"
+    }
+  ]
+}

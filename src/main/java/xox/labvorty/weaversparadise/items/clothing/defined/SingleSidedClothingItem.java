@@ -32,7 +32,7 @@ public abstract class SingleSidedClothingItem extends Item implements ICurioItem
         List<DyeTooltipEntry> entries = new ArrayList<>();
         entries.add(
                 new DyeTooltipEntry(
-                        DyeTypeRegistry.getDyeType(getItemDyeType(stack, 1)).getA(),
+                        DyeTypeRegistry.getDyeType(getItemDyeType(stack, 1)).getDyeIcon(),
                         getItemDyeType(stack, 1),
                         getItemDyeType(stack, 1),
                         getItemLightValue(stack, 1),
@@ -43,7 +43,7 @@ public abstract class SingleSidedClothingItem extends Item implements ICurioItem
         if (!getStensilType(stack).equals("default")) {
             entries.add(
                     new DyeTooltipEntry(
-                            DyeTypeRegistry.getDyeType(getItemDyeType(stack, 2)).getA(),
+                            DyeTypeRegistry.getDyeType(getItemDyeType(stack, 2)).getDyeIcon(),
                             getItemDyeType(stack, 2),
                             getItemDyeType(stack, 2),
                             getItemLightValue(stack, 2),

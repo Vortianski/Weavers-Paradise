@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 public enum CatRingTextures {
     DEFAULT(
             "default",
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/cat_ring.png"
             ),
@@ -17,7 +17,7 @@ public enum CatRingTextures {
     ),
     GOLDEN(
             "minecraft:gold_ingot",
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/cat_ring_golden.png"
             ),

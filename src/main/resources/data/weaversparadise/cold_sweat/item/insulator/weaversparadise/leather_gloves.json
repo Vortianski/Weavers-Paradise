@@ -20,7 +20,7 @@
       {
         "name": "weaversparadise:leather_gloves",
         "amount": 0.05,
-        "operation": "add_value"
+        "operation": "addition"
       }
     ]
   },

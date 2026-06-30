@@ -3,7 +3,6 @@
 #moj_import <matrix.glsl>
 
 uniform sampler2D Sampler0;
-uniform sampler2D Sampler1;
 uniform sampler2D Sampler2;
 uniform sampler2D Sampler3;
 
@@ -58,7 +57,6 @@ mat4 end_portal_layer(float layer) {
 out vec4 fragColor;
 
 void main() {
-    vec4 _unused_sampler1 = texture(Sampler1, vec2(0.0));
 	vec4 armorTex = texture(Sampler3, texCoord0);
 	float redMask = armorTex.r;
 	float greenMask = armorTex.g;

@@ -224,6 +224,7 @@
   "weaversparadise.dye_text.health": "Type: Health",
   "weaversparadise.dye_text.hunger": "Type: Hunger",
   "weaversparadise.dye_text.day_time": "Type: Day Time",
+  "weaversparadise.dye_text.starfall": "Type: Starfall",
 
   "emi.category.weaversparadise.clothcrafting": "Clothcrafting",
   "emi.category.weaversparadise.spinning_jenny": "Spinning Jenny",
@@ -234,5 +235,7 @@
   "jei.weaversparadise.dyemaking": "Dyemaking",
 
   "weaversparadise.tooltip.hold": "Hold [%s] for additional information",
-  "weaversparadise.tooltip.applicable_to": "Can be applied to:"
+  "weaversparadise.tooltip.applicable_to": "Can be applied to:",
+
+  "weaversparadise.patchouli_warning": "Weavers Paradise works best with Patchouli. Install Patchouli and restart Minecraft to access the in-game guide. You can disable this warning in mods client configuration"
 }

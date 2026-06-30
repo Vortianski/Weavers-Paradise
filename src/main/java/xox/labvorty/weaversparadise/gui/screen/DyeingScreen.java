@@ -25,7 +25,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.joml.Vector4f;
 import oshi.util.tuples.Pair;
-import xox.labvorty.weaversparadise.data.texture.deprecated.CapeTextures;
+import xox.labvorty.weaversparadise.data.texture.ItemTexture;
+import xox.labvorty.weaversparadise.data.texture.TextureRegistry;
 import xox.labvorty.weaversparadise.gui.menu.DyeingMenu;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.clothing.*;
@@ -837,7 +838,6 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
             Minecraft mc = Minecraft.getInstance();
 
             MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
-            int ticks = (int)mc.level.getGameTime();
             int primaryColorOne = capeCottonItem.getItemMainColor(stack, 1);
             int secondaryColorOne = capeCottonItem.getItemSecondaryColor(stack, 1);
             int primaryColorTwo = capeCottonItem.getItemMainColor(stack, 2);
@@ -850,7 +850,7 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
 
             RenderingUtils renderingUtils = new RenderingUtils();
 
-            CapeTextures capeTextures = CapeTextures.getByTypeAndMaterial(stensilType, "cotton");
+            ItemTexture texture = TextureRegistry.find("cape", stensilType, "cotton");
 
             Pair<Integer, Integer> col1 = ColorHandlers.handle(dyeTypeOne, primaryColorOne, secondaryColorOne, lightValueOne, minecraft.player, LightTexture.FULL_BRIGHT, (int)minecraft.level.getGameTime());
             Pair<Integer, Integer> col2 = ColorHandlers.handle(dyeTypeTwo, primaryColorTwo, secondaryColorTwo, lightValueTwo, minecraft.player, LightTexture.FULL_BRIGHT, (int)minecraft.level.getGameTime());
@@ -865,11 +865,11 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
             poseStack.scale(36, 36, 36);
             poseStack.mulPose(Axis.YP.rotationDegrees(modelYaw));
 
-            VertexConsumer vertexConsumer1 = renderingUtils.parseVC(buffer, dyeTypeOne, capeTextures.getTextureOne(), "cape");
+            VertexConsumer vertexConsumer1 = renderingUtils.parseVC(buffer, dyeTypeOne, texture.getTextureOne(), "cape");
             ((PlayerModelInterface)model5).getCloak().render(poseStack, vertexConsumer1, finalLightOne, OverlayTexture.NO_OVERLAY, finalColorOne.x, finalColorOne.y, finalColorOne.z, finalColorOne.w);
 
-            if (capeTextures.getRenderType().equals("double")) {
-                VertexConsumer vertexConsumer2 = renderingUtils.parseVC(buffer, dyeTypeTwo, capeTextures.getTextureTwo(),"cape");
+            if (texture.getRenderType()) {
+                VertexConsumer vertexConsumer2 = renderingUtils.parseVC(buffer, dyeTypeTwo, texture.getTextureTwo(),"cape");
                 ((PlayerModelInterface)model5).getCloak().render(poseStack, vertexConsumer2, finalLightTwo, OverlayTexture.NO_OVERLAY, finalColorTwo.x, finalColorTwo.y, finalColorTwo.z, finalColorTwo.w);
             }
 
@@ -880,7 +880,6 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
             Minecraft mc = Minecraft.getInstance();
 
             MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
-            int ticks = (int)mc.level.getGameTime();
             int primaryColorOne = capeSilkItem.getItemMainColor(stack, 1);
             int secondaryColorOne = capeSilkItem.getItemSecondaryColor(stack, 1);
             int primaryColorTwo = capeSilkItem.getItemMainColor(stack, 2);
@@ -893,7 +892,7 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
 
             RenderingUtils renderingUtils = new RenderingUtils();
 
-            CapeTextures capeTextures = CapeTextures.getByTypeAndMaterial(stensilType, "silk");
+            ItemTexture texture = TextureRegistry.find("cape", stensilType, "silk");
 
             Pair<Integer, Integer> col1 = ColorHandlers.handle(dyeTypeOne, primaryColorOne, secondaryColorOne, lightValueOne, minecraft.player, LightTexture.FULL_BRIGHT, (int)minecraft.level.getGameTime());
             Pair<Integer, Integer> col2 = ColorHandlers.handle(dyeTypeTwo, primaryColorTwo, secondaryColorTwo, lightValueTwo, minecraft.player, LightTexture.FULL_BRIGHT, (int)minecraft.level.getGameTime());
@@ -908,11 +907,11 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
             poseStack.scale(36, 36, 36);
             poseStack.mulPose(Axis.YP.rotationDegrees(modelYaw));
 
-            VertexConsumer vertexConsumer1 = renderingUtils.parseVC(buffer, dyeTypeOne, capeTextures.getTextureOne(), "cape");
+            VertexConsumer vertexConsumer1 = renderingUtils.parseVC(buffer, dyeTypeOne, texture.getTextureOne(), "cape");
             ((PlayerModelInterface)model5).getCloak().render(poseStack, vertexConsumer1, finalLightOne, OverlayTexture.NO_OVERLAY, finalColorOne.x, finalColorOne.y, finalColorOne.z, finalColorOne.w);
 
-            if (capeTextures.getRenderType().equals("double")) {
-                VertexConsumer vertexConsumer2 = renderingUtils.parseVC(buffer, dyeTypeTwo, capeTextures.getTextureTwo(),"cape");
+            if (texture.getRenderType()) {
+                VertexConsumer vertexConsumer2 = renderingUtils.parseVC(buffer, dyeTypeTwo, texture.getTextureTwo(),"cape");
                 ((PlayerModelInterface)model5).getCloak().render(poseStack, vertexConsumer2, finalLightTwo, OverlayTexture.NO_OVERLAY, finalColorTwo.x, finalColorTwo.y, finalColorTwo.z, finalColorTwo.w);
             }
 
@@ -923,7 +922,6 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
             Minecraft mc = Minecraft.getInstance();
 
             MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
-            int ticks = (int)mc.level.getGameTime();
             int primaryColorOne = capeWoolItem.getItemMainColor(stack, 1);
             int secondaryColorOne = capeWoolItem.getItemSecondaryColor(stack, 1);
             int primaryColorTwo = capeWoolItem.getItemMainColor(stack, 2);
@@ -936,7 +934,7 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
 
             RenderingUtils renderingUtils = new RenderingUtils();
 
-            CapeTextures capeTextures = CapeTextures.getByTypeAndMaterial(stensilType, "wool");
+            ItemTexture texture = TextureRegistry.find("cape", stensilType, "wool");
 
             Pair<Integer, Integer> col1 = ColorHandlers.handle(dyeTypeOne, primaryColorOne, secondaryColorOne, lightValueOne, minecraft.player, LightTexture.FULL_BRIGHT, (int)minecraft.level.getGameTime());
             Pair<Integer, Integer> col2 = ColorHandlers.handle(dyeTypeTwo, primaryColorTwo, secondaryColorTwo, lightValueTwo, minecraft.player, LightTexture.FULL_BRIGHT, (int)minecraft.level.getGameTime());
@@ -951,11 +949,11 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
             poseStack.scale(36, 36, 36);
             poseStack.mulPose(Axis.YP.rotationDegrees(modelYaw));
 
-            VertexConsumer vertexConsumer1 = renderingUtils.parseVC(buffer, dyeTypeOne, capeTextures.getTextureOne(), "cape");
+            VertexConsumer vertexConsumer1 = renderingUtils.parseVC(buffer, dyeTypeOne, texture.getTextureOne(), "cape");
             ((PlayerModelInterface)model5).getCloak().render(poseStack, vertexConsumer1, finalLightOne, OverlayTexture.NO_OVERLAY, finalColorOne.x, finalColorOne.y, finalColorOne.z, finalColorOne.w);
 
-            if (capeTextures.getRenderType().equals("double")) {
-                VertexConsumer vertexConsumer2 = renderingUtils.parseVC(buffer, dyeTypeTwo, capeTextures.getTextureTwo(),"cape");
+            if (texture.getRenderType()) {
+                VertexConsumer vertexConsumer2 = renderingUtils.parseVC(buffer, dyeTypeTwo, texture.getTextureTwo(),"cape");
                 ((PlayerModelInterface)model5).getCloak().render(poseStack, vertexConsumer2, finalLightTwo, OverlayTexture.NO_OVERLAY, finalColorTwo.x, finalColorTwo.y, finalColorTwo.z, finalColorTwo.w);
             }
 
@@ -971,7 +969,7 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
 
-        guiGraphics.blit(new ResourceLocation("weaversparadise:textures/screens/dyeing_screen.png"), this.leftPos + -1, this.topPos + -7, 0, 0, 178, 227, 178, 227);
+        guiGraphics.blit(ResourceLocation.parse("weaversparadise:textures/screens/dyeing_screen.png"), this.leftPos + -1, this.topPos + -7, 0, 0, 178, 227, 178, 227);
 
         NonNullList<Slot> slots = this.menu.slots;
 
@@ -987,7 +985,7 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
                         slots.get(0).getItem().is(WeaversParadiseItems.WOOL_CAPE.get())
         ) {
             guiGraphics.blit(
-                    new ResourceLocation("weaversparadise:textures/screens/nope.png"),
+                    ResourceLocation.parse("weaversparadise:textures/screens/nope.png"),
                     this.leftPos + 126,
                     this.topPos + 87,
                     0,
@@ -999,7 +997,7 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
             );
 
             guiGraphics.blit(
-                    new ResourceLocation("weaversparadise:textures/screens/nope.png"),
+                    ResourceLocation.parse("weaversparadise:textures/screens/nope.png"),
                     this.leftPos + 148,
                     this.topPos + 87,
                     0,
@@ -1011,7 +1009,7 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
             );
 
             guiGraphics.blit(
-                    new ResourceLocation("weaversparadise:textures/screens/nope.png"),
+                    ResourceLocation.parse("weaversparadise:textures/screens/nope.png"),
                     this.leftPos + 137,
                     this.topPos + 66,
                     0,

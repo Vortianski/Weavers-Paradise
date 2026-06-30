@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 public enum HeartTextures {
     DEFAULT(
             "default",
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/heart.png"
             ),
@@ -17,7 +17,7 @@ public enum HeartTextures {
     ),
     GOLDEN(
             "minecraft:gold_ingot",
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/heart_golden.png"
             ),

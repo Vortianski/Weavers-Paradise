@@ -9,19 +9,19 @@ import java.util.stream.Stream;
 
 public enum ChokerTextures {
     DEFAULT("default",
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/chocker_half_pri.png"
             ),
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/chocker_half_pri.png"
             ),
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/chocker_half_sec.png"
             ),
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/chocker_half_sec.png"
             ),
@@ -29,19 +29,19 @@ public enum ChokerTextures {
             "base"
     ),
     HALF("half",
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/variants/choker/choker_half_pri_half_1.png"
             ),
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/variants/choker/choker_half_pri_half_2.png"
             ),
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/variants/choker/choker_half_sec_half_1.png"
             ),
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/variants/choker/choker_half_sec_half_2.png"
             ),
@@ -49,19 +49,19 @@ public enum ChokerTextures {
             "base"
     ),
     VERTICAL_LINE("vertical_lines",
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/variants/choker/choker_half_pri_lines_vertical_1.png"
             ),
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/variants/choker/choker_half_pri_lines_vertical_2.png"
             ),
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/variants/choker/choker_half_sec_lines_vertical_1.png"
             ),
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/variants/choker/choker_half_sec_lines_vertical_2.png"
             ),
@@ -69,19 +69,19 @@ public enum ChokerTextures {
             "base"
     ),
     SMALL_LINE("small_lines",
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/variants/choker/choker_half_pri_lines_small_1.png"
             ),
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/variants/choker/choker_half_pri_lines_small_2.png"
             ),
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/variants/choker/choker_half_sec_lines_small_1.png"
             ),
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/variants/choker/choker_half_sec_lines_small_2.png"
             ),
@@ -89,19 +89,19 @@ public enum ChokerTextures {
             "base"
     ),
     BIG_LINE("big_lines",
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/variants/choker/choker_half_pri_lines_big_1.png"
             ),
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/variants/choker/choker_half_pri_lines_big_2.png"
             ),
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/variants/choker/choker_half_sec_lines_big_1.png"
             ),
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/variants/choker/choker_half_sec_lines_big_2.png"
             ),
@@ -109,19 +109,19 @@ public enum ChokerTextures {
             "base"
     ),
     CHECKERS_SMALL("checkers_small",
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/variants/choker/choker_half_pri_checkers_small_1.png"
             ),
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/variants/choker/choker_half_pri_checkers_small_2.png"
             ),
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/variants/choker/choker_half_sec_checkers_small_1.png"
             ),
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/variants/choker/choker_half_sec_checkers_small_2.png"
             ),

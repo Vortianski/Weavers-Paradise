@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 public enum BellTextures {
     DEFAULT(
             "default",
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/bell.png"
             ),
@@ -17,7 +17,7 @@ public enum BellTextures {
     ),
     GOLDEN(
             "minecraft:gold_ingot",
-            new ResourceLocation(
+            ResourceLocation.fromNamespaceAndPath(
                     "weaversparadise",
                     "textures/clothing/bell_golden.png"
             ),

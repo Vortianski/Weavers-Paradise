@@ -197,7 +197,6 @@
   "weaversparadise.dye_text.speed": "Тип:Скорость",
   "weaversparadise.dye_text.height_bedrock": "Тип:Глобальная Высота",
   "weaversparadise.dye_text.height_sea": "Тип:Высота Моря",
-  "weaversparadise.dye_text.none": "",
   "weaversparadise.dye_text.pride": "Тип:ПРАЙД",
   "weaversparadise.dye_text.asexual": "Тип:АСЕКСУАЛ",
   "weaversparadise.dye_text.aromantic": "Тип:АРОМАНТИК",
@@ -223,8 +222,9 @@
   "weaversparadise.dye_text.nebula": "Тип: Туманность",
   "weaversparadise.dye_text.crystal": "Тип: Кристал",
   "weaversparadise.dye_text.health": "Тип: Жизненная Сила",
-  "weaversparadise.dye_text.hunger": "Type: Голод",
-  "weaversparadise.dye_text.day_time": "Type: Время Дня",
+  "weaversparadise.dye_text.hunger": "Тип: Голод",
+  "weaversparadise.dye_text.day_time": "Тип: Время Дня",
+  "weaversparadise.dye_text.starfall": "Тип: Звездопад",
 
   "emi.category.weaversparadise.clothcrafting": "Тканеделие",
   "emi.category.weaversparadise.spinning_jenny": "Прялка Дженни",
@@ -235,5 +235,7 @@
   "jei.weaversparadise.dyemaking": "Изготовление Красителей",
 
   "weaversparadise.tooltip.hold": "Удерживайте [%s] для дополнительной информации",
-  "weaversparadise.tooltip.applicable_to": "Можно применить к:"
+  "weaversparadise.tooltip.applicable_to": "Можно применить к:",
+
+  "weaversparadise.patchouli_warning": "Weavers Paradise работает лучше с Patchouli. Установите Patchouli и перезапустите Minecraft чтобы получить доступ к внутри игровому руководству. Вы можете отключить данное предупреждение в клиент конфигурации мода"
 }
