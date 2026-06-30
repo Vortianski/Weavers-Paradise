@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "patchouli"
+    }
+  ],
+
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "weaversparadise:mortar_and_pestle"
+    }
+  ],
+  "result": {
+    "id": "patchouli:guide_book",
+    "components": {
+      "patchouli:book": "weaversparadise:weavers_manual"
+    },
+    "count": 1
+  }
+}

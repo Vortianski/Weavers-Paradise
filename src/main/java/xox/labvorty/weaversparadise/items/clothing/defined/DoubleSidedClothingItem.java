@@ -37,7 +37,7 @@ public abstract class DoubleSidedClothingItem extends Item implements ICurioItem
         List<DyeTooltipEntry> entries = new ArrayList<>();
         entries.add(
                 new DyeTooltipEntry(
-                        DyeTypeRegistry.getDyeType(getItemDyeType(stack, "left", 1)).getA(),
+                        DyeTypeRegistry.getDyeType(getItemDyeType(stack, "left", 1)).getDyeIcon(),
                         getItemDyeType(stack, "left", 1),
                         getItemDyeType(stack, "left", 1),
                         getItemLightValue(stack, "left", 1),
@@ -49,7 +49,7 @@ public abstract class DoubleSidedClothingItem extends Item implements ICurioItem
         if (!getStensilType(stack, "left").equals("default")) {
             entries.add(
                     new DyeTooltipEntry(
-                            DyeTypeRegistry.getDyeType(getItemDyeType(stack, "left", 2)).getA(),
+                            DyeTypeRegistry.getDyeType(getItemDyeType(stack, "left", 2)).getDyeIcon(),
                             getItemDyeType(stack, "left", 2),
                             getItemDyeType(stack, "left", 2),
                             getItemLightValue(stack, "left", 2),
@@ -61,7 +61,7 @@ public abstract class DoubleSidedClothingItem extends Item implements ICurioItem
 
         entries.add(
                 new DyeTooltipEntry(
-                        DyeTypeRegistry.getDyeType(getItemDyeType(stack, "right", 1)).getA(),
+                        DyeTypeRegistry.getDyeType(getItemDyeType(stack, "right", 1)).getDyeIcon(),
                         getItemDyeType(stack, "right", 1),
                         getItemDyeType(stack, "right", 1),
                         getItemLightValue(stack, "right", 1),
@@ -73,7 +73,7 @@ public abstract class DoubleSidedClothingItem extends Item implements ICurioItem
         if (!getStensilType(stack, "right").equals("default")) {
             entries.add(
                     new DyeTooltipEntry(
-                            DyeTypeRegistry.getDyeType(getItemDyeType(stack, "right", 2)).getA(),
+                            DyeTypeRegistry.getDyeType(getItemDyeType(stack, "right", 2)).getDyeIcon(),
                             getItemDyeType(stack, "right", 2),
                             getItemDyeType(stack, "right" ,2),
                             getItemLightValue(stack, "right", 2),

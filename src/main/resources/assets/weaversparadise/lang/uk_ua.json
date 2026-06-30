@@ -222,9 +222,10 @@
   "weaversparadise.dye_text.true_negative": "Тип: Істинний Негатив",
   "weaversparadise.dye_text.nebula": "Тип: Туманність",
   "weaversparadise.dye_text.crystal": "Тип: Кристал",
-  "weaversparadise.dye_text.health": "Type: Життєва Сила",
-  "weaversparadise.dye_text.hunger": "Type: Голод",
-  "weaversparadise.dye_text.day_time": "Type: Час Доби",
+  "weaversparadise.dye_text.health": "Тип: Життєва Сила",
+  "weaversparadise.dye_text.hunger": "Тип: Голод",
+  "weaversparadise.dye_text.day_time": "Тип: Час Доби",
+  "weaversparadise.dye_text.starfall": "Тип: Зорепад",
 
   "emi.category.weaversparadise.clothcrafting": "Ткацтво",
   "emi.category.weaversparadise.spinning_jenny": "Прядка Дженні",
@@ -235,5 +236,7 @@
   "jei.weaversparadise.dyemaking": "Виготовлення Барвників",
 
   "weaversparadise.tooltip.hold": "Утримуйте [%s] для додаткової інформації",
-  "weaversparadise.tooltip.applicable_to": "Може бути застосовано до:"
+  "weaversparadise.tooltip.applicable_to": "Може бути застосовано до:",
+
+  "weaversparadise.patchouli_warning": "Weavers Paradise найкраще працює з Patchouli. Встановіть Patchouli та перезапустіть Minecraft, щоб отримати доступ до внутрішньоігрового посібника. Ви можете вимкнути це застереження в конфігурації"
 }

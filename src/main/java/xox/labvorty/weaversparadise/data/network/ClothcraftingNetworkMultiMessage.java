@@ -40,7 +40,11 @@ public record ClothcraftingNetworkMultiMessage(int buttonID, int x, int y, int z
         buffer.writeInt(message.gameScore);
         buffer.writeBoolean(message.isGameOn);
         listCodec.encode(buffer, message.items);
-        ItemStack.STREAM_CODEC.encode(buffer, message.clothType);
+        if (!message.clothType.isEmpty()) {
+            ItemStack.STREAM_CODEC.encode(buffer, message.clothType);
+        } else {
+            ItemStack.STREAM_CODEC.encode(buffer, new ItemStack(Items.STONE, 1));
+        }
     }, (RegistryFriendlyByteBuf buffer) -> new ClothcraftingNetworkMultiMessage(buffer.readInt(), buffer.readInt(), buffer.readInt(), buffer.readInt(), buffer.readInt(), buffer.readInt(), buffer.readBoolean(), listCodec.decode(buffer), ItemStack.STREAM_CODEC.decode(buffer)));
     @Override
     public CustomPacketPayload.Type<ClothcraftingNetworkMultiMessage> type() {

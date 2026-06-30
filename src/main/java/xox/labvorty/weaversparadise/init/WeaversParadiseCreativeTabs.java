@@ -102,7 +102,8 @@ public class WeaversParadiseCreativeTabs {
                         "negative",
                         "true_negative",
                         "nebula",
-                        "polychromatic"
+                        "polychromatic",
+                        "starfall"
                 );
                 List<ItemStack> dyedItems = List.of(
                         WeaversParadiseItems.BOTTLED_DYE.toStack(),

@@ -57,8 +57,8 @@ public class MikkelaArmorModel<T extends Entity> extends EntityModel<T> {
 
 		PartDefinition Right_Arm_r6 = Body.addOrReplaceChild("Right_Arm_r6", CubeListBuilder.create().texOffs(72, 16).addBox(-2.5916F, -4.3283F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.0001F)), PartPose.offsetAndRotation(-3.6365F, 5.2239F, -3.4391F, -0.6247F, -0.2097F, -0.1938F));
 
-		PartDefinition Head = partdefinition.addOrReplaceChild("Head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.2503F))
-		.texOffs(32, 0).addBox(-4.0F, -0.4F, 2.0F, 8.0F, 20.0F, 2.0F, new CubeDeformation(0.251F))
+		PartDefinition Head = partdefinition.addOrReplaceChild("Head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.2515F))
+		.texOffs(32, 0).addBox(-4.0F, -0.4F, 2.0F, 8.0F, 20.0F, 2.0F, new CubeDeformation(0.252F))
 		.texOffs(108, 88).addBox(-4.0F, -0.4F, 2.0F, 8.0F, 20.0F, 2.0F, new CubeDeformation(0.551F))
 		.texOffs(0, 16).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.6F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 

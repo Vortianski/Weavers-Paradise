@@ -1,0 +1,156 @@
+{
+  "name": "Dye Types",
+  "icon": "weaversparadise:dye_core",
+  "category": "weaversparadise:dyemaking",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Getting tired of just using colors? Well, Dye Types is just what you need! Most of them change item rendering fully, by modifying rendering and this entry will explain most of them.$(br2)Some Dye Types use $(l:weaversparadise:dyemaking/learning_the_basics#double_dye)secondary colors$()"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Default",
+      "item": "weaversparadise:dye_core",
+      "text": "Default rendering, only uses one color. As basic as it can get, does not require anything"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Pride",
+      "item": "weaversparadise:flag_agender,weaversparadise:flag_aroace,weaversparadise:flag_aromantic,weaversparadise:flag_asexual,weaversparadise:flag_bisexual,weaversparadise:flag_demiboy,weaversparadise:flag_demigender,weaversparadise:flag_demigirl,weaversparadise:flag_gay,weaversparadise:flag_genderfluid,weaversparadise:flag_genderqueer,weaversparadise:flag_intersex,weaversparadise:flag_lesbian,weaversparadise:flag_nonbinary,weaversparadise:flag_pansexual,weaversparadise:flag_pride,weaversparadise:flag_trans",
+      "text": "$(bold)Double color:$() No$(br2)Uses pride flag mask over default texture."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Redstone",
+      "item": "minecraft:redstone",
+      "text": "$(bold)Double color:$() No$(br2)Has power 0-15 which determines its color (#640000-#FF0000). Cannot use provided colors, can only be red."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Glowstone",
+      "item": "minecraft:glowstone_dust",
+      "text": "$(bold)Double color:$() No$(br2)Dye that uses provided color but always has max amount of light, and thus it glows in the dark."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Lamp",
+      "item": "minecraft:redstone_lamp",
+      "text": "$(bold)Double color:$() No$(br2)Works similarly to glowstone, but it's power can be set using redstone. Crafted by either applying glowstone to a Redstone Dye Core or applying redstone to a Glowstone Dye Core."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Sculk",
+      "item": "minecraft:sculk",
+      "text": "$(bold)Double color:$() No$(br2)Cannot use provided colors. Pulses when sounds are triggered near player."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Colored Sculk",
+      "item": "minecraft:echo_shard",
+      "text": "$(bold)Double color:$() Yes$(br2)Uses provided colors. Works same as Sculk."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Hunger",
+      "item": "minecraft:rotten_flesh",
+      "text": "$(bold)Double color:$() Yes$(br2)Uses provided colors to show how hungry player is, by interpolating from first color to the second one."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Health",
+      "item": "minecraft:glistering_melon_slice",
+      "text": "$(bold)Double color:$() Yes$(br2)Uses provided colors to show how much health entity has, by interpolating from first color to the second one."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Day Time",
+      "item": "minecraft:sunflower",
+      "text": "$(bold)Double color:$() No$(br2)Cannot use provided colors. Interpolates colors to show what time of day it is."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Colored Day Time",
+      "item": "minecraft:clock",
+      "text": "$(bold)Double color:$() Yes$(br2)Uses provided colors. Interpolates colors to show what time of day it is."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Rainbow",
+      "item": "weaversparadise:chromatic_bloom_fruit",
+      "text": "$(bold)Double color:$() No$(br2)Cannot use provided colors. Shifts colors using time granting a rgb effect."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Biome",
+      "item": "minecraft:moss_block",
+      "text": "$(bold)Double color:$() No$(br2)Cannot use provided colors. Uses foliage colors."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Ender",
+      "item": "minecraft:ender_eye",
+      "text": "$(bold)Double color:$() No$(br2)Cannot use provided colors. Renders same as End Portal."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Speed",
+      "item": "minecraft:sugar",
+      "text": "$(bold)Double color:$() Yes$(br2)Uses provided colors. Interpolates from first color into second color using speed."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Height (Bedrock)",
+      "item": "minecraft:phantom_membrane",
+      "text": "$(bold)Double color:$() Yes$(br2)Uses provided colors. Interpolates from first color into second color using distance from bedrock."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Height (Sea)",
+      "item": "minecraft:prismarine_crystals",
+      "text": "$(bold)Double color:$() Yes$(br2)Uses provided colors. Interpolates from first color into second color using distance from sea level (usually y:63)."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Invisible",
+      "item": "minecraft:air",
+      "text": "$(bold)Double color:$() No$(br2)Cannot use provided colors. Renders nothing."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Static",
+      "item": "minecraft:powder_snow_bucket",
+      "text": "$(bold)Double color:$() No$(br2)Cannot use provided colors. Render as static noise."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Crystal",
+      "item": "minecraft:amethyst_shard",
+      "text": "$(bold)Double color:$() No$(br2)Uses provided colors. Renderer shifts pixels using Voronoi Noise"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Negative",
+      "item": "minecraft:barrier",
+      "text": "$(bold)Double color:$() No$(br2)Uses provided colors. Applies negative after light."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "True Negative",
+      "item": "minecraft:barrier",
+      "text": "$(bold)Double color:$() No$(br2)Uses provided colors. Applies negative before light."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Nebula",
+      "item": "minecraft:dragon_breath",
+      "text": "$(bold)Double color:$() No$(br2)Cannot use provided colors. Renders purple nebula."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Polychromatic",
+      "item": "weaversparadise:chromatic_dust",
+      "text": "$(bold)Double color:$() No$(br2)Uses provided colors. Determines color hue shift using camera angle and position."
+    }
+  ]
+}

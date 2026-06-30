@@ -1,34 +1,69 @@
 package xox.labvorty.weaversparadise.data.tooltip_components;
 
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
-import oshi.util.tuples.Pair;
+import xox.labvorty.weaversparadise.data.tooltip_components.helper.DyeData;
+import xox.labvorty.weaversparadise.data.tooltip_components.helper.DyeDataColor;
+import xox.labvorty.weaversparadise.data.tooltip_components.helper.DyeInstance;
+import xox.labvorty.weaversparadise.data.tooltip_components.helper.RenderData;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 public class DyeTypeRegistry {
-    private static final Map<String, Pair<DyeIcon, Component>> dyeType = new HashMap<>();
-    private static final Pair<DyeIcon, Component> DEFAULT = new Pair<>(
+    private static final Map<String, DyeInstance> dyeType = new HashMap<>();
+    private static final DyeInstance DEFAULT = new DyeInstance(
             new DyeIcon(ResourceLocation.fromNamespaceAndPath("weaversparadise", "textures/tooltips/flag_empty.png")),
-            Component.translatable("weaversparadise.dye_text.default")
+            Component.translatable("weaversparadise.dye_text.default"),
+            (dyeData) -> {
+                int colorOne = dyeData.getColorOne();
+
+                return dyeData.getComponent().copy().withColor(colorOne);
+            },
+            (dyeDataColor) -> {
+                if (dyeDataColor.layer() == 1) {
+                    return dyeDataColor.colorOne();
+                }
+
+                return -1;
+            },
+            (renderData) -> RenderType.entityTranslucent(renderData.resourceLocation())
     );
 
     public static void registerDyeType(
             String name,
             DyeIcon dyeIcon,
-            Component component
+            Component component,
+            Function<DyeData, MutableComponent> nameParser,
+            Function<DyeDataColor, Integer> colorParser
+    ) {
+        registerDyeType(name, dyeIcon, component, nameParser, colorParser, (renderData) -> RenderType.entityTranslucent(renderData.resourceLocation()));
+    }
+
+    public static void registerDyeType(
+            String name,
+            DyeIcon dyeIcon,
+            Component component,
+            Function<DyeData, MutableComponent> nameParser,
+            Function<DyeDataColor, Integer> colorParser,
+            Function<RenderData, RenderType> renderTypeParser
     ) {
         dyeType.put(
                 name,
-                new Pair<>(
+                new DyeInstance(
                         dyeIcon,
-                        component
+                        component,
+                        nameParser,
+                        colorParser,
+                        renderTypeParser
                 )
         );
     }
 
-    public static Pair<DyeIcon, Component> getDyeType(String s) {
+    public static DyeInstance getDyeType(String s) {
         return dyeType.getOrDefault(s, DEFAULT);
     }
 }

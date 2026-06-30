@@ -26,7 +26,8 @@ import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import oshi.util.tuples.Pair;
-import xox.labvorty.weaversparadise.data.texture.deprecated.CapeTextures;
+import xox.labvorty.weaversparadise.data.texture.ItemTexture;
+import xox.labvorty.weaversparadise.data.texture.TextureRegistry;
 import xox.labvorty.weaversparadise.gui.menu.DyeingMenu;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.clothing.*;
@@ -851,7 +852,7 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
 
             RenderingUtils renderingUtils = new RenderingUtils();
 
-            CapeTextures capeTextures = CapeTextures.getByTypeAndMaterial(stensilType, "cotton");
+            ItemTexture texture = TextureRegistry.find("cape", stensilType, "cotton");
 
             Pair<Integer, Integer> col1 = ColorHandlers.handle(dyeTypeOne, primaryColorOne, secondaryColorOne, lightValueOne, minecraft.player, LightTexture.FULL_BRIGHT, (int)minecraft.level.getGameTime());
             Pair<Integer, Integer> col2 = ColorHandlers.handle(dyeTypeTwo, primaryColorTwo, secondaryColorTwo, lightValueTwo, minecraft.player, LightTexture.FULL_BRIGHT, (int)minecraft.level.getGameTime());
@@ -866,11 +867,11 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
             poseStack.scale(36, 36, 36);
             poseStack.mulPose(Axis.YP.rotationDegrees(modelYaw));
 
-            VertexConsumer vertexConsumer1 = renderingUtils.parseVC(buffer, dyeTypeOne, capeTextures.getTextureOne(), "cape");
+            VertexConsumer vertexConsumer1 = renderingUtils.parseVC(buffer, dyeTypeOne, texture.getTextureOne(), "cape");
             ((PlayerModelInterface)model5).getCloak().render(poseStack, vertexConsumer1, finalLightOne, OverlayTexture.NO_OVERLAY, finalColorOne);
 
-            if (capeTextures.getRenderType().equals("double")) {
-                VertexConsumer vertexConsumer2 = renderingUtils.parseVC(buffer, dyeTypeTwo, capeTextures.getTextureTwo(),"cape");
+            if (texture.getRenderType()) {
+                VertexConsumer vertexConsumer2 = renderingUtils.parseVC(buffer, dyeTypeTwo, texture.getTextureTwo(),"cape");
                 ((PlayerModelInterface)model5).getCloak().render(poseStack, vertexConsumer2, finalLightTwo, OverlayTexture.NO_OVERLAY, finalColorTwo);
             }
 
@@ -894,7 +895,7 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
 
             RenderingUtils renderingUtils = new RenderingUtils();
 
-            CapeTextures capeTextures = CapeTextures.getByTypeAndMaterial(stensilType, "silk");
+            ItemTexture texture = TextureRegistry.find("cape", stensilType, "silk");
 
             Pair<Integer, Integer> col1 = ColorHandlers.handle(dyeTypeOne, primaryColorOne, secondaryColorOne, lightValueOne, minecraft.player, LightTexture.FULL_BRIGHT, (int)minecraft.level.getGameTime());
             Pair<Integer, Integer> col2 = ColorHandlers.handle(dyeTypeTwo, primaryColorTwo, secondaryColorTwo, lightValueTwo, minecraft.player, LightTexture.FULL_BRIGHT, (int)minecraft.level.getGameTime());
@@ -909,11 +910,11 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
             poseStack.scale(36, 36, 36);
             poseStack.mulPose(Axis.YP.rotationDegrees(modelYaw));
 
-            VertexConsumer vertexConsumer1 = renderingUtils.parseVC(buffer, dyeTypeOne, capeTextures.getTextureOne(), "cape");
+            VertexConsumer vertexConsumer1 = renderingUtils.parseVC(buffer, dyeTypeOne, texture.getTextureOne(), "cape");
             ((PlayerModelInterface)model5).getCloak().render(poseStack, vertexConsumer1, finalLightOne, OverlayTexture.NO_OVERLAY, finalColorOne);
 
-            if (capeTextures.getRenderType().equals("double")) {
-                VertexConsumer vertexConsumer2 = renderingUtils.parseVC(buffer, dyeTypeTwo, capeTextures.getTextureTwo(),"cape");
+            if (texture.getRenderType()) {
+                VertexConsumer vertexConsumer2 = renderingUtils.parseVC(buffer, dyeTypeTwo, texture.getTextureTwo(),"cape");
                 ((PlayerModelInterface)model5).getCloak().render(poseStack, vertexConsumer2, finalLightTwo, OverlayTexture.NO_OVERLAY, finalColorTwo);
             }
 
@@ -937,7 +938,7 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
 
             RenderingUtils renderingUtils = new RenderingUtils();
 
-            CapeTextures capeTextures = CapeTextures.getByTypeAndMaterial(stensilType, "wool");
+            ItemTexture texture = TextureRegistry.find("cape", stensilType, "wool");
 
             Pair<Integer, Integer> col1 = ColorHandlers.handle(dyeTypeOne, primaryColorOne, secondaryColorOne, lightValueOne, minecraft.player, LightTexture.FULL_BRIGHT, (int)minecraft.level.getGameTime());
             Pair<Integer, Integer> col2 = ColorHandlers.handle(dyeTypeTwo, primaryColorTwo, secondaryColorTwo, lightValueTwo, minecraft.player, LightTexture.FULL_BRIGHT, (int)minecraft.level.getGameTime());
@@ -952,11 +953,11 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
             poseStack.scale(36, 36, 36);
             poseStack.mulPose(Axis.YP.rotationDegrees(modelYaw));
 
-            VertexConsumer vertexConsumer1 = renderingUtils.parseVC(buffer, dyeTypeOne, capeTextures.getTextureOne(), "cape");
+            VertexConsumer vertexConsumer1 = renderingUtils.parseVC(buffer, dyeTypeOne, texture.getTextureOne(), "cape");
             ((PlayerModelInterface)model5).getCloak().render(poseStack, vertexConsumer1, finalLightOne, OverlayTexture.NO_OVERLAY, finalColorOne);
 
-            if (capeTextures.getRenderType().equals("double")) {
-                VertexConsumer vertexConsumer2 = renderingUtils.parseVC(buffer, dyeTypeTwo, capeTextures.getTextureTwo(),"cape");
+            if (texture.getRenderType()) {
+                VertexConsumer vertexConsumer2 = renderingUtils.parseVC(buffer, dyeTypeTwo, texture.getTextureTwo(),"cape");
                 ((PlayerModelInterface)model5).getCloak().render(poseStack, vertexConsumer2, finalLightTwo, OverlayTexture.NO_OVERLAY, finalColorTwo);
             }
 

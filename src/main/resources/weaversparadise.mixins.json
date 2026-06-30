@@ -16,12 +16,14 @@
     "client.HumanModelMixin",
     "client.ItemRendererMixin",
     "client.ElytraLayerMixin",
-    "client.CapeLayerMixin"
+    "client.CapeLayerMixin",
+    "compat.ClientBookRegistryMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "overwrites": {
     "requireAnnotations": true
-  }
+  },
+  "plugin": "xox.labvorty.weaversparadise.mixins.compat.WeaversParadiseMixinPlugin"
 }

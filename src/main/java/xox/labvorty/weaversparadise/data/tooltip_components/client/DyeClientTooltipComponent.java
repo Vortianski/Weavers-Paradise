@@ -1,7 +1,6 @@
 package xox.labvorty.weaversparadise.data.tooltip_components.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
@@ -44,18 +43,15 @@ public class DyeClientTooltipComponent implements ClientTooltipComponent {
 
     @Override
     public int getWidth(Font font) {
-        return (width + 2 + font.width(DyeTypeRegistry.getDyeType(this.text).getB()));
+        return (width + 2 + font.width(DyeTypeRegistry.getDyeType(this.text).getComponent()));
     }
 
     @Override
     public void renderImage(Font font, int x, int y, GuiGraphics guiGraphics) {
         RenderSystem.enableBlend();
 
-        Minecraft mc = Minecraft.getInstance();
-        int ticks = (int)mc.level.getGameTime();
-
         dyeIcon.render(guiGraphics, x, y);
-        guiGraphics.drawString(font, DyeTooltipData.parse(text, type, ticks, primaryColor, secondaryColor, lightValue), x + (width + 2), y + 1, 0xFFFFFF);
+        guiGraphics.drawString(font, DyeTooltipData.parse(type, primaryColor, secondaryColor, lightValue), x + (width + 2), y + 1, 0xFFFFFF);
 
         RenderSystem.disableBlend();
     }

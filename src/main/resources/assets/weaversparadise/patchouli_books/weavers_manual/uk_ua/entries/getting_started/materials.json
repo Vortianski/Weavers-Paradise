@@ -1,0 +1,52 @@
+{
+  "name": "Матеріали",
+  "icon": "weaversparadise:cotton_boll",
+  "category": "weaversparadise:getting_started",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Weavers Paradise - це мод про створення одягу, але перш ніж перейти до цікавого, доведеться трохи забруднити руки.$(br2)Спершу познайомимося з основними матеріалами та тим, як обробляти їх для подальшого використання."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:spinning_jenny_recipe",
+      "text": "Прядка Дженні - це крафтова станція, потрібна для переробки сировини на котушки."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Бавовна",
+      "item": "weaversparadise:raw_cotton",
+      "text": "Створюється з x4 $(l:weaversparadise:getting_started/plants#cotton)сирої бавовни$(/l). Має середні властивості й найпростіше добувається."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Вовна",
+      "item": "tag:minecraft:wool",
+      "text": "Створюється з x1 будь-якої вовни. Має найбільшу міцність серед усіх матеріалів."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Шовк",
+      "item": "minecraft:string",
+      "text": "Створюється з x5 ниток. Має найменшу міцність."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Джинс",
+      "item": "weaversparadise:jeans_spool",
+      "text": "Створюється з x4 бавовняних котушок. Має середні властивості."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Температура",
+      "flag": "|mod:cold_sweat,mod:legendarysurvivaloverhaul",
+      "text": "Weavers Paradise також підтримує деякі температурні моди. Наразі:$(br)$(bold)> Cold Sweat$(br)$(bold)> Legendary Survival Overhaul"
+    },
+    {
+      "type": "patchouli:text",
+      "flag": "|mod:cold_sweat,mod:legendarysurvivaloverhaul",
+      "text": "Він додає матеріалам такі властивості:$(br)$(bold)Бавовна$() - середній захист і від спеки, і від холоду$(br)$(bold)Шовк$() - захист від спеки$(br)$(bold)Вовна$() - захист від холоду"
+    }
+  ]
+}

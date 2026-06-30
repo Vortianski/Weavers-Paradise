@@ -1,0 +1,52 @@
+{
+  "name": "Pants",
+  "icon": "weaversparadise:pants_cotton",
+  "category": "weaversparadise:clothing_items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Curio slot: Pants$(br)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Enchantments",
+      "text": "$(br)$(#FF5555)$(bold)> Vanishing Curse$()$(br)$(#FF5555)$(bold)> Binding Curse$()$(br)$(#FF55FF)$(bold)> Unbreaking I-V$()$(br)$(#FF55FF)$(bold)> Mending$()$(br2)$(bold)Cotton:$()$(br)$(#FF55FF)$(bold)> Soft & Cozy I-V - up to +10% movement efficiency$(bold)$()$(br2)$(bold)Silk:$()$(br)$(#FF55FF)$(bold)> Graceful I-V - up to +10% movement efficiency while in water$()$(br2)$(bold)Jeans:$()$(br)$(#FF55FF)$(bold)Tough as Nails - up to 16.6% chance to deflect any arrow when hit.$()"
+    },
+    {
+      "type": "weaversparadise:single_sided_clothing_list",
+      "name": "Cotton Pants",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:pants_cotton\", Count:1b}}",
+      "scale": 2,
+      "offset": 0
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:pants_cotton_recipe",
+      "text": "$(l:weaversparadise:getting_started/advanced_materials#cotton_pant_legs)This recipe uses advanced materials$()"
+    },
+    {
+      "type": "weaversparadise:single_sided_clothing_list",
+      "name": "Silk Pants",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:pants_silk\", Count:1b}}",
+      "scale": 2,
+      "offset": 0
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:pants_silk_recipe",
+      "text": "$(l:weaversparadise:getting_started/advanced_materials#silk_pant_legs)This recipe uses advanced materials$()"
+    },
+    {
+      "type": "weaversparadise:single_sided_clothing_list",
+      "name": "Jeans Pants",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:pants_jeans\", Count:1b}}",
+      "scale": 2,
+      "offset": 0
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:pants_jeans_recipe",
+      "text": "$(l:weaversparadise:getting_started/advanced_materials#jeans_pant_legs)This recipe uses advanced materials$()"
+    }
+  ]
+}

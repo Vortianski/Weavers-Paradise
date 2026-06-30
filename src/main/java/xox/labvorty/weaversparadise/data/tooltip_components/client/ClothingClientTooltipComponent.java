@@ -34,7 +34,7 @@ public class ClothingClientTooltipComponent implements ClientTooltipComponent {
         int maxTextWidth = 0;
 
         for (DyeTooltipEntry entry : entries) {
-            maxTextWidth = Math.max(maxTextWidth, font.width(DyeTypeRegistry.getDyeType(entry.textKey()).getB()));
+            maxTextWidth = Math.max(maxTextWidth, font.width(DyeTypeRegistry.getDyeType(entry.textKey()).getComponent()));
         }
 
         return 8 + 2 + maxTextWidth;
@@ -59,9 +59,7 @@ public class ClothingClientTooltipComponent implements ClientTooltipComponent {
             guiGraphics.drawString(
                     font,
                     DyeTooltipData.parse(
-                            entry.textKey(),
                             entry.type(),
-                            ticks,
                             entry.primaryColor(),
                             entry.secondaryColor(),
                             entry.lightValue()

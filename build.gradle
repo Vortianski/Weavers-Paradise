@@ -109,26 +109,34 @@ configurations {
 }
 
 dependencies {
-    // EMI
-    compileOnlyApi(("dev.emi:emi-neoforge:1.1.22+1.21.1:api"))
-    //runtimeOnly(("dev.emi:emi-neoforge:1.1.22+1.21.1"))
+    // EMI | Client + Compilation Side
+    compileOnlyApi("dev.emi:emi-neoforge:1.1.22+1.21.1:api")
+    runtimeOnly("dev.emi:emi-neoforge:1.1.22+1.21.1")
 
-    compileOnlyApi(("top.theillusivec4.curios:curios-neoforge:${property("curios_version")}"))
-    runtimeOnly(("top.theillusivec4.curios:curios-neoforge:${property("curios_version")}"))
+    //Curios API | Client + Compilation Side
+    compileOnlyApi("top.theillusivec4.curios:curios-neoforge:${property("curios_version")}")
+    runtimeOnly("top.theillusivec4.curios:curios-neoforge:${property("curios_version")}")
 
-    //JEI
+    //JEI | Client + Compilation Side
     compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
     runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
 
-    //Cold Sweat
+    //Cold Sweat | Client Side
     compileOnly("curse.maven:cold-sweat-506194:7370181")
 
-    //Iris Shaders
-    runtimeOnly("curse.maven:sodium-394468:6382651")
-    implementation("curse.maven:irisshaders-455508:6661598")
+    //Legendary Survival Overhaul | Client Side
+    runtimeOnly("curse.maven:legendary-survival-overhaul-840254:7603851")
 
-    //VortyLib
-    implementation("curse.maven:vortylib-1578928:8268462")
+    //Iris Shaders | Client Side
+    runtimeOnly("curse.maven:sodium-394468:6382651")
+
+    //VortyLib | Client + Compilation Side
+    implementation("curse.maven:vortylib-1578928:8342619")
+
+    //Patchouli | Client Side
+    compileOnly("vazkii.patchouli:Patchouli:${patchouli_version}:api")
+    compileOnly("vazkii.patchouli:Patchouli:${patchouli_version}")
+    runtimeOnly("vazkii.patchouli:Patchouli:${patchouli_version}")
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

@@ -1,0 +1,52 @@
+{
+  "name": "Штани",
+  "icon": "weaversparadise:pants_cotton",
+  "category": "weaversparadise:clothing_items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Слот Curio: Штани$(br)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Зачарування",
+      "text": "$(br)$(#FF5555)$(bold)> Прокляття зникнення$()$(br)$(#FF5555)$(bold)> Прокляття прив’язки$()$(br)$(#FF55FF)$(bold)> Незламність I-V$()$(br)$(#FF55FF)$(bold)> Лагодження$()$(br2)$(bold)Бавовна:$()$(br)$(#FF55FF)$(bold)> М’яко й затишно I-V - до +10% ефективності руху$(bold)$()$(br2)$(bold)Шовк:$()$(br)$(#FF55FF)$(bold)> Граційність I-V - до +10% ефективності руху у воді$()$(br2)$(bold)Джинс:$()$(br)$(#FF55FF)$(bold)Міцний як цвяхи - до 16.6% шанс відбити будь-яку стрілу при влучанні.$()"
+    },
+    {
+      "type": "weaversparadise:single_sided_clothing_list",
+      "name": "Бавовняні штани",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:pants_cotton\", Count:1b}}",
+      "scale": 2,
+      "offset": 0
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:pants_cotton_recipe",
+      "text": "$(l:weaversparadise:getting_started/advanced_materials#cotton_pant_legs)Цей рецепт використовує просунуті матеріали$()"
+    },
+    {
+      "type": "weaversparadise:single_sided_clothing_list",
+      "name": "Шовкові штани",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:pants_silk\", Count:1b}}",
+      "scale": 2,
+      "offset": 0
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:pants_silk_recipe",
+      "text": "$(l:weaversparadise:getting_started/advanced_materials#silk_pant_legs)Цей рецепт використовує просунуті матеріали$()"
+    },
+    {
+      "type": "weaversparadise:single_sided_clothing_list",
+      "name": "Джинсові штани",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:pants_jeans\", Count:1b}}",
+      "scale": 2,
+      "offset": 0
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:pants_jeans_recipe",
+      "text": "$(l:weaversparadise:getting_started/advanced_materials#jeans_pant_legs)Цей рецепт використовує просунуті матеріали$()"
+    }
+  ]
+}

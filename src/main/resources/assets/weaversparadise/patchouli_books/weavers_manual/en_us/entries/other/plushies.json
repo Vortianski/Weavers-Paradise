@@ -1,0 +1,19 @@
+{
+  "name": "Plushies!",
+  "icon": "weaversparadise:player_plushie",
+  "category": "weaversparadise:interesting_stuff",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "title": "Plushies!",
+      "item": "weaversparadise:player_plushie",
+      "text": "Some chests in the world may contain Player Plushies!$(br)Changing the skin of said plushie requires you to rename Player Plushie Rename Token on an anvil to desired player name, and then combining it in crafting table.$(br2)Sometimes the recipe may output wrong skin, in that case take out one of the ingredients and then put it back. Not my fault it works that way :("
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Recipes",
+      "recipe": "weaversparadise:player_plushie_rename_token_recipe",
+      "recipe2": "weaversparadise:plushie_renaming_recipe"
+    }
+  ]
+}

@@ -30,7 +30,7 @@ public class DyeCoreItem extends Item {
 
         return Optional.of(
                 new DyeTooltipComponent(
-                        DyeTypeRegistry.getDyeType(data.getString("dyeType")).getA(),
+                        DyeTypeRegistry.getDyeType(data.getString("dyeType")).getDyeIcon(),
                         data.getString("dyeType"),
                         data.getString("dyeType"),
                         data.getInt("lightValue"),

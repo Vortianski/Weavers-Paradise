@@ -1,0 +1,20 @@
+{
+  "name": "Покраска",
+  "icon": "weaversparadise:dyeing_barrel",
+  "category": "weaversparadise:dyemaking",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "title": "Покраска",
+      "recipe": "weaversparadise:dyeing_barrel_recipe",
+      "text": "Покраска предметов не так проста на первый взгляд, для того чтобы начать ей заниматся вам нужна Покрасочная Бочка. Некоторые предметы можно покрасить только одним Бутилированным Красителем, тогда как другие предметы с несколькими частями, двумя. Трафареты позволяют использовать 2 Бутилированных Красителя на одной стороне/предмете."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Трафареты",
+      "item": "weaversparadise:base_stencil,weaversparadise:half_stencil,weaversparadise:checkers_stencil,weaversparadise:checkers_small_stencil,weaversparadise:lines_vertical_stencil,weaversparadise:lines_small_stencil,weaversparadise:lines_big_stencil,weaversparadise:cross_stencil,weaversparadise:paws_stencil,weaversparadise:star_stencil,weaversparadise:dirt_stencil,weaversparadise:flower_stencil",
+      "text": "Трафареты позволяют кастомизировать вашу одежду ещё больше! Чтобы их создать вам нужно положить основу для трафарета в Камнерез"
+    }
+  ]
+}

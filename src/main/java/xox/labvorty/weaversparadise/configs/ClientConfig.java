@@ -10,6 +10,10 @@ import java.util.List;
 public class ClientConfig {
     public static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
+    public static final ModConfigSpec.ConfigValue<Boolean> PATCHOULI_WARNING = BUILDER
+            .comment("Display a message if Patchouli is not installed when joining the game")
+            .define("patchouliWarning", true);
+
     public static final ModConfigSpec.ConfigValue<List<? extends String>> THIGH_HIGHS_RESTRICTOR = BUILDER
             .comment("Items that will prevent Thigh Highs from rendering")
             .defineListAllowEmpty(
