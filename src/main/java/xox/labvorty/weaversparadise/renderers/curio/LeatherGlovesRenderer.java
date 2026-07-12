@@ -22,7 +22,7 @@ import xox.labvorty.weaversparadise.models.HandWarmersModel;
 import java.util.List;
 
 public class LeatherGlovesRenderer implements ICurioRenderer {
-    private static final ResourceLocation TEXTURE = new ResourceLocation("weaversparadise", "textures/clothing/leather_gloves_clothing.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("weaversparadise", "textures/clothing/leather_gloves_clothing.png");
     private final HandWarmersModel model;
 
     public LeatherGlovesRenderer() {

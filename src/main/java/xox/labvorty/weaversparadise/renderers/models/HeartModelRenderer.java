@@ -8,10 +8,10 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.entity.LivingEntity;
 import org.joml.Vector4f;
-import xox.labvorty.weaversparadise.data.texture.deprecated.HeartTextures;
+import xox.labvorty.weaversparadise.data.texture.ItemTexture;
+import xox.labvorty.weaversparadise.data.texture.TextureRegistry;
 import xox.labvorty.weaversparadise.models.HeartModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ChokerTrinketRenderingData;
-import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
 
 public class HeartModelRenderer {
     private int color;
@@ -24,7 +24,7 @@ public class HeartModelRenderer {
 
     public void renderModel(
             MultiBufferSource multiBufferSource,
-            HeartModel model,
+            HeartModel<?> model,
             ChokerTrinketRenderingData data,
             LivingEntity entity,
             float scaleX,
@@ -44,10 +44,12 @@ public class HeartModelRenderer {
     ) {
         initData(data);
 
-        RenderingUtils renderingUtils = new RenderingUtils();
-        HeartTextures handler = HeartTextures.getByMetalType(metalType);
+        ItemTexture itemTexture = TextureRegistry.find("heart", "default", metalType);
+        if (itemTexture == null) {
+            itemTexture = TextureRegistry.find("heart", "default", "default");
+        }
         int finalColor;
-        if (handler.isFreezeColor()) {
+        if (itemTexture.getRenderType()) {
             finalColor = 255 << 24 | 255 << 16 | 255 << 8 | 255;
         } else {
             finalColor = color;
@@ -72,7 +74,7 @@ public class HeartModelRenderer {
         poseStack.mulPose(Axis.ZP.rotationDegrees(zRot));
 
         VertexConsumer vertexConsumer = multiBufferSource.getBuffer(
-                RenderType.entityTranslucent(handler.getTexture())
+                RenderType.entityTranslucent(itemTexture.getTextureOne())
         );
         Vector4f finalVec = colorIntToVector4f(finalColor);
         model.renderToBuffer(

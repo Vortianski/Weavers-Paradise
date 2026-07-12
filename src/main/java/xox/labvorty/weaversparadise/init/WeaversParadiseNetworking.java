@@ -45,6 +45,13 @@ public class WeaversParadiseNetworking {
                     RendererSyncMessage::new,
                     RendererSyncMessage::handler
             );
+
+            WeaversParadiseMod.addNetworkMessage(
+                    OpenUpperWearMessage.class,
+                    OpenUpperWearMessage::buffer,
+                    OpenUpperWearMessage::new,
+                    OpenUpperWearMessage::handler
+            );
         });
     }
 }

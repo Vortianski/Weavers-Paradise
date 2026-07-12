@@ -9,7 +9,8 @@
     "PlayerMixin",
     "SculkBlockEntityMixin",
     "AbstractArrowMixin",
-    "EntityMixin"
+    "EntityMixin",
+    "ItemStackMixin"
   ],
   "client": [
     "client.ItemRendererMixin",

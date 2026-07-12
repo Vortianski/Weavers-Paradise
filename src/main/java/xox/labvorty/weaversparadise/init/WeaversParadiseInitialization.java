@@ -18,6 +18,9 @@ public class WeaversParadiseInitialization {
             ShirtOpenTextures.register();
             CapeTextures.register();
             PantsTextures.register();
+            ChokerTrinketsTextures.register();
+            ChokerTextures.register();
+            BuiltInStencils.register();
         });
     }
 }

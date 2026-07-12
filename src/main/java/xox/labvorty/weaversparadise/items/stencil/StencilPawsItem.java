@@ -14,47 +14,13 @@ import xox.labvorty.weaversparadise.utils.ClientDataProvider;
 
 import java.util.List;
 
-public class StencilPawsItem extends Item {
+public class StencilPawsItem extends Stencil {
     public StencilPawsItem() {
         super(new Properties().rarity(Rarity.COMMON).stacksTo(1));
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltipComponents, TooltipFlag pIsAdvanced) {
-        boolean shift = false;
-
-        if (FMLEnvironment.dist == Dist.CLIENT) {
-            shift = ClientDataProvider.isShiftDown();
-        }
-
-        if (shift) {
-            tooltipComponents.add(
-                    Component.translatable("weaversparadise.tooltip.applicable_to").withStyle(ChatFormatting.GRAY)
-            );
-            tooltipComponents.add(
-                    Component.translatable("item.weaversparadise.thigh_highs_cotton")
-            );
-            tooltipComponents.add(
-                    Component.translatable("item.weaversparadise.thigh_highs_silk")
-            );
-            tooltipComponents.add(
-                    Component.translatable("item.weaversparadise.thigh_highs_wool")
-            );
-            tooltipComponents.add(
-                    Component.translatable("item.weaversparadise.hand_warmers_cotton")
-            );
-            tooltipComponents.add(
-                    Component.translatable("item.weaversparadise.hand_warmers_silk")
-            );
-            tooltipComponents.add(
-                    Component.translatable("item.weaversparadise.hand_warmers_wool")
-            );
-        } else {
-            tooltipComponents.add(
-                    Component.translatable("weaversparadise.tooltip.hold", "SHIFT").withStyle(ChatFormatting.GRAY)
-            );
-        }
-
-        super.appendHoverText(pStack, pLevel, tooltipComponents, pIsAdvanced);
+    public String getType() {
+        return "paws";
     }
 }

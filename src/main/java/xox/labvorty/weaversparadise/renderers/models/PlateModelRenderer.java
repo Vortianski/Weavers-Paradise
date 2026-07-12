@@ -8,10 +8,10 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.entity.LivingEntity;
 import org.joml.Vector4f;
-import xox.labvorty.weaversparadise.data.texture.deprecated.PlateTextures;
+import xox.labvorty.weaversparadise.data.texture.ItemTexture;
+import xox.labvorty.weaversparadise.data.texture.TextureRegistry;
 import xox.labvorty.weaversparadise.models.BasicPlateModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ChokerTrinketRenderingData;
-import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
 
 public class PlateModelRenderer {
     private int color;
@@ -24,7 +24,7 @@ public class PlateModelRenderer {
 
     public void renderModel(
             MultiBufferSource multiBufferSource,
-            BasicPlateModel model,
+            BasicPlateModel<?> model,
             ChokerTrinketRenderingData data,
             LivingEntity entity,
             float scaleX,
@@ -44,10 +44,12 @@ public class PlateModelRenderer {
     ) {
         initData(data);
 
-        RenderingUtils renderingUtils = new RenderingUtils();
-        PlateTextures handler = PlateTextures.getByMetalType(metalType);
+        ItemTexture itemTexture = TextureRegistry.find("plate", "default", metalType);
+        if (itemTexture == null) {
+            itemTexture = TextureRegistry.find("plate", "default", "default");
+        }
         int finalColor;
-        if (handler.isFreezeColor()) {
+        if (itemTexture.getRenderType()) {
             finalColor = 255 << 24 | 255 << 16 | 255 << 8 | 255;
         } else {
             finalColor = color;
@@ -72,7 +74,7 @@ public class PlateModelRenderer {
         poseStack.mulPose(Axis.ZP.rotationDegrees(zRot));
 
         VertexConsumer vertexConsumer = multiBufferSource.getBuffer(
-                RenderType.entityTranslucent(handler.getTexture())
+                RenderType.entityTranslucent(itemTexture.getTextureOne())
         );
         Vector4f finalVec = colorIntToVector4f(finalColor);
         model.renderToBuffer(

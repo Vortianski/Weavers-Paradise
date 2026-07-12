@@ -111,6 +111,9 @@ dependencies {
     //EMI | Client Side
     runtimeOnly(fg.deobf("curse.maven:emi-580555:6420945"))
 
+    //VortyLib | Client + Compilation Side
+    implementation("xox.labvorty.vortylib:vortylib-1.20.1:1.2.1")
+
     //Patchouli | Client Side
     compileOnly(fg.deobf("curse.maven:patchouli-306770:7731017"))
     runtimeOnly(fg.deobf("curse.maven:patchouli-306770:7731017"))

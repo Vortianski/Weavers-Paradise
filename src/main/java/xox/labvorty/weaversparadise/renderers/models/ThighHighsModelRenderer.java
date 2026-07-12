@@ -18,9 +18,6 @@ import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
 import xox.labvorty.weaversparadise.renderers.helpers.ThighHighsRenderingData;
 
 public class ThighHighsModelRenderer {
-    private Minecraft minecraft;
-    private int ticks;
-
     private int pCLO;
     private int sCLO;
     private int pCRO;
@@ -80,7 +77,7 @@ public class ThighHighsModelRenderer {
 
     public void renderModel(
             MultiBufferSource multiBufferSource,
-            ThighHighsModel model,
+            ThighHighsModel<?> model,
             ThighHighsRenderingData renderingData,
             LivingEntity livingEntity,
             float scaleX,
@@ -101,8 +98,11 @@ public class ThighHighsModelRenderer {
         initData(renderingData);
 
         RenderingUtils renderingUtils = new RenderingUtils();
-        minecraft = Minecraft.getInstance();
-        ticks = (int)minecraft.level.getGameTime();
+        Minecraft minecraft = Minecraft.getInstance();
+        int ticks = 0;
+        if (minecraft.level != null) {
+            ticks = (int) minecraft.level.getGameTime();
+        }
 
         Pair<Integer, Integer> fCLO = ColorHandlers.handle(dTLO, pCLO, sCLO, lVLO, livingEntity, packedLight, ticks);
         Pair<Integer, Integer> fCLT = ColorHandlers.handle(dTLT, pCLT, sCLT, lVLT, livingEntity, packedLight, ticks);

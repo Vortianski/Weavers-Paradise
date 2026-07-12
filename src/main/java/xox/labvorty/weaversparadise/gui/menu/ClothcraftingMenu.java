@@ -20,6 +20,7 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.data.recipe.ClothcraftingRecipeInput;
 import xox.labvorty.weaversparadise.init.WeaversParadiseMenus;
 import xox.labvorty.weaversparadise.init.WeaversParadiseRecipes;
@@ -100,11 +101,11 @@ public class ClothcraftingMenu extends AbstractContainerMenu implements Supplier
 
         this.customSlots.put(0, this.addSlot(new SlotItemHandler(this.internal, 0, 47, 1) {
             @Override
-            public boolean mayPlace(ItemStack stack) {
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
                 return world.getRecipeManager()
                         .getAllRecipesFor(WeaversParadiseRecipes.CLOTHCRAFTING_TYPE.get())
                         .stream()
-                        .anyMatch(r -> r.matches(new ClothcraftingRecipeInput(stack), world));
+                        .anyMatch(r -> r.matches(new ClothcraftingRecipeInput(itemStack), world));
             }
         }));
 
@@ -120,7 +121,7 @@ public class ClothcraftingMenu extends AbstractContainerMenu implements Supplier
     }
 
     @Override
-    public boolean stillValid(Player player) {
+    public boolean stillValid(@NotNull Player player) {
         if (this.bound) {
             if (this.boundItemMatcher != null) {
                 return this.boundItemMatcher.get();
@@ -134,7 +135,7 @@ public class ClothcraftingMenu extends AbstractContainerMenu implements Supplier
     }
 
     @Override
-    public ItemStack quickMoveStack(Player player, int index) {
+    public @NotNull ItemStack quickMoveStack(@NotNull Player player, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
 
@@ -233,7 +234,7 @@ public class ClothcraftingMenu extends AbstractContainerMenu implements Supplier
     }
 
     @Override
-    public void removed(Player player) {
+    public void removed(@NotNull Player player) {
         super.removed(player);
 
         if (!this.bound && player instanceof ServerPlayer serverPlayer) {

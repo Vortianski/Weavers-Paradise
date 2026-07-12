@@ -24,10 +24,15 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.WeaversParadiseMod;
 import xox.labvorty.weaversparadise.data.network.DyeingNetworkMessage;
+import xox.labvorty.weaversparadise.data.texture.StencilRegistry;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.init.WeaversParadiseMenus;
+import xox.labvorty.weaversparadise.items.clothing.defined.DoubleSidedClothingItem;
+import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingItem;
+import xox.labvorty.weaversparadise.items.stencil.Stencil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -78,7 +83,6 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
 
         if (pos != null) {
             if (extraData.readableBytes() == 1) {
-                // bound to item
                 byte hand = extraData.readByte();
                 ItemStack itemstack = hand == 0 ? this.entity.getMainHandItem() : this.entity.getOffhandItem();
                 this.boundItemMatcher = () -> itemstack == (hand == 0 ? this.entity.getMainHandItem() : this.entity.getOffhandItem());
@@ -90,8 +94,7 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
                 });
 
             } else if (extraData.readableBytes() > 1) {
-                // bound to entity
-                extraData.readByte(); // drop padding
+                extraData.readByte();
                 this.boundEntity = world.getEntity(extraData.readVarInt());
 
                 if (this.boundEntity != null) {
@@ -119,28 +122,30 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
         }
 
         this.customSlots.put(0, this.addSlot(new SlotItemHandler(internal, 0, 58, 103) {
+            @Override
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.getItem() instanceof SingleSidedClothingItem || itemStack.getItem() instanceof DoubleSidedClothingItem;
+            }
         }));
 
         this.customSlots.put(1, this.addSlot(new SlotItemHandler(internal, 1, 102, 103) {
             @Override
-            public boolean mayPlace(ItemStack stack) {
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
                 return false;
             }
 
             @Override
-            public void onTake(Player player, ItemStack stack) {
+            public void onTake(@NotNull Player player, @NotNull ItemStack stack) {
                 super.onTake(player, stack);
 
                 boolean leftdyes = false;
                 boolean rightdyes = false;
 
-                if (internal.getStackInSlot(4).is(WeaversParadiseItems.BOTTLED_DYE.get())
-                        || internal.getStackInSlot(5).is(WeaversParadiseItems.BOTTLED_DYE.get())) {
+                if (internal.getStackInSlot(4).is(WeaversParadiseItems.BOTTLED_DYE.get()) || internal.getStackInSlot(5).is(WeaversParadiseItems.BOTTLED_DYE.get())) {
                     leftdyes = true;
                 }
 
-                if (internal.getStackInSlot(6).is(WeaversParadiseItems.BOTTLED_DYE.get())
-                        || internal.getStackInSlot(7).is(WeaversParadiseItems.BOTTLED_DYE.get())) {
+                if (internal.getStackInSlot(6).is(WeaversParadiseItems.BOTTLED_DYE.get()) || internal.getStackInSlot(7).is(WeaversParadiseItems.BOTTLED_DYE.get())) {
                     rightdyes = true;
                 }
 
@@ -150,37 +155,17 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
 
         this.customSlots.put(2, this.addSlot(new SlotItemHandler(internal, 2, 21, 67) {
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                if (internal.getStackInSlot(0).is(WeaversParadiseItems.THIGH_HIGHS_COTTON.get())
-                        || internal.getStackInSlot(0).is(WeaversParadiseItems.THIGH_HIGHS_WOOL.get())
-                        || internal.getStackInSlot(0).is(WeaversParadiseItems.THIGH_HIGHS_SILK.get())
-                        || internal.getStackInSlot(0).is(WeaversParadiseItems.HAND_WARMERS_COTTON.get())
-                        || internal.getStackInSlot(0).is(WeaversParadiseItems.HAND_WARMERS_SILK.get())
-                        || internal.getStackInSlot(0).is(WeaversParadiseItems.HAND_WARMERS_WOOL.get())) {
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                if (itemStack.getItem() instanceof Stencil stencil) {
+                    ItemStack clothingStack = internal.getStackInSlot(0);
+                    String type = stencil.getType();
+                    List<StencilRegistry.Stencil> stencils = StencilRegistry.getStencilsForType(type);
 
-                    return stack.is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("weaversparadise", "thigh_highs_stensils")));
-
-                } else if (internal.getStackInSlot(0).is(WeaversParadiseItems.SHIRT_COTTON.get())
-                        || internal.getStackInSlot(0).is(WeaversParadiseItems.SHIRT_SILK.get())
-                        || internal.getStackInSlot(0).is(WeaversParadiseItems.SWEATER_WOOL.get())) {
-
-                    return stack.is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("weaversparadise", "shirts_stensils")));
-
-                } else if (internal.getStackInSlot(0).is(WeaversParadiseItems.COTTON_CAPE.get())
-                        || internal.getStackInSlot(0).is(WeaversParadiseItems.SILK_CAPE.get())
-                        || internal.getStackInSlot(0).is(WeaversParadiseItems.WOOL_CAPE.get())) {
-
-                    return stack.is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("weaversparadise", "cape_stensils")));
-
-                } else if (internal.getStackInSlot(0).is(WeaversParadiseItems.CHOKER.get())) {
-
-                    return stack.is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("weaversparadise", "choker_stencils")));
-
-                } else if (internal.getStackInSlot(0).is(WeaversParadiseItems.PANTS_JEANS.get())
-                        || internal.getStackInSlot(0).is(WeaversParadiseItems.PANTS_COTTON.get())
-                        || internal.getStackInSlot(0).is(WeaversParadiseItems.PANTS_SILK.get())) {
-
-                    return stack.is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("weaversparadise", "pants_stencils")));
+                    for (StencilRegistry.Stencil s : stencils) {
+                        if (s.item().equals(clothingStack.getItem())) {
+                            return true;
+                        }
+                    }
                 }
 
                 return false;
@@ -189,19 +174,17 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
 
         this.customSlots.put(3, this.addSlot(new SlotItemHandler(internal, 3, 137, 66) {
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                if (internal.getStackInSlot(0).is(WeaversParadiseItems.THIGH_HIGHS_COTTON.get())
-                        || internal.getStackInSlot(0).is(WeaversParadiseItems.THIGH_HIGHS_WOOL.get())
-                        || internal.getStackInSlot(0).is(WeaversParadiseItems.THIGH_HIGHS_SILK.get())
-                        || internal.getStackInSlot(0).is(WeaversParadiseItems.HAND_WARMERS_COTTON.get())
-                        || internal.getStackInSlot(0).is(WeaversParadiseItems.HAND_WARMERS_SILK.get())
-                        || internal.getStackInSlot(0).is(WeaversParadiseItems.HAND_WARMERS_WOOL.get())) {
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                if (itemStack.getItem() instanceof Stencil stencil) {
+                    ItemStack clothingStack = internal.getStackInSlot(0);
+                    String type = stencil.getType();
+                    List<StencilRegistry.Stencil> stencils = StencilRegistry.getStencilsForType(type);
 
-                    return stack.is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("weaversparadise", "thigh_highs_stensils")));
-
-                } else if (internal.getStackInSlot(0).is(WeaversParadiseItems.CHOKER.get())) {
-
-                    return stack.is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("weaversparadise", "choker_stencils")));
+                    for (StencilRegistry.Stencil s : stencils) {
+                        if (s.item().equals(clothingStack.getItem()) && clothingStack.getItem() instanceof DoubleSidedClothingItem doubleSidedClothingItem) {
+                            return true;
+                        }
+                    }
                 }
 
                 return false;
@@ -210,65 +193,45 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
 
         this.customSlots.put(4, this.addSlot(new SlotItemHandler(internal, 4, 10, 88) {
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(WeaversParadiseItems.BOTTLED_DYE.get());
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.is(WeaversParadiseItems.BOTTLED_DYE.get());
             }
         }));
 
         this.customSlots.put(5, this.addSlot(new SlotItemHandler(internal, 5, 32, 88) {
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                CompoundTag tags = stack.getOrCreateTag();
-
-                if (internal.getStackInSlot(2).is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("weaversparadise", "stensils")))) {
-                    if (stack.is(WeaversParadiseItems.BOTTLED_DYE.get())) {
-                        return true;
-                    }
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                if (internal.getStackInSlot(2).getItem() instanceof Stencil stencil) {
+                    return itemStack.is(WeaversParadiseItems.BOTTLED_DYE.get());
                 }
 
-                return stack.is(WeaversParadiseItems.BOTTLED_DYE.get());
+                return false;
             }
         }));
 
         this.customSlots.put(6, this.addSlot(new SlotItemHandler(internal, 6, 126, 87) {
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                CompoundTag tags = stack.getOrCreateTag();
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                ItemStack clothingStack = internal.getStackInSlot(0);
 
-                if (singleItems.contains(internal.getStackInSlot(0).getItem())) {
+                if (!(clothingStack.getItem() instanceof DoubleSidedClothingItem)) {
                     return false;
                 }
 
-                if (internal.getStackInSlot(3).is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("weaversparadise", "stensils")))) {
-                    if (stack.is(WeaversParadiseItems.BOTTLED_DYE.get())) {
-                        return true;
-                    }
-                }
-
-                return stack.is(WeaversParadiseItems.BOTTLED_DYE.get());
+                return itemStack.is(WeaversParadiseItems.BOTTLED_DYE.get());
             }
         }));
 
         this.customSlots.put(7, this.addSlot(new SlotItemHandler(internal, 7, 148, 87) {
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                if (internal.getStackInSlot(3).isEmpty()) {
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                ItemStack clothingStack = internal.getStackInSlot(0);
+
+                if (internal.getStackInSlot(3).isEmpty() || !(internal.getStackInSlot(3).getItem() instanceof Stencil) || !(clothingStack.getItem() instanceof DoubleSidedClothingItem)) {
                     return false;
                 }
 
-                CompoundTag tags = stack.getOrCreateTag();
-
-                if (singleItems.contains(internal.getStackInSlot(0).getItem())) {
-                    return false;
-                }
-
-                if (internal.getStackInSlot(3).is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("weaversparadise", "stensils")))) {
-                    if (stack.is(WeaversParadiseItems.BOTTLED_DYE.get())) {
-                        return true;
-                    }
-                }
-
-                return stack.is(WeaversParadiseItems.BOTTLED_DYE.get());
+                return itemStack.is(WeaversParadiseItems.BOTTLED_DYE.get());
             }
         }));
 
@@ -284,7 +247,7 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
     }
 
     @Override
-    public boolean stillValid(Player player) {
+    public boolean stillValid(@NotNull Player player) {
         if (this.bound) {
             if (this.boundItemMatcher != null) {
                 return this.boundItemMatcher.get();
@@ -298,7 +261,7 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
     }
 
     @Override
-    public ItemStack quickMoveStack(Player player, int index) {
+    public @NotNull ItemStack quickMoveStack(@NotNull Player player, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
 
@@ -396,7 +359,7 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
     }
 
     @Override
-    public void removed(Player player) {
+    public void removed(@NotNull Player player) {
         super.removed(player);
 
         if (!bound && player instanceof ServerPlayer serverPlayer) {

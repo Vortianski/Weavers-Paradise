@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.WeaversParadiseMod;
 import xox.labvorty.weaversparadise.data.network.StringNetworkMessage;
 import xox.labvorty.weaversparadise.gui.menu.StringMenu;
@@ -37,7 +38,7 @@ public class StringScreen extends AbstractContainerScreen<StringMenu> {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
         this.renderTooltip(guiGraphics, mouseX, mouseY);
@@ -52,9 +53,9 @@ public class StringScreen extends AbstractContainerScreen<StringMenu> {
         float percentage = (float) progress / (float) maxProgress;
         float realPercentage = 1.0f - percentage;
 
-        guiGraphics.blit(new ResourceLocation("weaversparadise:textures/screens/string_ui.png"), this.leftPos - 8, this.topPos - 16, 0, 0, 240, 216, 240, 216);
-        guiGraphics.blit(new ResourceLocation("weaversparadise:textures/screens/arrow_full.png"), this.leftPos - 8 + 152, this.topPos - 16 + 88, 0, 0, 31, 20, 31, 20);
-        guiGraphics.blit(new ResourceLocation("weaversparadise:textures/screens/arrow_empty.png"), this.leftPos - 8 + 152, this.topPos - 16 + 88, 0, 0, (int)(31 * realPercentage), 20, 31, 20);
+        guiGraphics.blit(ResourceLocation.parse("weaversparadise:textures/screens/string_ui.png"), this.leftPos - 8, this.topPos - 16, 0, 0, 240, 216, 240, 216);
+        guiGraphics.blit(ResourceLocation.parse("weaversparadise:textures/screens/arrow_full.png"), this.leftPos - 8 + 152, this.topPos - 16 + 88, 0, 0, 31, 20, 31, 20);
+        guiGraphics.blit(ResourceLocation.parse("weaversparadise:textures/screens/arrow_empty.png"), this.leftPos - 8 + 152, this.topPos - 16 + 88, 0, 0, (int)(31 * realPercentage), 20, 31, 20);
 
         RenderSystem.disableBlend();
     }
@@ -62,14 +63,17 @@ public class StringScreen extends AbstractContainerScreen<StringMenu> {
     @Override
     public boolean keyPressed(int key, int b, int c) {
         if (key == 256) {
-            this.minecraft.player.closeContainer();
+            if (minecraft != null && minecraft.player != null) {
+                this.minecraft.player.closeContainer();
+            }
+
             return true;
         }
         return super.keyPressed(key, b, c);
     }
 
     @Override
-    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+    protected void renderLabels(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY) {
     }
 
     @Override

@@ -67,7 +67,7 @@ public abstract class ElytraLayerMixin extends RenderLayer<LivingEntity, EntityM
 
                 if (handler.isPresent()) {
                     handler.ifPresent((curiosHandler) -> {
-                        Optional<SlotResult> optionalSlotResult = curiosHandler.findFirstCurio(stack -> stack.getItem() instanceof CapeInterface capeInterface);
+                        Optional<SlotResult> optionalSlotResult = curiosHandler.findFirstCurio(stack -> stack.getItem() instanceof CapeInterface);
 
                         String type = "cotton";
                         int primaryColorOne = -1;
@@ -83,7 +83,7 @@ public abstract class ElytraLayerMixin extends RenderLayer<LivingEntity, EntityM
                         if (optionalSlotResult.isPresent()) {
                             ItemStack stack = optionalSlotResult.get().stack();
 
-                            if (stack.getItem() instanceof CapeCottonItem || stack.getItem() instanceof CapeSilkItem capeSilkItem || stack.getItem() instanceof CapeWoolItem capeWoolItem) {
+                            if (stack.getItem() instanceof CapeCottonItem || stack.getItem() instanceof CapeSilkItem || stack.getItem() instanceof CapeWoolItem) {
                                 if (stack.getItem() instanceof CapeInterface capeInterface) {
                                     primaryColorOne = capeInterface.getItemMainColor(stack, 1);
                                     secondaryColorOne = capeInterface.getItemSecondaryColor(stack, 1);
@@ -95,15 +95,15 @@ public abstract class ElytraLayerMixin extends RenderLayer<LivingEntity, EntityM
                                     lightValueOne = capeInterface.getItemLightValue(stack, 1);
                                     lightValueTwo = capeInterface.getItemLightValue(stack, 2);
 
-                                    if (stack.getItem() instanceof CapeCottonItem capeCottonItem) {
+                                    if (stack.getItem() instanceof CapeCottonItem) {
                                         type = "cotton";
                                     }
 
-                                    if (stack.getItem() instanceof CapeSilkItem capeSilkItem) {
+                                    if (stack.getItem() instanceof CapeSilkItem) {
                                         type = "silk";
                                     }
 
-                                    if (stack.getItem() instanceof CapeWoolItem capeWoolItem) {
+                                    if (stack.getItem() instanceof CapeWoolItem) {
                                         type = "wool";
                                     }
                                 }

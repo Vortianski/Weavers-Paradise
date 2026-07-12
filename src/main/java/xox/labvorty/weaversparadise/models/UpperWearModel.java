@@ -10,9 +10,10 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import org.jetbrains.annotations.NotNull;
 
 public class UpperWearModel<T extends Entity> extends EntityModel<T> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("weaversparadise", "model_upper_wear"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("weaversparadise", "model_upper_wear"), "main");
     public final ModelPart Body;
     public final ModelPart RightArm;
     public final ModelPart LeftArm;
@@ -34,13 +35,13 @@ public class UpperWearModel<T extends Entity> extends EntityModel<T> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float r, float g, float b, float a) {
+    public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float r, float g, float b, float a) {
         Body.render(poseStack, vertexConsumer, packedLight, packedOverlay, r, g, b, a);
         RightArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, r, g, b, a);
         LeftArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, r, g, b, a);
     }
 
-    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(@NotNull T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.RightArm.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * limbSwingAmount;
         this.LeftArm.xRot = Mth.cos(limbSwing * 0.6662F) * limbSwingAmount;
     }

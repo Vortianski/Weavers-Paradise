@@ -14,38 +14,13 @@ import xox.labvorty.weaversparadise.utils.ClientDataProvider;
 
 import java.util.List;
 
-public class DirtStencilItem extends Item {
+public class DirtStencilItem extends Stencil {
     public DirtStencilItem() {
         super(new Properties().rarity(Rarity.COMMON).stacksTo(1));
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        boolean shift = false;
-
-        if (FMLEnvironment.dist == Dist.CLIENT) {
-            shift = ClientDataProvider.isShiftDown();
-        }
-
-        if (shift) {
-            tooltipComponents.add(
-                    Component.translatable("weaversparadise.tooltip.applicable_to").withStyle(ChatFormatting.GRAY)
-            );
-            tooltipComponents.add(
-                    Component.translatable("item.weaversparadise.pants_jeans")
-            );
-            tooltipComponents.add(
-                    Component.translatable("item.weaversparadise.pants_cotton")
-            );
-            tooltipComponents.add(
-                    Component.translatable("item.weaversparadise.pants_silk")
-            );
-        } else {
-            tooltipComponents.add(
-                    Component.translatable("weaversparadise.tooltip.hold", "SHIFT").withStyle(ChatFormatting.GRAY)
-            );
-        }
-
-        super.appendHoverText(pStack, pLevel, tooltipComponents, tooltipFlag);
+    public String getType() {
+        return "dirt";
     }
 }

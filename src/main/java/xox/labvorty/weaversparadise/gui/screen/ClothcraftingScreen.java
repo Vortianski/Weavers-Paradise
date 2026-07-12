@@ -924,7 +924,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
             inputThree = "";
             inputFour = "";
             inputFive = "";
-            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE, 0.5f));
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE.value(), 0.5f, 1));
         }
 
         if (pretypeTwo != inputTwo && !inputTwo.isBlank()) {
@@ -933,7 +933,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
             inputThree = "";
             inputFour = "";
             inputFive = "";
-            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE, 0.5f));
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE.value(), 0.5f, 1));
         }
 
         if (pretypeThree != inputThree && !inputThree.isBlank()) {
@@ -942,7 +942,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
             inputThree = "";
             inputFour = "";
             inputFive = "";
-            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE, 0.5f));
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE.value(), 0.5f, 1));
         }
 
         if (pretypeFour != inputFour && !inputFour.isBlank()) {
@@ -951,7 +951,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
             inputThree = "";
             inputFour = "";
             inputFive = "";
-            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE, 0.5f));
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE.value(), 0.5f, 1));
         }
 
         if (pretypeFive != inputFive && !inputFive.isBlank()) {
@@ -960,7 +960,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
             inputThree = "";
             inputFour = "";
             inputFive = "";
-            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE, 0.5f));
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE.value(), 0.5f, 1));
         }
 
         if (inputOne == pretypeOne
@@ -1007,7 +1007,7 @@ public class ClothcraftingScreen extends AbstractContainerScreen<ClothcraftingMe
             inputFour = "";
             inputFive = "";
 
-            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_CHIME, 2));
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.NOTE_BLOCK_CHIME.value(), 2, 1));
             WeaversParadiseMod.PACKET_HANDLER.sendToServer(
                     new ClothcraftingNetworkMessage(1, x, y, z, gameTime, gameScore + 1, gameStarted, items, clothType)
             );

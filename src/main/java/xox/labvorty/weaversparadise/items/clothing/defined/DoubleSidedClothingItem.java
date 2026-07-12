@@ -237,6 +237,10 @@ public abstract class DoubleSidedClothingItem extends Item implements ICurioItem
         return type;
     }
 
+    public CompoundTag obtainDefault() {
+        return createDefault();
+    }
+
     protected static CompoundTag createDefault() {
         CompoundTag compoundTag = new CompoundTag();
 

@@ -69,7 +69,7 @@ public class RingItem extends Item implements ICurioItem {
     @Override
     public boolean isValidRepairItem(ItemStack stack, ItemStack repairCandidate) {
         CompoundTag compoundTag = stack.getOrCreateTag();
-        Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(compoundTag.getString("metalType")));
+        Item item = BuiltInRegistries.ITEM.get(ResourceLocation.parse(compoundTag.getString("metalType")));
         Item pushedCandidate = Items.BEDROCK;
         if (item != Items.AIR && item != Items.STONE) {
             pushedCandidate = item;

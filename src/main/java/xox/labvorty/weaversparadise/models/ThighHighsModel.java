@@ -10,9 +10,10 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import org.jetbrains.annotations.NotNull;
 
 public class ThighHighsModel<T extends Entity> extends EntityModel<T> {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("weaversparadise", "model_thigh_highs"), "main");
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("weaversparadise", "model_thigh_highs"), "main");
     public final ModelPart RightLeg;
     public final ModelPart LeftLeg;
 
@@ -31,14 +32,14 @@ public class ThighHighsModel<T extends Entity> extends EntityModel<T> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float r, float g, float b, float a) {
+    public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float r, float g, float b, float a) {
         RightLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, r, g, b, a);
         LeftLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, r, g, b, a);
     }
 
-    public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.LeftLeg.xRot = Mth.cos(limbSwing * 1.0F) * -1.0F * limbSwingAmount;
-        this.RightLeg.xRot = Mth.cos(limbSwing * 1.0F) * 1.0F * limbSwingAmount;
+    public void setupAnim(@NotNull T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        this.LeftLeg.xRot = Mth.cos(limbSwing) * -1.0F * limbSwingAmount;
+        this.RightLeg.xRot = Mth.cos(limbSwing) * 1.0F * limbSwingAmount;
     }
 
 }

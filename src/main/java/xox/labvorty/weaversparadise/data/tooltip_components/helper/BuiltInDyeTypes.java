@@ -9,11 +9,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
+import xox.labvorty.vortylib.init.VortyLibRenderTypes;
 import xox.labvorty.weaversparadise.data.tooltip_components.DyeIcon;
 import xox.labvorty.weaversparadise.data.tooltip_components.DyeTypeRegistry;
 import xox.labvorty.weaversparadise.data.tooltip_components.ItemDyeIcon;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
-import xox.labvorty.weaversparadise.init.WeaversParadiseRenderTypes;
 
 import java.util.List;
 
@@ -98,7 +98,7 @@ public class BuiltInDyeTypes {
                     return -1;
                 },
                 (renderData) -> {
-                    return WeaversParadiseRenderTypes.getEndEntity(
+                    return VortyLibRenderTypes.getEntityEndPortal(
                             TheEndPortalRenderer.END_SKY_LOCATION,
                             renderData.resourceLocation(),
                             TheEndPortalRenderer.END_PORTAL_LOCATION
@@ -562,7 +562,7 @@ public class BuiltInDyeTypes {
                             "textures/clothing/mask/" + renderData.clothingType() + "/" + renderData.dyeType() + ".png"
                     );
 
-                    return WeaversParadiseRenderTypes.getEntityTranslucentMask(
+                    return VortyLibRenderTypes.getEntityTranslucentMask(
                             renderData.resourceLocation(),
                             mask
                     );
@@ -615,7 +615,7 @@ public class BuiltInDyeTypes {
                             "textures/clothing/mask/" + renderData.clothingType() + "/" + renderData.dyeType() + ".png"
                     );
 
-                    return WeaversParadiseRenderTypes.getEntityTranslucentMask(
+                    return VortyLibRenderTypes.getEntityTranslucentMask(
                             renderData.resourceLocation(),
                             mask
                     );
@@ -670,7 +670,7 @@ public class BuiltInDyeTypes {
                             "textures/clothing/mask/" + renderData.clothingType() + "/" + renderData.dyeType() + ".png"
                     );
 
-                    return WeaversParadiseRenderTypes.getEntityTranslucentMask(
+                    return VortyLibRenderTypes.getEntityTranslucentMask(
                             renderData.resourceLocation(),
                             mask
                     );
@@ -725,7 +725,7 @@ public class BuiltInDyeTypes {
                             "textures/clothing/mask/" + renderData.clothingType() + "/" + renderData.dyeType() + ".png"
                     );
 
-                    return WeaversParadiseRenderTypes.getEntityTranslucentMask(
+                    return VortyLibRenderTypes.getEntityTranslucentMask(
                             renderData.resourceLocation(),
                             mask
                     );
@@ -784,7 +784,7 @@ public class BuiltInDyeTypes {
                             "textures/clothing/mask/" + renderData.clothingType() + "/" + renderData.dyeType() + ".png"
                     );
 
-                    return WeaversParadiseRenderTypes.getEntityTranslucentMask(
+                    return VortyLibRenderTypes.getEntityTranslucentMask(
                             renderData.resourceLocation(),
                             mask
                     );
@@ -839,7 +839,7 @@ public class BuiltInDyeTypes {
                             "textures/clothing/mask/" + renderData.clothingType() + "/" + renderData.dyeType() + ".png"
                     );
 
-                    return WeaversParadiseRenderTypes.getEntityTranslucentMask(
+                    return VortyLibRenderTypes.getEntityTranslucentMask(
                             renderData.resourceLocation(),
                             mask
                     );
@@ -898,7 +898,7 @@ public class BuiltInDyeTypes {
                             "textures/clothing/mask/" + renderData.clothingType() + "/" + renderData.dyeType() + ".png"
                     );
 
-                    return WeaversParadiseRenderTypes.getEntityTranslucentMask(
+                    return VortyLibRenderTypes.getEntityTranslucentMask(
                             renderData.resourceLocation(),
                             mask
                     );
@@ -957,7 +957,7 @@ public class BuiltInDyeTypes {
                             "textures/clothing/mask/" + renderData.clothingType() + "/" + renderData.dyeType() + ".png"
                     );
 
-                    return WeaversParadiseRenderTypes.getEntityTranslucentMask(
+                    return VortyLibRenderTypes.getEntityTranslucentMask(
                             renderData.resourceLocation(),
                             mask
                     );
@@ -1016,7 +1016,7 @@ public class BuiltInDyeTypes {
                             "textures/clothing/mask/" + renderData.clothingType() + "/" + renderData.dyeType() + ".png"
                     );
 
-                    return WeaversParadiseRenderTypes.getEntityTranslucentMask(
+                    return VortyLibRenderTypes.getEntityTranslucentMask(
                             renderData.resourceLocation(),
                             mask
                     );
@@ -1075,7 +1075,7 @@ public class BuiltInDyeTypes {
                             "textures/clothing/mask/" + renderData.clothingType() + "/" + renderData.dyeType() + ".png"
                     );
 
-                    return WeaversParadiseRenderTypes.getEntityTranslucentMask(
+                    return VortyLibRenderTypes.getEntityTranslucentMask(
                             renderData.resourceLocation(),
                             mask
                     );
@@ -1130,7 +1130,7 @@ public class BuiltInDyeTypes {
                             "textures/clothing/mask/" + renderData.clothingType() + "/" + renderData.dyeType() + ".png"
                     );
 
-                    return WeaversParadiseRenderTypes.getEntityTranslucentMask(
+                    return VortyLibRenderTypes.getEntityTranslucentMask(
                             renderData.resourceLocation(),
                             mask
                     );
@@ -1181,7 +1181,7 @@ public class BuiltInDyeTypes {
                             "textures/clothing/mask/" + renderData.clothingType() + "/" + renderData.dyeType() + ".png"
                     );
 
-                    return WeaversParadiseRenderTypes.getEntityTranslucentMask(
+                    return VortyLibRenderTypes.getEntityTranslucentMask(
                             renderData.resourceLocation(),
                             mask
                     );
@@ -1240,7 +1240,7 @@ public class BuiltInDyeTypes {
                             "textures/clothing/mask/" + renderData.clothingType() + "/" + renderData.dyeType() + ".png"
                     );
 
-                    return WeaversParadiseRenderTypes.getEntityTranslucentMask(
+                    return VortyLibRenderTypes.getEntityTranslucentMask(
                             renderData.resourceLocation(),
                             mask
                     );
@@ -1295,7 +1295,7 @@ public class BuiltInDyeTypes {
                             "textures/clothing/mask/" + renderData.clothingType() + "/" + renderData.dyeType() + ".png"
                     );
 
-                    return WeaversParadiseRenderTypes.getEntityTranslucentMask(
+                    return VortyLibRenderTypes.getEntityTranslucentMask(
                             renderData.resourceLocation(),
                             mask
                     );
@@ -1348,7 +1348,7 @@ public class BuiltInDyeTypes {
                             "textures/clothing/mask/" + renderData.clothingType() + "/" + renderData.dyeType() + ".png"
                     );
 
-                    return WeaversParadiseRenderTypes.getEntityTranslucentMask(
+                    return VortyLibRenderTypes.getEntityTranslucentMask(
                             renderData.resourceLocation(),
                             mask
                     );
@@ -1399,7 +1399,7 @@ public class BuiltInDyeTypes {
                             "textures/clothing/mask/" + renderData.clothingType() + "/" + renderData.dyeType() + ".png"
                     );
 
-                    return WeaversParadiseRenderTypes.getEntityTranslucentMask(
+                    return VortyLibRenderTypes.getEntityTranslucentMask(
                             renderData.resourceLocation(),
                             mask
                     );
@@ -1454,7 +1454,7 @@ public class BuiltInDyeTypes {
                             "textures/clothing/mask/" + renderData.clothingType() + "/" + renderData.dyeType() + ".png"
                     );
 
-                    return WeaversParadiseRenderTypes.getEntityTranslucentMask(
+                    return VortyLibRenderTypes.getEntityTranslucentMask(
                             renderData.resourceLocation(),
                             mask
                     );
@@ -1502,7 +1502,7 @@ public class BuiltInDyeTypes {
                     return -1;
                 },
                 (renderData) -> {
-                    return WeaversParadiseRenderTypes.getPolychromatic(
+                    return VortyLibRenderTypes.getEntityPolychromatic(
                             renderData.resourceLocation()
                     );
                 }
@@ -1554,7 +1554,7 @@ public class BuiltInDyeTypes {
                 },
                 (dyeDataColor) -> -1,
                 (renderData) -> {
-                    return WeaversParadiseRenderTypes.getEntityStatic(
+                    return VortyLibRenderTypes.getEntityStaticNoise(
                             renderData.resourceLocation()
                     );
                 }
@@ -1575,7 +1575,7 @@ public class BuiltInDyeTypes {
                     return -1;
                 },
                 (renderData) -> {
-                    return WeaversParadiseRenderTypes.getCrystal(
+                    return VortyLibRenderTypes.getEntityCrystal(
                             renderData.resourceLocation()
                     );
                 }
@@ -1626,7 +1626,7 @@ public class BuiltInDyeTypes {
                     return -1;
                 },
                 (renderData) -> {
-                    return WeaversParadiseRenderTypes.getNegative(
+                    return VortyLibRenderTypes.getEntityNegative(
                             renderData.resourceLocation()
                     );
                 }
@@ -1677,7 +1677,7 @@ public class BuiltInDyeTypes {
                     return -1;
                 },
                 (renderData) -> {
-                    return WeaversParadiseRenderTypes.getTrueNegative(
+                    return VortyLibRenderTypes.getEntityTrueNegative(
                             renderData.resourceLocation()
                     );
                 }
@@ -1726,7 +1726,7 @@ public class BuiltInDyeTypes {
                     return -1;
                 },
                 (renderData) -> {
-                    return WeaversParadiseRenderTypes.getNebula(
+                    return VortyLibRenderTypes.getEntityNebula(
                             renderData.resourceLocation()
                     );
                 }
@@ -2070,7 +2070,7 @@ public class BuiltInDyeTypes {
                     return -1;
                 },
                 (renderData) -> {
-                    return WeaversParadiseRenderTypes.getEntityStarfall(
+                    return VortyLibRenderTypes.getEntityStarfall(
                             renderData.resourceLocation(),
                             TheEndPortalRenderer.END_PORTAL_LOCATION
                     );

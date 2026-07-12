@@ -69,7 +69,7 @@ public class HangingFlagEntityRenderer extends EntityRenderer<HangingFlagEntity>
             variant = "default";
         }
 
-        return new ResourceLocation("weaversparadise", "textures/entity/" + variant + ".png");
+        return ResourceLocation.fromNamespaceAndPath("weaversparadise", "textures/entity/" + variant + ".png");
     }
 
     private void renderFlag(PoseStack poseStack, VertexConsumer consumer, int light) {

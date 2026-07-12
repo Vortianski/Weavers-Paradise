@@ -23,6 +23,7 @@ import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.init.WeaversParadiseMenus;
 
@@ -104,11 +105,8 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
 
         this.customSlots.put(0, this.addSlot(new SlotItemHandler(internal, 0, 183, 74) {
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(WeaversParadiseItems.COTTON_SPOOL.get())
-                        || stack.is(WeaversParadiseItems.RAW_COTTON.get())
-                        || stack.is(Items.STRING)
-                        || stack.is(ItemTags.create(new ResourceLocation("minecraft", "wool")));
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.is(WeaversParadiseItems.COTTON_SPOOL.get()) || itemStack.is(WeaversParadiseItems.RAW_COTTON.get()) || itemStack.is(Items.STRING) || itemStack.is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "wool")));
             }
         }));
 
@@ -119,13 +117,13 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
             }
 
             @Override
-            public int getMaxStackSize(ItemStack stack) {
+            public int getMaxStackSize(@NotNull ItemStack itemStack) {
                 return 1;
             }
 
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(WeaversParadiseItems.EMPTY_SPOOL.get());
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.is(WeaversParadiseItems.EMPTY_SPOOL.get());
             }
         }));
 
@@ -136,13 +134,13 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
             }
 
             @Override
-            public int getMaxStackSize(ItemStack stack) {
+            public int getMaxStackSize(@NotNull ItemStack itemStack) {
                 return 1;
             }
 
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(WeaversParadiseItems.EMPTY_SPOOL.get());
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.is(WeaversParadiseItems.EMPTY_SPOOL.get());
             }
         }));
 
@@ -153,13 +151,13 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
             }
 
             @Override
-            public int getMaxStackSize(ItemStack stack) {
+            public int getMaxStackSize(@NotNull ItemStack itemStack) {
                 return 1;
             }
 
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(WeaversParadiseItems.EMPTY_SPOOL.get());
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.is(WeaversParadiseItems.EMPTY_SPOOL.get());
             }
         }));
 
@@ -170,13 +168,13 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
             }
 
             @Override
-            public int getMaxStackSize(ItemStack stack) {
+            public int getMaxStackSize(@NotNull ItemStack itemStack) {
                 return 1;
             }
 
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(WeaversParadiseItems.EMPTY_SPOOL.get());
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.is(WeaversParadiseItems.EMPTY_SPOOL.get());
             }
         }));
 
@@ -187,13 +185,13 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
             }
 
             @Override
-            public int getMaxStackSize(ItemStack stack) {
+            public int getMaxStackSize(@NotNull ItemStack itemStack) {
                 return 1;
             }
 
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(WeaversParadiseItems.EMPTY_SPOOL.get());
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.is(WeaversParadiseItems.EMPTY_SPOOL.get());
             }
         }));
 
@@ -204,13 +202,13 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
             }
 
             @Override
-            public int getMaxStackSize(ItemStack stack) {
+            public int getMaxStackSize(@NotNull ItemStack itemStack) {
                 return 1;
             }
 
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(WeaversParadiseItems.EMPTY_SPOOL.get());
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.is(WeaversParadiseItems.EMPTY_SPOOL.get());
             }
         }));
 
@@ -226,7 +224,7 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
     }
 
     @Override
-    public boolean stillValid(Player player) {
+    public boolean stillValid(@NotNull Player player) {
         if (this.bound) {
             if (this.boundItemMatcher != null)
                 return this.boundItemMatcher.get();
@@ -239,7 +237,7 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
     }
 
     @Override
-    public ItemStack quickMoveStack(Player player, int index) {
+    public @NotNull ItemStack quickMoveStack(@NotNull Player player, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
 
@@ -332,7 +330,7 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
     }
 
     @Override
-    public void removed(Player player) {
+    public void removed(@NotNull Player player) {
         super.removed(player);
 
         if (!bound && player instanceof ServerPlayer serverPlayer) {

@@ -42,7 +42,7 @@ public class DyemakingScreen extends AbstractContainerScreen<DyemakingMenu>{
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
 
-        guiGraphics.blit(new ResourceLocation("weaversparadise:textures/screens/dyemaking_ui.png"), this.leftPos + -1, this.topPos + 1, 0, 0, 176, 200, 176, 200);
+        guiGraphics.blit(ResourceLocation.parse("weaversparadise:textures/screens/dyemaking_ui.png"), this.leftPos + -1, this.topPos + 1, 0, 0, 176, 200, 176, 200);
 
         RenderSystem.disableBlend();
     }

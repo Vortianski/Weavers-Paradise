@@ -52,53 +52,7 @@ public class ThighHighsWoolItem extends DoubleSidedClothingItem implements Thigh
     public @NotNull ItemStack getDefaultInstance() {
         ItemStack itemStack = super.getDefaultInstance();
 
-        CompoundTag compoundTag = new CompoundTag() {{
-            putInt("quality", 0);
-            putString("dyeTypeLeftOne", "default");
-            putString("dyeTypeRightOne", "default");
-            putString("dyeTypeLeftTwo", "default");
-            putString("dyeTypeRightTwo", "default");
-            putString("stensilTypeLeft", "default");
-            putString("stensilTypeRight", "default");
-            putInt("colorPriRedLeftOne", 255);
-            putInt("colorPriGreenLeftOne", 255);
-            putInt("colorPriBlueLeftOne", 255);
-
-            putInt("colorPriRedLeftTwo", 255);
-            putInt("colorPriGreenLeftTwo", 255);
-            putInt("colorPriBlueLeftTwo", 255);
-
-            putInt("colorSecRedLeftOne", 255);
-            putInt("colorSecGreenLeftOne", 255);
-            putInt("colorSecBlueLeftOne", 255);
-
-            putInt("colorSecRedLeftTwo", 255);
-            putInt("colorSecGreenLeftTwo", 255);
-            putInt("colorSecBlueLeftTwo", 255);
-
-            putInt("colorPriRedRightOne", 255);
-            putInt("colorPriGreenRightOne", 255);
-            putInt("colorPriBlueRightOne", 255);
-
-            putInt("colorPriRedRightTwo", 255);
-            putInt("colorPriGreenRightTwo", 255);
-            putInt("colorPriBlueRightTwo", 255);
-
-            putInt("colorSecRedRightOne", 255);
-            putInt("colorSecGreenRightOne", 255);
-            putInt("colorSecBlueRightOne", 255);
-
-            putInt("colorSecRedRightTwo", 255);
-            putInt("colorSecGreenRightTwo", 255);
-            putInt("colorSecBlueRightTwo", 255);
-
-            putInt("lightValueLeftOne", 15);
-            putInt("lightValueLeftTwo", 15);
-            putInt("lightValueRightOne", 15);
-            putInt("lightValueRightTwo", 15);
-        }};
-
-        itemStack.setTag(compoundTag);
+        itemStack.setTag(obtainDefault());
 
         return itemStack;
     }

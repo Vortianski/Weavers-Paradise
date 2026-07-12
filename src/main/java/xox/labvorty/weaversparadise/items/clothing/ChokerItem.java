@@ -21,11 +21,14 @@ import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.clothing.defined.DoubleSidedClothingItem;
 import xox.labvorty.weaversparadise.renderers.bewlr.ChokerRenderer;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Consumer;
 
 public class ChokerItem extends DoubleSidedClothingItem {
+    private static final UUID CHOKER_SLOT_UUID = UUID.nameUUIDFromBytes("weaversparadise:choker".getBytes(StandardCharsets.UTF_8));
+
     public ChokerItem() {
         super(
                 new Properties()
@@ -42,6 +45,7 @@ public class ChokerItem extends DoubleSidedClothingItem {
         modifiers.put(
                 SlotAttribute.getOrCreate("choker_trinket"),
                 new AttributeModifier(
+                        CHOKER_SLOT_UUID,
                         "weaversparadise:choker",
                         1,
                         AttributeModifier.Operation.ADDITION
@@ -55,55 +59,14 @@ public class ChokerItem extends DoubleSidedClothingItem {
     public @NotNull ItemStack getDefaultInstance() {
         ItemStack itemStack = super.getDefaultInstance();
 
-        CompoundTag compoundTag = new CompoundTag() {{
-            putInt("quality", 10);
-            putString("dyeTypeLeftOne", "default");
-            putString("dyeTypeRightOne", "default");
-            putString("dyeTypeLeftTwo", "default");
-            putString("dyeTypeRightTwo", "default");
-            putString("stensilTypeLeft", "default");
-            putString("stensilTypeRight", "default");
-            putInt("colorPriRedLeftOne", 160);
-            putInt("colorPriGreenLeftOne", 102);
-            putInt("colorPriBlueLeftOne", 0);
-
-            putInt("colorPriRedLeftTwo", 160);
-            putInt("colorPriGreenLeftTwo", 102);
-            putInt("colorPriBlueLeftTwo", 0);
-
-            putInt("colorSecRedLeftOne", 160);
-            putInt("colorSecGreenLeftOne", 102);
-            putInt("colorSecBlueLeftOne", 0);
-
-            putInt("colorSecRedLeftTwo", 160);
-            putInt("colorSecGreenLeftTwo", 102);
-            putInt("colorSecBlueLeftTwo", 0);
-
-            putInt("colorPriRedRightOne", 160);
-            putInt("colorPriGreenRightOne", 102);
-            putInt("colorPriBlueRightOne", 0);
-
-            putInt("colorPriRedRightTwo", 160);
-            putInt("colorPriGreenRightTwo", 102);
-            putInt("colorPriBlueRightTwo", 0);
-
-            putInt("colorSecRedRightOne", 160);
-            putInt("colorSecGreenRightOne", 102);
-            putInt("colorSecBlueRightOne", 0);
-
-            putInt("colorSecRedRightTwo", 160);
-            putInt("colorSecGreenRightTwo", 102);
-            putInt("colorSecBlueRightTwo", 0);
-
-            putInt("lightValueLeftOne", 15);
-            putInt("lightValueLeftTwo", 15);
-            putInt("lightValueRightOne", 15);
-            putInt("lightValueRightTwo", 15);
-        }};
-
-        itemStack.setTag(compoundTag);
+        itemStack.setTag(obtainDefault());
 
         return itemStack;
+    }
+
+    @Override
+    public CompoundTag obtainDefault() {
+        return createDefault(10);
     }
 
     @Override

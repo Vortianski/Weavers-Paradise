@@ -45,32 +45,7 @@ public class PantsSilkItem extends SingleSidedClothingItem implements PantsInter
     public @NotNull ItemStack getDefaultInstance() {
         ItemStack itemStack = super.getDefaultInstance();
 
-        CompoundTag compoundTag = new CompoundTag() {{
-            putInt("quality", 0);
-            putString("dyeTypeOne", "default");
-            putString("dyeTypeTwo", "default");
-            putString("stensilType", "default");
-            putInt("colorPriRedOne", 255);
-            putInt("colorPriGreenOne", 255);
-            putInt("colorPriBlueOne", 255);
-
-            putInt("colorPriRedTwo", 255);
-            putInt("colorPriGreenTwo", 255);
-            putInt("colorPriBlueTwo", 255);
-
-            putInt("colorSecRedOne", 255);
-            putInt("colorSecGreenOne", 255);
-            putInt("colorSecBlueOne", 255);
-
-            putInt("colorSecRedTwo", 255);
-            putInt("colorSecGreenTwo", 255);
-            putInt("colorSecBlueTwo", 255);
-
-            putInt("lightValueOne", 15);
-            putInt("lightValueTwo", 15);
-        }};
-
-        itemStack.setTag(compoundTag);
+        itemStack.setTag(obtainDefault());
 
         return itemStack;
     }

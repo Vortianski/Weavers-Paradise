@@ -10,7 +10,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import org.joml.Vector4f;
 import oshi.util.tuples.Pair;
-import xox.labvorty.weaversparadise.data.texture.deprecated.ChokerTextures;
+import xox.labvorty.weaversparadise.data.texture.ItemTexture;
+import xox.labvorty.weaversparadise.data.texture.TextureRegistry;
 import xox.labvorty.weaversparadise.models.ChokerModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ChokerRenderingData;
 import xox.labvorty.weaversparadise.renderers.helpers.ColorHandlers;
@@ -79,7 +80,7 @@ public class ChokerModelRenderer {
 
     public void renderModel(
             MultiBufferSource multiBufferSource,
-            ChokerModel model,
+            ChokerModel<?> model,
             ChokerRenderingData renderingData,
             LivingEntity livingEntity,
             float scaleX,
@@ -101,7 +102,9 @@ public class ChokerModelRenderer {
 
         RenderingUtils renderingUtils = new RenderingUtils();
         minecraft = Minecraft.getInstance();
-        ticks = (int)minecraft.level.getGameTime();
+        if (minecraft.level != null) {
+            ticks = (int)minecraft.level.getGameTime();
+        }
 
         Pair<Integer, Integer> fCLO = ColorHandlers.handle(dTLO, pCLO, sCLO, lVLO, livingEntity, packedLight, ticks);
         Pair<Integer, Integer> fCLT = ColorHandlers.handle(dTLT, pCLT, sCLT, lVLT, livingEntity, packedLight, ticks);
@@ -116,15 +119,15 @@ public class ChokerModelRenderer {
         finalCRT = colorIntToVector4f(fCRT.getA());
         finalL4 = fCRT.getB();
 
-        ChokerTextures leftHandler = ChokerTextures.getByTypeAndMaterial(sTL, mat);
-        String renderTypeLeft = leftHandler.getRenderType();
-        ResourceLocation tex1left = leftHandler.getTextureOne();
-        ResourceLocation tex2left = leftHandler.getTextureTwo();
+        ItemTexture primaryTexture = TextureRegistry.find("choker", sTL, "pri");
+        boolean renderTypeLeft = primaryTexture.getRenderType();
+        ResourceLocation tex1left = primaryTexture.getTextureOne();
+        ResourceLocation tex2left = primaryTexture.getTextureTwo();
 
-        ChokerTextures rightHandler = ChokerTextures.getByTypeAndMaterial(sTR, mat);
-        String renderTypeRight = rightHandler.getRenderType();
-        ResourceLocation tex1right = rightHandler.getTextureThree();
-        ResourceLocation tex2right = rightHandler.getTextureFour();
+        ItemTexture secondaryTexture = TextureRegistry.find("choker", sTR, "sec");
+        boolean renderTypeRight = secondaryTexture.getRenderType();
+        ResourceLocation tex1right = secondaryTexture.getTextureOne();
+        ResourceLocation tex2right = secondaryTexture.getTextureTwo();
 
         poseStack.pushPose();
 
@@ -156,7 +159,7 @@ public class ChokerModelRenderer {
                 finalCLO.w
         );
 
-        if (renderTypeLeft.equals("double")) {
+        if (renderTypeLeft) {
             VertexConsumer vc2 = renderingUtils.parseVC(multiBufferSource, dTLT, tex2left, "choker");
             model.Body.render(
                     poseStack,
@@ -182,7 +185,7 @@ public class ChokerModelRenderer {
                 finalCRO.w
         );
 
-        if (renderTypeRight.equals("double")) {
+        if (renderTypeRight) {
             VertexConsumer vc4 = renderingUtils.parseVC(multiBufferSource, dTRT, tex2right, "choker");
             model.Body.render(
                     poseStack,

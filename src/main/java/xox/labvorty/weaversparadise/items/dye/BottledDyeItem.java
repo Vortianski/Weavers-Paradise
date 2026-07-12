@@ -97,6 +97,16 @@ public class BottledDyeItem extends Item {
         }
     }
 
+    public String getItemDyeType(ItemStack stack) {
+        String type = "default";
+
+        if (stack.getOrCreateTag().contains("dyeType")) {
+            type = stack.getOrCreateTag().getString("dyeType");
+        }
+
+        return type;
+    }
+
     public int getItemMainColor(ItemStack stack) {
         int color = 0;
 
