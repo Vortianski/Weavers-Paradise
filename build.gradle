@@ -131,7 +131,7 @@ dependencies {
     runtimeOnly("curse.maven:sodium-394468:6382651")
 
     //VortyLib | Client + Compilation Side
-    implementation("curse.maven:vortylib-1578928:8342619")
+    implementation("xox.labvorty.vortylib:vortylib-template-1.21.1:1.2.1")
 
     //Patchouli | Client Side
     compileOnly("vazkii.patchouli:Patchouli:${patchouli_version}:api")

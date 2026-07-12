@@ -1,12 +1,8 @@
 package xox.labvorty.weaversparadise.gui.menu;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -15,7 +11,6 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -26,9 +21,14 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.data.network.DyeingNetworkMessage;
+import xox.labvorty.weaversparadise.data.texture.StencilRegistry;
 import xox.labvorty.weaversparadise.init.WeaversParadiseInterfaces;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
+import xox.labvorty.weaversparadise.items.clothing.defined.DoubleSidedClothingItem;
+import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingItem;
+import xox.labvorty.weaversparadise.items.stencil.Stencil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -102,24 +102,23 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
                 }
             }
         }
-        this.customSlots.put(0, this.addSlot(new SlotItemHandler(internal, 0, 58, 103) {
-            private final int slot = 0;
-            private int x = DyeingMenu.this.x;
-            private int y = DyeingMenu.this.y;
-        }));
-        this.customSlots.put(1, this.addSlot(new SlotItemHandler(internal, 1, 102, 103) {
-            private final int slot = 1;
-            private int x = DyeingMenu.this.x;
-            private int y = DyeingMenu.this.y;
 
+        this.customSlots.put(0, this.addSlot(new SlotItemHandler(internal, 0, 58, 103) {
             @Override
-            public boolean mayPlace(ItemStack stack) {
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.getItem() instanceof SingleSidedClothingItem || itemStack.getItem() instanceof DoubleSidedClothingItem;
+            }
+        }));
+
+        this.customSlots.put(1, this.addSlot(new SlotItemHandler(internal, 1, 102, 103) {
+            @Override
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
                 return false;
             }
 
             @Override
-            public void onTake(Player player, ItemStack stack) {
-                super.onTake(player, stack);
+            public void onTake(@NotNull Player player, @NotNull ItemStack itemStack) {
+                super.onTake(player, itemStack);
 
                 boolean leftdyes = false;
                 boolean rightdyes = false;
@@ -135,169 +134,96 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
                 slotChanged(leftdyes, rightdyes);
             }
         }));
+
         this.customSlots.put(2, this.addSlot(new SlotItemHandler(internal, 2, 21, 67) {
-            private final int slot = 2;
-            private int x = DyeingMenu.this.x;
-            private int y = DyeingMenu.this.y;
-
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                if (
-                        internal.getStackInSlot(0).is(WeaversParadiseItems.THIGH_HIGHS_COTTON)
-                                || internal.getStackInSlot(0).is(WeaversParadiseItems.THIGH_HIGHS_WOOL)
-                                || internal.getStackInSlot(0).is(WeaversParadiseItems.THIGH_HIGHS_SILK)
-                                || internal.getStackInSlot(0).is(WeaversParadiseItems.HAND_WARMERS_COTTON)
-                                || internal.getStackInSlot(0).is(WeaversParadiseItems.HAND_WARMERS_SILK)
-                                || internal.getStackInSlot(0).is(WeaversParadiseItems.HAND_WARMERS_WOOL)
-                ) {
-                    if (stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:thigh_highs_stensils")))) {
-                        return true;
-                    }
-                } else if (
-                        internal.getStackInSlot(0).is(WeaversParadiseItems.SHIRT_COTTON)
-                                || internal.getStackInSlot(0).is(WeaversParadiseItems.SHIRT_SILK)
-                                || internal.getStackInSlot(0).is(WeaversParadiseItems.SWEATER_WOOL)
-                ) {
-                    if (stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:shirts_stensils")))) {
-                        return true;
-                    }
-                } else if (
-                        internal.getStackInSlot(0).is(WeaversParadiseItems.COTTON_CAPE)
-                                || internal.getStackInSlot(0).is(WeaversParadiseItems.SILK_CAPE)
-                                || internal.getStackInSlot(0).is(WeaversParadiseItems.WOOL_CAPE)
-                ) {
-                    if (stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:cape_stensils")))) {
-                        return true;
-                    }
-                } else if (internal.getStackInSlot(0).is(WeaversParadiseItems.CHOKER)) {
-                    if (stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:choker_stencils")))) {
-                        return true;
-                    }
-                } else if (
-                        internal.getStackInSlot(0).is(WeaversParadiseItems.PANTS_JEANS)
-                                || internal.getStackInSlot(0).is(WeaversParadiseItems.PANTS_COTTON)
-                                || internal.getStackInSlot(0).is(WeaversParadiseItems.PANTS_SILK)
-                ) {
-                    if (stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:pants_stencils")))) {
-                        return true;
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                if (itemStack.getItem() instanceof Stencil stencil) {
+                    ItemStack clothingStack = internal.getStackInSlot(0);
+                    String type = stencil.getType();
+                    List<StencilRegistry.Stencil> stencils = StencilRegistry.getStencilsForType(type);
+
+                    for (StencilRegistry.Stencil s : stencils) {
+                        if (s.item().equals(clothingStack.getItem())) {
+                            return true;
+                        }
                     }
                 }
 
                 return false;
             }
         }));
+
         this.customSlots.put(3, this.addSlot(new SlotItemHandler(internal, 3, 137, 66) {
-            private final int slot = 3;
-            private int x = DyeingMenu.this.x;
-            private int y = DyeingMenu.this.y;
-
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                if (
-                        internal.getStackInSlot(0).is(WeaversParadiseItems.THIGH_HIGHS_COTTON)
-                                || internal.getStackInSlot(0).is(WeaversParadiseItems.THIGH_HIGHS_WOOL)
-                                || internal.getStackInSlot(0).is(WeaversParadiseItems.THIGH_HIGHS_SILK)
-                                || internal.getStackInSlot(0).is(WeaversParadiseItems.HAND_WARMERS_COTTON)
-                                || internal.getStackInSlot(0).is(WeaversParadiseItems.HAND_WARMERS_SILK)
-                                || internal.getStackInSlot(0).is(WeaversParadiseItems.HAND_WARMERS_WOOL)
-                ) {
-                    if (stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:thigh_highs_stensils")))) {
-                        return true;
-                    }
-                } else if (internal.getStackInSlot(0).is(WeaversParadiseItems.CHOKER)) {
-                    if (stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:choker_stencils")))) {
-                        return true;
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                if (itemStack.getItem() instanceof Stencil stencil) {
+                    ItemStack clothingStack = internal.getStackInSlot(0);
+                    String type = stencil.getType();
+                    List<StencilRegistry.Stencil> stencils = StencilRegistry.getStencilsForType(type);
+
+                    for (StencilRegistry.Stencil s : stencils) {
+                        if (s.item().equals(clothingStack.getItem()) && clothingStack.getItem() instanceof DoubleSidedClothingItem doubleSidedClothingItem) {
+                            return true;
+                        }
                     }
                 }
 
                 return false;
             }
         }));
-        this.customSlots.put(4, this.addSlot(new SlotItemHandler(internal, 4, 10, 88) {
-            private final int slot = 4;
-            private int x = DyeingMenu.this.x;
-            private int y = DyeingMenu.this.y;
 
+        this.customSlots.put(4, this.addSlot(new SlotItemHandler(internal, 4, 10, 88) {
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(WeaversParadiseItems.BOTTLED_DYE);
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.is(WeaversParadiseItems.BOTTLED_DYE.get());
             }
         }));
+
         this.customSlots.put(5, this.addSlot(new SlotItemHandler(internal, 5, 32, 88) {
-            private final int slot = 5;
-            private int x = DyeingMenu.this.x;
-            private int y = DyeingMenu.this.y;
-
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                CompoundTag tags = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-
-                if (internal.getStackInSlot(2).is(ItemTags.create(ResourceLocation.parse("weaversparadise:stensils")))) {
-                    if (stack.is(WeaversParadiseItems.BOTTLED_DYE)) {
-                        return true;
-                    }
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                if (internal.getStackInSlot(2).getItem() instanceof Stencil stencil) {
+                    return itemStack.is(WeaversParadiseItems.BOTTLED_DYE.get());
                 }
 
-                return stack.is(WeaversParadiseItems.BOTTLED_DYE);
+                return false;
             }
         }));
+
         this.customSlots.put(6, this.addSlot(new SlotItemHandler(internal, 6, 126, 87) {
-            private final int slot = 6;
-            private int x = DyeingMenu.this.x;
-            private int y = DyeingMenu.this.y;
-
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                CompoundTag tags = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                ItemStack clothingStack = internal.getStackInSlot(0);
 
-                if (singleItems.contains(internal.getStackInSlot(0).getItem())) {
+                if (!(clothingStack.getItem() instanceof DoubleSidedClothingItem)) {
                     return false;
                 }
 
-                if (internal.getStackInSlot(3).is(ItemTags.create(ResourceLocation.parse("weaversparadise:stensils")))) {
-                    if (stack.is(WeaversParadiseItems.BOTTLED_DYE)) {
-                        return true;
-                    }
-                }
-
-                return stack.is(WeaversParadiseItems.BOTTLED_DYE);
+                return itemStack.is(WeaversParadiseItems.BOTTLED_DYE.get());
             }
         }));
         this.customSlots.put(7, this.addSlot(new SlotItemHandler(internal, 7, 148, 87) {
-            private final int slot = 7;
-            private int x = DyeingMenu.this.x;
-            private int y = DyeingMenu.this.y;
-
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                if (internal.getStackInSlot(3).isEmpty()) {
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                ItemStack clothingStack = internal.getStackInSlot(0);
+
+                if (internal.getStackInSlot(3).isEmpty() || !(internal.getStackInSlot(3).getItem() instanceof Stencil) || !(clothingStack.getItem() instanceof DoubleSidedClothingItem)) {
                     return false;
                 }
 
-                CompoundTag tags = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-
-                if (singleItems.contains(internal.getStackInSlot(0).getItem())) {
-                    return false;
-                }
-
-                if (internal.getStackInSlot(3).is(ItemTags.create(ResourceLocation.parse("weaversparadise:stensils")))) {
-                    if (stack.is(WeaversParadiseItems.BOTTLED_DYE)) {
-                        return true;
-                    }
-                }
-
-                return stack.is(WeaversParadiseItems.BOTTLED_DYE);
+                return itemStack.is(WeaversParadiseItems.BOTTLED_DYE.get());
             }
         }));
         for (int si = 0; si < 3; ++si)
             for (int sj = 0; sj < 9; ++sj)
-                this.addSlot(new Slot(inv, sj + (si + 1) * 9, 0 + 8 + sj * 18, 54 + 84 + si * 18));
+                this.addSlot(new Slot(inv, sj + (si + 1) * 9, 8 + sj * 18, 54 + 84 + si * 18));
         for (int si = 0; si < 9; ++si)
-            this.addSlot(new Slot(inv, si, 0 + 8 + si * 18, 54 + 142));
+            this.addSlot(new Slot(inv, si, 8 + si * 18, 54 + 142));
     }
 
     @Override
-    public boolean stillValid(Player player) {
+    public boolean stillValid(@NotNull Player player) {
         if (this.bound) {
             if (this.boundItemMatcher != null)
                 return this.boundItemMatcher.get();
@@ -310,7 +236,7 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
     }
 
     @Override
-    public ItemStack quickMoveStack(Player playerIn, int index) {
+    public ItemStack quickMoveStack(@NotNull Player player, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = (Slot) this.slots.get(index);
         if (slot != null && slot.hasItem()) {
@@ -336,32 +262,32 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
                 slot.setChanged();
             if (itemstack1.getCount() == itemstack.getCount())
                 return ItemStack.EMPTY;
-            slot.onTake(playerIn, itemstack1);
+            slot.onTake(player, itemstack1);
         }
         return itemstack;
     }
 
     @Override
-    protected boolean moveItemStackTo(ItemStack p_38904_, int p_38905_, int p_38906_, boolean p_38907_) {
+    protected boolean moveItemStackTo(@NotNull ItemStack itemStack, int p_38905_, int p_38906_, boolean p_38907_) {
         boolean flag = false;
         int i = p_38905_;
         if (p_38907_) {
             i = p_38906_ - 1;
         }
-        if (p_38904_.isStackable()) {
-            while (!p_38904_.isEmpty() && (p_38907_ ? i >= p_38905_ : i < p_38906_)) {
+        if (itemStack.isStackable()) {
+            while (!itemStack.isEmpty() && (p_38907_ ? i >= p_38905_ : i < p_38906_)) {
                 Slot slot = this.slots.get(i);
                 ItemStack itemstack = slot.getItem();
-                if (slot.mayPlace(itemstack) && !itemstack.isEmpty() && ItemStack.isSameItemSameComponents(p_38904_, itemstack)) {
-                    int j = itemstack.getCount() + p_38904_.getCount();
+                if (slot.mayPlace(itemstack) && !itemstack.isEmpty() && ItemStack.isSameItemSameComponents(itemStack, itemstack)) {
+                    int j = itemstack.getCount() + itemStack.getCount();
                     int k = slot.getMaxStackSize(itemstack);
                     if (j <= k) {
-                        p_38904_.setCount(0);
+                        itemStack.setCount(0);
                         itemstack.setCount(j);
                         slot.set(itemstack);
                         flag = true;
                     } else if (itemstack.getCount() < k) {
-                        p_38904_.shrink(k - itemstack.getCount());
+                        itemStack.shrink(k - itemstack.getCount());
                         itemstack.setCount(k);
                         slot.set(itemstack);
                         flag = true;
@@ -374,7 +300,7 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
                 }
             }
         }
-        if (!p_38904_.isEmpty()) {
+        if (!itemStack.isEmpty()) {
             if (p_38907_) {
                 i = p_38906_ - 1;
             } else {
@@ -383,9 +309,9 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
             while (p_38907_ ? i >= p_38905_ : i < p_38906_) {
                 Slot slot1 = this.slots.get(i);
                 ItemStack itemstack1 = slot1.getItem();
-                if (itemstack1.isEmpty() && slot1.mayPlace(p_38904_)) {
-                    int l = slot1.getMaxStackSize(p_38904_);
-                    slot1.setByPlayer(p_38904_.split(Math.min(p_38904_.getCount(), l)));
+                if (itemstack1.isEmpty() && slot1.mayPlace(itemStack)) {
+                    int l = slot1.getMaxStackSize(itemStack);
+                    slot1.setByPlayer(itemStack.split(Math.min(itemStack.getCount(), l)));
                     slot1.setChanged();
                     flag = true;
                     break;
@@ -401,18 +327,18 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
     }
 
     @Override
-    public void removed(Player playerIn) {
-        super.removed(playerIn);
-        if (!bound && playerIn instanceof ServerPlayer serverPlayer) {
+    public void removed(@NotNull Player player) {
+        super.removed(player);
+        if (!bound && player instanceof ServerPlayer serverPlayer) {
             if (!serverPlayer.isAlive() || serverPlayer.hasDisconnected()) {
                 for (int j = 0; j < internal.getSlots(); ++j) {
-                    playerIn.drop(internal.getStackInSlot(j), false);
+                    player.drop(internal.getStackInSlot(j), false);
                     if (internal instanceof IItemHandlerModifiable ihm)
                         ihm.setStackInSlot(j, ItemStack.EMPTY);
                 }
             } else {
                 for (int i = 0; i < internal.getSlots(); ++i) {
-                    playerIn.getInventory().placeItemBackInInventory(internal.getStackInSlot(i));
+                    player.getInventory().placeItemBackInInventory(internal.getStackInSlot(i));
                     if (internal instanceof IItemHandlerModifiable ihm)
                         ihm.setStackInSlot(i, ItemStack.EMPTY);
                 }

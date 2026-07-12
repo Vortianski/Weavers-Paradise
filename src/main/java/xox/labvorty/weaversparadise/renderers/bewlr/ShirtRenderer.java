@@ -10,6 +10,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.items.clothing.ShirtCottonItem;
 import xox.labvorty.weaversparadise.items.clothing.ShirtSilkItem;
 import xox.labvorty.weaversparadise.items.clothing.SweaterWoolItem;
@@ -19,19 +20,19 @@ import xox.labvorty.weaversparadise.renderers.helpers.ShirtRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.ShirtModelRenderer;
 
 public class ShirtRenderer extends BlockEntityWithoutLevelRenderer {
-    private final UpperWearModel model;
+    private final UpperWearModel<?> model;
 
     public ShirtRenderer(BlockEntityRenderDispatcher dispatcher, EntityModelSet entityModels) {
         super(dispatcher, entityModels);
-        this.model = new UpperWearModel(entityModels.bakeLayer(UpperWearModel.LAYER_LOCATION));
+        this.model = new UpperWearModel<>(entityModels.bakeLayer(UpperWearModel.LAYER_LOCATION));
     }
 
     @Override
     public void renderByItem(
             ItemStack stack,
-            ItemDisplayContext transformType,
-            PoseStack poseStack,
-            MultiBufferSource buffer,
+            @NotNull ItemDisplayContext transformType,
+            @NotNull PoseStack poseStack,
+            @NotNull MultiBufferSource buffer,
             int packedLight,
             int packedOverlay
     ) {

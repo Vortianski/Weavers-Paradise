@@ -6,10 +6,8 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
@@ -30,9 +28,14 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.blocks.entities.DyeingBarrelBlockEntity;
 import xox.labvorty.weaversparadise.gui.menu.DyeingMenu;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
+import xox.labvorty.weaversparadise.items.clothing.defined.DoubleSidedClothingItem;
+import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingItem;
+import xox.labvorty.weaversparadise.items.dye.BottledDyeItem;
+import xox.labvorty.weaversparadise.items.stencil.Stencil;
 
 public class DyeingBarrelBlock extends Block implements EntityBlock {
     public DyeingBarrelBlock() {
@@ -40,21 +43,22 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+    public int getLightBlock(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos) {
         return 0;
     }
 
     @Override
-    public void onPlace(BlockState blockstate, Level world, BlockPos pos, BlockState oldState, boolean moving) {
-        super.onPlace(blockstate, world, pos, oldState, moving);
-        world.scheduleTick(pos, this, 1);
+    public void onPlace(@NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockStateOld, boolean moving) {
+        super.onPlace(blockState, level, blockPos, blockStateOld, moving);
+
+        level.scheduleTick(blockPos, this, 1);
     }
 
     @Override
-    public void tick(BlockState blockstate, ServerLevel serverLevel, BlockPos pos, RandomSource random) {
-        super.tick(blockstate, serverLevel, pos, random);
+    public void tick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource randomSource) {
+        super.tick(blockState, serverLevel, blockPos, randomSource);
 
-        BlockEntity blockEntity = serverLevel.getBlockEntity(pos);
+        BlockEntity blockEntity = serverLevel.getBlockEntity(blockPos);
         if (blockEntity instanceof DyeingBarrelBlockEntity dyeingBarrelBlock) {
             ItemStack slot0 = dyeingBarrelBlock.getItemHandler().getStackInSlot(0);
             ItemStack slot1 = dyeingBarrelBlock.getItemHandler().getStackInSlot(1);
@@ -101,637 +105,471 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
                 }
             }
 
-            if (
-                    slot0.is(WeaversParadiseItems.THIGH_HIGHS_COTTON)
-                            || slot0.is(WeaversParadiseItems.THIGH_HIGHS_SILK)
-                            || slot0.is(WeaversParadiseItems.THIGH_HIGHS_WOOL)
-                            || slot0.is(WeaversParadiseItems.HAND_WARMERS_COTTON)
-                            || slot0.is(WeaversParadiseItems.HAND_WARMERS_SILK)
-                            || slot0.is(WeaversParadiseItems.HAND_WARMERS_WOOL)
-                            || slot0.is(WeaversParadiseItems.CHOKER)
-            ) {
-                ItemStack stack = slot0.copy();
+            if (slot0.getItem() instanceof SingleSidedClothingItem singleSidedClothingItem) {
+                ItemStack itemStack = slot0.copy();
 
-                if (slot2.isEmpty()) {
+                final String stencil;
+                boolean hasStencil = false;
+                if (slot2.getItem() instanceof Stencil stencilItem) {
+                    stencil = stencilItem.getType();
+                    hasStencil = true;
+                } else {
+                    stencil = singleSidedClothingItem.getStensilType(slot0);
+                }
+
+                final String dyeTypeOne;
+                final int redPriOne;
+                final int redSecOne;
+                final int greenPriOne;
+                final int greenSecOne;
+                final int bluePriOne;
+                final int blueSecOne;
+                final int lightOne;
+                final String dyeTypeTwo;
+                final int redPriTwo;
+                final int redSecTwo;
+                final int greenPriTwo;
+                final int greenSecTwo;
+                final int bluePriTwo;
+                final int blueSecTwo;
+                final int lightTwo;
+
+                if (slot4.getItem() instanceof BottledDyeItem bottledDyeItem) {
+                    dyeTypeOne = bottledDyeItem.getItemDyeType(slot4);
+                    RGB primaryColor = splitColor(bottledDyeItem.getItemMainColor(slot4));
+                    RGB secondaryColor = splitColor(bottledDyeItem.getItemSecondaryColor(slot4));
+                    redPriOne = primaryColor.r;
+                    greenPriOne = primaryColor.g;
+                    bluePriOne = primaryColor.b;
+                    redSecOne = secondaryColor.r;
+                    greenSecOne = secondaryColor.g;
+                    blueSecOne = secondaryColor.b;
+                    lightOne = bottledDyeItem.getItemLightValue(slot4);
+                } else {
+                    dyeTypeOne = singleSidedClothingItem.getItemDyeType(itemStack, 1);
+                    RGB primaryColor = splitColor(singleSidedClothingItem.getItemMainColor(itemStack, 1));
+                    RGB secondaryColor = splitColor(singleSidedClothingItem.getItemSecondaryColor(itemStack, 1));
+                    redPriOne = primaryColor.r;
+                    greenPriOne = primaryColor.g;
+                    bluePriOne = primaryColor.b;
+                    redSecOne = secondaryColor.r;
+                    greenSecOne = secondaryColor.g;
+                    blueSecOne = secondaryColor.b;
+                    lightOne = singleSidedClothingItem.getItemLightValue(slot0, 1);
+                }
+
+                if (hasStencil) {
+                    if (slot5.getItem() instanceof BottledDyeItem bottledDyeItem) {
+                        dyeTypeTwo = bottledDyeItem.getItemDyeType(slot5);
+                        RGB primaryColor = splitColor(bottledDyeItem.getItemMainColor(slot5));
+                        RGB secondaryColor = splitColor(bottledDyeItem.getItemSecondaryColor(slot5));
+                        redPriTwo = primaryColor.r;
+                        greenPriTwo = primaryColor.g;
+                        bluePriTwo = primaryColor.b;
+                        redSecTwo = secondaryColor.r;
+                        greenSecTwo = secondaryColor.g;
+                        blueSecTwo = secondaryColor.b;
+                        lightTwo = bottledDyeItem.getItemLightValue(slot5);
+                    } else {
+                        dyeTypeTwo = singleSidedClothingItem.getItemDyeType(itemStack, 2);
+                        RGB primaryColor = splitColor(singleSidedClothingItem.getItemMainColor(itemStack, 2));
+                        RGB secondaryColor = splitColor(singleSidedClothingItem.getItemSecondaryColor(itemStack, 2));
+                        redPriTwo = primaryColor.r;
+                        greenPriTwo = primaryColor.g;
+                        bluePriTwo = primaryColor.b;
+                        redSecTwo = secondaryColor.r;
+                        greenSecTwo = secondaryColor.g;
+                        blueSecTwo = secondaryColor.b;
+                        lightTwo = singleSidedClothingItem.getItemLightValue(slot0, 2);
+                    }
+                } else {
                     if (!slot5.isEmpty()) {
-                        Containers.dropItemStack(serverLevel, pos.getX(), pos.getY(), pos.getZ(), slot5);
+                        dropItem(slot5.copy(), serverLevel, blockPos.getX(), blockPos.getY(), blockPos.getZ());
                         dyeingBarrelBlock.getItemHandler().setStackInSlot(5, ItemStack.EMPTY);
-                        slot5 = ItemStack.EMPTY;
                     }
 
-                    if (slot4.is(WeaversParadiseItems.BOTTLED_DYE.get())) {
-                        CompoundTag tag = slot4.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-
-                        if (tag.getInt("amount") < 1) {
-                            dyeingBarrelBlock.getItemHandler().setStackInSlot(4, new ItemStack(Items.GLASS_BOTTLE));
-                            slot4 = new ItemStack(Items.GLASS_BOTTLE);
-                        } else {
-
-                            CustomData.update(DataComponents.CUSTOM_DATA, stack, (tags) -> {
-                                    tags.putInt("colorPriRedLeftOne", tag.getInt("colorRedOne"));
-                                    tags.putInt("colorPriGreenLeftOne", tag.getInt("colorGreenOne"));
-                                    tags.putInt("colorPriBlueLeftOne", tag.getInt("colorBlueOne"));
-                                    tags.putInt("colorSecRedLeftOne", tag.getInt("colorRedTwo"));
-                                    tags.putInt("colorSecGreenLeftOne", tag.getInt("colorGreenTwo"));
-                                    tags.putInt("colorSecBlueLeftOne", tag.getInt("colorBlueTwo"));
-                                    tags.putInt("colorPriRedLeftTwo", tag.getInt("colorRedOne"));
-                                    tags.putInt("colorPriGreenLeftTwo", tag.getInt("colorGreenOne"));
-                                    tags.putInt("colorPriBlueLeftTwo", tag.getInt("colorBlueOne"));
-                                    tags.putInt("colorSecRedLeftTwo", tag.getInt("colorRedTwo"));
-                                    tags.putInt("colorSecGreenLeftTwo", tag.getInt("colorGreenTwo"));
-                                    tags.putInt("colorSecBlueLeftTwo", tag.getInt("colorBlueTwo"));
-                                    tags.putString("dyeTypeLeftOne", tag.getString("dyeType"));
-                                    tags.putString("dyeTypeLeftTwo", tag.getString("dyeType"));
-                                    tags.putInt("lightValueLeftOne", tag.getInt("lightValue"));
-                                    tags.putInt("lightValueLeftTwo", tag.getInt("lightValue"));
-                            });
-                        }
-                    }
-                } else if (slot2.is(ItemTags.create(ResourceLocation.parse("weaversparadise:thigh_highs_stensils")))) {
-                    final String stensilLeft;
-                    if (slot2.is(WeaversParadiseItems.HALF_STENCIL)) {
-                        stensilLeft = "half";
-                    } else if (slot2.is(WeaversParadiseItems.CHECKERS_STENCIL)) {
-                        stensilLeft = "checkers";
-                    } else if (slot2.is(WeaversParadiseItems.CHECKERS_SMALL_STENCIL)) {
-                        stensilLeft = "checkers_small";
-                    } else if (slot2.is(WeaversParadiseItems.LINES_VERTICAL_STENCIL)) {
-                        stensilLeft = "vertical_lines";
-                    } else if (slot2.is(WeaversParadiseItems.LINES_SMALL_STENCIL)) {
-                        stensilLeft = "small_lines";
-                    } else if (slot2.is(WeaversParadiseItems.LINES_BIG_STENCIL)) {
-                        stensilLeft = "big_lines";
-                    } else if (slot2.is(WeaversParadiseItems.CROSS_STENCIL)) {
-                        stensilLeft = "cross";
-                    } else if (slot2.is(WeaversParadiseItems.PAWS_STENCIL)) {
-                        stensilLeft = "paws";
-                    } else if (slot2.is(WeaversParadiseItems.STAR_STENCIL)) {
-                        stensilLeft = "stars";
-                    } else if (slot2.is(WeaversParadiseItems.DIRT_STENCIL)) {
-                        stensilLeft = "dirt";
-                    } else if (slot2.is(WeaversParadiseItems.FLOWER_STENCIL)) {
-                        stensilLeft = "flowers";
-                    } else {
-                        stensilLeft = "default";
-                    }
-
-                    final String dyeTypeLeftOne;
-
-                    final int redLeftPriOne;
-                    final int redLeftSecOne;
-                    final int greenLeftPriOne;
-                    final int greenLeftSecOne;
-                    final int blueLeftPriOne;
-                    final int blueLeftSecOne;
-
-                    final String dyeTypeLeftTwo;
-
-                    final int redLeftPriTwo;
-                    final int redLeftSecTwo;
-                    final int greenLeftPriTwo;
-                    final int greenLeftSecTwo;
-                    final int blueLeftPriTwo;
-                    final int blueLeftSecTwo;
-
-                    if (slot4.is(WeaversParadiseItems.BOTTLED_DYE)) {
-                        CompoundTag dyetag = slot4.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-
-                        if (dyetag.getInt("amount") < 1) {
-                            dyeingBarrelBlock.getItemHandler().setStackInSlot(4, new ItemStack(Items.GLASS_BOTTLE));
-                            slot4 = new ItemStack(Items.GLASS_BOTTLE);
-
-                            CompoundTag datatag = slot0.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-
-                            redLeftPriOne = datatag.getInt("colorPriRedLeftOne");
-                            redLeftSecOne = datatag.getInt("colorSecRedLeftOne");
-                            greenLeftPriOne = datatag.getInt("colorPriGreenLeftOne");
-                            greenLeftSecOne = datatag.getInt("colorSecGreenLeftOne");
-                            blueLeftPriOne = datatag.getInt("colorPriBlueLeftOne");
-                            blueLeftSecOne = datatag.getInt("colorSecBlueLeftOne");
-                            dyeTypeLeftOne = datatag.getString("dyeTypeLeftOne");
-                        } else {
-                            redLeftPriOne = dyetag.getInt("colorRedOne");
-                            redLeftSecOne = dyetag.getInt("colorRedTwo");
-                            greenLeftPriOne = dyetag.getInt("colorGreenOne");
-                            greenLeftSecOne = dyetag.getInt("colorGreenTwo");
-                            blueLeftPriOne = dyetag.getInt("colorBlueOne");
-                            blueLeftSecOne = dyetag.getInt("colorBlueTwo");
-                            dyeTypeLeftOne = dyetag.getString("dyeType");
-                        }
-                    } else {
-                        CompoundTag datatag = slot0.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-
-                        redLeftPriOne = datatag.getInt("colorPriRedLeftOne");
-                        redLeftSecOne = datatag.getInt("colorSecRedLeftOne");
-                        greenLeftPriOne = datatag.getInt("colorPriGreenLeftOne");
-                        greenLeftSecOne = datatag.getInt("colorSecGreenLeftOne");
-                        blueLeftPriOne = datatag.getInt("colorPriBlueLeftOne");
-                        blueLeftSecOne = datatag.getInt("colorSecBlueLeftOne");
-                        dyeTypeLeftOne = datatag.getString("dyeTypeLeftOne");
-                    }
-
-                    if (slot5.is(WeaversParadiseItems.BOTTLED_DYE)) {
-                        CompoundTag dyetag = slot5.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-
-                        if (dyetag.getInt("amount") < 1) {
-                            dyeingBarrelBlock.getItemHandler().setStackInSlot(5, new ItemStack(Items.GLASS_BOTTLE));
-                            slot5 = new ItemStack(Items.GLASS_BOTTLE);
-
-                            CompoundTag datatag = slot0.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-
-                            redLeftPriTwo = datatag.getInt("colorPriRedLeftTwo");
-                            redLeftSecTwo = datatag.getInt("colorSecRedLeftTwo");
-                            greenLeftPriTwo = datatag.getInt("colorPriGreenLeftTwo");
-                            greenLeftSecTwo = datatag.getInt("colorSecGreenLeftTwo");
-                            blueLeftPriTwo = datatag.getInt("colorPriBlueLeftTwo");
-                            blueLeftSecTwo = datatag.getInt("colorSecBlueLeftTwo");
-                            dyeTypeLeftTwo = datatag.getString("dyeTypeLeftTwo");
-                        } else {
-                            redLeftPriTwo = dyetag.getInt("colorRedOne");
-                            redLeftSecTwo = dyetag.getInt("colorRedTwo");
-                            greenLeftPriTwo = dyetag.getInt("colorGreenOne");
-                            greenLeftSecTwo = dyetag.getInt("colorGreenTwo");
-                            blueLeftPriTwo = dyetag.getInt("colorBlueOne");
-                            blueLeftSecTwo = dyetag.getInt("colorBlueTwo");
-                            dyeTypeLeftTwo = dyetag.getString("dyeType");
-                        }
-                    } else {
-                        CompoundTag datatag = slot0.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-
-                        redLeftPriTwo = datatag.getInt("colorPriRedLeftTwo");
-                        redLeftSecTwo = datatag.getInt("colorSecRedLeftTwo");
-                        greenLeftPriTwo = datatag.getInt("colorPriGreenLeftTwo");
-                        greenLeftSecTwo = datatag.getInt("colorSecGreenLeftTwo");
-                        blueLeftPriTwo = datatag.getInt("colorPriBlueLeftTwo");
-                        blueLeftSecTwo = datatag.getInt("colorSecBlueLeftTwo");
-                        dyeTypeLeftTwo = datatag.getString("dyeTypeLeftTwo");
-                    }
-
-                    CustomData.update(DataComponents.CUSTOM_DATA, stack, (tags) -> {
-                        tags.putString("dyeTypeLeftOne", dyeTypeLeftOne);
-                        tags.putString("dyeTypeLeftTwo", dyeTypeLeftTwo);
-                        tags.putString("stensilTypeLeft", stensilLeft);
-                        tags.putInt("colorPriRedLeftOne", redLeftPriOne);
-                        tags.putInt("colorPriGreenLeftOne", greenLeftPriOne);
-                        tags.putInt("colorPriBlueLeftOne", blueLeftPriOne);
-                        tags.putInt("colorPriRedLeftTwo", redLeftPriTwo);
-                        tags.putInt("colorPriGreenLeftTwo", greenLeftPriTwo);
-                        tags.putInt("colorPriBlueLeftTwo", blueLeftPriTwo);
-                        tags.putInt("colorSecRedLeftOne", redLeftSecOne);
-                        tags.putInt("colorSecGreenLeftOne", greenLeftSecOne);
-                        tags.putInt("colorSecBlueLeftOne", blueLeftSecOne);
-                        tags.putInt("colorSecRedLeftTwo", redLeftSecTwo);
-                        tags.putInt("colorSecGreenLeftTwo", greenLeftSecTwo);
-                        tags.putInt("colorSecBlueLeftTwo", blueLeftSecTwo);
-                    });
+                    dyeTypeTwo = singleSidedClothingItem.getItemDyeType(itemStack, 2);
+                    RGB primaryColor = splitColor(singleSidedClothingItem.getItemMainColor(itemStack, 2));
+                    RGB secondaryColor = splitColor(singleSidedClothingItem.getItemSecondaryColor(itemStack, 2));
+                    redPriTwo = primaryColor.r;
+                    greenPriTwo = primaryColor.g;
+                    bluePriTwo = primaryColor.b;
+                    redSecTwo = secondaryColor.r;
+                    greenSecTwo = secondaryColor.g;
+                    blueSecTwo = secondaryColor.b;
+                    lightTwo = singleSidedClothingItem.getItemLightValue(slot0, 2);
                 }
 
-                if (slot3.isEmpty()) {
+                CustomData.update(DataComponents.CUSTOM_DATA, itemStack, (compoundTag) -> {
+                    compoundTag.putString("dyeTypeOne", dyeTypeOne);
+                    compoundTag.putString("dyeTypeTwo", dyeTypeTwo);
+                    compoundTag.putString("stensilType", stencil);
+                    compoundTag.putInt("colorPriRedOne", redPriOne);
+                    compoundTag.putInt("colorPriGreenOne", greenPriOne);
+                    compoundTag.putInt("colorPriBlueOne", bluePriOne);
+                    compoundTag.putInt("colorPriRedTwo", redPriTwo);
+                    compoundTag.putInt("colorPriGreenTwo", greenPriTwo);
+                    compoundTag.putInt("colorPriBlueTwo", bluePriTwo);
+                    compoundTag.putInt("colorSecRedOne", redSecOne);
+                    compoundTag.putInt("colorSecGreenOne", greenSecOne);
+                    compoundTag.putInt("colorSecBlueOne", blueSecOne);
+                    compoundTag.putInt("colorSecRedTwo", redSecTwo);
+                    compoundTag.putInt("colorSecGreenTwo", greenSecTwo);
+                    compoundTag.putInt("colorSecBlueTwo", blueSecTwo);
+                    compoundTag.putInt("lightValueOne", lightOne);
+                    compoundTag.putInt("lightValueTwo", lightTwo);
+                });
+
+                dyeingBarrelBlock.getItemHandler().setStackInSlot(1, itemStack);
+            } else if (slot0.getItem() instanceof DoubleSidedClothingItem doubleSidedClothingItem) {
+                ItemStack itemStack = slot0.copy();
+
+                final String stencilLeft;
+                boolean hasLeftStencil = false;
+                if (slot2.getItem() instanceof Stencil stencilItem) {
+                    stencilLeft = stencilItem.getType();
+                    hasLeftStencil = true;
+                } else {
+                    stencilLeft = doubleSidedClothingItem.getStensilType(itemStack, "left");
+                }
+
+                final String stencilRight;
+                boolean hasRightStencil = false;
+                if (slot3.getItem() instanceof Stencil stencilItem) {
+                    stencilRight = stencilItem.getType();
+                    hasRightStencil = true;
+                } else {
+                    stencilRight = doubleSidedClothingItem.getStensilType(itemStack, "right");
+                }
+
+                final String dyeTypeLeftOne;
+                final int redLeftPriOne;
+                final int redLeftSecOne;
+                final int greenLeftPriOne;
+                final int greenLeftSecOne;
+                final int blueLeftPriOne;
+                final int blueLeftSecOne;
+                final int lightValueLeftOne;
+                final String dyeTypeLeftTwo;
+                final int redLeftPriTwo;
+                final int redLeftSecTwo;
+                final int greenLeftPriTwo;
+                final int greenLeftSecTwo;
+                final int blueLeftPriTwo;
+                final int blueLeftSecTwo;
+                final int lightValueLeftTwo;
+                final String dyeTypeRightOne;
+                final int redRightPriOne;
+                final int redRightSecOne;
+                final int greenRightPriOne;
+                final int greenRightSecOne;
+                final int blueRightPriOne;
+                final int blueRightSecOne;
+                final int lightValueRightOne;
+                final String dyeTypeRightTwo;
+                final int redRightPriTwo;
+                final int redRightSecTwo;
+                final int greenRightPriTwo;
+                final int greenRightSecTwo;
+                final int blueRightPriTwo;
+                final int blueRightSecTwo;
+                final int lightValueRightTwo;
+
+                if (slot4.getItem() instanceof BottledDyeItem bottledDyeItem) {
+                    dyeTypeLeftOne = bottledDyeItem.getItemDyeType(slot4);
+                    RGB primaryColor = splitColor(bottledDyeItem.getItemMainColor(slot4));
+                    RGB secondaryColor = splitColor(bottledDyeItem.getItemSecondaryColor(slot4));
+                    redLeftPriOne = primaryColor.r;
+                    greenLeftPriOne = primaryColor.g;
+                    blueLeftPriOne = primaryColor.b;
+                    redLeftSecOne = secondaryColor.r;
+                    greenLeftSecOne = secondaryColor.g;
+                    blueLeftSecOne = secondaryColor.b;
+                    lightValueLeftOne = bottledDyeItem.getItemLightValue(slot4);
+                } else {
+                    dyeTypeLeftOne = doubleSidedClothingItem.getItemDyeType(itemStack, "left", 1);
+                    RGB primaryColor = splitColor(doubleSidedClothingItem.getItemMainColor(itemStack, "left", 1));
+                    RGB secondaryColor = splitColor(doubleSidedClothingItem.getItemSecondaryColor(itemStack, "left", 1));
+                    redLeftPriOne = primaryColor.r;
+                    greenLeftPriOne = primaryColor.g;
+                    blueLeftPriOne = primaryColor.b;
+                    redLeftSecOne = secondaryColor.r;
+                    greenLeftSecOne = secondaryColor.g;
+                    blueLeftSecOne = secondaryColor.b;
+                    lightValueLeftOne = doubleSidedClothingItem.getItemLightValue(itemStack, "left", 1);
+                }
+
+                if (hasLeftStencil) {
+                    if (slot5.getItem() instanceof BottledDyeItem bottledDyeItem) {
+                        dyeTypeLeftTwo = bottledDyeItem.getItemDyeType(slot5);
+                        RGB primaryColor = splitColor(bottledDyeItem.getItemMainColor(slot5));
+                        RGB secondaryColor = splitColor(bottledDyeItem.getItemSecondaryColor(slot5));
+                        redLeftPriTwo = primaryColor.r;
+                        greenLeftPriTwo = primaryColor.g;
+                        blueLeftPriTwo = primaryColor.b;
+                        redLeftSecTwo = secondaryColor.r;
+                        greenLeftSecTwo = secondaryColor.g;
+                        blueLeftSecTwo = secondaryColor.b;
+                        lightValueLeftTwo = bottledDyeItem.getItemLightValue(slot5);
+                    } else {
+                        dyeTypeLeftTwo = doubleSidedClothingItem.getItemDyeType(itemStack, "left", 2);
+                        RGB primaryColor = splitColor(doubleSidedClothingItem.getItemMainColor(itemStack, "left", 2));
+                        RGB secondaryColor = splitColor(doubleSidedClothingItem.getItemSecondaryColor(itemStack, "left", 2));
+                        redLeftPriTwo = primaryColor.r;
+                        greenLeftPriTwo = primaryColor.g;
+                        blueLeftPriTwo = primaryColor.b;
+                        redLeftSecTwo = secondaryColor.r;
+                        greenLeftSecTwo = secondaryColor.g;
+                        blueLeftSecTwo = secondaryColor.b;
+                        lightValueLeftTwo = doubleSidedClothingItem.getItemLightValue(itemStack, "left", 2);
+                    }
+                } else {
+                    if (!slot5.isEmpty()) {
+                        dropItem(slot5.copy(), serverLevel, blockPos.getX(), blockPos.getY(), blockPos.getZ());
+                        dyeingBarrelBlock.getItemHandler().setStackInSlot(5, ItemStack.EMPTY);
+                    }
+
+                    dyeTypeLeftTwo = doubleSidedClothingItem.getItemDyeType(itemStack, "left", 2);
+                    RGB primaryColor = splitColor(doubleSidedClothingItem.getItemMainColor(itemStack, "left", 2));
+                    RGB secondaryColor = splitColor(doubleSidedClothingItem.getItemSecondaryColor(itemStack, "left", 2));
+                    redLeftPriTwo = primaryColor.r;
+                    greenLeftPriTwo = primaryColor.g;
+                    blueLeftPriTwo = primaryColor.b;
+                    redLeftSecTwo = secondaryColor.r;
+                    greenLeftSecTwo = secondaryColor.g;
+                    blueLeftSecTwo = secondaryColor.b;
+                    lightValueLeftTwo = doubleSidedClothingItem.getItemLightValue(itemStack, "left", 2);
+                }
+
+                if (slot6.getItem() instanceof BottledDyeItem bottledDyeItem) {
+                    dyeTypeRightOne = bottledDyeItem.getItemDyeType(slot6);
+                    RGB primaryColor = splitColor(bottledDyeItem.getItemMainColor(slot6));
+                    RGB secondaryColor = splitColor(bottledDyeItem.getItemSecondaryColor(slot6));
+                    redRightPriOne = primaryColor.r;
+                    greenRightPriOne = primaryColor.g;
+                    blueRightPriOne = primaryColor.b;
+                    redRightSecOne = secondaryColor.r;
+                    greenRightSecOne = secondaryColor.g;
+                    blueRightSecOne = secondaryColor.b;
+                    lightValueRightOne = bottledDyeItem.getItemLightValue(slot6);
+                } else {
+                    dyeTypeRightOne = doubleSidedClothingItem.getItemDyeType(itemStack, "right", 1);
+                    RGB primaryColor = splitColor(doubleSidedClothingItem.getItemMainColor(itemStack, "right", 1));
+                    RGB secondaryColor = splitColor(doubleSidedClothingItem.getItemSecondaryColor(itemStack, "right", 1));
+                    redRightPriOne = primaryColor.r;
+                    greenRightPriOne = primaryColor.g;
+                    blueRightPriOne = primaryColor.b;
+                    redRightSecOne = secondaryColor.r;
+                    greenRightSecOne = secondaryColor.g;
+                    blueRightSecOne = secondaryColor.b;
+                    lightValueRightOne = doubleSidedClothingItem.getItemLightValue(itemStack, "right", 1);
+                }
+
+                if (hasRightStencil) {
+                    if (slot7.getItem() instanceof BottledDyeItem bottledDyeItem) {
+                        dyeTypeRightTwo = bottledDyeItem.getItemDyeType(slot7);
+                        RGB primaryColor = splitColor(bottledDyeItem.getItemMainColor(slot7));
+                        RGB secondaryColor = splitColor(bottledDyeItem.getItemSecondaryColor(slot7));
+                        redRightPriTwo = primaryColor.r;
+                        greenRightPriTwo = primaryColor.g;
+                        blueRightPriTwo = primaryColor.b;
+                        redRightSecTwo = secondaryColor.r;
+                        greenRightSecTwo = secondaryColor.g;
+                        blueRightSecTwo = secondaryColor.b;
+                        lightValueRightTwo = bottledDyeItem.getItemLightValue(slot7);
+                    } else {
+                        dyeTypeRightTwo = doubleSidedClothingItem.getItemDyeType(itemStack, "right", 2);
+                        RGB primaryColor = splitColor(doubleSidedClothingItem.getItemMainColor(itemStack, "right", 2));
+                        RGB secondaryColor = splitColor(doubleSidedClothingItem.getItemSecondaryColor(itemStack, "right", 2));
+                        redRightPriTwo = primaryColor.r;
+                        greenRightPriTwo = primaryColor.g;
+                        blueRightPriTwo = primaryColor.b;
+                        redRightSecTwo = secondaryColor.r;
+                        greenRightSecTwo = secondaryColor.g;
+                        blueRightSecTwo = secondaryColor.b;
+                        lightValueRightTwo = doubleSidedClothingItem.getItemLightValue(itemStack, "right", 2);
+                    }
+                } else {
                     if (!slot7.isEmpty()) {
-                        serverLevel.addFreshEntity(new ItemEntity(serverLevel, pos.getX(), pos.getY(), pos.getZ(), slot7));
+                        dropItem(slot7.copy(), serverLevel, blockPos.getX(), blockPos.getY(), blockPos.getZ());
                         dyeingBarrelBlock.getItemHandler().setStackInSlot(7, ItemStack.EMPTY);
-                        slot7 = ItemStack.EMPTY;
                     }
 
-                    if (slot6.is(WeaversParadiseItems.BOTTLED_DYE.get())) {
-                        CompoundTag tag = slot6.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-
-                        if (tag.getInt("amount") < 1) {
-                            dyeingBarrelBlock.getItemHandler().setStackInSlot(6, new ItemStack(Items.GLASS_BOTTLE));
-                            slot6 = new ItemStack(Items.GLASS_BOTTLE);
-                        } else {
-                            CustomData.update(DataComponents.CUSTOM_DATA, stack, (tags) -> {
-                                tags.putInt("colorPriRedRightOne", tag.getInt("colorRedOne"));
-                                tags.putInt("colorPriGreenRightOne", tag.getInt("colorGreenOne"));
-                                tags.putInt("colorPriBlueRightOne", tag.getInt("colorBlueOne"));
-                                tags.putInt("colorSecRedRightOne", tag.getInt("colorRedTwo"));
-                                tags.putInt("colorSecGreenRightOne", tag.getInt("colorGreenTwo"));
-                                tags.putInt("colorSecBlueRightOne", tag.getInt("colorBlueTwo"));
-                                tags.putInt("colorPriRedRightTwo", tag.getInt("colorRedOne"));
-                                tags.putInt("colorPriGreenRightTwo", tag.getInt("colorGreenOne"));
-                                tags.putInt("colorPriBlueRightTwo", tag.getInt("colorBlueOne"));
-                                tags.putInt("colorSecRedRightTwo", tag.getInt("colorRedTwo"));
-                                tags.putInt("colorSecGreenRightTwo", tag.getInt("colorGreenTwo"));
-                                tags.putInt("colorSecBlueRightTwo", tag.getInt("colorBlueTwo"));
-                                tags.putString("dyeTypeRightOne", tag.getString("dyeType"));
-                                tags.putString("dyeTypeRightTwo", tag.getString("dyeType"));
-                                tags.putInt("lightValueRightOne", tag.getInt("lightValue"));
-                                tags.putInt("lightValueRightTwo", tag.getInt("lightValue"));
-                            });
-                        }
-                    }
-                } else if (slot3.is(ItemTags.create(ResourceLocation.parse("weaversparadise:thigh_highs_stensils")))) {
-                    final String stensilRight;
-                    if (slot3.is(WeaversParadiseItems.HALF_STENCIL)) {
-                        stensilRight = "half";
-                    } else if (slot3.is(WeaversParadiseItems.CHECKERS_STENCIL)) {
-                        stensilRight = "checkers";
-                    } else if (slot3.is(WeaversParadiseItems.CHECKERS_SMALL_STENCIL)) {
-                        stensilRight = "checkers_small";
-                    } else if (slot3.is(WeaversParadiseItems.LINES_VERTICAL_STENCIL)) {
-                        stensilRight = "vertical_lines";
-                    } else if (slot3.is(WeaversParadiseItems.LINES_SMALL_STENCIL)) {
-                        stensilRight = "small_lines";
-                    } else if (slot3.is(WeaversParadiseItems.LINES_BIG_STENCIL)) {
-                        stensilRight = "big_lines";
-                    } else if (slot3.is(WeaversParadiseItems.CROSS_STENCIL)) {
-                        stensilRight = "cross";
-                    } else if (slot3.is(WeaversParadiseItems.PAWS_STENCIL)) {
-                        stensilRight = "paws";
-                    } else {
-                        stensilRight = "default";
-                    }
-
-                    final String dyeTypeRightOne;
-
-                    final int redRightPriOne;
-                    final int redRightSecOne;
-                    final int greenRightPriOne;
-                    final int greenRightSecOne;
-                    final int blueRightPriOne;
-                    final int blueRightSecOne;
-
-                    final String dyeTypeRightTwo;
-
-                    final int redRightPriTwo;
-                    final int redRightSecTwo;
-                    final int greenRightPriTwo;
-                    final int greenRightSecTwo;
-                    final int blueRightPriTwo;
-                    final int blueRightSecTwo;
-
-                    if (slot6.is(WeaversParadiseItems.BOTTLED_DYE)) {
-                        CompoundTag dyetag = slot6.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-                        if (dyetag.getInt("amount") < 1) {
-                            dyeingBarrelBlock.getItemHandler().setStackInSlot(6, new ItemStack(Items.GLASS_BOTTLE));
-                            slot6 = new ItemStack(Items.GLASS_BOTTLE);
-
-                            CompoundTag datatag = slot0.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-
-                            redRightPriOne = datatag.getInt("colorPriRedRightOne");
-                            redRightSecOne = datatag.getInt("colorSecRedRightOne");
-                            greenRightPriOne = datatag.getInt("colorPriGreenRightOne");
-                            greenRightSecOne = datatag.getInt("colorSecGreenRightOne");
-                            blueRightPriOne = datatag.getInt("colorPriBlueRightOne");
-                            blueRightSecOne = datatag.getInt("colorSecBlueRightOne");
-                            dyeTypeRightOne = datatag.getString("dyeTypeRightOne");
-                        } else {
-                            redRightPriOne = dyetag.getInt("colorRedOne");
-                            redRightSecOne = dyetag.getInt("colorRedTwo");
-                            greenRightPriOne = dyetag.getInt("colorGreenOne");
-                            greenRightSecOne = dyetag.getInt("colorGreenTwo");
-                            blueRightPriOne = dyetag.getInt("colorBlueOne");
-                            blueRightSecOne = dyetag.getInt("colorBlueTwo");
-                            dyeTypeRightOne = dyetag.getString("dyeType");
-                        }
-                    } else {
-                        CompoundTag datatag = slot0.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-
-                        redRightPriOne = datatag.getInt("colorPriRedRightOne");
-                        redRightSecOne = datatag.getInt("colorSecRedRightOne");
-                        greenRightPriOne = datatag.getInt("colorPriGreenRightOne");
-                        greenRightSecOne = datatag.getInt("colorSecGreenRightOne");
-                        blueRightPriOne = datatag.getInt("colorPriBlueRightOne");
-                        blueRightSecOne = datatag.getInt("colorSecBlueRightOne");
-                        dyeTypeRightOne = datatag.getString("dyeTypeRightOne");
-                    }
-
-                    if (slot7.is(WeaversParadiseItems.BOTTLED_DYE)) {
-                        CompoundTag dyetag = slot7.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-
-                        if (dyetag.getInt("amount") < 1) {
-                            dyeingBarrelBlock.getItemHandler().setStackInSlot(7, new ItemStack(Items.GLASS_BOTTLE));
-                            slot7 = new ItemStack(Items.GLASS_BOTTLE);
-
-                            CompoundTag datatag = slot0.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-
-                            redRightPriTwo = datatag.getInt("colorPriRedRightTwo");
-                            redRightSecTwo = datatag.getInt("colorSecRedRightTwo");
-                            greenRightPriTwo = datatag.getInt("colorPriGreenRightTwo");
-                            greenRightSecTwo = datatag.getInt("colorSecGreenRightTwo");
-                            blueRightPriTwo = datatag.getInt("colorPriBlueRightTwo");
-                            blueRightSecTwo = datatag.getInt("colorSecBlueRightTwo");
-                            dyeTypeRightTwo = datatag.getString("dyeTypeRightTwo");
-                        } else {
-
-                            redRightPriTwo = dyetag.getInt("colorRedOne");
-                            redRightSecTwo = dyetag.getInt("colorRedTwo");
-                            greenRightPriTwo = dyetag.getInt("colorGreenOne");
-                            greenRightSecTwo = dyetag.getInt("colorGreenTwo");
-                            blueRightPriTwo = dyetag.getInt("colorBlueOne");
-                            blueRightSecTwo = dyetag.getInt("colorBlueTwo");
-                            dyeTypeRightTwo = dyetag.getString("dyeType");
-                        }
-                    } else {
-                        CompoundTag datatag = slot0.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-
-                        redRightPriTwo = datatag.getInt("colorPriRedRightTwo");
-                        redRightSecTwo = datatag.getInt("colorSecRedRightTwo");
-                        greenRightPriTwo = datatag.getInt("colorPriGreenRightTwo");
-                        greenRightSecTwo = datatag.getInt("colorSecGreenRightTwo");
-                        blueRightPriTwo = datatag.getInt("colorPriBlueRightTwo");
-                        blueRightSecTwo = datatag.getInt("colorSecBlueRightTwo");
-                        dyeTypeRightTwo = datatag.getString("dyeTypeRightTwo");
-                    }
-
-                    CustomData.update(DataComponents.CUSTOM_DATA, stack, (tags) -> {
-                        tags.putString("dyeTypeRightOne", dyeTypeRightOne);
-                        tags.putString("dyeTypeRightTwo", dyeTypeRightTwo);
-                        tags.putString("stensilTypeRight", stensilRight);
-                        tags.putInt("colorPriRedRightOne", redRightPriOne);
-                        tags.putInt("colorPriGreenRightOne", greenRightPriOne);
-                        tags.putInt("colorPriBlueRightOne", blueRightPriOne);
-                        tags.putInt("colorPriRedRightTwo", redRightPriTwo);
-                        tags.putInt("colorPriGreenRightTwo", greenRightPriTwo);
-                        tags.putInt("colorPriBlueRightTwo", blueRightPriTwo);
-                        tags.putInt("colorSecRedRightOne", redRightSecOne);
-                        tags.putInt("colorSecGreenRightOne", greenRightSecOne);
-                        tags.putInt("colorSecBlueRightOne", blueRightSecOne);
-                        tags.putInt("colorSecRedRightTwo", redRightSecTwo);
-                        tags.putInt("colorSecGreenRightTwo", greenRightSecTwo);
-                        tags.putInt("colorSecBlueRightTwo", blueRightSecTwo);
-                    });
+                    dyeTypeRightTwo = doubleSidedClothingItem.getItemDyeType(itemStack, "right", 2);
+                    RGB primaryColor = splitColor(doubleSidedClothingItem.getItemMainColor(itemStack, "right", 2));
+                    RGB secondaryColor = splitColor(doubleSidedClothingItem.getItemSecondaryColor(itemStack, "right", 2));
+                    redRightPriTwo = primaryColor.r;
+                    greenRightPriTwo = primaryColor.g;
+                    blueRightPriTwo = primaryColor.b;
+                    redRightSecTwo = secondaryColor.r;
+                    greenRightSecTwo = secondaryColor.g;
+                    blueRightSecTwo = secondaryColor.b;
+                    lightValueRightTwo = doubleSidedClothingItem.getItemLightValue(itemStack, "right", 2);
                 }
 
-                dyeingBarrelBlock.getItemHandler().setStackInSlot(1, stack);
-            } else if (
-                    slot0.is(WeaversParadiseItems.SHIRT_COTTON)
-                            || slot0.is(WeaversParadiseItems.SHIRT_SILK)
-                            || slot0.is(WeaversParadiseItems.SWEATER_WOOL)
-                            || slot0.is(WeaversParadiseItems.PANTS_JEANS)
-                            || slot0.is(WeaversParadiseItems.PANTS_COTTON)
-                            || slot0.is(WeaversParadiseItems.PANTS_SILK)
-                            || slot0.is(WeaversParadiseItems.COTTON_CAPE)
-                            || slot0.is(WeaversParadiseItems.SILK_CAPE)
-                            || slot0.is(WeaversParadiseItems.WOOL_CAPE)
-            ) {
-                ItemStack stack = slot0.copy();
+                CustomData.update(DataComponents.CUSTOM_DATA, itemStack, (compoundTag) -> {
+                    compoundTag.putString("dyeTypeLeftOne", dyeTypeLeftOne);
+                    compoundTag.putString("dyeTypeRightOne", dyeTypeRightOne);
+                    compoundTag.putString("dyeTypeLeftTwo", dyeTypeLeftTwo);
+                    compoundTag.putString("dyeTypeRightTwo", dyeTypeRightTwo);
+                    compoundTag.putString("stensilTypeLeft", stencilLeft);
+                    compoundTag.putString("stensilTypeRight", stencilRight);
+                    compoundTag.putInt("colorPriRedLeftOne", redLeftPriOne);
+                    compoundTag.putInt("colorPriGreenLeftOne", greenLeftPriOne);
+                    compoundTag.putInt("colorPriBlueLeftOne", blueLeftPriOne);
+                    compoundTag.putInt("colorPriRedLeftTwo", redLeftPriTwo);
+                    compoundTag.putInt("colorPriGreenLeftTwo", greenLeftPriTwo);
+                    compoundTag.putInt("colorPriBlueLeftTwo", blueLeftPriTwo);
+                    compoundTag.putInt("colorSecRedLeftOne", redLeftSecOne);
+                    compoundTag.putInt("colorSecGreenLeftOne", greenLeftSecOne);
+                    compoundTag.putInt("colorSecBlueLeftOne", blueLeftSecOne);
+                    compoundTag.putInt("colorSecRedLeftTwo", redLeftSecTwo);
+                    compoundTag.putInt("colorSecGreenLeftTwo", greenLeftSecTwo);
+                    compoundTag.putInt("colorSecBlueLeftTwo", blueLeftSecTwo);
+                    compoundTag.putInt("colorPriRedRightOne", redRightPriOne);
+                    compoundTag.putInt("colorPriGreenRightOne", greenRightPriOne);
+                    compoundTag.putInt("colorPriBlueRightOne", blueRightPriOne);
+                    compoundTag.putInt("colorPriRedRightTwo", redRightPriTwo);
+                    compoundTag.putInt("colorPriGreenRightTwo", greenRightPriTwo);
+                    compoundTag.putInt("colorPriBlueRightTwo", blueRightPriTwo);
+                    compoundTag.putInt("colorSecRedRightOne", redRightSecOne);
+                    compoundTag.putInt("colorSecGreenRightOne", greenRightSecOne);
+                    compoundTag.putInt("colorSecBlueRightOne", blueRightSecOne);
+                    compoundTag.putInt("colorSecRedRightTwo", redRightSecTwo);
+                    compoundTag.putInt("colorSecGreenRightTwo", greenRightSecTwo);
+                    compoundTag.putInt("colorSecBlueRightTwo", blueRightSecTwo);
+                    compoundTag.putInt("lightValueLeftOne", lightValueLeftOne);
+                    compoundTag.putInt("lightValueLeftTwo", lightValueLeftTwo);
+                    compoundTag.putInt("lightValueRightOne", lightValueRightOne);
+                    compoundTag.putInt("lightValueRightTwo", lightValueRightTwo);
+                });
 
-                if (slot2.is(WeaversParadiseItems.PAWS_STENCIL) || slot2.is(WeaversParadiseItems.CROSS_STENCIL)) {
-                    Containers.dropItemStack(serverLevel, pos.getX(), pos.getY(), pos.getZ(), slot2);
-                    slot2 = ItemStack.EMPTY;
+                dyeingBarrelBlock.getItemHandler().setStackInSlot(1, itemStack);
+            } else {
+                if (!slot2.isEmpty()) {
+                    dropItem(slot2.copy(), serverLevel, blockPos.getX(), blockPos.getY(), blockPos.getZ());
+                    dyeingBarrelBlock.getItemHandler().setStackInSlot(2, ItemStack.EMPTY);
                 }
+
                 if (!slot3.isEmpty()) {
-                    Containers.dropItemStack(serverLevel, pos.getX(), pos.getY(), pos.getZ(), slot3);
-                    slot3 = ItemStack.EMPTY;
+                    dropItem(slot3.copy(), serverLevel, blockPos.getX(), blockPos.getY(), blockPos.getZ());
+                    dyeingBarrelBlock.getItemHandler().setStackInSlot(3, ItemStack.EMPTY);
+                }
+
+                if (!slot4.isEmpty()) {
+                    dropItem(slot4.copy(), serverLevel, blockPos.getX(), blockPos.getY(), blockPos.getZ());
+                    dyeingBarrelBlock.getItemHandler().setStackInSlot(4, ItemStack.EMPTY);
+                }
+
+                if (!slot5.isEmpty()) {
+                    dropItem(slot5.copy(), serverLevel, blockPos.getX(), blockPos.getY(), blockPos.getZ());
+                    dyeingBarrelBlock.getItemHandler().setStackInSlot(5, ItemStack.EMPTY);
                 }
 
                 if (!slot6.isEmpty()) {
-                    Containers.dropItemStack(serverLevel, pos.getX(), pos.getY(), pos.getZ(), slot6);
-                    slot6 = ItemStack.EMPTY;
+                    dropItem(slot6.copy(), serverLevel, blockPos.getX(), blockPos.getY(), blockPos.getZ());
+                    dyeingBarrelBlock.getItemHandler().setStackInSlot(6, ItemStack.EMPTY);
                 }
 
                 if (!slot7.isEmpty()) {
-                    Containers.dropItemStack(serverLevel, pos.getX(), pos.getY(), pos.getZ(), slot7);
-                    slot7 = ItemStack.EMPTY;
+                    dropItem(slot7.copy(), serverLevel, blockPos.getX(), blockPos.getY(), blockPos.getZ());
+                    dyeingBarrelBlock.getItemHandler().setStackInSlot(7, ItemStack.EMPTY);
                 }
 
-                if (slot2.isEmpty()) {
-                    if (!slot5.isEmpty()) {
-                        Containers.dropItemStack(serverLevel, pos.getX(), pos.getY(), pos.getZ(), slot5);
-                        dyeingBarrelBlock.getItemHandler().setStackInSlot(5, ItemStack.EMPTY);
-                        slot5 = ItemStack.EMPTY;
-                    }
-
-                    if (slot4.is(WeaversParadiseItems.BOTTLED_DYE.get())) {
-                        CompoundTag tag = slot4.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-
-                        if (tag.getInt("amount") < 1) {
-                            dyeingBarrelBlock.getItemHandler().setStackInSlot(4, new ItemStack(Items.GLASS_BOTTLE));
-                            slot4 = new ItemStack(Items.GLASS_BOTTLE);
-                        } else {
-                            CustomData.update(DataComponents.CUSTOM_DATA, stack, (tags) -> {
-                                tags.putInt("colorPriRedOne", tag.getInt("colorRedOne"));
-                                tags.putInt("colorPriGreenOne", tag.getInt("colorGreenOne"));
-                                tags.putInt("colorPriBlueOne", tag.getInt("colorBlueOne"));
-                                tags.putInt("colorSecRedOne", tag.getInt("colorRedTwo"));
-                                tags.putInt("colorSecGreenOne", tag.getInt("colorGreenTwo"));
-                                tags.putInt("colorSecBlueOne", tag.getInt("colorBlueTwo"));
-                                tags.putInt("colorPriRedTwo", tag.getInt("colorRedOne"));
-                                tags.putInt("colorPriGreenTwo", tag.getInt("colorGreenOne"));
-                                tags.putInt("colorPriBlueTwo", tag.getInt("colorBlueOne"));
-                                tags.putInt("colorSecRedTwo", tag.getInt("colorRedTwo"));
-                                tags.putInt("colorSecGreenTwo", tag.getInt("colorGreenTwo"));
-                                tags.putInt("colorSecBlueTwo", tag.getInt("colorBlueTwo"));
-                                tags.putString("dyeTypeOne", tag.getString("dyeType"));
-                                tags.putString("dyeTypeTwo", tag.getString("dyeType"));
-                                tags.putInt("lightValueOne", tag.getInt("lightValue"));
-                                tags.putInt("lightValueTwo", tag.getInt("lightValue"));
-                            });
-                        }
-                    }
-                } else if (slot2.is(ItemTags.create(ResourceLocation.parse("weaversparadise:shirts_stensils"))) || slot2.is(ItemTags.create(ResourceLocation.parse("weaversparadise:pants_stencils")))) {
-                    final String stensil;
-                    if (slot2.is(WeaversParadiseItems.HALF_STENCIL)) {
-                        stensil = "half";
-                    } else if (slot2.is(WeaversParadiseItems.CHECKERS_STENCIL)) {
-                        stensil = "checkers";
-                    } else if (slot2.is(WeaversParadiseItems.CHECKERS_SMALL_STENCIL)) {
-                        stensil = "checkers_small";
-                    } else if (slot2.is(WeaversParadiseItems.LINES_VERTICAL_STENCIL)) {
-                        stensil = "vertical_lines";
-                    } else if (slot2.is(WeaversParadiseItems.LINES_SMALL_STENCIL)) {
-                        stensil = "small_lines";
-                    } else if (slot2.is(WeaversParadiseItems.LINES_BIG_STENCIL)) {
-                        stensil = "big_lines";
-                    } else if (slot2.is(WeaversParadiseItems.STAR_STENCIL)) {
-                        stensil = "stars";
-                    } else if (slot2.is(WeaversParadiseItems.DIRT_STENCIL)) {
-                        stensil = "dirt";
-                    } else if (slot2.is(WeaversParadiseItems.FLOWER_STENCIL)) {
-                        stensil = "flowers";
-                    } else {
-                        stensil = "default";
-                    }
-
-                    final String dyeTypeOne;
-
-                    final int redPriOne;
-                    final int redSecOne;
-                    final int greenPriOne;
-                    final int greenSecOne;
-                    final int bluePriOne;
-                    final int blueSecOne;
-
-                    final String dyeTypeTwo;
-
-                    final int redPriTwo;
-                    final int redSecTwo;
-                    final int greenPriTwo;
-                    final int greenSecTwo;
-                    final int bluePriTwo;
-                    final int blueSecTwo;
-
-                    if (slot4.is(WeaversParadiseItems.BOTTLED_DYE)) {
-                        CompoundTag dyetag = slot4.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-                        if (dyetag.getInt("amount") < 1) {
-                            dyeingBarrelBlock.getItemHandler().setStackInSlot(4, new ItemStack(Items.GLASS_BOTTLE));
-                            slot4 = new ItemStack(Items.GLASS_BOTTLE);
-
-                            CompoundTag datatag = slot0.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-
-                            redPriOne = datatag.getInt("colorPriRedOne");
-                            redSecOne = datatag.getInt("colorSecRedOne");
-                            greenPriOne = datatag.getInt("colorPriGreenOne");
-                            greenSecOne = datatag.getInt("colorSecGreenOne");
-                            bluePriOne = datatag.getInt("colorPriBlueOne");
-                            blueSecOne = datatag.getInt("colorSecBlueOne");
-                            dyeTypeOne = datatag.getString("dyeTypeOne");
-                        } else {
-                            redPriOne = dyetag.getInt("colorRedOne");
-                            redSecOne = dyetag.getInt("colorRedTwo");
-                            greenPriOne = dyetag.getInt("colorGreenOne");
-                            greenSecOne = dyetag.getInt("colorGreenTwo");
-                            bluePriOne = dyetag.getInt("colorBlueOne");
-                            blueSecOne = dyetag.getInt("colorBlueTwo");
-                            dyeTypeOne = dyetag.getString("dyeType");
-                        }
-                    } else {
-                        CompoundTag datatag = slot0.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-
-                        redPriOne = datatag.getInt("colorPriRedOne");
-                        redSecOne = datatag.getInt("colorSecRedOne");
-                        greenPriOne = datatag.getInt("colorPriGreenOne");
-                        greenSecOne = datatag.getInt("colorSecGreenOne");
-                        bluePriOne = datatag.getInt("colorPriBlueOne");
-                        blueSecOne = datatag.getInt("colorSecBlueOne");
-                        dyeTypeOne = datatag.getString("dyeTypeOne");
-                    }
-
-                    if (slot5.is(WeaversParadiseItems.BOTTLED_DYE)) {
-                        CompoundTag dyetag = slot5.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-
-                        if (dyetag.getInt("amount") < 1) {
-                            dyeingBarrelBlock.getItemHandler().setStackInSlot(5, new ItemStack(Items.GLASS_BOTTLE));
-                            slot5 = new ItemStack(Items.GLASS_BOTTLE);
-
-                            CompoundTag datatag = slot0.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-
-                            redPriTwo = datatag.getInt("colorPriRedTwo");
-                            redSecTwo = datatag.getInt("colorSecRedTwo");
-                            greenPriTwo = datatag.getInt("colorPriGreenTwo");
-                            greenSecTwo = datatag.getInt("colorSecGreenTwo");
-                            bluePriTwo = datatag.getInt("colorPriBlueTwo");
-                            blueSecTwo = datatag.getInt("colorSecBlueTwo");
-                            dyeTypeTwo = datatag.getString("dyeTypeTwo");
-                        } else {
-                            redPriTwo = dyetag.getInt("colorRedOne");
-                            redSecTwo = dyetag.getInt("colorRedTwo");
-                            greenPriTwo = dyetag.getInt("colorGreenOne");
-                            greenSecTwo = dyetag.getInt("colorGreenTwo");
-                            bluePriTwo = dyetag.getInt("colorBlueOne");
-                            blueSecTwo = dyetag.getInt("colorBlueTwo");
-                            dyeTypeTwo = dyetag.getString("dyeType");
-                        }
-                    } else {
-                        CompoundTag datatag = slot0.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-
-                        redPriTwo = datatag.getInt("colorPriRedTwo");
-                        redSecTwo = datatag.getInt("colorSecRedTwo");
-                        greenPriTwo = datatag.getInt("colorPriGreenTwo");
-                        greenSecTwo = datatag.getInt("colorSecGreenTwo");
-                        bluePriTwo = datatag.getInt("colorPriBlueTwo");
-                        blueSecTwo = datatag.getInt("colorSecBlueTwo");
-                        dyeTypeTwo = datatag.getString("dyeTypeTwo");
-                    }
-
-                    CustomData.update(DataComponents.CUSTOM_DATA, stack, (tags) -> {
-                        tags.putString("dyeTypeOne", dyeTypeOne);
-                        tags.putString("dyeTypeTwo", dyeTypeTwo);
-                        tags.putString("stensilType", stensil);
-                        tags.putInt("colorPriRedOne", redPriOne);
-                        tags.putInt("colorPriGreenOne", greenPriOne);
-                        tags.putInt("colorPriBlueOne", bluePriOne);
-                        tags.putInt("colorPriRedTwo", redPriTwo);
-                        tags.putInt("colorPriGreenTwo", greenPriTwo);
-                        tags.putInt("colorPriBlueTwo", bluePriTwo);
-                        tags.putInt("colorSecRedOne", redSecOne);
-                        tags.putInt("colorSecGreenOne", greenSecOne);
-                        tags.putInt("colorSecBlueOne", blueSecOne);
-                        tags.putInt("colorSecRedTwo", redSecTwo);
-                        tags.putInt("colorSecGreenTwo", greenSecTwo);
-                        tags.putInt("colorSecBlueTwo", blueSecTwo);
-                    });
-                }
-
-                dyeingBarrelBlock.getItemHandler().setStackInSlot(1, stack);
-            } else {
                 dyeingBarrelBlock.getItemHandler().setStackInSlot(1, ItemStack.EMPTY);
             }
         }
 
-        serverLevel.scheduleTick(pos, this, 1);
+        serverLevel.scheduleTick(blockPos, this, 1);
+    }
+
+    private static void dropItem(ItemStack itemStack, ServerLevel serverLevel, int x, int y, int z) {
+        serverLevel.addFreshEntity(new ItemEntity(serverLevel, x, y, z, itemStack));
     }
 
     @Override
-    public InteractionResult useWithoutItem(BlockState blockstate, Level world, BlockPos pos, Player entity, BlockHitResult hit) {
-        super.useWithoutItem(blockstate, world, pos, entity, hit);
-        if (entity instanceof ServerPlayer player) {
-            player.openMenu(new MenuProvider() {
+    public @NotNull InteractionResult useWithoutItem(@NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, @NotNull Player player, @NotNull BlockHitResult blockHitResult) {
+        super.useWithoutItem(blockState, level, blockPos, player, blockHitResult);
+
+        if (player instanceof ServerPlayer serverPlayer) {
+            serverPlayer.openMenu(new MenuProvider() {
                 @Override
-                public Component getDisplayName() {
+                public @NotNull Component getDisplayName() {
                     return Component.literal("Dyeing Barrel");
                 }
 
                 @Override
-                public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-                    return new DyeingMenu(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(pos));
+                public AbstractContainerMenu createMenu(int id, @NotNull Inventory inventory, @NotNull Player player) {
+                    return new DyeingMenu(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(blockPos));
                 }
-            }, pos);
+            }, blockPos);
         }
+
         return InteractionResult.SUCCESS;
     }
 
     @Override
-    public MenuProvider getMenuProvider(BlockState state, Level worldIn, BlockPos pos) {
-        BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-        return tileEntity instanceof MenuProvider menuProvider ? menuProvider : null;
+    public MenuProvider getMenuProvider(@NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos) {
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+
+        return blockEntity instanceof MenuProvider menuProvider ? menuProvider : null;
     }
 
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new DyeingBarrelBlockEntity(pos, state);
+    public BlockEntity newBlockEntity(@NotNull BlockPos blockPos, @NotNull BlockState blockState) {
+        return new DyeingBarrelBlockEntity(blockPos, blockState);
     }
 
     @Override
-    public boolean triggerEvent(BlockState state, Level world, BlockPos pos, int eventID, int eventParam) {
-        super.triggerEvent(state, world, pos, eventID, eventParam);
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        return blockEntity == null ? false : blockEntity.triggerEvent(eventID, eventParam);
+    public boolean triggerEvent(@NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, int eventID, int eventParam) {
+        super.triggerEvent(blockState, level, blockPos, eventID, eventParam);
+
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+
+        return blockEntity != null && blockEntity.triggerEvent(eventID, eventParam);
     }
 
     @Override
-    public void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean isMoving) {
-        if (state.getBlock() != newState.getBlock()) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
+    public void onRemove(@NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockStateNew, boolean isMoving) {
+        if (blockState.getBlock() != blockStateNew.getBlock()) {
+            BlockEntity blockEntity = level.getBlockEntity(blockPos);
+
             if (blockEntity instanceof DyeingBarrelBlockEntity be) {
                 for (int i = 0; i <= 7; i++) {
                     if (!(i == 1)) {
                         ItemStack stack = be.getItemHandler().getStackInSlot(i);
 
                         if (!stack.isEmpty()) {
-                            Containers.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
+                            Containers.dropItemStack(level, blockPos.getX(), blockPos.getY(), blockPos.getZ(), stack);
                         }
                     }
                 }
 
-                world.updateNeighbourForOutputSignal(pos, this);
+                level.updateNeighbourForOutputSignal(blockPos, this);
             }
-            super.onRemove(state, world, pos, newState, isMoving);
+            super.onRemove(blockState, level, blockPos, blockStateNew, isMoving);
         }
     }
 
     @Override
-    public boolean hasAnalogOutputSignal(BlockState state) {
+    public boolean hasAnalogOutputSignal(@NotNull BlockState blockState) {
         return true;
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState blockState, Level world, BlockPos pos) {
-        BlockEntity tileentity = world.getBlockEntity(pos);
-        if (tileentity instanceof DyeingBarrelBlockEntity be)
-            return AbstractContainerMenu.getRedstoneSignalFromContainer(be);
-        else
-            return 0;
+    public int getAnalogOutputSignal(@NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos) {
+        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+
+        return blockEntity instanceof DyeingBarrelBlockEntity dyeingBarrelBlockEntity ? AbstractContainerMenu.getRedstoneSignalFromContainer(dyeingBarrelBlockEntity) : 0;
+    }
+
+    record RGB(int r, int g, int b) {}
+
+    private static RGB splitColor(int color) {
+        return new RGB(
+                (color >> 16) & 255,
+                (color >> 8) & 255,
+                color & 255
+        );
     }
 }

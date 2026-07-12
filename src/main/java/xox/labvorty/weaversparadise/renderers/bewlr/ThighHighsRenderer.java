@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.items.clothing.ThighHighsCottonItem;
 import xox.labvorty.weaversparadise.items.clothing.ThighHighsSilkItem;
 import xox.labvorty.weaversparadise.items.clothing.ThighHighsWoolItem;
@@ -17,19 +18,19 @@ import xox.labvorty.weaversparadise.renderers.helpers.ThighHighsRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.ThighHighModelRenderer;
 
 public class ThighHighsRenderer extends BlockEntityWithoutLevelRenderer {
-    private final ThighHighsModel model;
+    private final ThighHighsModel<?> model;
 
     public ThighHighsRenderer(BlockEntityRenderDispatcher dispatcher, EntityModelSet entityModels) {
         super(dispatcher, entityModels);
-        this.model = new ThighHighsModel(entityModels.bakeLayer(ThighHighsModel.LAYER_LOCATION));
+        this.model = new ThighHighsModel<>(entityModels.bakeLayer(ThighHighsModel.LAYER_LOCATION));
     }
 
     @Override
     public void renderByItem(
             ItemStack stack,
-            ItemDisplayContext transformType,
-            PoseStack poseStack,
-            MultiBufferSource buffer,
+            @NotNull ItemDisplayContext transformType,
+            @NotNull PoseStack poseStack,
+            @NotNull MultiBufferSource buffer,
             int packedLight,
             int packedOverlay
     ) {
@@ -57,7 +58,6 @@ public class ThighHighsRenderer extends BlockEntityWithoutLevelRenderer {
 
         switch (transformType) {
             case GUI -> {
-                scale = 1.0f;
                 ytranslation = 1.65f;
                 additionalYrot = 45f;
                 additionalXrot = 22.5f;

@@ -5,6 +5,8 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -13,9 +15,24 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import org.jetbrains.annotations.NotNull;
+import xox.labvorty.weaversparadise.data.tooltip_components.ClothingTooltipComponent;
+import xox.labvorty.weaversparadise.data.tooltip_components.DyeTooltipComponent;
+import xox.labvorty.weaversparadise.data.tooltip_components.DyeTypeRegistry;
+import xox.labvorty.weaversparadise.data.tooltip_components.QualityTooltipComponent;
+import xox.labvorty.weaversparadise.data.tooltip_components.client.ClothingClientTooltipComponent;
+import xox.labvorty.weaversparadise.data.tooltip_components.client.DyeClientTooltipComponent;
+import xox.labvorty.weaversparadise.data.tooltip_components.client.QualityClientTooltipComponent;
+import xox.labvorty.weaversparadise.data.tooltip_components.helper.DyeDataColor;
+import xox.labvorty.weaversparadise.data.tooltip_components.helper.DyeInstance;
+import xox.labvorty.weaversparadise.items.dye.BottledDyeItem;
+import xox.labvorty.weaversparadise.items.dye.PigmentItem;
+import xox.labvorty.weaversparadise.items.materials.ChromaticBloomFruitItem;
+import xox.labvorty.weaversparadise.items.materials.ChromaticDustItem;
 import xox.labvorty.weaversparadise.model.*;
 import xox.labvorty.weaversparadise.renderers.bewlr.*;
 
@@ -23,7 +40,7 @@ import java.util.Collections;
 import java.util.Map;
 
 @EventBusSubscriber(value = Dist.CLIENT)
-public class WeaversParadiseClientItemExtensions {
+public class WeaversParadiseClient {
     @SubscribeEvent
     public static void registerItemExtensions(RegisterClientExtensionsEvent event) {
         event.registerItem(new IClientItemExtensions() {
@@ -299,23 +316,23 @@ public class WeaversParadiseClientItemExtensions {
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
                 HumanoidModel<?> armorModel = new HumanoidModel<>(
                         new ModelPart(
-                                Collections.emptyList(), 
+                                Collections.emptyList(),
                                 Map.of(
-                                        "left_leg", new FelixClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(FelixClothingModel.LAYER_LOCATION)).Left_Leg, 
-                                        "right_leg", new FelixClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(FelixClothingModel.LAYER_LOCATION)).Right_Leg, 
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()), 
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()), 
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()), 
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()), 
+                                        "left_leg", new FelixClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(FelixClothingModel.LAYER_LOCATION)).Left_Leg,
+                                        "right_leg", new FelixClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(FelixClothingModel.LAYER_LOCATION)).Right_Leg,
+                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
                                         "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
                                 )
                         )
                 );
-                
+
                 armorModel.crouching = livingEntity.isShiftKeyDown();
                 armorModel.riding = humanoidModel.riding;
                 armorModel.young = livingEntity.isBaby();
-                
+
                 return armorModel;
             }
         }, WeaversParadiseItems.FELIX_ARMOR_SKIRT.get());
@@ -326,19 +343,19 @@ public class WeaversParadiseClientItemExtensions {
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
                 HumanoidModel<?> armorModel = new HumanoidModel<>(
                         new ModelPart(
-                                Collections.emptyList(), 
+                                Collections.emptyList(),
                                 Map.of(
-                                        "left_leg", new FelixClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(FelixClothingModel.LAYER_LOCATION)).Left_Leg2, 
-                                        "right_leg", new FelixClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(FelixClothingModel.LAYER_LOCATION)).Right_Leg2, 
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()), 
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()), 
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()), 
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()), 
+                                        "left_leg", new FelixClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(FelixClothingModel.LAYER_LOCATION)).Left_Leg2,
+                                        "right_leg", new FelixClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(FelixClothingModel.LAYER_LOCATION)).Right_Leg2,
+                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
                                         "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
                                 )
                         )
                 );
-                
+
                 armorModel.crouching = livingEntity.isShiftKeyDown();
                 armorModel.riding = humanoidModel.riding;
                 armorModel.young = livingEntity.isBaby();
@@ -1104,5 +1121,99 @@ public class WeaversParadiseClientItemExtensions {
                 WeaversParadiseItems.SILK_CAPE,
                 WeaversParadiseItems.WOOL_CAPE
         );
+    }
+
+    @SubscribeEvent
+    public static void registerTooltipComponents(RegisterClientTooltipComponentFactoriesEvent event) {
+        event.register(ClothingTooltipComponent.class, data -> new ClothingClientTooltipComponent(
+                data.getQualityTextures(),
+                data.getEntries()
+        ));
+
+        event.register(DyeTooltipComponent.class, data -> new DyeClientTooltipComponent(data.getDyeIcon(), data.getText(), data.getType(), data.getLightValue(), data.getPrimaryColor(), data.getSecondaryColor()));
+        event.register(QualityTooltipComponent.class, data -> new QualityClientTooltipComponent(data.getTextures()));
+    }
+
+    @SubscribeEvent
+    public static void itemHandlers(RegisterColorHandlersEvent.Item event) {
+        event.register((stack, layer) -> {
+            if (stack.getItem() instanceof BottledDyeItem dye) {
+                CompoundTag compoundTag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+
+                DyeInstance dyeInstance = DyeTypeRegistry.getDyeType(compoundTag.getString("dyeType"));
+                return dyeInstance.getColorParser().apply(
+                        new DyeDataColor(
+                                layer,
+                                compoundTag,
+                                dye.getItemMainColor(stack),
+                                dye.getItemSecondaryColor(stack),
+                                dye.getItemLightValue(stack)
+                        )
+                );
+            }
+
+            return -1;
+        }, WeaversParadiseItems.BOTTLED_DYE.get());
+
+        event.register((stack, layer) -> {
+            if (layer == 0) {
+                return -1;
+            }
+
+            if (stack.getItem() instanceof ChromaticBloomFruitItem) {
+                Minecraft minecraft = Minecraft.getInstance();
+                int ticks = 0;
+                if (minecraft.level != null) {
+                    ticks = (int)minecraft.level.getGameTime();
+                }
+                ticks += (layer * 2);
+
+                float speed = 0.05F;
+
+                float red = Mth.clamp((float)(Math.sin(ticks * speed) * 0.5 + 0.5), 0, 1);
+                float green = Mth.clamp((float)(Math.sin(ticks * speed + 2 * Math.PI / 3) * 0.5 + 0.5), 0, 1);
+                float blue = Mth.clamp((float)(Math.sin(ticks * speed + 4 * Math.PI / 3) * 0.5 + 0.5), 0, 1);
+
+                int trueRed = (int)(red * 255);
+                int trueGreen = (int)(green * 255);
+                int trueBlue = (int)(blue * 255);
+
+                return 255 << 24 | trueRed << 16 | trueGreen << 8 | trueBlue;
+            }
+
+            return -1;
+        }, WeaversParadiseItems.CHROMATIC_BLOOM_FRUIT);
+
+        event.register((stack, layer) -> {
+            if (stack.getItem() instanceof PigmentItem pureDyeItem) {
+                return pureDyeItem.getDyeColor(stack);
+            }
+
+            return -1;
+        }, WeaversParadiseItems.PURE_DYE);
+
+        event.register((stack, layer) -> {
+            if (stack.getItem() instanceof ChromaticDustItem) {
+                Minecraft minecraft = Minecraft.getInstance();
+                int ticks = 0;
+                if (minecraft.level != null) {
+                    ticks = (int)minecraft.level.getGameTime();
+                }
+
+                float speed = 0.05F;
+
+                float red = Mth.clamp((float)(Math.sin(ticks * speed) * 0.5 + 0.5), 0, 1);
+                float green = Mth.clamp((float)(Math.sin(ticks * speed + 2 * Math.PI / 3) * 0.5 + 0.5), 0, 1);
+                float blue = Mth.clamp((float)(Math.sin(ticks * speed + 4 * Math.PI / 3) * 0.5 + 0.5), 0, 1);
+
+                int trueRed = (int)(red * 255);
+                int trueGreen = (int)(green * 255);
+                int trueBlue = (int)(blue * 255);
+
+                return 255 << 24 | trueRed << 16 | trueGreen << 8 | trueBlue;
+            }
+
+            return -1;
+        }, WeaversParadiseItems.CHROMATIC_DUST);
     }
 }

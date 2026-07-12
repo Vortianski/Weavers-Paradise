@@ -7,10 +7,10 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.entity.LivingEntity;
-import xox.labvorty.weaversparadise.data.texture.deprecated.BellTextures;
+import xox.labvorty.weaversparadise.data.texture.ItemTexture;
+import xox.labvorty.weaversparadise.data.texture.TextureRegistry;
 import xox.labvorty.weaversparadise.model.BellModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ChokerTrinketRenderingData;
-import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
 
 public class BellModelRenderer {
     private int color;
@@ -23,7 +23,7 @@ public class BellModelRenderer {
 
     public void renderModel(
             MultiBufferSource multiBufferSource,
-            BellModel model,
+            BellModel<?> model,
             ChokerTrinketRenderingData data,
             LivingEntity entity,
             float scaleX,
@@ -43,10 +43,12 @@ public class BellModelRenderer {
     ) {
         initData(data);
 
-        RenderingUtils renderingUtils = new RenderingUtils();
-        BellTextures handler = BellTextures.getByMetalType(metalType);
+        ItemTexture itemTexture = TextureRegistry.find("bell", "default", metalType);
+        if (itemTexture == null) {
+            itemTexture = TextureRegistry.find("bell", "default", "default");
+        }
         int finalColor;
-        if (handler.isFreezeColor()) {
+        if (itemTexture.getRenderType()) {
             finalColor = 255 << 24 | 255 << 16 | 255 << 8 | 255;
         } else {
             finalColor = color;
@@ -71,7 +73,7 @@ public class BellModelRenderer {
         poseStack.mulPose(Axis.ZP.rotationDegrees(zRot));
 
         VertexConsumer vertexConsumer = multiBufferSource.getBuffer(
-                RenderType.entityTranslucent(handler.getTexture())
+                RenderType.entityTranslucent(itemTexture.getTextureOne())
         );
         model.renderToBuffer(
                 poseStack,

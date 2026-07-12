@@ -11,30 +11,29 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.items.clothing.PlateItem;
 import xox.labvorty.weaversparadise.model.BasicPlateModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ChokerTrinketRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.PlateModelRenderer;
 
 public class PlateRenderer extends BlockEntityWithoutLevelRenderer {
-    private final BasicPlateModel bellModel;
+    private final BasicPlateModel<?> bellModel;
 
     public PlateRenderer(BlockEntityRenderDispatcher dispatcher, EntityModelSet entityModels) {
         super(dispatcher, entityModels);
-        this.bellModel = new BasicPlateModel(entityModels.bakeLayer(BasicPlateModel.LAYER_LOCATION));
+        this.bellModel = new BasicPlateModel<>(entityModels.bakeLayer(BasicPlateModel.LAYER_LOCATION));
     }
 
     @Override
     public void renderByItem(
             ItemStack stack,
-            ItemDisplayContext transformType,
-            PoseStack poseStack,
-            MultiBufferSource buffer,
+            @NotNull ItemDisplayContext transformType,
+            @NotNull PoseStack poseStack,
+            @NotNull MultiBufferSource buffer,
             int packedLight,
             int packedOverlay
     ) {
-        String material = "base";
-
         if (!(stack.getItem() instanceof PlateItem plateItem)) return;
 
         float scale = 1.0f;
@@ -50,7 +49,6 @@ public class PlateRenderer extends BlockEntityWithoutLevelRenderer {
             case GUI -> {
                 scale = 2.5f;
                 xtranslation = -0.25f;
-                ytranslation = 0.85f;
                 additionalYrot = 45f;
                 additionalXrot = 22.5f;
             }

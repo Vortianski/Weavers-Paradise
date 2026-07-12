@@ -22,13 +22,13 @@ public class ArmorLootboxLootModifier extends LootModifier {
     }
 
     @Override
-    public MapCodec<? extends IGlobalLootModifier> codec() {
+    public @NotNull MapCodec<? extends IGlobalLootModifier> codec() {
         return CODEC;
     }
 
     @NotNull
     @Override
-    protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
+    protected ObjectArrayList<ItemStack> doApply(@NotNull ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
         ResourceLocation location = context.getQueriedLootTableId();
         if (location.getPath().startsWith("chests/")) {
             generatedLoot.add(new ItemStack(WeaversParadiseItems.ARMOR_LOOTBOX.get()));

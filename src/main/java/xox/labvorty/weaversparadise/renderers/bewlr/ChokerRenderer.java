@@ -8,25 +8,26 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.items.clothing.ChokerItem;
 import xox.labvorty.weaversparadise.model.ChokerModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ChokerRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.ChokerModelRenderer;
 
 public class ChokerRenderer extends BlockEntityWithoutLevelRenderer {
-    private final ChokerModel model;
+    private final ChokerModel<?> model;
 
     public ChokerRenderer(BlockEntityRenderDispatcher dispatcher, EntityModelSet entityModels) {
         super(dispatcher, entityModels);
-        this.model = new ChokerModel(entityModels.bakeLayer(ChokerModel.LAYER_LOCATION));
+        this.model = new ChokerModel<>(entityModels.bakeLayer(ChokerModel.LAYER_LOCATION));
     }
 
     @Override
     public void renderByItem(
             ItemStack stack,
-            ItemDisplayContext transformType,
-            PoseStack poseStack,
-            MultiBufferSource buffer,
+            @NotNull ItemDisplayContext transformType,
+            @NotNull PoseStack poseStack,
+            @NotNull MultiBufferSource buffer,
             int packedLight,
             int packedOverlay
     ) {

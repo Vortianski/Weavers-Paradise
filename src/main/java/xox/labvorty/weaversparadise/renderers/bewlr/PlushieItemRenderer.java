@@ -16,26 +16,27 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ResolvableProfile;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.items.misc.PlushieItem;
 import xox.labvorty.weaversparadise.model.SlimPlushieModel;
 import xox.labvorty.weaversparadise.model.WidePlushieModel;
 
 public class PlushieItemRenderer extends BlockEntityWithoutLevelRenderer {
-    private final SlimPlushieModel slimPlushieModel;
-    private final WidePlushieModel widePlushieModel;
+    private final SlimPlushieModel<?> slimPlushieModel;
+    private final WidePlushieModel<?> widePlushieModel;
 
     public PlushieItemRenderer(BlockEntityRenderDispatcher dispatcher, EntityModelSet entityModels) {
         super(dispatcher, entityModels);
-        this.slimPlushieModel = new SlimPlushieModel(entityModels.bakeLayer(SlimPlushieModel.LAYER_LOCATION));
-        this.widePlushieModel = new WidePlushieModel(entityModels.bakeLayer(WidePlushieModel.LAYER_LOCATION));
+        this.slimPlushieModel = new SlimPlushieModel<>(entityModels.bakeLayer(SlimPlushieModel.LAYER_LOCATION));
+        this.widePlushieModel = new WidePlushieModel<>(entityModels.bakeLayer(WidePlushieModel.LAYER_LOCATION));
     }
 
     @Override
     public void renderByItem(
             ItemStack stack,
-            ItemDisplayContext displayContext,
-            PoseStack poseStack,
-            MultiBufferSource buffer,
+            @NotNull ItemDisplayContext displayContext,
+            @NotNull PoseStack poseStack,
+            @NotNull MultiBufferSource buffer,
             int packedLight,
             int packedOverlay
     ) {
@@ -140,7 +141,6 @@ public class PlushieItemRenderer extends BlockEntityWithoutLevelRenderer {
         }
 
         GameProfile gameProfile = resolvableProfile.gameProfile();
-        if (gameProfile == null) return;
         SkinManager skinManager = minecraft.getSkinManager();
         PlayerSkin skin = skinManager.getInsecureSkin(gameProfile);
 

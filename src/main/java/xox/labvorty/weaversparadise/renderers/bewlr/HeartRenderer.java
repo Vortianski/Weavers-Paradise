@@ -11,30 +11,29 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.items.clothing.HeartItem;
 import xox.labvorty.weaversparadise.model.HeartModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ChokerTrinketRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.HeartModelRenderer;
 
 public class HeartRenderer extends BlockEntityWithoutLevelRenderer {
-    private final HeartModel bellModel;
+    private final HeartModel<?> bellModel;
 
     public HeartRenderer(BlockEntityRenderDispatcher dispatcher, EntityModelSet entityModels) {
         super(dispatcher, entityModels);
-        this.bellModel = new HeartModel(entityModels.bakeLayer(HeartModel.LAYER_LOCATION));
+        this.bellModel = new HeartModel<>(entityModels.bakeLayer(HeartModel.LAYER_LOCATION));
     }
 
     @Override
     public void renderByItem(
             ItemStack stack,
-            ItemDisplayContext transformType,
-            PoseStack poseStack,
-            MultiBufferSource buffer,
+            @NotNull ItemDisplayContext transformType,
+            @NotNull PoseStack poseStack,
+            @NotNull MultiBufferSource buffer,
             int packedLight,
             int packedOverlay
     ) {
-        String material = "base";
-
         if (!(stack.getItem() instanceof HeartItem heartItem)) return;
 
         float scale = 1.0f;
@@ -50,7 +49,6 @@ public class HeartRenderer extends BlockEntityWithoutLevelRenderer {
             case GUI -> {
                 scale = 2.5f;
                 xtranslation = -0.25f;
-                ytranslation = 0.85f;
                 additionalYrot = 45f;
                 additionalXrot = 22.5f;
             }

@@ -29,20 +29,19 @@ public class HandWarmersCottonItem extends DoubleSidedClothingItem implements Ha
     @Override
     public int getMaxDamage(ItemStack stack) {
         int quality = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getInt("quality");
-        int maxdamage = 100 + (20 * quality);
 
-        return maxdamage;
+        return 100 + (20 * quality);
     }
 
     @Override
     public boolean isValidRepairItem(ItemStack stack, ItemStack repairCandidate) {
-        CompoundTag stackdata = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-        CompoundTag candidatedata = repairCandidate.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+        CompoundTag itemStackData = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+        CompoundTag candidate = repairCandidate.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
 
-        int stackquality = stackdata.getInt("quality");
-        int candidatequality = candidatedata.getInt("quality");
+        int itemStackQuality = itemStackData.getInt("quality");
+        int candidateQuality = candidate.getInt("quality");
 
-        return repairCandidate.is(WeaversParadiseItems.COTTON_CLOTH) && candidatequality >= stackquality;
+        return repairCandidate.is(WeaversParadiseItems.COTTON_CLOTH) && candidateQuality >= itemStackQuality;
     }
 
     @Override

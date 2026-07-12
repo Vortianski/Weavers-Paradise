@@ -8,16 +8,17 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.gameevent.GameEventListener;
 import net.minecraft.world.level.gameevent.PositionSource;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
-public class WeaversParadiseSculkPlayerListener implements GameEventListener {
+public class SculkPlayerListener implements GameEventListener {
     private final PositionSource posSource;
     private final int radius;
     private final UUID playerId;
     private final ServerPlayer player;
 
-    public WeaversParadiseSculkPlayerListener(ServerPlayer player, int radius) {
+    public SculkPlayerListener(ServerPlayer player, int radius) {
         this.posSource = new EntityPositionSource(player, player.getEyeHeight());
         this.radius = radius;
         this.playerId = player.getUUID();
@@ -25,7 +26,7 @@ public class WeaversParadiseSculkPlayerListener implements GameEventListener {
     }
 
     @Override
-    public PositionSource getListenerSource() {
+    public @NotNull PositionSource getListenerSource() {
         return posSource;
     }
 
@@ -35,7 +36,7 @@ public class WeaversParadiseSculkPlayerListener implements GameEventListener {
     }
 
     @Override
-    public boolean handleGameEvent(ServerLevel level, Holder<GameEvent> event, GameEvent.Context context, Vec3 pos) {
+    public boolean handleGameEvent(@NotNull ServerLevel level, @NotNull Holder<GameEvent> event, GameEvent.Context context, @NotNull Vec3 pos) {
         if (context.sourceEntity() != player) {
             if (player.getPersistentData().getInt("weaversSculkPulse") <= 0) {
                 player.getPersistentData().putInt("weaversSculkPulse", 60);

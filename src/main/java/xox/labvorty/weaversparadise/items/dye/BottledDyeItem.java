@@ -92,6 +92,18 @@ public class BottledDyeItem extends Item {
         }
     }
 
+    public String getItemDyeType(ItemStack stack) {
+        String type = "default";
+
+        CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+
+        if (tag.contains("dyeType")) {
+            type = tag.getString("dyeType");
+        }
+
+        return type;
+    }
+
     public int getItemMainColor(ItemStack stack) {
         int color = 0;
 

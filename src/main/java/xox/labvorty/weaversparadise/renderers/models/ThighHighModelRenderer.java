@@ -7,7 +7,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import oshi.util.tuples.Pair;
 import xox.labvorty.weaversparadise.data.texture.ItemTexture;
@@ -18,9 +17,6 @@ import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
 import xox.labvorty.weaversparadise.renderers.helpers.ThighHighsRenderingData;
 
 public class ThighHighModelRenderer {
-    private Minecraft minecraft;
-    private int ticks;
-
     private int pCLO;
     private int sCLO;
     private int pCRO;
@@ -80,7 +76,7 @@ public class ThighHighModelRenderer {
 
     public void renderModel(
             MultiBufferSource multiBufferSource,
-            ThighHighsModel model,
+            ThighHighsModel<?> model,
             ThighHighsRenderingData renderingData,
             LivingEntity livingEntity,
             float scaleX,
@@ -101,8 +97,11 @@ public class ThighHighModelRenderer {
         initData(renderingData);
 
         RenderingUtils renderingUtils = new RenderingUtils();
-        minecraft = Minecraft.getInstance();
-        ticks = (int)minecraft.level.getGameTime();
+        Minecraft minecraft = Minecraft.getInstance();
+        int ticks = 0;
+        if (minecraft.level != null) {
+            ticks = (int)minecraft.level.getGameTime();
+        }
 
         Pair<Integer, Integer> fCLO = ColorHandlers.handle(dTLO, pCLO, sCLO, lVLO, livingEntity, packedLight, ticks);
         Pair<Integer, Integer> fCLT = ColorHandlers.handle(dTLT, pCLT, sCLT, lVLT, livingEntity, packedLight, ticks);
@@ -186,15 +185,5 @@ public class ThighHighModelRenderer {
         }
 
         poseStack.popPose();
-    }
-
-    public int getRainbowColor(int ticks) {
-        float speed = 0.05F;
-
-        float red = Mth.clamp((float)(Math.sin(ticks * speed) * 0.5 + 0.5), 0, 1);
-        float green = Mth.clamp((float)(Math.sin(ticks * speed + 2 * Math.PI / 3) * 0.5 + 0.5), 0, 1);
-        float blue = Mth.clamp((float)(Math.sin(ticks * speed + 4 * Math.PI / 3) * 0.5 + 0.5), 0, 1);
-
-        return 255 << 24 | (int)(red * 255) << 16 | (int)(green * 255) << 8 | (int)(blue * 255);
     }
 }

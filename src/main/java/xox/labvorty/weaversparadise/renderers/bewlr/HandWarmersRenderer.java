@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.items.clothing.HandWarmersCottonItem;
 import xox.labvorty.weaversparadise.items.clothing.HandWarmersSilkItem;
 import xox.labvorty.weaversparadise.items.clothing.HandWarmersWoolItem;
@@ -17,19 +18,19 @@ import xox.labvorty.weaversparadise.renderers.helpers.ThighHighsRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.HandWarmersSpecialModelRenderer;
 
 public class HandWarmersRenderer extends BlockEntityWithoutLevelRenderer {
-    private final ThighHighsModel model;
+    private final ThighHighsModel<?> model;
 
     public HandWarmersRenderer(BlockEntityRenderDispatcher dispatcher, EntityModelSet entityModels) {
         super(dispatcher, entityModels);
-        this.model = new ThighHighsModel(entityModels.bakeLayer(ThighHighsModel.LAYER_LOCATION));
+        this.model = new ThighHighsModel<>(entityModels.bakeLayer(ThighHighsModel.LAYER_LOCATION));
     }
 
         @Override
         public void renderByItem(
                 ItemStack stack,
-                ItemDisplayContext transformType,
-                PoseStack poseStack,
-                MultiBufferSource buffer,
+                @NotNull ItemDisplayContext transformType,
+                @NotNull PoseStack poseStack,
+                @NotNull MultiBufferSource buffer,
                 int packedLight,
                 int packedOverlay
         ) {

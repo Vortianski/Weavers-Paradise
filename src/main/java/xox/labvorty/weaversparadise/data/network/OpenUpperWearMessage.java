@@ -1,4 +1,4 @@
-package xox.labvorty.weaversparadise.data.keybinds;
+package xox.labvorty.weaversparadise.data.network;
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;

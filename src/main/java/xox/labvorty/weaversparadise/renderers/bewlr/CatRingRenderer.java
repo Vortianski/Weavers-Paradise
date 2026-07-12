@@ -11,30 +11,29 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.items.clothing.CatRingItem;
 import xox.labvorty.weaversparadise.model.CatRingModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ChokerTrinketRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.CatRingModelRenderer;
 
 public class CatRingRenderer extends BlockEntityWithoutLevelRenderer {
-    private final CatRingModel bellModel;
+    private final CatRingModel<?> bellModel;
 
     public CatRingRenderer(BlockEntityRenderDispatcher dispatcher, EntityModelSet entityModels) {
         super(dispatcher, entityModels);
-        this.bellModel = new CatRingModel(entityModels.bakeLayer(CatRingModel.LAYER_LOCATION));
+        this.bellModel = new CatRingModel<>(entityModels.bakeLayer(CatRingModel.LAYER_LOCATION));
     }
 
     @Override
     public void renderByItem(
             ItemStack stack,
-            ItemDisplayContext transformType,
-            PoseStack poseStack,
-            MultiBufferSource buffer,
+            @NotNull ItemDisplayContext transformType,
+            @NotNull PoseStack poseStack,
+            @NotNull MultiBufferSource buffer,
             int packedLight,
             int packedOverlay
     ) {
-        String material = "base";
-
         if (!(stack.getItem() instanceof CatRingItem catRingItem)) return;
 
         float scale = 1.0f;
@@ -50,7 +49,6 @@ public class CatRingRenderer extends BlockEntityWithoutLevelRenderer {
             case GUI -> {
                 scale = 2.5f;
                 xtranslation = -0.25f;
-                ytranslation = 0.85f;
                 additionalYrot = 45f;
                 additionalXrot = 22.5f;
             }
@@ -70,9 +68,7 @@ public class CatRingRenderer extends BlockEntityWithoutLevelRenderer {
                 scale = 0.7f;
             }
         }
-
-
-
+        
         Minecraft minecraft = Minecraft.getInstance();
 
         CatRingModelRenderer catRingModelRenderer = new CatRingModelRenderer();

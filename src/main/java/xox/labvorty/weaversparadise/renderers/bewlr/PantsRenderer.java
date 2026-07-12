@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.items.clothing.PantsCottonItem;
 import xox.labvorty.weaversparadise.items.clothing.PantsJeansItem;
 import xox.labvorty.weaversparadise.items.clothing.PantsSilkItem;
@@ -17,19 +18,19 @@ import xox.labvorty.weaversparadise.renderers.helpers.PantsRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.PantsModelRenderer;
 
 public class PantsRenderer extends BlockEntityWithoutLevelRenderer {
-    private final PantsModel model;
+    private final PantsModel<?> model;
 
     public PantsRenderer(BlockEntityRenderDispatcher dispatcher, EntityModelSet entityModels) {
         super(dispatcher, entityModels);
-        this.model = new PantsModel(entityModels.bakeLayer(PantsModel.LAYER_LOCATION));
+        this.model = new PantsModel<>(entityModels.bakeLayer(PantsModel.LAYER_LOCATION));
     }
 
     @Override
     public void renderByItem(
             ItemStack stack,
-            ItemDisplayContext transformType,
-            PoseStack poseStack,
-            MultiBufferSource buffer,
+            @NotNull ItemDisplayContext transformType,
+            @NotNull PoseStack poseStack,
+            @NotNull MultiBufferSource buffer,
             int packedLight,
             int packedOverlay
     ) {
