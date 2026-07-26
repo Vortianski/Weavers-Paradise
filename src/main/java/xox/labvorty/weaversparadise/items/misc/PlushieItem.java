@@ -1,6 +1,7 @@
 package xox.labvorty.weaversparadise.items.misc;
 
 import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.PropertyMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -13,6 +14,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.ResolvableProfile;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
+import org.jetbrains.annotations.Nullable;
 import xox.labvorty.weaversparadise.WeaversParadise;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 
@@ -47,48 +49,36 @@ public class PlushieItem extends Item implements Plushie {
 
     @Override
     public void verifyComponentsAfterLoad(ItemStack stack) {
-        ResolvableProfile resolvableprofile = stack.get(DataComponents.PROFILE);
-        if (resolvableprofile != null && !resolvableprofile.isResolved()) {
-            resolvableprofile.resolve()
-                    .thenAcceptAsync(p_332155_ -> stack.set(DataComponents.PROFILE, p_332155_), SkullBlockEntity.CHECKED_MAIN_THREAD_EXECUTOR);
+        ResolvableProfile profile = stack.get(DataComponents.PROFILE);
+
+        if (profile != null && !profile.isResolved()) {
+            profile.resolve().thenAcceptAsync(
+                    resolved -> stack.set(DataComponents.PROFILE, resolved),
+                    SkullBlockEntity.CHECKED_MAIN_THREAD_EXECUTOR
+            );
         }
     }
 
-    public static ItemStack createPreMadePlushieAsync(String playerName, UUID uuid) {
-        ItemStack stack = new ItemStack(WeaversParadiseItems.PLAYER_PLUSHIE.get());
+    public static ItemStack createPlushie(Optional<String> playerName, Optional<UUID> uuid) {
+        ItemStack itemStack = WeaversParadiseItems.PLAYER_PLUSHIE.get().getDefaultInstance();
 
-        CompletableFuture<Optional<GameProfile>> future;
+        ResolvableProfile profile = new ResolvableProfile(
+                playerName,
+                uuid,
+                new PropertyMap()
+        );
 
-        if (uuid != null) {
-            future = SkullBlockEntity.fetchGameProfile(uuid);
-        } else {
-            future = SkullBlockEntity.fetchGameProfile(playerName);
-        }
+        itemStack.set(DataComponents.PROFILE, profile);
 
-        try {
-            Optional<GameProfile> optionalProfile = future.get(1, TimeUnit.MILLISECONDS);
+        profile.resolve().thenAcceptAsync(
+                resolved -> itemStack.set(DataComponents.PROFILE, resolved),
+                SkullBlockEntity.CHECKED_MAIN_THREAD_EXECUTOR
+        );
 
-            if (optionalProfile.isPresent()) {
-                GameProfile completeProfile = optionalProfile.get();
-                ResolvableProfile profile = new ResolvableProfile(completeProfile);
-                stack.set(DataComponents.PROFILE, profile);
-            } else {
-                ResolvableProfile profile = new ResolvableProfile(
-                        new GameProfile(uuid != null ? uuid : UUID.randomUUID(), playerName));
-                stack.set(DataComponents.PROFILE, profile);
-            }
-
-        } catch (Exception e) {
-            ResolvableProfile profile = new ResolvableProfile(
-                    new GameProfile(uuid != null ? uuid : UUID.randomUUID(), playerName));
-            stack.set(DataComponents.PROFILE, profile);
-        }
-
-        return stack;
+        return itemStack;
     }
 
     public static final ResourceLocation MINING_SPEED_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(WeaversParadise.MODID, "base_attack_damage");
-
     public static ItemAttributeModifiers createAttributeModifiers() {
         return ItemAttributeModifiers.builder()
                 .add(Attributes.BLOCK_BREAK_SPEED, new AttributeModifier(MINING_SPEED_MODIFIER_ID, -3.0, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), EquipmentSlotGroup.MAINHAND)

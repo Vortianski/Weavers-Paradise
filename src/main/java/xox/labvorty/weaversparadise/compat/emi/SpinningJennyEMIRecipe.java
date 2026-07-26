@@ -9,6 +9,7 @@ import dev.emi.emi.api.widget.Widget;
 import dev.emi.emi.api.widget.WidgetHolder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
@@ -17,11 +18,15 @@ public class SpinningJennyEMIRecipe implements EmiRecipe {
     private final ResourceLocation id;
     private final List<EmiIngredient> input;
     private final List<EmiStack> output;
+    private final int countRequired;
+    private final int craftTime;
 
-    public SpinningJennyEMIRecipe(ResourceLocation id, List<EmiIngredient> inputs, List<EmiStack> outputs) {
+    public SpinningJennyEMIRecipe(ResourceLocation id, List<EmiIngredient> inputs, List<EmiStack> outputs, int countRequired, int craftTime) {
         this.id = id;
         this.input = inputs;
         this.output = outputs;
+        this.countRequired = countRequired;
+        this.craftTime = craftTime;
     }
 
     @Override
@@ -76,31 +81,47 @@ public class SpinningJennyEMIRecipe implements EmiRecipe {
                 240, 145
         );
 
+        // Animated arrow widget
         widgets.add(new Widget() {
             @Override
             public Bounds getBounds() {
-                return new Bounds(0, 0, 31, 20);
+                return new Bounds(152, 93, 31, 20);
             }
 
             @Override
             public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float delta) {
                 Minecraft minecraft = Minecraft.getInstance();
-                int ticks = 0;
                 if (minecraft.level != null) {
-                    ticks = (int)minecraft.level.getGameTime();
+                    int ticks = (int) minecraft.level.getGameTime();
+                    int cycleticks = ticks % 100;
+
+                    guiGraphics.blit(
+                            ResourceLocation.parse("weaversparadise:textures/screens/arrow_full.png"),
+                            152, 93, 0, 0, 31, 20, 31, 20
+                    );
+                    guiGraphics.blit(
+                            ResourceLocation.parse("weaversparadise:textures/screens/arrow_empty.png"),
+                            152, 93, 0, 0, (int)(31 * (1 - (cycleticks / 100.0))), 20, 31, 20
+                    );
                 }
-
-                int cycleticks = ticks % 100;
-
-                guiGraphics.blit(ResourceLocation.parse("weaversparadise:textures/screens/arrow_full.png"), 152, 88, 0, 0, 31, 20, 31, 20);
-                guiGraphics.blit(ResourceLocation.parse("weaversparadise:textures/screens/arrow_empty.png"), 152, 88, 0, 0, (int)(31 * (1 - (cycleticks / 100.0))), 20, 31, 20);
             }
         });
 
-        widgets.addSlot(input.get(0), 36 + 7, 73 + 15).drawBack(false);
+        // Input slots
+        widgets.addSlot(input.get(0), 36 + 7, 73 + 15)
+                .drawBack(false)
+                .appendTooltip(Component.literal("Input: " + countRequired + " required"));
 
-        widgets.addSlot(output.getFirst(), 53 + 7, 73 + 15).drawBack(false).recipeContext(this);
+        // Output slot
+        widgets.addSlot(output.getFirst(), 53 + 7, 73 + 15)
+                .drawBack(false)
+                .recipeContext(this);
 
-        widgets.addSlot(input.get(1), 183 + 7, 74 + 15).drawBack(false);
+        // Catalyst slot (second input)
+        if (input.size() > 1) {
+            widgets.addSlot(input.get(1), 183 + 7, 74 + 15)
+                    .drawBack(false)
+                    .appendTooltip(Component.literal("Catalyst"));
+        }
     }
 }

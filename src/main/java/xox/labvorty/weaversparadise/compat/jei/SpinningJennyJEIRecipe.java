@@ -15,23 +15,31 @@ import java.util.List;
 
 public class SpinningJennyJEIRecipe {
     private final ResourceLocation id;
-    private final List<Ingredient> inputs;
+    private final Ingredient input;
+    private final Ingredient catalyst;
     private final ItemStack output;
     private final int countRequired;
+    private final int craftTime;
 
-    public SpinningJennyJEIRecipe(ResourceLocation id, List<Ingredient> inputs, ItemStack output, int countRequired) {
+    public SpinningJennyJEIRecipe(ResourceLocation id, Ingredient input, Ingredient catalyst, ItemStack output, int countRequired, int craftTime) {
         this.id = id;
-        this.inputs = inputs;
+        this.input = input;
+        this.catalyst = catalyst;
         this.output = output;
         this.countRequired = countRequired;
+        this.craftTime = craftTime;
     }
 
     public ResourceLocation getId() {
         return id;
     }
 
-    public List<Ingredient> getInput() {
-        return inputs;
+    public Ingredient getInput() {
+        return input;
+    }
+
+    public Ingredient getCatalyst() {
+        return catalyst;
     }
 
     public ItemStack getOutput() {
@@ -40,6 +48,10 @@ public class SpinningJennyJEIRecipe {
 
     public int getCountRequired() {
         return countRequired;
+    }
+
+    public int getCraftTime() {
+        return craftTime;
     }
 
     public static List<SpinningJennyJEIRecipe> generateRecipes() {
@@ -54,14 +66,13 @@ public class SpinningJennyJEIRecipe {
         for (RecipeHolder<SpinningJennyRecipe> holder : holders) {
             SpinningJennyRecipe recipe = holder.value();
 
-            Ingredient ingredient = recipe.getInput();
-            Ingredient countedIngredient = recipe.getInput();
-
             result.add(new SpinningJennyJEIRecipe(
                     holder.id(),
-                    List.of(ingredient, countedIngredient),
+                    recipe.getInput(),
+                    recipe.getCatalyst(),
                     recipe.getResultItem(minecraft.level.registryAccess()).copy(),
-                    recipe.getCountRequired()
+                    recipe.getCountRequired(),
+                    recipe.getCraftTime()
             ));
         }
 

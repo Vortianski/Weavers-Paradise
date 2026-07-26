@@ -17,9 +17,11 @@ import xox.labvorty.weaversparadise.items.clothing.defined.DoubleSidedClothingIt
 import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingItem;
 import xox.labvorty.weaversparadise.items.dye.PigmentItem;
 import xox.labvorty.weaversparadise.items.misc.PlushieItem;
+import xox.labvorty.weaversparadise.utilities.CreativeModeTabProviders;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class WeaversParadiseCreativeTabs {
@@ -297,7 +299,8 @@ public class WeaversParadiseCreativeTabs {
             })
     .build());
 
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ITEMS_TAB = CREATIVE_MODE_TABS.register("items_tab", () -> CreativeModeTab.builder()
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ITEMS_TAB = CREATIVE_MODE_TABS.register("items_tab", () -> ExpandableCreativeTab.builder()
+            .addGroup("contributor_plushies", PlushieItem.createPlushie(Optional.of("Vortianski"), Optional.empty()), CreativeModeTabProviders.getPlayerPlushies())
             .title(Component.translatable("itemGroup.weaversparadise.items"))
             .icon(() -> WeaversParadiseItems.MORTAR_AND_PESTLE.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
@@ -392,9 +395,6 @@ public class WeaversParadiseCreativeTabs {
                     }
                 }
 
-                //Can use both null and preset UUID. If none are given defaults
-                output.accept(PlushieItem.createPreMadePlushieAsync("Vortianski", UUID.fromString("383b1ab0-ae8f-4342-b94d-b4f3d2cfc9c0")));
-                output.accept(PlushieItem.createPreMadePlushieAsync("Pelemeshek", null));
                 output.accept(WeaversParadiseItems.PLAYER_PLUSHIE_RENAME_TOKEN);
                 output.accept(WeaversParadiseItems.ARMOR_LOOTBOX);
             }).build()

@@ -27,7 +27,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@EventBusSubscriber
 public record OpenUpperWearMessage(int eventType, int pressedms) implements CustomPacketPayload {
     public static final Type<OpenUpperWearMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(WeaversParadise.MODID, "open_upper_wear"));
     public static final StreamCodec<RegistryFriendlyByteBuf, OpenUpperWearMessage> STREAM_CODEC = StreamCodec.of((RegistryFriendlyByteBuf buffer, OpenUpperWearMessage message) -> {
@@ -85,10 +84,5 @@ public record OpenUpperWearMessage(int eventType, int pressedms) implements Cust
                 }
             }
         }
-    }
-
-    @SubscribeEvent
-    public static void registerMessage(FMLCommonSetupEvent event) {
-        WeaversParadise.addNetworkMessage(OpenUpperWearMessage.TYPE, OpenUpperWearMessage.STREAM_CODEC, OpenUpperWearMessage::handleData);
     }
 }

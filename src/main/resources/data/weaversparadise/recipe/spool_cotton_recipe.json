@@ -3,6 +3,9 @@
   "input": {
     "item": "weaversparadise:raw_cotton"
   },
+  "catalyst": {
+    "item": "weaversparadise:empty_spool"
+  },
   "result": {
     "id": "weaversparadise:cotton_spool",
     "count": 1

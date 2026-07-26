@@ -3,6 +3,9 @@
   "input": {
     "item": "weaversparadise:cotton_spool"
   },
+  "catalyst": {
+    "item": "weaversparadise:empty_spool"
+  },
   "result": {
     "id": "weaversparadise:jeans_spool",
     "count": 1

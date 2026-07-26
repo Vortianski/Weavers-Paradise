@@ -18,7 +18,6 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 import xox.labvorty.weaversparadise.WeaversParadise;
 import xox.labvorty.weaversparadise.blocks.entities.DyemakingBlockEntity;
 
-@EventBusSubscriber
 public record DyemakingNetworkMessage(int slotID, int x, int y, int z, int changeType, int meta) implements CustomPacketPayload {
     public static final Type<DyemakingNetworkMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(WeaversParadise.MODID, "dyemaking_network_message"));
     public static final StreamCodec<RegistryFriendlyByteBuf, DyemakingNetworkMessage> STREAM_CODEC = StreamCodec.of((RegistryFriendlyByteBuf buf, DyemakingNetworkMessage message) -> {
@@ -74,29 +73,10 @@ public record DyemakingNetworkMessage(int slotID, int x, int y, int z, int chang
         }
 
         if (context.flow() == PacketFlow.CLIENTBOUND) {
-            context.enqueueWork(() -> {
-                Player player = context.player();
-                int slotID = message.slotID;
-                int changeType = message.changeType;
-                int meta = message.meta;
-                int x = message.x;
-                int y = message.y;
-                int z = message.z;
-
-
-            }).exceptionally(e -> {
+            context.enqueueWork(() -> {}).exceptionally(e -> {
                 context.connection().disconnect(Component.literal(e.getMessage()));
                 return null;
             });
         }
-    }
-
-    @SubscribeEvent
-    public static void registerMessage(FMLCommonSetupEvent event) {
-        WeaversParadise.addNetworkMessage(
-                DyemakingNetworkMessage.TYPE,
-                DyemakingNetworkMessage.STREAM_CODEC,
-                DyemakingNetworkMessage::handleData
-        );
     }
 }

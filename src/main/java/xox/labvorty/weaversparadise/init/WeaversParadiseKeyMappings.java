@@ -22,15 +22,15 @@ public class WeaversParadiseKeyMappings {
         @Override
         public void setDown(boolean isDown) {
             super.setDown(isDown);
+
             if (isDownOld != isDown && isDown) {
                 PacketDistributor.sendToServer(new OpenUpperWearMessage(0, 0));
-                OpenUpperWearMessage.pressAction(Minecraft.getInstance().player, 0, 0);
                 OPEN_UPPER_WEAR_LASTPRESS = System.currentTimeMillis();
             } else if (isDownOld != isDown && !isDown) {
                 int dt = (int) (System.currentTimeMillis() - OPEN_UPPER_WEAR_LASTPRESS);
                 PacketDistributor.sendToServer(new OpenUpperWearMessage(1, dt));
-                OpenUpperWearMessage.pressAction(Minecraft.getInstance().player, 1, dt);
             }
+
             isDownOld = isDown;
         }
     };

@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.items.misc.PlushieItem;
 
 import java.util.List;
+import java.util.Optional;
 
 public class PlushieLootModifier extends LootModifier {
     List<String> applicableNames = List.of(
@@ -44,7 +45,7 @@ public class PlushieLootModifier extends LootModifier {
         if (location.getPath().startsWith("chests/")) {
             RandomSource randomSource = RandomSource.create();
 
-            ItemStack stack = PlushieItem.createPreMadePlushieAsync(applicableNames.get(randomSource.nextIntBetweenInclusive(0, applicableNames.size() - 1)), null);
+            ItemStack stack = PlushieItem.createPlushie(Optional.of(applicableNames.get(randomSource.nextIntBetweenInclusive(0, applicableNames.size() - 1))), Optional.empty());
 
             generatedLoot.add(stack);
         }

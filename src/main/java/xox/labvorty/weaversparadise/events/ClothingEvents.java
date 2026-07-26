@@ -27,7 +27,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @EventBusSubscriber
-public class WeaversParadiseClothingEvents {
+public class ClothingEvents {
     private static List<ResourceKey<DamageType>> vanillaDurabilityFriendly = List.of(
             DamageTypes.CAMPFIRE,
             DamageTypes.CRAMMING,

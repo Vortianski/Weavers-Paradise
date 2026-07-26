@@ -81,7 +81,7 @@ public class HandWarmersSpecialModelRenderer {
 
     public void renderModel(
             MultiBufferSource multiBufferSource,
-            ThighHighsModel model,
+            ThighHighsModel<?> model,
             ThighHighsRenderingData renderingData,
             LivingEntity livingEntity,
             float scaleX,

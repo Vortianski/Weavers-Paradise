@@ -5,7 +5,6 @@
   "mixins": [
     "SculkBlockEntityMixin",
     "GameEventListenerMixin",
-    "LivingRendererMixin",
     "EntityMixin",
     "PlayerMixin",
     "AbstractArrowMixin"
@@ -17,7 +16,8 @@
     "client.ItemRendererMixin",
     "client.ElytraLayerMixin",
     "client.CapeLayerMixin",
-    "compat.ClientBookRegistryMixin"
+    "compat.ClientBookRegistryMixin",
+    "client.LivingRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

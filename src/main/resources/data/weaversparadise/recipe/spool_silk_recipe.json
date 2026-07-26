@@ -3,6 +3,9 @@
   "input": {
     "item": "minecraft:string"
   },
+  "catalyst": {
+    "item": "weaversparadise:empty_spool"
+  },
   "result": {
     "id": "weaversparadise:silk_spool",
     "count": 1

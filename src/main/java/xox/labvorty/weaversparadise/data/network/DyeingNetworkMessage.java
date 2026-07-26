@@ -21,7 +21,6 @@ import xox.labvorty.weaversparadise.WeaversParadise;
 import xox.labvorty.weaversparadise.blocks.entities.DyeingBarrelBlockEntity;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 
-@EventBusSubscriber
 public record DyeingNetworkMessage(int x, int y, int z, boolean leftdyes, boolean rightdyes) implements CustomPacketPayload {
     public static final Type<DyeingNetworkMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(WeaversParadise.MODID, "dyeing_network_message"));
     public static final StreamCodec<RegistryFriendlyByteBuf, DyeingNetworkMessage> STREAM_CODEC = StreamCodec.of((RegistryFriendlyByteBuf buf, DyeingNetworkMessage message) -> {
@@ -111,26 +110,11 @@ public record DyeingNetworkMessage(int x, int y, int z, boolean leftdyes, boolea
         }
 
         if (context.flow() == PacketFlow.CLIENTBOUND) {
-            context.enqueueWork(() -> {
-                Player player = context.player();
-                int x = message.x;
-                int y = message.y;
-                int z = message.z;
-
-
-            }).exceptionally(e -> {
+            context.enqueueWork(() -> {}).exceptionally(e -> {
                 context.connection().disconnect(Component.literal(e.getMessage()));
                 return null;
             });
         }
     }
 
-    @SubscribeEvent
-    public static void registerMessage(FMLCommonSetupEvent event) {
-        WeaversParadise.addNetworkMessage(
-                DyeingNetworkMessage.TYPE,
-                DyeingNetworkMessage.STREAM_CODEC,
-                DyeingNetworkMessage::handleData
-        );
-    }
 }

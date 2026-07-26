@@ -9,6 +9,8 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
+import xox.labvorty.vortylib.init.VortyLibRenderTypes;
 import xox.labvorty.weaversparadise.entities.HangingFlagEntity;
 
 import java.util.List;
@@ -42,24 +44,42 @@ public class HangingFlagEntityRenderer extends EntityRenderer<HangingFlagEntity>
         super(context);
     }
 
-    public void render(HangingFlagEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+    public void render(@NotNull HangingFlagEntity hangingFlagEntity, float entityYaw, float partialTicks, PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int packedLight) {
         poseStack.pushPose();
         poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - entityYaw));
-        VertexConsumer vertexconsumer = buffer.getBuffer(RenderType.entitySolid(this.getTextureLocation(entity)));
-        this.renderFlag(entity, poseStack, vertexconsumer, packedLight);
+        VertexConsumer vertexconsumer = getConsumer(multiBufferSource, hangingFlagEntity);
+        this.renderFlag(hangingFlagEntity, poseStack, vertexconsumer, packedLight);
         poseStack.popPose();
-        super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
+        super.render(hangingFlagEntity, entityYaw, partialTicks, poseStack, multiBufferSource, packedLight);
     }
 
     @Override
-    public ResourceLocation getTextureLocation(HangingFlagEntity hangingFlagEntity) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull HangingFlagEntity hangingFlagEntity) {
+        return ResourceLocation.fromNamespaceAndPath("weaversparadise", "textures/entity/" + "default" + ".png");
+    }
+
+    private ResourceLocation getMaskLocation(String type) {
+        return ResourceLocation.fromNamespaceAndPath("weaversparadise", "textures/entity/mask/flag/" + type + ".png");
+    }
+
+    private VertexConsumer getConsumer(MultiBufferSource multiBufferSource, HangingFlagEntity hangingFlagEntity) {
+        String type = getType(hangingFlagEntity);
+
+        if (!type.equals("default")) {
+            return multiBufferSource.getBuffer(VortyLibRenderTypes.getEntityTranslucentMask(getTextureLocation(hangingFlagEntity), getMaskLocation(type)));
+        }
+
+        return multiBufferSource.getBuffer(RenderType.entityTranslucent(getTextureLocation(hangingFlagEntity)));
+    }
+
+    private String getType(HangingFlagEntity hangingFlagEntity) {
         String variant = hangingFlagEntity.getVariant();
 
         if (!variants.contains(variant)) {
             variant = "default";
         }
 
-        return ResourceLocation.fromNamespaceAndPath("weaversparadise", "textures/entity/" + variant + ".png");
+        return variant;
     }
 
     private void renderFlag(HangingFlagEntity flag, PoseStack poseStack, VertexConsumer consumer, int light) {

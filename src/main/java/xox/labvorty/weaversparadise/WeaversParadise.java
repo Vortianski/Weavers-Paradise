@@ -25,7 +25,6 @@ public class WeaversParadise {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public WeaversParadise(IEventBus modEventBus, ModContainer modContainer) {
-        modEventBus.addListener(this::registerNetworking);
         WeaversParadiseMobEffects.MOB_EFFECTS.register(modEventBus);
         WeaversParadiseItems.ITEMS.register(modEventBus);
         WeaversParadiseBlocks.BLOCKS.register(modEventBus);
@@ -36,6 +35,7 @@ public class WeaversParadise {
         WeaversParadiseRecipes.RECIPE_TYPES.register(modEventBus);
         WeaversParadiseLootModifiers.LOOT_MODIFIERS.register(modEventBus);
         WeaversParadiseEntityTypes.ENTITY_TYPES.register(modEventBus);
+        WeaversParadiseAttachmentTypes.ATTACHMENT_TYPES.register(modEventBus);
 
         modContainer.registerConfig(
                 ModConfig.Type.CLIENT,
@@ -47,24 +47,5 @@ public class WeaversParadise {
                 CommonConfig.SPEC,
                 "weaversparadise-common.toml"
         );
-    }
-
-    private static boolean networkingRegistered = false;
-    private static final Map<CustomPacketPayload.Type<?>, NetworkMessage<?>> MESSAGES = new HashMap<>();
-
-    private record NetworkMessage<T extends CustomPacketPayload>(StreamCodec<? extends FriendlyByteBuf, T> reader, IPayloadHandler<T> handler) {
-    }
-
-    public static <T extends CustomPacketPayload> void addNetworkMessage(CustomPacketPayload.Type<T> id, StreamCodec<? extends FriendlyByteBuf, T> reader, IPayloadHandler<T> handler) {
-        if (networkingRegistered)
-            throw new IllegalStateException("Cannot register new network messages after networking has been registered!");
-        MESSAGES.put(id, new NetworkMessage<>(reader, handler));
-    }
-
-    @SuppressWarnings({"rawtypes", "unchecked"})
-    private void registerNetworking(final RegisterPayloadHandlersEvent event) {
-        final PayloadRegistrar registrar = event.registrar(MODID);
-        MESSAGES.forEach((id, networkMessage) -> registrar.playBidirectional(id, ((NetworkMessage) networkMessage).reader(), ((NetworkMessage) networkMessage).handler()));
-        networkingRegistered = true;
     }
 }

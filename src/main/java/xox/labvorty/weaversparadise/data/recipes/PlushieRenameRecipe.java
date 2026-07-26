@@ -1,5 +1,7 @@
 package xox.labvorty.weaversparadise.data.recipes;
 
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.PropertyMap;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -8,10 +10,14 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ResolvableProfile;
 import net.minecraft.world.item.crafting.*;
 import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.items.misc.PlayerPlushieRenameTokenItem;
 import xox.labvorty.weaversparadise.items.misc.PlushieItem;
+
+import java.util.Optional;
+import java.util.UUID;
 
 public class PlushieRenameRecipe extends ShapelessRecipe {
     public PlushieRenameRecipe(
@@ -25,19 +31,29 @@ public class PlushieRenameRecipe extends ShapelessRecipe {
 
     @Override
     public @NotNull ItemStack assemble(@NotNull CraftingInput input, HolderLookup.@NotNull Provider registries) {
-        ItemStack stack = super.assemble(input, registries);
+        ItemStack result = super.assemble(input, registries);
 
         for (int i = 0; i < input.size(); i++) {
-            ItemStack inputItem = input.getItem(i);
+            ItemStack ingredient = input.getItem(i);
 
-            if (inputItem.getItem() instanceof PlayerPlushieRenameTokenItem playerPlushieRenameTokenItem) {
-                String newName = inputItem.getOrDefault(DataComponents.CUSTOM_NAME, Component.literal("Steve")).getString();
+            if (ingredient.getItem() instanceof PlayerPlushieRenameTokenItem) {
+                Component customName = ingredient.get(DataComponents.CUSTOM_NAME);
+                String playerName = customName != null ? customName.getString().trim() : "Steve";
 
-                stack = PlushieItem.createPreMadePlushieAsync(newName, null);
+                result.set(
+                        DataComponents.PROFILE,
+                        new ResolvableProfile(
+                                Optional.of(playerName),
+                                Optional.empty(),
+                                new PropertyMap()
+                        )
+                );
+
+                break;
             }
         }
 
-        return stack;
+        return result;
     }
 
     public static class Serializer implements RecipeSerializer<PlushieRenameRecipe> {

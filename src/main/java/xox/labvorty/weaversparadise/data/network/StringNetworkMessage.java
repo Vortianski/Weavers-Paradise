@@ -19,7 +19,6 @@ import xox.labvorty.weaversparadise.WeaversParadise;
 import xox.labvorty.weaversparadise.blocks.entities.SpinningJennyBlockEntity;
 import xox.labvorty.weaversparadise.gui.screen.StringScreen;
 
-@EventBusSubscriber
 public record StringNetworkMessage(int buttonID, int x, int y, int z, int data) implements CustomPacketPayload {
     public static final Type<StringNetworkMessage> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(WeaversParadise.MODID, "string_network_message"));
     public static final StreamCodec<RegistryFriendlyByteBuf, StringNetworkMessage> STREAM_CODEC = StreamCodec.of((RegistryFriendlyByteBuf buffer, StringNetworkMessage message) -> {
@@ -67,10 +66,5 @@ public record StringNetworkMessage(int buttonID, int x, int y, int z, int data) 
                 StringScreen.updateProgress(data);
             });
         }
-    }
-
-    @SubscribeEvent
-    public static void registerMessage(FMLCommonSetupEvent event) {
-        WeaversParadise.addNetworkMessage(StringNetworkMessage.TYPE, StringNetworkMessage.STREAM_CODEC, StringNetworkMessage::handleData);
     }
 }

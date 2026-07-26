@@ -2,9 +2,7 @@ package xox.labvorty.weaversparadise.gui.menu;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -12,7 +10,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -22,8 +19,8 @@ import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.init.WeaversParadiseInterfaces;
-import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +53,7 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
             access = ContainerLevelAccess.create(world, pos);
         }
         if (pos != null) {
-            if (extraData.readableBytes() == 1) { // bound to item
+            if (extraData.readableBytes() == 1) {
                 byte hand = extraData.readByte();
                 ItemStack itemstack = hand == 0 ? this.entity.getMainHandItem() : this.entity.getOffhandItem();
                 this.boundItemMatcher = () -> itemstack == (hand == 0 ? this.entity.getMainHandItem() : this.entity.getOffhandItem());
@@ -65,8 +62,8 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
                     this.internal = cap;
                     this.bound = true;
                 }
-            } else if (extraData.readableBytes() > 1) { // bound to entity
-                extraData.readByte(); // drop padding
+            } else if (extraData.readableBytes() > 1) {
+                extraData.readByte();
                 boundEntity = world.getEntity(extraData.readVarInt());
                 if (boundEntity != null) {
                     IItemHandler cap = boundEntity.getCapability(Capabilities.ItemHandler.ENTITY);
@@ -75,7 +72,7 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
                         this.bound = true;
                     }
                 }
-            } else { // might be bound to block
+            } else {
                 boundBlockEntity = this.world.getBlockEntity(pos);
                 if (boundBlockEntity instanceof BaseContainerBlockEntity baseContainerBlockEntity) {
                     this.internal = new InvWrapper(baseContainerBlockEntity);
@@ -84,148 +81,116 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
             }
         }
         this.customSlots.put(0, this.addSlot(new SlotItemHandler(internal, 0, 183, 74) {
-            private final int slot = 0;
-            private int x = StringMenu.this.x;
-            private int y = StringMenu.this.y;
-
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                if (stack.is(WeaversParadiseItems.COTTON_SPOOL) || stack.is(WeaversParadiseItems.RAW_COTTON) || stack.is(Items.STRING) || stack.is(ItemTags.create(ResourceLocation.parse("minecraft:wool")))) {
-                    return true;
-                }
-
-                return false;
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+               return true;
             }
         }));
         this.customSlots.put(1, this.addSlot(new SlotItemHandler(internal, 1, 123, 73) {
-            private final int slot = 1;
-            private int x = StringMenu.this.x;
-            private int y = StringMenu.this.y;
-
             @Override
             public int getMaxStackSize() {
                 return 1;
             }
 
             @Override
-            public int getMaxStackSize(ItemStack stack) {
+            public int getMaxStackSize(@NotNull ItemStack itemStack) {
                 return 1;
             }
 
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(WeaversParadiseItems.EMPTY_SPOOL);
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return true;
             }
         }));
         this.customSlots.put(2, this.addSlot(new SlotItemHandler(internal, 2, 106, 73) {
-            private final int slot = 2;
-            private int x = StringMenu.this.x;
-            private int y = StringMenu.this.y;
-
             @Override
             public int getMaxStackSize() {
                 return 1;
             }
 
             @Override
-            public int getMaxStackSize(ItemStack stack) {
+            public int getMaxStackSize(@NotNull ItemStack itemStack) {
                 return 1;
             }
 
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(WeaversParadiseItems.EMPTY_SPOOL);
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return true;
             }
         }));
         this.customSlots.put(3, this.addSlot(new SlotItemHandler(internal, 3, 89, 73) {
-            private final int slot = 3;
-            private int x = StringMenu.this.x;
-            private int y = StringMenu.this.y;
-
             @Override
             public int getMaxStackSize() {
                 return 1;
             }
 
             @Override
-            public int getMaxStackSize(ItemStack stack) {
+            public int getMaxStackSize(@NotNull ItemStack itemStack) {
                 return 1;
             }
 
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(WeaversParadiseItems.EMPTY_SPOOL);
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return true;
             }
         }));
         this.customSlots.put(4, this.addSlot(new SlotItemHandler(internal, 4, 71, 73) {
-            private final int slot = 4;
-            private int x = StringMenu.this.x;
-            private int y = StringMenu.this.y;
-
             @Override
             public int getMaxStackSize() {
                 return 1;
             }
 
             @Override
-            public int getMaxStackSize(ItemStack stack) {
+            public int getMaxStackSize(@NotNull ItemStack itemStack) {
                 return 1;
             }
 
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(WeaversParadiseItems.EMPTY_SPOOL);
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return true;
             }
         }));
         this.customSlots.put(5, this.addSlot(new SlotItemHandler(internal, 5, 53, 73) {
-            private final int slot = 5;
-            private int x = StringMenu.this.x;
-            private int y = StringMenu.this.y;
-
             @Override
             public int getMaxStackSize() {
                 return 1;
             }
 
             @Override
-            public int getMaxStackSize(ItemStack stack) {
+            public int getMaxStackSize(@NotNull ItemStack itemStack) {
                 return 1;
             }
 
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(WeaversParadiseItems.EMPTY_SPOOL);
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return true;
             }
         }));
         this.customSlots.put(6, this.addSlot(new SlotItemHandler(internal, 6, 36, 73) {
-            private final int slot = 6;
-            private int x = StringMenu.this.x;
-            private int y = StringMenu.this.y;
-
             @Override
             public int getMaxStackSize() {
                 return 1;
             }
 
             @Override
-            public int getMaxStackSize(ItemStack stack) {
+            public int getMaxStackSize(@NotNull ItemStack itemStack) {
                 return 1;
             }
 
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(WeaversParadiseItems.EMPTY_SPOOL);
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return true;
             }
         }));
         for (int si = 0; si < 3; ++si)
             for (int sj = 0; sj < 9; ++sj)
-                this.addSlot(new Slot(inv, sj + (si + 1) * 9, 0 + 8 + sj * 18, 34 + 84 + si * 18));
+                this.addSlot(new Slot(inv, sj + (si + 1) * 9, 8 + sj * 18, 34 + 84 + si * 18));
         for (int si = 0; si < 9; ++si)
-            this.addSlot(new Slot(inv, si, 0 + 8 + si * 18, 34 + 142));
+            this.addSlot(new Slot(inv, si, 8 + si * 18, 34 + 142));
     }
 
     @Override
-    public boolean stillValid(Player player) {
+    public boolean stillValid(@NotNull Player player) {
         if (this.bound) {
             if (this.boundItemMatcher != null)
                 return this.boundItemMatcher.get();
@@ -238,10 +203,10 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
     }
 
     @Override
-    public ItemStack quickMoveStack(Player playerIn, int index) {
+    public @NotNull ItemStack quickMoveStack(@NotNull Player playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = (Slot) this.slots.get(index);
-        if (slot != null && slot.hasItem()) {
+        Slot slot = this.slots.get(index);
+        if (slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
             if (index < 7) {
@@ -270,26 +235,26 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
     }
 
     @Override
-    protected boolean moveItemStackTo(ItemStack p_38904_, int p_38905_, int p_38906_, boolean p_38907_) {
+    protected boolean moveItemStackTo(@NotNull ItemStack itemStack, int p_38905_, int p_38906_, boolean p_38907_) {
         boolean flag = false;
         int i = p_38905_;
         if (p_38907_) {
             i = p_38906_ - 1;
         }
-        if (p_38904_.isStackable()) {
-            while (!p_38904_.isEmpty() && (p_38907_ ? i >= p_38905_ : i < p_38906_)) {
+        if (itemStack.isStackable()) {
+            while (!itemStack.isEmpty() && (p_38907_ ? i >= p_38905_ : i < p_38906_)) {
                 Slot slot = this.slots.get(i);
                 ItemStack itemstack = slot.getItem();
-                if (slot.mayPlace(itemstack) && !itemstack.isEmpty() && ItemStack.isSameItemSameComponents(p_38904_, itemstack)) {
-                    int j = itemstack.getCount() + p_38904_.getCount();
+                if (slot.mayPlace(itemstack) && !itemstack.isEmpty() && ItemStack.isSameItemSameComponents(itemStack, itemstack)) {
+                    int j = itemstack.getCount() + itemstack.getCount();
                     int k = slot.getMaxStackSize(itemstack);
                     if (j <= k) {
-                        p_38904_.setCount(0);
+                        itemStack.setCount(0);
                         itemstack.setCount(j);
                         slot.set(itemstack);
                         flag = true;
                     } else if (itemstack.getCount() < k) {
-                        p_38904_.shrink(k - itemstack.getCount());
+                        itemStack.shrink(k - itemstack.getCount());
                         itemstack.setCount(k);
                         slot.set(itemstack);
                         flag = true;
@@ -302,7 +267,7 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
                 }
             }
         }
-        if (!p_38904_.isEmpty()) {
+        if (!itemStack.isEmpty()) {
             if (p_38907_) {
                 i = p_38906_ - 1;
             } else {
@@ -311,9 +276,9 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
             while (p_38907_ ? i >= p_38905_ : i < p_38906_) {
                 Slot slot1 = this.slots.get(i);
                 ItemStack itemstack1 = slot1.getItem();
-                if (itemstack1.isEmpty() && slot1.mayPlace(p_38904_)) {
-                    int l = slot1.getMaxStackSize(p_38904_);
-                    slot1.setByPlayer(p_38904_.split(Math.min(p_38904_.getCount(), l)));
+                if (itemstack1.isEmpty() && slot1.mayPlace(itemStack)) {
+                    int l = slot1.getMaxStackSize(itemStack);
+                    slot1.setByPlayer(itemStack.split(Math.min(itemStack.getCount(), l)));
                     slot1.setChanged();
                     flag = true;
                     break;
@@ -329,7 +294,7 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
     }
 
     @Override
-    public void removed(Player playerIn) {
+    public void removed(@NotNull Player playerIn) {
         super.removed(playerIn);
         if (!bound && playerIn instanceof ServerPlayer serverPlayer) {
             if (!serverPlayer.isAlive() || serverPlayer.hasDisconnected()) {

@@ -9,6 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import oshi.util.tuples.Pair;
 import xox.labvorty.weaversparadise.data.rendering.GlobalRenderingData;
+import xox.labvorty.weaversparadise.init.WeaversParadiseAttachmentTypes;
 
 public class ColorHandlers {
     public static Pair<Integer, Integer> handle(String dyeType, int colorOne, int colorTwo, int lightValue, LivingEntity livingEntity, int packedLight, int ticks) {
@@ -186,7 +187,7 @@ public class ColorHandlers {
             int greenPulse = 255;
             int bluePulse = 255;
 
-            int sculkPulse = GlobalRenderingData.getSculkPulse();
+            int sculkPulse = livingEntity.getData(WeaversParadiseAttachmentTypes.SCULK_PULSE);
             int finalRed = Mth.lerpInt(sculkPulse / 60.0f, redMain, redPulse);
             int finalGreen = Mth.lerpInt(sculkPulse / 60.0f, greenMain, greenPulse);
             int finalBlue = Mth.lerpInt(sculkPulse / 60.0f, blueMain, bluePulse);
@@ -203,7 +204,7 @@ public class ColorHandlers {
             int greenPulse = (colorTwo >> 8) & 0xFF;
             int bluePulse = (colorTwo) & 0xFF;
 
-            int sculkPulse = GlobalRenderingData.getSculkPulse();
+            int sculkPulse = livingEntity.getData(WeaversParadiseAttachmentTypes.SCULK_PULSE);
             int finalRed = Mth.lerpInt(sculkPulse / 60.0f, redMain, redPulse);
             int finalGreen = Mth.lerpInt(sculkPulse / 60.0f, greenMain, greenPulse);
             int finalBlue = Mth.lerpInt(sculkPulse / 60.0f, blueMain, bluePulse);

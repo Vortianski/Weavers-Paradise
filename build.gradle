@@ -47,6 +47,21 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
+
+    maven {
+        url = "https://maven.latvian.dev/releases"
+        content {
+            includeGroup "dev.latvian.mods"
+            includeGroup "dev.latvian.apps"
+        }
+    }
+
+    maven {
+        url = "https://jitpack.io"
+        content {
+            includeGroup "com.github.rtyley"
+        }
+    }
 }
 
 base {
@@ -129,14 +144,21 @@ dependencies {
 
     //Iris Shaders | Client Side
     runtimeOnly("curse.maven:sodium-394468:6382651")
+    implementation("curse.maven:irisshaders-455508:6661598")
 
     //VortyLib | Client + Compilation Side
-    implementation("xox.labvorty.vortylib:vortylib-template-1.21.1:1.2.1")
+    implementation("xox.labvorty.vortylib:vortylib-template-1.21.1:1.2.2")
 
     //Patchouli | Client Side
     compileOnly("vazkii.patchouli:Patchouli:${patchouli_version}:api")
     compileOnly("vazkii.patchouli:Patchouli:${patchouli_version}")
     runtimeOnly("vazkii.patchouli:Patchouli:${patchouli_version}")
+
+    //KubeJS
+    implementation("dev.latvian.mods:kubejs-neoforge:${kubejs_version}")
+
+    //ChaosLib
+    runtimeOnly("dev.elifian.chaoslib:neoforge:1.1.0")
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

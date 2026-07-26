@@ -27,7 +27,6 @@ import xox.labvorty.weaversparadise.init.WeaversParadiseRecipes;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@EventBusSubscriber
 public record ClothcraftingNetworkMultiMessage(int buttonID, int x, int y, int z, int gameTime, int gameScore, boolean isGameOn, List<ItemStack> items, ItemStack clothType) implements CustomPacketPayload {
     public static final CustomPacketPayload.Type<ClothcraftingNetworkMultiMessage> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(WeaversParadise.MODID, "clothcrafting_network_message"));
     public static StreamCodec<RegistryFriendlyByteBuf, List<ItemStack>> listCodec = ItemStack.STREAM_CODEC.apply(ByteBufCodecs.list());
@@ -52,14 +51,6 @@ public record ClothcraftingNetworkMultiMessage(int buttonID, int x, int y, int z
     }
 
     public static void handleData(final ClothcraftingNetworkMultiMessage message, final IPayloadContext context) {
-        //message id:
-        //0 - update data in the UI from BlockEntity
-        //1 - send data from UI into the BlockEntity
-        //2 - receive items from UI into the BlockEntity
-        //3 - receive items into player inventory from BlockEntity
-
-        //5 - remove 6 spools from main slot
-
         if (context.flow() == PacketFlow.SERVERBOUND) {
             context.enqueueWork(() -> {
                 Player player = context.player();
@@ -202,14 +193,5 @@ public record ClothcraftingNetworkMultiMessage(int buttonID, int x, int y, int z
                 }
             });
         }
-    }
-
-    @SubscribeEvent
-    public static void registerMessage(FMLCommonSetupEvent event) {
-        WeaversParadise.addNetworkMessage(
-                ClothcraftingNetworkMultiMessage.TYPE,
-                ClothcraftingNetworkMultiMessage.STREAM_CODEC,
-                ClothcraftingNetworkMultiMessage::handleData
-        );
     }
 }

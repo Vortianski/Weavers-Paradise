@@ -18,12 +18,20 @@ import xox.labvorty.weaversparadise.init.WeaversParadiseRecipes;
 
 public class SpinningJennyRecipe implements Recipe<SpinningJennyRecipeInput> {
     private final Ingredient input;
+    private final Ingredient catalyst;
     private final ItemStack result;
     private final int countRequired;
     private final int craftTime;
 
-    public SpinningJennyRecipe(Ingredient input, ItemStack result, int countRequired, int craftTime) {
+    public SpinningJennyRecipe(
+            Ingredient input,
+            Ingredient catalyst,
+            ItemStack result,
+            int countRequired,
+            int craftTime
+    ) {
         this.input = input;
+        this.catalyst = catalyst;
         this.result = result;
         this.countRequired = countRequired;
         this.craftTime = craftTime;
@@ -31,7 +39,8 @@ public class SpinningJennyRecipe implements Recipe<SpinningJennyRecipeInput> {
 
     @Override
     public boolean matches(SpinningJennyRecipeInput input, @NotNull Level level) {
-        return this.input.test(input.mainIngredient());
+        return this.input.test(input.mainIngredient())
+                && catalyst.test(input.catalyst());
     }
 
     @Override
@@ -45,7 +54,7 @@ public class SpinningJennyRecipe implements Recipe<SpinningJennyRecipeInput> {
     }
 
     @Override
-    public @NotNull ItemStack getResultItem(HolderLookup.Provider registries) {
+    public @NotNull ItemStack getResultItem(HolderLookup.@NotNull Provider registries) {
         return result;
     }
 
@@ -63,6 +72,10 @@ public class SpinningJennyRecipe implements Recipe<SpinningJennyRecipeInput> {
         return input;
     }
 
+    public Ingredient getCatalyst() {
+        return catalyst;
+    }
+
     public int getCountRequired() {
         return countRequired;
     }
@@ -75,20 +88,34 @@ public class SpinningJennyRecipe implements Recipe<SpinningJennyRecipeInput> {
     public @NotNull NonNullList<Ingredient> getIngredients() {
         NonNullList<Ingredient> list = NonNullList.create();
         list.add(input);
+        list.add(catalyst);
         return list;
     }
 
     public static class Serializer implements RecipeSerializer<SpinningJennyRecipe> {
-        public static Serializer INSTANCE = new Serializer();
 
-        private static final MapCodec<SpinningJennyRecipe> CODEC = RecordCodecBuilder.mapCodec(instance ->
-                instance.group(
-                        Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(SpinningJennyRecipe::getInput),
-                        ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
-                        Codec.INT.fieldOf("count_required").forGetter(SpinningJennyRecipe::getCountRequired),
-                        Codec.INT.optionalFieldOf("craft_time", 100).forGetter(SpinningJennyRecipe::getCraftTime)
-                ).apply(instance, SpinningJennyRecipe::new)
-        );
+        public static final Serializer INSTANCE = new Serializer();
+
+        private static final MapCodec<SpinningJennyRecipe> CODEC =
+                RecordCodecBuilder.mapCodec(instance ->
+                        instance.group(
+                                Ingredient.CODEC_NONEMPTY.fieldOf("input")
+                                        .forGetter(SpinningJennyRecipe::getInput),
+
+                                Ingredient.CODEC_NONEMPTY.fieldOf("catalyst")
+                                        .forGetter(SpinningJennyRecipe::getCatalyst),
+
+                                ItemStack.CODEC.fieldOf("result")
+                                        .forGetter(recipe -> recipe.result),
+
+                                Codec.INT.fieldOf("count_required")
+                                        .forGetter(SpinningJennyRecipe::getCountRequired),
+
+                                Codec.INT.optionalFieldOf("craft_time", 100)
+                                        .forGetter(SpinningJennyRecipe::getCraftTime)
+
+                        ).apply(instance, SpinningJennyRecipe::new)
+                );
 
         private static final StreamCodec<RegistryFriendlyByteBuf, SpinningJennyRecipe> STREAM_CODEC =
                 StreamCodec.of(Serializer::toNetwork, Serializer::fromNetwork);
@@ -105,14 +132,23 @@ public class SpinningJennyRecipe implements Recipe<SpinningJennyRecipeInput> {
 
         private static SpinningJennyRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
             Ingredient input = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
+            Ingredient catalyst = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
             ItemStack result = ItemStack.STREAM_CODEC.decode(buffer);
             int countRequired = buffer.readInt();
             int craftTime = buffer.readInt();
-            return new SpinningJennyRecipe(input, result, countRequired, craftTime);
+
+            return new SpinningJennyRecipe(
+                    input,
+                    catalyst,
+                    result,
+                    countRequired,
+                    craftTime
+            );
         }
 
         private static void toNetwork(RegistryFriendlyByteBuf buffer, SpinningJennyRecipe recipe) {
             Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.getInput());
+            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.getCatalyst());
             ItemStack.STREAM_CODEC.encode(buffer, recipe.result);
             buffer.writeInt(recipe.getCountRequired());
             buffer.writeInt(recipe.getCraftTime());

@@ -23,7 +23,7 @@ public class GameEventListenerMixin {
             ServerLevel var3 = player.serverLevel();
             DynamicGameEventListener<?> listener = new DynamicGameEventListener(new SculkPlayerListener(player, 8));
             if (var3 != null) {
-                consumer.accept(listener, player.serverLevel());
+                //consumer.accept(listener, player.serverLevel());
             }
         }
     }

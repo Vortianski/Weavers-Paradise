@@ -17,14 +17,11 @@ import org.jetbrains.annotations.Nullable;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 
 public class SpinningJennyJEICategory implements IRecipeCategory<SpinningJennyJEIRecipe> {
-    public static final RecipeType<SpinningJennyJEIRecipe> TYPE =
-            RecipeType.create("weaversparadise", "spinning_jenny", SpinningJennyJEIRecipe.class);
-
+    public static final RecipeType<SpinningJennyJEIRecipe> TYPE = RecipeType.create("weaversparadise", "spinning_jenny", SpinningJennyJEIRecipe.class);
     private final IDrawable icon;
 
     public SpinningJennyJEICategory(IGuiHelper guiHelper) {
-        icon = guiHelper.createDrawableItemStack(
-                new ItemStack(WeaversParadiseItems.SPINNING_JENNY.get()));
+        icon = guiHelper.createDrawableItemStack(new ItemStack(WeaversParadiseItems.SPINNING_JENNY.get()));
     }
 
     @Override
@@ -71,8 +68,8 @@ public class SpinningJennyJEICategory implements IRecipeCategory<SpinningJennyJE
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, SpinningJennyJEIRecipe recipe, @NotNull IFocusGroup focuses) {
-        builder.addInputSlot(36 + 8, 80 + 15).addIngredients(recipe.getInput().get(0));
-        builder.addInputSlot(183 + 8, 82 + 15).addIngredients(recipe.getInput().get(1)).setSlotName("ingredient_count_" + recipe.getCountRequired());
+        builder.addInputSlot(183 + 8, 82 + 15).addIngredients(recipe.getInput());
+        builder.addInputSlot(36 + 8, 80 + 15).addIngredients(recipe.getCatalyst()).setSlotName("ingredient_count_" + recipe.getCountRequired());
         builder.addOutputSlot(53 + 8, 80 + 15).addItemStack(recipe.getOutput());
     }
 }

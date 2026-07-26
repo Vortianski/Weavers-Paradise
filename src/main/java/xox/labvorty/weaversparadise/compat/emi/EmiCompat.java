@@ -125,16 +125,21 @@ public class EmiCompat implements EmiPlugin {
             for (RecipeHolder<SpinningJennyRecipe> holder : holders) {
                 SpinningJennyRecipe recipe = holder.value();
 
-                EmiIngredient baseIngredient = EmiIngredient.of(recipe.getInput());
-                EmiIngredient countedIngredient = EmiIngredient.of(recipe.getInput())
+                // Show the input ingredient with count
+                EmiIngredient inputIngredient = EmiIngredient.of(recipe.getInput())
                         .setAmount(recipe.getCountRequired());
+
+                // Show the catalyst ingredient
+                EmiIngredient catalystIngredient = EmiIngredient.of(recipe.getCatalyst());
 
                 ItemStack output = recipe.getResultItem(minecraft.level.registryAccess()).copy();
 
                 deferred.accept(new SpinningJennyEMIRecipe(
                         holder.id(),
-                        List.of(baseIngredient, countedIngredient),
-                        List.of(EmiStack.of(output))
+                        List.of(inputIngredient, catalystIngredient),
+                        List.of(EmiStack.of(output)),
+                        recipe.getCountRequired(),
+                        recipe.getCraftTime()
                 ));
             }
         });

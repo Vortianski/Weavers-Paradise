@@ -272,9 +272,12 @@
   "vortylib.tab.wool_sleeve_short": "Wool Sleeve: Short",
   "vortylib.tab.wool_sleeve_long": "Wool Sleeve: Long",
   "vortylib.tab.jeans_pant_leg": "Jeans Pant Leg",
+  "vortylib.tab.contributor_plushies": "Contributor Plushies",
 
   "weaversparadise.tooltip.hold": "Hold [%s] for additional information",
   "weaversparadise.tooltip.applicable_to": "Can be applied to:",
 
-  "weaversparadise.patchouli_warning": "Weavers Paradise works best with Patchouli. Install Patchouli and restart Minecraft to access the in-game guide. You can disable this warning in mods client configuration"
+  "weaversparadise.patchouli_warning": "Weavers Paradise works best with Patchouli. Install Patchouli and restart Minecraft to access the in-game guide.",
+  "weaversparadise.patchouli_warning.hint": "Click me to disable this warning",
+  "weaversparadise.patchouli_warning.disabled": "Patchouli warning is now disabled"
 }

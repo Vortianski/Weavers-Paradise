@@ -272,9 +272,12 @@
   "vortylib.tab.wool_sleeve_short": "Шерстяной Рукав: Короткий",
   "vortylib.tab.wool_sleeve_long": "Шерстяной Рукав: Длинный",
   "vortylib.tab.jeans_pant_leg": "Джинсовая Штанина",
+  "vortylib.tab.contributor_plushies": "Плюши Помошников",
 
   "weaversparadise.tooltip.hold": "Удерживайте [%s] для дополнительной информации",
   "weaversparadise.tooltip.applicable_to": "Можно применить к:",
 
-  "weaversparadise.patchouli_warning": "Weavers Paradise работает лучше с Patchouli. Установите Patchouli и перезапустите Minecraft чтобы получить доступ к внутри игровому руководству. Вы можете отключить данное предупреждение в клиент конфигурации мода"
+  "weaversparadise.patchouli_warning": "Weavers Paradise работает лучше с Patchouli. Установите Patchouli и перезапустите Minecraft чтобы получить доступ к внутри игровому руководству.",
+  "weaversparadise.patchouli_warning.hint": "Нажми сюда чтобы отключить данное предупреждение",
+  "weaversparadise.patchouli_warning.disabled": "Предупреждение о Patchouli теперь отключено"
 }

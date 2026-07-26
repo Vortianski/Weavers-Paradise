@@ -18,7 +18,7 @@ import xox.labvorty.weaversparadise.items.clothing.HandWarmersCottonItem;
 import java.util.Optional;
 
 @EventBusSubscriber
-public class WeaversParadiseAttributeEvents {
+public class AttributeEvents {
     @SubscribeEvent
     public static void entityHurt(LivingDamageEvent.Post event) {
         Entity source = event.getSource().getEntity();

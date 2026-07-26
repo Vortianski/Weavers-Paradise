@@ -156,9 +156,17 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
 
         ItemStack mainStack = itemHandler.getStackInSlot(0);
 
+        Optional<SpinningJennyRecipe> recipeOptional = getCurrentRecipe(serverLevel, ItemStack.EMPTY, ItemStack.EMPTY);
         int emptySpoolSlot = -1;
         for (int i = 1; i <= 6; i++) {
             ItemStack stack = itemHandler.getStackInSlot(i);
+
+            Optional<SpinningJennyRecipe> recipe = getCurrentRecipe(serverLevel, mainStack, stack);
+            if (recipe.isPresent()) {
+                emptySpoolSlot = i;
+                recipeOptional = recipe;
+                break;
+            }
 
             if (!stack.isEmpty() && stack.getItem() instanceof EmptySpoolItem) {
                 emptySpoolSlot = i;
@@ -166,10 +174,8 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
             }
         }
 
-        Optional<SpinningJennyRecipe> recipeOpt = getCurrentRecipe(serverLevel, mainStack);
-
-        if (recipeOpt.isPresent() && emptySpoolSlot != -1) {
-            SpinningJennyRecipe recipe = recipeOpt.get();
+        if (recipeOptional.isPresent() && emptySpoolSlot != -1) {
+            SpinningJennyRecipe recipe = recipeOptional.get();
 
             if (mainStack.getCount() >= recipe.getCountRequired()) {
                 int progress = spinningJennyBE.getWorkingState();
@@ -199,13 +205,13 @@ public class SpinningJennyBlock extends Block implements EntityBlock {
         serverLevel.scheduleTick(blockPos, this, 1);
     }
 
-    public Optional<SpinningJennyRecipe> getCurrentRecipe(Level level, ItemStack input) {
+    public Optional<SpinningJennyRecipe> getCurrentRecipe(Level level, ItemStack input, ItemStack catalyst) {
         if (level == null) return Optional.empty();
 
         return level.getRecipeManager()
                 .getAllRecipesFor(WeaversParadiseRecipes.SPINNING_JENNY_TYPE.get())
                 .stream()
-                .filter(holder -> holder.value().matches(new SpinningJennyRecipeInput(input), level))
+                .filter(holder -> holder.value().matches(new SpinningJennyRecipeInput(input, catalyst), level))
                 .map(RecipeHolder::value)
                 .findFirst();
     }
