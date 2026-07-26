@@ -20,7 +20,8 @@
     "client.HumanModelMixin",
     "client.PlayerRendererMixin",
     "client.ItemEntityRendererMixin",
-    "compat.ClientBookRegistryMixin"
+    "compat.ClientBookRegistryMixin",
+    "client.LivingEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

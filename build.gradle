@@ -117,6 +117,13 @@ dependencies {
     //Patchouli | Client Side
     compileOnly(fg.deobf("curse.maven:patchouli-306770:7731017"))
     runtimeOnly(fg.deobf("curse.maven:patchouli-306770:7731017"))
+
+    //ChaosLib
+    implementation fg.deobf("curse.maven:chaosapi-1601428:8407175")
+
+    //Oculus
+    implementation fg.deobf("curse.maven:oculus-581495:6020952")
+    implementation fg.deobf("curse.maven:embeddium-908741:5681725")
 }
 
 mixin {

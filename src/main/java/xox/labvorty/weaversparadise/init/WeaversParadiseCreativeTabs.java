@@ -17,6 +17,7 @@ import xox.labvorty.weaversparadise.items.clothing.defined.DoubleSidedClothingIt
 import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingItem;
 import xox.labvorty.weaversparadise.items.dye.PigmentItem;
 import xox.labvorty.weaversparadise.items.misc.PlushieItem;
+import xox.labvorty.weaversparadise.utils.CreativeModeTabProviders;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -298,7 +299,8 @@ public class WeaversParadiseCreativeTabs {
 
     public static final RegistryObject<CreativeModeTab> WEAVERS_PARADISE_MISC = CREATIVE_MODE_TABS.register(
             "weavers_paradise_misc",
-            () -> CreativeModeTab.builder()
+            () -> ExpandableCreativeTab.builder()
+                    .addGroup("contributor_plushies", PlushieItem.createPlushie("Vortianski", null), CreativeModeTabProviders.getPlushies())
                     .title(Component.translatable("itemGroup.weaversparadise.items"))
                     .icon(() -> WeaversParadiseItems.MORTAR_AND_PESTLE.get().getDefaultInstance())
                     .displayItems((parameters, output) -> {
@@ -394,9 +396,6 @@ public class WeaversParadiseCreativeTabs {
                                 output.accept(stack);
                             }
                         }
-
-                        output.accept(PlushieItem.createPreMadePlushieAsync("Vortianski", null));
-                        output.accept(PlushieItem.createPreMadePlushieAsync("Pelemeshek", null));
                     })
                     .build()
     );

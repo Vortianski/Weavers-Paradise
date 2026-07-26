@@ -44,7 +44,7 @@ public class PlayerPlushieModifier extends LootModifier {
         if (location.getPath().startsWith("chests/")) {
             RandomSource randomSource = RandomSource.create();
 
-            ItemStack stack = PlushieItem.createPreMadePlushieAsync(applicableNames.get(randomSource.nextIntBetweenInclusive(0, applicableNames.size() - 1)), null);
+            ItemStack stack = PlushieItem.createPlushie(applicableNames.get(randomSource.nextIntBetweenInclusive(0, applicableNames.size() - 1)), null);
 
             generatedLoot.add(stack);
         }

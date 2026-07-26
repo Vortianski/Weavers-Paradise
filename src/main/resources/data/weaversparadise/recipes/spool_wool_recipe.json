@@ -3,6 +3,9 @@
   "input": {
     "tag": "minecraft:wool"
   },
+  "catalyst": {
+    "item": "weaversparadise:empty_spool"
+  },
   "result": {
     "item": "weaversparadise:wool_spool",
     "count": 1

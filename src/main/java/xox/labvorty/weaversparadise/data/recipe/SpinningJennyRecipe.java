@@ -14,16 +14,17 @@ import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.init.WeaversParadiseRecipes;
 
 public class SpinningJennyRecipe implements Recipe<SpinningJennyRecipeInput> {
-
     private final ResourceLocation id;
     private final Ingredient input;
+    private final Ingredient catalyst;
     private final ItemStack result;
     private final int countRequired;
     private final int craftTime;
 
-    public SpinningJennyRecipe(ResourceLocation id, Ingredient input, ItemStack result, int countRequired, int craftTime) {
+    public SpinningJennyRecipe(ResourceLocation id, Ingredient input, Ingredient catalyst, ItemStack result, int countRequired, int craftTime) {
         this.id = id;
         this.input = input;
+        this.catalyst = catalyst;
         this.result = result;
         this.countRequired = countRequired;
         this.craftTime = craftTime;
@@ -38,6 +39,10 @@ public class SpinningJennyRecipe implements Recipe<SpinningJennyRecipeInput> {
         return input;
     }
 
+    public Ingredient getCatalyst() {
+        return catalyst;
+    }
+
     public int getCountRequired() {
         return countRequired;
     }
@@ -48,7 +53,8 @@ public class SpinningJennyRecipe implements Recipe<SpinningJennyRecipeInput> {
 
     @Override
     public boolean matches(SpinningJennyRecipeInput input, Level level) {
-        return this.input.test(input.mainIngredient());
+        return this.input.test(input.mainIngredient())
+                && this.catalyst.test(input.catalyst());
     }
 
     @Override
@@ -66,6 +72,7 @@ public class SpinningJennyRecipe implements Recipe<SpinningJennyRecipeInput> {
     public NonNullList<Ingredient> getIngredients() {
         NonNullList<Ingredient> list = NonNullList.create();
         list.add(input);
+        list.add(catalyst);
         return list;
     }
 
@@ -89,26 +96,29 @@ public class SpinningJennyRecipe implements Recipe<SpinningJennyRecipeInput> {
         @Override
         public SpinningJennyRecipe fromJson(ResourceLocation id, JsonObject json) {
             Ingredient input = Ingredient.fromJson(json.get("input"));
+            Ingredient catalyst = Ingredient.fromJson(json.get("catalyst"));
             ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
             int countRequired = GsonHelper.getAsInt(json, "count_required");
             int craftTime = json.has("craft_time") ? GsonHelper.getAsInt(json, "craft_time") : 100;
 
-            return new SpinningJennyRecipe(id, input, result, countRequired, craftTime);
+            return new SpinningJennyRecipe(id, input, catalyst, result, countRequired, craftTime);
         }
 
         @Override
         public SpinningJennyRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
             Ingredient input = Ingredient.fromNetwork(buf);
+            Ingredient catalyst = Ingredient.fromNetwork(buf);
             ItemStack result = buf.readItem();
             int countRequired = buf.readInt();
             int craftTime = buf.readInt();
 
-            return new SpinningJennyRecipe(id, input, result, countRequired, craftTime);
+            return new SpinningJennyRecipe(id, input, catalyst, result, countRequired, craftTime);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf buf, SpinningJennyRecipe recipe) {
             recipe.input.toNetwork(buf);
+            recipe.catalyst.toNetwork(buf);
             buf.writeItem(recipe.result);
             buf.writeInt(recipe.countRequired);
             buf.writeInt(recipe.craftTime);

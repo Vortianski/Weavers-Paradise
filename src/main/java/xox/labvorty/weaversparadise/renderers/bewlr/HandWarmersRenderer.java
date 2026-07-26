@@ -15,7 +15,6 @@ import xox.labvorty.weaversparadise.items.clothing.defined.HandWarmersInterface;
 import xox.labvorty.weaversparadise.models.ThighHighsModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ThighHighsRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.HandWarmersSpecialModelRenderer;
-import xox.labvorty.weaversparadise.renderers.models.ThighHighsModelRenderer;
 
 public class HandWarmersRenderer extends BlockEntityWithoutLevelRenderer {
     private final ThighHighsModel model;

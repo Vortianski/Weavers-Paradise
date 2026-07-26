@@ -10,7 +10,6 @@ import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.PacketDistributor;
 import xox.labvorty.weaversparadise.WeaversParadiseMod;
 import xox.labvorty.weaversparadise.blocks.entities.SpinningJennyBlockEntity;
-import xox.labvorty.weaversparadise.data.recipe.SpinningJennyRecipe;
 import xox.labvorty.weaversparadise.data.recipe.SpinningJennyRecipeInput;
 import xox.labvorty.weaversparadise.gui.screen.StringScreen;
 import xox.labvorty.weaversparadise.init.WeaversParadiseRecipes;
@@ -69,15 +68,24 @@ public class StringNetworkMessage {
                 if (blockEntity instanceof SpinningJennyBlockEntity spinningJennyBE) {
                     if (player instanceof ServerPlayer serverPlayer) {
                         ItemStack mainStack = spinningJennyBE.getItem(0);
-                        int maxProgress = player.level().getRecipeManager()
-                                .getAllRecipesFor(WeaversParadiseRecipes.SPINNING_JENNY_TYPE.get())
-                                .stream()
-                                .filter(r -> r.matches(
-                                        new SpinningJennyRecipeInput(mainStack),
-                                        player.level()))
-                                .mapToInt(SpinningJennyRecipe::getCraftTime)
-                                .findFirst()
-                                .orElse(100);
+
+                        int maxProgress = 100;
+                        for (int i = 1; i <= 6; i++) {
+                            ItemStack catalystStack = spinningJennyBE.getItem(i);
+
+                            var recipe = player.level().getRecipeManager()
+                                    .getAllRecipesFor(WeaversParadiseRecipes.SPINNING_JENNY_TYPE.get())
+                                    .stream()
+                                    .filter(r -> r.matches(
+                                            new SpinningJennyRecipeInput(mainStack, catalystStack),
+                                            player.level()))
+                                    .findFirst();
+
+                            if (recipe.isPresent()) {
+                                maxProgress = recipe.get().getCraftTime();
+                                break;
+                            }
+                        }
 
                         WeaversParadiseMod.PACKET_HANDLER.send(
                                 PacketDistributor.PLAYER.with(context::getSender),

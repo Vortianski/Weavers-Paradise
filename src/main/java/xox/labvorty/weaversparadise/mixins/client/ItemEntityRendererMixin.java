@@ -59,9 +59,7 @@ public abstract class ItemEntityRendererMixin {
     private boolean weaversparadise$shouldBobAsEntity(ItemEntityRenderer renderer) {
         ItemStack stack = this.weaversparadise$renderingStack;
 
-        if (!stack.isEmpty()
-            && stack.hasTag()
-            && stack.getTag().getBoolean("noBobbing")) {
+        if (!stack.isEmpty() && stack.getTag() != null && !stack.getTag().isEmpty() && stack.getTag().getBoolean("noBobbing")) {
             return false;
         }
 

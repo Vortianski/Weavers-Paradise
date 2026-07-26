@@ -33,7 +33,6 @@ public class WeaversParadiseMod {
     public static final String MOD_ID = "weaversparadise";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    @SuppressWarnings("deprecated")
     public WeaversParadiseMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 

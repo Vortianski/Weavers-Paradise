@@ -52,6 +52,20 @@ public class WeaversParadiseNetworking {
                     OpenUpperWearMessage::new,
                     OpenUpperWearMessage::handler
             );
+
+            WeaversParadiseMod.addNetworkMessage(
+                    ChromaticShiftSyncPacket.class,
+                    ChromaticShiftSyncPacket::encode,
+                    ChromaticShiftSyncPacket::new,
+                    ChromaticShiftSyncPacket::handle
+            );
+
+            WeaversParadiseMod.addNetworkMessage(
+                    SculkPulseSyncPacket.class,
+                    SculkPulseSyncPacket::encode,
+                    SculkPulseSyncPacket::new,
+                    SculkPulseSyncPacket::handle
+            );
         });
     }
 }

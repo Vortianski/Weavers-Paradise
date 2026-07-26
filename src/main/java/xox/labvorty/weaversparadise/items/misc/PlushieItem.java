@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.renderers.bewlr.PlushieItemRenderer;
 
@@ -53,7 +54,7 @@ public class PlushieItem extends Item implements Plushie {
     }
 
     @Override
-    public Component getName(ItemStack stack) {
+    public @NotNull Component getName(@NotNull ItemStack stack) {
         GameProfile profile = getProfile(stack);
         String name = profile.getName();
 
@@ -61,19 +62,24 @@ public class PlushieItem extends Item implements Plushie {
     }
 
     @Override
-    public void verifyTagAfterLoad(CompoundTag tag) {
+    public void verifyTagAfterLoad(@NotNull CompoundTag tag) {
         super.verifyTagAfterLoad(tag);
 
-        if (tag.contains(TAG_SKULL_OWNER, 8) && !Util.isBlank(tag.getString(TAG_SKULL_OWNER))) {
-            GameProfile profile = new GameProfile(null, tag.getString(TAG_SKULL_OWNER));
+        if (tag.contains(TAG_SKULL_OWNER, 10)) {
+            GameProfile profile = NbtUtils.readGameProfile(
+                    tag.getCompound(TAG_SKULL_OWNER)
+            );
 
             SkullBlockEntity.updateGameprofile(profile, resolved -> {
-                tag.put(TAG_SKULL_OWNER, NbtUtils.writeGameProfile(new CompoundTag(), resolved));
+                tag.put(
+                        TAG_SKULL_OWNER,
+                        NbtUtils.writeGameProfile(new CompoundTag(), resolved)
+                );
             });
         }
     }
 
-    public static ItemStack createPreMadePlushieAsync(String playerName, UUID uuid) {
+    public static ItemStack createPlushie(String playerName, UUID uuid) {
         ItemStack stack = new ItemStack(WeaversParadiseItems.PLAYER_PLUSHIE.get());
 
         GameProfile profile = new GameProfile(
@@ -82,13 +88,22 @@ public class PlushieItem extends Item implements Plushie {
         );
 
         CompoundTag tag = new CompoundTag();
-        tag.put("SkullOwner", NbtUtils.writeGameProfile(new CompoundTag(), profile));
+        tag.put(
+                TAG_SKULL_OWNER,
+                NbtUtils.writeGameProfile(new CompoundTag(), profile)
+        );
+
         stack.setTag(tag);
 
         SkullBlockEntity.updateGameprofile(profile, resolved -> {
-            CompoundTag newTag = new CompoundTag();
-            newTag.put("SkullOwner", NbtUtils.writeGameProfile(new CompoundTag(), resolved));
-            stack.setTag(newTag);
+            CompoundTag stackTag = stack.getTag();
+
+            if (stackTag != null) {
+                stackTag.put(
+                        TAG_SKULL_OWNER,
+                        NbtUtils.writeGameProfile(new CompoundTag(), resolved)
+                );
+            }
         });
 
         return stack;

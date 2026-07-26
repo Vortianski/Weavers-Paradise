@@ -1,6 +1,7 @@
 package xox.labvorty.weaversparadise.init;
 
 import net.minecraft.client.KeyMapping;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -9,7 +10,7 @@ import org.lwjgl.glfw.GLFW;
 import xox.labvorty.weaversparadise.WeaversParadiseMod;
 import xox.labvorty.weaversparadise.data.network.OpenUpperWearMessage;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class WeaversParadiseKeyMappings {
     public static KeyMapping MINIGAME_UP_BUTTON = new KeyMapping("weaversparadise.keybind.up_minigame", GLFW.GLFW_KEY_W, "key.categories.weaversparadise"){};
     public static KeyMapping MINIGAME_DOWN_BUTTON = new KeyMapping("weaversparadise.keybind.down_minigame", GLFW.GLFW_KEY_S, "key.categories.weaversparadise"){};
@@ -43,7 +44,7 @@ public class WeaversParadiseKeyMappings {
         event.register(OPEN_UPPER_WEAR_BUTTON);
     }
 
-    @Mod.EventBusSubscriber
+    @Mod.EventBusSubscriber(value = Dist.CLIENT)
     public static class KeyEventListener {
         @SubscribeEvent
         public static void onClientTick(TickEvent.ClientTickEvent event) {

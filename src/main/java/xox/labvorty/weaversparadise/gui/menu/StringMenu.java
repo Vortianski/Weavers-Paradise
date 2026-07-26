@@ -62,7 +62,6 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
 
         if (pos != null) {
             if (extraData.readableBytes() == 1) {
-                // bound to item
                 byte hand = extraData.readByte();
                 ItemStack itemstack = hand == 0 ? this.entity.getMainHandItem() : this.entity.getOffhandItem();
                 this.boundItemMatcher = () -> itemstack == (hand == 0 ? this.entity.getMainHandItem() : this.entity.getOffhandItem());
@@ -74,8 +73,7 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
                 });
 
             } else if (extraData.readableBytes() > 1) {
-                // bound to entity
-                extraData.readByte(); // drop padding
+                extraData.readByte();
                 this.boundEntity = world.getEntity(extraData.readVarInt());
 
                 if (this.boundEntity != null) {
@@ -87,7 +85,6 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
                 }
 
             } else {
-                // might be bound to block
                 this.boundBlockEntity = this.world.getBlockEntity(pos);
 
                 if (this.boundBlockEntity instanceof BaseContainerBlockEntity baseContainerBlockEntity) {
@@ -106,7 +103,7 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
         this.customSlots.put(0, this.addSlot(new SlotItemHandler(internal, 0, 183, 74) {
             @Override
             public boolean mayPlace(@NotNull ItemStack itemStack) {
-                return itemStack.is(WeaversParadiseItems.COTTON_SPOOL.get()) || itemStack.is(WeaversParadiseItems.RAW_COTTON.get()) || itemStack.is(Items.STRING) || itemStack.is(ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "wool")));
+                return true;
             }
         }));
 
@@ -123,7 +120,7 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
 
             @Override
             public boolean mayPlace(@NotNull ItemStack itemStack) {
-                return itemStack.is(WeaversParadiseItems.EMPTY_SPOOL.get());
+                return true;
             }
         }));
 
@@ -140,7 +137,7 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
 
             @Override
             public boolean mayPlace(@NotNull ItemStack itemStack) {
-                return itemStack.is(WeaversParadiseItems.EMPTY_SPOOL.get());
+                return true;
             }
         }));
 
@@ -157,7 +154,7 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
 
             @Override
             public boolean mayPlace(@NotNull ItemStack itemStack) {
-                return itemStack.is(WeaversParadiseItems.EMPTY_SPOOL.get());
+                return true;
             }
         }));
 
@@ -174,7 +171,7 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
 
             @Override
             public boolean mayPlace(@NotNull ItemStack itemStack) {
-                return itemStack.is(WeaversParadiseItems.EMPTY_SPOOL.get());
+                return true;
             }
         }));
 
@@ -191,7 +188,7 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
 
             @Override
             public boolean mayPlace(@NotNull ItemStack itemStack) {
-                return itemStack.is(WeaversParadiseItems.EMPTY_SPOOL.get());
+                return true;
             }
         }));
 
@@ -208,7 +205,7 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
 
             @Override
             public boolean mayPlace(@NotNull ItemStack itemStack) {
-                return itemStack.is(WeaversParadiseItems.EMPTY_SPOOL.get());
+                return true;
             }
         }));
 

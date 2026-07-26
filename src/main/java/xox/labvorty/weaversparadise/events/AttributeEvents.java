@@ -1,9 +1,11 @@
 package xox.labvorty.weaversparadise.events;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -11,7 +13,10 @@ import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
+import xox.labvorty.weaversparadise.WeaversParadiseMod;
 import xox.labvorty.weaversparadise.configs.CommonConfig;
+import xox.labvorty.weaversparadise.data.capabilities.ChromaticShiftProvider;
+import xox.labvorty.weaversparadise.data.capabilities.SculkPulseProvider;
 import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
 import xox.labvorty.weaversparadise.items.clothing.HandWarmersCottonItem;
 import xox.labvorty.weaversparadise.items.clothing.HandWarmersSilkItem;
@@ -85,5 +90,26 @@ public class AttributeEvents {
                 }
             });
         }
+    }
+
+    @SubscribeEvent
+    public static void attachCapabilities(
+            AttachCapabilitiesEvent<Entity> event
+    ) {
+        event.addCapability(
+                ResourceLocation.fromNamespaceAndPath(
+                        WeaversParadiseMod.MOD_ID,
+                        "chromatic_shift"
+                ),
+                new ChromaticShiftProvider()
+        );
+
+        event.addCapability(
+                ResourceLocation.fromNamespaceAndPath(
+                        WeaversParadiseMod.MOD_ID,
+                        "sculk_pulse"
+                ),
+                new SculkPulseProvider()
+        );
     }
 }

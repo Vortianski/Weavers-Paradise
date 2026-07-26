@@ -22,8 +22,6 @@ import xox.labvorty.weaversparadise.items.dye.PigmentItem;
 import xox.labvorty.weaversparadise.items.materials.ChromaticBloomFruitItem;
 import xox.labvorty.weaversparadise.items.materials.ChromaticDustItem;
 
-import java.util.List;
-
 @Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class WeaversParadiseClientRegistry {
     @SubscribeEvent

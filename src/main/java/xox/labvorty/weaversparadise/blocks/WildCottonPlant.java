@@ -39,7 +39,6 @@ public class WildCottonPlant extends FlowerBlock {
 
     @Override
     public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-
         LazyOptional<ICuriosItemHandler> handlerOpt = CuriosApi.getCuriosInventory(player);
 
         if (handlerOpt.isPresent()) {

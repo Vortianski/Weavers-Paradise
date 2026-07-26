@@ -38,7 +38,7 @@ public class PlushieRenameRecipe extends ShapelessRecipe {
                         ? input.getHoverName().getString()
                         : "Steve";
 
-                return PlushieItem.createPreMadePlushieAsync(newName, null);
+                return PlushieItem.createPlushie(newName, null);
             }
         }
 

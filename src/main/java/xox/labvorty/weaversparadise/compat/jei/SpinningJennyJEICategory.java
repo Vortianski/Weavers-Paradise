@@ -51,22 +51,25 @@ public class SpinningJennyJEICategory implements IRecipeCategory<SpinningJennyJE
 
     @Override
     public void draw(@NotNull SpinningJennyJEIRecipe recipe, @NotNull IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        guiGraphics.blit(ResourceLocation.fromNamespaceAndPath("weaversparadise", "textures/recipes/spinning_jenny.png"), 0, 0, 240, 155, 0, 0, 240, 155, 240, 155);
+        guiGraphics.blit(
+                ResourceLocation.fromNamespaceAndPath("weaversparadise", "textures/recipes/spinning_jenny.png"),
+                0, 0, 240, 155, 0, 0, 240, 155, 240, 155
+        );
 
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.level != null) {
             int cycleticks = (int)(minecraft.level.getGameTime() % 100);
-
-            guiGraphics.blit(ResourceLocation.parse("weaversparadise:textures/screens/arrow_full.png"), 152, 93, 0, 0, 31, 20, 31, 20);
-            guiGraphics.blit(ResourceLocation.parse("weaversparadise:textures/screens/arrow_empty.png"), 152, 93, 0, 0, (int)(31 * (1 - cycleticks / 100.0)), 20, 31, 20);
+            guiGraphics.blit(ResourceLocation.parse("weaversparadise:textures/screens/arrow_full.png"),
+                    152, 93, 0, 0, 31, 20, 31, 20);
+            guiGraphics.blit(ResourceLocation.parse("weaversparadise:textures/screens/arrow_empty.png"),
+                    152, 93, 0, 0, (int)(31 * (1 - cycleticks / 100.0)), 20, 31, 20);
         }
     }
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, SpinningJennyJEIRecipe recipe, @NotNull IFocusGroup focuses) {
-        builder.addInputSlot(36 + 8, 80 + 15).addIngredients(recipe.getInput().get(0));
-        builder.addInputSlot(183 + 8, 82 + 15).addIngredients(recipe.getInput().get(1))
-                .setSlotName("count_" + recipe.getCountRequired());
+        builder.addInputSlot(183 + 8, 82 + 15).addIngredients(recipe.getInput());
+        builder.addInputSlot(36 + 8, 80 + 15).addIngredients(recipe.getCatalyst()).setSlotName("ingredient_count_" + recipe.getCountRequired());
         builder.addOutputSlot(53 + 8, 80 + 15).addItemStack(recipe.getOutput());
     }
 }
