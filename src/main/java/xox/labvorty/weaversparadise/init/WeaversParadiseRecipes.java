@@ -14,6 +14,10 @@ public class WeaversParadiseRecipes {
             "quality_crafting",
             () -> QualityResultRecipe.Serializer.INSTANCE
     );
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<QualityResultShapelessRecipe>> QUALITY_SHAPELESS_RESULT_SERIALIZER = RECIPE_SERIALIZERS.register(
+            "quality_shapeless_crafting",
+            () -> QualityResultShapelessRecipe.Serializer.INSTANCE
+    );
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<DyeCoreUpgradeRecipe>> DYE_CORE_UPGRADE_SERIALIZER = RECIPE_SERIALIZERS.register(
             "dye_core_upgrade",
             () -> DyeCoreUpgradeRecipe.Serializer.INSTANCE

@@ -13,47 +13,14 @@ import xox.labvorty.weaversparadise.data.texture.ItemTexture;
 import xox.labvorty.weaversparadise.data.texture.TextureRegistry;
 import xox.labvorty.weaversparadise.model.PantsModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ColorHandlers;
-import xox.labvorty.weaversparadise.renderers.helpers.PantsRenderingData;
 import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
+import xox.labvorty.weaversparadise.renderers.helpers.SingleSidedClothingRenderingData;
 
 public class PantsModelRenderer {
-    private Minecraft minecraft;
-    private int ticks;
-
-    private int pCO;
-    private int sCO;
-    private int pCT;
-    private int sCT;
-    private String dTO;
-    private String dTT;
-    private String sT;
-    private int lVO;
-    private int lVT;
-    private String mat;
-
-    private int finalCO;
-    private int finalCT;
-
-    private int finalL1;
-    private int finalL2;
-
-    public void initData(PantsRenderingData renderingData) {
-        this.pCO = renderingData.getPrimaryColorOne();
-        this.sCO = renderingData.getSecondaryColorOne();
-        this.pCT = renderingData.getPrimaryColorTwo();
-        this.sCT = renderingData.getSecondaryColorTwo();
-        this.dTO = renderingData.getDyeTypeOne();
-        this.dTT = renderingData.getDyeTypeTwo();
-        this.sT = renderingData.getStencilType();
-        this.lVO = renderingData.getLightValueOne();
-        this.lVT = renderingData.getLightValueTwo();
-        this.mat = renderingData.getMaterial();
-    }
-
-    public void renderModel(
+    public static void renderModel(
             MultiBufferSource multiBufferSource,
-            PantsModel model,
-            PantsRenderingData renderingData,
+            PantsModel<?> model,
+            SingleSidedClothingRenderingData renderingData,
             LivingEntity livingEntity,
             float scaleX,
             float scaleY,
@@ -70,20 +37,17 @@ public class PantsModelRenderer {
             PoseStack poseStack,
             int packedLight
     ) {
-        initData(renderingData);
-
         RenderingUtils renderingUtils = new RenderingUtils();
-        minecraft = Minecraft.getInstance();
-        ticks = (int)minecraft.level.getGameTime();
+        Minecraft minecraft = Minecraft.getInstance();
+        int ticks = 0;
+        if (minecraft.level != null) {
+            ticks = (int)minecraft.level.getGameTime();
+        }
 
-        Pair<Integer, Integer> fCO = ColorHandlers.handle(dTO, pCO, sCO, lVO, livingEntity, packedLight, ticks);
-        Pair<Integer, Integer> fCT = ColorHandlers.handle(dTT, pCT, sCT, lVT, livingEntity, packedLight, ticks);
-        finalCO = fCO.getA();
-        finalL1 = fCO.getB();
-        finalCT = fCT.getA();
-        finalL2 = fCT.getB();
+        Pair<Integer, Integer> fCO = ColorHandlers.handle(renderingData.dTO(), renderingData.pCO(), renderingData.sCO(), renderingData.lVO(), livingEntity, packedLight, ticks);
+        Pair<Integer, Integer> fCT = ColorHandlers.handle(renderingData.dTT(), renderingData.pCT(), renderingData.sCT(), renderingData.lVT(), livingEntity, packedLight, ticks);
 
-        ItemTexture texture = TextureRegistry.find("pants", sT, mat);
+        ItemTexture texture = TextureRegistry.find("pants", renderingData.sT(), renderingData.mat());
         boolean renderType = texture.getRenderType();
         ResourceLocation tex1 = texture.getTextureOne();
         ResourceLocation tex2 = texture.getTextureTwo();
@@ -106,23 +70,23 @@ public class PantsModelRenderer {
 
         poseStack.mulPose(Axis.ZP.rotationDegrees(zRot));
 
-        VertexConsumer vc1 = renderingUtils.parseVC(multiBufferSource, dTO, tex1, "pants");
+        VertexConsumer vc1 = renderingUtils.parseVC(multiBufferSource, renderingData.dTO(), tex1, "pants", renderingData.glint(), renderingData.glintColor());
         model.renderToBuffer(
                 poseStack,
                 vc1,
-                finalL1,
+                fCO.getB(),
                 OverlayTexture.NO_OVERLAY,
-                finalCO
+                fCO.getA()
         );
 
         if (renderType) {
-            VertexConsumer vc2 = renderingUtils.parseVC(multiBufferSource, dTT, tex2, "pants");
+            VertexConsumer vc2 = renderingUtils.parseVC(multiBufferSource, renderingData.dTT(), tex2, "pants", renderingData.glint(), renderingData.glintColor());
             model.renderToBuffer(
                     poseStack,
                     vc2,
-                    finalL2,
+                    fCT.getB(),
                     OverlayTexture.NO_OVERLAY,
-                    finalCT
+                    fCT.getA()
             );
         }
 

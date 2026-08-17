@@ -1,14 +1,17 @@
 {
   "entities": [
+    "minecraft:armor_stand",
     "minecraft:player"
   ],
   "slots": [
     "legwear",
     "choker_trinket",
+    "head",
     "gloves",
     "pants",
     "upperwear",
     "necklace",
-    "cape"
+    "cape",
+    "armor_cosmetics"
   ]
 }

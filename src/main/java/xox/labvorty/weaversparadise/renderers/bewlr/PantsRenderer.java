@@ -14,7 +14,7 @@ import xox.labvorty.weaversparadise.items.clothing.PantsJeansItem;
 import xox.labvorty.weaversparadise.items.clothing.PantsSilkItem;
 import xox.labvorty.weaversparadise.items.clothing.defined.PantsInterface;
 import xox.labvorty.weaversparadise.model.PantsModel;
-import xox.labvorty.weaversparadise.renderers.helpers.PantsRenderingData;
+import xox.labvorty.weaversparadise.renderers.helpers.SingleSidedClothingRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.PantsModelRenderer;
 
 public class PantsRenderer extends BlockEntityWithoutLevelRenderer {
@@ -60,15 +60,16 @@ public class PantsRenderer extends BlockEntityWithoutLevelRenderer {
             case GUI -> {
                 scale = 0.9f;
                 ytranslation = 1.3f;
-                additionalYrot = 45f;
-                additionalXrot = 22.5f;
+                additionalYrot = -225f;
+                additionalXrot = -22.5f;
             }
             case THIRD_PERSON_LEFT_HAND, THIRD_PERSON_RIGHT_HAND, FIRST_PERSON_LEFT_HAND, FIRST_PERSON_RIGHT_HAND -> {
                 scale = 0.5f;
                 ytranslation = 0.9f;
+                additionalYrot = 180f;
             }
             case FIXED -> {
-                additionalYrot = 180f;
+                additionalYrot = 0f;
             }
             case GROUND -> {
                 ytranslation = 1.25f;
@@ -76,44 +77,35 @@ public class PantsRenderer extends BlockEntityWithoutLevelRenderer {
             }
         }
 
-        int primaryColorOne = pantsInterface.getItemMainColor(stack, 1);
-        int secondaryColorOne = pantsInterface.getItemSecondaryColor(stack, 1);
-        int primaryColorTwo = pantsInterface.getItemMainColor(stack, 2);
-        int secondaryColorTwo = pantsInterface.getItemSecondaryColor(stack, 2);
-        String dyeTypeOne = pantsInterface.getItemDyeType(stack, 1);
-        String dyeTypeTwo = pantsInterface.getItemDyeType(stack, 2);
-        String stensilType = pantsInterface.getStensilType(stack);
-        int lightValueOne = pantsInterface.getItemLightValue(stack, 1);
-        int lightValueTwo = pantsInterface.getItemLightValue(stack, 2);
-        Minecraft mc = Minecraft.getInstance();
-
-        PantsModelRenderer pantsModelRenderer = new PantsModelRenderer();
-
-        pantsModelRenderer.renderModel(
+        PantsModelRenderer.renderModel(
                 buffer,
                 model,
-                new PantsRenderingData(
-                        primaryColorOne,
-                        secondaryColorOne,
-                        primaryColorTwo,
-                        secondaryColorTwo,
-                        dyeTypeOne,
-                        dyeTypeTwo,
-                        stensilType,
-                        lightValueOne,
-                        lightValueTwo,
-                        material
+                new SingleSidedClothingRenderingData(
+                        pantsInterface.getFlag(stack),
+                        pantsInterface.getItemMainColor(stack, 1),
+                        pantsInterface.getItemSecondaryColor(stack, 1),
+                        pantsInterface.getItemMainColor(stack, 2),
+                        pantsInterface.getItemSecondaryColor(stack, 2),
+                        pantsInterface.getItemDyeType(stack, 1),
+                        pantsInterface.getItemDyeType(stack, 2),
+                        pantsInterface.getStensilType(stack),
+                        pantsInterface.getItemLightValue(stack, 1),
+                        pantsInterface.getItemLightValue(stack, 2),
+                        material,
+                        stack.isEnchanted(),
+                        pantsInterface.getGlintColor(stack),
+                        pantsInterface.getAdditionalData(stack)
                 ),
-                mc.player,
+                Minecraft.getInstance().player,
                 scale,
-                -scale,
                 scale,
-                0,
+                scale,
+                180,
                 180,
                 0,
                 -0.5f,
-                ytranslation,
-                -0.5f,
+                -ytranslation,
+                0.5f,
                 additionalXrot,
                 additionalYrot,
                 additionalZrot,

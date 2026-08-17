@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xox.labvorty.vortylib.init.VortyLibRenderTypes;
 import xox.labvorty.weaversparadise.init.WeaversParadiseAttachmentTypes;
-import xox.labvorty.weaversparadise.init.WeaversParadiseMobEffects;
 
 @Mixin(LivingEntityRenderer.class)
 public class LivingRendererMixin<T extends LivingEntity> {

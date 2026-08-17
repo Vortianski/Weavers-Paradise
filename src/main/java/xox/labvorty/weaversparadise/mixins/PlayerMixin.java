@@ -5,6 +5,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -15,8 +16,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
-import xox.labvorty.weaversparadise.items.clothing.BellItem;
-import xox.labvorty.weaversparadise.items.clothing.CatRingItem;
+import xox.labvorty.weaversparadise.init.WeaversParadiseSoundEvents;
+import xox.labvorty.weaversparadise.items.clothing.*;
 
 import java.util.Optional;
 
@@ -24,8 +25,7 @@ import java.util.Optional;
 public class PlayerMixin {
     @Inject(
             method = "playStepSound",
-            at = @At("HEAD"),
-            cancellable = true
+            at = @At("HEAD")
     )
     private void weaversparadise$makePlayerNoteBlock(BlockPos pos, BlockState state, CallbackInfo ci) {
         Player player = (Player) (Object) this;
@@ -53,6 +53,22 @@ public class PlayerMixin {
     }
 
     @Inject(
+            method = "getFallSounds",
+            at = @At("HEAD"),
+            cancellable = true
+    )
+    private void weaversparadise$fallSound(CallbackInfoReturnable<LivingEntity.Fallsounds> cir) {
+        Player player = (Player) (Object) this;
+        Optional<ICuriosItemHandler> handler = CuriosApi.getCuriosInventory(player);
+
+        if (!handler.isPresent()) return;
+
+        if (handler.get().isEquipped(itemStack -> itemStack.getItem() instanceof HeartItem)) {
+            cir.setReturnValue(new LivingEntity.Fallsounds(WeaversParadiseSoundEvents.FALL_SMALL_OLD.get(), WeaversParadiseSoundEvents.FALL_BIG_OLD.get()));
+        }
+    }
+
+    @Inject(
             method = "getHurtSound",
             at = @At("HEAD"),
             cancellable = true
@@ -63,10 +79,14 @@ public class PlayerMixin {
 
         if (!handler.isPresent()) return;
 
-        if (!handler.get().isEquipped(stack -> stack.getItem() instanceof CatRingItem catRingItem)) {
-            return;
+        if (handler.get().isEquipped(stack -> stack.getItem() instanceof CatRingItem catRingItem)) {
+            cir.setReturnValue(SoundEvents.CAT_HURT);
+        } else if (handler.get().isEquipped(itemStack -> itemStack.getItem() instanceof PlateItem plateItem)) {
+            cir.setReturnValue(SoundEvents.WOLF_HURT);
+        } else if (handler.get().isEquipped(itemStack -> itemStack.getItem() instanceof RingItem ringItem)) {
+            cir.setReturnValue(SoundEvents.FOX_HURT);
+        } else if (handler.get().isEquipped(itemStack -> itemStack.getItem() instanceof HeartItem heartItem)) {
+            cir.setReturnValue(WeaversParadiseSoundEvents.HURT_OLD.get());
         }
-
-        cir.setReturnValue(SoundEvents.CAT_HURT);
     }
 }

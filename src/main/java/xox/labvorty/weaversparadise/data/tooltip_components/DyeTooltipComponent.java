@@ -12,14 +12,16 @@ public class DyeTooltipComponent implements TooltipComponent {
     private final int lightValue;
     private final int primaryColor;
     private final int secondaryColor;
+    private final boolean isCore;
 
-    public DyeTooltipComponent(DyeIcon dyeIcon, String text, String type, int lightValue, int primaryColor, int secondaryColor) {
+    public DyeTooltipComponent(DyeIcon dyeIcon, String text, String type, int lightValue, int primaryColor, int secondaryColor, boolean isCore) {
         this.dyeIcon = dyeIcon;
         this.text = text;
         this.type = type;
         this.lightValue = lightValue;
         this.primaryColor = primaryColor;
         this.secondaryColor = secondaryColor;
+        this.isCore = isCore;
     }
 
     public int getWidth() {
@@ -52,5 +54,9 @@ public class DyeTooltipComponent implements TooltipComponent {
 
     public int getSecondaryColor() {
         return this.secondaryColor;
+    }
+
+    public boolean isCore() {
+        return isCore;
     }
 }

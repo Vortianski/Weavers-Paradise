@@ -1,6 +1,7 @@
 package xox.labvorty.weaversparadise.items.clothing.defined;
 
 import net.minecraft.world.item.ItemStack;
+import org.joml.Vector3f;
 
 public interface CapeInterface {
     default int getItemMainColor(ItemStack stack, int part) {
@@ -21,5 +22,9 @@ public interface CapeInterface {
 
     default String getStensilType(ItemStack stack) {
         return "";
+    }
+
+    default Vector3f getGlintColor(ItemStack itemStack) {
+        return new Vector3f(1, 1, 1);
     }
 }

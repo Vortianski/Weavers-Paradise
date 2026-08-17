@@ -32,7 +32,7 @@ public class QualityClientTooltipComponent implements ClientTooltipComponent {
     }
 
     @Override
-    public void renderImage(Font font, int x, int y, GuiGraphics guiGraphics) {
+    public void renderImage(@NotNull Font font, int x, int y, @NotNull GuiGraphics guiGraphics) {
         RenderSystem.enableBlend();
 
         for (int i = 0; i < textures.size(); i++) {

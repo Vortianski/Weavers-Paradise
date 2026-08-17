@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "weaversparadise:starbloom"
+    }
+  ],
+  "result": {
+    "id": "weaversparadise:starbloom_fruit",
+    "count": 1
+  }
+}

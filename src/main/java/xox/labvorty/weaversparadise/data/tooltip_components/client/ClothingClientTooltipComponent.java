@@ -1,13 +1,13 @@
 package xox.labvorty.weaversparadise.data.tooltip_components.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.data.tooltip_components.DyeTypeRegistry;
 import xox.labvorty.weaversparadise.data.tooltip_components.helper.DyeTooltipData;
 import xox.labvorty.weaversparadise.data.tooltip_components.helper.DyeTooltipEntry;
@@ -30,7 +30,7 @@ public class ClothingClientTooltipComponent implements ClientTooltipComponent {
     }
 
     @Override
-    public int getWidth(Font font) {
+    public int getWidth(@NotNull Font font) {
         int maxTextWidth = 0;
 
         for (DyeTooltipEntry entry : entries) {
@@ -41,11 +41,8 @@ public class ClothingClientTooltipComponent implements ClientTooltipComponent {
     }
 
     @Override
-    public void renderImage(Font font, int x, int y, GuiGraphics guiGraphics) {
+    public void renderImage(@NotNull Font font, int x, int y, @NotNull GuiGraphics guiGraphics) {
         RenderSystem.enableBlend();
-
-        Minecraft mc = Minecraft.getInstance();
-        int ticks = mc.level != null ? (int) mc.level.getGameTime() : 0;
 
         for (int i = 0; i < textures.size(); i++) {
             guiGraphics.blit(textures.get(i), x + (i * 9), y, 0, 0, 8, 8, 8, 8);

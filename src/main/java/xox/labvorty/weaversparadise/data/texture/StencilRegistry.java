@@ -20,9 +20,20 @@ public class StencilRegistry {
         return stencils.stream().filter(l -> l.name().equals(name)).toList();
     }
 
+    public static List<String> getStencilsForItem(Item item) {
+        return stencils.stream()
+                .filter(l -> l.item().equals(item))
+                .map(Stencil::name)
+                .toList();
+    }
+
     public static boolean acceptsStencil(String name, Item item) {
         return !stencils.stream().filter(l -> l.name().equals(name)).filter(l -> l.item.equals(item)).toList().isEmpty();
     }
 
     public record Stencil(String name, Item item) {}
+
+    public static void clear() {
+        stencils.clear();
+    }
 }

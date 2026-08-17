@@ -8,7 +8,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import oshi.util.tuples.Pair;
-import xox.labvorty.weaversparadise.data.rendering.GlobalRenderingData;
 import xox.labvorty.weaversparadise.init.WeaversParadiseAttachmentTypes;
 
 public class ColorHandlers {
@@ -32,7 +31,12 @@ public class ColorHandlers {
 
         if (dyeType.equals("biome")) {
             BlockPos bpos = new BlockPos((int)livingEntity.getX(), (int)livingEntity.getY(), (int)livingEntity.getZ());
-            int c = minecraft.level.getBiome(bpos).value().getGrassColor(livingEntity.getX(), livingEntity.getZ());
+            int c = 0;
+
+            if (minecraft.level != null) {
+                c = minecraft.level.getBiome(bpos).value().getGrassColor(livingEntity.getX(), livingEntity.getZ());
+            }
+
             c = 255 << 24 | ((c >> 16) & 0xFF) << 16 | ((c >> 8) & 0xFF) << 8 | (c & 0xFF);
 
             finalColor = c;
@@ -84,7 +88,10 @@ public class ColorHandlers {
         }
 
         if (dyeType.equals("day_time")) {
-            int time = (int)minecraft.level.getDayTime() % 24000;
+            int time = 0;
+            if (minecraft.level != null) {
+                time = (int)minecraft.level.getDayTime() % 24000;
+            }
 
             float t;
             if (time >= 6000 && time <= 18000) {
@@ -98,7 +105,10 @@ public class ColorHandlers {
         }
 
         if (dyeType.equals("colored_day_time")) {
-            int time = (int)minecraft.level.getDayTime() % 24000;
+            int time = 0;
+            if (minecraft.level != null) {
+                time = (int)minecraft.level.getDayTime() % 24000;
+            }
 
             float t;
             if (time >= 6000 && time <= 18000) {
@@ -131,8 +141,12 @@ public class ColorHandlers {
         }
 
         if (dyeType.equals("height_bedrock")) {
-            int absoluteMinimum = minecraft.level.getMinBuildHeight();
-            int absoluteMaximum = minecraft.level.getMaxBuildHeight();
+            int absoluteMinimum = -1;
+            int absoluteMaximum = 1;
+            if (minecraft.level != null) {
+                absoluteMinimum = minecraft.level.getMinBuildHeight();
+                absoluteMaximum = minecraft.level.getMaxBuildHeight();
+            }
             int height = (int)livingEntity.getY();
 
             float value = Mth.clamp(((float)height - (float)absoluteMinimum) / ((float)absoluteMaximum - (float)absoluteMinimum), 0, 1);
@@ -153,9 +167,16 @@ public class ColorHandlers {
         }
 
         if (dyeType.equals("height_sea")) {
-            double minY = minecraft.level.getMinBuildHeight();
-            double maxY = minecraft.level.getMaxBuildHeight();
-            double seaY = minecraft.level.getSeaLevel();
+            double minY = -1;
+            double maxY = 1;
+            double seaY = 0;
+
+            if (minecraft.level != null) {
+                minY = minecraft.level.getMinBuildHeight();
+                maxY = minecraft.level.getMaxBuildHeight();
+                seaY = minecraft.level.getSeaLevel();
+            }
+
             double playerY = livingEntity.getY();
 
             double distanceAbove = maxY - seaY;

@@ -1,9 +1,11 @@
 package xox.labvorty.weaversparadise.items.clothing;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -15,9 +17,14 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
+import org.jetbrains.annotations.NotNull;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@SuppressWarnings("deprecation")
 public class CatRingItem extends Item implements ICurioItem {
     public CatRingItem() {
         super(
@@ -39,8 +46,8 @@ public class CatRingItem extends Item implements ICurioItem {
     }
 
     @Override
-    public boolean isValidRepairItem(ItemStack stack, ItemStack repairCandidate) {
-        CompoundTag compoundTag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+    public boolean isValidRepairItem(@NotNull ItemStack itemStack, @NotNull ItemStack repairCandidate) {
+        CompoundTag compoundTag = itemStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
         Item item = BuiltInRegistries.ITEM.get(ResourceLocation.parse(compoundTag.getString("metalType")));
         Item pushedCandidate = Items.BEDROCK;
         if (item != Items.AIR && item != Items.STONE) {
@@ -51,18 +58,13 @@ public class CatRingItem extends Item implements ICurioItem {
     }
 
     @Override
-    public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+    public boolean supportsEnchantment(@NotNull ItemStack itemStack, Holder<Enchantment> enchantment) {
         return enchantment.is(Enchantments.UNBREAKING) || enchantment.is(Enchantments.VANISHING_CURSE) || enchantment.is(Enchantments.MENDING) || enchantment.is(Enchantments.BINDING_CURSE);
     }
 
     @Override
-    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-        return EnchantmentHelper.getEnchantmentsForCrafting(book).keySet().stream().anyMatch(holder -> {
-            if (holder.is(Enchantments.MENDING) || holder.is(Enchantments.UNBREAKING) || holder.is(Enchantments.VANISHING_CURSE) || holder.is(Enchantments.BINDING_CURSE)) {
-                return true;
-            }
-            return false;
-        });
+    public boolean isBookEnchantable(@NotNull ItemStack itemStack, @NotNull ItemStack book) {
+        return EnchantmentHelper.getEnchantmentsForCrafting(book).keySet().stream().anyMatch(holder -> holder.is(Enchantments.MENDING) || holder.is(Enchantments.UNBREAKING) || holder.is(Enchantments.VANISHING_CURSE) || holder.is(Enchantments.BINDING_CURSE));
     }
 
     @Override
@@ -84,7 +86,17 @@ public class CatRingItem extends Item implements ICurioItem {
     }
 
     @Override
-    public boolean isEnchantable(ItemStack stack) {
+    public boolean isEnchantable(@NotNull ItemStack itemStack) {
         return true;
+    }
+
+    @Override
+    public List<Component> getAttributesTooltip(List<Component> tooltips, TooltipContext context, ItemStack stack) {
+        List<Component> components = new ArrayList<>();
+
+        components.add(Component.translatable("curios.modifiers.choker_trinket").withStyle(style -> style.withColor(ChatFormatting.GOLD)));
+        components.add(Component.translatable("weaversparadise.tooltip.cat_ring").withStyle(style -> style.withColor(ChatFormatting.BLUE)));
+
+        return components;
     }
 }

@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -21,22 +20,21 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.CustomData;
-import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 import oshi.util.tuples.Pair;
 import xox.labvorty.weaversparadise.data.texture.ItemTexture;
 import xox.labvorty.weaversparadise.data.texture.TextureRegistry;
 import xox.labvorty.weaversparadise.gui.menu.DyeingMenu;
-import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.clothing.*;
+import xox.labvorty.weaversparadise.items.clothing.defined.*;
 import xox.labvorty.weaversparadise.mixin_helpers.PlayerModelInterface;
-import xox.labvorty.weaversparadise.model.ChokerModel;
-import xox.labvorty.weaversparadise.model.PantsModel;
-import xox.labvorty.weaversparadise.model.ThighHighsModel;
-import xox.labvorty.weaversparadise.model.UpperWearModel;
-import xox.labvorty.weaversparadise.renderers.helpers.*;
+import xox.labvorty.weaversparadise.model.*;
+import xox.labvorty.weaversparadise.renderers.helpers.ColorHandlers;
+import xox.labvorty.weaversparadise.renderers.helpers.DoubleSidedClothingRenderingData;
+import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
+import xox.labvorty.weaversparadise.renderers.helpers.SingleSidedClothingRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.*;
 
 import java.util.HashMap;
@@ -44,94 +42,79 @@ import java.util.HashMap;
 @OnlyIn(Dist.CLIENT)
 public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
     private final static HashMap<String, Object> guistate = DyeingMenu.guistate;
-    private final Level world;
-    private final int x, y, z;
-    private final Player entity;
-    private ItemStack stack = ItemStack.EMPTY;
+    private final Player player;
+    private ItemStack itemStack = ItemStack.EMPTY;
     private float modelYaw = 180f;
     private int lastMouseX = -1;
-    private static final ThighHighsModel model = new ThighHighsModel(Minecraft.getInstance().getEntityModels().bakeLayer(ThighHighsModel.LAYER_LOCATION));
-    private static final ThighHighsModel model1 = new ThighHighsModel(Minecraft.getInstance().getEntityModels().bakeLayer(ThighHighsModel.LAYER_LOCATION));
-    private static final UpperWearModel model2 = new UpperWearModel(Minecraft.getInstance().getEntityModels().bakeLayer(UpperWearModel.LAYER_LOCATION));
-    private static final ChokerModel model3 = new ChokerModel(Minecraft.getInstance().getEntityModels().bakeLayer(ChokerModel.LAYER_LOCATION));
-    private static final PantsModel model4 = new PantsModel(Minecraft.getInstance().getEntityModels().bakeLayer(PantsModel.LAYER_LOCATION));
-    private static final PlayerModel model5 = new PlayerModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.PLAYER), false);
+    private static final ThighHighsModel<?> thighHighsModel = new ThighHighsModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(ThighHighsModel.LAYER_LOCATION));
+    private static final UpperWearModel<?> upperWearModel = new UpperWearModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(UpperWearModel.LAYER_LOCATION));
+    private static final ChokerModel<?> chokerModel = new ChokerModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(ChokerModel.LAYER_LOCATION));
+    private static final PantsModel<?> pantsModel = new PantsModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(PantsModel.LAYER_LOCATION));
+    private static final PlayerModel<?> playerModel = new PlayerModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.PLAYER), false);
+    private static final CottonSkirtModel<?> cottonSkirtModel = new CottonSkirtModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(CottonSkirtModel.LAYER_LOCATION));
+    private static final CapModel<?> capModel = new CapModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(CapModel.LAYER_LOCATION));
+    private static final UshankaModel<?> ushankaModel = new UshankaModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(UshankaModel.LAYER_LOCATION));
+    private static final PomponHatModel<?> pomponHatModel = new PomponHatModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(PomponHatModel.LAYER_LOCATION));
 
     public DyeingScreen(DyeingMenu container, Inventory inventory, Component text) {
         super(container, inventory, text);
-        this.world = container.world;
-        this.x = container.x;
-        this.y = container.y;
-        this.z = container.z;
-        this.entity = container.entity;
+        this.player = container.entity;
         this.imageWidth = 176;
         this.imageHeight = 220;
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(guiGraphics, mouseX, mouseY, partialTicks);
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
         this.renderTooltip(guiGraphics, mouseX, mouseY);
 
         PoseStack poseStack = guiGraphics.pose();
+        if (minecraft == null) return;
+        MultiBufferSource.BufferSource multiBufferSource = minecraft.renderBuffers().bufferSource();
 
-        ThighHighModelRenderer thighHighModelRenderer = new ThighHighModelRenderer();
-        HandWarmersSpecialModelRenderer handWarmersSpecialModelRenderer = new HandWarmersSpecialModelRenderer();
-        ShirtModelRenderer shirtModelRenderer = new ShirtModelRenderer();
-        ChokerModelRenderer chokerModelRenderer = new ChokerModelRenderer();
-        PantsModelRenderer pantsModelRenderer = new PantsModelRenderer();
+        if (itemStack.getItem() instanceof ThighHighsInterface thighHighsInterface) {
+            String material;
 
-        if (stack.getItem() instanceof ThighHighsCottonItem cottonThighHighs) {
-            Minecraft mc = Minecraft.getInstance();
+            switch (itemStack.getItem()) {
+                case ThighHighsCottonItem thighHighsCottonItem -> material = "cotton";
+                case ThighHighsSilkItem thighHighsSilkItem -> material = "silk";
+                case ThighHighsWoolItem thighHighsWoolItem -> material = "wool";
+                default -> {
+                    return;
+                }
+            }
 
-            MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
-            int ticks = (int) mc.level.getGameTime();
-            int primaryColorLeftOne = cottonThighHighs.getItemMainColor(stack, "left", 1);
-            int secondaryColorLeftOne = cottonThighHighs.getItemSecondaryColor(stack, "left", 1);
-            int primaryColorRightOne = cottonThighHighs.getItemMainColor(stack, "right", 1);
-            int secondaryColorRightOne = cottonThighHighs.getItemSecondaryColor(stack, "right", 1);
-            int primaryColorLeftTwo = cottonThighHighs.getItemMainColor(stack, "left", 2);
-            int secondaryColorLeftTwo = cottonThighHighs.getItemSecondaryColor(stack, "left", 2);
-            int primaryColorRightTwo = cottonThighHighs.getItemMainColor(stack, "right", 2);
-            int secondaryColorRightTwo = cottonThighHighs.getItemSecondaryColor(stack, "right", 2);
-            String dyeTypeLeftOne = cottonThighHighs.getItemDyeType(stack, "left", 1);
-            String dyeTypeRightOne = cottonThighHighs.getItemDyeType(stack, "right", 1);
-            String dyeTypeLeftTwo = cottonThighHighs.getItemDyeType(stack, "left", 2);
-            String dyeTypeRightTwo = cottonThighHighs.getItemDyeType(stack, "right", 2);
-            String stensilTypeLeft = cottonThighHighs.getStensilType(stack, "left");
-            String stensilTypeRight = cottonThighHighs.getStensilType(stack, "right");
-            int lightValueLeftOne = cottonThighHighs.getItemLightValue(stack, "left", 1);
-            int lightValueLeftTwo = cottonThighHighs.getItemLightValue(stack, "left", 2);
-            int lightValueRightOne = cottonThighHighs.getItemLightValue(stack, "right", 1);
-            int lightValueRightTwo = cottonThighHighs.getItemLightValue(stack, "right", 2);
-
-            thighHighModelRenderer.renderModel(
-                    buffer,
-                    model,
-                    new ThighHighsRenderingData(
-                            primaryColorLeftOne,
-                            secondaryColorLeftOne,
-                            primaryColorRightOne,
-                            secondaryColorRightOne,
-                            primaryColorLeftTwo,
-                            secondaryColorLeftTwo,
-                            primaryColorRightTwo,
-                            secondaryColorRightTwo,
-                            dyeTypeLeftOne,
-                            dyeTypeRightOne,
-                            dyeTypeLeftTwo,
-                            dyeTypeRightTwo,
-                            stensilTypeLeft,
-                            stensilTypeRight,
-                            lightValueLeftOne,
-                            lightValueLeftTwo,
-                            lightValueRightOne,
-                            lightValueRightTwo,
-                            "cotton"
+            ThighHighsModelRenderer.renderModel(
+                    multiBufferSource,
+                    thighHighsModel,
+                    new DoubleSidedClothingRenderingData(
+                            thighHighsInterface.getFlag(itemStack),
+                            thighHighsInterface.getItemMainColor(itemStack, "left", 1),
+                            thighHighsInterface.getItemSecondaryColor(itemStack, "left", 1),
+                            thighHighsInterface.getItemMainColor(itemStack, "right", 1),
+                            thighHighsInterface.getItemSecondaryColor(itemStack, "right", 1),
+                            thighHighsInterface.getItemMainColor(itemStack, "left", 2),
+                            thighHighsInterface.getItemSecondaryColor(itemStack, "left", 2),
+                            thighHighsInterface.getItemMainColor(itemStack, "right", 2),
+                            thighHighsInterface.getItemSecondaryColor(itemStack, "right", 2),
+                            thighHighsInterface.getItemDyeType(itemStack, "left", 1),
+                            thighHighsInterface.getItemDyeType(itemStack, "right", 1),
+                            thighHighsInterface.getItemDyeType(itemStack, "left", 2),
+                            thighHighsInterface.getItemDyeType(itemStack, "right", 2),
+                            thighHighsInterface.getStensilType(itemStack, "left"),
+                            thighHighsInterface.getStensilType(itemStack, "right"),
+                            thighHighsInterface.getItemLightValue(itemStack, "left", 1),
+                            thighHighsInterface.getItemLightValue(itemStack, "left", 2),
+                            thighHighsInterface.getItemLightValue(itemStack, "right", 1),
+                            thighHighsInterface.getItemLightValue(itemStack, "right", 2),
+                            material,
+                            itemStack.isEnchanted(),
+                            thighHighsInterface.getGlintColor(itemStack),
+                            thighHighsInterface.getAdditionalData(itemStack)
                     ),
-                    mc.player,
-                    48,
+                    player,
+                    -48,
                     48,
                     48,
                     0,
@@ -141,63 +124,53 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
                     this.topPos,
                     50,
                     0,
-                    modelYaw,
+                    -modelYaw,
                     0,
                     poseStack,
                     LightTexture.FULL_BRIGHT
             );
+        } else if (itemStack.getItem() instanceof HandWarmersInterface handWarmersInterface) {
+            String material;
 
-            buffer.endBatch();
-        } else if (stack.getItem() instanceof ThighHighsSilkItem silkThighHighs) {
-            Minecraft mc = Minecraft.getInstance();
+            switch (itemStack.getItem()) {
+                case HandWarmersCottonItem handWarmersCottonItem -> material = "cotton";
+                case HandWarmersSilkItem handWarmersSilkItem -> material = "silk";
+                case HandWarmersWoolItem handWarmersWoolItem -> material = "wool";
+                default -> {
+                    return;
+                }
+            }
 
-            MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
-            int ticks = (int) mc.level.getGameTime();
-            int primaryColorLeftOne = silkThighHighs.getItemMainColor(stack, "left", 1);
-            int secondaryColorLeftOne = silkThighHighs.getItemSecondaryColor(stack, "left", 1);
-            int primaryColorRightOne = silkThighHighs.getItemMainColor(stack, "right", 1);
-            int secondaryColorRightOne = silkThighHighs.getItemSecondaryColor(stack, "right", 1);
-            int primaryColorLeftTwo = silkThighHighs.getItemMainColor(stack, "left", 2);
-            int secondaryColorLeftTwo = silkThighHighs.getItemSecondaryColor(stack, "left", 2);
-            int primaryColorRightTwo = silkThighHighs.getItemMainColor(stack, "right", 2);
-            int secondaryColorRightTwo = silkThighHighs.getItemSecondaryColor(stack, "right", 2);
-            String dyeTypeLeftOne = silkThighHighs.getItemDyeType(stack, "left", 1);
-            String dyeTypeRightOne = silkThighHighs.getItemDyeType(stack, "right", 1);
-            String dyeTypeLeftTwo = silkThighHighs.getItemDyeType(stack, "left", 2);
-            String dyeTypeRightTwo = silkThighHighs.getItemDyeType(stack, "right", 2);
-            String stensilTypeLeft = silkThighHighs.getStensilType(stack, "left");
-            String stensilTypeRight = silkThighHighs.getStensilType(stack, "right");
-            int lightValueLeftOne = silkThighHighs.getItemLightValue(stack, "left", 1);
-            int lightValueLeftTwo = silkThighHighs.getItemLightValue(stack, "left", 2);
-            int lightValueRightOne = silkThighHighs.getItemLightValue(stack, "right", 1);
-            int lightValueRightTwo = silkThighHighs.getItemLightValue(stack, "right", 2);
-
-            thighHighModelRenderer.renderModel(
-                    buffer,
-                    model,
-                    new ThighHighsRenderingData(
-                            primaryColorLeftOne,
-                            secondaryColorLeftOne,
-                            primaryColorRightOne,
-                            secondaryColorRightOne,
-                            primaryColorLeftTwo,
-                            secondaryColorLeftTwo,
-                            primaryColorRightTwo,
-                            secondaryColorRightTwo,
-                            dyeTypeLeftOne,
-                            dyeTypeRightOne,
-                            dyeTypeLeftTwo,
-                            dyeTypeRightTwo,
-                            stensilTypeLeft,
-                            stensilTypeRight,
-                            lightValueLeftOne,
-                            lightValueLeftTwo,
-                            lightValueRightOne,
-                            lightValueRightTwo,
-                            "silk"
+            HandWarmersGUIModelRenderer.renderModel(
+                    multiBufferSource,
+                    thighHighsModel,
+                    new DoubleSidedClothingRenderingData(
+                            handWarmersInterface.getFlag(itemStack),
+                            handWarmersInterface.getItemMainColor(itemStack, "left", 1),
+                            handWarmersInterface.getItemSecondaryColor(itemStack, "left", 1),
+                            handWarmersInterface.getItemMainColor(itemStack, "right", 1),
+                            handWarmersInterface.getItemSecondaryColor(itemStack, "right", 1),
+                            handWarmersInterface.getItemMainColor(itemStack, "left", 2),
+                            handWarmersInterface.getItemSecondaryColor(itemStack, "left", 2),
+                            handWarmersInterface.getItemMainColor(itemStack, "right", 2),
+                            handWarmersInterface.getItemSecondaryColor(itemStack, "right", 2),
+                            handWarmersInterface.getItemDyeType(itemStack, "left", 1),
+                            handWarmersInterface.getItemDyeType(itemStack, "right", 1),
+                            handWarmersInterface.getItemDyeType(itemStack, "left", 2),
+                            handWarmersInterface.getItemDyeType(itemStack, "right", 2),
+                            handWarmersInterface.getStensilType(itemStack, "left"),
+                            handWarmersInterface.getStensilType(itemStack, "right"),
+                            handWarmersInterface.getItemLightValue(itemStack, "left", 1),
+                            handWarmersInterface.getItemLightValue(itemStack, "left", 2),
+                            handWarmersInterface.getItemLightValue(itemStack, "right", 1),
+                            handWarmersInterface.getItemLightValue(itemStack, "right", 2),
+                            material,
+                            itemStack.isEnchanted(),
+                            handWarmersInterface.getGlintColor(itemStack),
+                            handWarmersInterface.getAdditionalData(itemStack)
                     ),
-                    mc.player,
-                    48,
+                    player,
+                    -48,
                     48,
                     48,
                     0,
@@ -207,112 +180,43 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
                     this.topPos,
                     50,
                     0,
-                    modelYaw,
+                    -modelYaw,
                     0,
                     poseStack,
                     LightTexture.FULL_BRIGHT
             );
+        } else if (itemStack.getItem() instanceof ShirtInterface shirtInterface) {
+            String material;
 
-            buffer.endBatch();
-        } else if (stack.getItem() instanceof ThighHighsWoolItem woolThighHighs) {
-            Minecraft mc = Minecraft.getInstance();
+            switch (itemStack.getItem()) {
+                case ShirtCottonItem shirtCottonItem -> material = "cotton";
+                case ShirtSilkItem shirtSilkItem -> material = "silk";
+                default -> {
+                    return;
+                }
+            }
 
-            MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
-            int ticks = (int) mc.level.getGameTime();
-            int primaryColorLeftOne = woolThighHighs.getItemMainColor(stack, "left", 1);
-            int secondaryColorLeftOne = woolThighHighs.getItemSecondaryColor(stack, "left", 1);
-            int primaryColorRightOne = woolThighHighs.getItemMainColor(stack, "right", 1);
-            int secondaryColorRightOne = woolThighHighs.getItemSecondaryColor(stack, "right", 1);
-            int primaryColorLeftTwo = woolThighHighs.getItemMainColor(stack, "left", 2);
-            int secondaryColorLeftTwo = woolThighHighs.getItemSecondaryColor(stack, "left", 2);
-            int primaryColorRightTwo = woolThighHighs.getItemMainColor(stack, "right", 2);
-            int secondaryColorRightTwo = woolThighHighs.getItemSecondaryColor(stack, "right", 2);
-            String dyeTypeLeftOne = woolThighHighs.getItemDyeType(stack, "left", 1);
-            String dyeTypeRightOne = woolThighHighs.getItemDyeType(stack, "right", 1);
-            String dyeTypeLeftTwo = woolThighHighs.getItemDyeType(stack, "left", 2);
-            String dyeTypeRightTwo = woolThighHighs.getItemDyeType(stack, "right", 2);
-            String stensilTypeLeft = woolThighHighs.getStensilType(stack, "left");
-            String stensilTypeRight = woolThighHighs.getStensilType(stack, "right");
-            int lightValueLeftOne = woolThighHighs.getItemLightValue(stack, "left", 1);
-            int lightValueLeftTwo = woolThighHighs.getItemLightValue(stack, "left", 2);
-            int lightValueRightOne = woolThighHighs.getItemLightValue(stack, "right", 1);
-            int lightValueRightTwo = woolThighHighs.getItemLightValue(stack, "right", 2);
-
-            thighHighModelRenderer.renderModel(
-                    buffer,
-                    model,
-                    new ThighHighsRenderingData(
-                            primaryColorLeftOne,
-                            secondaryColorLeftOne,
-                            primaryColorRightOne,
-                            secondaryColorRightOne,
-                            primaryColorLeftTwo,
-                            secondaryColorLeftTwo,
-                            primaryColorRightTwo,
-                            secondaryColorRightTwo,
-                            dyeTypeLeftOne,
-                            dyeTypeRightOne,
-                            dyeTypeLeftTwo,
-                            dyeTypeRightTwo,
-                            stensilTypeLeft,
-                            stensilTypeRight,
-                            lightValueLeftOne,
-                            lightValueLeftTwo,
-                            lightValueRightOne,
-                            lightValueRightTwo,
-                            "wool"
+            UpperwearModelRenderer.renderModel(
+                    multiBufferSource,
+                    upperWearModel,
+                    new SingleSidedClothingRenderingData(
+                            shirtInterface.getFlag(itemStack),
+                            shirtInterface.getItemMainColor(itemStack, 1),
+                            shirtInterface.getItemSecondaryColor(itemStack, 1),
+                            shirtInterface.getItemMainColor(itemStack, 2),
+                            shirtInterface.getItemSecondaryColor(itemStack, 2),
+                            shirtInterface.getItemDyeType(itemStack, 1),
+                            shirtInterface.getItemDyeType(itemStack, 2),
+                            shirtInterface.getStensilType(itemStack),
+                            shirtInterface.getItemLightValue(itemStack, 1),
+                            shirtInterface.getItemLightValue(itemStack, 2),
+                            material,
+                            itemStack.isEnchanted(),
+                            shirtInterface.getGlintColor(itemStack),
+                            shirtInterface.getAdditionalData(itemStack)
                     ),
-                    mc.player,
-                    48,
-                    48,
-                    48,
-                    0,
-                    0,
-                    0,
-                    this.leftPos + 87,
-                    this.topPos,
-                    50,
-                    0,
-                    modelYaw,
-                    0,
-                    poseStack,
-                    LightTexture.FULL_BRIGHT
-            );
-
-            buffer.endBatch();
-        } else if (stack.getItem() instanceof ShirtCottonItem shirtCotton) {
-            Minecraft mc = Minecraft.getInstance();
-
-            MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
-            int ticks = (int)mc.level.getGameTime();
-            int primaryColorOne = shirtCotton.getItemMainColor(stack, 1);
-            int secondaryColorOne = shirtCotton.getItemSecondaryColor(stack, 1);
-            int primaryColorTwo = shirtCotton.getItemMainColor(stack, 2);
-            int secondaryColorTwo = shirtCotton.getItemSecondaryColor(stack, 2);
-            String dyeTypeOne = shirtCotton.getItemDyeType(stack, 1);
-            String dyeTypeTwo = shirtCotton.getItemDyeType(stack, 2);
-            String stensilType = shirtCotton.getStensilType(stack);
-            int lightValueOne = shirtCotton.getItemLightValue(stack, 1);
-            int lightValueTwo = shirtCotton.getItemLightValue(stack, 2);
-
-            shirtModelRenderer.renderModel(
-                    buffer,
-                    model2,
-                    new ShirtRenderingData(
-                            stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("is_open"),
-                            primaryColorOne,
-                            secondaryColorOne,
-                            primaryColorTwo,
-                            secondaryColorTwo,
-                            dyeTypeOne,
-                            dyeTypeTwo,
-                            stensilType,
-                            lightValueOne,
-                            lightValueTwo,
-                            "cotton"
-                    ),
-                    mc.player,
-                    36,
+                    player,
+                    -36,
                     36,
                     36,
                     0,
@@ -322,95 +226,44 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
                     this.topPos + 30,
                     50,
                     0,
-                    modelYaw,
+                    -modelYaw,
                     0,
                     poseStack,
-                    LightTexture.FULL_BRIGHT
+                    LightTexture.FULL_BRIGHT,
+                    UpperwearModelRenderer.Type.SHIRT
             );
+        } else if (itemStack.getItem() instanceof PulloverInterface pulloverInterface) {
+            String material;
 
-            buffer.endBatch();
-        } else if (stack.getItem() instanceof ShirtSilkItem shirtSilk) {
-            Minecraft mc = Minecraft.getInstance();
+            switch (itemStack.getItem()) {
+                case LongSleeveCottonItem longSleeveCottonItem -> material = "cotton";
+                case SweaterWoolItem sweaterWoolItem -> material = "wool";
+                default -> {
+                    return;
+                }
+            }
 
-            MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
-            int ticks = (int)mc.level.getGameTime();
-            int primaryColorOne = shirtSilk.getItemMainColor(stack, 1);
-            int secondaryColorOne = shirtSilk.getItemSecondaryColor(stack, 1);
-            int primaryColorTwo = shirtSilk.getItemMainColor(stack, 2);
-            int secondaryColorTwo = shirtSilk.getItemSecondaryColor(stack, 2);
-            String dyeTypeOne = shirtSilk.getItemDyeType(stack, 1);
-            String dyeTypeTwo = shirtSilk.getItemDyeType(stack, 2);
-            String stensilType = shirtSilk.getStensilType(stack);
-            int lightValueOne = shirtSilk.getItemLightValue(stack, 1);
-            int lightValueTwo = shirtSilk.getItemLightValue(stack, 2);
-
-            shirtModelRenderer.renderModel(
-                    buffer,
-                    model2,
-                    new ShirtRenderingData(
-                            stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("is_open"),
-                            primaryColorOne,
-                            secondaryColorOne,
-                            primaryColorTwo,
-                            secondaryColorTwo,
-                            dyeTypeOne,
-                            dyeTypeTwo,
-                            stensilType,
-                            lightValueOne,
-                            lightValueTwo,
-                            "silk"
+            UpperwearModelRenderer.renderModel(
+                    multiBufferSource,
+                    upperWearModel,
+                    new SingleSidedClothingRenderingData(
+                            pulloverInterface.getFlag(itemStack),
+                            pulloverInterface.getItemMainColor(itemStack, 1),
+                            pulloverInterface.getItemSecondaryColor(itemStack, 1),
+                            pulloverInterface.getItemMainColor(itemStack, 2),
+                            pulloverInterface.getItemSecondaryColor(itemStack, 2),
+                            pulloverInterface.getItemDyeType(itemStack, 1),
+                            pulloverInterface.getItemDyeType(itemStack, 2),
+                            pulloverInterface.getStensilType(itemStack),
+                            pulloverInterface.getItemLightValue(itemStack, 1),
+                            pulloverInterface.getItemLightValue(itemStack, 2),
+                            material,
+                            itemStack.isEnchanted(),
+                            pulloverInterface.getGlintColor(itemStack),
+                            pulloverInterface.getAdditionalData(itemStack)
                     ),
-                    mc.player,
-                    36,
-                    36,
-                    36,
-                    0,
-                    0,
-                    0,
-                    this.leftPos + 88,
-                    this.topPos + 30,
-                    50,
-                    0,
-                    modelYaw,
-                    0,
-                    poseStack,
-                    LightTexture.FULL_BRIGHT
-            );
-
-            buffer.endBatch();
-        } else if (stack.getItem() instanceof SweaterWoolItem sweaterWool) {
-            Minecraft mc = Minecraft.getInstance();
-
-            MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
-            int ticks = (int)mc.level.getGameTime();
-            int primaryColorOne = sweaterWool.getItemMainColor(stack, 1);
-            int secondaryColorOne = sweaterWool.getItemSecondaryColor(stack, 1);
-            int primaryColorTwo = sweaterWool.getItemMainColor(stack, 2);
-            int secondaryColorTwo = sweaterWool.getItemSecondaryColor(stack, 2);
-            String dyeTypeOne = sweaterWool.getItemDyeType(stack, 1);
-            String dyeTypeTwo = sweaterWool.getItemDyeType(stack, 2);
-            String stensilType = sweaterWool.getStensilType(stack);
-            int lightValueOne = sweaterWool.getItemLightValue(stack, 1);
-            int lightValueTwo = sweaterWool.getItemLightValue(stack, 2);
-
-            shirtModelRenderer.renderModel(
-                    buffer,
-                    model2,
-                    new ShirtRenderingData(
-                            stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("is_open"),
-                            primaryColorOne,
-                            secondaryColorOne,
-                            primaryColorTwo,
-                            secondaryColorTwo,
-                            dyeTypeOne,
-                            dyeTypeTwo,
-                            stensilType,
-                            lightValueOne,
-                            lightValueTwo,
-                            "wool"
-                    ),
-                    mc.player,
-                    36,
+                    player,
+                    -36,
                     36,
                     36,
                     0,
@@ -420,309 +273,131 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
                     this.topPos + 30,
                     50,
                     0,
-                    modelYaw,
+                    -modelYaw,
                     0,
                     poseStack,
-                    LightTexture.FULL_BRIGHT
+                    LightTexture.FULL_BRIGHT,
+                    UpperwearModelRenderer.Type.PULLOVER
             );
+        } else if (itemStack.getItem() instanceof TopsInterface topsInterface) {
+            String material;
 
-            buffer.endBatch();
-        } else if (stack.getItem() instanceof HandWarmersCottonItem handWarmersCottonItem) {
-            Minecraft mc = Minecraft.getInstance();
+            switch (itemStack.getItem()) {
+                case TShirtItem tShirtItem -> material = "cotton";
+                case TankTopItem tankTopItem -> material = "silk";
+                case WoolVestItem woolVestItem -> material = "wool";
+                default -> {
+                    return;
+                }
+            }
 
-            MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
-            int ticks = (int) mc.level.getGameTime();
-            int primaryColorLeftOne = handWarmersCottonItem.getItemMainColor(stack, "left", 1);
-            int secondaryColorLeftOne = handWarmersCottonItem.getItemSecondaryColor(stack, "left", 1);
-            int primaryColorRightOne = handWarmersCottonItem.getItemMainColor(stack, "right", 1);
-            int secondaryColorRightOne = handWarmersCottonItem.getItemSecondaryColor(stack, "right", 1);
-            int primaryColorLeftTwo = handWarmersCottonItem.getItemMainColor(stack, "left", 2);
-            int secondaryColorLeftTwo = handWarmersCottonItem.getItemSecondaryColor(stack, "left", 2);
-            int primaryColorRightTwo = handWarmersCottonItem.getItemMainColor(stack, "right", 2);
-            int secondaryColorRightTwo = handWarmersCottonItem.getItemSecondaryColor(stack, "right", 2);
-            String dyeTypeLeftOne = handWarmersCottonItem.getItemDyeType(stack, "left", 1);
-            String dyeTypeRightOne = handWarmersCottonItem.getItemDyeType(stack, "right", 1);
-            String dyeTypeLeftTwo = handWarmersCottonItem.getItemDyeType(stack, "left", 2);
-            String dyeTypeRightTwo = handWarmersCottonItem.getItemDyeType(stack, "right", 2);
-            String stensilTypeLeft = handWarmersCottonItem.getStensilType(stack, "left");
-            String stensilTypeRight = handWarmersCottonItem.getStensilType(stack, "right");
-            int lightValueLeftOne = handWarmersCottonItem.getItemLightValue(stack, "left", 1);
-            int lightValueLeftTwo = handWarmersCottonItem.getItemLightValue(stack, "left", 2);
-            int lightValueRightOne = handWarmersCottonItem.getItemLightValue(stack, "right", 1);
-            int lightValueRightTwo = handWarmersCottonItem.getItemLightValue(stack, "right", 2);
-
-            handWarmersSpecialModelRenderer.renderModel(
-                    buffer,
-                    model,
-                    new ThighHighsRenderingData(
-                            primaryColorLeftOne,
-                            secondaryColorLeftOne,
-                            primaryColorRightOne,
-                            secondaryColorRightOne,
-                            primaryColorLeftTwo,
-                            secondaryColorLeftTwo,
-                            primaryColorRightTwo,
-                            secondaryColorRightTwo,
-                            dyeTypeLeftOne,
-                            dyeTypeRightOne,
-                            dyeTypeLeftTwo,
-                            dyeTypeRightTwo,
-                            stensilTypeLeft,
-                            stensilTypeRight,
-                            lightValueLeftOne,
-                            lightValueLeftTwo,
-                            lightValueRightOne,
-                            lightValueRightTwo,
-                            "cotton"
+            UpperwearModelRenderer.renderModel(
+                    multiBufferSource,
+                    upperWearModel,
+                    new SingleSidedClothingRenderingData(
+                            topsInterface.getFlag(itemStack),
+                            topsInterface.getItemMainColor(itemStack, 1),
+                            topsInterface.getItemSecondaryColor(itemStack, 1),
+                            topsInterface.getItemMainColor(itemStack, 2),
+                            topsInterface.getItemSecondaryColor(itemStack, 2),
+                            topsInterface.getItemDyeType(itemStack, 1),
+                            topsInterface.getItemDyeType(itemStack, 2),
+                            topsInterface.getStensilType(itemStack),
+                            topsInterface.getItemLightValue(itemStack, 1),
+                            topsInterface.getItemLightValue(itemStack, 2),
+                            material,
+                            itemStack.isEnchanted(),
+                            topsInterface.getGlintColor(itemStack),
+                            topsInterface.getAdditionalData(itemStack)
                     ),
-                    mc.player,
-                    48,
-                    48,
-                    48,
+                    player,
+                    -36,
+                    36,
+                    36,
                     0,
                     0,
                     0,
-                    this.leftPos + 87,
-                    this.topPos,
-                    50,
-                    0,
-                    modelYaw,
-                    0,
-                    poseStack,
-                    LightTexture.FULL_BRIGHT
-            );
-
-            buffer.endBatch();
-        } else if (stack.getItem() instanceof HandWarmersSilkItem handWarmersSilk) {
-            Minecraft mc = Minecraft.getInstance();
-
-            MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
-            int ticks = (int) mc.level.getGameTime();
-            int primaryColorLeftOne = handWarmersSilk.getItemMainColor(stack, "left", 1);
-            int secondaryColorLeftOne = handWarmersSilk.getItemSecondaryColor(stack, "left", 1);
-            int primaryColorRightOne = handWarmersSilk.getItemMainColor(stack, "right", 1);
-            int secondaryColorRightOne = handWarmersSilk.getItemSecondaryColor(stack, "right", 1);
-            int primaryColorLeftTwo = handWarmersSilk.getItemMainColor(stack, "left", 2);
-            int secondaryColorLeftTwo = handWarmersSilk.getItemSecondaryColor(stack, "left", 2);
-            int primaryColorRightTwo = handWarmersSilk.getItemMainColor(stack, "right", 2);
-            int secondaryColorRightTwo = handWarmersSilk.getItemSecondaryColor(stack, "right", 2);
-            String dyeTypeLeftOne = handWarmersSilk.getItemDyeType(stack, "left", 1);
-            String dyeTypeRightOne = handWarmersSilk.getItemDyeType(stack, "right", 1);
-            String dyeTypeLeftTwo = handWarmersSilk.getItemDyeType(stack, "left", 2);
-            String dyeTypeRightTwo = handWarmersSilk.getItemDyeType(stack, "right", 2);
-            String stensilTypeLeft = handWarmersSilk.getStensilType(stack, "left");
-            String stensilTypeRight = handWarmersSilk.getStensilType(stack, "right");
-            int lightValueLeftOne = handWarmersSilk.getItemLightValue(stack, "left", 1);
-            int lightValueLeftTwo = handWarmersSilk.getItemLightValue(stack, "left", 2);
-            int lightValueRightOne = handWarmersSilk.getItemLightValue(stack, "right", 1);
-            int lightValueRightTwo = handWarmersSilk.getItemLightValue(stack, "right", 2);
-
-            handWarmersSpecialModelRenderer.renderModel(
-                    buffer,
-                    model,
-                    new ThighHighsRenderingData(
-                            primaryColorLeftOne,
-                            secondaryColorLeftOne,
-                            primaryColorRightOne,
-                            secondaryColorRightOne,
-                            primaryColorLeftTwo,
-                            secondaryColorLeftTwo,
-                            primaryColorRightTwo,
-                            secondaryColorRightTwo,
-                            dyeTypeLeftOne,
-                            dyeTypeRightOne,
-                            dyeTypeLeftTwo,
-                            dyeTypeRightTwo,
-                            stensilTypeLeft,
-                            stensilTypeRight,
-                            lightValueLeftOne,
-                            lightValueLeftTwo,
-                            lightValueRightOne,
-                            lightValueRightTwo,
-                            "silk"
-                    ),
-                    mc.player,
-                    48,
-                    48,
-                    48,
-                    0,
-                    0,
-                    0,
-                    this.leftPos + 87,
-                    this.topPos,
-                    50,
-                    0,
-                    modelYaw,
-                    0,
-                    poseStack,
-                    LightTexture.FULL_BRIGHT
-            );
-
-            buffer.endBatch();
-        } else if (stack.getItem() instanceof HandWarmersWoolItem handWarmersWool) {
-            Minecraft mc = Minecraft.getInstance();
-
-            MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
-            int ticks = (int) mc.level.getGameTime();
-            int primaryColorLeftOne = handWarmersWool.getItemMainColor(stack, "left", 1);
-            int secondaryColorLeftOne = handWarmersWool.getItemSecondaryColor(stack, "left", 1);
-            int primaryColorRightOne = handWarmersWool.getItemMainColor(stack, "right", 1);
-            int secondaryColorRightOne = handWarmersWool.getItemSecondaryColor(stack, "right", 1);
-            int primaryColorLeftTwo = handWarmersWool.getItemMainColor(stack, "left", 2);
-            int secondaryColorLeftTwo = handWarmersWool.getItemSecondaryColor(stack, "left", 2);
-            int primaryColorRightTwo = handWarmersWool.getItemMainColor(stack, "right", 2);
-            int secondaryColorRightTwo = handWarmersWool.getItemSecondaryColor(stack, "right", 2);
-            String dyeTypeLeftOne = handWarmersWool.getItemDyeType(stack, "left", 1);
-            String dyeTypeRightOne = handWarmersWool.getItemDyeType(stack, "right", 1);
-            String dyeTypeLeftTwo = handWarmersWool.getItemDyeType(stack, "left", 2);
-            String dyeTypeRightTwo = handWarmersWool.getItemDyeType(stack, "right", 2);
-            String stensilTypeLeft = handWarmersWool.getStensilType(stack, "left");
-            String stensilTypeRight = handWarmersWool.getStensilType(stack, "right");
-            int lightValueLeftOne = handWarmersWool.getItemLightValue(stack, "left", 1);
-            int lightValueLeftTwo = handWarmersWool.getItemLightValue(stack, "left", 2);
-            int lightValueRightOne = handWarmersWool.getItemLightValue(stack, "right", 1);
-            int lightValueRightTwo = handWarmersWool.getItemLightValue(stack, "right", 2);
-
-            handWarmersSpecialModelRenderer.renderModel(
-                    buffer,
-                    model,
-                    new ThighHighsRenderingData(
-                            primaryColorLeftOne,
-                            secondaryColorLeftOne,
-                            primaryColorRightOne,
-                            secondaryColorRightOne,
-                            primaryColorLeftTwo,
-                            secondaryColorLeftTwo,
-                            primaryColorRightTwo,
-                            secondaryColorRightTwo,
-                            dyeTypeLeftOne,
-                            dyeTypeRightOne,
-                            dyeTypeLeftTwo,
-                            dyeTypeRightTwo,
-                            stensilTypeLeft,
-                            stensilTypeRight,
-                            lightValueLeftOne,
-                            lightValueLeftTwo,
-                            lightValueRightOne,
-                            lightValueRightTwo,
-                            "wool"
-                    ),
-                    mc.player,
-                    48,
-                    48,
-                    48,
-                    0,
-                    0,
-                    0,
-                    this.leftPos + 87,
-                    this.topPos,
-                    50,
-                    0,
-                    modelYaw,
-                    0,
-                    poseStack,
-                    LightTexture.FULL_BRIGHT
-            );
-
-            buffer.endBatch();
-        } else if (stack.getItem() instanceof ChokerItem chokerItem) {
-            Minecraft mc = Minecraft.getInstance();
-
-            MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
-            int ticks = (int) mc.level.getGameTime();
-            int primaryColorLeftOne = chokerItem.getItemMainColor(stack, "left", 1);
-            int secondaryColorLeftOne = chokerItem.getItemSecondaryColor(stack, "left", 1);
-            int primaryColorRightOne = chokerItem.getItemMainColor(stack, "right", 1);
-            int secondaryColorRightOne = chokerItem.getItemSecondaryColor(stack, "right", 1);
-            int primaryColorLeftTwo = chokerItem.getItemMainColor(stack, "left", 2);
-            int secondaryColorLeftTwo = chokerItem.getItemSecondaryColor(stack, "left", 2);
-            int primaryColorRightTwo = chokerItem.getItemMainColor(stack, "right", 2);
-            int secondaryColorRightTwo = chokerItem.getItemSecondaryColor(stack, "right", 2);
-            String dyeTypeLeftOne = chokerItem.getItemDyeType(stack, "left", 1);
-            String dyeTypeRightOne = chokerItem.getItemDyeType(stack, "right", 1);
-            String dyeTypeLeftTwo = chokerItem.getItemDyeType(stack, "left", 2);
-            String dyeTypeRightTwo = chokerItem.getItemDyeType(stack, "right", 2);
-            String stensilTypeLeft = chokerItem.getStensilType(stack, "left");
-            String stensilTypeRight = chokerItem.getStensilType(stack, "right");
-            int lightValueLeftOne = chokerItem.getItemLightValue(stack, "left", 1);
-            int lightValueLeftTwo = chokerItem.getItemLightValue(stack, "left", 2);
-            int lightValueRightOne = chokerItem.getItemLightValue(stack, "right", 1);
-            int lightValueRightTwo = chokerItem.getItemLightValue(stack, "right", 2);
-
-            chokerModelRenderer.renderModel(
-                    buffer,
-                    model3,
-                    new ChokerRenderingData(
-                            primaryColorLeftOne,
-                            secondaryColorLeftOne,
-                            primaryColorRightOne,
-                            secondaryColorRightOne,
-                            primaryColorLeftTwo,
-                            secondaryColorLeftTwo,
-                            primaryColorRightTwo,
-                            secondaryColorRightTwo,
-                            dyeTypeLeftOne,
-                            dyeTypeRightOne,
-                            dyeTypeLeftTwo,
-                            dyeTypeRightTwo,
-                            stensilTypeLeft,
-                            stensilTypeRight,
-                            lightValueLeftOne,
-                            lightValueLeftTwo,
-                            lightValueRightOne,
-                            lightValueRightTwo,
-                            "base"
-                    ),
-                    mc.player,
-                    48,
-                    48,
-                    48,
-                    0,
-                    0,
-                    0,
-                    this.leftPos + 87,
+                    this.leftPos + 88,
                     this.topPos + 30,
                     50,
                     0,
-                    modelYaw,
+                    -modelYaw,
                     0,
                     poseStack,
-                    LightTexture.FULL_BRIGHT
+                    LightTexture.FULL_BRIGHT,
+                    UpperwearModelRenderer.Type.TOPS
             );
-
-            buffer.endBatch();
-        } else if (stack.getItem() instanceof PantsJeansItem pantsJeans) {
-            Minecraft mc = Minecraft.getInstance();
-
-            MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
-            int ticks = (int)mc.level.getGameTime();
-            int primaryColorOne = pantsJeans.getItemMainColor(stack, 1);
-            int secondaryColorOne = pantsJeans.getItemSecondaryColor(stack, 1);
-            int primaryColorTwo = pantsJeans.getItemMainColor(stack, 2);
-            int secondaryColorTwo = pantsJeans.getItemSecondaryColor(stack, 2);
-            String dyeTypeOne = pantsJeans.getItemDyeType(stack, 1);
-            String dyeTypeTwo = pantsJeans.getItemDyeType(stack, 2);
-            String stensilType = pantsJeans.getStensilType(stack);
-            int lightValueOne = pantsJeans.getItemLightValue(stack, 1);
-            int lightValueTwo = pantsJeans.getItemLightValue(stack, 2);
-
-            pantsModelRenderer.renderModel(
-                    buffer,
-                    model4,
-                    new PantsRenderingData(
-                            primaryColorOne,
-                            secondaryColorOne,
-                            primaryColorTwo,
-                            secondaryColorTwo,
-                            dyeTypeOne,
-                            dyeTypeTwo,
-                            stensilType,
-                            lightValueOne,
-                            lightValueTwo,
-                            "jeans"
+        } else if (itemStack.getItem() instanceof PonchoItem ponchoItem) {
+            UpperwearModelRenderer.renderModel(
+                    multiBufferSource,
+                    upperWearModel,
+                    new SingleSidedClothingRenderingData(
+                            ponchoItem.getFlag(itemStack),
+                            ponchoItem.getItemMainColor(itemStack, 1),
+                            ponchoItem.getItemSecondaryColor(itemStack, 1),
+                            ponchoItem.getItemMainColor(itemStack, 2),
+                            ponchoItem.getItemSecondaryColor(itemStack, 2),
+                            ponchoItem.getItemDyeType(itemStack, 1),
+                            ponchoItem.getItemDyeType(itemStack, 2),
+                            ponchoItem.getStensilType(itemStack),
+                            ponchoItem.getItemLightValue(itemStack, 1),
+                            ponchoItem.getItemLightValue(itemStack, 2),
+                            "cotton",
+                            itemStack.isEnchanted(),
+                            ponchoItem.getGlintColor(itemStack),
+                            ponchoItem.getAdditionalData(itemStack)
                     ),
-                    mc.player,
+                    player,
+                    -36,
                     36,
+                    36,
+                    0,
+                    0,
+                    0,
+                    this.leftPos + 88,
+                    this.topPos + 30,
+                    50,
+                    0,
+                    -modelYaw,
+                    0,
+                    poseStack,
+                    LightTexture.FULL_BRIGHT,
+                    UpperwearModelRenderer.Type.PONCHO
+            );
+        } else if (itemStack.getItem() instanceof PantsInterface pantsInterface) {
+            String material;
+
+            switch (itemStack.getItem()) {
+                case PantsCottonItem pantsCottonItem -> material = "cotton";
+                case PantsSilkItem pantsSilkItem -> material = "silk";
+                case PantsJeansItem pantsJeansItem -> material = "jeans";
+                case PantsWoolItem pantsWoolItem -> material = "wool";
+                default -> {
+                    return;
+                }
+            }
+
+            PantsModelRenderer.renderModel(
+                    multiBufferSource,
+                    pantsModel,
+                    new SingleSidedClothingRenderingData(
+                            pantsInterface.getFlag(itemStack),
+                            pantsInterface.getItemMainColor(itemStack, 1),
+                            pantsInterface.getItemSecondaryColor(itemStack, 1),
+                            pantsInterface.getItemMainColor(itemStack, 2),
+                            pantsInterface.getItemSecondaryColor(itemStack, 2),
+                            pantsInterface.getItemDyeType(itemStack, 1),
+                            pantsInterface.getItemDyeType(itemStack, 2),
+                            pantsInterface.getStensilType(itemStack),
+                            pantsInterface.getItemLightValue(itemStack, 1),
+                            pantsInterface.getItemLightValue(itemStack, 2),
+                            material,
+                            itemStack.isEnchanted(),
+                            pantsInterface.getGlintColor(itemStack),
+                            pantsInterface.getAdditionalData(itemStack)
+                    ),
+                    player,
+                    -36,
                     36,
                     36,
                     0,
@@ -732,45 +407,131 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
                     this.topPos + 20,
                     50,
                     0,
-                    modelYaw,
+                    -modelYaw,
                     0,
                     poseStack,
                     LightTexture.FULL_BRIGHT
             );
+        } else if (itemStack.getItem() instanceof CapeInterface capeInterface) {
+            String material;
 
-            buffer.endBatch();
-        } else if (stack.getItem() instanceof PantsCottonItem pantsCotton) {
-            Minecraft mc = Minecraft.getInstance();
+            switch (itemStack.getItem()) {
+                case CapeCottonItem capeCottonItem -> material = "cotton";
+                case CapeSilkItem capeSilkItem -> material = "silk";
+                case CapeWoolItem capeWoolItem -> material = "wool";
+                default -> {
+                    return;
+                }
+            }
 
-            MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
-            int ticks = (int)mc.level.getGameTime();
-            int primaryColorOne = pantsCotton.getItemMainColor(stack, 1);
-            int secondaryColorOne = pantsCotton.getItemSecondaryColor(stack, 1);
-            int primaryColorTwo = pantsCotton.getItemMainColor(stack, 2);
-            int secondaryColorTwo = pantsCotton.getItemSecondaryColor(stack, 2);
-            String dyeTypeOne = pantsCotton.getItemDyeType(stack, 1);
-            String dyeTypeTwo = pantsCotton.getItemDyeType(stack, 2);
-            String stensilType = pantsCotton.getStensilType(stack);
-            int lightValueOne = pantsCotton.getItemLightValue(stack, 1);
-            int lightValueTwo = pantsCotton.getItemLightValue(stack, 2);
+            int primaryColorOne = capeInterface.getItemMainColor(itemStack, 1);
+            int secondaryColorOne = capeInterface.getItemSecondaryColor(itemStack, 1);
+            int primaryColorTwo = capeInterface.getItemMainColor(itemStack, 2);
+            int secondaryColorTwo = capeInterface.getItemSecondaryColor(itemStack, 2);
+            String dyeTypeOne = capeInterface.getItemDyeType(itemStack, 1);
+            String dyeTypeTwo = capeInterface.getItemDyeType(itemStack, 2);
+            String stensilType = capeInterface.getStensilType(itemStack);
+            int lightValueOne = capeInterface.getItemLightValue(itemStack, 1);
+            int lightValueTwo = capeInterface.getItemLightValue(itemStack, 2);
 
-            pantsModelRenderer.renderModel(
-                    buffer,
-                    model4,
-                    new PantsRenderingData(
-                            primaryColorOne,
-                            secondaryColorOne,
-                            primaryColorTwo,
-                            secondaryColorTwo,
-                            dyeTypeOne,
-                            dyeTypeTwo,
-                            stensilType,
-                            lightValueOne,
-                            lightValueTwo,
-                            "cotton"
+            RenderingUtils renderingUtils = new RenderingUtils();
+
+            ItemTexture texture = TextureRegistry.find("cape", stensilType, material);
+
+            Pair<Integer, Integer> col1 = ColorHandlers.handle(dyeTypeOne, primaryColorOne, secondaryColorOne, lightValueOne, minecraft.player, LightTexture.FULL_BRIGHT, (int)minecraft.level.getGameTime());
+            Pair<Integer, Integer> col2 = ColorHandlers.handle(dyeTypeTwo, primaryColorTwo, secondaryColorTwo, lightValueTwo, minecraft.player, LightTexture.FULL_BRIGHT, (int)minecraft.level.getGameTime());
+
+            poseStack.pushPose();
+
+            poseStack.translate(this.leftPos + 88, this.topPos + 30, 50);
+            poseStack.scale(36, 36, 36);
+            poseStack.mulPose(Axis.YP.rotationDegrees(modelYaw));
+
+            VertexConsumer vertexConsumer1 = renderingUtils.parseVC(multiBufferSource, dyeTypeOne, texture.getTextureOne(), "cape");
+            ((PlayerModelInterface)playerModel).getCloak().render(poseStack, vertexConsumer1, col1.getB(), OverlayTexture.NO_OVERLAY, col1.getA());
+
+            if (texture.getRenderType()) {
+                VertexConsumer vertexConsumer2 = renderingUtils.parseVC(multiBufferSource, dyeTypeTwo, texture.getTextureTwo(),"cape");
+                ((PlayerModelInterface)playerModel).getCloak().render(poseStack, vertexConsumer2, col2.getB(), OverlayTexture.NO_OVERLAY, col2.getA());
+            }
+
+            poseStack.popPose();
+        } else if (itemStack.getItem() instanceof ChokerItem chokerItem) {
+            ChokerModelRenderer.renderModel(
+                    multiBufferSource,
+                    chokerModel,
+                    new DoubleSidedClothingRenderingData(
+                            chokerItem.getFlag(itemStack),
+                            chokerItem.getItemMainColor(itemStack, "left", 1),
+                            chokerItem.getItemSecondaryColor(itemStack, "left", 1),
+                            chokerItem.getItemMainColor(itemStack, "right", 1),
+                            chokerItem.getItemSecondaryColor(itemStack, "right", 1),
+                            chokerItem.getItemMainColor(itemStack, "left", 2),
+                            chokerItem.getItemSecondaryColor(itemStack, "left", 2),
+                            chokerItem.getItemMainColor(itemStack, "right", 2),
+                            chokerItem.getItemSecondaryColor(itemStack, "right", 2),
+                            chokerItem.getItemDyeType(itemStack, "left", 1),
+                            chokerItem.getItemDyeType(itemStack, "right", 1),
+                            chokerItem.getItemDyeType(itemStack, "left", 2),
+                            chokerItem.getItemDyeType(itemStack, "right", 2),
+                            chokerItem.getStensilType(itemStack, "left"),
+                            chokerItem.getStensilType(itemStack, "right"),
+                            chokerItem.getItemLightValue(itemStack, "left", 1),
+                            chokerItem.getItemLightValue(itemStack, "left", 2),
+                            chokerItem.getItemLightValue(itemStack, "right", 1),
+                            chokerItem.getItemLightValue(itemStack, "right", 2),
+                            "base",
+                            itemStack.isEnchanted(),
+                            chokerItem.getGlintColor(itemStack),
+                            chokerItem.getAdditionalData(itemStack)
                     ),
-                    mc.player,
-                    36,
+                    player,
+                    -48,
+                    48,
+                    48,
+                    0,
+                    0,
+                    0,
+                    this.leftPos + 87,
+                    this.topPos + 30,
+                    50,
+                    0,
+                    -modelYaw,
+                    0,
+                    poseStack,
+                    LightTexture.FULL_BRIGHT
+            );
+        } else if (itemStack.getItem() instanceof SkirtCottonItem skirtCottonItem) {
+            CottonSkirtModelRenderer.renderModel(
+                    multiBufferSource,
+                    cottonSkirtModel,
+                    new DoubleSidedClothingRenderingData(
+                            skirtCottonItem.getFlag(itemStack),
+                            skirtCottonItem.getItemMainColor(itemStack, "left", 1),
+                            skirtCottonItem.getItemSecondaryColor(itemStack, "left", 1),
+                            skirtCottonItem.getItemMainColor(itemStack, "right", 1),
+                            skirtCottonItem.getItemSecondaryColor(itemStack, "right", 1),
+                            skirtCottonItem.getItemMainColor(itemStack, "left", 2),
+                            skirtCottonItem.getItemSecondaryColor(itemStack, "left", 2),
+                            skirtCottonItem.getItemMainColor(itemStack, "right", 2),
+                            skirtCottonItem.getItemSecondaryColor(itemStack, "right", 2),
+                            skirtCottonItem.getItemDyeType(itemStack, "left", 1),
+                            skirtCottonItem.getItemDyeType(itemStack, "right", 1),
+                            skirtCottonItem.getItemDyeType(itemStack, "left", 2),
+                            skirtCottonItem.getItemDyeType(itemStack, "right", 2),
+                            skirtCottonItem.getStensilType(itemStack, "left"),
+                            skirtCottonItem.getStensilType(itemStack, "right"),
+                            skirtCottonItem.getItemLightValue(itemStack, "left", 1),
+                            skirtCottonItem.getItemLightValue(itemStack, "left", 2),
+                            skirtCottonItem.getItemLightValue(itemStack, "right", 1),
+                            skirtCottonItem.getItemLightValue(itemStack, "right", 2),
+                            "base",
+                            itemStack.isEnchanted(),
+                            skirtCottonItem.getGlintColor(itemStack),
+                            skirtCottonItem.getAdditionalData(itemStack)
+                    ),
+                    player,
+                    -36,
                     36,
                     36,
                     0,
@@ -780,191 +541,131 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
                     this.topPos + 20,
                     50,
                     0,
-                    modelYaw,
+                    -modelYaw,
                     0,
                     poseStack,
                     LightTexture.FULL_BRIGHT
             );
-
-            buffer.endBatch();
-        } else if (stack.getItem() instanceof PantsSilkItem pantsSilk) {
-            Minecraft mc = Minecraft.getInstance();
-
-            MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
-            int ticks = (int)mc.level.getGameTime();
-            int primaryColorOne = pantsSilk.getItemMainColor(stack, 1);
-            int secondaryColorOne = pantsSilk.getItemSecondaryColor(stack, 1);
-            int primaryColorTwo = pantsSilk.getItemMainColor(stack, 2);
-            int secondaryColorTwo = pantsSilk.getItemSecondaryColor(stack, 2);
-            String dyeTypeOne = pantsSilk.getItemDyeType(stack, 1);
-            String dyeTypeTwo = pantsSilk.getItemDyeType(stack, 2);
-            String stensilType = pantsSilk.getStensilType(stack);
-            int lightValueOne = pantsSilk.getItemLightValue(stack, 1);
-            int lightValueTwo = pantsSilk.getItemLightValue(stack, 2);
-
-            pantsModelRenderer.renderModel(
-                    buffer,
-                    model4,
-                    new PantsRenderingData(
-                            primaryColorOne,
-                            secondaryColorOne,
-                            primaryColorTwo,
-                            secondaryColorTwo,
-                            dyeTypeOne,
-                            dyeTypeTwo,
-                            stensilType,
-                            lightValueOne,
-                            lightValueTwo,
-                            "silk"
+        } else if (itemStack.getItem() instanceof CapItem capItem) {
+            CapModelRenderer.renderModel(
+                    multiBufferSource,
+                    capModel,
+                    new SingleSidedClothingRenderingData(
+                            capItem.getFlag(itemStack),
+                            capItem.getItemMainColor(itemStack, 1),
+                            capItem.getItemSecondaryColor(itemStack, 1),
+                            capItem.getItemMainColor(itemStack, 2),
+                            capItem.getItemSecondaryColor(itemStack, 2),
+                            capItem.getItemDyeType(itemStack, 1),
+                            capItem.getItemDyeType(itemStack, 2),
+                            capItem.getStensilType(itemStack),
+                            capItem.getItemLightValue(itemStack, 1),
+                            capItem.getItemLightValue(itemStack, 2),
+                            "jeans",
+                            itemStack.isEnchanted(),
+                            capItem.getGlintColor(itemStack),
+                            capItem.getAdditionalData(itemStack)
                     ),
-                    mc.player,
-                    36,
+                    player,
+                    -36,
                     36,
                     36,
                     0,
                     0,
                     0,
-                    this.leftPos + 88,
-                    this.topPos + 20,
+                    this.leftPos + 87,
+                    this.topPos + 50,
                     50,
                     0,
-                    modelYaw,
+                    -modelYaw,
                     0,
                     poseStack,
                     LightTexture.FULL_BRIGHT
             );
-
-            buffer.endBatch();
-        } else if (stack.getItem() instanceof CapeCottonItem capeCottonItem) {
-            Minecraft mc = Minecraft.getInstance();
-
-            MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
-            int ticks = (int)mc.level.getGameTime();
-            int primaryColorOne = capeCottonItem.getItemMainColor(stack, 1);
-            int secondaryColorOne = capeCottonItem.getItemSecondaryColor(stack, 1);
-            int primaryColorTwo = capeCottonItem.getItemMainColor(stack, 2);
-            int secondaryColorTwo = capeCottonItem.getItemSecondaryColor(stack, 2);
-            String dyeTypeOne = capeCottonItem.getItemDyeType(stack, 1);
-            String dyeTypeTwo = capeCottonItem.getItemDyeType(stack, 2);
-            String stensilType = capeCottonItem.getStensilType(stack);
-            int lightValueOne = capeCottonItem.getItemLightValue(stack, 1);
-            int lightValueTwo = capeCottonItem.getItemLightValue(stack, 2);
-
-            RenderingUtils renderingUtils = new RenderingUtils();
-
-            ItemTexture texture = TextureRegistry.find("cape", stensilType, "cotton");
-
-            Pair<Integer, Integer> col1 = ColorHandlers.handle(dyeTypeOne, primaryColorOne, secondaryColorOne, lightValueOne, minecraft.player, LightTexture.FULL_BRIGHT, (int)minecraft.level.getGameTime());
-            Pair<Integer, Integer> col2 = ColorHandlers.handle(dyeTypeTwo, primaryColorTwo, secondaryColorTwo, lightValueTwo, minecraft.player, LightTexture.FULL_BRIGHT, (int)minecraft.level.getGameTime());
-            int finalColorOne = col1.getA();
-            int finalColorTwo = col2.getA();
-            int finalLightOne = col1.getB();
-            int finalLightTwo = col2.getB();
-
-            poseStack.pushPose();
-
-            poseStack.translate(this.leftPos + 88, this.topPos + 30, 50);
-            poseStack.scale(36, 36, 36);
-            poseStack.mulPose(Axis.YP.rotationDegrees(modelYaw));
-
-            VertexConsumer vertexConsumer1 = renderingUtils.parseVC(buffer, dyeTypeOne, texture.getTextureOne(), "cape");
-            ((PlayerModelInterface)model5).getCloak().render(poseStack, vertexConsumer1, finalLightOne, OverlayTexture.NO_OVERLAY, finalColorOne);
-
-            if (texture.getRenderType()) {
-                VertexConsumer vertexConsumer2 = renderingUtils.parseVC(buffer, dyeTypeTwo, texture.getTextureTwo(),"cape");
-                ((PlayerModelInterface)model5).getCloak().render(poseStack, vertexConsumer2, finalLightTwo, OverlayTexture.NO_OVERLAY, finalColorTwo);
-            }
-
-            poseStack.popPose();
-
-            buffer.endBatch();
-        } else if (stack.getItem() instanceof CapeSilkItem capeSilkItem) {
-            Minecraft mc = Minecraft.getInstance();
-
-            MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
-            int ticks = (int)mc.level.getGameTime();
-            int primaryColorOne = capeSilkItem.getItemMainColor(stack, 1);
-            int secondaryColorOne = capeSilkItem.getItemSecondaryColor(stack, 1);
-            int primaryColorTwo = capeSilkItem.getItemMainColor(stack, 2);
-            int secondaryColorTwo = capeSilkItem.getItemSecondaryColor(stack, 2);
-            String dyeTypeOne = capeSilkItem.getItemDyeType(stack, 1);
-            String dyeTypeTwo = capeSilkItem.getItemDyeType(stack, 2);
-            String stensilType = capeSilkItem.getStensilType(stack);
-            int lightValueOne = capeSilkItem.getItemLightValue(stack, 1);
-            int lightValueTwo = capeSilkItem.getItemLightValue(stack, 2);
-
-            RenderingUtils renderingUtils = new RenderingUtils();
-
-            ItemTexture texture = TextureRegistry.find("cape", stensilType, "silk");
-
-            Pair<Integer, Integer> col1 = ColorHandlers.handle(dyeTypeOne, primaryColorOne, secondaryColorOne, lightValueOne, minecraft.player, LightTexture.FULL_BRIGHT, (int)minecraft.level.getGameTime());
-            Pair<Integer, Integer> col2 = ColorHandlers.handle(dyeTypeTwo, primaryColorTwo, secondaryColorTwo, lightValueTwo, minecraft.player, LightTexture.FULL_BRIGHT, (int)minecraft.level.getGameTime());
-            int finalColorOne = col1.getA();
-            int finalColorTwo = col2.getA();
-            int finalLightOne = col1.getB();
-            int finalLightTwo = col2.getB();
-
-            poseStack.pushPose();
-
-            poseStack.translate(this.leftPos + 88, this.topPos + 30, 50);
-            poseStack.scale(36, 36, 36);
-            poseStack.mulPose(Axis.YP.rotationDegrees(modelYaw));
-
-            VertexConsumer vertexConsumer1 = renderingUtils.parseVC(buffer, dyeTypeOne, texture.getTextureOne(), "cape");
-            ((PlayerModelInterface)model5).getCloak().render(poseStack, vertexConsumer1, finalLightOne, OverlayTexture.NO_OVERLAY, finalColorOne);
-
-            if (texture.getRenderType()) {
-                VertexConsumer vertexConsumer2 = renderingUtils.parseVC(buffer, dyeTypeTwo, texture.getTextureTwo(),"cape");
-                ((PlayerModelInterface)model5).getCloak().render(poseStack, vertexConsumer2, finalLightTwo, OverlayTexture.NO_OVERLAY, finalColorTwo);
-            }
-
-            poseStack.popPose();
-
-            buffer.endBatch();
-        } else if (stack.getItem() instanceof CapeWoolItem capeWoolItem) {
-            Minecraft mc = Minecraft.getInstance();
-
-            MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
-            int ticks = (int)mc.level.getGameTime();
-            int primaryColorOne = capeWoolItem.getItemMainColor(stack, 1);
-            int secondaryColorOne = capeWoolItem.getItemSecondaryColor(stack, 1);
-            int primaryColorTwo = capeWoolItem.getItemMainColor(stack, 2);
-            int secondaryColorTwo = capeWoolItem.getItemSecondaryColor(stack, 2);
-            String dyeTypeOne = capeWoolItem.getItemDyeType(stack, 1);
-            String dyeTypeTwo = capeWoolItem.getItemDyeType(stack, 2);
-            String stensilType = capeWoolItem.getStensilType(stack);
-            int lightValueOne = capeWoolItem.getItemLightValue(stack, 1);
-            int lightValueTwo = capeWoolItem.getItemLightValue(stack, 2);
-
-            RenderingUtils renderingUtils = new RenderingUtils();
-
-            ItemTexture texture = TextureRegistry.find("cape", stensilType, "wool");
-
-            Pair<Integer, Integer> col1 = ColorHandlers.handle(dyeTypeOne, primaryColorOne, secondaryColorOne, lightValueOne, minecraft.player, LightTexture.FULL_BRIGHT, (int)minecraft.level.getGameTime());
-            Pair<Integer, Integer> col2 = ColorHandlers.handle(dyeTypeTwo, primaryColorTwo, secondaryColorTwo, lightValueTwo, minecraft.player, LightTexture.FULL_BRIGHT, (int)minecraft.level.getGameTime());
-            int finalColorOne = col1.getA();
-            int finalColorTwo = col2.getA();
-            int finalLightOne = col1.getB();
-            int finalLightTwo = col2.getB();
-
-            poseStack.pushPose();
-
-            poseStack.translate(this.leftPos + 88, this.topPos + 30, 50);
-            poseStack.scale(36, 36, 36);
-            poseStack.mulPose(Axis.YP.rotationDegrees(modelYaw));
-
-            VertexConsumer vertexConsumer1 = renderingUtils.parseVC(buffer, dyeTypeOne, texture.getTextureOne(), "cape");
-            ((PlayerModelInterface)model5).getCloak().render(poseStack, vertexConsumer1, finalLightOne, OverlayTexture.NO_OVERLAY, finalColorOne);
-
-            if (texture.getRenderType()) {
-                VertexConsumer vertexConsumer2 = renderingUtils.parseVC(buffer, dyeTypeTwo, texture.getTextureTwo(),"cape");
-                ((PlayerModelInterface)model5).getCloak().render(poseStack, vertexConsumer2, finalLightTwo, OverlayTexture.NO_OVERLAY, finalColorTwo);
-            }
-
-            poseStack.popPose();
-
-            buffer.endBatch();
+        } else if (itemStack.getItem() instanceof UshankaItem ushankaItem) {
+            UshankaModelRenderer.renderModel(
+                    multiBufferSource,
+                    ushankaModel,
+                    new DoubleSidedClothingRenderingData(
+                            ushankaItem.getFlag(itemStack),
+                            ushankaItem.getItemMainColor(itemStack, "left", 1),
+                            ushankaItem.getItemSecondaryColor(itemStack, "left", 1),
+                            ushankaItem.getItemMainColor(itemStack, "right", 1),
+                            ushankaItem.getItemSecondaryColor(itemStack, "right", 1),
+                            ushankaItem.getItemMainColor(itemStack, "left", 2),
+                            ushankaItem.getItemSecondaryColor(itemStack, "left", 2),
+                            ushankaItem.getItemMainColor(itemStack, "right", 2),
+                            ushankaItem.getItemSecondaryColor(itemStack, "right", 2),
+                            ushankaItem.getItemDyeType(itemStack, "left", 1),
+                            ushankaItem.getItemDyeType(itemStack, "right", 1),
+                            ushankaItem.getItemDyeType(itemStack, "left", 2),
+                            ushankaItem.getItemDyeType(itemStack, "right", 2),
+                            ushankaItem.getStensilType(itemStack, "left"),
+                            ushankaItem.getStensilType(itemStack, "right"),
+                            ushankaItem.getItemLightValue(itemStack, "left", 1),
+                            ushankaItem.getItemLightValue(itemStack, "left", 2),
+                            ushankaItem.getItemLightValue(itemStack, "right", 1),
+                            ushankaItem.getItemLightValue(itemStack, "right", 2),
+                            "base",
+                            itemStack.isEnchanted(),
+                            ushankaItem.getGlintColor(itemStack),
+                            ushankaItem.getAdditionalData(itemStack)
+                    ),
+                    player,
+                    -36,
+                    36,
+                    36,
+                    0,
+                    0,
+                    0,
+                    this.leftPos + 87,
+                    this.topPos + 50,
+                    50,
+                    0,
+                    -modelYaw,
+                    0,
+                    poseStack,
+                    LightTexture.FULL_BRIGHT
+            );
+        } else if (itemStack.getItem() instanceof PomponHatItem pomponHatItem) {
+            PomponHatModelRenderer.renderModel(
+                    multiBufferSource,
+                    pomponHatModel,
+                    new SingleSidedClothingRenderingData(
+                            pomponHatItem.getFlag(itemStack),
+                            pomponHatItem.getItemMainColor(itemStack, 1),
+                            pomponHatItem.getItemSecondaryColor(itemStack, 1),
+                            pomponHatItem.getItemMainColor(itemStack, 2),
+                            pomponHatItem.getItemSecondaryColor(itemStack, 2),
+                            pomponHatItem.getItemDyeType(itemStack, 1),
+                            pomponHatItem.getItemDyeType(itemStack, 2),
+                            pomponHatItem.getStensilType(itemStack),
+                            pomponHatItem.getItemLightValue(itemStack, 1),
+                            pomponHatItem.getItemLightValue(itemStack, 2),
+                            "cotton",
+                            itemStack.isEnchanted(),
+                            pomponHatItem.getGlintColor(itemStack),
+                            pomponHatItem.getAdditionalData(itemStack)
+                    ),
+                    player,
+                    -36,
+                    36,
+                    36,
+                    0,
+                    0,
+                    0,
+                    this.leftPos + 87,
+                    this.topPos + 50,
+                    50,
+                    0,
+                    -modelYaw,
+                    0,
+                    poseStack,
+                    LightTexture.FULL_BRIGHT
+            );
         }
+
+        multiBufferSource.endBatch();
     }
 
     @Override
@@ -977,17 +678,7 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
 
         NonNullList<Slot> slots = this.menu.slots;
 
-        if (
-                slots.get(0).getItem().is(WeaversParadiseItems.SHIRT_COTTON) ||
-                        slots.get(0).getItem().is(WeaversParadiseItems.SHIRT_SILK) ||
-                        slots.get(0).getItem().is(WeaversParadiseItems.SWEATER_WOOL) ||
-                        slots.get(0).getItem().is(WeaversParadiseItems.PANTS_JEANS) ||
-                        slots.get(0).getItem().is(WeaversParadiseItems.PANTS_COTTON) ||
-                        slots.get(0).getItem().is(WeaversParadiseItems.PANTS_SILK) ||
-                        slots.get(0).getItem().is(WeaversParadiseItems.COTTON_CAPE) ||
-                        slots.get(0).getItem().is(WeaversParadiseItems.SILK_CAPE) ||
-                        slots.get(0).getItem().is(WeaversParadiseItems.WOOL_CAPE)
-        ) {
+        if (slots.getFirst().getItem().getItem() instanceof SingleSidedClothingItem) {
             guiGraphics.blit(
                     ResourceLocation.parse("weaversparadise:textures/screens/nope.png"),
                     this.leftPos + 126,
@@ -1034,16 +725,17 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
             this.minecraft.player.closeContainer();
             return true;
         }
+
         return super.keyPressed(key, b, c);
     }
 
     @Override
-    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+    protected void renderLabels(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY) {
     }
 
     @Override
     public void containerTick() {
-        stack = menu.slots.get(1).getItem();
+        itemStack = menu.slots.get(1).getItem();
     }
 
     @Override
@@ -1069,19 +761,5 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
     public boolean mouseReleased(double mouseX, double mouseY, int button) {
         if (button == 0) lastMouseX = -1;
         return super.mouseReleased(mouseX, mouseY, button);
-    }
-
-    public int getRainbowColor(int ticks) {
-        float speed = 0.05F;
-
-        float red = Mth.clamp((float)(Math.sin(ticks * speed) * 0.5 + 0.5), 0, 1);
-        float green = Mth.clamp((float)(Math.sin(ticks * speed + 2 * Math.PI / 3) * 0.5 + 0.5), 0, 1);
-        float blue = Mth.clamp((float)(Math.sin(ticks * speed + 4 * Math.PI / 3) * 0.5 + 0.5), 0, 1);
-
-        int truered = (int)(red * 255);
-        int truegreen = (int)(green * 255);
-        int trueblue = (int)(blue * 255);
-
-        return 255 << 24 | truered << 16 | truegreen << 8 | trueblue;
     }
 }

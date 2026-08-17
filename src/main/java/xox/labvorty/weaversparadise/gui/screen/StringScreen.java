@@ -6,11 +6,10 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.data.network.StringNetworkMessage;
 import xox.labvorty.weaversparadise.gui.menu.StringMenu;
 
@@ -19,18 +18,14 @@ import java.util.HashMap;
 @OnlyIn(Dist.CLIENT)
 public class StringScreen extends AbstractContainerScreen<StringMenu> {
     private final static HashMap<String, Object> guistate = StringMenu.guistate;
-    private final Level world;
     private final int x, y, z;
-    private final Player entity;
     private static int progress = 0;
 
     public StringScreen(StringMenu container, Inventory inventory, Component text) {
         super(container, inventory, text);
-        this.world = container.world;
         this.x = container.x;
         this.y = container.y;
         this.z = container.z;
-        this.entity = container.entity;
         this.imageWidth = 176;
         this.imageHeight = 200;
     }
@@ -40,7 +35,7 @@ public class StringScreen extends AbstractContainerScreen<StringMenu> {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(guiGraphics, mouseX, mouseY, partialTicks);
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
         this.renderTooltip(guiGraphics, mouseX, mouseY);
@@ -72,7 +67,7 @@ public class StringScreen extends AbstractContainerScreen<StringMenu> {
     }
 
     @Override
-    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+    protected void renderLabels(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY) {
     }
 
     @Override

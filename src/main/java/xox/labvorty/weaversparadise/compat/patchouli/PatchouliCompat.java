@@ -4,8 +4,8 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.MutableComponent;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -14,7 +14,7 @@ import xox.labvorty.weaversparadise.configs.ClientConfig;
 
 @EventBusSubscriber
 public class PatchouliCompat {
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void noPatchouli(ClientPlayerNetworkEvent.LoggingIn event) {
         LocalPlayer localPlayer = event.getPlayer();
 

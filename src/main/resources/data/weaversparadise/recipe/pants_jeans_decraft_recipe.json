@@ -1,0 +1,12 @@
+{
+  "type": "weaversparadise:quality_shapeless_crafting",
+  "category": "misc",
+  "ingredients": [
+    { "item": "weaversparadise:pants_jeans" },
+    { "item": "weaversparadise:weavers_shears" }
+  ],
+  "result": {
+    "id": "weaversparadise:jeans_cloth",
+    "count": 6
+  }
+}

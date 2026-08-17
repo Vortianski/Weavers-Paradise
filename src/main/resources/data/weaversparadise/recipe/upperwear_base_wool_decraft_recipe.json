@@ -1,0 +1,12 @@
+{
+  "type": "weaversparadise:quality_shapeless_crafting",
+  "category": "misc",
+  "ingredients": [
+    { "item": "weaversparadise:wool_upperwear_base" },
+    { "item": "weaversparadise:weavers_shears" }
+  ],
+  "result": {
+    "id": "weaversparadise:wool_cloth",
+    "count": 7
+  }
+}

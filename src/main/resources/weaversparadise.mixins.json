@@ -4,7 +4,6 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "SculkBlockEntityMixin",
-    "GameEventListenerMixin",
     "EntityMixin",
     "PlayerMixin",
     "AbstractArrowMixin"
@@ -13,11 +12,13 @@
     "client.PlayerRendererMixin",
     "client.PlayerModelMixin",
     "client.HumanModelMixin",
-    "client.ItemRendererMixin",
     "client.ElytraLayerMixin",
     "client.CapeLayerMixin",
     "compat.ClientBookRegistryMixin",
-    "client.LivingRendererMixin"
+    "client.LivingRendererMixin",
+    "client.ClientHooksMixin",
+    "client.HumanoidArmorLayerMixin",
+    "client.GuiGraphicsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

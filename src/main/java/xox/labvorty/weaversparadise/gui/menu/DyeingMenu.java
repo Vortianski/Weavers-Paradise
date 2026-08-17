@@ -236,7 +236,7 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
     }
 
     @Override
-    public ItemStack quickMoveStack(@NotNull Player player, int index) {
+    public @NotNull ItemStack quickMoveStack(@NotNull Player player, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = (Slot) this.slots.get(index);
         if (slot != null && slot.hasItem()) {

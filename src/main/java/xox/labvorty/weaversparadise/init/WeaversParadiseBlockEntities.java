@@ -9,10 +9,7 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import xox.labvorty.weaversparadise.blocks.entities.ClothcraftingStationBlockEntity;
-import xox.labvorty.weaversparadise.blocks.entities.DyeingBarrelBlockEntity;
-import xox.labvorty.weaversparadise.blocks.entities.DyemakingBlockEntity;
-import xox.labvorty.weaversparadise.blocks.entities.SpinningJennyBlockEntity;
+import xox.labvorty.weaversparadise.blocks.entities.*;
 
 @EventBusSubscriber
 public class WeaversParadiseBlockEntities {
@@ -21,6 +18,7 @@ public class WeaversParadiseBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<?>> CLOTHCRAFTING_STATION_BE = register("clothcrafting_station", WeaversParadiseBlocks.CLOTHCRAFTING_STATION, ClothcraftingStationBlockEntity::new);
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<?>> DYEMAKING_BE = register("dyemaking", WeaversParadiseBlocks.DYEMAKING_BLOCK, DyemakingBlockEntity::new);
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<?>> DYEING_BARREL_BE = register("dyeing", WeaversParadiseBlocks.DYEING_BARREL_BLOCK, DyeingBarrelBlockEntity::new);
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PlushieBlockEntity>> PLUSHIE_BE = BLOCK_ENTITIES.register("plushie", () -> BlockEntityType.Builder.of(PlushieBlockEntity::new, WeaversParadiseBlocks.PLUSHIE.get()).build(null));
 
     private static DeferredHolder<BlockEntityType<?>, BlockEntityType<?>> register(String registryname, DeferredHolder<Block, Block> block, BlockEntityType.BlockEntitySupplier<?> supplier) {
         return BLOCK_ENTITIES.register(registryname, () -> BlockEntityType.Builder.of(supplier, block.get()).build(null));

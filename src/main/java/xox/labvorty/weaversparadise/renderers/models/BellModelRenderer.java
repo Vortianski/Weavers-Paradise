@@ -13,18 +13,10 @@ import xox.labvorty.weaversparadise.model.BellModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ChokerTrinketRenderingData;
 
 public class BellModelRenderer {
-    private int color;
-    private String metalType;
-
-    public void initData(ChokerTrinketRenderingData data) {
-        this.color = data.getColor();
-        this.metalType = data.getMetalType();
-    }
-
     public void renderModel(
             MultiBufferSource multiBufferSource,
             BellModel<?> model,
-            ChokerTrinketRenderingData data,
+            ChokerTrinketRenderingData renderingData,
             LivingEntity entity,
             float scaleX,
             float scaleY,
@@ -41,17 +33,16 @@ public class BellModelRenderer {
             PoseStack poseStack,
             int packedLight
     ) {
-        initData(data);
-
-        ItemTexture itemTexture = TextureRegistry.find("bell", "default", metalType);
+        ItemTexture itemTexture = TextureRegistry.find("bell", "default", renderingData.metalType());
         if (itemTexture == null) {
             itemTexture = TextureRegistry.find("bell", "default", "default");
         }
+
         int finalColor;
         if (itemTexture.getRenderType()) {
             finalColor = 255 << 24 | 255 << 16 | 255 << 8 | 255;
         } else {
-            finalColor = color;
+            finalColor = renderingData.color();
         }
 
         poseStack.pushPose();

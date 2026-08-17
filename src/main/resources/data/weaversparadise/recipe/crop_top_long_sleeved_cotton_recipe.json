@@ -1,0 +1,22 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    "abc"
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:weavers_shears"
+    },
+    "b": {
+      "item": "weaversparadise:long_sleeve_cotton"
+    },
+    "c": {
+      "item": "weaversparadise:needle_with_thread"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:cotton_crop_top_long_sleeved",
+    "count": 1
+  }
+}

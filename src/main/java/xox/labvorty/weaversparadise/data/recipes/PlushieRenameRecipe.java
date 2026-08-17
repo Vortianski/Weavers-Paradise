@@ -1,6 +1,5 @@
 package xox.labvorty.weaversparadise.data.recipes;
 
-import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.PropertyMap;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.HolderLookup;
@@ -14,10 +13,8 @@ import net.minecraft.world.item.component.ResolvableProfile;
 import net.minecraft.world.item.crafting.*;
 import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.items.misc.PlayerPlushieRenameTokenItem;
-import xox.labvorty.weaversparadise.items.misc.PlushieItem;
 
 import java.util.Optional;
-import java.util.UUID;
 
 public class PlushieRenameRecipe extends ShapelessRecipe {
     public PlushieRenameRecipe(

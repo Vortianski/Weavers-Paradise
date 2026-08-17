@@ -49,19 +49,21 @@ public class CatRingRenderer extends BlockEntityWithoutLevelRenderer {
             case GUI -> {
                 scale = 2.5f;
                 xtranslation = -0.25f;
-                additionalYrot = 45f;
-                additionalXrot = 22.5f;
+                additionalYrot = -225f;
+                additionalXrot = -22.5f;
             }
             case THIRD_PERSON_LEFT_HAND, THIRD_PERSON_RIGHT_HAND -> {
                 scale = 0.75f;
                 ytranslation = 0.6f;
+                additionalYrot = 180f;
             }
             case FIRST_PERSON_LEFT_HAND, FIRST_PERSON_RIGHT_HAND -> {
                 scale = 0.75f;
                 ytranslation = 0.8f;
+                additionalYrot = 180f;
             }
             case FIXED -> {
-                additionalYrot = 180f;
+                additionalYrot = 0f;
             }
             case GROUND -> {
                 ytranslation = 0.5f;
@@ -83,14 +85,14 @@ public class CatRingRenderer extends BlockEntityWithoutLevelRenderer {
                 ),
                 minecraft.player,
                 scale,
-                -scale,
                 scale,
-                0,
+                scale,
+                180,
                 180,
                 0,
                 xtranslation,
-                ytranslation,
-                -0.5f,
+                -ytranslation,
+                0.5f,
                 additionalXrot,
                 additionalYrot,
                 additionalZrot,

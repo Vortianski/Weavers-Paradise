@@ -10,22 +10,14 @@
   },
   "insulation": {
     "heat": 0,
-    "cold": 0
+    "cold": 1
   },
   "entity": {
     "entities": ["*"]
   },
-  "attributes": {
-    "cold_sweat:cold_resistance": [
-      {
-        "name": "weaversparadise:leather_gloves",
-        "amount": 0.05,
-        "operation": "add_value"
-      }
-    ]
-  },
+  "attributes": {},
   "immune_temp_modifiers": {
-    "cold_sweat:fire": 1.0
+    "cold_sweat:water": 0.1
   },
   "hint": {
     "key": "tooltip.hint.heat_or_cold_item"

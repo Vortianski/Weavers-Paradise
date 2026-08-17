@@ -14,6 +14,10 @@ public class ClientConfig {
             .comment("Display a message if Patchouli is not installed when joining the game")
             .define("patchouliWarning", true);
 
+    public static final ModConfigSpec.ConfigValue<Boolean> VERSION_WARNING = BUILDER
+            .comment("Display a message if your mod version is outdated")
+            .define("versionWarning", true);
+
     public static final ModConfigSpec.ConfigValue<List<? extends String>> THIGH_HIGHS_RESTRICTOR = BUILDER
             .comment("Items that will prevent Thigh Highs from rendering")
             .defineListAllowEmpty(
@@ -43,9 +47,7 @@ public class ClientConfig {
             .defineListAllowEmpty(
                     "shirtRestrictors",
                     List.of(
-                            "weaversparadise:astolfo_armor_chestplate",
-                            "weaversparadise:bridget_armor_jacket",
-                            "weaversparadise:felix_armor_jacket"
+                            "weaversparadise:niko_cosmetics"
                     ),
                     () -> "", ClientConfig::validateItemName
             );
@@ -57,6 +59,22 @@ public class ClientConfig {
                     List.of(
                             "weaversparadise:felix_armor_jacket"
                     ),
+                    () -> "", ClientConfig::validateItemName
+            );
+
+    public static final ModConfigSpec.ConfigValue<List<? extends String>> HAT_RESTRICTOR = BUILDER
+            .comment("Items that will prevent Hats from rendering")
+            .defineListAllowEmpty(
+                    "hatsRestrictors",
+                    List.of(),
+                    () -> "", ClientConfig::validateItemName
+            );
+
+    public static final ModConfigSpec.ConfigValue<List<? extends String>> SKIRT_RESTRICTOR = BUILDER
+            .comment("Items that will prevent Skirts from rendering")
+            .defineListAllowEmpty(
+                    "skirtsRestrictors",
+                    List.of(),
                     () -> "", ClientConfig::validateItemName
             );
 

@@ -1,0 +1,35 @@
+{
+  "required_mods": [
+    "weaversparadise"
+  ],
+  "type": "curio",
+  "item": {
+    "items": [
+      "weaversparadise:thigh_highs_cotton",
+      "weaversparadise:hand_warmers_cotton",
+      "weaversparadise:shirt_cotton",
+      "weaversparadise:long_sleeve_cotton",
+      "weaversparadise:t_shirt",
+      "weaversparadise:pants_cotton",
+      "weaversparadise:pompon_hat",
+      "weaversparadise:skirt_cotton",
+      "weaversparadise:cotton_crop_top_long_sleeved",
+      "weaversparadise:poncho"
+    ]
+  },
+  "insulation": {
+    "heat": 1,
+    "cold": 1
+  },
+  "entity": {
+    "entities": ["*"]
+  },
+  "attributes": {},
+  "immune_temp_modifiers": {
+    "cold_sweat:water": 0.05,
+    "cold_sweat:on_fire": 0.05
+  },
+  "hint": {
+    "key": "tooltip.hint.heat_or_cold_item"
+  }
+}

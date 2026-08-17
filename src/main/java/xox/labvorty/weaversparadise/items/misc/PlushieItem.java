@@ -2,30 +2,45 @@ package xox.labvorty.weaversparadise.items.misc;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.PropertyMap;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.ResolvableProfile;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xox.labvorty.weaversparadise.WeaversParadise;
+import xox.labvorty.weaversparadise.blocks.PlushieBlock;
+import xox.labvorty.weaversparadise.blocks.entities.PlushieBlockEntity;
+import xox.labvorty.weaversparadise.init.WeaversParadiseBlocks;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 
 import java.util.Optional;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
-public class PlushieItem extends Item implements Plushie {
-    public PlushieItem() {
+public class PlushieItem extends BlockItem implements Plushie {
+    public PlushieItem(Block block) {
         super(
+                block,
                 new Properties()
                         .stacksTo(1)
                         .rarity(Rarity.RARE)
@@ -39,12 +54,26 @@ public class PlushieItem extends Item implements Plushie {
     }
 
     @Override
-    public Component getName(ItemStack stack) {
+    public @NotNull Component getName(@NotNull ItemStack stack) {
         ResolvableProfile profile = getProfile(stack);
 
         String profileName = profile.name().orElse("Steve");
 
         return Component.translatable(this.getDescriptionId(stack), profileName);
+    }
+
+    @Override
+    protected boolean updateCustomBlockEntityTag(@NotNull BlockPos pos, @NotNull Level level, @Nullable Player player, @NotNull ItemStack stack, @NotNull BlockState state) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+
+        if (blockEntity instanceof PlushieBlockEntity plushieBlockEntity) {
+            ResolvableProfile profile = stack.get(DataComponents.PROFILE);
+            if (profile != null) {
+                plushieBlockEntity.setProfile(profile);
+            }
+        }
+
+        return super.updateCustomBlockEntityTag(pos, level, player, stack, state);
     }
 
     @Override

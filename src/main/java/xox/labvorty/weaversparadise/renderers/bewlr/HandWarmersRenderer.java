@@ -14,8 +14,8 @@ import xox.labvorty.weaversparadise.items.clothing.HandWarmersSilkItem;
 import xox.labvorty.weaversparadise.items.clothing.HandWarmersWoolItem;
 import xox.labvorty.weaversparadise.items.clothing.defined.HandWarmersInterface;
 import xox.labvorty.weaversparadise.model.ThighHighsModel;
-import xox.labvorty.weaversparadise.renderers.helpers.ThighHighsRenderingData;
-import xox.labvorty.weaversparadise.renderers.models.HandWarmersSpecialModelRenderer;
+import xox.labvorty.weaversparadise.renderers.helpers.DoubleSidedClothingRenderingData;
+import xox.labvorty.weaversparadise.renderers.models.HandWarmersGUIModelRenderer;
 
 public class HandWarmersRenderer extends BlockEntityWithoutLevelRenderer {
     private final ThighHighsModel<?> model;
@@ -60,15 +60,16 @@ public class HandWarmersRenderer extends BlockEntityWithoutLevelRenderer {
                 case GUI -> {
                     scale = 1.0f;
                     ytranslation = 1.65f;
-                    additionalYrot = 45f;
-                    additionalXrot = 22.5f;
+                    additionalYrot = -225f;
+                    additionalXrot = -22.5f;
                 }
                 case THIRD_PERSON_LEFT_HAND, THIRD_PERSON_RIGHT_HAND, FIRST_PERSON_LEFT_HAND, FIRST_PERSON_RIGHT_HAND -> {
                     scale = 0.5f;
                     ytranslation = 1.25f;
+                    additionalYrot = 180f;
                 }
                 case FIXED -> {
-                    additionalYrot = 180f;
+                    additionalYrot = 0f;
                 }
                 case GROUND -> {
                     scale = 0.5f;
@@ -76,63 +77,46 @@ public class HandWarmersRenderer extends BlockEntityWithoutLevelRenderer {
                 }
             }
 
-            int primaryColorLeftOne = handWarmersInterface.getItemMainColor(stack, "left", 1);
-            int secondaryColorLeftOne = handWarmersInterface.getItemSecondaryColor(stack, "left", 1);
-            int primaryColorRightOne = handWarmersInterface.getItemMainColor(stack, "right", 1);
-            int secondaryColorRightOne = handWarmersInterface.getItemSecondaryColor(stack, "right", 1);
-            int primaryColorLeftTwo = handWarmersInterface.getItemMainColor(stack, "left", 2);
-            int secondaryColorLeftTwo = handWarmersInterface.getItemSecondaryColor(stack, "left", 2);
-            int primaryColorRightTwo = handWarmersInterface.getItemMainColor(stack, "right", 2);
-            int secondaryColorRightTwo = handWarmersInterface.getItemSecondaryColor(stack, "right", 2);
-            String dyeTypeLeftOne = handWarmersInterface.getItemDyeType(stack, "left", 1);
-            String dyeTypeRightOne = handWarmersInterface.getItemDyeType(stack, "right", 1);
-            String dyeTypeLeftTwo = handWarmersInterface.getItemDyeType(stack, "left", 2);
-            String dyeTypeRightTwo = handWarmersInterface.getItemDyeType(stack, "right", 2);
-            String stensilTypeLeft = handWarmersInterface.getStensilType(stack, "left");
-            String stensilTypeRight = handWarmersInterface.getStensilType(stack, "right");
-            int lightValueLeftOne = handWarmersInterface.getItemLightValue(stack, "left", 1);
-            int lightValueLeftTwo = handWarmersInterface.getItemLightValue(stack, "left", 2);
-            int lightValueRightOne = handWarmersInterface.getItemLightValue(stack, "right", 1);
-            int lightValueRightTwo = handWarmersInterface.getItemLightValue(stack, "right", 2);
-
             Minecraft minecraft = Minecraft.getInstance();
 
-            HandWarmersSpecialModelRenderer handWarmersSpecialModelRenderer = new HandWarmersSpecialModelRenderer();
-
-            handWarmersSpecialModelRenderer.renderModel(
+            HandWarmersGUIModelRenderer.renderModel(
                     buffer,
                     model,
-                    new ThighHighsRenderingData(
-                            primaryColorLeftOne,
-                            secondaryColorLeftOne,
-                            primaryColorRightOne,
-                            secondaryColorRightOne,
-                            primaryColorLeftTwo,
-                            secondaryColorLeftTwo,
-                            primaryColorRightTwo,
-                            secondaryColorRightTwo,
-                            dyeTypeLeftOne,
-                            dyeTypeRightOne,
-                            dyeTypeLeftTwo,
-                            dyeTypeRightTwo,
-                            stensilTypeLeft,
-                            stensilTypeRight,
-                            lightValueLeftOne,
-                            lightValueLeftTwo,
-                            lightValueRightOne,
-                            lightValueRightTwo,
-                            material
+                    new DoubleSidedClothingRenderingData(
+                            handWarmersInterface.getFlag(stack),
+                            handWarmersInterface.getItemMainColor(stack, "left", 1),
+                            handWarmersInterface.getItemSecondaryColor(stack, "left", 1),
+                            handWarmersInterface.getItemMainColor(stack, "right", 1),
+                            handWarmersInterface.getItemSecondaryColor(stack, "right", 1),
+                            handWarmersInterface.getItemMainColor(stack, "left", 2),
+                            handWarmersInterface.getItemSecondaryColor(stack, "left", 2),
+                            handWarmersInterface.getItemMainColor(stack, "right", 2),
+                            handWarmersInterface.getItemSecondaryColor(stack, "right", 2),
+                            handWarmersInterface.getItemDyeType(stack, "left", 1),
+                            handWarmersInterface.getItemDyeType(stack, "right", 1),
+                            handWarmersInterface.getItemDyeType(stack, "left", 2),
+                            handWarmersInterface.getItemDyeType(stack, "right", 2),
+                            handWarmersInterface.getStensilType(stack, "left"),
+                            handWarmersInterface.getStensilType(stack, "right"),
+                            handWarmersInterface.getItemLightValue(stack, "left", 1),
+                            handWarmersInterface.getItemLightValue(stack, "left", 2),
+                            handWarmersInterface.getItemLightValue(stack, "right", 1),
+                            handWarmersInterface.getItemLightValue(stack, "right", 2),
+                            material,
+                            stack.isEnchanted(),
+                            handWarmersInterface.getGlintColor(stack),
+                            handWarmersInterface.getAdditionalData(stack)
                     ),
                     minecraft.player,
                     scale,
-                    -scale,
                     scale,
-                    0,
+                    scale,
+                    180,
                     180,
                     0,
                     -0.5f,
-                    ytranslation,
-                    -0.5f,
+                    -ytranslation,
+                    0.5f,
                     additionalXrot,
                     additionalYrot,
                     additionalZrot,

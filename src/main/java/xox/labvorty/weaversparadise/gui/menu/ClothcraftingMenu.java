@@ -19,6 +19,7 @@ import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.data.recipes.ClothcraftingRecipeInput;
 import xox.labvorty.weaversparadise.init.WeaversParadiseInterfaces;
 import xox.labvorty.weaversparadise.init.WeaversParadiseRecipes;
@@ -84,7 +85,7 @@ public class ClothcraftingMenu extends AbstractContainerMenu implements Supplier
         }
         this.customSlots.put(0, this.addSlot(new SlotItemHandler(internal, 0, 47, 1) {
             @Override
-            public boolean mayPlace(ItemStack stack) {
+            public boolean mayPlace(@NotNull ItemStack stack) {
                 return world.getRecipeManager()
                         .getRecipeFor(
                                 WeaversParadiseRecipes.CLOTHCRAFTING_TYPE.get(),
@@ -95,13 +96,13 @@ public class ClothcraftingMenu extends AbstractContainerMenu implements Supplier
         }));
         for (int si = 0; si < 3; ++si)
             for (int sj = 0; sj < 9; ++sj)
-                this.addSlot(new Slot(inv, sj + (si + 1) * 9, 0 + 8 + sj * 18, 43 + 84 + si * 18));
+                this.addSlot(new Slot(inv, sj + (si + 1) * 9, 8 + sj * 18, 43 + 84 + si * 18));
         for (int si = 0; si < 9; ++si)
-            this.addSlot(new Slot(inv, si, 0 + 8 + si * 18, 43 + 142));
+            this.addSlot(new Slot(inv, si, 8 + si * 18, 43 + 142));
     }
 
     @Override
-    public boolean stillValid(Player player) {
+    public boolean stillValid(@NotNull Player player) {
         if (this.bound) {
             if (this.boundItemMatcher != null)
                 return this.boundItemMatcher.get();
@@ -114,7 +115,7 @@ public class ClothcraftingMenu extends AbstractContainerMenu implements Supplier
     }
 
     @Override
-    public ItemStack quickMoveStack(Player playerIn, int index) {
+    public @NotNull ItemStack quickMoveStack(@NotNull Player playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = (Slot) this.slots.get(index);
         if (slot != null && slot.hasItem()) {
@@ -146,7 +147,7 @@ public class ClothcraftingMenu extends AbstractContainerMenu implements Supplier
     }
 
     @Override
-    protected boolean moveItemStackTo(ItemStack p_38904_, int p_38905_, int p_38906_, boolean p_38907_) {
+    protected boolean moveItemStackTo(@NotNull ItemStack p_38904_, int p_38905_, int p_38906_, boolean p_38907_) {
         boolean flag = false;
         int i = p_38905_;
         if (p_38907_) {
@@ -205,7 +206,7 @@ public class ClothcraftingMenu extends AbstractContainerMenu implements Supplier
     }
 
     @Override
-    public void removed(Player playerIn) {
+    public void removed(@NotNull Player playerIn) {
         super.removed(playerIn);
         if (!bound && playerIn instanceof ServerPlayer serverPlayer) {
             if (!serverPlayer.isAlive() || serverPlayer.hasDisconnected()) {

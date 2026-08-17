@@ -14,8 +14,8 @@ import xox.labvorty.weaversparadise.items.clothing.ThighHighsSilkItem;
 import xox.labvorty.weaversparadise.items.clothing.ThighHighsWoolItem;
 import xox.labvorty.weaversparadise.items.clothing.defined.ThighHighsInterface;
 import xox.labvorty.weaversparadise.model.ThighHighsModel;
-import xox.labvorty.weaversparadise.renderers.helpers.ThighHighsRenderingData;
-import xox.labvorty.weaversparadise.renderers.models.ThighHighModelRenderer;
+import xox.labvorty.weaversparadise.renderers.helpers.DoubleSidedClothingRenderingData;
+import xox.labvorty.weaversparadise.renderers.models.ThighHighsModelRenderer;
 
 public class ThighHighsRenderer extends BlockEntityWithoutLevelRenderer {
     private final ThighHighsModel<?> model;
@@ -59,15 +59,16 @@ public class ThighHighsRenderer extends BlockEntityWithoutLevelRenderer {
         switch (transformType) {
             case GUI -> {
                 ytranslation = 1.65f;
-                additionalYrot = 45f;
-                additionalXrot = 22.5f;
+                additionalYrot = -225f;
+                additionalXrot = -22.5f;
             }
             case THIRD_PERSON_LEFT_HAND, THIRD_PERSON_RIGHT_HAND, FIRST_PERSON_LEFT_HAND, FIRST_PERSON_RIGHT_HAND -> {
                 scale = 0.5f;
                 ytranslation = 1.25f;
+                additionalYrot = 180f;
             }
             case FIXED -> {
-                additionalYrot = 180f;
+                additionalYrot = 0f;
             }
             case GROUND -> {
                 scale = 0.5f;
@@ -75,63 +76,46 @@ public class ThighHighsRenderer extends BlockEntityWithoutLevelRenderer {
             }
         }
 
-        int primaryColorLeftOne = thighHighsInterface.getItemMainColor(stack, "left", 1);
-        int secondaryColorLeftOne = thighHighsInterface.getItemSecondaryColor(stack, "left", 1);
-        int primaryColorRightOne = thighHighsInterface.getItemMainColor(stack, "right", 1);
-        int secondaryColorRightOne = thighHighsInterface.getItemSecondaryColor(stack, "right", 1);
-        int primaryColorLeftTwo = thighHighsInterface.getItemMainColor(stack, "left", 2);
-        int secondaryColorLeftTwo = thighHighsInterface.getItemSecondaryColor(stack, "left", 2);
-        int primaryColorRightTwo = thighHighsInterface.getItemMainColor(stack, "right", 2);
-        int secondaryColorRightTwo = thighHighsInterface.getItemSecondaryColor(stack, "right", 2);
-        String dyeTypeLeftOne = thighHighsInterface.getItemDyeType(stack, "left", 1);
-        String dyeTypeRightOne = thighHighsInterface.getItemDyeType(stack, "right", 1);
-        String dyeTypeLeftTwo = thighHighsInterface.getItemDyeType(stack, "left", 2);
-        String dyeTypeRightTwo = thighHighsInterface.getItemDyeType(stack, "right", 2);
-        String stensilTypeLeft = thighHighsInterface.getStensilType(stack, "left");
-        String stensilTypeRight = thighHighsInterface.getStensilType(stack, "right");
-        int lightValueLeftOne = thighHighsInterface.getItemLightValue(stack, "left", 1);
-        int lightValueLeftTwo = thighHighsInterface.getItemLightValue(stack, "left", 2);
-        int lightValueRightOne = thighHighsInterface.getItemLightValue(stack, "right", 1);
-        int lightValueRightTwo = thighHighsInterface.getItemLightValue(stack, "right", 2);
-
         Minecraft minecraft = Minecraft.getInstance();
 
-        ThighHighModelRenderer modelRenderer = new ThighHighModelRenderer();
-
-        modelRenderer.renderModel(
+        ThighHighsModelRenderer.renderModel(
                 buffer,
                 model,
-                new ThighHighsRenderingData(
-                        primaryColorLeftOne,
-                        secondaryColorLeftOne,
-                        primaryColorRightOne,
-                        secondaryColorRightOne,
-                        primaryColorLeftTwo,
-                        secondaryColorLeftTwo,
-                        primaryColorRightTwo,
-                        secondaryColorRightTwo,
-                        dyeTypeLeftOne,
-                        dyeTypeRightOne,
-                        dyeTypeLeftTwo,
-                        dyeTypeRightTwo,
-                        stensilTypeLeft,
-                        stensilTypeRight,
-                        lightValueLeftOne,
-                        lightValueLeftTwo,
-                        lightValueRightOne,
-                        lightValueRightTwo,
-                        material
+                new DoubleSidedClothingRenderingData(
+                        thighHighsInterface.getFlag(stack),
+                        thighHighsInterface.getItemMainColor(stack, "left", 1),
+                        thighHighsInterface.getItemSecondaryColor(stack, "left", 1),
+                        thighHighsInterface.getItemMainColor(stack, "right", 1),
+                        thighHighsInterface.getItemSecondaryColor(stack, "right", 1),
+                        thighHighsInterface.getItemMainColor(stack, "left", 2),
+                        thighHighsInterface.getItemSecondaryColor(stack, "left", 2),
+                        thighHighsInterface.getItemMainColor(stack, "right", 2),
+                        thighHighsInterface.getItemSecondaryColor(stack, "right", 2),
+                        thighHighsInterface.getItemDyeType(stack, "left", 1),
+                        thighHighsInterface.getItemDyeType(stack, "right", 1),
+                        thighHighsInterface.getItemDyeType(stack, "left", 2),
+                        thighHighsInterface.getItemDyeType(stack, "right", 2),
+                        thighHighsInterface.getStensilType(stack, "left"),
+                        thighHighsInterface.getStensilType(stack, "right"),
+                        thighHighsInterface.getItemLightValue(stack, "left", 1),
+                        thighHighsInterface.getItemLightValue(stack, "left", 2),
+                        thighHighsInterface.getItemLightValue(stack, "right", 1),
+                        thighHighsInterface.getItemLightValue(stack, "right", 2),
+                        material,
+                        stack.isEnchanted(),
+                        thighHighsInterface.getGlintColor(stack),
+                        thighHighsInterface.getAdditionalData(stack)
                 ),
                 minecraft.player,
                 scale,
-                -scale,
                 scale,
-                0,
+                scale,
+                180,
                 180,
                 0,
                 -0.5f,
-                ytranslation,
-                -0.5f,
+                -ytranslation,
+                0.5f,
                 additionalXrot,
                 additionalYrot,
                 additionalZrot,

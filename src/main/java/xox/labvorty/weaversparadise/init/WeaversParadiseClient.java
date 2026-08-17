@@ -1,25 +1,26 @@
 package xox.labvorty.weaversparadise.init;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import org.jetbrains.annotations.NotNull;
+import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 import xox.labvorty.weaversparadise.data.tooltip_components.ClothingTooltipComponent;
 import xox.labvorty.weaversparadise.data.tooltip_components.DyeTooltipComponent;
 import xox.labvorty.weaversparadise.data.tooltip_components.DyeTypeRegistry;
@@ -35,842 +36,18 @@ import xox.labvorty.weaversparadise.items.materials.ChromaticBloomFruitItem;
 import xox.labvorty.weaversparadise.items.materials.ChromaticDustItem;
 import xox.labvorty.weaversparadise.model.*;
 import xox.labvorty.weaversparadise.renderers.bewlr.*;
-
-import java.util.Collections;
-import java.util.Map;
+import xox.labvorty.weaversparadise.renderers.bewlr.BellRenderer;
+import xox.labvorty.weaversparadise.renderers.bewlr.CatRingRenderer;
+import xox.labvorty.weaversparadise.renderers.bewlr.HeartRenderer;
+import xox.labvorty.weaversparadise.renderers.bewlr.PlateRenderer;
+import xox.labvorty.weaversparadise.renderers.bewlr.RingRenderer;
+import xox.labvorty.weaversparadise.renderers.curios.*;
+import xox.labvorty.weaversparadise.renderers.layer.*;
 
 @EventBusSubscriber(value = Dist.CLIENT)
 public class WeaversParadiseClient {
     @SubscribeEvent
     public static void registerItemExtensions(RegisterClientExtensionsEvent event) {
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "head", new AstolfoArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(AstolfoArmorModel.LAYER_LOCATION)).Head,
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.ASTOLFO_ARMOR_WIG.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "body", new AstolfoArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(AstolfoArmorModel.LAYER_LOCATION)).Body,
-                                        "left_arm", new AstolfoArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(AstolfoArmorModel.LAYER_LOCATION)).LeftArm,
-                                        "right_arm", new AstolfoArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(AstolfoArmorModel.LAYER_LOCATION)).RightArm,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.ASTOLFO_ARMOR_CHESTPLATE.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "left_leg", new AstolfoArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(AstolfoArmorModel.LAYER_LOCATION)).LeftLeg,
-                                        "right_leg", new AstolfoArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(AstolfoArmorModel.LAYER_LOCATION)).RightLeg,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.ASTOLFO_ARMOR_LEGGINGS.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "left_leg", new AstolfoArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(AstolfoArmorModel.LAYER_LOCATION)).LeftBoot,
-                                        "right_leg", new AstolfoArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(AstolfoArmorModel.LAYER_LOCATION)).RightBoot,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.ASTOLFO_ARMOR_BOOTS.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "head", new BridgetClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(BridgetClothingModel.LAYER_LOCATION)).Head,
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.BRIDGET_ARMOR_HAT.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "body", new BridgetClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(BridgetClothingModel.LAYER_LOCATION)).Body,
-                                        "left_arm", new BridgetClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(BridgetClothingModel.LAYER_LOCATION)).LeftArm,
-                                        "right_arm", new BridgetClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(BridgetClothingModel.LAYER_LOCATION)).RightArm,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.BRIDGET_ARMOR_JACKET.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "left_leg", new BridgetClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(BridgetClothingModel.LAYER_LOCATION)).LeftLegPants,
-                                        "right_leg", new BridgetClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(BridgetClothingModel.LAYER_LOCATION)).RightLegPants,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.BRIDGET_ARMOR_SKIRT.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "left_leg", new BridgetClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(BridgetClothingModel.LAYER_LOCATION)).LeftLeg,
-                                        "right_leg", new BridgetClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(BridgetClothingModel.LAYER_LOCATION)).RightLeg,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.BRIDGET_ARMOR_BOOTS.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "head", new FelixClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(FelixClothingModel.LAYER_LOCATION)).Head,
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.FELIX_ARMOR_HAT.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "body", new FelixClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(FelixClothingModel.LAYER_LOCATION)).Body,
-                                        "left_arm", new FelixClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(FelixClothingModel.LAYER_LOCATION)).Left_Arm,
-                                        "right_arm", new FelixClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(FelixClothingModel.LAYER_LOCATION)).Right_Arm,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.FELIX_ARMOR_JACKET.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "left_leg", new FelixClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(FelixClothingModel.LAYER_LOCATION)).Left_Leg,
-                                        "right_leg", new FelixClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(FelixClothingModel.LAYER_LOCATION)).Right_Leg,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.FELIX_ARMOR_SKIRT.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "left_leg", new FelixClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(FelixClothingModel.LAYER_LOCATION)).Left_Leg2,
-                                        "right_leg", new FelixClothingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(FelixClothingModel.LAYER_LOCATION)).Right_Leg2,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.FELIX_ARMOR_BOOTS.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "head", new GriffithArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GriffithArmorModel.LAYER_LOCATION)).Head,
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.GRIFFITH_ARMOR_WIG.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "body", new GriffithArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GriffithArmorModel.LAYER_LOCATION)).Body,
-                                        "left_arm", new GriffithArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GriffithArmorModel.LAYER_LOCATION)).LeftArm,
-                                        "right_arm", new GriffithArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GriffithArmorModel.LAYER_LOCATION)).RightArm,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.GRIFFITH_ARMOR_CHESTPLATE.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "left_leg", new GriffithArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GriffithArmorModel.LAYER_LOCATION)).LeftLeg,
-                                        "right_leg", new GriffithArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GriffithArmorModel.LAYER_LOCATION)).RightLeg,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.GRIFFITH_ARMOR_LEGGINGS.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "left_leg", new GriffithArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GriffithArmorModel.LAYER_LOCATION)).LeftBoot,
-                                        "right_leg", new GriffithArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GriffithArmorModel.LAYER_LOCATION)).RightBoot,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.GRIFFITH_ARMOR_BOOTS.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "head", new NikoArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(NikoArmorModel.LAYER_LOCATION)).Head,
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.NIKO_ARMOR_HAT.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "body", new NikoArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(NikoArmorModel.LAYER_LOCATION)).Body,
-                                        "left_arm", new NikoArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(NikoArmorModel.LAYER_LOCATION)).LeftArm,
-                                        "right_arm", new NikoArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(NikoArmorModel.LAYER_LOCATION)).RightArm,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.NIKO_ARMOR_CHESTPLATE.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "left_leg", new NikoArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(NikoArmorModel.LAYER_LOCATION)).LeftLeg,
-                                        "right_leg", new NikoArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(NikoArmorModel.LAYER_LOCATION)).RightLeg,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.NIKO_ARMOR_LEGGINGS.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "left_leg", new NikoArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(NikoArmorModel.LAYER_LOCATION)).LeftBoot,
-                                        "right_leg", new NikoArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(NikoArmorModel.LAYER_LOCATION)).RightBoot,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.NIKO_ARMOR_BOOTS.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "head", new GabrielArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GabrielArmorModel.LAYER_LOCATION)).Head,
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.GABRIEL_ARMOR_HELMET.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "body", new GabrielArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GabrielArmorModel.LAYER_LOCATION)).Body,
-                                        "left_arm", new GabrielArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GabrielArmorModel.LAYER_LOCATION)).LeftArm,
-                                        "right_arm", new GabrielArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GabrielArmorModel.LAYER_LOCATION)).RightArm,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.GABRIEL_ARMOR_CHESTPLATE.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "left_leg", new GabrielArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GabrielArmorModel.LAYER_LOCATION)).LeftLeg,
-                                        "right_leg", new GabrielArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GabrielArmorModel.LAYER_LOCATION)).RightLeg,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.GABRIEL_ARMOR_LEGGINGS.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "left_leg", new GabrielArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GabrielArmorModel.LAYER_LOCATION)).LeftBoot,
-                                        "right_leg", new GabrielArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GabrielArmorModel.LAYER_LOCATION)).RightBoot,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.GABRIEL_ARMOR_BOOTS.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "head", new GiselleArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GiselleArmorModel.LAYER_LOCATION)).Head,
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.GISELLE_ARMOR_HAT.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "body", new GiselleArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GiselleArmorModel.LAYER_LOCATION)).Body,
-                                        "left_arm", new GiselleArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GiselleArmorModel.LAYER_LOCATION)).LeftArm,
-                                        "right_arm", new GiselleArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GiselleArmorModel.LAYER_LOCATION)).RightArm,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.GISELLE_ARMOR_CHESTPLATE.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "left_leg", new GiselleArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GiselleArmorModel.LAYER_LOCATION)).LeftLeg,
-                                        "right_leg", new GiselleArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GiselleArmorModel.LAYER_LOCATION)).RightLeg,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.GISELLE_ARMOR_LEGGINGS.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "left_leg", new GiselleArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GiselleArmorModel.LAYER_LOCATION)).LeftBoot,
-                                        "right_leg", new GiselleArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GiselleArmorModel.LAYER_LOCATION)).RightBoot, "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.GISELLE_ARMOR_BOOTS.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "head", new MikkelaArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(MikkelaArmorModel.LAYER_LOCATION)).Head,
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.MIKKELA_ARMOR_HAT.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "body", new MikkelaArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(MikkelaArmorModel.LAYER_LOCATION)).Body,
-                                        "left_arm", new MikkelaArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(MikkelaArmorModel.LAYER_LOCATION)).LeftArm,
-                                        "right_arm", new MikkelaArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(MikkelaArmorModel.LAYER_LOCATION)).RightArm,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.MIKKELA_ARMOR_CHESTPLATE.get());
-
-        event.registerItem(new IClientItemExtensions() {
-            @Override
-            @OnlyIn(Dist.CLIENT)
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(@NotNull LivingEntity livingEntity, @NotNull ItemStack itemStack, @NotNull EquipmentSlot equipmentSlot, @NotNull HumanoidModel humanoidModel) {
-                HumanoidModel<?> armorModel = new HumanoidModel<>(
-                        new ModelPart(
-                                Collections.emptyList(),
-                                Map.of(
-                                        "left_leg", new MikkelaArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(MikkelaArmorModel.LAYER_LOCATION)).LeftLeg,
-                                        "right_leg", new MikkelaArmorModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(MikkelaArmorModel.LAYER_LOCATION)).RightLeg,
-                                        "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "right_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
-                                        "left_arm", new ModelPart(Collections.emptyList(), Collections.emptyMap())
-                                )
-                        )
-                );
-
-                armorModel.crouching = livingEntity.isShiftKeyDown();
-                armorModel.riding = humanoidModel.riding;
-                armorModel.young = livingEntity.isBaby();
-
-                return armorModel;
-            }
-        }, WeaversParadiseItems.MIKKELA_ARMOR_LEGGINGS.get());
-
         event.registerItem(
                 new IClientItemExtensions() {
                     @Override
@@ -919,7 +96,7 @@ public class WeaversParadiseClient {
                 new IClientItemExtensions() {
                     @Override
                     public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                        return new ShirtRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(),
+                        return new UpperwearRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(),
                                 Minecraft.getInstance().getEntityModels());
                     }
 
@@ -932,9 +109,15 @@ public class WeaversParadiseClient {
                         return IClientItemExtensions.super.shouldBobAsEntity(itemStack);
                     }
                 },
+                WeaversParadiseItems.T_SHIRT,
+                WeaversParadiseItems.TANK_TOP,
+                WeaversParadiseItems.WOOL_VEST,
                 WeaversParadiseItems.SHIRT_COTTON,
                 WeaversParadiseItems.SHIRT_SILK,
-                WeaversParadiseItems.SWEATER_WOOL
+                WeaversParadiseItems.LONG_SLEEVE_COTTON,
+                WeaversParadiseItems.SWEATER_WOOL,
+                WeaversParadiseItems.PONCHO,
+                WeaversParadiseItems.COTTON_CROP_TOP_LONG_SLEEVED
         );
 
         event.registerItem(
@@ -1096,7 +279,8 @@ public class WeaversParadiseClient {
                 },
                 WeaversParadiseItems.PANTS_JEANS,
                 WeaversParadiseItems.PANTS_COTTON,
-                WeaversParadiseItems.PANTS_SILK
+                WeaversParadiseItems.PANTS_SILK,
+                WeaversParadiseItems.PANTS_WOOL
         );
 
         event.registerItem(
@@ -1121,6 +305,82 @@ public class WeaversParadiseClient {
                 WeaversParadiseItems.SILK_CAPE,
                 WeaversParadiseItems.WOOL_CAPE
         );
+
+        event.registerItem(
+                new IClientItemExtensions() {
+                    @Override
+                    public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                        return new CottonSkirtRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
+                    }
+
+                    @Override
+                    public boolean shouldBobAsEntity(@NotNull ItemStack itemStack) {
+                        if (itemStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("noBobbing")) {
+                            return false;
+                        }
+
+                        return IClientItemExtensions.super.shouldBobAsEntity(itemStack);
+                    }
+                },
+                WeaversParadiseItems.COTTON_SKIRT
+        );
+
+        event.registerItem(
+                new IClientItemExtensions() {
+                    @Override
+                    public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                        return new UshankaRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
+                    }
+
+                    @Override
+                    public boolean shouldBobAsEntity(@NotNull ItemStack itemStack) {
+                        if (itemStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("noBobbing")) {
+                            return false;
+                        }
+
+                        return IClientItemExtensions.super.shouldBobAsEntity(itemStack);
+                    }
+                },
+                WeaversParadiseItems.USHANKA
+        );
+
+        event.registerItem(
+                new IClientItemExtensions() {
+                    @Override
+                    public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                        return new CapRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
+                    }
+
+                    @Override
+                    public boolean shouldBobAsEntity(@NotNull ItemStack itemStack) {
+                        if (itemStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("noBobbing")) {
+                            return false;
+                        }
+
+                        return IClientItemExtensions.super.shouldBobAsEntity(itemStack);
+                    }
+                },
+                WeaversParadiseItems.CAP
+        );
+
+        event.registerItem(
+                new IClientItemExtensions() {
+                    @Override
+                    public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                        return new PomponHatRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
+                    }
+
+                    @Override
+                    public boolean shouldBobAsEntity(@NotNull ItemStack itemStack) {
+                        if (itemStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("noBobbing")) {
+                            return false;
+                        }
+
+                        return IClientItemExtensions.super.shouldBobAsEntity(itemStack);
+                    }
+                },
+                WeaversParadiseItems.POMPON_HAT
+        );
     }
 
     @SubscribeEvent
@@ -1130,7 +390,7 @@ public class WeaversParadiseClient {
                 data.getEntries()
         ));
 
-        event.register(DyeTooltipComponent.class, data -> new DyeClientTooltipComponent(data.getDyeIcon(), data.getText(), data.getType(), data.getLightValue(), data.getPrimaryColor(), data.getSecondaryColor()));
+        event.register(DyeTooltipComponent.class, data -> new DyeClientTooltipComponent(data.getDyeIcon(), data.getText(), data.getType(), data.getLightValue(), data.getPrimaryColor(), data.getSecondaryColor(), data.isCore()));
         event.register(QualityTooltipComponent.class, data -> new QualityClientTooltipComponent(data.getTextures()));
     }
 
@@ -1215,5 +475,139 @@ public class WeaversParadiseClient {
 
             return -1;
         }, WeaversParadiseItems.CHROMATIC_DUST);
+    }
+
+    @SubscribeEvent
+    public static void registerLayers(final EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(ThighHighsModel.LAYER_LOCATION, ThighHighsModel::createBodyLayer);
+        event.registerLayerDefinition(AstolfoModel.LAYER_LOCATION, AstolfoModel::createBodyLayer);
+        event.registerLayerDefinition(BridgetModel.LAYER_LOCATION, BridgetModel::createBodyLayer);
+        event.registerLayerDefinition(FelixModel.LAYER_LOCATION, FelixModel::createBodyLayer);
+        event.registerLayerDefinition(GriffithModel.LAYER_LOCATION, GriffithModel::createBodyLayer);
+        event.registerLayerDefinition(NikoModel.LAYER_LOCATION, NikoModel::createBodyLayer);
+        event.registerLayerDefinition(GiselleModel.LAYER_LOCATION, GiselleModel::createBodyLayer);
+        event.registerLayerDefinition(GabrielModel.LAYER_LOCATION, GabrielModel::createBodyLayer);
+        event.registerLayerDefinition(MikkelaModel.LAYER_LOCATION, MikkelaModel::createBodyLayer);
+        event.registerLayerDefinition(ExpieModel.LAYER_LOCATION, ExpieModel::createBodyLayer);
+        event.registerLayerDefinition(GasterModel.LAYER_LOCATION, GasterModel::createBodyLayer);
+        event.registerLayerDefinition(RalseiModel.LAYER_LOCATION, RalseiModel::createBodyLayer);
+        event.registerLayerDefinition(MinosPrimeModel.LAYER_LOCATION, MinosPrimeModel::createBodyLayer);
+        event.registerLayerDefinition(JayaUtomoModel.LAYER_LOCATION, JayaUtomoModel::createBodyLayer);
+        event.registerLayerDefinition(HandWarmersModel.LAYER_LOCATION, HandWarmersModel::createBodyLayer);
+        event.registerLayerDefinition(UpperWearModel.LAYER_LOCATION, UpperWearModel::createBodyLayer);
+        event.registerLayerDefinition(SlimPlushieModel.LAYER_LOCATION, SlimPlushieModel::createBodyLayer);
+        event.registerLayerDefinition(WidePlushieModel.LAYER_LOCATION, WidePlushieModel::createBodyLayer);
+        event.registerLayerDefinition(ChokerModel.LAYER_LOCATION, ChokerModel::createBodyLayer);
+        event.registerLayerDefinition(BellModel.LAYER_LOCATION, BellModel::createBodyLayer);
+        event.registerLayerDefinition(PantsModel.LAYER_LOCATION, PantsModel::createBodyLayer);
+        event.registerLayerDefinition(BasicRingModel.LAYER_LOCATION, BasicRingModel::createBodyLayer);
+        event.registerLayerDefinition(CatRingModel.LAYER_LOCATION, CatRingModel::createBodyLayer);
+        event.registerLayerDefinition(HeartModel.LAYER_LOCATION, HeartModel::createBodyLayer);
+        event.registerLayerDefinition(BasicPlateModel.LAYER_LOCATION, BasicPlateModel::createBodyLayer);
+        event.registerLayerDefinition(CottonSkirtModel.LAYER_LOCATION, CottonSkirtModel::createBodyLayer);
+        event.registerLayerDefinition(UshankaModel.LAYER_LOCATION, UshankaModel::createBodyLayer);
+        event.registerLayerDefinition(CapModel.LAYER_LOCATION, CapModel::createBodyLayer);
+        event.registerLayerDefinition(PomponHatModel.LAYER_LOCATION, PomponHatModel::createBodyLayer);
+    }
+
+    @SubscribeEvent
+    public static void clientSetup(final FMLClientSetupEvent event) {
+        CuriosRendererRegistry.register(WeaversParadiseItems.THIGH_HIGHS_COTTON.get(), ThighHighsCurioRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.THIGH_HIGHS_WOOL.get(), ThighHighsCurioRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.THIGH_HIGHS_SILK.get(), ThighHighsCurioRenderer::new);
+
+        CuriosRendererRegistry.register(WeaversParadiseItems.LEATHER_GLOVES.get(), LeatherGlovesRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.CHOKER.get(), ChokerCurioRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.BELL.get(), xox.labvorty.weaversparadise.renderers.curios.BellRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.RING.get(), xox.labvorty.weaversparadise.renderers.curios.RingRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.CAT_RING.get(), xox.labvorty.weaversparadise.renderers.curios.CatRingRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.HEART.get(), xox.labvorty.weaversparadise.renderers.curios.HeartRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.PLATE.get(), xox.labvorty.weaversparadise.renderers.curios.PlateRenderer::new);
+
+        CuriosRendererRegistry.register(WeaversParadiseItems.HAND_WARMERS_COTTON.get(), HandWarmersCurioRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.HAND_WARMERS_SILK.get(), HandWarmersCurioRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.HAND_WARMERS_WOOL.get(), HandWarmersCurioRenderer::new);
+
+        CuriosRendererRegistry.register(WeaversParadiseItems.T_SHIRT.get(), UpperwearCurioRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.TANK_TOP.get(), UpperwearCurioRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.WOOL_VEST.get(), UpperwearCurioRenderer::new);
+
+        CuriosRendererRegistry.register(WeaversParadiseItems.SHIRT_COTTON.get(), UpperwearCurioRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.SHIRT_SILK.get(), UpperwearCurioRenderer::new);
+
+        CuriosRendererRegistry.register(WeaversParadiseItems.LONG_SLEEVE_COTTON.get(), UpperwearCurioRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.SWEATER_WOOL.get(), UpperwearCurioRenderer::new);
+
+        CuriosRendererRegistry.register(WeaversParadiseItems.PONCHO.get(), UpperwearCurioRenderer::new);
+
+        CuriosRendererRegistry.register(WeaversParadiseItems.COTTON_CROP_TOP_LONG_SLEEVED.get(), UpperwearCurioRenderer::new);
+
+        CuriosRendererRegistry.register(WeaversParadiseItems.POMPON_HAT.get(), PomponHatCurioRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.CAP.get(), CapCurioRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.USHANKA.get(), UshankaCurioRenderer::new);
+
+        CuriosRendererRegistry.register(WeaversParadiseItems.PANTS_JEANS.get(), PantsCurioRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.PANTS_COTTON.get(), PantsCurioRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.PANTS_SILK.get(), PantsCurioRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.PANTS_WOOL.get(), PantsCurioRenderer::new);
+
+        CuriosRendererRegistry.register(WeaversParadiseItems.COTTON_SKIRT.get(), CottonSkirtCurioRenderer::new);
+    }
+
+    @SubscribeEvent
+    public static void addLayers(EntityRenderersEvent.AddLayers event) {
+        for (EntityType<?> type : event.getEntityTypes()) {
+            var renderer = event.getRenderer(type);
+            if (renderer instanceof LivingEntityRenderer<?, ?> livingRenderer) {
+                addThighHighsLayer(livingRenderer);
+                addShirtLayer(livingRenderer);
+                addPantsLayer(livingRenderer);
+                addHandWarmersLayer(livingRenderer);
+                addCottonSkirtLayer(livingRenderer);
+                addHatLayer(livingRenderer);
+            }
+        }
+
+        for (PlayerSkin.Model skin : event.getSkins()) {
+            var playerRenderer = event.getSkin(skin);
+            if (playerRenderer != null) {
+                addThighHighsLayer((LivingEntityRenderer<?, ?>) playerRenderer);
+                addShirtLayer((LivingEntityRenderer<?, ?>) playerRenderer);
+                addPantsLayer((LivingEntityRenderer<?, ?>) playerRenderer);
+                addHandWarmersLayer((LivingEntityRenderer<?, ?>) playerRenderer);
+                addCottonSkirtLayer((LivingEntityRenderer<?, ?>) playerRenderer);
+                addHatLayer((LivingEntityRenderer<?, ?>) playerRenderer);
+            }
+        }
+    }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private static void addThighHighsLayer(LivingEntityRenderer<?, ?> renderer) {
+        renderer.addLayer(new ThighHighsRenderLayer(renderer));
+    }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private static void addShirtLayer(LivingEntityRenderer<?, ?> renderer) {
+        renderer.addLayer(new UpperwearRenderLayer(renderer));
+    }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private static void addPantsLayer(LivingEntityRenderer<?, ?> renderer) {
+        renderer.addLayer(new PantsRenderLayer(renderer));
+    }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private static void addHandWarmersLayer(LivingEntityRenderer<?, ?> renderer) {
+        renderer.addLayer(new HandWarmersRenderLayer(renderer));
+    }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private static void addCottonSkirtLayer(LivingEntityRenderer<?, ?> renderer) {
+        renderer.addLayer(new CottonSkirtRenderLayer(renderer));
+    }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    private static void addHatLayer(LivingEntityRenderer<?, ?> renderer) {
+        renderer.addLayer(new HatRenderLayer(renderer));
     }
 }

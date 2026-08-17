@@ -1,0 +1,19 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    "aba"
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:cotton_sleeve_long"
+    },
+    "b": {
+      "item": "weaversparadise:cotton_upperwear_base"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:long_sleeve_cotton",
+    "count": 1
+  }
+}

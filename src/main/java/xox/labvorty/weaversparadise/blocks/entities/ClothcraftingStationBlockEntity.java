@@ -18,7 +18,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.gui.menu.ClothcraftingMenu;
 import xox.labvorty.weaversparadise.init.WeaversParadiseBlockEntities;
@@ -28,10 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-
 public class ClothcraftingStationBlockEntity extends RandomizableContainerBlockEntity implements WorldlyContainer {
-    private NonNullList<ItemStack> stacks = NonNullList.<ItemStack>withSize(1, ItemStack.EMPTY);
-    private final SidedInvWrapper handler = new SidedInvWrapper(this, null);
+    private NonNullList<ItemStack> stacks = NonNullList.withSize(1, ItemStack.EMPTY);
     private int gameTime = 0;
     private int gameScore = 0;
     private boolean isGameOn = false;
@@ -76,15 +73,14 @@ public class ClothcraftingStationBlockEntity extends RandomizableContainerBlockE
     }
 
     @Override
-    public void saveAdditional(CompoundTag compound, HolderLookup.Provider lookupProvider) {
+    public void saveAdditional(@NotNull CompoundTag compound, HolderLookup.@NotNull Provider lookupProvider) {
         super.saveAdditional(compound, lookupProvider);
         if (!this.trySaveLootTable(compound)) {
             ContainerHelper.saveAllItems(compound, this.stacks, lookupProvider);
         }
         int amount = 0;
         if (items != null) {
-            for (int i = 0; i < items.size(); i++) {
-                ItemStack item = items.get(i);
+            for (ItemStack item : items) {
                 if (!item.isEmpty()) {
                     CompoundTag tag = new CompoundTag();
                     item.save(lookupProvider, tag);
@@ -98,17 +94,15 @@ public class ClothcraftingStationBlockEntity extends RandomizableContainerBlockE
         compound.putInt("gameScore", gameScore);
         compound.putBoolean("isGameOn", isGameOn);
 
+        CompoundTag tag = new CompoundTag();
         if (clothType != null && !clothType.isEmpty()) {
-            CompoundTag tag = new CompoundTag();
             clothType.save(lookupProvider, tag);
 
-            compound.put("clothType", tag);
         } else {
-            CompoundTag tag = new CompoundTag();
             new ItemStack(Items.STONE, 1).save(lookupProvider, tag);
 
-            compound.put("clothType", tag);
         }
+        compound.put("clothType", tag);
     }
 
     public void setGameTime(int time) {
@@ -162,7 +156,7 @@ public class ClothcraftingStationBlockEntity extends RandomizableContainerBlockE
     }
 
     @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider lookupProvider) {
+    public @NotNull CompoundTag getUpdateTag(HolderLookup.@NotNull Provider lookupProvider) {
         return this.saveWithFullMetadata(lookupProvider);
     }
 
@@ -180,7 +174,7 @@ public class ClothcraftingStationBlockEntity extends RandomizableContainerBlockE
     }
 
     @Override
-    public Component getDefaultName() {
+    public @NotNull Component getDefaultName() {
         return Component.literal("clothcrafting_station");
     }
 
@@ -190,49 +184,42 @@ public class ClothcraftingStationBlockEntity extends RandomizableContainerBlockE
     }
 
     @Override
-    public AbstractContainerMenu createMenu(int id, Inventory inventory) {
+    public @NotNull AbstractContainerMenu createMenu(int id, @NotNull Inventory inventory) {
         return new ClothcraftingMenu(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(this.worldPosition));
     }
 
     @Override
-    public Component getDisplayName() {
+    public @NotNull Component getDisplayName() {
         return Component.literal("Clothcrafting Station");
     }
 
     @Override
-    protected NonNullList<ItemStack> getItems() {
+    protected @NotNull NonNullList<ItemStack> getItems() {
         return this.stacks;
     }
 
     @Override
-    protected void setItems(NonNullList<ItemStack> stacks) {
+    protected void setItems(@NotNull NonNullList<ItemStack> stacks) {
         this.stacks = stacks;
     }
 
     @Override
-    public boolean canPlaceItem(int index, ItemStack stack) {
+    public boolean canPlaceItem(int index, @NotNull ItemStack stack) {
         return true;
     }
 
     @Override
-    public int[] getSlotsForFace(Direction side) {
+    public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
         return IntStream.range(0, this.getContainerSize()).toArray();
     }
 
     @Override
-    public boolean canPlaceItemThroughFace(int index, ItemStack stack, @Nullable Direction direction) {
+    public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
         return this.canPlaceItem(index, stack);
     }
 
     @Override
-    public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
-        if (index == 0)
-            return false;
-        return true;
+    public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @NotNull Direction direction) {
+        return index != 0;
     }
-
-    public SidedInvWrapper getItemHandler() {
-        return handler;
-    }
-
 }

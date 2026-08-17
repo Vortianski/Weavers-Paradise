@@ -22,18 +22,13 @@ public class AttributeEvents {
     @SubscribeEvent
     public static void entityHurt(LivingDamageEvent.Post event) {
         Entity source = event.getSource().getEntity();
-        Entity receiver = event.getEntity();
 
         if (source instanceof Player player) {
             Optional<ICuriosItemHandler> handler = CuriosApi.getCuriosInventory(player);
 
             if (handler.isPresent()) {
-                if (handler.get().isEquipped(stack -> {
-                    return stack.getItem() instanceof HandWarmersCottonItem handWarmersCottonItem;
-                })) {
-                    Optional<SlotResult> slotResult = handler.get().findFirstCurio(stack -> {
-                        return stack.getItem() instanceof HandWarmersCottonItem handWarmersCotton;
-                    });
+                if (handler.get().isEquipped(stack -> stack.getItem() instanceof HandWarmersCottonItem)) {
+                    Optional<SlotResult> slotResult = handler.get().findFirstCurio(stack -> stack.getItem() instanceof HandWarmersCottonItem);
 
                     if (slotResult.isPresent()) {
                         SlotResult slot = slotResult.get();

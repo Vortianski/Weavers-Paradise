@@ -10,8 +10,6 @@ import dev.latvian.mods.kubejs.recipe.schema.RecipeSchema;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeSchemaRegistry;
 import dev.latvian.mods.kubejs.script.BindingRegistry;
 import net.minecraft.resources.ResourceLocation;
-import xox.labvorty.weaversparadise.data.recipes.ClothcraftingRecipe;
-import xox.labvorty.weaversparadise.data.recipes.SpinningJennyRecipe;
 
 public class KubeJSCompat implements KubeJSPlugin {
     private static final RecipeKey<?> INPUT = IngredientComponent.INGREDIENT.inputKey("input");

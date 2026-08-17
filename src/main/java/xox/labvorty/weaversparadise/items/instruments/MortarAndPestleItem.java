@@ -3,6 +3,7 @@ package xox.labvorty.weaversparadise.items.instruments;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 
 public class MortarAndPestleItem extends Item {
@@ -15,12 +16,12 @@ public class MortarAndPestleItem extends Item {
     }
 
     @Override
-    public ItemStack getCraftingRemainingItem(ItemStack itemStack) {
+    public @NotNull ItemStack getCraftingRemainingItem(@NotNull ItemStack itemStack) {
         return new ItemStack(WeaversParadiseItems.MORTAR_AND_PESTLE.get());
     }
 
     @Override
-    public boolean hasCraftingRemainingItem(ItemStack stack) {
+    public boolean hasCraftingRemainingItem(@NotNull ItemStack itemStack) {
         return true;
     }
 }

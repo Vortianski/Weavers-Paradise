@@ -36,4 +36,8 @@ public class TextureRegistry {
     ) {
         return textures.getOrDefault(clothing_type + ":" + stencil + ":" + material, textures.get(clothing_type + ":" + "default" + ":" + material));
     }
+
+    public static void clear() {
+        textures.clear();
+    }
 }

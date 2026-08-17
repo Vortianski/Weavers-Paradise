@@ -15,14 +15,16 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
+import xox.labvorty.weaversparadise.configs.ClientConfig;
 import xox.labvorty.weaversparadise.model.HandWarmersModel;
+import xox.labvorty.weaversparadise.utilities.WeaversUtilities;
 
 public class LeatherGlovesRenderer implements ICurioRenderer {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("weaversparadise", "textures/clothing/leather_gloves_clothing.png");
-    private final HandWarmersModel model;
+    private final HandWarmersModel<?> model;
 
     public LeatherGlovesRenderer() {
-        this.model = new HandWarmersModel(Minecraft.getInstance().getEntityModels().bakeLayer(HandWarmersModel.LAYER_LOCATION));
+        this.model = new HandWarmersModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(HandWarmersModel.LAYER_LOCATION));
     }
 
     @Override
@@ -45,12 +47,14 @@ public class LeatherGlovesRenderer implements ICurioRenderer {
         LivingEntity entity = slotContext.entity();
         VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(TEXTURE), stack.isEnchanted());
 
-        M playerModel = renderLayerParent.getModel();
-        if (playerModel instanceof HumanoidModel<?>) {
-            HumanoidModel humModel = (HumanoidModel<?>) playerModel;
+        if (WeaversUtilities.isRestricted(entity, ClientConfig.HAND_WARMERS_RESTRICTOR.get())) {
+            return;
+        }
 
-            this.model.RightArm.copyFrom(humModel.rightArm);
-            this.model.LeftArm.copyFrom(humModel.leftArm);
+        M playerModel = renderLayerParent.getModel();
+        if (playerModel instanceof HumanoidModel<?> humanoidModel) {
+            this.model.RightArm.copyFrom(humanoidModel.rightArm);
+            this.model.LeftArm.copyFrom(humanoidModel.leftArm);
         }
 
         this.model.renderToBuffer(matrixStack, vertexconsumer, light, OverlayTexture.NO_OVERLAY);

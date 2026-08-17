@@ -6,6 +6,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import xox.labvorty.weaversparadise.blocks.*;
 
@@ -30,4 +31,19 @@ public class WeaversParadiseBlocks {
     public static final DeferredBlock<Block> SILK_CLOTH_BLOCK = BLOCKS.register("silk_cloth_block", SilkClothBlock::new);
     public static final DeferredBlock<Block> WOOL_SPOOL_BLOCK = BLOCKS.register("wool_spool_block", WoolSpoolBlock::new);
     public static final DeferredBlock<Block> WOOL_CLOTH_BLOCK = BLOCKS.register("wool_cloth_block", WoolClothBlock::new);
+    public static final DeferredBlock<Block> WITCHROOT = BLOCKS.register("witchroot", () -> new CeilingPlantBlock(
+            BlockBehaviour.Properties.of()
+                    .noCollission()
+                    .instabreak()
+                    .sound(SoundType.GRASS)
+                    .offsetType(BlockBehaviour.OffsetType.XZ)
+    ));
+    public static final DeferredBlock<PlushieBlock> PLUSHIE = BLOCKS.register("player_plushie", () -> new PlushieBlock(BlockBehaviour.Properties.of().sound(SoundType.WOOL).noOcclusion().strength(0.5f).noTerrainParticles()));
+    public static final DeferredBlock<Block> STARBLOOM = BLOCKS.register("starbloom", () -> new StarbloomBlock(
+            BlockBehaviour.Properties.of()
+                    .noCollission()
+                    .instabreak()
+                    .sound(SoundType.GRASS)
+                    .offsetType(BlockBehaviour.OffsetType.XZ)
+    ));
 }

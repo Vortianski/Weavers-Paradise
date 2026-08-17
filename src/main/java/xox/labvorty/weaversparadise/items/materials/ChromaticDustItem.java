@@ -5,6 +5,6 @@ import net.minecraft.world.item.Rarity;
 
 public class ChromaticDustItem extends Item {
     public ChromaticDustItem() {
-        super(new Properties().stacksTo(1).rarity(Rarity.COMMON));
+        super(new Properties().stacksTo(1).rarity(Rarity.RARE));
     }
 }

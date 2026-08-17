@@ -9,6 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -51,11 +52,11 @@ public class PigmentItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext context, @NotNull List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         if (tooltipFlag.isAdvanced()) {
-            tooltipComponents.add(Component.literal("Red: " + getRed(stack)).withColor(ChatFormatting.GRAY.getColor()));
-            tooltipComponents.add(Component.literal("Green: " + getGreen(stack)).withColor(ChatFormatting.GRAY.getColor()));
-            tooltipComponents.add(Component.literal("Blue: " + getBlue(stack)).withColor(ChatFormatting.GRAY.getColor()));
+            tooltipComponents.add(Component.literal("Red: " + getRed(stack)).withStyle(style -> style.withColor(ChatFormatting.GRAY)));
+            tooltipComponents.add(Component.literal("Green: " + getGreen(stack)).withStyle(style -> style.withColor(ChatFormatting.GRAY)));
+            tooltipComponents.add(Component.literal("Blue: " + getBlue(stack)).withStyle(style -> style.withColor(ChatFormatting.GRAY)));
         }
     }
 }

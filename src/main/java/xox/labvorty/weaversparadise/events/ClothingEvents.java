@@ -28,7 +28,7 @@ import java.util.Set;
 
 @EventBusSubscriber
 public class ClothingEvents {
-    private static List<ResourceKey<DamageType>> vanillaDurabilityFriendly = List.of(
+    private static final List<ResourceKey<DamageType>> durabilityFriendly = List.of(
             DamageTypes.CAMPFIRE,
             DamageTypes.CRAMMING,
             DamageTypes.DRAGON_BREATH,
@@ -52,15 +52,6 @@ public class ClothingEvents {
             DamageTypes.STARVE,
             DamageTypes.UNATTRIBUTED_FIREBALL,
             DamageTypes.WITHER
-    );
-
-    private static final Set<String> DAMAGEABLE_CURIO_SLOTS = Set.of(
-            "legwear",
-            "gloves",
-            "pants",
-            "upperwear",
-            "necklace",
-            "choker_trinket"
     );
 
     @SubscribeEvent
@@ -95,14 +86,19 @@ public class ClothingEvents {
 
         ICuriosItemHandler handler = optionalHandler.get();
 
-        if (!vanillaDurabilityFriendly.contains(damageType)) {
-            // legwear
-            if (!entity.hasItemInSlot(EquipmentSlot.FEET) && !entity.hasItemInSlot(EquipmentSlot.LEGS)) {
+        if (!durabilityFriendly.contains(damageType)) {
+            if (!entity.hasItemInSlot(EquipmentSlot.HEAD)) {
+                damageCurioSlot(entity, handler, "head", durabilityDamageHead);
+            }
+
+            if (!entity.hasItemInSlot(EquipmentSlot.FEET)) {
                 damageCurioSlot(entity, handler, "legwear", durabilityDamageFeet);
+            }
+
+            if (!entity.hasItemInSlot(EquipmentSlot.LEGS)) {
                 damageCurioSlot(entity, handler, "pants", durabilityDamageLegs);
             }
 
-            // upper body
             if (!entity.hasItemInSlot(EquipmentSlot.CHEST)) {
                 damageCurioSlot(entity, handler, "upperwear", durabilityDamageBody);
                 damageCurioSlot(entity, handler, "gloves", durabilityDamageBody);

@@ -246,7 +246,7 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
                 Slot slot = this.slots.get(i);
                 ItemStack itemstack = slot.getItem();
                 if (slot.mayPlace(itemstack) && !itemstack.isEmpty() && ItemStack.isSameItemSameComponents(itemStack, itemstack)) {
-                    int j = itemstack.getCount() + itemstack.getCount();
+                    int j = itemStack.getCount() + itemstack.getCount();
                     int k = slot.getMaxStackSize(itemstack);
                     if (j <= k) {
                         itemStack.setCount(0);
@@ -260,6 +260,7 @@ public class StringMenu extends AbstractContainerMenu implements Supplier<Map<In
                         flag = true;
                     }
                 }
+
                 if (p_38907_) {
                     i--;
                 } else {

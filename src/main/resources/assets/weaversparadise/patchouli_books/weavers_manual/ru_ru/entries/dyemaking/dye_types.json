@@ -131,13 +131,13 @@
     {
       "type": "patchouli:spotlight",
       "title": "Негатив",
-      "item": "minecraft:barrier",
+      "item": "weaversparadise:witchroot_fruit",
       "text": "$(bold)Двойной цвет:$() Нет$(br2)Использует выбранные цвета. Применяет негатив после освещения."
     },
     {
       "type": "patchouli:spotlight",
       "title": "Истинный негатив",
-      "item": "minecraft:barrier",
+      "item": "weaversparadise:witchroot_fruit_cooked",
       "text": "$(bold)Двойной цвет:$() Нет$(br2)Использует выбранные цвета. Применяет негатив до освещения."
     },
     {

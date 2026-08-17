@@ -21,7 +21,7 @@
       "type": "patchouli:text",
       "title": "Quality",
       "anchor": "quality",
-      "text": "Quality of fabric only affects how durable the clothing crafted from it will be. Base item durability is 100, material types get bonus durability as follows:$(br)$(bold)Cotton$() - 20 durability per half a star$(br)$(bold)Silk$() - 15 durability per half a star$(br)$(bold)Wool$() - 25 durability per half a star$(br)$(bold)Jeans$() - 25 durability per half a star"
+      "text": "Quality of fabric affects the durability of clothing crafted from it. Clothing has a base durability determined by the amount of fabric used, while fabric quality provides an additional durability bonus. The higher the quality, the larger the bonus.$(br)$(br)For example, a shirt requires 14 Cotton, giving it 140 base durability. The quality of the Cotton can then add up to 100 additional durability, for a maximum of 240 durability.$(br)$(br)Durability per fabric:$(br)Cotton - 10 durability (up to +100 from quality)$(br)Silk - 8 durability (up to +80 from quality)$(br)Wool - 12 durability (up to +120 from quality)$(br)Jeans - 15 durability (up to +150 from quality)"
     }
   ]
 }

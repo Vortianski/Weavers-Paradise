@@ -3,6 +3,7 @@ package xox.labvorty.weaversparadise.items.clothing;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
@@ -11,18 +12,20 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
-import xox.labvorty.weaversparadise.items.clothing.defined.DoubleSidedClothingItem;
+import xox.labvorty.weaversparadise.items.clothing.defined.DoubleSidedClothingArmorItem;
 import xox.labvorty.weaversparadise.items.clothing.defined.HandWarmersInterface;
 
 import java.util.List;
 
-public class HandWarmersCottonItem extends DoubleSidedClothingItem implements HandWarmersInterface {
+public class HandWarmersCottonItem extends DoubleSidedClothingArmorItem implements HandWarmersInterface {
     public HandWarmersCottonItem() {
-        super(new Item.Properties()
-                .stacksTo(1)
-                .rarity(Rarity.COMMON)
-                .durability(1)
-                .component(DataComponents.CUSTOM_DATA, CustomData.of(createDefault()))
+        super(
+                new Item.Properties()
+                        .stacksTo(1)
+                        .rarity(Rarity.COMMON)
+                        .durability(1)
+                        .component(DataComponents.CUSTOM_DATA, CustomData.of(createDefault())),
+                EquipmentSlot.CHEST
         );
     }
 
@@ -30,7 +33,7 @@ public class HandWarmersCottonItem extends DoubleSidedClothingItem implements Ha
     public int getMaxDamage(ItemStack stack) {
         int quality = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getInt("quality");
 
-        return 100 + (20 * quality);
+        return 40 + (10 * quality);
     }
 
     @Override

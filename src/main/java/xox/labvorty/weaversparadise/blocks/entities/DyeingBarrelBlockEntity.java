@@ -17,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.gui.menu.DyeingMenu;
 import xox.labvorty.weaversparadise.init.WeaversParadiseBlockEntities;
 
@@ -32,7 +33,7 @@ public class DyeingBarrelBlockEntity extends RandomizableContainerBlockEntity im
     }
 
     @Override
-    public void loadAdditional(CompoundTag compound, HolderLookup.Provider lookupProvider) {
+    public void loadAdditional(@NotNull CompoundTag compound, HolderLookup.@NotNull Provider lookupProvider) {
         super.loadAdditional(compound, lookupProvider);
         if (!this.tryLoadLootTable(compound))
             this.stacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
@@ -40,7 +41,7 @@ public class DyeingBarrelBlockEntity extends RandomizableContainerBlockEntity im
     }
 
     @Override
-    public void saveAdditional(CompoundTag compound, HolderLookup.Provider lookupProvider) {
+    public void saveAdditional(@NotNull CompoundTag compound, HolderLookup.@NotNull Provider lookupProvider) {
         super.saveAdditional(compound, lookupProvider);
         if (!this.trySaveLootTable(compound)) {
             ContainerHelper.saveAllItems(compound, this.stacks, lookupProvider);
@@ -53,7 +54,7 @@ public class DyeingBarrelBlockEntity extends RandomizableContainerBlockEntity im
     }
 
     @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider lookupProvider) {
+    public @NotNull CompoundTag getUpdateTag(HolderLookup.@NotNull Provider lookupProvider) {
         return this.saveWithFullMetadata(lookupProvider);
     }
 

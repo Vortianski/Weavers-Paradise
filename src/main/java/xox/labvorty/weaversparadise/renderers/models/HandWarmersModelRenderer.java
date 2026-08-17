@@ -7,81 +7,20 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import oshi.util.tuples.Pair;
 import xox.labvorty.weaversparadise.data.texture.ItemTexture;
 import xox.labvorty.weaversparadise.data.texture.TextureRegistry;
 import xox.labvorty.weaversparadise.model.HandWarmersModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ColorHandlers;
-import xox.labvorty.weaversparadise.renderers.helpers.HandWarmersRenderingData;
+import xox.labvorty.weaversparadise.renderers.helpers.DoubleSidedClothingRenderingData;
 import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
 
 public class HandWarmersModelRenderer {
-    private Minecraft minecraft;
-    private int ticks;
-
-    private int pCLO;
-    private int sCLO;
-    private int pCRO;
-    private int sCRO;
-    private int pCLT;
-    private int sCLT;
-    private int pCRT;
-    private int sCRT;
-    private String dTLO;
-    private String dTRO;
-    private String dTLT;
-    private String dTRT;
-    private String sTL;
-    private String sTR;
-    private int lVLO;
-    private int lVLT;
-    private int lVRO;
-    private int lVRT;
-    private String mat;
-
-    private int finalCLO;
-    private int finalCLT;
-    private int finalCRO;
-    private int finalCRT;
-
-    private int finalL1;
-    private int finalL2;
-    private int finalL3;
-    private int finalL4;
-
-    public void initData(HandWarmersRenderingData renderingData) {
-        pCLO = renderingData.getPrimaryColorLeftOne();
-        sCLO = renderingData.getSecondaryColorLeftOne();
-        pCRO = renderingData.getPrimaryColorRightOne();
-        sCRO = renderingData.getSecondaryColorRightOne();
-
-        pCLT = renderingData.getPrimaryColorLeftTwo();
-        sCLT = renderingData.getSecondaryColorLeftTwo();
-        pCRT = renderingData.getPrimaryColorRightTwo();
-        sCRT = renderingData.getSecondaryColorRightTwo();
-
-        dTLO = renderingData.getDyeTypeLeftOne();
-        dTRO = renderingData.getDyeTypeRightOne();
-        dTLT = renderingData.getDyeTypeLeftTwo();
-        dTRT = renderingData.getDyeTypeRightTwo();
-
-        sTL = renderingData.getStencilTypeLeft();
-        sTR = renderingData.getStencilTypeRight();
-
-        lVLO = renderingData.getLightValueLeftOne();
-        lVLT = renderingData.getLightValueLeftTwo();
-        lVRO = renderingData.getLightValueRightOne();
-        lVRT = renderingData.getLightValueRightTwo();
-
-        mat = renderingData.getMaterial();
-    }
-
-    public void renderModel(
+    public static void renderModel(
             MultiBufferSource multiBufferSource,
-            HandWarmersModel model,
-            HandWarmersRenderingData renderingData,
+            HandWarmersModel<?> model,
+            DoubleSidedClothingRenderingData renderingData,
             LivingEntity livingEntity,
             float scaleX,
             float scaleY,
@@ -98,31 +37,24 @@ public class HandWarmersModelRenderer {
             PoseStack poseStack,
             int packedLight
     ) {
-        initData(renderingData);
-
         RenderingUtils renderingUtils = new RenderingUtils();
-        minecraft = Minecraft.getInstance();
-        ticks = (int)minecraft.level.getGameTime();
+        Minecraft minecraft = Minecraft.getInstance();
+        int ticks = 0;
+        if (minecraft.level != null) {
+            ticks = (int)minecraft.level.getGameTime();
+        }
 
-        Pair<Integer, Integer> fCLO = ColorHandlers.handle(dTLO, pCLO, sCLO, lVLO, livingEntity, packedLight, ticks);
-        Pair<Integer, Integer> fCLT = ColorHandlers.handle(dTLT, pCLT, sCLT, lVLT, livingEntity, packedLight, ticks);
-        Pair<Integer, Integer> fCRO = ColorHandlers.handle(dTRO, pCRO, sCRO, lVRO, livingEntity, packedLight, ticks);
-        Pair<Integer, Integer> fCRT = ColorHandlers.handle(dTRT, pCRT, sCRT, lVRT, livingEntity, packedLight, ticks);
-        finalCLO = fCLO.getA();
-        finalL1 = fCLO.getB();
-        finalCLT = fCLT.getA();
-        finalL2 = fCLT.getB();
-        finalCRO = fCRO.getA();
-        finalL3 = fCRO.getB();
-        finalCRT = fCRT.getA();
-        finalL4 = fCRT.getB();
+        Pair<Integer, Integer> fCLO = ColorHandlers.handle(renderingData.dTLO(), renderingData.pCLO(), renderingData.sCLO(), renderingData.lVLO(), livingEntity, packedLight, ticks);
+        Pair<Integer, Integer> fCLT = ColorHandlers.handle(renderingData.dTLT(), renderingData.pCLT(), renderingData.sCLT(), renderingData.lVLT(), livingEntity, packedLight, ticks);
+        Pair<Integer, Integer> fCRO = ColorHandlers.handle(renderingData.dTRO(), renderingData.pCRO(), renderingData.sCRO(), renderingData.lVRO(), livingEntity, packedLight, ticks);
+        Pair<Integer, Integer> fCRT = ColorHandlers.handle(renderingData.dTRT(), renderingData.pCRT(), renderingData.sCRT(), renderingData.lVRT(), livingEntity, packedLight, ticks);
 
-        ItemTexture leftTexture = TextureRegistry.find("hand_warmers", sTL, mat);
+        ItemTexture leftTexture = TextureRegistry.find("hand_warmers", renderingData.sTL(), renderingData.mat());
         boolean renderTypeLeft = leftTexture.getRenderType();
         ResourceLocation tex1left = leftTexture.getTextureOne();
         ResourceLocation tex2left = leftTexture.getTextureTwo();
 
-        ItemTexture rightTexture = TextureRegistry.find("hand_warmers", sTR, mat);
+        ItemTexture rightTexture = TextureRegistry.find("hand_warmers", renderingData.sTR(), renderingData.mat());
         boolean renderTypeRight = rightTexture.getRenderType();
         ResourceLocation tex1right = rightTexture.getTextureOne();
         ResourceLocation tex2right = rightTexture.getTextureTwo();
@@ -145,56 +77,46 @@ public class HandWarmersModelRenderer {
 
         poseStack.mulPose(Axis.ZP.rotationDegrees(zRot));
 
-        VertexConsumer vc1 = renderingUtils.parseVC(multiBufferSource, dTLO, tex1left, "hand_warmers");
+        VertexConsumer vc1 = renderingUtils.parseVC(multiBufferSource, renderingData.dTLO(), tex1left, "hand_warmers", renderingData.glint(), renderingData.glintColor());
         model.LeftArm.render(
                 poseStack,
                 vc1,
-                finalL1,
+                fCLO.getB(),
                 OverlayTexture.NO_OVERLAY,
-                finalCLO
+                fCLO.getA()
         );
 
         if (renderTypeLeft) {
-            VertexConsumer vc2 = renderingUtils.parseVC(multiBufferSource, dTLT, tex2left, "hand_warmers");
+            VertexConsumer vc2 = renderingUtils.parseVC(multiBufferSource, renderingData.dTLT(), tex2left, "hand_warmers", renderingData.glint(), renderingData.glintColor());
             model.LeftArm.render(
                     poseStack,
                     vc2,
-                    finalL2,
+                    fCLT.getB(),
                     OverlayTexture.NO_OVERLAY,
-                    finalCLT
+                    fCLT.getA()
             );
         }
 
-        VertexConsumer vc3 = renderingUtils.parseVC(multiBufferSource, dTRO, tex1right, "hand_warmers");
+        VertexConsumer vc3 = renderingUtils.parseVC(multiBufferSource, renderingData.dTRO(), tex1right, "hand_warmers", renderingData.glint(), renderingData.glintColor());
         model.RightArm.render(
                 poseStack,
                 vc3,
-                finalL3,
+                fCRO.getB(),
                 OverlayTexture.NO_OVERLAY,
-                finalCRO
+                fCRO.getA()
         );
 
         if (renderTypeRight) {
-            VertexConsumer vc4 = renderingUtils.parseVC(multiBufferSource, dTRT, tex2right, "hand_warmers");
+            VertexConsumer vc4 = renderingUtils.parseVC(multiBufferSource, renderingData.dTRT(), tex2right, "hand_warmers", renderingData.glint(), renderingData.glintColor());
             model.RightArm.render(
                     poseStack,
                     vc4,
-                    finalL4,
+                    fCRT.getB(),
                     OverlayTexture.NO_OVERLAY,
-                    finalCRT
+                    fCRT.getA()
             );
         }
 
         poseStack.popPose();
-    }
-
-    public int getRainbowColor(int ticks) {
-        float speed = 0.05F;
-
-        float red = Mth.clamp((float)(Math.sin(ticks * speed) * 0.5 + 0.5), 0, 1);
-        float green = Mth.clamp((float)(Math.sin(ticks * speed + 2 * Math.PI / 3) * 0.5 + 0.5), 0, 1);
-        float blue = Mth.clamp((float)(Math.sin(ticks * speed + 4 * Math.PI / 3) * 0.5 + 0.5), 0, 1);
-
-        return 255 << 24 | (int)(red * 255) << 16 | (int)(green * 255) << 8 | (int)(blue * 255);
     }
 }

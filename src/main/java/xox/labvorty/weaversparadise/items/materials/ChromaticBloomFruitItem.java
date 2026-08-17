@@ -6,7 +6,7 @@ import net.minecraft.world.item.Rarity;
 public class ChromaticBloomFruitItem extends Item {
     public ChromaticBloomFruitItem() {
         super(new Item.Properties()
-                .rarity(Rarity.COMMON)
+                .rarity(Rarity.RARE)
                 .stacksTo(64)
         );
     }

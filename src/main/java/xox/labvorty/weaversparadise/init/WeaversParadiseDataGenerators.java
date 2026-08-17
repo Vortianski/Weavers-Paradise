@@ -8,7 +8,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import xox.labvorty.weaversparadise.WeaversParadise;
-import xox.labvorty.weaversparadise.data.generators.WeaversParadiseCuriosRegistry;
+import xox.labvorty.weaversparadise.data.generators.CurioRegistry;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -21,7 +21,6 @@ public class WeaversParadiseDataGenerators {
         CompletableFuture<HolderLookup.Provider> provider = event.getLookupProvider();
         ExistingFileHelper helper = event.getExistingFileHelper();
 
-        generator.addProvider(event.includeServer(),
-                new WeaversParadiseCuriosRegistry(output, helper, provider));
+        generator.addProvider(event.includeServer(), new CurioRegistry(output, helper, provider));
     }
 }

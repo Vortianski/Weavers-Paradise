@@ -8,6 +8,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -22,27 +23,28 @@ import top.theillusivec4.curios.api.SlotContext;
 import xox.labvorty.weaversparadise.configs.CommonConfig;
 import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
-import xox.labvorty.weaversparadise.items.clothing.defined.DoubleSidedClothingItem;
+import xox.labvorty.weaversparadise.items.clothing.defined.DoubleSidedClothingArmorItem;
 import xox.labvorty.weaversparadise.items.clothing.defined.ThighHighsInterface;
 
 import java.util.List;
 
-public class ThighHighsCottonItem extends DoubleSidedClothingItem implements ThighHighsInterface {
+public class ThighHighsCottonItem extends DoubleSidedClothingArmorItem implements ThighHighsInterface {
     public ThighHighsCottonItem() {
-        super(new Item.Properties()
-                .stacksTo(1)
-                .rarity(Rarity.COMMON)
-                .durability(1)
-                .component(DataComponents.CUSTOM_DATA, CustomData.of(createDefault()))
+        super(
+                new Item.Properties()
+                        .stacksTo(1)
+                        .rarity(Rarity.COMMON)
+                        .durability(1)
+                        .component(DataComponents.CUSTOM_DATA, CustomData.of(createDefault())),
+                EquipmentSlot.FEET
         );
     }
 
     @Override
     public int getMaxDamage(ItemStack stack) {
         int quality = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getInt("quality");
-        int maxdamage = 100 + (20 * quality);
 
-        return maxdamage;
+        return 60 + (10 * quality);
     }
 
     @Override
@@ -65,6 +67,16 @@ public class ThighHighsCottonItem extends DoubleSidedClothingItem implements Thi
         }
 
         return modifiers;
+    }
+
+    @Override
+    protected boolean hideAttributes() {
+        return true;
+    }
+
+    @Override
+    protected List<ResourceKey<Enchantment>> getTooltipEnchantments() {
+        return List.of(WeaversParadiseEnchantments.SOFT_AND_COZY);
     }
 
     @Override

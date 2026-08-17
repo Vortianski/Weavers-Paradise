@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.items.clothing.ChokerItem;
 import xox.labvorty.weaversparadise.model.ChokerModel;
-import xox.labvorty.weaversparadise.renderers.helpers.ChokerRenderingData;
+import xox.labvorty.weaversparadise.renderers.helpers.DoubleSidedClothingRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.ChokerModelRenderer;
 
 public class ChokerRenderer extends BlockEntityWithoutLevelRenderer {
@@ -47,15 +47,16 @@ public class ChokerRenderer extends BlockEntityWithoutLevelRenderer {
             case GUI -> {
                 scale = 1.2f;
                 ytranslation = 0.5f;
-                additionalYrot = 45f;
-                additionalXrot = 22.5f;
+                additionalYrot = -225f;
+                additionalXrot = -22.5f;
             }
             case THIRD_PERSON_LEFT_HAND, THIRD_PERSON_RIGHT_HAND, FIRST_PERSON_LEFT_HAND, FIRST_PERSON_RIGHT_HAND -> {
                 scale = 0.75f;
                 ytranslation = 0.6f;
+                additionalYrot = 180f;
             }
             case FIXED -> {
-                additionalYrot = 180f;
+                additionalYrot = -0f;
             }
             case GROUND -> {
                 ytranslation = 0.25f;
@@ -63,63 +64,46 @@ public class ChokerRenderer extends BlockEntityWithoutLevelRenderer {
             }
         }
 
-        int primaryColorLeftOne = chokerItem.getItemMainColor(stack, "left", 1);
-        int secondaryColorLeftOne = chokerItem.getItemSecondaryColor(stack, "left", 1);
-        int primaryColorRightOne = chokerItem.getItemMainColor(stack, "right", 1);
-        int secondaryColorRightOne = chokerItem.getItemSecondaryColor(stack, "right", 1);
-        int primaryColorLeftTwo = chokerItem.getItemMainColor(stack, "left", 2);
-        int secondaryColorLeftTwo = chokerItem.getItemSecondaryColor(stack, "left", 2);
-        int primaryColorRightTwo = chokerItem.getItemMainColor(stack, "right", 2);
-        int secondaryColorRightTwo = chokerItem.getItemSecondaryColor(stack, "right", 2);
-        String dyeTypeLeftOne = chokerItem.getItemDyeType(stack, "left", 1);
-        String dyeTypeRightOne = chokerItem.getItemDyeType(stack, "right", 1);
-        String dyeTypeLeftTwo = chokerItem.getItemDyeType(stack, "left", 2);
-        String dyeTypeRightTwo = chokerItem.getItemDyeType(stack, "right", 2);
-        String stensilTypeLeft = chokerItem.getStensilType(stack, "left");
-        String stensilTypeRight = chokerItem.getStensilType(stack, "right");
-        int lightValueLeftOne = chokerItem.getItemLightValue(stack, "left", 1);
-        int lightValueLeftTwo = chokerItem.getItemLightValue(stack, "left", 2);
-        int lightValueRightOne = chokerItem.getItemLightValue(stack, "right", 1);
-        int lightValueRightTwo = chokerItem.getItemLightValue(stack, "right", 2);
-
         Minecraft minecraft = Minecraft.getInstance();
 
-        ChokerModelRenderer chokerRenderer = new ChokerModelRenderer();
-
-        chokerRenderer.renderModel(
+        ChokerModelRenderer.renderModel(
                 buffer,
                 model,
-                new ChokerRenderingData(
-                        primaryColorLeftOne,
-                        secondaryColorLeftOne,
-                        primaryColorRightOne,
-                        secondaryColorRightOne,
-                        primaryColorLeftTwo,
-                        secondaryColorLeftTwo,
-                        primaryColorRightTwo,
-                        secondaryColorRightTwo,
-                        dyeTypeLeftOne,
-                        dyeTypeRightOne,
-                        dyeTypeLeftTwo,
-                        dyeTypeRightTwo,
-                        stensilTypeLeft,
-                        stensilTypeRight,
-                        lightValueLeftOne,
-                        lightValueLeftTwo,
-                        lightValueRightOne,
-                        lightValueRightTwo,
-                        material
+                new DoubleSidedClothingRenderingData(
+                        chokerItem.getFlag(stack),
+                        chokerItem.getItemMainColor(stack, "left", 1),
+                        chokerItem.getItemSecondaryColor(stack, "left", 1),
+                        chokerItem.getItemMainColor(stack, "right", 1),
+                        chokerItem.getItemSecondaryColor(stack, "right", 1),
+                        chokerItem.getItemMainColor(stack, "left", 2),
+                        chokerItem.getItemSecondaryColor(stack, "left", 2),
+                        chokerItem.getItemMainColor(stack, "right", 2),
+                        chokerItem.getItemSecondaryColor(stack, "right", 2),
+                        chokerItem.getItemDyeType(stack, "left", 1),
+                        chokerItem.getItemDyeType(stack, "right", 1),
+                        chokerItem.getItemDyeType(stack, "left", 2),
+                        chokerItem.getItemDyeType(stack, "right", 2),
+                        chokerItem.getStensilType(stack, "left"),
+                        chokerItem.getStensilType(stack, "right"),
+                        chokerItem.getItemLightValue(stack, "left", 1),
+                        chokerItem.getItemLightValue(stack, "left", 2),
+                        chokerItem.getItemLightValue(stack, "right", 1),
+                        chokerItem.getItemLightValue(stack, "right", 2),
+                        material,
+                        stack.isEnchanted(),
+                        chokerItem.getGlintColor(stack),
+                        chokerItem.getAdditionalData(stack)
                 ),
                 minecraft.player,
                 scale,
-                -scale,
                 scale,
-                0,
+                scale,
+                180,
                 180,
                 0,
                 -0.5f,
-                ytranslation,
-                -0.5f,
+                -ytranslation,
+                0.5f,
                 additionalXrot,
                 additionalYrot,
                 additionalZrot,

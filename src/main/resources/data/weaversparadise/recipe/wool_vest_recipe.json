@@ -1,0 +1,22 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    "abc"
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:weavers_shears"
+    },
+    "b": {
+      "item": "weaversparadise:wool_upperwear_base"
+    },
+    "c": {
+      "item": "weaversparadise:needle_with_thread"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:wool_vest",
+    "count": 1
+  }
+}

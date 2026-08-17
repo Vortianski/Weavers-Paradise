@@ -1,0 +1,18 @@
+{
+  "weaversparadise.hurt_old": {
+    "sounds": [
+      "weaversparadise:hurt_old"
+    ]
+  },
+  "weaversparadise.fall_big_old": {
+    "sounds": [
+      "weaversparadise:fallbig_old_1",
+      "weaversparadise:fallbig_old_2"
+    ]
+  },
+  "weaversparadise.fall_small_old": {
+    "sounds": [
+      "weaversparadise:fallsmall_old"
+    ]
+  }
+}

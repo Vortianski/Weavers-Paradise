@@ -1,0 +1,20 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aba"
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:cotton_cloth"
+    },
+    "b": {
+      "item": "weaversparadise:needle_with_thread"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:pompon_hat",
+    "count": 1
+  }
+}

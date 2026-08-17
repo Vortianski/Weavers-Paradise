@@ -12,6 +12,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.entities.HangingFlagEntity;
 import xox.labvorty.weaversparadise.init.WeaversParadiseEntityTypes;
 
@@ -19,6 +20,7 @@ import java.util.Optional;
 
 public class GayFlagItem extends HangingEntityItem {
     private final EntityType<? extends HangingEntity> type;
+    private static final String flagType = "gay";
 
     public GayFlagItem() {
         super(
@@ -29,21 +31,23 @@ public class GayFlagItem extends HangingEntityItem {
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext context) {
-        BlockPos blockpos = context.getClickedPos();
+    public @NotNull InteractionResult useOn(UseOnContext context) {
+        BlockPos blockPos = context.getClickedPos();
         Direction direction = context.getClickedFace();
-        BlockPos blockpos1 = blockpos.relative(direction);
+        BlockPos blockPos1 = blockPos.relative(direction);
         Player player = context.getPlayer();
         ItemStack itemstack = context.getItemInHand();
 
-        if (player != null && !this.mayPlace(player, direction, itemstack, blockpos1)) {
+        if (player != null && !this.mayPlace(player, direction, itemstack, blockPos1)) {
             return InteractionResult.FAIL;
         } else {
             Level level = context.getLevel();
             HangingEntity hangingentity;
 
             if (this.type == WeaversParadiseEntityTypes.HANGING_FLAG_ENTITY.get()) {
-                Optional<HangingFlagEntity> hangingFlagEntity = HangingFlagEntity.create(level, blockpos1, direction, "gay");
+                Optional<HangingFlagEntity> hangingFlagEntity = HangingFlagEntity.create(level, blockPos1, direction, flagType);
+
+                if (hangingFlagEntity.isEmpty()) return InteractionResult.FAIL;
 
                 hangingentity = hangingFlagEntity.get();
 

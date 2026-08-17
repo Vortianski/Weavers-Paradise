@@ -35,7 +35,7 @@ public class SculkBlockEntityMixin {
             GameEvent.Context context,
             CallbackInfoReturnable<Boolean> cir
     ) {
-        if (CommonConfig.ITEM_SPECIAL_ABILITIES.get()) {
+        if (!CommonConfig.ITEM_SPECIAL_ABILITIES.get()) {
             return;
         }
 

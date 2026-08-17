@@ -3,6 +3,7 @@ package xox.labvorty.weaversparadise.items.clothing;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
@@ -12,24 +13,26 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.clothing.defined.PantsInterface;
-import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingItem;
+import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingArmorItem;
 
 import java.util.List;
 
-public class PantsJeansItem extends SingleSidedClothingItem implements PantsInterface {
+public class PantsJeansItem extends SingleSidedClothingArmorItem implements PantsInterface {
     public PantsJeansItem() {
-        super(new Item.Properties()
-                .stacksTo(1)
-                .rarity(Rarity.COMMON)
-                .durability(1)
-                .component(DataComponents.CUSTOM_DATA, CustomData.of(createDefault()))
+        super(
+                new Item.Properties()
+                        .stacksTo(1)
+                        .rarity(Rarity.COMMON)
+                        .durability(1)
+                        .component(DataComponents.CUSTOM_DATA, CustomData.of(createDefault())),
+                EquipmentSlot.LEGS
         );
     }
 
     @Override
     public int getMaxDamage(ItemStack stack) {
         int quality = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getInt("quality");
-        int maxdamage = 100 + (20 * quality);
+        int maxdamage = 120 + (15 * quality);
 
         return maxdamage;
     }

@@ -36,7 +36,8 @@ public class DyeCoreItem extends Item {
                         data.getString("dyeType"),
                         data.getInt("lightValue"),
                         (255 << 24 | 255 << 16 | 255 << 8 | 255),
-                        (255 << 24 | 255 << 16 | 255 << 8 | 255)
+                        (255 << 24 | 255 << 16 | 255 << 8 | 255),
+                        true
                 )
         );
     }

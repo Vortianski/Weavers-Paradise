@@ -8,10 +8,12 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.component.CustomData;
@@ -21,27 +23,28 @@ import top.theillusivec4.curios.api.SlotContext;
 import xox.labvorty.weaversparadise.configs.CommonConfig;
 import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
-import xox.labvorty.weaversparadise.items.clothing.defined.DoubleSidedClothingItem;
+import xox.labvorty.weaversparadise.items.clothing.defined.DoubleSidedClothingArmorItem;
 import xox.labvorty.weaversparadise.items.clothing.defined.HandWarmersInterface;
 
 import java.util.List;
 
-public class HandWarmersSilkItem extends DoubleSidedClothingItem implements HandWarmersInterface {
+public class HandWarmersSilkItem extends DoubleSidedClothingArmorItem implements HandWarmersInterface {
     public HandWarmersSilkItem() {
-        super(new Properties()
-                .stacksTo(1)
-                .rarity(Rarity.COMMON)
-                .durability(1)
-                .component(DataComponents.CUSTOM_DATA, CustomData.of(createDefault()))
+        super(
+                new Item.Properties()
+                        .stacksTo(1)
+                        .rarity(Rarity.COMMON)
+                        .durability(1)
+                        .component(DataComponents.CUSTOM_DATA, CustomData.of(createDefault())),
+                EquipmentSlot.CHEST
         );
     }
 
     @Override
     public int getMaxDamage(ItemStack stack) {
         int quality = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getInt("quality");
-        int maxdamage = 100 + (20 * quality);
 
-        return maxdamage;
+        return 32 + (8 * quality);
     }
 
     @Override
@@ -64,6 +67,16 @@ public class HandWarmersSilkItem extends DoubleSidedClothingItem implements Hand
         }
 
         return modifiers;
+    }
+
+    @Override
+    protected boolean hideAttributes() {
+        return true;
+    }
+
+    @Override
+    protected List<ResourceKey<Enchantment>> getTooltipEnchantments() {
+        return List.of(WeaversParadiseEnchantments.GRACEFUL);
     }
 
     @Override

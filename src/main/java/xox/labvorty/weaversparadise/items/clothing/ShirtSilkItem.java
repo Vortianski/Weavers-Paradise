@@ -8,6 +8,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -23,26 +24,32 @@ import xox.labvorty.weaversparadise.configs.CommonConfig;
 import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.clothing.defined.ShirtInterface;
-import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingItem;
+import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingArmorItem;
 
 import java.util.List;
 
-public class ShirtSilkItem extends SingleSidedClothingItem implements ShirtInterface {
+public class ShirtSilkItem extends SingleSidedClothingArmorItem implements ShirtInterface {
     public ShirtSilkItem() {
-        super(new Item.Properties()
-                .stacksTo(1)
-                .rarity(Rarity.COMMON)
-                .durability(1)
-                .component(DataComponents.CUSTOM_DATA, CustomData.of(createDefault(true)))
+        super(
+                new Item.Properties()
+                        .stacksTo(1)
+                        .rarity(Rarity.COMMON)
+                        .durability(1)
+                        .component(DataComponents.CUSTOM_DATA, CustomData.of(createDefault(true))),
+                EquipmentSlot.CHEST
         );
     }
 
     @Override
     public int getMaxDamage(ItemStack stack) {
         int quality = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getInt("quality");
-        int maxdamage = 100 + (20 * quality);
 
-        return maxdamage;
+        return 112 + (8 * quality);
+    }
+
+    @Override
+    public boolean getFlag(ItemStack itemStack) {
+        return itemStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("is_open");
     }
 
     @Override
@@ -68,14 +75,24 @@ public class ShirtSilkItem extends SingleSidedClothingItem implements ShirtInter
     }
 
     @Override
+    protected boolean hideAttributes() {
+        return true;
+    }
+
+    @Override
+    protected List<ResourceKey<Enchantment>> getTooltipEnchantments() {
+        return List.of(WeaversParadiseEnchantments.GRACEFUL);
+    }
+
+    @Override
     public boolean isValidRepairItem(ItemStack stack, ItemStack repairCandidate) {
-        CompoundTag stackdata = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-        CompoundTag candidatedata = repairCandidate.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+        CompoundTag compoundTag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+        CompoundTag candidateCompound = repairCandidate.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
 
-        int stackquality = stackdata.getInt("quality");
-        int candidatequality = candidatedata.getInt("quality");
+        int quality = compoundTag.getInt("quality");
+        int candidateQuality = candidateCompound.getInt("quality");
 
-        return repairCandidate.is(WeaversParadiseItems.SILK_CLOTH) && candidatequality >= stackquality;
+        return repairCandidate.is(WeaversParadiseItems.SILK_CLOTH) && candidateQuality >= quality;
     }
 
     @Override

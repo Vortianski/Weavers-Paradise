@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
@@ -19,42 +18,27 @@ import xox.labvorty.weaversparadise.items.clothing.RingItem;
 import xox.labvorty.weaversparadise.model.BasicRingModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ChokerTrinketRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.RingModelRenderer;
-
-import java.util.List;
+import xox.labvorty.weaversparadise.utilities.WeaversUtilities;
 
 public class RingRenderer implements ICurioRenderer {
-    private final BasicRingModel model;
+    private final BasicRingModel<?> model;
 
     public RingRenderer() {
-        this.model = new BasicRingModel(Minecraft.getInstance().getEntityModels().bakeLayer(BasicRingModel.LAYER_LOCATION));
+        this.model = new BasicRingModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(BasicRingModel.LAYER_LOCATION));
     }
 
     @Override
     public <T extends LivingEntity, M extends EntityModel<T>> void render(ItemStack stack, SlotContext slotContext, PoseStack matrixStack, RenderLayerParent<T, M> renderLayerParent, MultiBufferSource renderTypeBuffer, int light, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         LivingEntity entity = slotContext.entity();
 
-        List<? extends String> configValues = ClientConfig.CHOKER_RESTRICTOR.get();
-        ItemStack FEET = entity.getItemBySlot(EquipmentSlot.FEET);
-        ItemStack LEGS = entity.getItemBySlot(EquipmentSlot.LEGS);
-        ItemStack BODY = entity.getItemBySlot(EquipmentSlot.BODY);
-        ItemStack HEAD = entity.getItemBySlot(EquipmentSlot.HEAD);
-
-        if (!FEET.isEmpty() && ClientConfig.containsItem(configValues, FEET.getItem())) {
-            return;
-        } else if (!LEGS.isEmpty() && ClientConfig.containsItem(configValues, LEGS.getItem())) {
-            return;
-        } else if (!BODY.isEmpty() && ClientConfig.containsItem(configValues, BODY.getItem())) {
-            return;
-        } else if (!HEAD.isEmpty() && ClientConfig.containsItem(configValues, HEAD.getItem())) {
+        if (WeaversUtilities.isRestricted(entity, ClientConfig.CHOKER_RESTRICTOR.get())) {
             return;
         }
 
         if (stack.getItem() instanceof RingItem ringItem) {
             M playerModel = renderLayerParent.getModel();
-            if (playerModel instanceof HumanoidModel<?>) {
-                HumanoidModel<?> humModel = (HumanoidModel<?>)playerModel;
-
-                this.model.Body.copyFrom(humModel.body);
+            if (playerModel instanceof HumanoidModel<?> humanoidModel) {
+                this.model.Body.copyFrom(humanoidModel.body);
             }
 
 

@@ -61,7 +61,6 @@ public class DyeingBarrelBlock extends Block implements EntityBlock {
         BlockEntity blockEntity = serverLevel.getBlockEntity(blockPos);
         if (blockEntity instanceof DyeingBarrelBlockEntity dyeingBarrelBlock) {
             ItemStack slot0 = dyeingBarrelBlock.getItemHandler().getStackInSlot(0);
-            ItemStack slot1 = dyeingBarrelBlock.getItemHandler().getStackInSlot(1);
             ItemStack slot2 = dyeingBarrelBlock.getItemHandler().getStackInSlot(2);
             ItemStack slot3 = dyeingBarrelBlock.getItemHandler().getStackInSlot(3);
             ItemStack slot4 = dyeingBarrelBlock.getItemHandler().getStackInSlot(4);

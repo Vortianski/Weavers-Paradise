@@ -66,4 +66,8 @@ public class DyeTypeRegistry {
     public static DyeInstance getDyeType(String s) {
         return dyeType.getOrDefault(s, DEFAULT);
     }
+
+    public static void clear() {
+        dyeType.clear();
+    }
 }

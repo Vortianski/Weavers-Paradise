@@ -23,6 +23,7 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.data.network.DyemakingNetworkMessage;
 import xox.labvorty.weaversparadise.init.WeaversParadiseInterfaces;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
@@ -86,150 +87,98 @@ public class DyemakingMenu extends AbstractContainerMenu implements Supplier<Map
             }
         }
         this.customSlots.put(0, this.addSlot(new SlotItemHandler(internal, 0, 146, 34) {
-            private final int slot = 0;
-            private int x = DyemakingMenu.this.x;
-            private int y = DyemakingMenu.this.y;
-
             @Override
-            public void onTake(Player player, ItemStack stack) {
-                super.onTake(player, stack);
+            public void onTake(@NotNull Player player, @NotNull ItemStack itemStack) {
+                super.onTake(player, itemStack);
                 slotChanged(0, 1, 0);
             }
 
             @Override
-            public boolean mayPlace(ItemStack stack) {
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
                 return false;
             }
         }));
         this.customSlots.put(1, this.addSlot(new SlotItemHandler(internal, 1, 59, 13) {
-            private final int slot = 1;
-            private int x = DyemakingMenu.this.x;
-            private int y = DyemakingMenu.this.y;
-
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:vanilla_dyes"))) || stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:custom_dyes")));
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:vanilla_dyes"))) || itemStack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:custom_dyes")));
             }
         }));
         this.customSlots.put(2, this.addSlot(new SlotItemHandler(internal, 2, 77, 13) {
-            private final int slot = 2;
-            private int x = DyemakingMenu.this.x;
-            private int y = DyemakingMenu.this.y;
-
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:vanilla_dyes"))) || stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:custom_dyes")));
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:vanilla_dyes"))) || itemStack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:custom_dyes")));
             }
         }));
         this.customSlots.put(3, this.addSlot(new SlotItemHandler(internal, 3, 95, 13) {
-            private final int slot = 3;
-            private int x = DyemakingMenu.this.x;
-            private int y = DyemakingMenu.this.y;
-
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:vanilla_dyes"))) || stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:custom_dyes")));
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:vanilla_dyes"))) || itemStack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:custom_dyes")));
             }
         }));
         this.customSlots.put(4, this.addSlot(new SlotItemHandler(internal, 4, 59, 31) {
-            private final int slot = 4;
-            private int x = DyemakingMenu.this.x;
-            private int y = DyemakingMenu.this.y;
-
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:vanilla_dyes"))) || stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:custom_dyes")));
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:vanilla_dyes"))) || itemStack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:custom_dyes")));
             }
         }));
         this.customSlots.put(5, this.addSlot(new SlotItemHandler(internal, 5, 77, 31) {
-            private final int slot = 5;
-            private int x = DyemakingMenu.this.x;
-            private int y = DyemakingMenu.this.y;
-
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:vanilla_dyes"))) || stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:custom_dyes")));
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:vanilla_dyes"))) || itemStack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:custom_dyes")));
             }
         }));
         this.customSlots.put(6, this.addSlot(new SlotItemHandler(internal, 6, 95, 31) {
-            private final int slot = 6;
-            private int x = DyemakingMenu.this.x;
-            private int y = DyemakingMenu.this.y;
-
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:vanilla_dyes"))) || stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:custom_dyes")));
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:vanilla_dyes"))) || itemStack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:custom_dyes")));
             }
         }));
         this.customSlots.put(7, this.addSlot(new SlotItemHandler(internal, 7, 59, 49) {
-            private final int slot = 7;
-            private int x = DyemakingMenu.this.x;
-            private int y = DyemakingMenu.this.y;
-
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:vanilla_dyes"))) || stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:custom_dyes")));
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:vanilla_dyes"))) || itemStack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:custom_dyes")));
             }
         }));
         this.customSlots.put(8, this.addSlot(new SlotItemHandler(internal, 8, 77, 49) {
-            private final int slot = 8;
-            private int x = DyemakingMenu.this.x;
-            private int y = DyemakingMenu.this.y;
-
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:vanilla_dyes"))) || stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:custom_dyes")));
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:vanilla_dyes"))) || itemStack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:custom_dyes")));
             }
         }));
         this.customSlots.put(9, this.addSlot(new SlotItemHandler(internal, 9, 95, 49) {
-            private final int slot = 9;
-            private int x = DyemakingMenu.this.x;
-            private int y = DyemakingMenu.this.y;
-
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:vanilla_dyes"))) || stack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:custom_dyes")));
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:vanilla_dyes"))) || itemStack.is(ItemTags.create(ResourceLocation.parse("weaversparadise:custom_dyes")));
             }
         }));
         this.customSlots.put(10, this.addSlot(new SlotItemHandler(internal, 10, 21, 60) {
-            private final int slot = 10;
-            private int x = DyemakingMenu.this.x;
-            private int y = DyemakingMenu.this.y;
-
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(Items.GLASS_BOTTLE);
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.is(Items.GLASS_BOTTLE);
             }
         }));
         this.customSlots.put(11, this.addSlot(new SlotItemHandler(internal, 11, 21, 78) {
-            private final int slot = 11;
-            private int x = DyemakingMenu.this.x;
-            private int y = DyemakingMenu.this.y;
-
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(Items.POTION) || stack.is(WeaversParadiseItems.BOTTLED_DYE) || stack.is(Items.GLASS_BOTTLE);
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.is(Items.POTION) || itemStack.is(WeaversParadiseItems.BOTTLED_DYE) || itemStack.is(Items.GLASS_BOTTLE);
             }
         }));
         this.customSlots.put(12, this.addSlot(new SlotItemHandler(internal, 12, 138, 72) {
-            private final int slot = 12;
-            private int x = DyemakingMenu.this.x;
-            private int y = DyemakingMenu.this.y;
-
             @Override
-            public boolean mayPlace(ItemStack stack) {
-                return stack.is(WeaversParadiseItems.DYE_CORE);
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.is(WeaversParadiseItems.DYE_CORE);
             }
         }));
         for (int si = 0; si < 3; ++si)
             for (int sj = 0; sj < 9; ++sj)
-                this.addSlot(new Slot(inv, sj + (si + 1) * 9, 0 + 8 + sj * 18, 35 + 84 + si * 18));
+                this.addSlot(new Slot(inv, sj + (si + 1) * 9, 8 + sj * 18, 35 + 84 + si * 18));
         for (int si = 0; si < 9; ++si)
-            this.addSlot(new Slot(inv, si, 0 + 8 + si * 18, 35 + 142));
+            this.addSlot(new Slot(inv, si, 8 + si * 18, 35 + 142));
     }
 
     @Override
-    public boolean stillValid(Player player) {
+    public boolean stillValid(@NotNull Player player) {
         if (this.bound) {
             if (this.boundItemMatcher != null)
                 return this.boundItemMatcher.get();
@@ -242,7 +191,7 @@ public class DyemakingMenu extends AbstractContainerMenu implements Supplier<Map
     }
 
     @Override
-    public ItemStack quickMoveStack(Player playerIn, int index) {
+    public @NotNull ItemStack quickMoveStack(@NotNull Player playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = (Slot) this.slots.get(index);
         if (slot != null && slot.hasItem()) {
@@ -274,7 +223,7 @@ public class DyemakingMenu extends AbstractContainerMenu implements Supplier<Map
     }
 
     @Override
-    protected boolean moveItemStackTo(ItemStack p_38904_, int p_38905_, int p_38906_, boolean p_38907_) {
+    protected boolean moveItemStackTo(@NotNull ItemStack p_38904_, int p_38905_, int p_38906_, boolean p_38907_) {
         boolean flag = false;
         int i = p_38905_;
         if (p_38907_) {
@@ -333,7 +282,7 @@ public class DyemakingMenu extends AbstractContainerMenu implements Supplier<Map
     }
 
     @Override
-    public void removed(Player playerIn) {
+    public void removed(@NotNull Player playerIn) {
         super.removed(playerIn);
         if (!bound && playerIn instanceof ServerPlayer serverPlayer) {
             if (!serverPlayer.isAlive() || serverPlayer.hasDisconnected()) {

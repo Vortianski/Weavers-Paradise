@@ -131,13 +131,13 @@
     {
       "type": "patchouli:spotlight",
       "title": "Negative",
-      "item": "minecraft:barrier",
+      "item": "weaversparadise:witchroot_fruit",
       "text": "$(bold)Double color:$() No$(br2)Uses provided colors. Applies negative after light."
     },
     {
       "type": "patchouli:spotlight",
       "title": "True Negative",
-      "item": "minecraft:barrier",
+      "item": "weaversparadise:witchroot_fruit_cooked",
       "text": "$(bold)Double color:$() No$(br2)Uses provided colors. Applies negative before light."
     },
     {

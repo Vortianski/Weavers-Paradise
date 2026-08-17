@@ -11,8 +11,6 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.init.WeaversParadiseAttachmentTypes;
 
-import java.util.UUID;
-
 public class SculkPlayerListener implements GameEventListener {
     private final PositionSource posSource;
     private final int radius;
