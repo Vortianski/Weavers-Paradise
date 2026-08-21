@@ -163,6 +163,9 @@ dependencies {
 
     //Cosmetic Armor
     implementation("curse.maven:cosmetic-armor-reworked-237307:5610814")
+
+    //(Testing Only)
+    runtimeOnly("curse.maven:immersive-armors-580681:8076920")
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {

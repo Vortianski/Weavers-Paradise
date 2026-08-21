@@ -9,12 +9,9 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import xox.labvorty.weaversparadise.items.clothing.ChokerItem;
 import xox.labvorty.weaversparadise.items.clothing.UshankaItem;
-import xox.labvorty.weaversparadise.model.ChokerModel;
 import xox.labvorty.weaversparadise.model.UshankaModel;
 import xox.labvorty.weaversparadise.renderers.helpers.DoubleSidedClothingRenderingData;
-import xox.labvorty.weaversparadise.renderers.models.ChokerModelRenderer;
 import xox.labvorty.weaversparadise.renderers.models.UshankaModelRenderer;
 
 public class UshankaRenderer extends BlockEntityWithoutLevelRenderer {

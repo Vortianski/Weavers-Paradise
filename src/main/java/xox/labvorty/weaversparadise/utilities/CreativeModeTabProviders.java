@@ -1,9 +1,11 @@
 package xox.labvorty.weaversparadise.utilities;
 
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.phys.Vec3;
+import oshi.util.tuples.Pair;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.misc.PlushieItem;
 
@@ -18,8 +20,33 @@ public class CreativeModeTabProviders {
                 PlushieItem.createPlushie(Optional.of("Pelemeshek"), Optional.empty()),
                 PlushieItem.createPlushie(Optional.of("Elifian"), Optional.empty()),
                 PlushieItem.createPlushie(Optional.of("_Alazi_"), Optional.empty()),
-                PlushieItem.createPlushie(Optional.of("IRON_carat"), Optional.empty())
+                PlushieItem.createPlushie(Optional.of("IRON_carat"), Optional.empty()),
+                PlushieItem.createPlushie(Optional.of("FIT_FOX"), Optional.empty())
         );
+    }
+
+    private static final List<Pair<String, Pair<Integer, Integer>>> metalTypes = List.of(
+            new Pair<>("minecraft:iron_ingot", new Pair<>(-1, 100)),
+            new Pair<>("minecraft:gold_ingot", new Pair<>(-1, 25)),
+            new Pair<>("minecraft:copper_ingot", new Pair<>(-34267, 50))
+    );
+
+    public static List<ItemStack> getTrinketList(Item item) {
+        List<ItemStack> itemStacks = new ArrayList<>();
+
+        for (Pair<String, Pair<Integer, Integer>> type : metalTypes) {
+            ItemStack instance = new ItemStack(item);
+
+            CustomData.update(DataComponents.CUSTOM_DATA, instance, (tag) -> {
+                tag.putString("metalType", type.getA());
+                tag.putInt("color", type.getB().getA());
+                tag.putInt("damage", type.getB().getB());
+            });
+
+            itemStacks.add(instance);
+        }
+
+        return itemStacks;
     }
 
     public static List<ItemStack> getPigments() {

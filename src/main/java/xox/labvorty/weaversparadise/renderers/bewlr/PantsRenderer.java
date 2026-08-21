@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.items.clothing.PantsCottonItem;
 import xox.labvorty.weaversparadise.items.clothing.PantsJeansItem;
 import xox.labvorty.weaversparadise.items.clothing.PantsSilkItem;
+import xox.labvorty.weaversparadise.items.clothing.PantsWoolItem;
 import xox.labvorty.weaversparadise.items.clothing.defined.PantsInterface;
 import xox.labvorty.weaversparadise.model.PantsModel;
 import xox.labvorty.weaversparadise.renderers.helpers.SingleSidedClothingRenderingData;
@@ -44,6 +45,8 @@ public class PantsRenderer extends BlockEntityWithoutLevelRenderer {
             material = "cotton";
         } else if (stack.getItem() instanceof PantsSilkItem pantsSilk) {
             material = "silk";
+        } else if (stack.getItem() instanceof PantsWoolItem pantsWoolItem) {
+            material = "wool";
         } else {
             material = "jeans";
         }

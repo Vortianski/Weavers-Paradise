@@ -22,7 +22,11 @@ public class PlushieLootModifier extends LootModifier {
             "Pelemeshek",
             "Steve",
             "Notch",
-            "Herobrine"
+            "Herobrine",
+            "Elifian",
+            "_Alazi_",
+            "IRON_carat",
+            "FIT_FOX"
     );
 
     public static final MapCodec<PlushieLootModifier> CODEC = RecordCodecBuilder.mapCodec(instance ->
@@ -43,7 +47,7 @@ public class PlushieLootModifier extends LootModifier {
     protected ObjectArrayList<ItemStack> doApply(@NotNull ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
         ResourceLocation location = context.getQueriedLootTableId();
         if (location.getPath().startsWith("chests/")) {
-            RandomSource randomSource = RandomSource.create();
+            RandomSource randomSource = context.getRandom();
 
             ItemStack stack = PlushieItem.createPlushie(Optional.of(applicableNames.get(randomSource.nextIntBetweenInclusive(0, applicableNames.size() - 1))), Optional.empty());
 

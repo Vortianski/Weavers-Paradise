@@ -10,7 +10,6 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
-import xox.labvorty.weaversparadise.items.clothing.defined.CapeInterface;
 import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingArmorItem;
 
 import java.util.List;

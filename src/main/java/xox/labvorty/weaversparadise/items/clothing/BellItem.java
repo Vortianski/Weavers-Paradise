@@ -20,12 +20,13 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import org.jetbrains.annotations.NotNull;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
+import xox.labvorty.weaversparadise.items.clothing.defined.ChokerTrinketInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
-public class BellItem extends Item implements ICurioItem {
+public class BellItem extends Item implements ICurioItem, ChokerTrinketInterface {
     public BellItem() {
         super(
                 new Properties()

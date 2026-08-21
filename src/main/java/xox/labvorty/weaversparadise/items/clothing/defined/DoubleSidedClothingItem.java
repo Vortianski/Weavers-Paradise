@@ -316,7 +316,7 @@ public abstract class DoubleSidedClothingItem extends Item implements ICurioItem
 
         compoundTag.put("additional_data", additionalData);
 
-        VortyLibUtilities.serializeSpecificVector3f(compoundTag, new Vector3f(1, 1, 1), "glintColor");
+        VortyLibUtilities.serializeSpecificVector3f(compoundTag, new Vector3f(1, 0, 1), "glintColor");
 
         return compoundTag;
     }

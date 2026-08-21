@@ -13,14 +13,10 @@ import xox.labvorty.weaversparadise.items.dye.DyeCoreItem;
 import xox.labvorty.weaversparadise.items.dye.PigmentItem;
 import xox.labvorty.weaversparadise.items.flags.*;
 import xox.labvorty.weaversparadise.items.food.KozinakiItem;
-import xox.labvorty.weaversparadise.items.instruments.MortarAndPestleItem;
-import xox.labvorty.weaversparadise.items.instruments.NeedleItem;
-import xox.labvorty.weaversparadise.items.instruments.NeedleWithThreadItem;
-import xox.labvorty.weaversparadise.items.instruments.PestleItem;
+import xox.labvorty.weaversparadise.items.instruments.*;
 import xox.labvorty.weaversparadise.items.materials.*;
 import xox.labvorty.weaversparadise.items.misc.PlayerPlushieRenameTokenItem;
 import xox.labvorty.weaversparadise.items.misc.PlushieItem;
-import xox.labvorty.weaversparadise.items.instruments.WeaversShearsItem;
 import xox.labvorty.weaversparadise.items.stencil.*;
 
 public class WeaversParadiseItems {
@@ -68,6 +64,7 @@ public class WeaversParadiseItems {
     public static final DeferredItem<Item> RING = ITEMS.register("ring", RingItem::new);
     public static final DeferredItem<Item> CAT_RING = ITEMS.register("cat_ring", CatRingItem::new);
     public static final DeferredItem<Item> PLATE = ITEMS.register("plate", PlateItem::new);
+    public static final DeferredItem<Item> FISH = ITEMS.register("fish", FishItem::new);
 
     public static final DeferredItem<Item> COTTON_CAPE = ITEMS.register("cotton_cape", CapeCottonItem::new);
     public static final DeferredItem<Item> SILK_CAPE = ITEMS.register("silk_cape", CapeSilkItem::new);

@@ -6,36 +6,28 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.ResolvableProfile;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import xox.labvorty.weaversparadise.WeaversParadise;
-import xox.labvorty.weaversparadise.blocks.PlushieBlock;
 import xox.labvorty.weaversparadise.blocks.entities.PlushieBlockEntity;
-import xox.labvorty.weaversparadise.init.WeaversParadiseBlocks;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 
 import java.util.Optional;
 import java.util.UUID;
-import java.util.function.Consumer;
 
 public class PlushieItem extends BlockItem implements Plushie {
     public PlushieItem(Block block) {

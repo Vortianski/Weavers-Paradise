@@ -7,6 +7,8 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -20,12 +22,13 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import org.jetbrains.annotations.NotNull;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
+import xox.labvorty.weaversparadise.items.clothing.defined.ChokerTrinketInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
-public class PlateItem extends Item implements ICurioItem {
+public class PlateItem extends Item implements ICurioItem, ChokerTrinketInterface {
     public PlateItem() {
         super(
                 new Properties()
@@ -98,5 +101,12 @@ public class PlateItem extends Item implements ICurioItem {
         components.add(Component.translatable("weaversparadise.tooltip.plate").withStyle(style -> style.withColor(ChatFormatting.BLUE)));
 
         return components;
+    }
+
+    @Override
+    public List<SoundEvent> getSounds() {
+        return List.of(
+                SoundEvents.WOLF_AMBIENT
+        );
     }
 }

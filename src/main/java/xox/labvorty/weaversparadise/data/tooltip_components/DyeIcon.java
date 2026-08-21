@@ -3,8 +3,6 @@ package xox.labvorty.weaversparadise.data.tooltip_components;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 
 public class DyeIcon {
     protected final ResourceLocation resourceLocation;

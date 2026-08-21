@@ -11,11 +11,9 @@ import net.minecraft.world.item.ItemStack;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 import xox.labvorty.weaversparadise.configs.ClientConfig;
-import xox.labvorty.weaversparadise.items.clothing.ChokerItem;
 import xox.labvorty.weaversparadise.items.clothing.SkirtCottonItem;
 import xox.labvorty.weaversparadise.model.CottonSkirtModel;
 import xox.labvorty.weaversparadise.renderers.helpers.DoubleSidedClothingRenderingData;
-import xox.labvorty.weaversparadise.renderers.models.ChokerModelRenderer;
 import xox.labvorty.weaversparadise.renderers.models.CottonSkirtModelRenderer;
 import xox.labvorty.weaversparadise.utilities.WeaversUtilities;
 

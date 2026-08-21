@@ -8,7 +8,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import xox.labvorty.weaversparadise.model.RalseiModel;
-import xox.labvorty.weaversparadise.model.RalseiModel;
 
 import java.util.Collections;
 import java.util.Map;

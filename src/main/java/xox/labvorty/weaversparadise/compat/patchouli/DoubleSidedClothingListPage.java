@@ -24,6 +24,7 @@ import vazkii.patchouli.client.book.BookEntry;
 import vazkii.patchouli.client.book.gui.GuiBook;
 import vazkii.patchouli.client.book.gui.GuiBookEntry;
 import vazkii.patchouli.client.book.page.abstr.PageWithText;
+import xox.labvorty.weaversparadise.utilities.WeaversUtilities;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -53,49 +54,6 @@ public class DoubleSidedClothingListPage extends PageWithText {
     transient float renderScale;
     transient float offset;
 
-    List<String> dyeTypes = List.of(
-            "default",
-            "agender",
-            "aroace",
-            "aromantic",
-            "asexual",
-            "bisexual",
-            "demiboy",
-            "demigender",
-            "demigirl",
-            "gay",
-            "genderfluid",
-            "genderqueer",
-            "intersex",
-            "lesbian",
-            "nonbinary",
-            "pansexual",
-            "pride",
-            "trans",
-            "redstone",
-            "lamp",
-            "sculk",
-            "colored_sculk",
-            "hunger",
-            "health",
-            "day_time",
-            "colored_day_time",
-            "glowstone",
-            "rainbow",
-            "biome",
-            "ender",
-            "speed",
-            "height_bedrock",
-            "height_sea",
-            "invisible",
-            "static",
-            "crystal",
-            "negative",
-            "true_negative",
-            "nebula",
-            "polychromatic"
-    );
-
     @Override
     public void build(Level level, BookEntry entry, BookContentsBuilder builder, int pageNum) {
         super.build(level, entry, builder, pageNum);
@@ -114,7 +72,7 @@ public class DoubleSidedClothingListPage extends PageWithText {
         entityType = maybeType.get();
 
         List<CompoundTag> tags = new ArrayList<>();
-        for (String type : dyeTypes) {
+        for (String type : WeaversUtilities.dyeTypes) {
             int r = 255, g = 255, b = 255;
 
             if (type.equals("polychromatic") || type.equals("redstone")) {

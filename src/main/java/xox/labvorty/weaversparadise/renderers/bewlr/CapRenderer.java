@@ -11,11 +11,8 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.items.clothing.CapItem;
 import xox.labvorty.weaversparadise.model.CapModel;
-import xox.labvorty.weaversparadise.model.UshankaModel;
-import xox.labvorty.weaversparadise.renderers.helpers.DoubleSidedClothingRenderingData;
 import xox.labvorty.weaversparadise.renderers.helpers.SingleSidedClothingRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.CapModelRenderer;
-import xox.labvorty.weaversparadise.renderers.models.UshankaModelRenderer;
 
 public class CapRenderer extends BlockEntityWithoutLevelRenderer {
     private final CapModel<?> model;

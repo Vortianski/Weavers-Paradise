@@ -11,7 +11,6 @@ import net.minecraft.world.entity.LivingEntity;
 import oshi.util.tuples.Pair;
 import xox.labvorty.weaversparadise.data.texture.ItemTexture;
 import xox.labvorty.weaversparadise.data.texture.TextureRegistry;
-import xox.labvorty.weaversparadise.model.ChokerModel;
 import xox.labvorty.weaversparadise.model.UshankaModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ColorHandlers;
 import xox.labvorty.weaversparadise.renderers.helpers.DoubleSidedClothingRenderingData;

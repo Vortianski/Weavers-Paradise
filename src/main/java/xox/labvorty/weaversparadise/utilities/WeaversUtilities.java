@@ -19,6 +19,53 @@ import java.util.Optional;
 import java.util.Random;
 
 public class WeaversUtilities {
+    public static final List<String> dyeTypes = List.of(
+            "default",
+            "agender",
+            "aroace",
+            "aromantic",
+            "asexual",
+            "bisexual",
+            "demiboy",
+            "demigender",
+            "demigirl",
+            "gay",
+            "genderfluid",
+            "genderqueer",
+            "intersex",
+            "lesbian",
+            "nonbinary",
+            "pansexual",
+            "pride",
+            "trans",
+            "redstone",
+            "lamp",
+            "sculk",
+            "colored_sculk",
+            "hunger",
+            "health",
+            "day_time",
+            "colored_day_time",
+            "glowstone",
+            "rainbow",
+            "biome",
+            "ender",
+            "speed",
+            "height_bedrock",
+            "height_sea",
+            "invisible",
+            "static",
+            "crystal",
+            "negative",
+            "true_negative",
+            "nebula",
+            "polychromatic",
+            "starfall",
+            "chromatic_aberration",
+            "boykisser",
+            "forcefield",
+            "hypnotic"
+    );
     private static final EquipmentSlot[] ARMOR_SLOTS = {
             EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.BODY, EquipmentSlot.LEGS, EquipmentSlot.FEET
     };

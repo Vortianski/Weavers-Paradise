@@ -16,7 +16,6 @@
     "client.CapeLayerMixin",
     "compat.ClientBookRegistryMixin",
     "client.LivingRendererMixin",
-    "client.ClientHooksMixin",
     "client.HumanoidArmorLayerMixin",
     "client.GuiGraphicsMixin"
   ],

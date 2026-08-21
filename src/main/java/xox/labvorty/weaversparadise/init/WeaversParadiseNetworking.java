@@ -41,5 +41,11 @@ public class WeaversParadiseNetworking {
                 StringNetworkMessage.STREAM_CODEC,
                 StringNetworkMessage::handleData
         );
+
+        VortyLib.addNetworkMessage(
+                TrinketSoundMessage.TYPE,
+                TrinketSoundMessage.STREAM_CODEC,
+                TrinketSoundMessage::handle
+        );
     }
 }

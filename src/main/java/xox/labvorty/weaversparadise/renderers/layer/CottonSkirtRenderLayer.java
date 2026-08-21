@@ -12,13 +12,10 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.configs.ClientConfig;
-import xox.labvorty.weaversparadise.items.clothing.*;
+import xox.labvorty.weaversparadise.items.clothing.SkirtCottonItem;
 import xox.labvorty.weaversparadise.model.CottonSkirtModel;
-import xox.labvorty.weaversparadise.model.PantsModel;
 import xox.labvorty.weaversparadise.renderers.helpers.DoubleSidedClothingRenderingData;
-import xox.labvorty.weaversparadise.renderers.helpers.SingleSidedClothingRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.CottonSkirtModelRenderer;
-import xox.labvorty.weaversparadise.renderers.models.PantsModelRenderer;
 import xox.labvorty.weaversparadise.utilities.WeaversUtilities;
 
 public class CottonSkirtRenderLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {

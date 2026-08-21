@@ -381,6 +381,26 @@ public class WeaversParadiseClient {
                 },
                 WeaversParadiseItems.POMPON_HAT
         );
+
+        event.registerItem(
+                new IClientItemExtensions() {
+                    @Override
+                    public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                        return new xox.labvorty.weaversparadise.renderers.bewlr.FishRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(),
+                                Minecraft.getInstance().getEntityModels());
+                    }
+
+                    @Override
+                    public boolean shouldBobAsEntity(@NotNull ItemStack itemStack) {
+                        if (itemStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("noBobbing")) {
+                            return false;
+                        }
+
+                        return IClientItemExtensions.super.shouldBobAsEntity(itemStack);
+                    }
+                },
+                WeaversParadiseItems.FISH
+        );
     }
 
     @SubscribeEvent
@@ -504,6 +524,7 @@ public class WeaversParadiseClient {
         event.registerLayerDefinition(CatRingModel.LAYER_LOCATION, CatRingModel::createBodyLayer);
         event.registerLayerDefinition(HeartModel.LAYER_LOCATION, HeartModel::createBodyLayer);
         event.registerLayerDefinition(BasicPlateModel.LAYER_LOCATION, BasicPlateModel::createBodyLayer);
+        event.registerLayerDefinition(FishModel.LAYER_LOCATION, FishModel::createBodyLayer);
         event.registerLayerDefinition(CottonSkirtModel.LAYER_LOCATION, CottonSkirtModel::createBodyLayer);
         event.registerLayerDefinition(UshankaModel.LAYER_LOCATION, UshankaModel::createBodyLayer);
         event.registerLayerDefinition(CapModel.LAYER_LOCATION, CapModel::createBodyLayer);
@@ -523,6 +544,7 @@ public class WeaversParadiseClient {
         CuriosRendererRegistry.register(WeaversParadiseItems.CAT_RING.get(), xox.labvorty.weaversparadise.renderers.curios.CatRingRenderer::new);
         CuriosRendererRegistry.register(WeaversParadiseItems.HEART.get(), xox.labvorty.weaversparadise.renderers.curios.HeartRenderer::new);
         CuriosRendererRegistry.register(WeaversParadiseItems.PLATE.get(), xox.labvorty.weaversparadise.renderers.curios.PlateRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.FISH.get(), xox.labvorty.weaversparadise.renderers.curios.FishRenderer::new);
 
         CuriosRendererRegistry.register(WeaversParadiseItems.HAND_WARMERS_COTTON.get(), HandWarmersCurioRenderer::new);
         CuriosRendererRegistry.register(WeaversParadiseItems.HAND_WARMERS_SILK.get(), HandWarmersCurioRenderer::new);

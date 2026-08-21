@@ -87,6 +87,8 @@ public class PlayerMixin {
             cir.setReturnValue(SoundEvents.FOX_HURT);
         } else if (handler.get().isEquipped(itemStack -> itemStack.getItem() instanceof HeartItem heartItem)) {
             cir.setReturnValue(WeaversParadiseSoundEvents.HURT_OLD.get());
+        } else if (handler.get().isEquipped(itemStack -> itemStack.getItem() instanceof FishItem fishItem)) {
+            cir.setReturnValue(SoundEvents.AXOLOTL_HURT);
         }
     }
 }

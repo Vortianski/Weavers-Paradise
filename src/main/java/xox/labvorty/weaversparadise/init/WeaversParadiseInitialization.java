@@ -5,12 +5,12 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import xox.labvorty.weaversparadise.data.initializers.BuiltInDyeTypes;
 import xox.labvorty.weaversparadise.data.initializers.BuiltInStencils;
 import xox.labvorty.weaversparadise.data.initializers.BuiltInTextures;
 import xox.labvorty.weaversparadise.data.texture.StencilRegistry;
 import xox.labvorty.weaversparadise.data.texture.TextureRegistry;
 import xox.labvorty.weaversparadise.data.tooltip_components.DyeTypeRegistry;
-import xox.labvorty.weaversparadise.data.initializers.BuiltInDyeTypes;
 import xox.labvorty.weaversparadise.events.ReloadEvent;
 
 @EventBusSubscriber

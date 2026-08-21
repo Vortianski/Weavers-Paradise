@@ -78,6 +78,10 @@ public class ClientConfig {
                     () -> "", ClientConfig::validateItemName
             );
 
+    public static final ModConfigSpec.BooleanValue FULL_ARMOR = BUILDER
+            .comment("Should cosplay armor render fully, or use equipped armor to determine visible pieces")
+            .define("fullArmor", false);
+
     public static final ModConfigSpec SPEC = BUILDER.build();
 
     private static boolean validateItemName(final Object obj) {

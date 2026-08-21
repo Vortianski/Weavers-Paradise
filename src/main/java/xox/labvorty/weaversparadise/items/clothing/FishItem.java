@@ -28,8 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
-public class CatRingItem extends Item implements ICurioItem, ChokerTrinketInterface {
-    public CatRingItem() {
+public class FishItem extends Item implements ICurioItem, ChokerTrinketInterface {
+    public FishItem() {
         super(
                 new Properties()
                         .stacksTo(1)
@@ -98,7 +98,7 @@ public class CatRingItem extends Item implements ICurioItem, ChokerTrinketInterf
         List<Component> components = new ArrayList<>();
 
         components.add(Component.translatable("curios.modifiers.choker_trinket").withStyle(style -> style.withColor(ChatFormatting.GOLD)));
-        components.add(Component.translatable("weaversparadise.tooltip.cat_ring").withStyle(style -> style.withColor(ChatFormatting.BLUE)));
+        components.add(Component.translatable("weaversparadise.tooltip.fish").withStyle(style -> style.withColor(ChatFormatting.BLUE)));
 
         return components;
     }
@@ -106,9 +106,7 @@ public class CatRingItem extends Item implements ICurioItem, ChokerTrinketInterf
     @Override
     public List<SoundEvent> getSounds() {
         return List.of(
-                SoundEvents.CAT_PURR,
-                SoundEvents.CAT_PURREOW,
-                SoundEvents.CAT_AMBIENT
+                SoundEvents.AXOLOTL_IDLE_AIR
         );
     }
 }

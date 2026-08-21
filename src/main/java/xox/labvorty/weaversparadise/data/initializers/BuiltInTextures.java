@@ -145,8 +145,8 @@ public class BuiltInTextures {
         private static void base() {
             TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, COTTON, DEFAULT, BASE_PATH, VARIANT_PATH, "pants_cotton.png", "pants_cotton.png", false));
             TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, SILK, DEFAULT, BASE_PATH, VARIANT_PATH, "pants_silk.png", "pants_silk.png", false));
-            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, WOOL, DEFAULT, BASE_PATH, VARIANT_PATH, "pants_silk.png", "pants_silk.png", false));
-            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, JEANS, DEFAULT, BASE_PATH, VARIANT_PATH, "wool_pants.png", "wool_pants.png", false));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, WOOL, DEFAULT, BASE_PATH, VARIANT_PATH, "wool_pants.png", "wool_pants.png", false));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, JEANS, DEFAULT, BASE_PATH, VARIANT_PATH, "pants_jeans.png", "pants_jeans.png", false));
         }
 
         private static void variants() {
@@ -491,16 +491,16 @@ public class BuiltInTextures {
             TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, PRI, HALF, BASE_PATH, VARIANT_PATH, "ushanka_pri_half_1.png", "ushanka_pri_half_2.png", true));
             TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, PRI, CHECKERS, BASE_PATH, VARIANT_PATH, "ushanka_pri_checkers_1.png", "ushanka_pri_checkers_2.png", true));
             TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, PRI, CHECKERS_SMALL, BASE_PATH, VARIANT_PATH, "ushanka_pri_checkers_small_1.png", "ushanka_pri_checkers_small_2.png", true));
-            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, PRI, VERTICAL_LINES, BASE_PATH, VARIANT_PATH, "ushanka_pri_lines_vertical_1.png", "ushanka_pri_lines_vertical_2.png", true));
-            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, PRI, SMALL_LINES, BASE_PATH, VARIANT_PATH, "ushanka_pri_lines_small_1.png", "ushanka_pri_lines_small_2.png", true));
-            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, PRI, BIG_LINES, BASE_PATH, VARIANT_PATH, "ushanka_pri_lines_big_1.png", "ushanka_pri_lines_big_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, PRI, VERTICAL_LINES, BASE_PATH, VARIANT_PATH, "ushanka_pri_vertical_lines_1.png", "ushanka_pri_vertical_lines_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, PRI, SMALL_LINES, BASE_PATH, VARIANT_PATH, "ushanka_pri_small_lines_1.png", "ushanka_pri_small_lines_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, PRI, BIG_LINES, BASE_PATH, VARIANT_PATH, "ushanka_pri_big_lines_1.png", "ushanka_pri_big_lines_2.png", true));
 
             TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, SEC, HALF, BASE_PATH, VARIANT_PATH, "ushanka_sec_half_1.png", "ushanka_sec_half_2.png", true));
             TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, SEC, CHECKERS, BASE_PATH, VARIANT_PATH, "ushanka_sec_checkers_1.png", "ushanka_sec_checkers_2.png", true));
             TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, SEC, CHECKERS_SMALL, BASE_PATH, VARIANT_PATH, "ushanka_sec_checkers_small_1.png", "ushanka_sec_checkers_small_2.png", true));
-            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, SEC, VERTICAL_LINES, BASE_PATH, VARIANT_PATH, "ushanka_sec_lines_vertical_1.png", "ushanka_sec_lines_vertical_2.png", true));
-            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, SEC, SMALL_LINES, BASE_PATH, VARIANT_PATH, "ushanka_sec_lines_small_1.png", "ushanka_sec_lines_small_2.png", true));
-            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, SEC, BIG_LINES, BASE_PATH, VARIANT_PATH, "ushanka_sec_lines_big_1.png", "ushanka_sec_lines_big_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, SEC, VERTICAL_LINES, BASE_PATH, VARIANT_PATH, "ushanka_sec_vertical_lines_1.png", "ushanka_sec_vertical_lines_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, SEC, SMALL_LINES, BASE_PATH, VARIANT_PATH, "ushanka_sec_small_lines_1.png", "ushanka_sec_small_lines_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, SEC, BIG_LINES, BASE_PATH, VARIANT_PATH, "ushanka_sec_big_lines_1.png", "ushanka_sec_big_lines_2.png", true));
         }
     }
 
@@ -555,6 +555,7 @@ public class BuiltInTextures {
             Heart.register();
             Ring.register();
             Plate.register();
+            Fish.register();
         }
 
         private static class Bell {
@@ -599,6 +600,15 @@ public class BuiltInTextures {
             private static void register() {
                 TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, DEFAULT, DEFAULT, BASE_PATH, "", "plate.png", "plate.png", false));
                 TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, "minecraft:gold_ingot", DEFAULT, BASE_PATH, "", "plate_golden.png", "plate_golden.png", true));
+            }
+        }
+
+        private static class Fish {
+            private static final String TYPE = "fish";
+
+            private static void register() {
+                TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, DEFAULT, DEFAULT, BASE_PATH, "", "fish.png", "fish.png", false));
+                TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, "minecraft:gold_ingot", DEFAULT, BASE_PATH, "", "fish_golden.png", "fish_golden.png", true));
             }
         }
     }

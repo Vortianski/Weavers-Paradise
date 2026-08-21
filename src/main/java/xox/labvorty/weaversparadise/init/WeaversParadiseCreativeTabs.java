@@ -10,127 +10,58 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import oshi.util.tuples.Pair;
 import xox.labvorty.vortylib.data.creative_tab.ExpandableCreativeTab;
 import xox.labvorty.weaversparadise.items.clothing.defined.DoubleSidedClothingItem;
 import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingItem;
 import xox.labvorty.weaversparadise.items.misc.PlushieItem;
 import xox.labvorty.weaversparadise.utilities.CreativeModeTabProviders;
+import xox.labvorty.weaversparadise.utilities.WeaversUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class WeaversParadiseCreativeTabs {
-    private static final List<String> dyeTypes = List.of(
-            "default",
-            "agender",
-            "aroace",
-            "aromantic",
-            "asexual",
-            "bisexual",
-            "demiboy",
-            "demigender",
-            "demigirl",
-            "gay",
-            "genderfluid",
-            "genderqueer",
-            "intersex",
-            "lesbian",
-            "nonbinary",
-            "pansexual",
-            "pride",
-            "trans",
-            "redstone",
-            "lamp",
-            "sculk",
-            "colored_sculk",
-            "hunger",
-            "health",
-            "day_time",
-            "colored_day_time",
-            "glowstone",
-            "rainbow",
-            "biome",
-            "ender",
-            "speed",
-            "height_bedrock",
-            "height_sea",
-            "invisible",
-            "static",
-            "crystal",
-            "negative",
-            "true_negative",
-            "nebula",
-            "polychromatic",
-            "starfall",
-            "chromatic_aberration",
-            "boykisser",
-            "forcefield",
-            "hypnotic"
-    );
-
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, "weaversparadise");
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CLOTHING_TAB = CREATIVE_MODE_TABS.register("clothing_tab", () -> ExpandableCreativeTab.builder()
-            .addGroup("thigh_highs_cotton", new ItemStack(WeaversParadiseItems.THIGH_HIGHS_COTTON.get()), getVariantItem(WeaversParadiseItems.THIGH_HIGHS_COTTON.get(), dyeTypes))
-            .addGroup("thigh_highs_silk", new ItemStack(WeaversParadiseItems.THIGH_HIGHS_SILK.get()), getVariantItem(WeaversParadiseItems.THIGH_HIGHS_SILK.get(), dyeTypes))
-            .addGroup("thigh_highs_wool", new ItemStack(WeaversParadiseItems.THIGH_HIGHS_WOOL.get()), getVariantItem(WeaversParadiseItems.THIGH_HIGHS_WOOL.get(), dyeTypes))
-            .addGroup("hand_warmers_cotton", new ItemStack(WeaversParadiseItems.HAND_WARMERS_COTTON.get()), getVariantItem(WeaversParadiseItems.HAND_WARMERS_COTTON.get(), dyeTypes))
-            .addGroup("hand_warmers_silk", new ItemStack(WeaversParadiseItems.HAND_WARMERS_SILK.get()), getVariantItem(WeaversParadiseItems.HAND_WARMERS_SILK.get(), dyeTypes))
-            .addGroup("hand_warmers_wool", new ItemStack(WeaversParadiseItems.HAND_WARMERS_WOOL.get()), getVariantItem(WeaversParadiseItems.HAND_WARMERS_WOOL.get(), dyeTypes))
-            .addGroup("t_shirt", new ItemStack(WeaversParadiseItems.T_SHIRT.get()), getVariantItem(WeaversParadiseItems.T_SHIRT.get(), dyeTypes))
-            .addGroup("tank_top", new ItemStack(WeaversParadiseItems.TANK_TOP.get()), getVariantItem(WeaversParadiseItems.TANK_TOP.get(), dyeTypes))
-            .addGroup("wool_vest", new ItemStack(WeaversParadiseItems.WOOL_VEST.get()), getVariantItem(WeaversParadiseItems.WOOL_VEST.get(), dyeTypes))
-            .addGroup("shirt_cotton", new ItemStack(WeaversParadiseItems.SHIRT_COTTON.get()), getVariantItem(WeaversParadiseItems.SHIRT_COTTON.get(), dyeTypes))
-            .addGroup("shirt_silk", new ItemStack(WeaversParadiseItems.SHIRT_SILK.get()), getVariantItem(WeaversParadiseItems.SHIRT_SILK.get(), dyeTypes))
-            .addGroup("long_sleeve_cotton", new ItemStack(WeaversParadiseItems.LONG_SLEEVE_COTTON.get()), getVariantItem(WeaversParadiseItems.LONG_SLEEVE_COTTON.get(), dyeTypes))
-            .addGroup("sweater_wool", new ItemStack(WeaversParadiseItems.SWEATER_WOOL.get()), getVariantItem(WeaversParadiseItems.SWEATER_WOOL.get(), dyeTypes))
-            .addGroup("poncho", new ItemStack(WeaversParadiseItems.PONCHO.get()), getVariantItem(WeaversParadiseItems.PONCHO.get(), dyeTypes))
-            .addGroup("cotton_crop_top_long_sleeved", new ItemStack(WeaversParadiseItems.COTTON_CROP_TOP_LONG_SLEEVED.get()), getVariantItem(WeaversParadiseItems.COTTON_CROP_TOP_LONG_SLEEVED.get(), dyeTypes))
-            .addGroup("pants_jeans", new ItemStack(WeaversParadiseItems.PANTS_JEANS.get()), getVariantItem(WeaversParadiseItems.PANTS_JEANS.get(), dyeTypes))
-            .addGroup("pants_cotton", new ItemStack(WeaversParadiseItems.PANTS_COTTON.get()), getVariantItem(WeaversParadiseItems.PANTS_COTTON.get(), dyeTypes))
-            .addGroup("pants_silk", new ItemStack(WeaversParadiseItems.PANTS_SILK.get()), getVariantItem(WeaversParadiseItems.PANTS_SILK.get(), dyeTypes))
-            .addGroup("pants_wool", new ItemStack(WeaversParadiseItems.PANTS_WOOL.get()), getVariantItem(WeaversParadiseItems.PANTS_WOOL.get(), dyeTypes))
-            .addGroup("skirt_cotton", new ItemStack(WeaversParadiseItems.COTTON_SKIRT.get()), getVariantItem(WeaversParadiseItems.COTTON_SKIRT.get(), dyeTypes))
-            .addGroup("cape_cotton", new ItemStack(WeaversParadiseItems.COTTON_CAPE.get()), getVariantItem(WeaversParadiseItems.COTTON_CAPE.get(), dyeTypes))
-            .addGroup("cape_silk", new ItemStack(WeaversParadiseItems.SILK_CAPE.get()), getVariantItem(WeaversParadiseItems.SILK_CAPE.get(), dyeTypes))
-            .addGroup("cape_wool", new ItemStack(WeaversParadiseItems.WOOL_CAPE.get()), getVariantItem(WeaversParadiseItems.WOOL_CAPE.get(), dyeTypes))
-            .addGroup("pompon_hat", new ItemStack(WeaversParadiseItems.POMPON_HAT.get()), getVariantItem(WeaversParadiseItems.POMPON_HAT.get(), dyeTypes))
-            .addGroup("cap", new ItemStack(WeaversParadiseItems.CAP.get()), getVariantItem(WeaversParadiseItems.CAP.get(), dyeTypes))
-            .addGroup("ushanka", new ItemStack(WeaversParadiseItems.USHANKA.get()), getVariantItem(WeaversParadiseItems.USHANKA.get(), dyeTypes))
-            .addGroup("choker", new ItemStack(WeaversParadiseItems.CHOKER.get()), getVariantItem(WeaversParadiseItems.CHOKER.get(), dyeTypes))
+            .addGroup("thigh_highs_cotton", new ItemStack(WeaversParadiseItems.THIGH_HIGHS_COTTON.get()), getVariantItem(WeaversParadiseItems.THIGH_HIGHS_COTTON.get(), WeaversUtilities.dyeTypes))
+            .addGroup("thigh_highs_silk", new ItemStack(WeaversParadiseItems.THIGH_HIGHS_SILK.get()), getVariantItem(WeaversParadiseItems.THIGH_HIGHS_SILK.get(), WeaversUtilities.dyeTypes))
+            .addGroup("thigh_highs_wool", new ItemStack(WeaversParadiseItems.THIGH_HIGHS_WOOL.get()), getVariantItem(WeaversParadiseItems.THIGH_HIGHS_WOOL.get(), WeaversUtilities.dyeTypes))
+            .addGroup("hand_warmers_cotton", new ItemStack(WeaversParadiseItems.HAND_WARMERS_COTTON.get()), getVariantItem(WeaversParadiseItems.HAND_WARMERS_COTTON.get(), WeaversUtilities.dyeTypes))
+            .addGroup("hand_warmers_silk", new ItemStack(WeaversParadiseItems.HAND_WARMERS_SILK.get()), getVariantItem(WeaversParadiseItems.HAND_WARMERS_SILK.get(), WeaversUtilities.dyeTypes))
+            .addGroup("hand_warmers_wool", new ItemStack(WeaversParadiseItems.HAND_WARMERS_WOOL.get()), getVariantItem(WeaversParadiseItems.HAND_WARMERS_WOOL.get(), WeaversUtilities.dyeTypes))
+            .addGroup("t_shirt", new ItemStack(WeaversParadiseItems.T_SHIRT.get()), getVariantItem(WeaversParadiseItems.T_SHIRT.get(), WeaversUtilities.dyeTypes))
+            .addGroup("tank_top", new ItemStack(WeaversParadiseItems.TANK_TOP.get()), getVariantItem(WeaversParadiseItems.TANK_TOP.get(), WeaversUtilities.dyeTypes))
+            .addGroup("wool_vest", new ItemStack(WeaversParadiseItems.WOOL_VEST.get()), getVariantItem(WeaversParadiseItems.WOOL_VEST.get(), WeaversUtilities.dyeTypes))
+            .addGroup("shirt_cotton", new ItemStack(WeaversParadiseItems.SHIRT_COTTON.get()), getVariantItem(WeaversParadiseItems.SHIRT_COTTON.get(), WeaversUtilities.dyeTypes))
+            .addGroup("shirt_silk", new ItemStack(WeaversParadiseItems.SHIRT_SILK.get()), getVariantItem(WeaversParadiseItems.SHIRT_SILK.get(), WeaversUtilities.dyeTypes))
+            .addGroup("long_sleeve_cotton", new ItemStack(WeaversParadiseItems.LONG_SLEEVE_COTTON.get()), getVariantItem(WeaversParadiseItems.LONG_SLEEVE_COTTON.get(), WeaversUtilities.dyeTypes))
+            .addGroup("sweater_wool", new ItemStack(WeaversParadiseItems.SWEATER_WOOL.get()), getVariantItem(WeaversParadiseItems.SWEATER_WOOL.get(), WeaversUtilities.dyeTypes))
+            .addGroup("poncho", new ItemStack(WeaversParadiseItems.PONCHO.get()), getVariantItem(WeaversParadiseItems.PONCHO.get(), WeaversUtilities.dyeTypes))
+            .addGroup("cotton_crop_top_long_sleeved", new ItemStack(WeaversParadiseItems.COTTON_CROP_TOP_LONG_SLEEVED.get()), getVariantItem(WeaversParadiseItems.COTTON_CROP_TOP_LONG_SLEEVED.get(), WeaversUtilities.dyeTypes))
+            .addGroup("pants_jeans", new ItemStack(WeaversParadiseItems.PANTS_JEANS.get()), getVariantItem(WeaversParadiseItems.PANTS_JEANS.get(), WeaversUtilities.dyeTypes))
+            .addGroup("pants_cotton", new ItemStack(WeaversParadiseItems.PANTS_COTTON.get()), getVariantItem(WeaversParadiseItems.PANTS_COTTON.get(), WeaversUtilities.dyeTypes))
+            .addGroup("pants_silk", new ItemStack(WeaversParadiseItems.PANTS_SILK.get()), getVariantItem(WeaversParadiseItems.PANTS_SILK.get(), WeaversUtilities.dyeTypes))
+            .addGroup("pants_wool", new ItemStack(WeaversParadiseItems.PANTS_WOOL.get()), getVariantItem(WeaversParadiseItems.PANTS_WOOL.get(), WeaversUtilities.dyeTypes))
+            .addGroup("skirt_cotton", new ItemStack(WeaversParadiseItems.COTTON_SKIRT.get()), getVariantItem(WeaversParadiseItems.COTTON_SKIRT.get(), WeaversUtilities.dyeTypes))
+            .addGroup("cape_cotton", new ItemStack(WeaversParadiseItems.COTTON_CAPE.get()), getVariantItem(WeaversParadiseItems.COTTON_CAPE.get(), WeaversUtilities.dyeTypes))
+            .addGroup("cape_silk", new ItemStack(WeaversParadiseItems.SILK_CAPE.get()), getVariantItem(WeaversParadiseItems.SILK_CAPE.get(), WeaversUtilities.dyeTypes))
+            .addGroup("cape_wool", new ItemStack(WeaversParadiseItems.WOOL_CAPE.get()), getVariantItem(WeaversParadiseItems.WOOL_CAPE.get(), WeaversUtilities.dyeTypes))
+            .addGroup("pompon_hat", new ItemStack(WeaversParadiseItems.POMPON_HAT.get()), getVariantItem(WeaversParadiseItems.POMPON_HAT.get(), WeaversUtilities.dyeTypes))
+            .addGroup("cap", new ItemStack(WeaversParadiseItems.CAP.get()), getVariantItem(WeaversParadiseItems.CAP.get(), WeaversUtilities.dyeTypes))
+            .addGroup("ushanka", new ItemStack(WeaversParadiseItems.USHANKA.get()), getVariantItem(WeaversParadiseItems.USHANKA.get(), WeaversUtilities.dyeTypes))
+            .addGroup("choker", new ItemStack(WeaversParadiseItems.CHOKER.get()), getVariantItem(WeaversParadiseItems.CHOKER.get(), WeaversUtilities.dyeTypes))
             .addGroup("armor_cosmetics", new ItemStack(WeaversParadiseItems.ASTOLFO_COSMETICS.get()), CreativeModeTabProviders.getArmorCosmetics())
+            .addGroup("bell", WeaversParadiseItems.BELL.get().getDefaultInstance(), CreativeModeTabProviders.getTrinketList(WeaversParadiseItems.BELL.get()))
+            .addGroup("plate", WeaversParadiseItems.PLATE.get().getDefaultInstance(), CreativeModeTabProviders.getTrinketList(WeaversParadiseItems.PLATE.get()))
+            .addGroup("ring", WeaversParadiseItems.RING.get().getDefaultInstance(), CreativeModeTabProviders.getTrinketList(WeaversParadiseItems.RING.get()))
+            .addGroup("cat_ring", WeaversParadiseItems.CAT_RING.get().getDefaultInstance(), CreativeModeTabProviders.getTrinketList(WeaversParadiseItems.CAT_RING.get()))
+            .addGroup("heart", WeaversParadiseItems.HEART.get().getDefaultInstance(), CreativeModeTabProviders.getTrinketList(WeaversParadiseItems.HEART.get()))
+            .addGroup("fish", WeaversParadiseItems.FISH.get().getDefaultInstance(), CreativeModeTabProviders.getTrinketList(WeaversParadiseItems.FISH.get()))
             .title(Component.translatable("itemGroup.weaversparadise.clothing"))
             .icon(() -> WeaversParadiseItems.THIGH_HIGHS_COTTON.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
-                List<Pair<String, Pair<Integer, Integer>>> metalTypes = List.of(
-                        new Pair<>("minecraft:iron_ingot", new Pair<>(-1, 100)),
-                        new Pair<>("minecraft:gold_ingot", new Pair<>(-1, 25)),
-                        new Pair<>("minecraft:copper_ingot", new Pair<>(-34267, 50))
-                );
-
-                List<ItemStack> chokerTrinkets = List.of(
-                        WeaversParadiseItems.BELL.toStack(),
-                        WeaversParadiseItems.PLATE.toStack(),
-                        WeaversParadiseItems.RING.toStack(),
-                        WeaversParadiseItems.CAT_RING.toStack(),
-                        WeaversParadiseItems.HEART.toStack()
-                );
-
-                for (Pair<String, Pair<Integer, Integer>> type : metalTypes) {
-                    for (ItemStack stack : chokerTrinkets) {
-                        ItemStack instance = stack.copy();
-
-                        CustomData.update(DataComponents.CUSTOM_DATA, instance, (tag) -> {
-                            tag.putString("metalType", type.getA());
-                            tag.putInt("color", type.getB().getA());
-                            tag.putInt("damage", type.getB().getB());
-                        });
-                        output.accept(instance);
-                    }
-                }
-
                 output.accept(WeaversParadiseItems.LEATHER_GLOVES);
             })
             .build()
@@ -175,7 +106,7 @@ public class WeaversParadiseCreativeTabs {
                 );
 
                 for (ItemStack stack : dyedItems) {
-                    for (String type : dyeTypes) {
+                    for (String type : WeaversUtilities.dyeTypes) {
                         if (type.equals("redstone")) {
                             for (int i = 0; i <= 15; i++) {
                                 ItemStack item = stack.copy();
@@ -232,7 +163,9 @@ public class WeaversParadiseCreativeTabs {
                         }
                     }
                 }
-            }).build()
+            })
+            .withTabsBefore(QUALITY_MATERIALS_TAB.getId())
+            .build()
     );
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ITEMS_TAB = CREATIVE_MODE_TABS.register("items_tab", () -> ExpandableCreativeTab.builder()
@@ -289,7 +222,9 @@ public class WeaversParadiseCreativeTabs {
 
                 output.accept(WeaversParadiseItems.PLAYER_PLUSHIE_RENAME_TOKEN);
                 output.accept(WeaversParadiseItems.ARMOR_LOOTBOX);
-            }).build()
+            })
+            .withTabsBefore(DYES_TAB.getId())
+            .build()
     );
 
     private static List<ItemStack> getQualityVariants(Item item) {
