@@ -41,6 +41,7 @@ public class BuiltInTextures {
         Cap.register();
         Ushanka.register();
         ChokerTrinkets.register();
+        Blahaj.register();
     }
 
     private static class ThighHighs {
@@ -610,6 +611,15 @@ public class BuiltInTextures {
                 TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, DEFAULT, DEFAULT, BASE_PATH, "", "fish.png", "fish.png", false));
                 TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, "minecraft:gold_ingot", DEFAULT, BASE_PATH, "", "fish_golden.png", "fish_golden.png", true));
             }
+        }
+    }
+
+    private static class Blahaj {
+        private static final String TYPE = "blahaj";
+
+        private static void register() {
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, DEFAULT, DEFAULT, BASE_PATH, "", "blahaj_main.png", "blahaj_main.png", false));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE + "_sec", DEFAULT, DEFAULT, BASE_PATH, "", "blahaj_secondary.png", "blahaj_secondary.png", false));
         }
     }
 }

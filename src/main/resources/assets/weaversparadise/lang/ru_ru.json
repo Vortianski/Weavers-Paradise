@@ -27,6 +27,7 @@
   "block.weaversparadise.wool_cloth_block": "Блок из Шерстяной Ткани",
   "block.weaversparadise.witchroot": "Ведьмовской Корень",
   "block.weaversparadise.starbloom": "Звездоцвет",
+  "block.weaversparadise.blahaj": "Blåhaj",
 
   "item.weaversparadise.pure_dye": "Пигмент",
   "item.weaversparadise.button": "Пуговица",
@@ -76,7 +77,7 @@
   "item.weaversparadise.dye_core": "Ядро Красителя",
   "item.weaversparadise.mortar_and_pestle": "Пестик и Ступка",
   "item.weaversparadise.pestle": "Пестик",
-  "item.weaversparadise.kozinaki": "Козинаки",
+  "item.weaversparadise.kozinaki": "Гозинаки",
   "block.weaversparadise.player_plushie": "Плюшевый %s",
   "item.weaversparadise.player_plushie_rename_token": "Бирка Переименования Плюша",
   "item.weaversparadise.player_plushie_box": "Коробка с Плюшем",
@@ -318,6 +319,7 @@
   "vortylib.tab.wool_pant_leg": "Шерстяная Штанина",
 
   "vortylib.tab.contributor_plushies": "Плюши Помощников",
+  "vortylib.tab.blahaj": "Blåhaj",
   "vortylib.tab.pigments": "Пигменты",
   "vortylib.tab.flags": "Флаги",
   "vortylib.tab.stencils": "Шаблоны",

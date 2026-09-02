@@ -27,6 +27,7 @@
   "block.weaversparadise.wool_cloth_block": "Блок з Вовняної Тканини",
   "block.weaversparadise.witchroot": "Відьминський Корінь",
   "block.weaversparadise.starbloom": "Зіркоцвіт",
+  "block.weaversparadise.blahaj": "Blåhaj",
 
   "item.weaversparadise.pure_dye": "Пігмент",
   "item.weaversparadise.button": "Ґудзик",
@@ -76,7 +77,7 @@
   "item.weaversparadise.dye_core": "Ядро Барвника",
   "item.weaversparadise.mortar_and_pestle": "Пестик і Ступка",
   "item.weaversparadise.pestle": "Пестик",
-  "item.weaversparadise.kozinaki": "Козинак",
+  "item.weaversparadise.kozinaki": "Ґозинаки",
   "block.weaversparadise.player_plushie": "Плюшевий %s",
   "item.weaversparadise.player_plushie_rename_token": "Бирка Перенайменування Плюша",
   "item.weaversparadise.player_plushie_box": "Коробка з Плюшем",
@@ -318,6 +319,7 @@
   "vortylib.tab.wool_pant_leg": "Вовняна Штанина",
 
   "vortylib.tab.contributor_plushies": "Плюші Помічників",
+  "vortylib.tab.blahaj": "Blåhaj",
   "vortylib.tab.pigments": "Pigments",
   "vortylib.tab.flags": "Flags",
   "vortylib.tab.stencils": "Stencils",

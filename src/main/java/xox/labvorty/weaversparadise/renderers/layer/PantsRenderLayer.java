@@ -45,7 +45,7 @@ public class PantsRenderLayer<T extends LivingEntity, M extends EntityModel<T>> 
     ) {
         ItemStack itemStack = entity.getItemBySlot(EquipmentSlot.LEGS);
 
-        if (WeaversUtilities.isRestricted(entity, ClientConfig.PANTS_RESTRICTOR.get())) {
+        if (WeaversUtilities.isRestricted(entity, ClientConfig.PANTS_RESTRICTOR.get(), EquipmentSlot.LEGS)) {
             return;
         }
 

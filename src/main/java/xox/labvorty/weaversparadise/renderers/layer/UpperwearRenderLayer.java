@@ -47,7 +47,7 @@ public class UpperwearRenderLayer<T extends LivingEntity, M extends EntityModel<
 
         if (!(itemStack.getItem() instanceof SingleSidedClothingItem singleSidedClothingItem)) return;
 
-        if (WeaversUtilities.isRestricted(entity, ClientConfig.SHIRT_RESTRICTOR.get())) {
+        if (WeaversUtilities.isRestricted(entity, ClientConfig.SHIRT_RESTRICTOR.get(), EquipmentSlot.CHEST)) {
             return;
         }
 

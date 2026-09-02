@@ -27,6 +27,7 @@
   "block.weaversparadise.wool_cloth_block": "Wool Cloth Block",
   "block.weaversparadise.witchroot": "Witchroot",
   "block.weaversparadise.starbloom": "Starbloom",
+  "block.weaversparadise.blahaj": "Blåhaj",
 
   "item.weaversparadise.pure_dye": "Pigment",
   "item.weaversparadise.button": "Button",
@@ -76,7 +77,7 @@
   "item.weaversparadise.dye_core": "Dye Core",
   "item.weaversparadise.mortar_and_pestle": "Mortar & Pestle",
   "item.weaversparadise.pestle": "Pestle",
-  "item.weaversparadise.kozinaki": "Kozinaki",
+  "item.weaversparadise.kozinaki": "Gozinaki",
   "block.weaversparadise.player_plushie": "%s's Plushie",
   "item.weaversparadise.player_plushie_rename_token": "Plushie Rename Tag",
   "item.weaversparadise.player_plushie_box": "Plushie Box",
@@ -220,7 +221,7 @@
   "weaversparadise.dye_text.nonbinary": "Type:NON-BINARY",
   "weaversparadise.dye_text.pansexual": "Type:PANSEXUAL",
   "weaversparadise.dye_text.trans": "Type:TRANSGENDER",
-  "weaversparadise.dye_text.polychromatic": "Type: Polychromatic",
+  "weaversparadise.dye_text.polychromatic": "Type:Polychromatic",
   "weaversparadise.dye_text.invisible": "Type: Invisible",
   "weaversparadise.dye_text.static": "Type:Static",
   "weaversparadise.dye_text.crystal": "Type:Crystal",
@@ -328,6 +329,7 @@
   "vortylib.tab.wool_pant_leg": "Wool Pant Leg",
 
   "vortylib.tab.contributor_plushies": "Contributor Plushies",
+  "vortylib.tab.blahaj": "Blåhaj",
   "vortylib.tab.pigments": "Pigments",
   "vortylib.tab.flags": "Flags",
   "vortylib.tab.stencils": "Stencils",

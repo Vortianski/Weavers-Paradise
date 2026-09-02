@@ -23,6 +23,7 @@ import oshi.util.tuples.Pair;
 import xox.labvorty.weaversparadise.data.tooltip_components.DyeTypeRegistry;
 import xox.labvorty.weaversparadise.data.tooltip_components.helper.DyeData;
 import xox.labvorty.weaversparadise.data.tooltip_components.helper.DyeInstance;
+import xox.labvorty.weaversparadise.items.clothing.defined.DoubleSidedBlockItem;
 import xox.labvorty.weaversparadise.items.clothing.defined.DoubleSidedClothingItem;
 import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingItem;
 import xox.labvorty.weaversparadise.renderers.helpers.ColorHandlers;
@@ -80,6 +81,10 @@ public class ClothingInfoScreen extends Screen {
             return forDoubleSided(lastScreen, item, stack);
         }
 
+        if (stack.getItem() instanceof DoubleSidedBlockItem doubleSidedBlockItem) {
+            return forDoubleSidedPlushie(lastScreen, doubleSidedBlockItem, stack);
+        }
+
         return new ClothingInfoScreen(
                 lastScreen,
                 Component.empty(),
@@ -99,6 +104,38 @@ public class ClothingInfoScreen extends Screen {
         return new ClothingInfoScreen(
                 lastScreen,
                 Component.translatable("weaversparadise.clothing_info.title"),
+                rows
+        );
+    }
+
+    private static ClothingInfoScreen forDoubleSidedPlushie(
+            Screen lastScreen,
+            DoubleSidedBlockItem item,
+            ItemStack stack
+    ) {
+        List<Row> rows = new ArrayList<>();
+
+        addDoubleSidedPlushieEntry(
+                rows,
+                Component.translatable("weaversparadise.clothing_info.side_left"),
+                item,
+                stack,
+                "left"
+        );
+
+        addDoubleSidedPlushieEntry(
+                rows,
+                Component.translatable("weaversparadise.clothing_info.side_right"),
+                item,
+                stack,
+                "right"
+        );
+
+        return new ClothingInfoScreen(
+                lastScreen,
+                Component.translatable(
+                        "weaversparadise.clothing_info.title"
+                ),
                 rows
         );
     }
@@ -164,6 +201,49 @@ public class ClothingInfoScreen extends Screen {
                     item.getItemMainColor(stack, 2),
                     item.getItemSecondaryColor(stack, 2),
                     item.getItemLightValue(stack, 2)
+            );
+        }
+
+        rows.add(
+                Row.dyes(
+                        null,
+                        partOne,
+                        partTwo
+                )
+        );
+    }
+
+    private static void addDoubleSidedPlushieEntry(
+            List<Row> rows,
+            Component sideLabel,
+            DoubleSidedBlockItem item,
+            ItemStack stack,
+            String side
+    ) {
+        String stencilType = item.getStensilType(stack, side);
+
+        rows.add(
+                Row.stencil(
+                        sideLabel,
+                        stencilType
+                )
+        );
+
+        DyeEntry partOne = new DyeEntry(
+                item.getItemDyeType(stack, side, 1),
+                item.getItemMainColor(stack, side, 1),
+                item.getItemSecondaryColor(stack, side, 1),
+                item.getItemLightValue(stack, side, 1)
+        );
+
+        @Nullable DyeEntry partTwo = null;
+
+        if (!stencilType.equals("default")) {
+            partTwo = new DyeEntry(
+                    item.getItemDyeType(stack, side, 2),
+                    item.getItemMainColor(stack, side, 2),
+                    item.getItemSecondaryColor(stack, side, 2),
+                    item.getItemLightValue(stack, side, 2)
             );
         }
 

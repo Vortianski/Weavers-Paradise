@@ -52,7 +52,7 @@ public class HatRenderLayer<T extends LivingEntity, M extends EntityModel<T>> ex
     ) {
         ItemStack itemStack = entity.getItemBySlot(EquipmentSlot.HEAD);
 
-        if (WeaversUtilities.isRestricted(entity, ClientConfig.HAT_RESTRICTOR.get())) {
+        if (WeaversUtilities.isRestricted(entity, ClientConfig.HAT_RESTRICTOR.get(), EquipmentSlot.HEAD)) {
             return;
         }
 

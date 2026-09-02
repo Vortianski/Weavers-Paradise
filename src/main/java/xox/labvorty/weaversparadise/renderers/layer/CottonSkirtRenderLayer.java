@@ -41,7 +41,7 @@ public class CottonSkirtRenderLayer<T extends LivingEntity, M extends EntityMode
     ) {
         ItemStack itemStack = entity.getItemBySlot(EquipmentSlot.LEGS);
 
-        if (WeaversUtilities.isRestricted(entity, ClientConfig.PANTS_RESTRICTOR.get())) {
+        if (WeaversUtilities.isRestricted(entity, ClientConfig.SKIRT_RESTRICTOR.get(), EquipmentSlot.LEGS)) {
             return;
         }
 

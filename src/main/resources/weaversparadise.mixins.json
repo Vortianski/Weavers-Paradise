@@ -6,7 +6,8 @@
     "SculkBlockEntityMixin",
     "EntityMixin",
     "PlayerMixin",
-    "AbstractArrowMixin"
+    "AbstractArrowMixin",
+    "ArmorStandMixin"
   ],
   "client": [
     "client.PlayerRendererMixin",

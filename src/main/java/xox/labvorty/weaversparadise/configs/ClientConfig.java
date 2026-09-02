@@ -22,7 +22,7 @@ public class ClientConfig {
             .comment("Items that will prevent Thigh Highs from rendering")
             .defineListAllowEmpty(
                     "thighHighsRestrictors",
-                    List.of(),
+                    List.of("weaversparadise:astolfo_cosmetics", "weaversparadise:bridget_cosmetics", "weaversparadise:expie_cosmetics", "weaversparadise:felix_cosmetics", "weaversparadise:gabriel_cosmetics", "weaversparadise:gaster_cosmetics", "weaversparadise:giselle_cosmetics", "weaversparadise:griffith_cosmetics", "weaversparadise:jaya_utomo_cosmetics", "weaversparadise:mikkela_cosmetics", "weaversparadise:minos_prime_cosmetics", "weaversparadise:ralsei_cosmetics", "weaversparadise:niko_cosmetics"),
                     () -> "", ClientConfig::validateItemName
             );
 
@@ -30,7 +30,7 @@ public class ClientConfig {
             .comment("Items that will prevent Hand Warmers from rendering")
             .defineListAllowEmpty(
                     "handWarmersRestrictors",
-                    List.of(),
+                    List.of("weaversparadise:astolfo_cosmetics", "weaversparadise:bridget_cosmetics", "weaversparadise:expie_cosmetics", "weaversparadise:felix_cosmetics", "weaversparadise:gabriel_cosmetics", "weaversparadise:gaster_cosmetics", "weaversparadise:giselle_cosmetics", "weaversparadise:griffith_cosmetics", "weaversparadise:jaya_utomo_cosmetics", "weaversparadise:mikkela_cosmetics", "weaversparadise:minos_prime_cosmetics", "weaversparadise:ralsei_cosmetics", "weaversparadise:niko_cosmetics"),
                     () -> "", ClientConfig::validateItemName
             );
 
@@ -46,9 +46,7 @@ public class ClientConfig {
             .comment("Items that will prevent Shirt from rendering")
             .defineListAllowEmpty(
                     "shirtRestrictors",
-                    List.of(
-                            "weaversparadise:niko_cosmetics"
-                    ),
+                    List.of("weaversparadise:astolfo_cosmetics", "weaversparadise:bridget_cosmetics", "weaversparadise:expie_cosmetics", "weaversparadise:felix_cosmetics", "weaversparadise:gabriel_cosmetics", "weaversparadise:gaster_cosmetics", "weaversparadise:giselle_cosmetics", "weaversparadise:griffith_cosmetics", "weaversparadise:jaya_utomo_cosmetics", "weaversparadise:mikkela_cosmetics", "weaversparadise:minos_prime_cosmetics", "weaversparadise:ralsei_cosmetics", "weaversparadise:niko_cosmetics"),
                     () -> "", ClientConfig::validateItemName
             );
 
@@ -56,9 +54,7 @@ public class ClientConfig {
             .comment("Items that will prevent Choker and it's trinkets from rendering")
             .defineListAllowEmpty(
                     "chokerRestrictors",
-                    List.of(
-                            "weaversparadise:felix_armor_jacket"
-                    ),
+                    List.of("weaversparadise:astolfo_cosmetics", "weaversparadise:bridget_cosmetics", "weaversparadise:expie_cosmetics", "weaversparadise:felix_cosmetics", "weaversparadise:gabriel_cosmetics", "weaversparadise:gaster_cosmetics", "weaversparadise:giselle_cosmetics", "weaversparadise:griffith_cosmetics", "weaversparadise:jaya_utomo_cosmetics", "weaversparadise:mikkela_cosmetics", "weaversparadise:minos_prime_cosmetics", "weaversparadise:ralsei_cosmetics", "weaversparadise:niko_cosmetics"),
                     () -> "", ClientConfig::validateItemName
             );
 
@@ -66,7 +62,7 @@ public class ClientConfig {
             .comment("Items that will prevent Hats from rendering")
             .defineListAllowEmpty(
                     "hatsRestrictors",
-                    List.of(),
+                    List.of("weaversparadise:astolfo_cosmetics", "weaversparadise:bridget_cosmetics", "weaversparadise:expie_cosmetics", "weaversparadise:felix_cosmetics", "weaversparadise:gabriel_cosmetics", "weaversparadise:gaster_cosmetics", "weaversparadise:giselle_cosmetics", "weaversparadise:griffith_cosmetics", "weaversparadise:jaya_utomo_cosmetics", "weaversparadise:mikkela_cosmetics", "weaversparadise:minos_prime_cosmetics", "weaversparadise:ralsei_cosmetics", "weaversparadise:niko_cosmetics"),
                     () -> "", ClientConfig::validateItemName
             );
 
@@ -74,7 +70,7 @@ public class ClientConfig {
             .comment("Items that will prevent Skirts from rendering")
             .defineListAllowEmpty(
                     "skirtsRestrictors",
-                    List.of(),
+                    List.of("weaversparadise:astolfo_cosmetics", "weaversparadise:bridget_cosmetics", "weaversparadise:expie_cosmetics", "weaversparadise:felix_cosmetics", "weaversparadise:gabriel_cosmetics", "weaversparadise:gaster_cosmetics", "weaversparadise:giselle_cosmetics", "weaversparadise:griffith_cosmetics", "weaversparadise:jaya_utomo_cosmetics", "weaversparadise:mikkela_cosmetics", "weaversparadise:minos_prime_cosmetics", "weaversparadise:ralsei_cosmetics", "weaversparadise:niko_cosmetics"),
                     () -> "", ClientConfig::validateItemName
             );
 

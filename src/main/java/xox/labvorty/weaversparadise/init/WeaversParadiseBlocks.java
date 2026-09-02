@@ -45,4 +45,7 @@ public class WeaversParadiseBlocks {
                     .sound(SoundType.GRASS)
                     .offsetType(BlockBehaviour.OffsetType.XZ)
     ));
+    public static final DeferredBlock<BlahajBlock> BLAHAJ = BLOCKS.register("blahaj", () -> new BlahajBlock(
+            BlockBehaviour.Properties.of().sound(SoundType.WOOL).noOcclusion().strength(0.5f).noTerrainParticles()
+    ));
 }

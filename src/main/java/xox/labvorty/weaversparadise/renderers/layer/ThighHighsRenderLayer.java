@@ -44,7 +44,7 @@ public class ThighHighsRenderLayer<T extends LivingEntity, M extends EntityModel
     ) {
         ItemStack itemStack = entity.getItemBySlot(EquipmentSlot.FEET);
 
-        if (WeaversUtilities.isRestricted(entity, ClientConfig.THIGH_HIGHS_RESTRICTOR.get())) {
+        if (WeaversUtilities.isRestricted(entity, ClientConfig.THIGH_HIGHS_RESTRICTOR.get(), EquipmentSlot.FEET)) {
             return;
         }
 

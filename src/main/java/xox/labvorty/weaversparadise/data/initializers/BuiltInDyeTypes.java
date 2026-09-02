@@ -11,6 +11,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector4f;
 import oshi.util.tuples.Pair;
+import xox.labvorty.vortylib.data.text.ComponentFormatter;
 import xox.labvorty.vortylib.init.VortyLibRenderTypes;
 import xox.labvorty.weaversparadise.data.tooltip_components.DyeIcon;
 import xox.labvorty.weaversparadise.data.tooltip_components.DyeTypeRegistry;
@@ -52,7 +53,7 @@ public class BuiltInDyeTypes {
 
                     for (int i = 0; i < val.length(); i++) {
                         char c = val.charAt(i);
-                        int color = getRainbowColorFromTick(ticks + (3 * i));
+                        int color = ComponentFormatter.getRainbowColorFromTick(ticks + (3 * i));
                         Component letter = Component.literal(String.valueOf(c)).withColor(color);
                         mutableComponent.append(letter);
                     }
@@ -141,7 +142,7 @@ public class BuiltInDyeTypes {
 
                         if (timeInCycle >= pulseStartTick && timeInCycle <= pulseStartTick + pulseDuration) {
                             float fade = 1.0f - (float)(timeInCycle - pulseStartTick) / pulseDuration;
-                            finalColor = blendColors(pulseColor, baseColor, fade);
+                            finalColor = ComponentFormatter.blendColors(pulseColor, baseColor, fade);
                         } else {
                             finalColor = baseColor;
                         }
@@ -173,7 +174,7 @@ public class BuiltInDyeTypes {
                         if (timeInCycle >= pulseStartTick && timeInCycle <= pulseStartTick + pulseDuration) {
                             float fade = 1.0f - (float)(timeInCycle - pulseStartTick) / pulseDuration;
 
-                            return blendColors(pulseColorValue, baseColor, fade);
+                            return ComponentFormatter.blendColors(pulseColorValue, baseColor, fade);
                         } else {
                             return baseColor;
                         }
@@ -532,7 +533,7 @@ public class BuiltInDyeTypes {
                             (0x750787)
                     );
 
-                    return flagText(dyeData.getComponent().getString(), colors, ticks);
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
                 },
                 (dyeDataColor) -> {
                     if (dyeDataColor.layer() == 1) {
@@ -551,7 +552,7 @@ public class BuiltInDyeTypes {
                                 (0x750787)
                         );
 
-                        return getCycledColor(colors, ticks);
+                        return ComponentFormatter.getCycledColor(colors, ticks);
                     }
 
                     return -1;
@@ -587,7 +588,7 @@ public class BuiltInDyeTypes {
                             (0x800080)
                     );
 
-                    return flagText(dyeData.getComponent().getString(), colors, ticks);
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
                 },
                 (dyeDataColor) -> {
                     if (dyeDataColor.layer() == 1) {
@@ -604,7 +605,7 @@ public class BuiltInDyeTypes {
                                 (0x800080)
                         );
 
-                        return getCycledColor(colors, ticks);
+                        return ComponentFormatter.getCycledColor(colors, ticks);
                     }
 
                     return -1;
@@ -641,7 +642,7 @@ public class BuiltInDyeTypes {
                             (0x2E2E2E)
                     );
 
-                    return flagText(dyeData.getComponent().getString(), colors, ticks);
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
                 },
                 (dyeDataColor) -> {
                     if (dyeDataColor.layer() == 1) {
@@ -659,7 +660,7 @@ public class BuiltInDyeTypes {
                                 (0x2E2E2E)
                         );
 
-                        return getCycledColor(colors, ticks);
+                        return ComponentFormatter.getCycledColor(colors, ticks);
                     }
 
                     return -1;
@@ -696,7 +697,7 @@ public class BuiltInDyeTypes {
                             (0x800080)
                     );
 
-                    return flagText(dyeData.getComponent().getString(), colors, ticks);
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
                 },
                 (dyeDataColor) -> {
                     if (dyeDataColor.layer() == 1) {
@@ -714,7 +715,7 @@ public class BuiltInDyeTypes {
                                 (0x800080)
                         );
 
-                        return getCycledColor(colors, ticks);
+                        return ComponentFormatter.getCycledColor(colors, ticks);
                     }
 
                     return -1;
@@ -753,7 +754,7 @@ public class BuiltInDyeTypes {
                             (0x2E2E2E)
                     );
 
-                    return flagText(dyeData.getComponent().getString(), colors, ticks);
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
                 },
                 (dyeDataColor) -> {
                     if (dyeDataColor.layer() == 1) {
@@ -773,7 +774,7 @@ public class BuiltInDyeTypes {
                                 (0x2E2E2E)
                         );
 
-                        return getCycledColor(colors, ticks);
+                        return ComponentFormatter.getCycledColor(colors, ticks);
                     }
 
                     return -1;
@@ -810,7 +811,7 @@ public class BuiltInDyeTypes {
                             (0x0038A8)
                     );
 
-                    return flagText(dyeData.getComponent().getString(), colors, ticks);
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
                 },
                 (dyeDataColor) -> {
                     if (dyeDataColor.layer() == 1) {
@@ -828,7 +829,7 @@ public class BuiltInDyeTypes {
                                 (0x0038A8)
                         );
 
-                        return getCycledColor(colors, ticks);
+                        return ComponentFormatter.getCycledColor(colors, ticks);
                     }
 
                     return -1;
@@ -867,7 +868,7 @@ public class BuiltInDyeTypes {
                             (0x2E2E2E)
                     );
 
-                    return flagText(dyeData.getComponent().getString(), colors, ticks);
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
                 },
                 (dyeDataColor) -> {
                     if (dyeDataColor.layer() == 1) {
@@ -887,7 +888,7 @@ public class BuiltInDyeTypes {
                                 (0x2E2E2E)
                         );
 
-                        return getCycledColor(colors, ticks);
+                        return ComponentFormatter.getCycledColor(colors, ticks);
                     }
 
                     return -1;
@@ -926,7 +927,7 @@ public class BuiltInDyeTypes {
                             (0x2E2E2E)
                     );
 
-                    return flagText(dyeData.getComponent().getString(), colors, ticks);
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
                 },
                 (dyeDataColor) -> {
                     if (dyeDataColor.layer() == 1) {
@@ -946,7 +947,7 @@ public class BuiltInDyeTypes {
                                 (0x2E2E2E)
                         );
 
-                        return getCycledColor(colors, ticks);
+                        return ComponentFormatter.getCycledColor(colors, ticks);
                     }
 
                     return -1;
@@ -985,7 +986,7 @@ public class BuiltInDyeTypes {
                             (0x2E2E2E)
                     );
 
-                    return flagText(dyeData.getComponent().getString(), colors, ticks);
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
                 },
                 (dyeDataColor) -> {
                     if (dyeDataColor.layer() == 1) {
@@ -1005,7 +1006,7 @@ public class BuiltInDyeTypes {
                                 (0x2E2E2E)
                         );
 
-                        return getCycledColor(colors, ticks);
+                        return ComponentFormatter.getCycledColor(colors, ticks);
                     }
 
                     return -1;
@@ -1044,7 +1045,7 @@ public class BuiltInDyeTypes {
                             (0x3D1A78)
                     );
 
-                    return flagText(dyeData.getComponent().getString(), colors, ticks);
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
                 },
                 (dyeDataColor) -> {
                     if (dyeDataColor.layer() == 1) {
@@ -1064,7 +1065,7 @@ public class BuiltInDyeTypes {
                                 (0x3D1A78)
                         );
 
-                        return getCycledColor(colors, ticks);
+                        return ComponentFormatter.getCycledColor(colors, ticks);
                     }
 
                     return -1;
@@ -1101,7 +1102,7 @@ public class BuiltInDyeTypes {
                             (0x333EBD)
                     );
 
-                    return flagText(dyeData.getComponent().getString(), colors, ticks);
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
                 },
                 (dyeDataColor) -> {
                     if (dyeDataColor.layer() == 1) {
@@ -1119,7 +1120,7 @@ public class BuiltInDyeTypes {
                                 (0x333EBD)
                         );
 
-                        return getCycledColor(colors, ticks);
+                        return ComponentFormatter.getCycledColor(colors, ticks);
                     }
 
                     return -1;
@@ -1154,7 +1155,7 @@ public class BuiltInDyeTypes {
                             (0x49822B)
                     );
 
-                    return flagText(dyeData.getComponent().getString(), colors, ticks);
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
                 },
                 (dyeDataColor) -> {
                     if (dyeDataColor.layer() == 1) {
@@ -1170,7 +1171,7 @@ public class BuiltInDyeTypes {
                                 (0x49822B)
                         );
 
-                        return getCycledColor(colors, ticks);
+                        return ComponentFormatter.getCycledColor(colors, ticks);
                     }
 
                     return -1;
@@ -1209,7 +1210,7 @@ public class BuiltInDyeTypes {
                             (0xFFD800)
                     );
 
-                    return flagText(dyeData.getComponent().getString(), colors, ticks);
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
                 },
                 (dyeDataColor) -> {
                     if (dyeDataColor.layer() == 1) {
@@ -1229,7 +1230,7 @@ public class BuiltInDyeTypes {
                                 (0xFFD800)
                         );
 
-                        return getCycledColor(colors, ticks);
+                        return ComponentFormatter.getCycledColor(colors, ticks);
                     }
 
                     return -1;
@@ -1266,7 +1267,7 @@ public class BuiltInDyeTypes {
                             (0xA50062)
                     );
 
-                    return flagText(dyeData.getComponent().getString(), colors, ticks);
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
                 },
                 (dyeDataColor) -> {
                     if (dyeDataColor.layer() == 1) {
@@ -1284,7 +1285,7 @@ public class BuiltInDyeTypes {
                                 (0xA50062)
                         );
 
-                        return getCycledColor(colors, ticks);
+                        return ComponentFormatter.getCycledColor(colors, ticks);
                     }
 
                     return -1;
@@ -1320,7 +1321,7 @@ public class BuiltInDyeTypes {
                             (0x2E2E2E)
                     );
 
-                    return flagText(dyeData.getComponent().getString(), colors, ticks);
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
                 },
                 (dyeDataColor) -> {
                     if (dyeDataColor.layer() == 1) {
@@ -1337,7 +1338,7 @@ public class BuiltInDyeTypes {
                                 (0x2E2E2E)
                         );
 
-                        return getCycledColor(colors, ticks);
+                        return ComponentFormatter.getCycledColor(colors, ticks);
                     }
 
                     return -1;
@@ -1372,7 +1373,7 @@ public class BuiltInDyeTypes {
                             (0x21B1FF)
                     );
 
-                    return flagText(dyeData.getComponent().getString(), colors, ticks);
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
                 },
                 (dyeDataColor) -> {
                     if (dyeDataColor.layer() == 1) {
@@ -1388,7 +1389,7 @@ public class BuiltInDyeTypes {
                                 (0x21B1FF)
                         );
 
-                        return getCycledColor(colors, ticks);
+                        return ComponentFormatter.getCycledColor(colors, ticks);
                     }
 
                     return -1;
@@ -1425,7 +1426,7 @@ public class BuiltInDyeTypes {
                             (0x5BCEFA)
                     );
 
-                    return flagText(dyeData.getComponent().getString(), colors, ticks);
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
                 },
                 (dyeDataColor) -> {
                     if (dyeDataColor.layer() == 1) {
@@ -1443,7 +1444,7 @@ public class BuiltInDyeTypes {
                                 (0x5BCEFA)
                         );
 
-                        return getCycledColor(colors, ticks);
+                        return ComponentFormatter.getCycledColor(colors, ticks);
                     }
 
                     return -1;
@@ -1474,12 +1475,12 @@ public class BuiltInDyeTypes {
 
                     List<Integer> colors = List.of(
                             dyeData.getColorOne(),
-                            hueShift(dyeData.getColorOne(), 0.33f),
-                            hueShift(dyeData.getColorOne(), 0.66f),
-                            hueShift(dyeData.getColorOne(), 1)
+                            ComponentFormatter.hueShift(dyeData.getColorOne(), 0.33f),
+                            ComponentFormatter.hueShift(dyeData.getColorOne(), 0.66f),
+                            ComponentFormatter.hueShift(dyeData.getColorOne(), 1)
                     );
 
-                    return flagText(dyeData.getComponent().getString(), colors, ticks);
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
                 },
                 (dyeDataColor) -> {
                     if (dyeDataColor.layer() == 1) {
@@ -1491,12 +1492,12 @@ public class BuiltInDyeTypes {
 
                         List<Integer> colors = List.of(
                                 dyeDataColor.colorOne(),
-                                hueShift(dyeDataColor.colorOne(), 0.33f),
-                                hueShift(dyeDataColor.colorOne(), 0.66f),
-                                hueShift(dyeDataColor.colorOne(), 1)
+                                ComponentFormatter.hueShift(dyeDataColor.colorOne(), 0.33f),
+                                ComponentFormatter.hueShift(dyeDataColor.colorOne(), 0.66f),
+                                ComponentFormatter.hueShift(dyeDataColor.colorOne(), 1)
                         );
 
-                        return getCycledColor(colors, ticks);
+                        return ComponentFormatter.getCycledColor(colors, ticks);
                     }
 
                     return -1;
@@ -1601,7 +1602,7 @@ public class BuiltInDyeTypes {
                             (255 << 24 | (255 - primaryRed) << 16 | (255 - primaryGreen) << 8 | (255 - primaryBlue))
                     );
 
-                    return flagText(dyeData.getComponent().getString(), colors, ticks);
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
                 },
                 (dyeDataColor) -> {
                     if (dyeDataColor.layer() == 1) {
@@ -1620,7 +1621,7 @@ public class BuiltInDyeTypes {
                                 (255 << 24 | (255 - primaryRed) << 16 | (255 - primaryGreen) << 8 | (255 - primaryBlue))
                         );
 
-                        return getCycledColor(colors, ticks);
+                        return ComponentFormatter.getCycledColor(colors, ticks);
                     }
 
                     return -1;
@@ -1652,7 +1653,7 @@ public class BuiltInDyeTypes {
                             (255 << 24 | (255 - primaryRed) << 16 | (255 - primaryGreen) << 8 | (255 - primaryBlue))
                     );
 
-                    return flagText(dyeData.getComponent().getString(), colors, ticks);
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
                 },
                 (dyeDataColor) -> {
                     if (dyeDataColor.layer() == 1) {
@@ -1671,7 +1672,7 @@ public class BuiltInDyeTypes {
                                 (255 << 24 | (255 - primaryRed) << 16 | (255 - primaryGreen) << 8 | (255 - primaryBlue))
                         );
 
-                        return getCycledColor(colors, ticks);
+                        return ComponentFormatter.getCycledColor(colors, ticks);
                     }
 
                     return -1;
@@ -1702,7 +1703,7 @@ public class BuiltInDyeTypes {
                             0x8C40A6
                     );
 
-                    return flagText(dyeData.getComponent().getString(), colors, ticks);
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
                 },
                 (dyeDataColor) -> {
                     if (dyeDataColor.layer() == 1) {
@@ -1720,7 +1721,7 @@ public class BuiltInDyeTypes {
                                 0x8C40A6
                         );
 
-                        return getCycledColor(colors, ticks);
+                        return ComponentFormatter.getCycledColor(colors, ticks);
                     }
 
                     return -1;
@@ -1763,7 +1764,7 @@ public class BuiltInDyeTypes {
 
                         if (timeInCycle >= pulseStartTick && timeInCycle <= pulseStartTick + pulseDuration) {
                             float fade = 1.0f - (float)(timeInCycle - pulseStartTick) / pulseDuration;
-                            finalColor = blendColors(dyeData.getColorTwo(), dyeData.getColorOne(), fade);
+                            finalColor = ComponentFormatter.blendColors(dyeData.getColorTwo(), dyeData.getColorOne(), fade);
                         } else {
                             finalColor = dyeData.getColorOne();
                         }
@@ -1792,7 +1793,7 @@ public class BuiltInDyeTypes {
                         if (timeInCycle >= pulseStartTick && timeInCycle <= pulseStartTick + pulseDuration) {
                             float fade = 1.0f - (float)(timeInCycle - pulseStartTick) / pulseDuration;
 
-                            return blendColors(dyeDataColor.colorTwo(), dyeDataColor.colorOne(), fade);
+                            return ComponentFormatter.blendColors(dyeDataColor.colorTwo(), dyeDataColor.colorOne(), fade);
                         } else {
                             return dyeDataColor.colorOne();
                         }
@@ -1935,7 +1936,7 @@ public class BuiltInDyeTypes {
                         t = 1.0f - ((wrappedTime - 18000) / 12000.0f);
                     }
 
-                    int color = lerpColor(0xffdd40, 0x191970, t);
+                    int color = ComponentFormatter.lerpColor(0xffdd40, 0x191970, t);
 
                     return dyeData.getComponent().copy().withColor(color);
                 },
@@ -1955,7 +1956,7 @@ public class BuiltInDyeTypes {
                             t = 1.0f - ((wrappedTime - 18000) / 12000.0f);
                         }
 
-                        return lerpColor(0xffdd40, 0x191970, t);
+                        return ComponentFormatter.lerpColor(0xffdd40, 0x191970, t);
                     }
 
                     return -1;
@@ -1981,7 +1982,7 @@ public class BuiltInDyeTypes {
                         t = 1.0f - ((wrappedTime - 18000) / 12000.0f);
                     }
 
-                    int color = lerpColor(dyeData.getColorOne(), dyeData.getColorTwo(), t);
+                    int color = ComponentFormatter.lerpColor(dyeData.getColorOne(), dyeData.getColorTwo(), t);
 
                     return dyeData.getComponent().copy().withColor(color);
                 },
@@ -2001,7 +2002,7 @@ public class BuiltInDyeTypes {
                             t = 1.0f - ((wrappedTime - 18000) / 12000.0f);
                         }
 
-                        return lerpColor(dyeDataColor.colorOne(), dyeDataColor.colorTwo(), t);
+                        return ComponentFormatter.lerpColor(dyeDataColor.colorOne(), dyeDataColor.colorTwo(), t);
                     }
 
                     return -1;
@@ -2165,105 +2166,5 @@ public class BuiltInDyeTypes {
                     );
                 }
         );
-    }
-
-    public static int getRainbowColorFromTick(int ticks) {
-        float speed = 0.05F;
-
-        float red = Mth.clamp((float)(Math.sin(ticks * speed) * 0.5 + 0.5), 0, 1);
-        float green = Mth.clamp((float)(Math.sin(ticks * speed + 2 * Math.PI / 3) * 0.5 + 0.5), 0, 1);
-        float blue = Mth.clamp((float)(Math.sin(ticks * speed + 4 * Math.PI / 3) * 0.5 + 0.5), 0, 1);
-
-        int tRed = (int)(red * 255);
-        int tGreen = (int)(green * 255);
-        int tBlue = (int)(blue * 255);
-
-        return (tRed << 16) | (tGreen << 8) | tBlue;
-    }
-
-    public static MutableComponent flagText(String text, List<Integer> colors, int ticks) {
-        MutableComponent component = Component.literal("");
-
-        for (int i = 0; i < text.length(); i++) {
-            char c = text.charAt(i);
-            int color = getCycledColor(colors, ticks + (3 * i));
-            MutableComponent letter = Component.literal(String.valueOf(c)).withStyle(style -> style.withColor(color));
-            component.append(letter);
-        }
-
-        return component;
-    }
-
-    public static int getCycledColor(List<Integer> colors, int ticks) {
-        if (colors == null || colors.isEmpty()) return 0xFFFFFF;
-        if (colors.size() == 1) return colors.getFirst();
-
-        int holdTime = 20;
-        int fadeTime = 20;
-        int segmentTime = holdTime + fadeTime;
-        int totalCycle = colors.size() * segmentTime;
-
-        int time = ticks % totalCycle;
-        int index = time / segmentTime;
-        int local = time % segmentTime;
-
-        int current = colors.get(index);
-        int next = colors.get((index + 1) % colors.size());
-
-        float t = 0f;
-        if (local >= holdTime) {
-            t = (local - holdTime) / (float) fadeTime;
-        }
-
-        return lerpColor(current, next, t);
-    }
-
-    private static int lerpColor(int c1, int c2, float t) {
-        int r1 = (c1 >> 16) & 0xFF;
-        int g1 = (c1 >> 8) & 0xFF;
-        int b1 = c1 & 0xFF;
-
-        int r2 = (c2 >> 16) & 0xFF;
-        int g2 = (c2 >> 8) & 0xFF;
-        int b2 = c2 & 0xFF;
-
-        int r = (int)(r1 + (r2 - r1) * t);
-        int g = (int)(g1 + (g2 - g1) * t);
-        int b = (int)(b1 + (b2 - b1) * t);
-
-        return 255 << 24 | (r << 16) | (g << 8) | b;
-    }
-
-    public static int blendColors(int c1, int c2, float ratio) {
-        ratio = Math.min(1.0f, Math.max(0.0f, ratio));
-
-        int r1 = (c1 >> 16) & 0xFF;
-        int g1 = (c1 >> 8) & 0xFF;
-        int b1 = c1 & 0xFF;
-
-        int r2 = (c2 >> 16) & 0xFF;
-        int g2 = (c2 >> 8) & 0xFF;
-        int b2 = c2 & 0xFF;
-
-        int r = (int)(r1 * ratio + r2 * (1 - ratio));
-        int g = (int)(g1 * ratio + g2 * (1 - ratio));
-        int b = (int)(b1 * ratio + b2 * (1 - ratio));
-
-        return 255 << 24 | (r << 16) | (g << 8) | b;
-    }
-
-    public static int hueShift(int color, float hueShift) {
-        int a = (color >> 24) & 0xFF;
-        int r = (color >> 16) & 0xFF;
-        int g = (color >> 8) & 0xFF;
-        int b = color & 0xFF;
-
-        float[] hsb = java.awt.Color.RGBtoHSB(r, g, b, null);
-        hsb[0] = (hsb[0] + hueShift) % 1.0f;
-        if (hsb[0] < 0) hsb[0] += 1.0f;
-        int rgb = java.awt.Color.HSBtoRGB(hsb[0], hsb[1], hsb[2]);
-
-
-        return (a << 24) | (rgb & 0x00FFFFFF);
     }
 }

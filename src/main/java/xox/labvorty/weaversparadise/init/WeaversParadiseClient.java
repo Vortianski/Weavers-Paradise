@@ -401,6 +401,25 @@ public class WeaversParadiseClient {
                 },
                 WeaversParadiseItems.FISH
         );
+
+        event.registerItem(
+                new IClientItemExtensions() {
+                    @Override
+                    public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                        return new BlahajRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
+                    }
+
+                    @Override
+                    public boolean shouldBobAsEntity(@NotNull ItemStack itemStack) {
+                        if (itemStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("noBobbing")) {
+                            return false;
+                        }
+
+                        return IClientItemExtensions.super.shouldBobAsEntity(itemStack);
+                    }
+                },
+                WeaversParadiseItems.BLAHAJ
+        );
     }
 
     @SubscribeEvent
@@ -529,6 +548,7 @@ public class WeaversParadiseClient {
         event.registerLayerDefinition(UshankaModel.LAYER_LOCATION, UshankaModel::createBodyLayer);
         event.registerLayerDefinition(CapModel.LAYER_LOCATION, CapModel::createBodyLayer);
         event.registerLayerDefinition(PomponHatModel.LAYER_LOCATION, PomponHatModel::createBodyLayer);
+        event.registerLayerDefinition(BlahajModel.LAYER_LOCATION, BlahajModel::createBodyLayer);
     }
 
     @SubscribeEvent

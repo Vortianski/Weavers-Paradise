@@ -8,6 +8,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import xox.labvorty.weaversparadise.items.armor.*;
 import xox.labvorty.weaversparadise.items.clothing.*;
+import xox.labvorty.weaversparadise.items.clothing.defined.DoubleSidedBlockItem;
 import xox.labvorty.weaversparadise.items.dye.BottledDyeItem;
 import xox.labvorty.weaversparadise.items.dye.DyeCoreItem;
 import xox.labvorty.weaversparadise.items.dye.PigmentItem;
@@ -15,6 +16,7 @@ import xox.labvorty.weaversparadise.items.flags.*;
 import xox.labvorty.weaversparadise.items.food.KozinakiItem;
 import xox.labvorty.weaversparadise.items.instruments.*;
 import xox.labvorty.weaversparadise.items.materials.*;
+import xox.labvorty.weaversparadise.items.misc.BlahajItem;
 import xox.labvorty.weaversparadise.items.misc.PlayerPlushieRenameTokenItem;
 import xox.labvorty.weaversparadise.items.misc.PlushieItem;
 import xox.labvorty.weaversparadise.items.stencil.*;
@@ -189,4 +191,5 @@ public class WeaversParadiseItems {
     public static final DeferredItem<Item> WITCHROOT_FRUIT_COOKED = ITEMS.register("witchroot_fruit_cooked", () -> new Item(new Item.Properties().rarity(Rarity.RARE).stacksTo(64)));
     public static final DeferredItem<Item> STARBLOOM_FRUIT = ITEMS.register("starbloom_fruit", () -> new Item(new Item.Properties().rarity(Rarity.RARE).stacksTo(64)));
     public static final DeferredItem<Item> WEAVERS_SHEARS = ITEMS.register("weavers_shears", WeaversShearsItem::new);
+    public static final DeferredItem<DoubleSidedBlockItem> BLAHAJ = ITEMS.register(WeaversParadiseBlocks.BLAHAJ.getId().getPath(), () -> new BlahajItem(WeaversParadiseBlocks.BLAHAJ.get()));
 }

@@ -10,6 +10,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.common.loot.LootModifier;
 import org.jetbrains.annotations.NotNull;
+import xox.labvorty.weaversparadise.configs.CommonConfig;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 
 public class ArmorLootboxLootModifier extends LootModifier {
@@ -31,6 +32,8 @@ public class ArmorLootboxLootModifier extends LootModifier {
     protected ObjectArrayList<ItemStack> doApply(@NotNull ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
         ResourceLocation location = context.getQueriedLootTableId();
         if (location.getPath().startsWith("chests/")) {
+            if (context.getRandom().nextDouble() > CommonConfig.ARMOR_LOOTBOX_CHANCE.get()) return generatedLoot;
+
             generatedLoot.add(new ItemStack(WeaversParadiseItems.ARMOR_LOOTBOX.get()));
         }
 

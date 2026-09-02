@@ -44,7 +44,7 @@ public class HandWarmersRenderLayer<T extends LivingEntity, M extends EntityMode
     ) {
         ItemStack itemStack = entity.getItemBySlot(EquipmentSlot.CHEST);
 
-        if (WeaversUtilities.isRestricted(entity, ClientConfig.HAND_WARMERS_RESTRICTOR.get())) {
+        if (WeaversUtilities.isRestricted(entity, ClientConfig.HAND_WARMERS_RESTRICTOR.get(), EquipmentSlot.CHEST)) {
             return;
         }
 

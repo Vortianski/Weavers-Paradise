@@ -9,7 +9,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
@@ -26,6 +25,7 @@ import xox.labvorty.weaversparadise.data.network.DyeingNetworkMessage;
 import xox.labvorty.weaversparadise.data.texture.StencilRegistry;
 import xox.labvorty.weaversparadise.init.WeaversParadiseInterfaces;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
+import xox.labvorty.weaversparadise.items.clothing.defined.DoubleSidedBlockItem;
 import xox.labvorty.weaversparadise.items.clothing.defined.DoubleSidedClothingItem;
 import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingItem;
 import xox.labvorty.weaversparadise.items.stencil.Stencil;
@@ -48,18 +48,6 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
     private Supplier<Boolean> boundItemMatcher = null;
     private Entity boundEntity = null;
     private BlockEntity boundBlockEntity = null;
-
-    private List<Item> singleItems = List.of(
-            WeaversParadiseItems.SHIRT_COTTON.get(),
-            WeaversParadiseItems.SHIRT_SILK.get(),
-            WeaversParadiseItems.SWEATER_WOOL.get(),
-            WeaversParadiseItems.PANTS_COTTON.get(),
-            WeaversParadiseItems.PANTS_JEANS.get(),
-            WeaversParadiseItems.PANTS_SILK.get(),
-            WeaversParadiseItems.COTTON_CAPE.get(),
-            WeaversParadiseItems.SILK_CAPE.get(),
-            WeaversParadiseItems.WOOL_CAPE.get()
-    );
 
     public DyeingMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
         super(WeaversParadiseInterfaces.DYEING_MENU.get(), id);
@@ -106,7 +94,7 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
         this.customSlots.put(0, this.addSlot(new SlotItemHandler(internal, 0, 58, 103) {
             @Override
             public boolean mayPlace(@NotNull ItemStack itemStack) {
-                return itemStack.getItem() instanceof SingleSidedClothingItem || itemStack.getItem() instanceof DoubleSidedClothingItem;
+                return itemStack.getItem() instanceof SingleSidedClothingItem || itemStack.getItem() instanceof DoubleSidedClothingItem || itemStack.getItem() instanceof DoubleSidedBlockItem;
             }
         }));
 
@@ -163,7 +151,7 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
                     List<StencilRegistry.Stencil> stencils = StencilRegistry.getStencilsForType(type);
 
                     for (StencilRegistry.Stencil s : stencils) {
-                        if (s.item().equals(clothingStack.getItem()) && clothingStack.getItem() instanceof DoubleSidedClothingItem doubleSidedClothingItem) {
+                        if (s.item().equals(clothingStack.getItem()) && (clothingStack.getItem() instanceof DoubleSidedClothingItem || clothingStack.getItem() instanceof DoubleSidedBlockItem)) {
                             return true;
                         }
                     }
@@ -196,7 +184,7 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
             public boolean mayPlace(@NotNull ItemStack itemStack) {
                 ItemStack clothingStack = internal.getStackInSlot(0);
 
-                if (!(clothingStack.getItem() instanceof DoubleSidedClothingItem)) {
+                if (!(clothingStack.getItem() instanceof DoubleSidedClothingItem || clothingStack.getItem() instanceof DoubleSidedBlockItem)) {
                     return false;
                 }
 
@@ -208,7 +196,7 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
             public boolean mayPlace(@NotNull ItemStack itemStack) {
                 ItemStack clothingStack = internal.getStackInSlot(0);
 
-                if (internal.getStackInSlot(3).isEmpty() || !(internal.getStackInSlot(3).getItem() instanceof Stencil) || !(clothingStack.getItem() instanceof DoubleSidedClothingItem)) {
+                if (internal.getStackInSlot(3).isEmpty() || !(internal.getStackInSlot(3).getItem() instanceof Stencil) || !(clothingStack.getItem() instanceof DoubleSidedClothingItem || clothingStack.getItem() instanceof DoubleSidedBlockItem)) {
                     return false;
                 }
 

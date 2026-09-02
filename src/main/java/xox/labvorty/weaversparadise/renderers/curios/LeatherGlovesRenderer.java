@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import top.theillusivec4.curios.api.SlotContext;
@@ -47,7 +48,7 @@ public class LeatherGlovesRenderer implements ICurioRenderer {
         LivingEntity entity = slotContext.entity();
         VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(renderTypeBuffer, RenderType.armorCutoutNoCull(TEXTURE), stack.isEnchanted());
 
-        if (WeaversUtilities.isRestricted(entity, ClientConfig.HAND_WARMERS_RESTRICTOR.get())) {
+        if (WeaversUtilities.isRestricted(entity, ClientConfig.HAND_WARMERS_RESTRICTOR.get(), EquipmentSlot.CHEST)) {
             return;
         }
 

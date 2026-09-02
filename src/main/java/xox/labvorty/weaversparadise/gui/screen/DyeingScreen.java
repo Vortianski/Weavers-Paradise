@@ -28,6 +28,7 @@ import xox.labvorty.weaversparadise.data.texture.TextureRegistry;
 import xox.labvorty.weaversparadise.gui.menu.DyeingMenu;
 import xox.labvorty.weaversparadise.items.clothing.*;
 import xox.labvorty.weaversparadise.items.clothing.defined.*;
+import xox.labvorty.weaversparadise.items.misc.BlahajItem;
 import xox.labvorty.weaversparadise.mixin_helpers.PlayerModelInterface;
 import xox.labvorty.weaversparadise.model.*;
 import xox.labvorty.weaversparadise.renderers.helpers.ColorHandlers;
@@ -54,6 +55,7 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
     private static final CapModel<?> capModel = new CapModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(CapModel.LAYER_LOCATION));
     private static final UshankaModel<?> ushankaModel = new UshankaModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(UshankaModel.LAYER_LOCATION));
     private static final PomponHatModel<?> pomponHatModel = new PomponHatModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(PomponHatModel.LAYER_LOCATION));
+    private static final BlahajModel<?> blahajModel = new BlahajModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(BlahajModel.LAYER_LOCATION));
 
     public DyeingScreen(DyeingMenu container, Inventory inventory, Component text) {
         super(container, inventory, text);
@@ -655,6 +657,51 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
                     0,
                     this.leftPos + 87,
                     this.topPos + 50,
+                    50,
+                    0,
+                    -modelYaw,
+                    0,
+                    poseStack,
+                    LightTexture.FULL_BRIGHT
+            );
+        } else if (itemStack.getItem() instanceof BlahajItem blahajItem) {
+            BlahajModelRenderer.renderModel(
+                    multiBufferSource,
+                    blahajModel,
+                    new DoubleSidedClothingRenderingData(
+                            blahajItem.getFlag(itemStack),
+                            blahajItem.getItemMainColor(itemStack, "left", 1),
+                            blahajItem.getItemSecondaryColor(itemStack, "left", 1),
+                            blahajItem.getItemMainColor(itemStack, "right", 1),
+                            blahajItem.getItemSecondaryColor(itemStack, "right", 1),
+                            blahajItem.getItemMainColor(itemStack, "left", 2),
+                            blahajItem.getItemSecondaryColor(itemStack, "left", 2),
+                            blahajItem.getItemMainColor(itemStack, "right", 2),
+                            blahajItem.getItemSecondaryColor(itemStack, "right", 2),
+                            blahajItem.getItemDyeType(itemStack, "left", 1),
+                            blahajItem.getItemDyeType(itemStack, "right", 1),
+                            blahajItem.getItemDyeType(itemStack, "left", 2),
+                            blahajItem.getItemDyeType(itemStack, "right", 2),
+                            blahajItem.getStensilType(itemStack, "left"),
+                            blahajItem.getStensilType(itemStack, "right"),
+                            blahajItem.getItemLightValue(itemStack, "left", 1),
+                            blahajItem.getItemLightValue(itemStack, "left", 2),
+                            blahajItem.getItemLightValue(itemStack, "right", 1),
+                            blahajItem.getItemLightValue(itemStack, "right", 2),
+                            "default",
+                            itemStack.isEnchanted(),
+                            blahajItem.getGlintColor(itemStack),
+                            blahajItem.getAdditionalData(itemStack)
+                    ),
+                    player,
+                    -32,
+                    32,
+                    32,
+                    0,
+                    0,
+                    0,
+                    this.leftPos + 87,
+                    this.topPos,
                     50,
                     0,
                     -modelYaw,

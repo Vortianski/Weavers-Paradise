@@ -11,6 +11,7 @@ import net.minecraft.world.item.component.CustomData;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import xox.labvorty.vortylib.data.creative_tab.ExpandableCreativeTab;
+import xox.labvorty.weaversparadise.items.clothing.defined.DoubleSidedBlockItem;
 import xox.labvorty.weaversparadise.items.clothing.defined.DoubleSidedClothingItem;
 import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingItem;
 import xox.labvorty.weaversparadise.items.misc.PlushieItem;
@@ -170,6 +171,7 @@ public class WeaversParadiseCreativeTabs {
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ITEMS_TAB = CREATIVE_MODE_TABS.register("items_tab", () -> ExpandableCreativeTab.builder()
             .addGroup("contributor_plushies", PlushieItem.createPlushie(Optional.of("Vortianski"), Optional.empty()), CreativeModeTabProviders.getPlayerPlushies())
+            .addGroup("blahaj", WeaversParadiseItems.BLAHAJ.get().getDefaultInstance(), getVariantItem(WeaversParadiseItems.BLAHAJ.get(), WeaversUtilities.dyeTypes))
             .addGroup("pigments", WeaversParadiseItems.PURE_DYE.toStack(), CreativeModeTabProviders.getPigments())
             .addGroup("flags", WeaversParadiseItems.FLAG_BASIC.get().getDefaultInstance(), CreativeModeTabProviders.getFlags())
             .addGroup("stencils", WeaversParadiseItems.BASIC_STENCIL.toStack(), CreativeModeTabProviders.getStencils())
@@ -255,6 +257,10 @@ public class WeaversParadiseCreativeTabs {
             items = getDoubleSidedVariants(doubleSidedClothingItem, variants);
         }
 
+        if (item instanceof DoubleSidedBlockItem doubleSidedBlockItem) {
+            items = getDoubleSidedPlushieVariants(doubleSidedBlockItem, variants);
+        }
+
         return items;
     }
 
@@ -292,6 +298,49 @@ public class WeaversParadiseCreativeTabs {
 
         for (String variant : variants) {
             ItemStack itemStack = new ItemStack(doubleSidedClothingItem);
+
+            CustomData.update(DataComponents.CUSTOM_DATA, itemStack, (tag) -> {
+                tag.putString("dyeTypeLeftOne", variant);
+                tag.putString("dyeTypeLeftTwo", variant);
+                tag.putString("dyeTypeRightOne", variant);
+                tag.putString("dyeTypeRightTwo", variant);
+                tag.putInt("colorPriRedLeftOne", 255);
+                tag.putInt("colorPriGreenLeftOne", 255);
+                tag.putInt("colorPriBlueLeftOne", 255);
+                tag.putInt("colorPriRedLeftTwo", 255);
+                tag.putInt("colorPriGreenLeftTwo", 255);
+                tag.putInt("colorPriBlueLeftTwo", 255);
+                tag.putInt("colorSecRedLeftOne", 255);
+                tag.putInt("colorSecGreenLeftOne", 255);
+                tag.putInt("colorSecBlueLeftOne", 255);
+                tag.putInt("colorSecRedLeftTwo", 255);
+                tag.putInt("colorSecGreenLeftTwo", 255);
+                tag.putInt("colorSecBlueLeftTwo", 255);
+                tag.putInt("colorPriRedRightOne", 255);
+                tag.putInt("colorPriGreenRightOne", 255);
+                tag.putInt("colorPriBlueRightOne", 255);
+                tag.putInt("colorPriRedRightTwo", 255);
+                tag.putInt("colorPriGreenRightTwo", 255);
+                tag.putInt("colorPriBlueRightTwo", 255);
+                tag.putInt("colorSecRedRightOne", 255);
+                tag.putInt("colorSecGreenRightOne", 255);
+                tag.putInt("colorSecBlueRightOne", 255);
+                tag.putInt("colorSecRedRightTwo", 255);
+                tag.putInt("colorSecGreenRightTwo", 255);
+                tag.putInt("colorSecBlueRightTwo", 255);
+            });
+
+            items.add(itemStack);
+        }
+
+        return items;
+    }
+
+    private static List<ItemStack> getDoubleSidedPlushieVariants(DoubleSidedBlockItem doubleSidedBlockItem, List<String> variants) {
+        List<ItemStack> items = new ArrayList<>();
+
+        for (String variant : variants) {
+            ItemStack itemStack = new ItemStack(doubleSidedBlockItem);
 
             CustomData.update(DataComponents.CUSTOM_DATA, itemStack, (tag) -> {
                 tag.putString("dyeTypeLeftOne", variant);
