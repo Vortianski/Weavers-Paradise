@@ -5,12 +5,20 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           fetch-tags: true
+
+      - name: Checkout VortyLib
+        uses: actions/checkout@v4
+        with:
+          repository: Vortianski/VortyLib
+          ref: 1.21.1
+          path: vortylib-template-1.21.1
 
       - name: Setup JDK 21
         uses: actions/setup-java@v4
@@ -21,10 +29,10 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      # This is needed to be able to run ./gradlew below
-      # You can run `git update-index --chmod +x gradlew` then remove this step.
       - name: Make Gradle wrapper executable
         run: chmod +x ./gradlew
 
       - name: Build with Gradle
+        env:
+          VORTYLIB_PATH: vortylib-template-1.21.1
         run: ./gradlew build
