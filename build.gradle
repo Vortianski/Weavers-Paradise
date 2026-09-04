@@ -160,7 +160,7 @@ dependencies {
 
     //ChaosLib
     if (System.getenv("CHAOSLIB_PATH") || file("../chaoslib-1.21.1").exists()) {
-        runtimeOnly("dev.elifian.chaoslib:neoforge:1.1.0")
+        //runtimeOnly("dev.elifian.chaoslib:neoforge:1.1.0")
     }
 
     //Cosmetic Armor
