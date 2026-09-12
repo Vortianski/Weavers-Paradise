@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "minecraft:black_dye" },
+    { "item": "minecraft:light_gray_dye" },
+    { "item": "minecraft:white_dye" },
+    { "item": "minecraft:purple_dye" },
+    { "item": "weaversparadise:flag_base" }
+  ],
+  "result": { "id": "weaversparadise:flag_asexual", "count": 1 }
+}

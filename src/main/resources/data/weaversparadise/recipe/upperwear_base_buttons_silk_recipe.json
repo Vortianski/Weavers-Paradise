@@ -1,0 +1,24 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    "ab",
+    "cc",
+    "cc"
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:silk_upperwear_base"
+    },
+    "b": {
+      "item": "weaversparadise:needle_with_thread"
+    },
+    "c": {
+      "item": "weaversparadise:button"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:silk_upperwear_base_buttons",
+    "count": 1
+  }
+}

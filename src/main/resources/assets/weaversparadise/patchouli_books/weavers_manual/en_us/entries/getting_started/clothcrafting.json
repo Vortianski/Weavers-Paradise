@@ -1,0 +1,27 @@
+{
+  "name": "Clothcrafting",
+  "icon": "weaversparadise:clothcrafting_station",
+  "category": "weaversparadise:getting_started",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:clothcrafting_table_recipe",
+      "text": "Clothcrafting Station is needed to process spools into certain fabric types. This crafting station uses minigame to check your skills, the better you perform - the better $(l:weaversparadise:getting_started/clothcrafting#quality)$(bold)quality$() fabric you will get!"
+    },
+    {
+      "type": "patchouli:image",
+      "title": "Minigame",
+      "images": [
+        "weaversparadise:textures/patchouli/clothcrafting_preview.png"
+      ],
+      "text": "Minigame itself :D"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Quality",
+      "anchor": "quality",
+      "text": "Quality of fabric affects the durability of clothing crafted from it. Clothing has a base durability determined by the amount of fabric used, while fabric quality provides an additional durability bonus. The higher the quality, the larger the bonus.$(br)$(br)For example, a shirt requires 14 Cotton, giving it 140 base durability. The quality of the Cotton can then add up to 100 additional durability, for a maximum of 240 durability.$(br)$(br)Durability per fabric:$(br)Cotton - 10 durability (up to +100 from quality)$(br)Silk - 8 durability (up to +80 from quality)$(br)Wool - 12 durability (up to +120 from quality)$(br)Jeans - 15 durability (up to +150 from quality)"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    { "item": "weaversparadise:cotton_cloth" },
+    { "item": "weaversparadise:cotton_cloth" },
+    { "item": "weaversparadise:cotton_cloth" },
+    { "item": "weaversparadise:cotton_cloth" },
+    { "item": "weaversparadise:cotton_cloth" },
+    { "item": "weaversparadise:cotton_cloth" },
+    { "item": "weaversparadise:cotton_cloth" },
+    { "item": "weaversparadise:cotton_cloth" },
+    { "item": "weaversparadise:cotton_cloth" }
+  ],
+  "result": { "id": "weaversparadise:cotton_cloth_block", "count": 1 }
+}

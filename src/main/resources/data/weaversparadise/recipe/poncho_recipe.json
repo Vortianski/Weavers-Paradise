@@ -1,0 +1,18 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aaa",
+    "a a"
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:cotton_cloth"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:poncho",
+    "count": 1
+  }
+}

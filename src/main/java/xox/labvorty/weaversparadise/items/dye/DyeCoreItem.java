@@ -1,0 +1,47 @@
+package xox.labvorty.weaversparadise.items.dye;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.component.CustomData;
+import org.jetbrains.annotations.NotNull;
+import xox.labvorty.weaversparadise.data.tooltip_components.DyeTooltipComponent;
+import xox.labvorty.weaversparadise.data.tooltip_components.DyeTypeRegistry;
+
+import java.util.Optional;
+
+public class DyeCoreItem extends Item {
+    public DyeCoreItem() {
+        super(new Item.Properties()
+                .rarity(Rarity.COMMON)
+                .stacksTo(1)
+                .component(DataComponents.CUSTOM_DATA, CustomData.of(new CompoundTag() {{
+                    putString("dyeType", "default");
+                    putInt("lightValue", 15);
+                }}))
+        );
+    }
+
+    @Override
+    @Environment(EnvType.CLIENT)
+    public @NotNull Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
+        CompoundTag data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+
+        return Optional.of(
+                new DyeTooltipComponent(
+                        DyeTypeRegistry.getDyeType(data.getString("dyeType")).getDyeIcon(),
+                        data.getString("dyeType"),
+                        data.getString("dyeType"),
+                        data.getInt("lightValue"),
+                        (255 << 24 | 255 << 16 | 255 << 8 | 255),
+                        (255 << 24 | 255 << 16 | 255 << 8 | 255),
+                        true
+                )
+        );
+    }
+}

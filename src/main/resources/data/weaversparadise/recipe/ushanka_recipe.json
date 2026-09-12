@@ -1,0 +1,20 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "a a"
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:wool_cloth"
+    },
+    "b": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:ushanka",
+    "count": 1
+  }
+}

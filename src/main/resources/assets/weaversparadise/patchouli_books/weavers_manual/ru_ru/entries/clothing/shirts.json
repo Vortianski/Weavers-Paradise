@@ -1,0 +1,52 @@
+{
+  "name": "Рубашки",
+  "icon": "weaversparadise:shirt_cotton",
+  "category": "weaversparadise:clothing_items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Слот Curio: Одежда для верха$(br)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Зачарования",
+      "text": "$(br)$(#FF5555)$(bold)> Проклятие Утраты$()$(br)$(#FF5555)$(bold)> Проклятие Несъёмности$()$(br)$(#FF55FF)$(bold)> Прочность I-V$()$(br)$(#FF55FF)$(bold)> Починка$()$(br2)$(bold)Хлопок:$()$(br)$(#FF55FF)$(bold)> Мягкий и Уютный I-V - добавляет до -10% к времени горения$(bold)$()$(br2)$(bold)Шёлк:$()$(br)$(#FF55FF)$(bold)> Грация I-V - добавляет до +10% к эффективности передвижения в воде$()"
+    },
+    {
+      "type": "weaversparadise:single_sided_clothing_list",
+      "name": "Хлопковая Рубашка",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:shirt_cotton\", Count:1b}}",
+      "scale": 1.5,
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:shirt_cotton_recipe",
+      "text": "Этот рецепт использует 2 продвинутых материала: $(l:weaversparadise:getting_started/advanced_materials#cotton_base)Основа одежды$() и $(l:weaversparadise:getting_started/advanced_materials#cotton_sleeves)Рукава$()"
+    },
+    {
+      "type": "weaversparadise:single_sided_clothing_list",
+      "name": "Шёлковая Рубашка",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:shirt_silk\", Count:1b}}",
+      "scale": 1.5,
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:shirt_silk_recipe",
+      "text": "Этот рецепт использует 2 продвинутых материала: $(l:weaversparadise:getting_started/advanced_materials#silk_base)Основа одежды$() и $(l:weaversparadise:getting_started/advanced_materials#silk_sleeves)Рукава$()"
+    },
+    {
+      "type": "weaversparadise:single_sided_clothing_list",
+      "name": "Шерстяной Свитер",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:sweater_wool\", Count:1b}}",
+      "scale": 1.5,
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:sweater_wool_recipe",
+      "text": "Этот рецепт использует 2 продвинутых материала: $(l:weaversparadise:getting_started/advanced_materials#wool_base)Основа одежды$() и $(l:weaversparadise:getting_started/advanced_materials#wool_sleeves)Рукава$()"
+    }
+  ]
+}

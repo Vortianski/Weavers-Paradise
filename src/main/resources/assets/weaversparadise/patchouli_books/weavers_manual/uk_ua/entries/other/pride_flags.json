@@ -1,0 +1,213 @@
+{
+  "name": "Прайд-прапори",
+  "icon": "weaversparadise:flag_pride",
+  "category": "weaversparadise:interesting_stuff",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Прайд-прапори були простою функцією, доданою в ранніх версіях для рецептів, але пізніше їх також адаптували для розміщення у світі."
+    },
+    {
+      "type": "patchouli:empty",
+      "draw_filler": false
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "weaversparadise:hanging_flag_entity",
+      "scale": "0.5",
+      "name": "Звичайний",
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:flag_base_recipe"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "weaversparadise:hanging_flag_entity{variant:\"agender\"}",
+      "scale": "0.5",
+      "name": "Агендерний",
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:flag_agender_recipe"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "weaversparadise:hanging_flag_entity{variant:\"aroace\"}",
+      "scale": "0.5",
+      "name": "Ароейс",
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:flag_aroace_recipe"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "weaversparadise:hanging_flag_entity{variant:\"aromantic\"}",
+      "scale": "0.5",
+      "name": "Аромантичний",
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:flag_aromantic_recipe"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "weaversparadise:hanging_flag_entity{variant:\"asexual\"}",
+      "scale": "0.5",
+      "name": "Асексуальний",
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:flag_asexual_recipe"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "weaversparadise:hanging_flag_entity{variant:\"bisexual\"}",
+      "scale": "0.5",
+      "name": "Бісексуальний",
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:flag_bisexual_recipe"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "weaversparadise:hanging_flag_entity{variant:\"demiboy\"}",
+      "scale": "0.5",
+      "name": "Демібой",
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:flag_demiboy_recipe"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "weaversparadise:hanging_flag_entity{variant:\"demigender\"}",
+      "scale": "0.5",
+      "name": "Демігендерний",
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:flag_demigender_recipe"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "weaversparadise:hanging_flag_entity{variant:\"demigirl\"}",
+      "scale": "0.5",
+      "name": "Деміґьорл",
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:flag_demigirl_recipe"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "weaversparadise:hanging_flag_entity{variant:\"gay\"}",
+      "scale": "0.5",
+      "name": "Вінціанський",
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:flag_gay_recipe"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "weaversparadise:hanging_flag_entity{variant:\"genderfluid\"}",
+      "scale": "0.5",
+      "name": "Гендерфлюїдний",
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:flag_genderfluid_recipe"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "weaversparadise:hanging_flag_entity{variant:\"genderqueer\"}",
+      "scale": "0.5",
+      "name": "Гендерквірний",
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:flag_genderqueer_recipe"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "weaversparadise:hanging_flag_entity{variant:\"intersex\"}",
+      "scale": "0.5",
+      "name": "Інтерсекс",
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:flag_intersex_recipe"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "weaversparadise:hanging_flag_entity{variant:\"lesbian\"}",
+      "scale": "0.5",
+      "name": "Лесбійський",
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:flag_lesbian_recipe"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "weaversparadise:hanging_flag_entity{variant:\"nonbinary\"}",
+      "scale": "0.5",
+      "name": "Небінарний",
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:flag_nonbinary_recipe"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "weaversparadise:hanging_flag_entity{variant:\"pansexual\"}",
+      "scale": "0.5",
+      "name": "Пансексуальний",
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:flag_pansexual_recipe"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "weaversparadise:hanging_flag_entity{variant:\"pride\"}",
+      "scale": "0.5",
+      "name": "Прайд",
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:flag_pride_recipe"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "weaversparadise:hanging_flag_entity{variant:\"trans\"}",
+      "scale": "0.5",
+      "name": "Трансгендерний",
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:flag_trans_recipe"
+    }
+  ]
+}

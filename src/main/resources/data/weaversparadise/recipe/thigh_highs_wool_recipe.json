@@ -1,0 +1,18 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    "a a",
+    "a a",
+    "a a"
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:wool_cloth"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:thigh_highs_wool",
+    "count": 1
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "name": "Плащі",
+  "icon": "weaversparadise:cotton_cape",
+  "category": "weaversparadise:clothing_items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Слот Curio: Плащ$(br)Замінює ванільні плащі та елітри"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Зачарування",
+      "text": "$(br)$(#FF5555)$(bold)> Прокляття зникнення$()$(br)$(#FF5555)$(bold)> Прокляття прив’язки$()$(br)$(#FF55FF)$(bold)> Незламність I-V$()$(br)$(#FF55FF)$(bold)> Лагодження$()"
+    },
+    {
+      "type": "weaversparadise:single_sided_clothing_list",
+      "name": "Бавовняний плащ",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:cotton_cape\", Count:1b}}",
+      "scale": 2,
+      "offset": -0.35
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:cape_cotton_recipe",
+      "text": ""
+    },
+    {
+      "type": "weaversparadise:single_sided_clothing_list",
+      "name": "Шовковий плащ",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:silk_cape\", Count:1b}}",
+      "scale": 2,
+      "offset": -0.35
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:cape_silk_recipe",
+      "text": ""
+    },
+    {
+      "type": "weaversparadise:single_sided_clothing_list",
+      "name": "Вовняний плащ",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:wool_cape\", Count:1b}}",
+      "scale": 2,
+      "offset": -0.35
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:cape_wool_recipe",
+      "text": ""
+    }
+  ]
+}

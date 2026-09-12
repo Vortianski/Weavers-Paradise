@@ -1,0 +1,19 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    "aba"
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:silk_sleeve_long"
+    },
+    "b": {
+      "item": "weaversparadise:silk_upperwear_base_buttons"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:shirt_silk",
+    "count": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aba"
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:jeans_cloth"
+    },
+    "b": {
+      "item": "weaversparadise:needle_with_thread"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:cap",
+    "count": 1
+  }
+}

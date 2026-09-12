@@ -1,0 +1,9 @@
+{
+  "parent": "weaversparadise:block/spinning_jenny_model",
+  "textures": {
+    "all": "weaversparadise:block/spinning_jenny_texture",
+    "particle": "weaversparadise:block/spinning_jenny_texture",
+    "0": "weaversparadise:block/spinning_jenny_texture"
+  },
+  "render_type": "cutout"
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    { "item": "minecraft:yellow_dye" },
+    { "item": "minecraft:white_dye" },
+    { "item": "minecraft:purple_dye" },
+    { "item": "minecraft:black_dye" },
+    { "item": "weaversparadise:flag_base" }
+  ],
+  "result": { "id": "weaversparadise:flag_nonbinary", "count": 1 }
+}

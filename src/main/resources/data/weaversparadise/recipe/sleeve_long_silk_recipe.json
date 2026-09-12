@@ -1,0 +1,21 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    "ab",
+    "a ",
+    "a "
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:silk_cloth"
+    },
+    "b": {
+      "item": "weaversparadise:needle_with_thread"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:silk_sleeve_long",
+    "count": 1
+  }
+}

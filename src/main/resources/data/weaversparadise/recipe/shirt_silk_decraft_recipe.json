@@ -1,0 +1,12 @@
+{
+  "type": "weaversparadise:quality_shapeless_crafting",
+  "category": "misc",
+  "ingredients": [
+    { "item": "weaversparadise:shirt_silk" },
+    { "item": "weaversparadise:weavers_shears" }
+  ],
+  "result": {
+    "id": "weaversparadise:silk_cloth",
+    "count": 11
+  }
+}

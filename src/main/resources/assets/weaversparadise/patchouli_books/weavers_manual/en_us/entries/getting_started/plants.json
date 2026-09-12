@@ -1,0 +1,31 @@
+{
+  "name": "Plants",
+  "icon": "weaversparadise:wild_cotton",
+  "category": "weaversparadise:getting_started",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Weavers Paradise introduces several new plants, each with its own purpose. Some provide textile fibers, others produce dyes, and a few contain unique resources that cannot be obtained elsewhere."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Wild Cotton",
+      "item": "weaversparadise:wild_cotton",
+      "text": "Wild Cotton naturally grows across the world. Breaking it yields Cotton Seeds, allowing you to cultivate your own cotton farm.$(br2)$(t:Breaking this block without Leather Gloves deals 1 point of damage)$(#FF0000)Note to self$(/t)"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Cotton Plant",
+      "item": "weaversparadise:cotton_seeds",
+      "text": "Cotton Seeds can be planted on farmland to grow Cotton Plants. Mature plants produce Cotton Bolls, which can be processed into Raw Cotton for spinning into thread.$(br2)$(t:Breaking this block without Leather Gloves deals 1 point of damage)$(#FF0000)Note to self$(/t)",
+      "anchor": "cotton"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Chromatic Bloom",
+      "item": "weaversparadise:chromatic_bloom",
+      "text": "Rare flower that grows in deepslate layer with chance of 1/16 per chunk.$(br)This item can be processed 2 times for 2 different Dye Types:$(li)Chromatic Bloom Fruit (rainbow)$(li)Chromatic Dust (polychromatic)"
+    }
+  ]
+}

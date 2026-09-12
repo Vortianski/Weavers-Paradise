@@ -1,0 +1,20 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    "ab",
+    "a "
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:cotton_cloth"
+    },
+    "b": {
+      "item": "weaversparadise:needle_with_thread"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:cotton_sleeve_short",
+    "count": 1
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Weavers Manual",
+  "landing_text": "Welcome to Weavers Paradise",
+  "version": 1,
+  "creative_tab": "weaversparadise:items_tab",
+  "use_resource_pack": true,
+  "book_texture": "patchouli:textures/gui/book_red.png",
+  "model": "weaversparadise:weavers_manual",
+  "show_progress": false
+}

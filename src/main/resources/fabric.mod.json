@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "weaversparadise",
+  "version": "${version}",
+  "name": "Weavers Paradise",
+  "description": "Mod about crafting clothes and expressing yourself through said clothing",
+  "authors": [ "Vortianski" ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/weavers-paradise",
+    "sources": "https://github.com/Vortianski/Weavers-Paradise"
+  },
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [ "xox.labvorty.weaversparadise.WeaversParadise" ],
+    "client": [ "xox.labvorty.weaversparadise.client.WeaversParadiseFabricClient" ]
+  },
+  "mixins": [ "weaversparadise.mixins.json" ],
+  "depends": {
+    "fabricloader": ">=0.16.9",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*",
+    "trinkets": ">=3.10.0",
+    "patchouli": "*"
+  }
+}

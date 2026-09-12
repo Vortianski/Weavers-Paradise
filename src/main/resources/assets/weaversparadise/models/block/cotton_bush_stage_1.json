@@ -1,0 +1,7 @@
+{
+  "parent": "weaversparadise:block/cotton_bush",
+  "textures": {
+    "cross": "weaversparadise:block/cotton_plant_1"
+  },
+  "render_type": "cutout"
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:gold_ingot"
+  },
+  "result": {
+    "id": "weaversparadise:heart",
+    "count": 1,
+    "components": {
+      "minecraft:custom_data": {
+        "metalType": "minecraft:gold_ingot",
+        "color": -1,
+        "damage": 25
+      }
+    }
+  }
+}

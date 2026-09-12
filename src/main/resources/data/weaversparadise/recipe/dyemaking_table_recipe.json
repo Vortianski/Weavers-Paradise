@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "ccc"
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:bowl"
+    },
+    "b": {
+      "item": "weaversparadise:mortar_and_pestle"
+    },
+    "c": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:dyemaking_block",
+    "count": 1
+  }
+}

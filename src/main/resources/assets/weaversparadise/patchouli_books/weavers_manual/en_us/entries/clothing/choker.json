@@ -1,0 +1,28 @@
+{
+  "name": "Choker",
+  "icon": "weaversparadise:choker",
+  "category": "weaversparadise:clothing_items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Curio slot: Necklace$(br)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Enchantments",
+      "text": "$(br)$(#FF5555)$(bold)> Vanishing Curse$()$(br)$(#FF5555)$(bold)> Binding Curse$()$(br)$(#FF55FF)$(bold)> Unbreaking I-V$()$(br)$(#FF55FF)$(bold)> Mending$()$(br)$(#FF55FF)$(bold)> Breathing Exercise I-III - adds up to +50% additional oxygen while underwater$()"
+    },
+    {
+      "type": "weaversparadise:double_sided_clothing_list",
+      "name": "Choker",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:choker\", Count:1b}}",
+      "scale": 2,
+      "offset": -0.5
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:choker_recipe",
+      "text": "Item for this recipe is obtained by putting leather into a Stonecutter"
+    }
+  ]
+}

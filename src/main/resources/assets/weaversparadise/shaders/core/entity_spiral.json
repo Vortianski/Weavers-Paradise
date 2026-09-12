@@ -1,0 +1,33 @@
+{
+  "vertex": "weaversparadise:entity_spiral",
+  "fragment": "weaversparadise:entity_spiral",
+  "attributes": [
+    "Position",
+    "Color",
+    "UV0",
+    "UV1",
+    "UV2",
+    "Normal"
+  ],
+  "samplers": [
+    { "name": "Sampler0" },
+    { "name": "Sampler2" }
+  ],
+  "uniforms": [
+    { "name": "ModelViewMat", "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
+    { "name": "ProjMat", "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
+    { "name": "ColorModulator", "type": "float", "count": 4, "values": [ 1.0, 1.0, 1.0, 1.0 ] },
+    { "name": "FogStart", "type": "float", "count": 1, "values": [ 0.0 ] },
+    { "name": "FogEnd", "type": "float", "count": 1, "values": [ 1.0 ] },
+    { "name": "FogColor", "type": "float", "count": 4, "values": [ 0.0, 0.0, 0.0, 0.0 ] },
+    { "name": "FogShape", "type": "int", "count": 1, "values": [ 0 ] },
+    { "name": "GameTime", "type": "float", "count": 1, "values": [ 0.0 ] },
+    { "name": "ScreenSize", "type": "float", "count": 2, "values": [ 1920.0, 1080.0 ] },
+    { "name": "SpiralSpeed", "type": "float", "count": 1, "values": [ 1000.0 ] },
+    { "name": "SpiralScale", "type": "float", "count": 1, "values": [ 24.0 ] },
+    { "name": "SpiralRotation", "type": "float", "count": 1, "values": [ 0.0 ] },
+    { "name": "SpiralIntensity", "type": "float", "count": 1, "values": [ 1.0 ] },
+    { "name": "SpiralDarkColor", "type": "float", "count": 3, "values": [ 0.0, 0.0, 0.0 ] },
+    { "name": "SpiralBrightColor", "type": "float", "count": 3, "values": [ 0.0, 0.0, 0.0 ] }
+  ]
+}

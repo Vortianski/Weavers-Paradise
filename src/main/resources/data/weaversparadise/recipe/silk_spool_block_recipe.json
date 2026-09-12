@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    { "item": "weaversparadise:silk_spool" },
+    { "item": "weaversparadise:silk_spool" },
+    { "item": "weaversparadise:silk_spool" },
+    { "item": "weaversparadise:silk_spool" },
+    { "item": "weaversparadise:silk_spool" },
+    { "item": "weaversparadise:silk_spool" },
+    { "item": "weaversparadise:silk_spool" },
+    { "item": "weaversparadise:silk_spool" },
+    { "item": "weaversparadise:silk_spool" }
+  ],
+  "result": { "id": "weaversparadise:silk_spool_block", "count": 1 }
+}

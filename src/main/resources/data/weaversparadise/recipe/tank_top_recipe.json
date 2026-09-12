@@ -1,0 +1,22 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    "abc"
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:weavers_shears"
+    },
+    "b": {
+      "item": "weaversparadise:silk_upperwear_base"
+    },
+    "c": {
+      "item": "weaversparadise:needle_with_thread"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:tank_top",
+    "count": 1
+  }
+}

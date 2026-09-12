@@ -1,0 +1,19 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    "aba"
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:wool_sleeve_long"
+    },
+    "b": {
+      "item": "weaversparadise:wool_upperwear_base"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:sweater_wool",
+    "count": 1
+  }
+}

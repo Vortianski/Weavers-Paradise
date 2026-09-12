@@ -1,0 +1,76 @@
+{
+  "name": "Косметическая броня",
+  "icon": "weaversparadise:armor_lootbox",
+  "category": "weaversparadise:interesting_stuff",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "В некоторых сундуках в мире можно найти лутбокс с бронёй. Из него можно получить косметический куриос. Наденьте его в слот куриосов, и он изменит внешний вид любой надетой брони, не влияя на её характеристики."
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Astolfo",
+      "entity": "minecraft:armor_stand{ShowArms:1b,ArmorItems:[{id:\"minecraft:diamond_boots\",Count:1b},{id:\"minecraft:diamond_leggings\",Count:1b},{id:\"minecraft:diamond_chestplate\",Count:1b},{id:\"minecraft:diamond_helmet\",Count:1b}],\"trinkets:trinkets\":{\"chest\":{\"armor_cosmetics\":{\"Items\":[{\"id\":\"weaversparadise:astolfo_cosmetics\",\"count\":1}]}}}}"
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Bridget",
+      "entity": "minecraft:armor_stand{ShowArms:1b,ArmorItems:[{id:\"minecraft:diamond_boots\",Count:1b},{id:\"minecraft:diamond_leggings\",Count:1b},{id:\"minecraft:diamond_chestplate\",Count:1b},{id:\"minecraft:diamond_helmet\",Count:1b}],\"trinkets:trinkets\":{\"chest\":{\"armor_cosmetics\":{\"Items\":[{\"id\":\"weaversparadise:bridget_cosmetics\",\"count\":1}]}}}}"
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Felix",
+      "entity": "minecraft:armor_stand{ShowArms:1b,ArmorItems:[{id:\"minecraft:diamond_boots\",Count:1b},{id:\"minecraft:diamond_leggings\",Count:1b},{id:\"minecraft:diamond_chestplate\",Count:1b},{id:\"minecraft:diamond_helmet\",Count:1b}],\"trinkets:trinkets\":{\"chest\":{\"armor_cosmetics\":{\"Items\":[{\"id\":\"weaversparadise:felix_cosmetics\",\"count\":1}]}}}}"
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Griffith",
+      "entity": "minecraft:armor_stand{ShowArms:1b,ArmorItems:[{id:\"minecraft:diamond_boots\",Count:1b},{id:\"minecraft:diamond_leggings\",Count:1b},{id:\"minecraft:diamond_chestplate\",Count:1b},{id:\"minecraft:diamond_helmet\",Count:1b}],\"trinkets:trinkets\":{\"chest\":{\"armor_cosmetics\":{\"Items\":[{\"id\":\"weaversparadise:griffith_cosmetics\",\"count\":1}]}}}}"
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Niko",
+      "entity": "minecraft:armor_stand{ShowArms:1b,ArmorItems:[{id:\"minecraft:diamond_boots\",Count:1b},{id:\"minecraft:diamond_leggings\",Count:1b},{id:\"minecraft:diamond_chestplate\",Count:1b},{id:\"minecraft:diamond_helmet\",Count:1b}],\"trinkets:trinkets\":{\"chest\":{\"armor_cosmetics\":{\"Items\":[{\"id\":\"weaversparadise:niko_cosmetics\",\"count\":1}]}}}}"
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Gabriel",
+      "entity": "minecraft:armor_stand{ShowArms:1b,ArmorItems:[{id:\"minecraft:diamond_boots\",Count:1b},{id:\"minecraft:diamond_leggings\",Count:1b},{id:\"minecraft:diamond_chestplate\",Count:1b},{id:\"minecraft:diamond_helmet\",Count:1b}],\"trinkets:trinkets\":{\"chest\":{\"armor_cosmetics\":{\"Items\":[{\"id\":\"weaversparadise:gabriel_cosmetics\",\"count\":1}]}}}}"
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Giselle",
+      "entity": "minecraft:armor_stand{ShowArms:1b,ArmorItems:[{id:\"minecraft:diamond_boots\",Count:1b},{id:\"minecraft:diamond_leggings\",Count:1b},{id:\"minecraft:diamond_chestplate\",Count:1b},{id:\"minecraft:diamond_helmet\",Count:1b}],\"trinkets:trinkets\":{\"chest\":{\"armor_cosmetics\":{\"Items\":[{\"id\":\"weaversparadise:giselle_cosmetics\",\"count\":1}]}}}}"
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Mikkela",
+      "entity": "minecraft:armor_stand{ShowArms:1b,ArmorItems:[{id:\"minecraft:diamond_boots\",Count:1b},{id:\"minecraft:diamond_leggings\",Count:1b},{id:\"minecraft:diamond_chestplate\",Count:1b},{id:\"minecraft:diamond_helmet\",Count:1b}],\"trinkets:trinkets\":{\"chest\":{\"armor_cosmetics\":{\"Items\":[{\"id\":\"weaversparadise:mikkela_cosmetics\",\"count\":1}]}}}}"
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Expie",
+      "entity": "minecraft:armor_stand{ShowArms:1b,ArmorItems:[{id:\"minecraft:diamond_boots\",Count:1b},{id:\"minecraft:diamond_leggings\",Count:1b},{id:\"minecraft:diamond_chestplate\",Count:1b},{id:\"minecraft:diamond_helmet\",Count:1b}],\"trinkets:trinkets\":{\"chest\":{\"armor_cosmetics\":{\"Items\":[{\"id\":\"weaversparadise:expie_cosmetics\",\"count\":1}]}}}}"
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Ralsei",
+      "entity": "minecraft:armor_stand{ShowArms:1b,ArmorItems:[{id:\"minecraft:diamond_boots\",Count:1b},{id:\"minecraft:diamond_leggings\",Count:1b},{id:\"minecraft:diamond_chestplate\",Count:1b},{id:\"minecraft:diamond_helmet\",Count:1b}],\"trinkets:trinkets\":{\"chest\":{\"armor_cosmetics\":{\"Items\":[{\"id\":\"weaversparadise:ralsei_cosmetics\",\"count\":1}]}}}}"
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Minos Prime",
+      "entity": "minecraft:armor_stand{ShowArms:1b,ArmorItems:[{id:\"minecraft:diamond_boots\",Count:1b},{id:\"minecraft:diamond_leggings\",Count:1b},{id:\"minecraft:diamond_chestplate\",Count:1b},{id:\"minecraft:diamond_helmet\",Count:1b}],\"trinkets:trinkets\":{\"chest\":{\"armor_cosmetics\":{\"Items\":[{\"id\":\"weaversparadise:minos_prime_cosmetics\",\"count\":1}]}}}}"
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Gaster",
+      "entity": "minecraft:armor_stand{ShowArms:1b,ArmorItems:[{id:\"minecraft:diamond_boots\",Count:1b},{id:\"minecraft:diamond_leggings\",Count:1b},{id:\"minecraft:diamond_chestplate\",Count:1b},{id:\"minecraft:diamond_helmet\",Count:1b}],\"trinkets:trinkets\":{\"chest\":{\"armor_cosmetics\":{\"Items\":[{\"id\":\"weaversparadise:gaster_cosmetics\",\"count\":1}]}}}}"
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Jaya Utomo",
+      "entity": "minecraft:armor_stand{ShowArms:1b,ArmorItems:[{id:\"minecraft:diamond_boots\",Count:1b},{id:\"minecraft:diamond_leggings\",Count:1b},{id:\"minecraft:diamond_chestplate\",Count:1b},{id:\"minecraft:diamond_helmet\",Count:1b}],\"trinkets:trinkets\":{\"chest\":{\"armor_cosmetics\":{\"Items\":[{\"id\":\"weaversparadise:jaya_utomo_cosmetics\",\"count\":1}]}}}}"
+    }
+  ]
+}

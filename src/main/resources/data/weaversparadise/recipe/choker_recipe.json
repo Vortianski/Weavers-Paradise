@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " a ",
+    "a a",
+    " a "
+  ],
+  "key": {
+    "a": {
+      "item": "weaversparadise:leather_strips"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:choker",
+    "count": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "rotation=0": { "model": "minecraft:block/stone" },
+    "rotation=1": { "model": "minecraft:block/stone" },
+    "rotation=2": { "model": "minecraft:block/stone" },
+    "rotation=3": { "model": "minecraft:block/stone" },
+    "rotation=4": { "model": "minecraft:block/stone" },
+    "rotation=5": { "model": "minecraft:block/stone" },
+    "rotation=6": { "model": "minecraft:block/stone" },
+    "rotation=7": { "model": "minecraft:block/stone" },
+    "rotation=8": { "model": "minecraft:block/stone" },
+    "rotation=9": { "model": "minecraft:block/stone" },
+    "rotation=10": { "model": "minecraft:block/stone" },
+    "rotation=11": { "model": "minecraft:block/stone" },
+    "rotation=12": { "model": "minecraft:block/stone" },
+    "rotation=13": { "model": "minecraft:block/stone" },
+    "rotation=14": { "model": "minecraft:block/stone" },
+    "rotation=15": { "model": "minecraft:block/stone" }
+  }
+}

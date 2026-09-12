@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "a a",
+    "b b"
+  ],
+  "key": {
+    "a": {
+      "tag": "minecraft:wool"
+    },
+    "b": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:leather_gloves",
+    "count": 1
+  }
+}

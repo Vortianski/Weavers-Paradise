@@ -1,0 +1,12 @@
+{
+  "type": "weaversparadise:quality_shapeless_crafting",
+  "category": "misc",
+  "ingredients": [
+    { "item": "weaversparadise:t_shirt" },
+    { "item": "weaversparadise:weavers_shears" }
+  ],
+  "result": {
+    "id": "weaversparadise:cotton_cloth",
+    "count": 9
+  }
+}

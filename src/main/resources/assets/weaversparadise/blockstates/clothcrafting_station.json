@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "weaversparadise:block/clothcrafting_station"
+    },
+    "facing=east": {
+      "model": "weaversparadise:block/clothcrafting_station",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "weaversparadise:block/clothcrafting_station",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "weaversparadise:block/clothcrafting_station",
+      "y": 270
+    }
+  }
+}

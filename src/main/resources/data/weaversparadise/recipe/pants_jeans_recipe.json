@@ -1,0 +1,16 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    "aa"
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:jeans_pant_leg"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:pants_jeans",
+    "count": 1
+  }
+}

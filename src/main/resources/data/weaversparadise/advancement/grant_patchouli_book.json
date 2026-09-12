@@ -1,0 +1,12 @@
+{
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "weaversparadise:patchouli_book_on_join"
+    ]
+  }
+}

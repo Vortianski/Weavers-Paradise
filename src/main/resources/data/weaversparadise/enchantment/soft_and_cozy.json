@@ -1,0 +1,28 @@
+{
+  "description": {
+    "translate": "enchantment.weaversparadise.soft_and_cozy"
+  },
+  "supported_items": [
+    "weaversparadise:pants_cotton",
+    "weaversparadise:shirt_cotton",
+    "weaversparadise:thigh_highs_cotton"
+  ],
+  "primary_items": [
+    "weaversparadise:pants_cotton",
+    "weaversparadise:shirt_cotton",
+    "weaversparadise:thigh_highs_cotton"
+  ],
+  "weight": 8,
+  "max_level": 5,
+  "min_cost": {
+    "base": 4,
+    "per_level_above_first": 8
+  },
+  "max_cost": {
+    "base": 14,
+    "per_level_above_first": 8
+  },
+  "slots": [],
+  "anvil_cost": 2,
+  "effects": {}
+}

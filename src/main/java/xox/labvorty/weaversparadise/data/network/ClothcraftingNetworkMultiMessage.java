@@ -1,0 +1,156 @@
+package xox.labvorty.weaversparadise.data.network;
+
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import xox.labvorty.weaversparadise.WeaversParadise;
+import xox.labvorty.weaversparadise.blocks.entities.ClothcraftingStationBlockEntity;
+import xox.labvorty.weaversparadise.data.recipes.ClothcraftingRecipeInput;
+import xox.labvorty.weaversparadise.gui.screen.ClothcraftingScreen;
+import xox.labvorty.weaversparadise.init.WeaversParadiseRecipes;
+import xox.labvorty.weaversparadise.net.WPNetwork;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+public record ClothcraftingNetworkMultiMessage(int buttonID, int x, int y, int z, int gameTime, int gameScore, boolean isGameOn, List<ItemStack> items, ItemStack clothType) implements CustomPacketPayload {
+    public static final CustomPacketPayload.Type<ClothcraftingNetworkMultiMessage> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(WeaversParadise.MODID, "clothcrafting_network_message"));
+    public static StreamCodec<RegistryFriendlyByteBuf, List<ItemStack>> listCodec = ItemStack.STREAM_CODEC.apply(ByteBufCodecs.list());
+    public static final StreamCodec<RegistryFriendlyByteBuf, ClothcraftingNetworkMultiMessage> STREAM_CODEC = StreamCodec.of((RegistryFriendlyByteBuf buffer, ClothcraftingNetworkMultiMessage message) -> {
+        buffer.writeInt(message.buttonID);
+        buffer.writeInt(message.x);
+        buffer.writeInt(message.y);
+        buffer.writeInt(message.z);
+        buffer.writeInt(message.gameTime);
+        buffer.writeInt(message.gameScore);
+        buffer.writeBoolean(message.isGameOn);
+        listCodec.encode(buffer, message.items);
+        if (!message.clothType.isEmpty()) {
+            ItemStack.STREAM_CODEC.encode(buffer, message.clothType);
+        } else {
+            ItemStack.STREAM_CODEC.encode(buffer, new ItemStack(Items.STONE, 1));
+        }
+    }, (RegistryFriendlyByteBuf buffer) -> new ClothcraftingNetworkMultiMessage(buffer.readInt(), buffer.readInt(), buffer.readInt(), buffer.readInt(), buffer.readInt(), buffer.readInt(), buffer.readBoolean(), listCodec.decode(buffer), ItemStack.STREAM_CODEC.decode(buffer)));
+    @Override
+    public CustomPacketPayload.Type<ClothcraftingNetworkMultiMessage> type() {
+        return TYPE;
+    }
+
+    public static void handleData(final ClothcraftingNetworkMultiMessage message, final ServerPlayNetworking.Context context) {
+        Player player = context.player();
+        int buttonID = message.buttonID;
+        int x = message.x;
+        int y = message.y;
+        int z = message.z;
+        int gameTime = message.gameTime;
+        int gameScore = message.gameScore;
+        boolean isGameOn = message.isGameOn;
+        ItemStack clothType = message.clothType;
+
+        List<ItemStack> stackList = message.items;
+        BlockPos blockPos = BlockPos.containing(x, y, z);
+        BlockEntity blockEntity = player.level().getBlockEntity(blockPos);
+
+        if (blockEntity instanceof ClothcraftingStationBlockEntity clothEntity) {
+            if (player instanceof ServerPlayer serverPlayer) {
+                List<ItemStack> filteredItems = clothEntity.getItemsList().stream()
+                        .filter(item -> !item.isEmpty())
+                        .collect(Collectors.toList());
+
+                if (buttonID == 0) {
+                    WPNetwork.sendToPlayer(
+                            serverPlayer,
+                            new ClothcraftingNetworkMultiMessage(
+                                    0,
+                                    x,
+                                    y,
+                                    z,
+                                    clothEntity.getGameTime(),
+                                    clothEntity.getGameScore(),
+                                    clothEntity.getGameOn(),
+                                    filteredItems,
+                                    clothEntity.getClothType()
+                            )
+                    );
+                }
+
+                if (buttonID == 1) {
+                    clothEntity.setGameOn(isGameOn);
+                    clothEntity.setGameScore(gameScore);
+                    clothEntity.setGameTime(gameTime);
+                    clothEntity.setItems(filteredItems);
+                    clothEntity.setClothType(clothType);
+                }
+
+                if (buttonID == 2) {
+
+                }
+
+                if (buttonID == 3) {
+                    for (ItemStack itemStack : filteredItems) {
+                        player.addItem(itemStack);
+                    }
+                    filteredItems.clear();
+                    clothEntity.setItems(filteredItems);
+                }
+
+                if (buttonID == 4) {
+                    ItemStack stack = clothEntity.getItem(0);
+                    int cost = player.level().getRecipeManager()
+                            .getRecipeFor(
+                                    WeaversParadiseRecipes.CLOTHCRAFTING_TYPE,
+                                    new ClothcraftingRecipeInput(stack.copy()),
+                                    player.level()
+                            )
+                            .map(h -> h.value().getSpoolCost())
+                            .orElse(6);
+
+                    if (!stack.isEmpty()) {
+                        clothEntity.setClothType(stack.copy());
+                    }
+
+                    int duration = player.level().getRecipeManager()
+                            .getRecipeFor(
+                                    WeaversParadiseRecipes.CLOTHCRAFTING_TYPE,
+                                    new ClothcraftingRecipeInput(stack.copy()),
+                                    player.level()
+                            )
+                            .map(h -> h.value().getGameDuration())
+                            .orElse(900);
+
+                    stack.shrink(cost);
+                    clothEntity.setItem(0, stack);
+
+                    clothEntity.setGameOn(true);
+                    clothEntity.setGameScore(0);
+                    clothEntity.setGameTime(duration);
+                }
+
+                if (buttonID == 5) {
+                    ItemStack stack = clothEntity.getItem(0);
+                    int cost = player.level().getRecipeManager()
+                            .getRecipeFor(
+                                    WeaversParadiseRecipes.CLOTHCRAFTING_TYPE,
+                                    new ClothcraftingRecipeInput(stack),
+                                    player.level()
+                            )
+                            .map(h -> h.value().getSpoolCost())
+                            .orElse(6);
+                    stack.shrink(cost);
+                    clothEntity.setItem(0, stack);
+                }
+            }
+        }
+    }
+
+    /** Клиентский приём (S2C): вызывается из WeaversParadiseFabricClient через ClientPlayNetworking. */
+}

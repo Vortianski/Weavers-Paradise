@@ -1,0 +1,223 @@
+package xox.labvorty.weaversparadise.blocks.entities;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
+import xox.labvorty.weaversparadise.gui.menu.ClothcraftingMenu;
+import xox.labvorty.weaversparadise.init.WeaversParadiseBlockEntities;
+
+import org.jetbrains.annotations.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
+
+public class ClothcraftingStationBlockEntity extends RandomizableContainerBlockEntity implements WorldlyContainer {
+    private NonNullList<ItemStack> stacks = NonNullList.withSize(1, ItemStack.EMPTY);
+    private int gameTime = 0;
+    private int gameScore = 0;
+    private boolean isGameOn = false;
+    private List<ItemStack> items = new ArrayList<>();
+    private ItemStack clothType = new ItemStack(Items.STONE, 1);
+
+    public ClothcraftingStationBlockEntity(BlockPos position, BlockState state) {
+        super(WeaversParadiseBlockEntities.CLOTHCRAFTING_STATION_BE, position, state);
+    }
+
+    @Override
+    public void loadAdditional(@NotNull CompoundTag compound, HolderLookup.@NotNull Provider lookupProvider) {
+        super.loadAdditional(compound, lookupProvider);
+        if (!this.tryLoadLootTable(compound))
+            this.stacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+        ContainerHelper.loadAllItems(compound, this.stacks, lookupProvider);
+
+        List<ItemStack> itemStacks = new ArrayList<>();
+        int amount = compound.getInt("amountOfItems");
+        for (int i = 0; i < amount; i++) {
+            Tag tag = compound.get("item" + i);
+            if (tag instanceof CompoundTag compoundTag) {
+                ItemStack.parse(lookupProvider, compoundTag).ifPresentOrElse(
+                        itemStacks::add,
+                        () -> itemStacks.add(ItemStack.EMPTY)
+                );
+            } else {
+                itemStacks.add(ItemStack.EMPTY);
+            }
+        }
+        this.gameTime = compound.getInt("gameTime");
+        this.gameScore = compound.getInt("gameScore");
+        this.isGameOn = compound.getBoolean("isGameOn");
+
+        if (compound.contains("clothType")) {
+            this.clothType = ItemStack.parseOptional(lookupProvider, compound.getCompound("clothType"));
+        } else {
+            this.clothType = new ItemStack(Items.STONE, 1);
+        }
+
+        this.items = itemStacks;
+    }
+
+    @Override
+    public void saveAdditional(@NotNull CompoundTag compound, HolderLookup.@NotNull Provider lookupProvider) {
+        super.saveAdditional(compound, lookupProvider);
+        if (!this.trySaveLootTable(compound)) {
+            ContainerHelper.saveAllItems(compound, this.stacks, lookupProvider);
+        }
+        int amount = 0;
+        if (items != null) {
+            for (ItemStack item : items) {
+                if (!item.isEmpty()) {
+                    CompoundTag tag = new CompoundTag();
+                    item.save(lookupProvider, tag);
+                    compound.put("item" + amount, tag);
+                    amount += 1;
+                }
+            }
+        }
+        compound.putInt("amountOfItems", amount);
+        compound.putInt("gameTime", gameTime);
+        compound.putInt("gameScore", gameScore);
+        compound.putBoolean("isGameOn", isGameOn);
+
+        CompoundTag tag = new CompoundTag();
+        if (clothType != null && !clothType.isEmpty()) {
+            clothType.save(lookupProvider, tag);
+
+        } else {
+            new ItemStack(Items.STONE, 1).save(lookupProvider, tag);
+
+        }
+        compound.put("clothType", tag);
+    }
+
+    public void setGameTime(int time) {
+        gameTime = time;
+        setChanged();
+    }
+
+    public void setGameScore(int score) {
+        gameScore = score;
+        setChanged();
+    }
+
+    public void setGameOn(boolean ison) {
+        isGameOn = ison;
+        setChanged();
+    }
+
+    public void setItems(List<ItemStack> item) {
+        items = item;
+        setChanged();
+    }
+
+    public void setClothType(ItemStack type) {
+        clothType = type;
+        setChanged();
+    }
+
+    public int getGameTime() {
+        return gameTime;
+    }
+
+    public int getGameScore() {
+        return gameScore;
+    }
+
+    public boolean getGameOn() {
+        return isGameOn;
+    }
+
+    public List<ItemStack> getItemsList() {
+        return items;
+    }
+
+    public ItemStack getClothType() {
+        return clothType;
+    }
+
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public @NotNull CompoundTag getUpdateTag(HolderLookup.@NotNull Provider lookupProvider) {
+        return this.saveWithFullMetadata(lookupProvider);
+    }
+
+    @Override
+    public int getContainerSize() {
+        return stacks.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        for (ItemStack itemstack : this.stacks)
+            if (!itemstack.isEmpty())
+                return false;
+        return true;
+    }
+
+    @Override
+    public @NotNull Component getDefaultName() {
+        return Component.literal("clothcrafting_station");
+    }
+
+    @Override
+    public int getMaxStackSize() {
+        return 64;
+    }
+
+    @Override
+    public @NotNull AbstractContainerMenu createMenu(int id, @NotNull Inventory inventory) {
+        return new ClothcraftingMenu(id, inventory, this.worldPosition);
+    }
+
+    @Override
+    public @NotNull Component getDisplayName() {
+        return Component.literal("Clothcrafting Station");
+    }
+
+    @Override
+    protected @NotNull NonNullList<ItemStack> getItems() {
+        return this.stacks;
+    }
+
+    @Override
+    protected void setItems(@NotNull NonNullList<ItemStack> stacks) {
+        this.stacks = stacks;
+    }
+
+    @Override
+    public boolean canPlaceItem(int index, @NotNull ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public int @NotNull [] getSlotsForFace(@NotNull Direction side) {
+        return IntStream.range(0, this.getContainerSize()).toArray();
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction direction) {
+        return this.canPlaceItem(index, stack);
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @NotNull Direction direction) {
+        return index != 0;
+    }
+}

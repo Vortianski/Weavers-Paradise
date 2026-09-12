@@ -1,0 +1,21 @@
+{
+  "type": "weaversparadise:clothcrafting",
+  "ingredient": { "item": "weaversparadise:silk_spool" },
+  "spool_cost": 6,
+  "spool_return": { "id": "weaversparadise:empty_spool" },
+  "spool_return_count": 6,
+  "game_duration": 900,
+  "tiers": [
+    { "min_score": 0,  "max_score": 1,   "result": { "id": "weaversparadise:silk_cloth", "components": { "minecraft:custom_data": { "quality": 0  } } }, "count": 1 },
+    { "min_score": 2,  "max_score": 3,   "result": { "id": "weaversparadise:silk_cloth", "components": { "minecraft:custom_data": { "quality": 1  } } }, "count": 1 },
+    { "min_score": 4,  "max_score": 5,   "result": { "id": "weaversparadise:silk_cloth", "components": { "minecraft:custom_data": { "quality": 2  } } }, "count": 1 },
+    { "min_score": 6,  "max_score": 7,   "result": { "id": "weaversparadise:silk_cloth", "components": { "minecraft:custom_data": { "quality": 3  } } }, "count": 1 },
+    { "min_score": 8,  "max_score": 9,   "result": { "id": "weaversparadise:silk_cloth", "components": { "minecraft:custom_data": { "quality": 4  } } }, "count": 1 },
+    { "min_score": 10, "max_score": 11,  "result": { "id": "weaversparadise:silk_cloth", "components": { "minecraft:custom_data": { "quality": 5  } } }, "count": 1 },
+    { "min_score": 12, "max_score": 13,  "result": { "id": "weaversparadise:silk_cloth", "components": { "minecraft:custom_data": { "quality": 6  } } }, "count": 1 },
+    { "min_score": 14, "max_score": 15,  "result": { "id": "weaversparadise:silk_cloth", "components": { "minecraft:custom_data": { "quality": 7  } } }, "count": 1 },
+    { "min_score": 16, "max_score": 17,  "result": { "id": "weaversparadise:silk_cloth", "components": { "minecraft:custom_data": { "quality": 8  } } }, "count": 1 },
+    { "min_score": 18, "max_score": 19,  "result": { "id": "weaversparadise:silk_cloth", "components": { "minecraft:custom_data": { "quality": 9  } } }, "count": 1 },
+    { "min_score": 20, "max_score": 999, "result": { "id": "weaversparadise:silk_cloth", "components": { "minecraft:custom_data": { "quality": 10 } } }, "count": 1 }
+  ]
+}

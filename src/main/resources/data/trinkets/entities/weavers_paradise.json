@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "entities": [
+    "minecraft:player",
+    "minecraft:armor_stand"
+  ],
+  "slots": [
+    "chest/cape",
+    "chest/necklace",
+    "chest/back",
+    "chest/choker",
+    "chest/upperwear",
+    "chest/armor_cosmetics",
+    "head/hat",
+    "head/face",
+    "hand/gloves",
+    "hand/glove",
+    "hand/ring",
+    "offhand/glove",
+    "offhand/ring",
+    "legs/legwear",
+    "legs/pants",
+    "legs/belt",
+    "feet/aglet",
+    "feet/shoes"
+  ]
+}

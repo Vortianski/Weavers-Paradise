@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "weaversparadise:base_stencil"
+  },
+  "result": {
+    "id": "weaversparadise:star_stencil",
+    "count": 1
+  }
+}

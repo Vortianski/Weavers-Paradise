@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "weaversparadise:mortar_and_pestle"
+    },
+    {
+      "item": "minecraft:bone"
+    }
+  ],
+  "result": {
+    "id": "weaversparadise:pure_dye",
+    "count": 1,
+    "components": {
+      "minecraft:custom_data": {
+        "red": 255,
+        "green": 255,
+        "blue": 185
+      }
+    }
+  }
+}

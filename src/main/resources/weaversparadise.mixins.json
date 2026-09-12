@@ -1,0 +1,40 @@
+{
+  "required": true,
+  "package": "xox.labvorty.weaversparadise.mixins",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "SculkBlockEntityMixin",
+    "EntityMixin",
+    "PlayerMixin",
+    "AbstractArrowMixin",
+    "ArmorStandMixin",
+    "WanderingTraderMixin",
+    "ShapedRecipeAccessor",
+    "HopperBlockEntityAccessor",
+    "ItemExtensionMixin",
+    "ItemStackMixin",
+    "RecipeRemainderMixin",
+    "client.CreativeModeTabMixin"
+  ],
+  "client": [
+    "client.FontMixin",
+    "client.PlayerRendererMixin",
+    "client.PlayerModelMixin",
+    "client.HumanModelMixin",
+    "client.ElytraLayerMixin",
+    "client.CapeLayerMixin",
+    "client.LivingRendererMixin",
+    "client.HumanoidArmorLayerMixin",
+    "client.GuiGraphicsMixin",
+    "client.CreativeModeInventoryScreenMixin",
+    "client.CreativeModeInventoryScreenAccessor",
+    "client.AbstractContainerScreenMixin",
+    "compat.ClientBookRegistryMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "minecraft:iron_ingot"
+  },
+  "result": {
+    "id": "weaversparadise:bell",
+    "count": 1,
+    "components": {
+      "minecraft:custom_data": {
+        "metalType": "minecraft:iron_ingot",
+        "color": -1,
+        "damage": 100
+      }
+    }
+  }
+}

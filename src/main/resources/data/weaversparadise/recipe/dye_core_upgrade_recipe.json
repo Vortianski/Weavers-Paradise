@@ -1,0 +1,16 @@
+{
+  "type": "weaversparadise:dye_core_upgrade",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "weaversparadise:dye_core"
+    },
+    {
+      "tag": "weaversparadise:dye_core_upgrade_ingredients"
+    }
+  ],
+  "result": {
+    "id": "weaversparadise:dye_core",
+    "count": 1
+  }
+}

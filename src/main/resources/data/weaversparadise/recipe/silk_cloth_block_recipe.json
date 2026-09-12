@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    { "item": "weaversparadise:silk_cloth" },
+    { "item": "weaversparadise:silk_cloth" },
+    { "item": "weaversparadise:silk_cloth" },
+    { "item": "weaversparadise:silk_cloth" },
+    { "item": "weaversparadise:silk_cloth" },
+    { "item": "weaversparadise:silk_cloth" },
+    { "item": "weaversparadise:silk_cloth" },
+    { "item": "weaversparadise:silk_cloth" },
+    { "item": "weaversparadise:silk_cloth" }
+  ],
+  "result": { "id": "weaversparadise:silk_cloth_block", "count": 1 }
+}

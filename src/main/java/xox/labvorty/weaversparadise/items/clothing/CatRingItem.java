@@ -1,0 +1,113 @@
+package xox.labvorty.weaversparadise.items.clothing;
+
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import org.jetbrains.annotations.NotNull;
+import dev.emi.trinkets.api.SlotReference;
+import dev.emi.trinkets.api.Trinket;
+import dev.emi.trinkets.api.TrinketsApi;
+import xox.labvorty.weaversparadise.items.clothing.defined.ChokerTrinketInterface;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@SuppressWarnings("deprecation")
+public class CatRingItem extends Item implements Trinket, ChokerTrinketInterface {
+    public CatRingItem() {
+        super(
+                new Properties()
+                        .stacksTo(1)
+                        .rarity(Rarity.COMMON)
+                        .durability(1)
+                        .component(DataComponents.CUSTOM_DATA, CustomData.of(new CompoundTag() {{
+                            putInt("color", 255 << 24 | 255 << 16 | 255 << 8 | 255);
+                            putString("metalType", "minecraft:iron_ingot");
+                            putInt("damage", 100);
+                        }}))
+        );
+        TrinketsApi.registerTrinket(this, this);
+    }
+
+    public int getMaxDamage(ItemStack stack) {
+        return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getInt("damage");
+    }
+
+    @Override
+    public boolean isValidRepairItem(@NotNull ItemStack itemStack, @NotNull ItemStack repairCandidate) {
+        CompoundTag compoundTag = itemStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+        Item item = BuiltInRegistries.ITEM.get(ResourceLocation.parse(compoundTag.getString("metalType")));
+        Item pushedCandidate = Items.BEDROCK;
+        if (item != Items.AIR && item != Items.STONE) {
+            pushedCandidate = item;
+        }
+
+        return repairCandidate.is(pushedCandidate);
+    }
+
+    public boolean supportsEnchantment(@NotNull ItemStack itemStack, Holder<Enchantment> enchantment) {
+        return enchantment.is(Enchantments.UNBREAKING) || enchantment.is(Enchantments.VANISHING_CURSE) || enchantment.is(Enchantments.MENDING) || enchantment.is(Enchantments.BINDING_CURSE);
+    }
+
+    public boolean isBookEnchantable(@NotNull ItemStack itemStack, @NotNull ItemStack book) {
+        return EnchantmentHelper.getEnchantmentsForCrafting(book).keySet().stream().anyMatch(holder -> holder.is(Enchantments.MENDING) || holder.is(Enchantments.UNBREAKING) || holder.is(Enchantments.VANISHING_CURSE) || holder.is(Enchantments.BINDING_CURSE));
+    }
+
+    @Override
+    public boolean canUnequip(ItemStack stack, SlotReference slotReference, LivingEntity entity) {
+        LivingEntity livingEntity = entity;
+        if (livingEntity instanceof Player player && player.isCreative()) {
+            return true;
+        }
+
+        return EnchantmentHelper.getEnchantmentsForCrafting(stack)
+                .keySet()
+                .stream()
+                .noneMatch(holder -> holder.is(Enchantments.BINDING_CURSE));
+    }
+
+    @Override
+    public int getEnchantmentValue() {
+        return 15;
+    }
+
+    @Override
+    public boolean isEnchantable(@NotNull ItemStack itemStack) {
+        return true;
+    }
+
+    // getAttributesTooltip removed (was from Curios); content moved to appendHoverText.
+    @Override
+    public void appendHoverText(@NotNull ItemStack itemStack, @NotNull TooltipContext tooltipContext, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
+        super.appendHoverText(itemStack, tooltipContext, tooltipComponents, tooltipFlag);
+
+        tooltipComponents.add(Component.translatable("curios.modifiers.choker_trinket").withStyle(style -> style.withColor(ChatFormatting.GOLD)));
+        tooltipComponents.add(Component.translatable("weaversparadise.tooltip.cat_ring").withStyle(style -> style.withColor(ChatFormatting.BLUE)));
+    }
+
+    @Override
+    public List<SoundEvent> getSounds() {
+        return List.of(
+                SoundEvents.CAT_PURR,
+                SoundEvents.CAT_PURREOW,
+                SoundEvents.CAT_AMBIENT
+        );
+    }
+}

@@ -1,0 +1,52 @@
+{
+  "name": "Плащи",
+  "icon": "weaversparadise:cotton_cape",
+  "category": "weaversparadise:clothing_items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Слот Curio: Плащ$(br)Заменяет плащ и элитру"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Зачарования",
+      "text": "$(br)$(#FF5555)$(bold)> Проклятие Утраты$()$(br)$(#FF5555)$(bold)> Проклятие Несъёмности$()$(br)$(#FF55FF)$(bold)> Прочность I-V$()$(br)$(#FF55FF)$(bold)> Починка$()"
+    },
+    {
+      "type": "weaversparadise:single_sided_clothing_list",
+      "name": "Хлопковый Плащ",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:cotton_cape\", Count:1b}}",
+      "scale": 2,
+      "offset": -0.35
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:cape_cotton_recipe",
+      "text": ""
+    },
+    {
+      "type": "weaversparadise:single_sided_clothing_list",
+      "name": "Шёлковый Плащ",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:silk_cape\", Count:1b}}",
+      "scale": 2,
+      "offset": -0.35
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:cape_silk_recipe",
+      "text": ""
+    },
+    {
+      "type": "weaversparadise:single_sided_clothing_list",
+      "name": "Шерстяной Плащ",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:wool_cape\", Count:1b}}",
+      "scale": 2,
+      "offset": -0.35
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:cape_wool_recipe",
+      "text": ""
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "required_mods": [
+    "weaversparadise"
+  ],
+  "type": "curio",
+  "item": {
+    "items": [
+      "weaversparadise:thigh_highs_wool",
+      "weaversparadise:hand_warmers_wool",
+      "weaversparadise:sweater_wool",
+      "weaversparadise:wool_vest",
+      "weaversparadise:pants_wool",
+      "weaversparadise:ushanka"
+    ]
+  },
+  "insulation": {
+    "heat": 0,
+    "cold": 1.5
+  },
+  "entity": {
+    "entities": ["*"]
+  },
+  "attributes": {},
+  "immune_temp_modifiers": {
+    "cold_sweat:water": 0.1
+  },
+  "hint": {
+    "key": "tooltip.hint.heat_or_cold_item"
+  }
+}

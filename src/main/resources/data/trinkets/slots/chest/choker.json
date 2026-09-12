@@ -1,0 +1,6 @@
+{
+  "amount": 1,
+  "icon": "trinkets:gui/slots/necklace",
+  "order": 120,
+  "validator_predicates": ["trinkets:tag"]
+}

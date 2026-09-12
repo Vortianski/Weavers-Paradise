@@ -1,0 +1,49 @@
+{
+  "name": "Мітенки",
+  "icon": "weaversparadise:hand_warmers_cotton",
+  "category": "weaversparadise:clothing_items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Слот Curio: Рукавички$(br)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Зачарування",
+      "text": "$(br)$(#FF5555)$(bold)> Прокляття зникнення$()$(br)$(#FF5555)$(bold)> Прокляття прив’язки$()$(br)$(#FF55FF)$(bold)> Незламність I-V$()$(br)$(#FF55FF)$(bold)> Лагодження$()$(br2)$(bold)Бавовна:$()$(br)$(#FF55FF)$(bold)> Вампіризм I-V - дозволяє зцілюватися під час ударів по істотах, до 33.3% завданої шкоди$(bold)$()$(br2)$(bold)Шовк:$()$(br)$(#FF55FF)$(bold)> Граційність I-V - до +10% швидкості добування під водою$()$(br2)$(bold)Вовна:$()$(br)$(#FF55FF)$(bold)Шумопоглинання - вимикає виявлення скалк-сенсорами під час ламання, використання або відкривання блоків.$()"
+    },
+    {
+      "type": "weaversparadise:double_sided_clothing_list",
+      "name": "Бавовняні мітенки",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:hand_warmers_cotton\", Count:1b}}",
+      "scale": 2,
+      "offset": -0.2
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:hand_warmers_cotton_recipe"
+    },
+    {
+      "type": "weaversparadise:double_sided_clothing_list",
+      "name": "Шовкові мітенки",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:hand_warmers_silk\", Count:1b}}",
+      "scale": 2,
+      "offset": -0.2
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:hand_warmers_silk_recipe"
+    },
+    {
+      "type": "weaversparadise:double_sided_clothing_list",
+      "name": "Вовняні мітенки",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:hand_warmers_wool\", Count:1b}}",
+      "scale": 2,
+      "offset": -0.2
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:hand_warmers_wool_recipe"
+    }
+  ]
+}
