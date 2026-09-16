@@ -11,10 +11,11 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingArmorItem;
+import xox.labvorty.weaversparadise.items.clothing.defined.Upperwear;
 
 import java.util.List;
 
-public class PonchoItem extends SingleSidedClothingArmorItem {
+public class PonchoItem extends SingleSidedClothingArmorItem implements Upperwear {
     public PonchoItem() {
         super(
                 new Properties()

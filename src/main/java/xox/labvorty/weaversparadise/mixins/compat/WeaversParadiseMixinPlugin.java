@@ -10,6 +10,7 @@ import java.util.Set;
 
 public class WeaversParadiseMixinPlugin implements IMixinConfigPlugin {
     private static final String PATCHOULI_MOD_ID = "patchouli";
+    private static final String WILDFIRE_MOD_ID = "wildfire_gender";
 
     @Override
     public void onLoad(String mixinPackage) {
@@ -24,6 +25,10 @@ public class WeaversParadiseMixinPlugin implements IMixinConfigPlugin {
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (mixinClassName.endsWith("ClientBookRegistryMixin")) {
             return isModLoaded(PATCHOULI_MOD_ID);
+        }
+
+        if (mixinClassName.endsWith("GenderLayerMixin")) {
+            return isModLoaded(WILDFIRE_MOD_ID);
         }
 
         return true;

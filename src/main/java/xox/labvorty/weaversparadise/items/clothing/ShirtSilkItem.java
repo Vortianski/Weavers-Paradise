@@ -25,10 +25,11 @@ import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.clothing.defined.ShirtInterface;
 import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingArmorItem;
+import xox.labvorty.weaversparadise.items.clothing.defined.Upperwear;
 
 import java.util.List;
 
-public class ShirtSilkItem extends SingleSidedClothingArmorItem implements ShirtInterface {
+public class ShirtSilkItem extends SingleSidedClothingArmorItem implements ShirtInterface, Upperwear {
     public ShirtSilkItem() {
         super(
                 new Item.Properties()

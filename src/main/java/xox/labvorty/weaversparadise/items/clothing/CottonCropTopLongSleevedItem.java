@@ -11,10 +11,11 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingArmorItem;
+import xox.labvorty.weaversparadise.items.clothing.defined.Upperwear;
 
 import java.util.List;
 
-public class CottonCropTopLongSleevedItem extends SingleSidedClothingArmorItem {
+public class CottonCropTopLongSleevedItem extends SingleSidedClothingArmorItem implements Upperwear {
     public CottonCropTopLongSleevedItem() {
         super(
                 new Properties()

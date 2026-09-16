@@ -21,7 +21,8 @@ public class CreativeModeTabProviders {
                 PlushieItem.createPlushie(Optional.of("Elifian"), Optional.empty()),
                 PlushieItem.createPlushie(Optional.of("_Alazi_"), Optional.empty()),
                 PlushieItem.createPlushie(Optional.of("IRON_carat"), Optional.empty()),
-                PlushieItem.createPlushie(Optional.of("FIT_FOX"), Optional.empty())
+                PlushieItem.createPlushie(Optional.of("FIT_FOX"), Optional.empty()),
+                PlushieItem.createPlushie(Optional.of("LynxSNT"), Optional.empty())
         );
     }
 

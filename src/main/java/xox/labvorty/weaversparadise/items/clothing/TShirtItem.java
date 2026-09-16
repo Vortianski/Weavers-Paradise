@@ -13,10 +13,11 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingArmorItem;
 import xox.labvorty.weaversparadise.items.clothing.defined.TopsInterface;
+import xox.labvorty.weaversparadise.items.clothing.defined.Upperwear;
 
 import java.util.List;
 
-public class TShirtItem extends SingleSidedClothingArmorItem implements TopsInterface {
+public class TShirtItem extends SingleSidedClothingArmorItem implements TopsInterface, Upperwear {
     public TShirtItem() {
         super(
                 new Item.Properties()

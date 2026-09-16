@@ -18,7 +18,8 @@
     "compat.ClientBookRegistryMixin",
     "client.LivingRendererMixin",
     "client.HumanoidArmorLayerMixin",
-    "client.GuiGraphicsMixin"
+    "client.GuiGraphicsMixin",
+    "compat.wildfires_female_gender_mod.GenderLayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

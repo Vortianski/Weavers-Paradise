@@ -62,6 +62,11 @@ repositories {
             includeGroup "com.github.rtyley"
         }
     }
+
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+    }
 }
 
 base {
@@ -165,6 +170,9 @@ dependencies {
 
     //Cosmetic Armor
     implementation("curse.maven:cosmetic-armor-reworked-237307:5610814")
+
+    //Wildfires Female Gender Mod
+    implementation("maven.modrinth:bcOsQHnC:kKffHCGl")
 
     //(Testing Only)
     runtimeOnly("curse.maven:immersive-armors-580681:8076920")
