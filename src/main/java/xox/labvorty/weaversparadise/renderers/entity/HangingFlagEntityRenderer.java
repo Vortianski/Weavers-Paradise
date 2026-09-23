@@ -33,7 +33,9 @@ public class HangingFlagEntityRenderer extends EntityRenderer<HangingFlagEntity>
             "nonbinary",
             "pansexual",
             "pride",
-            "trans"
+            "trans",
+            "transfeminine",
+            "transmasculine"
     );
     private static final int TEX_W = 32;
     private static final int TEX_H = 16;

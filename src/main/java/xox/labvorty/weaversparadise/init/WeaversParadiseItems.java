@@ -159,6 +159,8 @@ public class WeaversParadiseItems {
     public static final DeferredItem<Item> FLAG_PANSEXUAL = ITEMS.register("flag_pansexual", PansexualFlagItem::new);
     public static final DeferredItem<Item> FLAG_PRIDE = ITEMS.register("flag_pride", PrideFlagItem::new);
     public static final DeferredItem<Item> FLAG_TRANS = ITEMS.register("flag_trans", TransFlagItem::new);
+    public static final DeferredItem<Item> FLAG_TRANSFEMININE = ITEMS.register("flag_transfeminine", TransfeminineFlagItem::new);
+    public static final DeferredItem<Item> FLAG_TRANSMASCULINE = ITEMS.register("flag_transmasculine", TransmasculineFlagItem::new);
 
     //misc
     public static final DeferredItem<Item> PURE_DYE = ITEMS.register("pure_dye", PigmentItem::new);

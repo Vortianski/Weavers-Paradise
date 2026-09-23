@@ -41,6 +41,8 @@ public class WeaversUtilities {
             "pansexual",
             "pride",
             "trans",
+            "transfeminine",
+            "transmasculine",
             "redstone",
             "lamp",
             "sculk",

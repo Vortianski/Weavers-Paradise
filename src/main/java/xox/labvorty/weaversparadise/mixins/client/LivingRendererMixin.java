@@ -36,7 +36,8 @@ public class LivingRendererMixin<T extends LivingEntity> {
                     value = "INVOKE",
                     target = "Lnet/minecraft/client/renderer/MultiBufferSource;getBuffer(Lnet/minecraft/client/renderer/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;"
             ),
-            remap = false
+            remap = false,
+            require = 0
     )
     private VertexConsumer weaversparadise$redirectGetBuffer(MultiBufferSource buffer, RenderType renderType) {
         T entity = this.weaversparadise$currentEntity;

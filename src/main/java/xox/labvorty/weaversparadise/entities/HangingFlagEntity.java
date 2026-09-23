@@ -163,6 +163,10 @@ public class HangingFlagEntity extends HangingEntity {
                 this.spawnAtLocation(WeaversParadiseItems.FLAG_PRIDE);
             } else if (variant.equals("trans")) {
                 this.spawnAtLocation(WeaversParadiseItems.FLAG_TRANS);
+            } else if (variant.equals("transfeminine")) {
+                this.spawnAtLocation(WeaversParadiseItems.FLAG_TRANSFEMININE);
+            } else if (variant.equals("transmasculine")) {
+                this.spawnAtLocation(WeaversParadiseItems.FLAG_TRANSMASCULINE);
             } else {
                 this.spawnAtLocation(WeaversParadiseItems.FLAG_BASIC);
             }
@@ -232,6 +236,10 @@ public class HangingFlagEntity extends HangingEntity {
             return WeaversParadiseItems.FLAG_PRIDE.toStack();
         } else if (variant.equals("trans")) {
             return WeaversParadiseItems.FLAG_TRANS.toStack();
+        } else if (variant.equals("transfeminine")) {
+            return WeaversParadiseItems.FLAG_TRANSFEMININE.toStack();
+        } else if (variant.equals("transmasculine")) {
+            return WeaversParadiseItems.FLAG_TRANSMASCULINE.toStack();
         } else {
             return WeaversParadiseItems.FLAG_BASIC.toStack();
         }

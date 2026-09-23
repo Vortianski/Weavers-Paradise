@@ -1463,6 +1463,124 @@ public class BuiltInDyeTypes {
         );
 
         DyeTypeRegistry.registerDyeType(
+                "transfeminine",
+                new ItemDyeIcon(WeaversParadiseItems.FLAG_TRANSFEMININE.get()),
+                Component.translatable("weaversparadise.dye_text.transfeminine"),
+                (dyeData) -> {
+                    Minecraft minecraft = Minecraft.getInstance();
+                    int ticks = 0;
+                    if (minecraft.level != null) {
+                        ticks = (int)minecraft.level.getGameTime();
+                    }
+
+                    List<Integer> colors = List.of(
+                            (0x72DFFF),
+                            (0xFFE1ED),
+                            (0xFFB5D6),
+                            (0xFE8CBF),
+                            (0xFFB5D6),
+                            (0xFFE1ED),
+                            (0x72DFFF)
+                    );
+
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
+                },
+                (dyeDataColor) -> {
+                    if (dyeDataColor.layer() == 1) {
+                        Minecraft minecraft = Minecraft.getInstance();
+                        int ticks = 0;
+                        if (minecraft.level != null) {
+                            ticks = (int)minecraft.level.getGameTime();
+                        }
+
+                        List<Integer> colors = List.of(
+                                (0x72DFFF),
+                                (0xFFE1ED),
+                                (0xFFB5D6),
+                                (0xFE8CBF),
+                                (0xFFB5D6),
+                                (0xFFE1ED),
+                                (0x72DFFF)
+                        );
+
+                        return ComponentFormatter.getCycledColor(colors, ticks);
+                    }
+
+                    return -1;
+                },
+                (renderData) -> {
+                    ResourceLocation mask = ResourceLocation.fromNamespaceAndPath(
+                            "weaversparadise",
+                            "textures/clothing/mask/" + renderData.clothingType() + "/" + renderData.dyeType() + ".png"
+                    );
+
+                    return VortyLibRenderTypes.getEntityTranslucentMask(
+                            renderData.resourceLocation(),
+                            mask
+                    );
+                }
+        );
+
+        DyeTypeRegistry.registerDyeType(
+                "transmasculine",
+                new ItemDyeIcon(WeaversParadiseItems.FLAG_TRANSMASCULINE.get()),
+                Component.translatable("weaversparadise.dye_text.transmasculine"),
+                (dyeData) -> {
+                    Minecraft minecraft = Minecraft.getInstance();
+                    int ticks = 0;
+                    if (minecraft.level != null) {
+                        ticks = (int)minecraft.level.getGameTime();
+                    }
+
+                    List<Integer> colors = List.of(
+                            (0xFF8ABE),
+                            (0xCEF4FD),
+                            (0x9AEBFE),
+                            (0x74DFFF),
+                            (0x9AEBFE),
+                            (0xCEF4FD),
+                            (0xFF8ABE)
+                    );
+
+                    return ComponentFormatter.gradientText(dyeData.getComponent().getString(), colors, ticks);
+                },
+                (dyeDataColor) -> {
+                    if (dyeDataColor.layer() == 1) {
+                        Minecraft minecraft = Minecraft.getInstance();
+                        int ticks = 0;
+                        if (minecraft.level != null) {
+                            ticks = (int)minecraft.level.getGameTime();
+                        }
+
+                        List<Integer> colors = List.of(
+                                (0xFF8ABE),
+                                (0xCEF4FD),
+                                (0x9AEBFE),
+                                (0x74DFFF),
+                                (0x9AEBFE),
+                                (0xCEF4FD),
+                                (0xFF8ABE)
+                        );
+
+                        return ComponentFormatter.getCycledColor(colors, ticks);
+                    }
+
+                    return -1;
+                },
+                (renderData) -> {
+                    ResourceLocation mask = ResourceLocation.fromNamespaceAndPath(
+                            "weaversparadise",
+                            "textures/clothing/mask/" + renderData.clothingType() + "/" + renderData.dyeType() + ".png"
+                    );
+
+                    return VortyLibRenderTypes.getEntityTranslucentMask(
+                            renderData.resourceLocation(),
+                            mask
+                    );
+                }
+        );
+
+        DyeTypeRegistry.registerDyeType(
                 "polychromatic",
                 new ItemDyeIcon(WeaversParadiseItems.CHROMATIC_DUST.get()),
                 Component.translatable("weaversparadise.dye_text.polychromatic"),

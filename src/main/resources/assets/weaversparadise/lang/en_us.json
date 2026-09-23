@@ -145,6 +145,8 @@
   "item.weaversparadise.flag_pansexual": "Flag \"Pansexual\"",
   "item.weaversparadise.flag_pride": "Flag \"Pride\"",
   "item.weaversparadise.flag_trans": "Flag \"Transgender\"",
+  "item.weaversparadise.flag_transfeminine": "Flag \"Transfeminine\"",
+  "item.weaversparadise.flag_transmasculine": "Flag \"Transmasculine\"",
 
   "item.weaversparadise.astolfo_cosmetics": "\"Astolfo\" Cosplay",
   "item.weaversparadise.bridget_cosmetics": "\"Bridget\" Cosplay",
@@ -221,6 +223,8 @@
   "weaversparadise.dye_text.nonbinary": "Type:NON-BINARY",
   "weaversparadise.dye_text.pansexual": "Type:PANSEXUAL",
   "weaversparadise.dye_text.trans": "Type:TRANSGENDER",
+  "weaversparadise.dye_text.transfeminine": "Type:TRANSFEMININE",
+  "weaversparadise.dye_text.transmasculine": "Type:TRANSMASCULINE",
   "weaversparadise.dye_text.polychromatic": "Type:Polychromatic",
   "weaversparadise.dye_text.invisible": "Type: Invisible",
   "weaversparadise.dye_text.static": "Type:Static",

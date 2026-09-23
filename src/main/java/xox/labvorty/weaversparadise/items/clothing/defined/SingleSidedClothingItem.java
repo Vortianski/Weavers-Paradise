@@ -250,7 +250,10 @@ public abstract class SingleSidedClothingItem extends Item implements ICurioItem
 
     @Override
     public boolean isBookEnchantable(@NotNull ItemStack itemStack, @NotNull ItemStack bookStack) {
-        return EnchantmentHelper.getEnchantmentsForCrafting(bookStack).keySet().stream().anyMatch(holder -> getSupportedEnchantments().contains(holder.getKey()));
+        return EnchantmentHelper.getEnchantmentsForCrafting(bookStack).keySet().stream()
+                .map(Holder::getKey)
+                .filter(Objects::nonNull)
+                .anyMatch(getSupportedEnchantments()::contains);
     }
 
     @Override

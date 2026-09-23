@@ -33,7 +33,14 @@ public class TickEvents {
         Entity entity = event.getEntity();
 
         if (entity instanceof LivingEntity livingEntity && !livingEntity.level().isClientSide) {
-            livingEntity.setData(WeaversParadiseAttachmentTypes.CHROMATIC_SHIFT_ACTIVE.get(), livingEntity.hasEffect(WeaversParadiseMobEffects.CHROMATIC_SHIFT));
+            boolean chromaticShiftActive = livingEntity.hasEffect(WeaversParadiseMobEffects.CHROMATIC_SHIFT);
+
+            if (livingEntity.getData(WeaversParadiseAttachmentTypes.CHROMATIC_SHIFT_ACTIVE.get()) != chromaticShiftActive) {
+                livingEntity.setData(
+                        WeaversParadiseAttachmentTypes.CHROMATIC_SHIFT_ACTIVE.get(),
+                        chromaticShiftActive
+                );
+            }
         }
     }
 }

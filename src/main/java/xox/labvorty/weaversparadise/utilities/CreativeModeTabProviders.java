@@ -87,6 +87,7 @@ public class CreativeModeTabProviders {
                 WeaversParadiseItems.FLAG_BISEXUAL.toStack(),
                 WeaversParadiseItems.FLAG_DEMIBOY.toStack(),
                 WeaversParadiseItems.FLAG_DEMIGENDER.toStack(),
+                WeaversParadiseItems.FLAG_DEMIGIRL.toStack(),
                 WeaversParadiseItems.FLAG_GAY.toStack(),
                 WeaversParadiseItems.FLAG_GENDERFLUID.toStack(),
                 WeaversParadiseItems.FLAG_GENDERQUEER.toStack(),
@@ -95,7 +96,9 @@ public class CreativeModeTabProviders {
                 WeaversParadiseItems.FLAG_NONBINARY.toStack(),
                 WeaversParadiseItems.FLAG_PANSEXUAL.toStack(),
                 WeaversParadiseItems.FLAG_PRIDE.toStack(),
-                WeaversParadiseItems.FLAG_TRANS.toStack()
+                WeaversParadiseItems.FLAG_TRANS.toStack(),
+                WeaversParadiseItems.FLAG_TRANSFEMININE.toStack(),
+                WeaversParadiseItems.FLAG_TRANSMASCULINE.toStack()
         );
     }
 

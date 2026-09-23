@@ -10,7 +10,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import xox.labvorty.vortylib.init.VortyLibRenderTypes;
-import xox.labvorty.weaversparadise.model.GabrielModel;
 import xox.labvorty.weaversparadise.model.MikkelaModel;
 
 import java.util.Collections;
@@ -154,8 +153,8 @@ public class MikkelaCosmeticItem extends Item implements ICurioItem, ModelReplac
                 new ModelPart(
                         Collections.emptyList(),
                         Map.of(
-                                "left_leg", new GabrielModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GabrielModel.LAYER_LOCATION)).LeftBoot,
-                                "right_leg", new GabrielModel<>(Minecraft.getInstance().getEntityModels().bakeLayer(GabrielModel.LAYER_LOCATION)).RightBoot,
+                                "left_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
+                                "right_leg", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
                                 "head", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
                                 "hat", new ModelPart(Collections.emptyList(), Collections.emptyMap()),
                                 "body", new ModelPart(Collections.emptyList(), Collections.emptyMap()),

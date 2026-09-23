@@ -7,22 +7,24 @@ ENGLISH / <a href="README-ru.md">РУССКИЙ</a>
 A Minecraft mod about crafting, dyeing, and wearing expressive clothing. Create fabrics, sew outfits, dye them with advanced effects, and customize your look far beyond vanilla armor.
 
 ## Version Support
+### SUPPORTED
+| Loader       | Version | Contributor |
+|--------------|---------|-------------|
+| NeoForge     | 1.21.1  | None        |
+| Forge        | 1.20.1  | None        |
+| Fabric       | 1.21.1  | LynxSNT     |
 
-| Loader       | Version | Status             |
-|--------------|---------|--------------------|
-| NeoForge     | 1.21.1  | Actively supported |
-| NeoForge     | 1.21    | Planned            |
-| Forge        | 1.20.1  | Actively supported |
-| Forge        | 1.19.2  | Not planned        |
-| Fabric/Quilt | X.X.X   | TBD                |
+### PLANNED
+| Loader   | Version |
+|----------|---------|
+| NeoForge | 1.21    |
+| Fabric   | 1.21    |
 
-> **Actively supported** - this version/loader receives active updates.
->
-> **Planned** - a port to this version/loader is planned.
->
-> **TBD** - a port is being considered, but no decision has been made yet.
->
-> **Not planned** - this version/loader is not currently planned.
+### NOT PLANNED
+| Loader | Version  | Explanation                                 |
+|--------|----------|---------------------------------------------|
+| Forge  | ≤1.19.2  | Major code changes, will take too much time |
+| Fabric | ≤1.19.2  | Major code changes, will take too much time |
 
 ## Supported Languages
 
