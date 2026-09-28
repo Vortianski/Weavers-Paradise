@@ -1,0 +1,52 @@
+{
+  "name": "Shirts",
+  "icon": "weaversparadise:shirt_cotton",
+  "category": "weaversparadise:clothing_items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Curio slot: Upperwear$(br)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Enchantments",
+      "text": "$(br)$(#FF5555)$(bold)> Vanishing Curse$()$(br)$(#FF5555)$(bold)> Binding Curse$()$(br)$(#FF55FF)$(bold)> Unbreaking I-V$()$(br)$(#FF55FF)$(bold)> Mending$()$(br2)$(bold)Cotton:$()$(br)$(#FF55FF)$(bold)> Soft & Cozy I-V - up to -10% burning time$(bold)$()$(br2)$(bold)Silk:$()$(br)$(#FF55FF)$(bold)> Graceful I-V - up to +10% movement efficiency while in water$()"
+    },
+    {
+      "type": "weaversparadise:single_sided_clothing_list",
+      "name": "Cotton Shirt",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:shirt_cotton\", Count:1b}}",
+      "scale": 1.5,
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:shirt_cotton_recipe",
+      "text": "This recipe uses 2 advanced materials: $(l:weaversparadise:getting_started/advanced_materials#cotton_base)Upperwear Base$() and $(l:weaversparadise:getting_started/advanced_materials#cotton_sleeves)Sleeves$()"
+    },
+    {
+      "type": "weaversparadise:single_sided_clothing_list",
+      "name": "Silk Shirt",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:shirt_silk\", Count:1b}}",
+      "scale": 1.5,
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:shirt_silk_recipe",
+      "text": "This recipe uses 2 advanced materials: $(l:weaversparadise:getting_started/advanced_materials#silk_base)Upperwear Base$() and $(l:weaversparadise:getting_started/advanced_materials#silk_sleeves)Sleeves$()"
+    },
+    {
+      "type": "weaversparadise:single_sided_clothing_list",
+      "name": "Wool Sweater",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:sweater_wool\", Count:1b}}",
+      "scale": 1.5,
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:sweater_wool_recipe",
+      "text": "This recipe uses 2 advanced materials: $(l:weaversparadise:getting_started/advanced_materials#wool_base)Upperwear Base$() and $(l:weaversparadise:getting_started/advanced_materials#wool_sleeves)Sleeves$()"
+    }
+  ]
+}

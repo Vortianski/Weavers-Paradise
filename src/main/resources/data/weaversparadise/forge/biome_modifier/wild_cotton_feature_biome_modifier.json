@@ -1,0 +1,8 @@
+{
+  "type": "forge:add_features",
+  "biomes": {
+    "type": "forge:any"
+  },
+  "features": "weaversparadise:wild_cotton_feature",
+  "step": "vegetal_decoration"
+}

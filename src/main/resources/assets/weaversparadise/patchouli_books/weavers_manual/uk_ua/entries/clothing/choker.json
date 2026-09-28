@@ -1,0 +1,28 @@
+{
+  "name": "Чокер",
+  "icon": "weaversparadise:choker",
+  "category": "weaversparadise:clothing_items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Слот Curio: Намисто$(br)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Зачарування",
+      "text": "$(br)$(#FF5555)$(bold)> Прокляття зникнення$()$(br)$(#FF5555)$(bold)> Прокляття прив’язки$()$(br)$(#FF55FF)$(bold)> Незламність I-V$()$(br)$(#FF55FF)$(bold)> Лагодження$()$(br)$(#FF55FF)$(bold)> Дихальні вправи I-III - додає до +50% додаткового кисню під водою$()"
+    },
+    {
+      "type": "weaversparadise:double_sided_clothing_list",
+      "name": "Чокер",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:choker\", Count:1b}}",
+      "scale": 2,
+      "offset": -0.5
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:choker_recipe",
+      "text": "Предмет для цього рецепта отримується, якщо покласти шкіру в каменеріз."
+    }
+  ]
+}

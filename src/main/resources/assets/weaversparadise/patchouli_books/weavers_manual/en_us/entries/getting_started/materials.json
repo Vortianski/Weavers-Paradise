@@ -1,0 +1,52 @@
+{
+  "name": "Materials",
+  "icon": "weaversparadise:cotton_boll",
+  "category": "weaversparadise:getting_started",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Weavers Paradise is a mod about making clothing, but before we get into the interesting stuff we have to get our hands dirty. $(br2)Let's get to know primary materials first, and how to process them for later use"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:spinning_jenny_recipe",
+      "text": "Spinning Jenny is a crafting station needed to process raw materials into spools."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Cotton",
+      "item": "weaversparadise:raw_cotton",
+      "text": "Crafted from x4 $(l:weaversparadise:getting_started/plants#cotton)Raw Cotton$(/l). Has average properties and is the easiest to obtain."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Wool",
+      "item": "tag:minecraft:wool",
+      "text": "Crafted from x1 of any Wool. Has the most durability of all materials."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Silk",
+      "item": "minecraft:string",
+      "text": "Crafted from x5 String. Has the least durability."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Jeans",
+      "item": "weaversparadise:jeans_spool",
+      "text": "Crafted from x4 of Cotton Spool. Has average properties."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Temperature",
+      "flag": "|mod:cold_sweat,mod:legendarysurvivaloverhaul",
+      "text": "Weavers Paradise also supports some temperature mods. Currently:$(br)$(bold)> Cold Sweat$(br)$(bold)> Legendary Survival Overhaul"
+    },
+    {
+      "type": "patchouli:text",
+      "flag": "|mod:cold_sweat,mod:legendarysurvivaloverhaul",
+      "text": "It adds these properties to materials:$(br)$(bold)Cotton$() - average protection against both heat and cold$(br)$(bold)Silk$() - protection against heat$(br)$(bold)Wool$() - protection against cold"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "Ткацтво",
+  "icon": "weaversparadise:clothcrafting_station_block",
+  "category": "weaversparadise:getting_started",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:clothcrafting_table_recipe",
+      "text": "Станція ткацтва потрібна, щоб переробляти котушки в певні типи тканини. Ця станція використовує міні-гру для перевірки ваших навичок: що краще ви впораєтесь, то кращу $(l:weaversparadise:getting_started/clothcrafting#quality)$(bold)якість$() тканини отримаєте!"
+    },
+    {
+      "type": "patchouli:image",
+      "title": "Міні-гра",
+      "images": [
+        "weaversparadise:textures/patchouli/clothcrafting_preview.png"
+      ],
+      "text": "Сама міні-гра :D"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Якість",
+      "anchor": "quality",
+      "text": "Якість тканини впливає лише на те, наскільки міцним буде одяг, створений із неї. Базова міцність предмета дорівнює 100, а типи матеріалів дають такий бонус:$(br)$(bold)Бавовна$() - 20 міцності за пів зірки$(br)$(bold)Шовк$() - 15 міцності за пів зірки$(br)$(bold)Вовна$() - 25 міцності за пів зірки$(br)$(bold)Джинс$() - 25 міцності за пів зірки"
+    }
+  ]
+}

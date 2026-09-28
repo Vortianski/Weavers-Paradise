@@ -1,0 +1,19 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "patchouli"
+    }
+  ],
+
+  "type": "patchouli:shapeless_book_recipe",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "weaversparadise:mortar_and_pestle"
+    }
+  ],
+  "book": "weaversparadise:weavers_manual"
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "weaversparadise:blocks/chromatic_bloom",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "weaversparadise:chromatic_bloom"
+        }
+      ]
+    }
+  ]
+}

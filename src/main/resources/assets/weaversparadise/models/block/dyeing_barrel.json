@@ -1,0 +1,9 @@
+{
+  "parent": "weaversparadise:block/dyeing_barrel_model",
+  "textures": {
+    "all": "weaversparadise:block/dyeing_barrel_texture",
+    "particle": "weaversparadise:block/dyeing_barrel_texture",
+    "0": "weaversparadise:block/dyeing_barrel_texture"
+  },
+  "render_type": "solid"
+}

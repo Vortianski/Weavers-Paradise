@@ -1,0 +1,156 @@
+{
+  "name": "Типи барвників",
+  "icon": "weaversparadise:dye_core",
+  "category": "weaversparadise:dyemaking",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Набридло користуватися лише кольорами? Тоді типи барвників саме те, що потрібно! Більшість із них повністю змінюють відображення предмета, змінюючи рендеринг, і цей запис пояснить більшість із них.$(br2)Деякі типи барвників використовують $(l:weaversparadise:dyemaking/learning_the_basics#double_dye)вторинні кольори$()"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Звичайний",
+      "item": "weaversparadise:dye_core",
+      "text": "Звичайне відображення, використовує лише один колір. Найпростіший варіант, нічого не потребує."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Прайд",
+      "item": "weaversparadise:flag_agender,weaversparadise:flag_aroace,weaversparadise:flag_aromantic,weaversparadise:flag_asexual,weaversparadise:flag_bisexual,weaversparadise:flag_demiboy,weaversparadise:flag_demigender,weaversparadise:flag_demigirl,weaversparadise:flag_gay,weaversparadise:flag_genderfluid,weaversparadise:flag_genderqueer,weaversparadise:flag_intersex,weaversparadise:flag_lesbian,weaversparadise:flag_nonbinary,weaversparadise:flag_pansexual,weaversparadise:flag_pride,weaversparadise:flag_trans",
+      "text": "$(bold)Подвійний колір:$() Ні$(br2)Використовує маску прайд-прапора поверх стандартної текстури."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Редстоун",
+      "item": "minecraft:redstone",
+      "text": "$(bold)Подвійний колір:$() Ні$(br2)Має силу 0-15, яка визначає його колір (#640000-#FF0000). Не може використовувати вибрані кольори, може бути лише червоним."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Світлокамінь",
+      "item": "minecraft:glowstone_dust",
+      "text": "$(bold)Подвійний колір:$() Ні$(br2)Барвник, що використовує вибраний колір, але завжди має максимальну кількість світла, тому світиться в темряві."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Лампа",
+      "item": "minecraft:redstone_lamp",
+      "text": "$(bold)Подвійний колір:$() Ні$(br2)Працює подібно до світлокаменю, але його силу можна налаштовувати редстоуном. Створюється або нанесенням світлокаменю на редстоунове ядро барвника, або нанесенням редстоуну на світлокам’яне ядро барвника."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Скалк",
+      "item": "minecraft:sculk",
+      "text": "$(bold)Подвійний колір:$() Ні$(br2)Не може використовувати вибрані кольори. Пульсує, коли поруч із гравцем спрацьовують звуки."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Кольоровий скалк",
+      "item": "minecraft:echo_shard",
+      "text": "$(bold)Подвійний колір:$() Так$(br2)Використовує вибрані кольори. Працює так само, як скалк."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Голод",
+      "item": "minecraft:rotten_flesh",
+      "text": "$(bold)Подвійний колір:$() Так$(br2)Використовує вибрані кольори, щоб показати, наскільки гравець голодний, інтерполюючи від першого кольору до другого."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Здоров’я",
+      "item": "minecraft:glistering_melon_slice",
+      "text": "$(bold)Подвійний колір:$() Так$(br2)Використовує вибрані кольори, щоб показати, скільки здоров’я має істота, інтерполюючи від першого кольору до другого."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Час доби",
+      "item": "minecraft:sunflower",
+      "text": "$(bold)Подвійний колір:$() Ні$(br2)Не може використовувати вибрані кольори. Інтерполює кольори, щоб показати час доби."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Кольоровий час доби",
+      "item": "minecraft:clock",
+      "text": "$(bold)Подвійний колір:$() Так$(br2)Використовує вибрані кольори. Інтерполює кольори, щоб показати час доби."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Веселка",
+      "item": "weaversparadise:chromatic_bloom_fruit",
+      "text": "$(bold)Подвійний колір:$() Ні$(br2)Не може використовувати вибрані кольори. Зсуває кольори з часом, створюючи RGB-ефект."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Біом",
+      "item": "minecraft:moss_block",
+      "text": "$(bold)Подвійний колір:$() Ні$(br2)Не може використовувати вибрані кольори. Використовує кольори листя."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Ендер",
+      "item": "minecraft:ender_eye",
+      "text": "$(bold)Подвійний колір:$() Ні$(br2)Не може використовувати вибрані кольори. Відображається так само, як портал в Енд."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Швидкість",
+      "item": "minecraft:sugar",
+      "text": "$(bold)Подвійний колір:$() Так$(br2)Використовує вибрані кольори. Інтерполює перший колір у другий залежно від швидкості."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Висота (бедрок)",
+      "item": "minecraft:phantom_membrane",
+      "text": "$(bold)Подвійний колір:$() Так$(br2)Використовує вибрані кольори. Інтерполює перший колір у другий залежно від відстані до бедроку."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Висота (море)",
+      "item": "minecraft:prismarine_crystals",
+      "text": "$(bold)Подвійний колір:$() Так$(br2)Використовує вибрані кольори. Інтерполює перший колір у другий залежно від відстані до рівня моря (зазвичай y:63)."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Невидимий",
+      "item": "minecraft:air",
+      "text": "$(bold)Подвійний колір:$() Ні$(br2)Не може використовувати вибрані кольори. Нічого не відображає."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Статика",
+      "item": "minecraft:powder_snow_bucket",
+      "text": "$(bold)Подвійний колір:$() Ні$(br2)Не може використовувати вибрані кольори. Відображається як статичний шум."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Кристал",
+      "item": "minecraft:amethyst_shard",
+      "text": "$(bold)Подвійний колір:$() Ні$(br2)Використовує вибрані кольори. Рендерер зміщує пікселі за допомогою шуму Вороного."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Негатив",
+      "item": "minecraft:barrier",
+      "text": "$(bold)Подвійний колір:$() Ні$(br2)Використовує вибрані кольори. Застосовує негатив після освітлення."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Справжній негатив",
+      "item": "minecraft:barrier",
+      "text": "$(bold)Подвійний колір:$() Ні$(br2)Використовує вибрані кольори. Застосовує негатив до освітлення."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Туманність",
+      "item": "minecraft:dragon_breath",
+      "text": "$(bold)Подвійний колір:$() Ні$(br2)Не може використовувати вибрані кольори. Відображає фіолетову туманність."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Поліхроматичний",
+      "item": "weaversparadise:chromatic_dust",
+      "text": "$(bold)Подвійний колір:$() Ні$(br2)Використовує вибрані кольори. Визначає зсув відтінку за кутом і позицією камери."
+    }
+  ]
+}

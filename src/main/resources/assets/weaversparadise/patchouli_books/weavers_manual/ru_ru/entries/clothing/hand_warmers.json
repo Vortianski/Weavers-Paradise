@@ -1,0 +1,49 @@
+{
+  "name": "Митенки",
+  "icon": "weaversparadise:hand_warmers_cotton",
+  "category": "weaversparadise:clothing_items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Слот Curio: Перчатки$(br)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Зачарования",
+      "text": "$(br)$(#FF5555)$(bold)> Проклятие Утраты$()$(br)$(#FF5555)$(bold)> Проклятие Несъёмности$()$(br)$(#FF55FF)$(bold)> Прочность I-V$()$(br)$(#FF55FF)$(bold)> Починка$()$(br2)$(bold)Хлопок:$()$(br)$(#FF55FF)$(bold)> Вампиризм I-V - позволяет восстанавливать до 33.3% нанесённого существам урона$(bold)$()$(br2)$(bold)Шёлк:$()$(br)$(#FF55FF)$(bold)> Грация I-V - добавляет до +10% к скорости копания под водой$()$(br2)$(bold)Шерсть:$()$(br)$(#FF55FF)$(bold)Шумоподавление - скалк-сенсоры не будут замечать вас, если вы ломаете, используете или открываете блоки.$()"
+    },
+    {
+      "type": "weaversparadise:double_sided_clothing_list",
+      "name": "Хлопковые Митенки",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:hand_warmers_cotton\", Count:1b}}",
+      "scale": 2,
+      "offset": -0.2
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:hand_warmers_cotton_recipe"
+    },
+    {
+      "type": "weaversparadise:double_sided_clothing_list",
+      "name": "Шёлковые Митенки",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:hand_warmers_silk\", Count:1b}}",
+      "scale": 2,
+      "offset": -0.2
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:hand_warmers_silk_recipe"
+    },
+    {
+      "type": "weaversparadise:double_sided_clothing_list",
+      "name": "Шерстяные Митенки",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:hand_warmers_wool\", Count:1b}}",
+      "scale": 2,
+      "offset": -0.2
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:hand_warmers_wool_recipe"
+    }
+  ]
+}

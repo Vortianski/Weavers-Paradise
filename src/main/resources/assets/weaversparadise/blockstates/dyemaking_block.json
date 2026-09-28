@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "weaversparadise:block/dyemaking_block"
+    },
+    "facing=east": {
+      "model": "weaversparadise:block/dyemaking_block",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "weaversparadise:block/dyemaking_block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "weaversparadise:block/dyemaking_block",
+      "y": 270
+    }
+  }
+}

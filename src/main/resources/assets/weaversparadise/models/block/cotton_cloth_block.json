@@ -1,0 +1,9 @@
+{
+  "parent": "weaversparadise:block/fulltexture_block",
+  "textures": {
+    "all": "weaversparadise:block/cotton_fabric_texture",
+    "particle": "weaversparadise:block/cotton_fabric_texture",
+    "0": "weaversparadise:block/cotton_fabric_texture"
+  },
+  "render_type": "solid"
+}

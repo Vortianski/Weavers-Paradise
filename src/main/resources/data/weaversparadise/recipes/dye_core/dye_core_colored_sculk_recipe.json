@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    }
+  ],
+  "result": {
+    "item": "weaversparadise:dye_core",
+    "count": 1,
+    "nbt": {
+      "dyeType": "colored_sculk"
+    }
+  }
+}

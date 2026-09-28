@@ -1,0 +1,8 @@
+{
+  "type": "forge:add_features",
+  "biomes": {
+    "type": "forge:any"
+  },
+  "features": "weaversparadise:chromatic_bloom_feature",
+  "step": "underground_decoration"
+}

@@ -1,0 +1,18 @@
+{
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "patchouli"
+    }
+  ],
+  "rewards": {
+    "loot": [
+      "weaversparadise:patchouli_book_on_join"
+    ]
+  }
+}

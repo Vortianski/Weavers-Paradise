@@ -1,0 +1,74 @@
+[17Sep2026 23:24:04.270] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 5, --assetsDir, C:\Users\vorti\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 47.4.0, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mod, weaversparadise, --all, --output, C:\Users\vorti\Desktop\weaversparadise-forge-1.20.1\src\generated\resources, --existing, C:\Users\vorti\Desktop\weaversparadise-forge-1.20.1\src\main\resources, --mixin.config, mixins.weaversparadise.json]
+[17Sep2026 23:24:04.277] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.12 by Oracle Corporation; OS Windows 11 arch amd64 version 10.0
+[17Sep2026 23:24:04.386] [main/WARN] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Configuration file C:\Users\vorti\Desktop\weaversparadise-forge-1.20.1\run-data\config\fml.toml is not correct. Correcting
+[17Sep2026 23:24:04.387] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowSkipGLVersions] was corrected from null to []
+[17Sep2026 23:24:04.388] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowLogHelpMessage] was corrected from null to true
+[17Sep2026 23:24:04.388] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowSquir] was corrected from null to false
+[17Sep2026 23:24:04.389] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowShowCPU] was corrected from null to false
+[17Sep2026 23:24:04.413] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgedatauserdev
+[17Sep2026 23:24:04.479] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/vorti/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23128!/ Service=ModLauncher Env=CLIENT
+[17Sep2026 23:24:05.031] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\vorti\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.4.0\f0c0b352173d0a378cbdcec9cfc4ba65899a721\javafmllanguage-1.20.1-47.4.0.jar is missing mods.toml file
+[17Sep2026 23:24:05.036] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\vorti\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.4.0\e862740d8c84d08dbfedea412bef88fe42e727c5\lowcodelanguage-1.20.1-47.4.0.jar is missing mods.toml file
+[17Sep2026 23:24:05.041] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\vorti\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.4.0\5719b3a297a33f877ed5dde4cb4bd75c859096af\mclanguage-1.20.1-47.4.0.jar is missing mods.toml file
+[17Sep2026 23:24:05.045] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\vorti\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.4.0\235975dafa4309945b59c56b53f31dc5b65a6051\fmlcore-1.20.1-47.4.0.jar is missing mods.toml file
+[17Sep2026 23:24:05.252] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[17Sep2026 23:24:07.557] [main/WARN] [mixin/]: Compatibility level JAVA_17 specified by mixins.weaversparadise.json is higher than the maximum level supported by this version of mixin (JAVA_13).
+[17Sep2026 23:24:07.557] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[17Sep2026 23:24:07.573] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, C:\Users\vorti\.gradle\caches\forge_gradle\assets, --assetIndex, 5, --mod, weaversparadise, --all, --output, C:\Users\vorti\Desktop\weaversparadise-forge-1.20.1\src\generated\resources, --existing, C:\Users\vorti\Desktop\weaversparadise-forge-1.20.1\src\main\resources]
+[17Sep2026 23:24:07.684] [main/INFO] [mixin/]: Attempting to load Fernflower decompiler (Threaded mode)
+[17Sep2026 23:24:07.687] [main/INFO] [mixin/]: Fernflower could not be loaded, exported classes will not be decompiled. NoClassDefFoundError: org/jetbrains/java/decompiler/main/extern/IResultSaver
+[17Sep2026 23:24:07.702] [main/INFO] [mixin/]: Preparing mixins for MixinEnvironment[DEFAULT]
+[17Sep2026 23:24:07.702] [main/INFO] [mixin/]: Selecting config mixins.weaversparadise.json
+[17Sep2026 23:24:07.731] [main/WARN] [mixin/]: Reference map 'weaversparadise.refmap.json' for mixins.weaversparadise.json could not be read. If this is a development environment you can ignore this message
+[17Sep2026 23:24:07.734] [main/INFO] [mixin/]: Selecting config mixins.vortylib.json
+[17Sep2026 23:24:08.026] [main/INFO] [mixin/]: Remapping refMap vortylib.refmap.json using C:\Users\vorti\Desktop\weaversparadise-forge-1.20.1\build\createSrgToMcp\output.srg
+[17Sep2026 23:24:08.026] [main/INFO] [mixin/]: Selecting config curios.mixins.json
+[17Sep2026 23:24:08.029] [main/INFO] [mixin/]: Remapping refMap curios.refmap.json using C:\Users\vorti\Desktop\weaversparadise-forge-1.20.1\build\createSrgToMcp\output.srg
+[17Sep2026 23:24:08.029] [main/INFO] [mixin/]: Selecting config patchouli_xplat.mixins.json
+[17Sep2026 23:24:08.031] [main/INFO] [mixin/]: Remapping refMap patchouli.refmap.json using C:\Users\vorti\Desktop\weaversparadise-forge-1.20.1\build\createSrgToMcp\output.srg
+[17Sep2026 23:24:08.031] [main/INFO] [mixin/]: Preparing mixins.weaversparadise.json (16)
+[17Sep2026 23:24:08.253] [main/INFO] [mixin/]: Preparing mixins.vortylib.json (6)
+[17Sep2026 23:24:08.286] [main/INFO] [mixin/]: Preparing curios.mixins.json (13)
+[17Sep2026 23:24:08.345] [main/INFO] [mixin/]: Preparing patchouli_xplat.mixins.json (10)
+[17Sep2026 23:24:08.512] [main/INFO] [mixin/]: Prepared 45 mixins in 0.810 sec (18.0ms avg) (0ms load, 0ms transform, 0ms plugin)
+[17Sep2026 23:24:08.960] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [weaversparadise]
+[17Sep2026 23:24:09.153] [main/INFO] [mixin/]: Mixing GameEventListenerMixin from mixins.weaversparadise.json into net.minecraft.world.entity.Entity
+[17Sep2026 23:24:09.169] [main/INFO] [mixin/]: Mixing EntityMixin from mixins.weaversparadise.json into net.minecraft.world.entity.Entity
+[17Sep2026 23:24:09.171] [main/INFO] [mixin/]: Renaming synthetic method lambda$weaversparadise$walkOnWater$1(Lnet/minecraft/world/item/ItemStack;)Z to mddd04c2$lambda$weaversparadise$walkOnWater$1$0 in mixins.weaversparadise.json:EntityMixin
+[17Sep2026 23:24:09.173] [main/INFO] [mixin/]: Renaming synthetic method lambda$weaversparadise$walkOnWater$0(Lnet/minecraft/world/item/enchantment/Enchantment;)Z to mddd04c2$lambda$weaversparadise$walkOnWater$0$1 in mixins.weaversparadise.json:EntityMixin
+[17Sep2026 23:24:09.212] [main/INFO] [mixin/]: Mixing AccessorEntity from curios.mixins.json into net.minecraft.world.entity.Entity
+[17Sep2026 23:24:09.383] [main/INFO] [mixin/]: Mixing MixinLivingEntity from curios.mixins.json into net.minecraft.world.entity.LivingEntity
+[17Sep2026 23:24:09.457] [main/INFO] [mixin/]: Mixing PlayerMixin from mixins.weaversparadise.json into net.minecraft.world.entity.player.Player
+[17Sep2026 23:24:09.458] [main/INFO] [mixin/]: Renaming synthetic method lambda$weaversparadise$hurtSound$3(Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;Ltop/theillusivec4/curios/api/type/capability/ICuriosItemHandler;)V to mddd04c2$lambda$weaversparadise$hurtSound$3$0 in mixins.weaversparadise.json:PlayerMixin
+[17Sep2026 23:24:09.458] [main/INFO] [mixin/]: Renaming synthetic method lambda$weaversparadise$hurtSound$2(Lnet/minecraft/world/item/ItemStack;)Z to mddd04c2$lambda$weaversparadise$hurtSound$2$1 in mixins.weaversparadise.json:PlayerMixin
+[17Sep2026 23:24:09.458] [main/INFO] [mixin/]: Renaming synthetic method lambda$weaversparadise$makePlayerNoteBlock$1(Lnet/minecraft/world/entity/player/Player;Ltop/theillusivec4/curios/api/type/capability/ICuriosItemHandler;)V to mddd04c2$lambda$weaversparadise$makePlayerNoteBlock$1$2 in mixins.weaversparadise.json:PlayerMixin
+[17Sep2026 23:24:09.459] [main/INFO] [mixin/]: Renaming synthetic method lambda$weaversparadise$makePlayerNoteBlock$0(Lnet/minecraft/world/item/ItemStack;)Z to mddd04c2$lambda$weaversparadise$makePlayerNoteBlock$0$3 in mixins.weaversparadise.json:PlayerMixin
+[17Sep2026 23:24:10.492] [main/INFO] [mixin/]: Mixing MixinPowderSnowBlock from curios.mixins.json into net.minecraft.world.level.block.PowderSnowBlock
+[17Sep2026 23:24:11.325] [main/INFO] [mixin/]: Mixing AbstractArrowMixin from mixins.weaversparadise.json into net.minecraft.world.entity.projectile.AbstractArrow
+[17Sep2026 23:24:11.326] [main/INFO] [mixin/]: Renaming synthetic method lambda$weaversparadise$deflectOnHit$1(Lnet/minecraft/world/entity/player/Player;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;Ltop/theillusivec4/curios/api/type/capability/ICuriosItemHandler;)V to mddd04c2$lambda$weaversparadise$deflectOnHit$1$0 in mixins.weaversparadise.json:AbstractArrowMixin
+[17Sep2026 23:24:11.328] [main/INFO] [mixin/]: Renaming synthetic method lambda$weaversparadise$deflectOnHit$0(Lnet/minecraft/world/item/ItemStack;)Z to mddd04c2$lambda$weaversparadise$deflectOnHit$0$1 in mixins.weaversparadise.json:AbstractArrowMixin
+[17Sep2026 23:24:11.496] [main/INFO] [mixin/]: Mixing ItemStackMixin from mixins.weaversparadise.json into net.minecraft.world.item.ItemStack
+[17Sep2026 23:24:12.326] [main/INFO] [mixin/]: Mixing MixinShearsItem from curios.mixins.json into net.minecraft.world.item.ShearsItem
+[17Sep2026 23:24:14.552] [main/INFO] [mixin/]: Mixing MixinInventory from curios.mixins.json into net.minecraft.world.entity.player.Inventory
+[17Sep2026 23:24:14.693] [main/INFO] [mixin/]: Mixing MixinApplyBonusCount from curios.mixins.json into net.minecraft.world.level.storage.loot.functions.ApplyBonusCount
+[17Sep2026 23:24:15.569] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.0, for MC 1.20.1 with MCP 20230612.114412
+[17Sep2026 23:24:15.571] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.4.0 Initialized
+[17Sep2026 23:24:15.618] [modloading-worker-0/INFO] [mixin/]: Mixing client.MixinLevelRenderer from patchouli_xplat.mixins.json into net.minecraft.client.renderer.LevelRenderer
+[17Sep2026 23:24:15.724] [modloading-worker-0/INFO] [mixin/]: Mixing client.AccessorKeyMapping from patchouli_xplat.mixins.json into net.minecraft.client.KeyMapping
+[17Sep2026 23:24:15.726] [modloading-worker-0/INFO] [mixin/]: Renaming @Accessor method getAllKeyMappings()Ljava/util/Map; to getAllKeyMappings_$md$dd04c2$0 in patchouli_xplat.mixins.json:client.AccessorKeyMapping
+[17Sep2026 23:24:15.782] [modloading-worker-0/INFO] [mixin/]: Mixing client.LivingEntityRendererMixin from mixins.weaversparadise.json into net.minecraft.client.renderer.entity.LivingEntityRenderer
+[17Sep2026 23:24:15.785] [modloading-worker-0/INFO] [mixin/]: Renaming synthetic method lambda$weaversparadise$redirectGetBuffer$0([ZLxox/labvorty/weaversparadise/data/capabilities/ChromaticShiftData;)V to mddd04c2$lambda$weaversparadise$redirectGetBuffer$0$0 in mixins.weaversparadise.json:client.LivingEntityRendererMixin
+[17Sep2026 23:24:15.820] [modloading-worker-0/INFO] [mixin/]: Mixing client.AccessorScreen from patchouli_xplat.mixins.json into net.minecraft.client.gui.screens.Screen
+[17Sep2026 23:24:15.969] [modloading-worker-0/INFO] [mixin/]: Mixing client.MixinInventoryScreen from patchouli_xplat.mixins.json into net.minecraft.client.gui.screens.inventory.InventoryScreen
+[17Sep2026 23:24:15.992] [modloading-worker-0/INFO] [mixin/]: Mixing client.AbstractContainerScreenMixin from mixins.vortylib.json into net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
+[17Sep2026 23:24:15.993] [modloading-worker-0/INFO] [mixin/]: Renaming synthetic method lambda$vortylib$tick$1(Lnet/minecraft/world/item/Item;Lorg/apache/commons/lang3/tuple/MutablePair;)Z to mddd04c2$lambda$vortylib$tick$1$0 in mixins.vortylib.json:client.AbstractContainerScreenMixin
+[17Sep2026 23:24:15.994] [modloading-worker-0/INFO] [mixin/]: Renaming synthetic method lambda$vortylib$advancedTooltipItem$0(Lnet/minecraft/world/item/Item;Lorg/apache/commons/lang3/tuple/MutablePair;)Z to mddd04c2$lambda$vortylib$advancedTooltipItem$0$1 in mixins.vortylib.json:client.AbstractContainerScreenMixin
+[17Sep2026 23:24:16.227] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager...
+[17Sep2026 23:24:16.232] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager took 3.086 ms
+[17Sep2026 23:24:16.701] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/vorti/Desktop/weaversparadise-forge-1.20.1/build/fg_cache/net/minecraftforge/forge/1.20.1-47.4.0_mapped_official_1.20.1/forge-1.20.1-47.4.0_mapped_official_1.20.1.jar%23191!/assets/.mcassetsroot' uses unexpected schema
+[17Sep2026 23:24:16.702] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/vorti/Desktop/weaversparadise-forge-1.20.1/build/fg_cache/net/minecraftforge/forge/1.20.1-47.4.0_mapped_official_1.20.1/forge-1.20.1-47.4.0_mapped_official_1.20.1.jar%23191!/data/.mcassetsroot' uses unexpected schema
+[17Sep2026 23:24:16.958] [main/INFO] [mixin/]: Mixing MixinCuriosDataProvider from curios.mixins.json into top.theillusivec4.curios.api.CuriosDataProvider
+[17Sep2026 23:24:16.979] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Curios for weaversparadise
+[17Sep2026 23:24:17.262] [main/INFO] [net.minecraft.data.DataGenerator/]: Curios for weaversparadise finished after 282 ms
+[17Sep2026 23:24:17.262] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 284 ms
+[17Sep2026 23:24:17.274] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 8, old count: 0, new count: 9, removed stale: 0, written: 8

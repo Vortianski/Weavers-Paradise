@@ -1,0 +1,27 @@
+{
+  "name": "Тканеделие",
+  "icon": "weaversparadise:clothcrafting_station_block",
+  "category": "weaversparadise:getting_started",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:clothcrafting_table_recipe",
+      "text": "Станция Тканеделия нужна для создания всех видов ткани. Она использует небольшую мини-игру для проверки ваших умений, чем лучше результат тем лучше $(l:weaversparadise:getting_started/clothcrafting#quality)$(bold)качество$() ткани!"
+    },
+    {
+      "type": "patchouli:image",
+      "title": "Мини-игра",
+      "images": [
+        "weaversparadise:textures/patchouli/clothcrafting_preview.png"
+      ],
+      "text": "Сама мини-игра :D"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Качество",
+      "anchor": "quality",
+      "text": "Качество ткани влияет только на то насколько прочным будет предмет одежды созданный из данной ткани. Стандартная прочность предметов одежды 100, типы материалов получают такой бонус:$(br)$(bold)Хлопок$() - 20 прочности за пол звезды$(br)$(bold)Шёлк$() - 15 прочности за пол звезды$(br)$(bold)Шерсть$() - 25 прочности за пол звезды$(br)$(bold)Джинс$() - 25 прочности за пол звезды"
+    }
+  ]
+}

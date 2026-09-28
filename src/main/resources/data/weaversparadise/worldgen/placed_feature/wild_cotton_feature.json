@@ -1,0 +1,13 @@
+{
+  "feature": "weaversparadise:wild_cotton_feature",
+  "placement": [
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR_WG"
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 16
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "entities": [
+    "minecraft:player"
+  ],
+  "slots": [
+    "legwear",
+    "choker_trinket",
+    "head",
+    "gloves",
+    "pants",
+    "upperwear",
+    "necklace",
+    "cape",
+    "armor_cosmetics"
+  ]
+}

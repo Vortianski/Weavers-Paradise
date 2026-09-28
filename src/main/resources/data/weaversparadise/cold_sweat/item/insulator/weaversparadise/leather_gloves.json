@@ -1,0 +1,25 @@
+{
+  "required_mods": [
+    "weaversparadise"
+  ],
+  "type": "curio",
+  "item": {
+    "items": [
+      "weaversparadise:leather_gloves"
+    ]
+  },
+  "insulation": {
+    "heat": 0,
+    "cold": 1
+  },
+  "entity": {
+    "entities": ["*"]
+  },
+  "attributes": {},
+  "immune_temp_modifiers": {
+    "cold_sweat:water": 0.1
+  },
+  "hint": {
+    "key": "tooltip.hint.heat_or_cold_item"
+  }
+}

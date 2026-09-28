@@ -1,0 +1,17 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    "a a",
+    "a a"
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:silk_cloth"
+    }
+  },
+  "result": {
+    "item": "weaversparadise:hand_warmers_silk",
+    "count": 1
+  }
+}

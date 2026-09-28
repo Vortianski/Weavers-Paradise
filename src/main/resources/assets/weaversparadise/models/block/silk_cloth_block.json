@@ -1,0 +1,9 @@
+{
+  "parent": "weaversparadise:block/fulltexture_block",
+  "textures": {
+    "all": "weaversparadise:block/silk_fabric_texture",
+    "particle": "weaversparadise:block/silk_fabric_texture",
+    "0": "weaversparadise:block/silk_fabric_texture"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,31 @@
+{
+  "required": true,
+  "minVersion": "0.8.5",
+  "compatibilityLevel": "JAVA_17",
+  "package": "xox.labvorty.weaversparadise.mixins",
+  "refmap": "weaversparadise.refmap.json",
+  "mixins": [
+    "GameEventListenerMixin",
+    "PlayerMixin",
+    "SculkBlockEntityMixin",
+    "AbstractArrowMixin",
+    "EntityMixin",
+    "ItemStackMixin"
+  ],
+  "client": [
+    "client.GuiGraphicsMixin",
+    "client.PlayerModelMixin",
+    "client.CapeLayerMixin",
+    "client.ElytraLayerMixin",
+    "client.HumanModelMixin",
+    "client.PlayerRendererMixin",
+    "client.ItemEntityRendererMixin",
+    "compat.ClientBookRegistryMixin",
+    "client.LivingEntityRendererMixin",
+    "client.HumanoidArmorLayerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "plugin": "xox.labvorty.weaversparadise.mixins.compat.WeaversParadiseMixinPlugin"
+}

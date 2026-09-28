@@ -1,0 +1,29 @@
+{
+  "required_mods": [
+    "weaversparadise"
+  ],
+  "type": "curio",
+  "item": {
+    "items": [
+      "weaversparadise:thigh_highs_silk",
+      "weaversparadise:hand_warmers_silk",
+      "weaversparadise:shirt_silk",
+      "weaversparadise:tank_top",
+      "weaversparadise:pants_silk"
+    ]
+  },
+  "insulation": {
+    "heat": 1.5,
+    "cold": 0
+  },
+  "entity": {
+    "entities": ["*"]
+  },
+  "attributes": {},
+  "immune_temp_modifiers": {
+    "cold_sweat:on_fire": 0.1
+  },
+  "hint": {
+    "key": "tooltip.hint.heat_or_cold_item"
+  }
+}

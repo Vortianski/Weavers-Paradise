@@ -1,0 +1,20 @@
+{
+  "name": "Фарбування",
+  "icon": "weaversparadise:dyeing_barrel_block",
+  "category": "weaversparadise:dyemaking",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "title": "Фарбування",
+      "recipe": "weaversparadise:dyeing_barrel_recipe",
+      "text": "Фарбувати будь-який предмет не так просто: для цього потрібно створити фарбувальну бочку. Деякі предмети приймають лише один пляшковий барвник, тоді як інші, що мають кілька частин, можуть приймати два. Трафарети дозволяють використовувати 2 окремі барвники на одному предметі або боці."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Трафарети",
+      "item": "weaversparadise:base_stencil,weaversparadise:half_stencil,weaversparadise:checkers_stencil,weaversparadise:checkers_small_stencil,weaversparadise:lines_vertical_stencil,weaversparadise:lines_small_stencil,weaversparadise:lines_big_stencil,weaversparadise:cross_stencil,weaversparadise:paws_stencil,weaversparadise:star_stencil,weaversparadise:dirt_stencil,weaversparadise:flower_stencil",
+      "text": "Трафарети дають змогу ще сильніше налаштовувати ваш одяг! Їх створюють з базового трафарета, покладеного в каменеріз."
+    }
+  ]
+}

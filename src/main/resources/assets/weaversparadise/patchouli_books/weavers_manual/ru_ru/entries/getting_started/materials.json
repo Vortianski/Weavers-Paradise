@@ -1,0 +1,52 @@
+{
+  "name": "Материалы",
+  "icon": "weaversparadise:cotton_boll",
+  "category": "weaversparadise:getting_started",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Weavers Paradise мод о создании одежды, но перед тем как мы приступим к интересному придется немного замарать руки.$(br2)Для начала познакомимся с изначальными материалами, и как их нужно обрабатывать для последующего использования"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:spinning_jenny_recipe",
+      "text": "Прялка Дженни это крафтовая станция нужная для переработки сырья в катушки с нужным материалом."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Хлопок",
+      "item": "weaversparadise:raw_cotton",
+      "text": "Создаётся из x4 $(l:weaversparadise:getting_started/plants#cotton)Сырья Хлопка$(/l). Имеет средние свойства и является самым простым в получении."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Шерсть",
+      "item": "tag:minecraft:wool",
+      "text": "Создаётся из x1 любой Шерсти. Имеет наибольшее количество прочности из всех материалов."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Шёлк",
+      "item": "minecraft:string",
+      "text": "Создаётся из x5 Ниток. Имеет наименьшее количество прочности."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "title": "Джинс",
+      "item": "weaversparadise:jeans_spool",
+      "text": "Создаётся из x4 Хлопковых Катушек."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Температура",
+      "flag": "|mod:cold_sweat,mod:legendarysurvivaloverhaul",
+      "text": "Weavers Paradise также совместим с некоторыми модами на температуру. На данный момент:$(br)$(bold)> Cold Sweat$(br)$(bold)> Legendary Survival Overhaul"
+    },
+    {
+      "type": "patchouli:text",
+      "flag": "|mod:cold_sweat,mod:legendarysurvivaloverhaul",
+      "text": "И добавляет такие свойства материалам:$(br)$(bold)Хлопок$() - средняя защита от холода и жары$(br)$(bold)Шёлк$() - защита от жары$(br)$(bold)Шерсть$() - защита от холода"
+    }
+  ]
+}

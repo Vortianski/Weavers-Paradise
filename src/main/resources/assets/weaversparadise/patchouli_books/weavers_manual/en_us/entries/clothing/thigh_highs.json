@@ -1,0 +1,49 @@
+{
+  "name": "Thigh Highs",
+  "icon": "weaversparadise:thigh_highs_cotton",
+  "category": "weaversparadise:clothing_items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Curio slot: Legwear$(br)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Enchantments",
+      "text": "$(br)$(#FF5555)$(bold)> Vanishing Curse$()$(br)$(#FF5555)$(bold)> Binding Curse$()$(br)$(#FF55FF)$(bold)> Unbreaking I-V$()$(br)$(#FF55FF)$(bold)> Mending$()$(br2)$(bold)Cotton:$()$(br)$(#FF55FF)$(bold)> Soft & Cozy I-V - up to +1.25 blocks of safe fall distance$(bold)$()$(br2)$(bold)Silk:$()$(br)$(#FF55FF)$(bold)> Water Strider - ability to walk on water$()$(br2)$(bold)Wool:$()$(br)$(#FF55FF)$(bold)Sound Muffles - disables sculk sensor detection when walking, running or falling.$()"
+    },
+    {
+      "type": "weaversparadise:double_sided_clothing_list",
+      "name": "Cotton Thigh Highs",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:thigh_highs_cotton\", Count:1b}}",
+      "scale": 2,
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:thigh_highs_cotton_recipe"
+    },
+    {
+      "type": "weaversparadise:double_sided_clothing_list",
+      "name": "Silk Thigh Highs",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:thigh_highs_silk\", Count:1b}}",
+      "scale": 2,
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:thigh_highs_silk_recipe"
+    },
+    {
+      "type": "weaversparadise:double_sided_clothing_list",
+      "name": "Wool Thigh Highs",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:thigh_highs_wool\", Count:1b}}",
+      "scale": 2,
+      "offset": -0.25
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:thigh_highs_wool_recipe"
+    }
+  ]
+}

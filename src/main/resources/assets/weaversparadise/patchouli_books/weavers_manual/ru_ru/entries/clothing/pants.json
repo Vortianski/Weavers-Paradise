@@ -1,0 +1,52 @@
+{
+  "name": "Штаны",
+  "icon": "weaversparadise:pants_cotton",
+  "category": "weaversparadise:clothing_items",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Слот Curio: Штаны$(br)"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Зачарования",
+      "text": "$(br)$(#FF5555)$(bold)> Проклятие Утраты$()$(br)$(#FF5555)$(bold)> Проклятие Несъёмности$()$(br)$(#FF55FF)$(bold)> Прочность I-V$()$(br)$(#FF55FF)$(bold)> Починка$()$(br2)$(bold)Хлопок:$()$(br)$(#FF55FF)$(bold)> Мягкий и Уютный I-V - добавляет до +10% к эффективности движения$(bold)$()$(br2)$(bold)Шёлк:$()$(br)$(#FF55FF)$(bold)> Грация I-V - добавляет до +10% к эффективности передвижения в воде$()$(br2)$(bold)Джинс:$()$(br)$(#FF55FF)$(bold)Крепыш - шанс до 16.6% отразить любую стрелу при попадании.$()"
+    },
+    {
+      "type": "weaversparadise:single_sided_clothing_list",
+      "name": "Хлопковые Штаны",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:pants_cotton\", Count:1b}}",
+      "scale": 2,
+      "offset": 0
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:pants_cotton_recipe",
+      "text": "$(l:weaversparadise:getting_started/advanced_materials#cotton_pant_legs)Этот рецепт использует продвинутые материалы$()"
+    },
+    {
+      "type": "weaversparadise:single_sided_clothing_list",
+      "name": "Шёлковые штаны",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:pants_silk\", Count:1b}}",
+      "scale": 2,
+      "offset": 0
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:pants_silk_recipe",
+      "text": "$(l:weaversparadise:getting_started/advanced_materials#silk_pant_legs)Этот рецепт использует продвинутые материалы$()"
+    },
+    {
+      "type": "weaversparadise:single_sided_clothing_list",
+      "name": "Джинсовые Штаны",
+      "entity": "minecraft:item{Item:{id:\"weaversparadise:pants_jeans\", Count:1b}}",
+      "scale": 2,
+      "offset": 0
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:pants_jeans_recipe",
+      "text": "$(l:weaversparadise:getting_started/advanced_materials#jeans_pant_legs)Этот рецепт использует продвинутые материалы$()"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "Вивчення основ",
+  "icon": "weaversparadise:mortar_and_pestle",
+  "category": "weaversparadise:dyemaking",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:dyemaking_table_recipe",
+      "title": "Вивчення основ",
+      "text": "Щоб почати працювати з барвниками, вам потрібно створити стіл виготовлення барвників і дістати 2 скляні пляшки."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "weaversparadise:pestle_recipe",
+      "recipe2": "weaversparadise:mortar_and_pestle_recipe"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Базовий пляшковий барвник створюється лише з трьох інгредієнтів: пляшки води, порожньої скляної пляшки та будь-яких барвників або пігментів. Щоб створити спеціалізованіші барвники, додайте ядро барвника під час крафту, щоб визначити $(l:weaversparadise:dyemaking/dye_types)тип барвника$()."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "weaversparadise:dye_core",
+      "title": "Подвійні кольори",
+      "anchor": "double_dye",
+      "text": "Деяким типам барвників потрібен вторинний колір. Щоб додати його, покладіть пляшковий барвник назад у стіл виготовлення барвників у слот пляшки води, а потім додайте другі барвники, щоб завершити рецепт."
+    }
+  ]
+}
