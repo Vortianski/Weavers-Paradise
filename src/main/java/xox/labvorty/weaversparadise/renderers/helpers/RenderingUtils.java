@@ -3,9 +3,9 @@ package xox.labvorty.weaversparadise.renderers.helpers;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexMultiConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import org.joml.Vector3f;
-import xox.labvorty.vortylib.init.VortyLibRenderTypes;
 import xox.labvorty.weaversparadise.data.tooltip_components.DyeTypeRegistry;
 import xox.labvorty.weaversparadise.data.tooltip_components.helper.DyeInstance;
 import xox.labvorty.weaversparadise.data.tooltip_components.helper.RenderData;
@@ -34,11 +34,17 @@ public class RenderingUtils {
                 )
         );
         if (glint) {
-            VertexConsumer glintConsumer = multiBufferSource.getBuffer(VortyLibRenderTypes.getEntityColoredGlint(glintColor));
-
             vertexConsumer = VertexMultiConsumer.create(
-                    glintConsumer,
-                    vertexConsumer
+                    multiBufferSource.getBuffer(RenderType.entityGlint()),
+                    multiBufferSource.getBuffer(
+                            dyeInstance.getRenderTypeParser().apply(
+                                    new RenderData(
+                                            dyeType,
+                                            clothingType,
+                                            texture
+                                    )
+                            )
+                    )
             );
         }
         return vertexConsumer;

@@ -32,9 +32,8 @@ public class PantsJeansItem extends SingleSidedClothingArmorItem implements Pant
     @Override
     public int getMaxDamage(ItemStack stack) {
         int quality = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getInt("quality");
-        int maxdamage = 120 + (15 * quality);
 
-        return maxdamage;
+        return 120 + (15 * quality);
     }
 
     @Override
