@@ -11,6 +11,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.ItemHandlerHelper;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 
 import java.util.List;
@@ -43,7 +44,11 @@ public class ArmorLootboxItem extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(
+            @NotNull Level level,
+            @NotNull Player player,
+            @NotNull InteractionHand usedHand
+    ) {
         ItemStack lootboxStack = player.getItemInHand(usedHand);
 
         if (!level.isClientSide) {
@@ -62,8 +67,13 @@ public class ArmorLootboxItem extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Level level, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
-        super.appendHoverText(stack, level, tooltipComponents, tooltipFlag);
+    public void appendHoverText(
+            @NotNull ItemStack itemStack,
+            Level level,
+            @NotNull List<Component> tooltipComponents,
+            @NotNull TooltipFlag tooltipFlag
+    ) {
+        super.appendHoverText(itemStack, level, tooltipComponents, tooltipFlag);
 
         if (level == null) {
             return;
