@@ -97,7 +97,15 @@ public abstract class HumanoidArmorLayerMixin<T extends LivingEntity, M extends 
             }
 
             if (!itemStack.isEmpty() && itemStack.isEnchanted()) {
-                this.renderGlint(poseStack, multiBufferSource, packedLight, (A)humanoidModel);
+                if (!itemStack.isEmpty() && itemStack.hasFoil()) {
+                    humanoidModel.renderToBuffer(
+                            poseStack,
+                            multiBufferSource.getBuffer(RenderType.armorEntityGlint()),
+                            packedLight,
+                            OverlayTexture.NO_OVERLAY,
+                            1.0F, 1.0F, 1.0F, 1.0F
+                    );
+                }
             }
         }
     }

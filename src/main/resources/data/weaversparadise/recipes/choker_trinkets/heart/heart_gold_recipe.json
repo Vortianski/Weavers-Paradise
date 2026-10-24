@@ -4,5 +4,6 @@
     "item": "minecraft:gold_ingot"
   },
   "result": "weaversparadise:heart",
-  "nbt": "{metalType:\"minecraft:gold_ingot\",color:-1,damage:25}"
+  "nbt": "{metalType:\"minecraft:gold_ingot\",color:-1,damage:25}",
+  "count": 1
 }

@@ -1,8 +1,9 @@
 {
-  "type": "minecraft:stonecutting",
+  "type": "weaversparadise:stonecutter_crafting",
   "ingredient": {
     "item": "minecraft:iron_ingot"
   },
   "result": "weaversparadise:fish",
-  "nbt": "{metalType:\"minecraft:iron_ingot\",color:-1,damage:100}"
+  "nbt": "{metalType:\"minecraft:iron_ingot\",color:-1,damage:100}",
+  "count": 1
 }

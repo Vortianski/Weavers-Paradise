@@ -4,5 +4,6 @@
     "item": "minecraft:iron_ingot"
   },
   "result": "weaversparadise:cat_ring",
-  "nbt": "{metalType:\"minecraft:iron_ingot\",color:-1,damage:100}"
+  "nbt": "{metalType:\"minecraft:iron_ingot\",color:-1,damage:100}",
+  "count": 1
 }

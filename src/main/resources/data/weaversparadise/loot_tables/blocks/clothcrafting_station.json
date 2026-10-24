@@ -1,6 +1,6 @@
 {
   "type": "minecraft:block",
-  "random_sequence": "weaversparadise:blocks/clothcrafting_station_block",
+  "random_sequence": "weaversparadise:blocks/clothcrafting_station",
   "pools": [
     {
       "rolls": 1.0,
@@ -12,7 +12,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "weaversparadise:clothcrafting_station_block"
+          "name": "weaversparadise:clothcrafting_station"
         }
       ]
     }
