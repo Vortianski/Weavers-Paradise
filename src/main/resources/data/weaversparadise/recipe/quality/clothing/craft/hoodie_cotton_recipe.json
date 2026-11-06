@@ -1,0 +1,26 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    " cd",
+    "aba"
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:cotton_sleeve_long"
+    },
+    "b": {
+      "item": "weaversparadise:cotton_upperwear_base"
+    },
+    "c": {
+      "item": "weaversparadise:cotton_cloth"
+    },
+    "d": {
+      "item": "weaversparadise:needle_with_thread"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:cotton_hoodie",
+    "count": 1
+  }
+}

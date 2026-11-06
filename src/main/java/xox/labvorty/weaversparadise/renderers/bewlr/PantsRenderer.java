@@ -9,10 +9,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import xox.labvorty.weaversparadise.items.clothing.PantsCottonItem;
-import xox.labvorty.weaversparadise.items.clothing.PantsJeansItem;
-import xox.labvorty.weaversparadise.items.clothing.PantsSilkItem;
-import xox.labvorty.weaversparadise.items.clothing.PantsWoolItem;
+import xox.labvorty.weaversparadise.items.clothing.*;
 import xox.labvorty.weaversparadise.items.clothing.defined.PantsInterface;
 import xox.labvorty.weaversparadise.model.PantsModel;
 import xox.labvorty.weaversparadise.renderers.helpers.SingleSidedClothingRenderingData;
@@ -113,7 +110,8 @@ public class PantsRenderer extends BlockEntityWithoutLevelRenderer {
                 additionalYrot,
                 additionalZrot,
                 poseStack,
-                packedLight
+                packedLight,
+                PantsModelRenderer.Type.PANTS
         );
     }
 }

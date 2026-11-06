@@ -10,10 +10,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.items.clothing.*;
-import xox.labvorty.weaversparadise.items.clothing.defined.PulloverInterface;
-import xox.labvorty.weaversparadise.items.clothing.defined.ShirtInterface;
-import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingItem;
-import xox.labvorty.weaversparadise.items.clothing.defined.TopsInterface;
+import xox.labvorty.weaversparadise.items.clothing.defined.*;
 import xox.labvorty.weaversparadise.model.UpperWearModel;
 import xox.labvorty.weaversparadise.renderers.helpers.SingleSidedClothingRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.UpperwearModelRenderer;
@@ -151,6 +148,30 @@ public class UpperwearRenderer extends BlockEntityWithoutLevelRenderer {
             stensilType = cottonCropTopLongSleevedItem.getStensilType(itemStack);
             lightValueOne = cottonCropTopLongSleevedItem.getItemLightValue(itemStack, 1);
             lightValueTwo = cottonCropTopLongSleevedItem.getItemLightValue(itemStack, 2);
+        } else if (itemStack.getItem() instanceof HoodieInterface hoodieInterface) {
+            switch (itemStack.getItem()) {
+                case CottonHoodieItem cottonHoodieItem -> {
+                    material = "cotton";
+                    type = UpperwearModelRenderer.Type.HOODIE;
+                }
+                case WoolHoodieItem woolHoodieItem -> {
+                    material = "wool";
+                    type = UpperwearModelRenderer.Type.HOODIE;
+                }
+                default -> {
+                    return;
+                }
+            }
+
+            primaryColorOne = hoodieInterface.getItemMainColor(itemStack, 1);
+            secondaryColorOne = hoodieInterface.getItemSecondaryColor(itemStack, 1);
+            primaryColorTwo = hoodieInterface.getItemMainColor(itemStack, 2);
+            secondaryColorTwo = hoodieInterface.getItemSecondaryColor(itemStack, 2);
+            dyeTypeOne = hoodieInterface.getItemDyeType(itemStack, 1);
+            dyeTypeTwo = hoodieInterface.getItemDyeType(itemStack, 2);
+            stensilType = hoodieInterface.getStensilType(itemStack);
+            lightValueOne = hoodieInterface.getItemLightValue(itemStack, 1);
+            lightValueTwo = hoodieInterface.getItemLightValue(itemStack, 2);
         } else {
             return;
         }

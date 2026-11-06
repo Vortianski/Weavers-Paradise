@@ -12,5 +12,8 @@
     { "item": "weaversparadise:wool_spool" },
     { "item": "weaversparadise:wool_spool" }
   ],
-  "result": { "id": "weaversparadise:wool_spool_block", "count": 1 }
+  "result": {
+    "id": "weaversparadise:wool_spool_block",
+    "count": 1
+  }
 }

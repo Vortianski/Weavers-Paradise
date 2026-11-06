@@ -18,6 +18,7 @@ import xox.labvorty.weaversparadise.configs.ClientConfig;
 import xox.labvorty.weaversparadise.items.clothing.CatRingItem;
 import xox.labvorty.weaversparadise.model.CatRingModel;
 import xox.labvorty.weaversparadise.renderers.helpers.ChokerTrinketRenderingData;
+import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
 import xox.labvorty.weaversparadise.renderers.models.CatRingModelRenderer;
 import xox.labvorty.weaversparadise.utilities.WeaversUtilities;
 
@@ -54,9 +55,9 @@ public class CatRingRenderer implements ICurioRenderer {
                             compoundTag.getString("metalType")
                     ),
                     entity,
-                    1,
-                    1,
-                    1,
+                    RenderingUtils.getScale(),
+                    RenderingUtils.getScale(),
+                    RenderingUtils.getScale(),
                     0,
                     0,
                     0,

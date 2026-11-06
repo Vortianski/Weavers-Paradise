@@ -1,0 +1,11 @@
+{
+  "type": "weaversparadise:quality_shapeless_crafting",
+  "category": "misc",
+  "ingredients": [
+    { "item": "weaversparadise:cotton_cloth_block" }
+  ],
+  "result": {
+    "id": "weaversparadise:cotton_cloth",
+    "count": 9
+  }
+}

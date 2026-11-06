@@ -20,16 +20,23 @@ public class WeaversParadiseBlocks {
     ));
     public static final DeferredBlock<Block> WILD_COTTON_PLANT = BLOCKS.register("wild_cotton", WildCottonPlant::new);
     public static final DeferredBlock<Block> CHROMATIC_BLOOM = BLOCKS.register("chromatic_bloom", ChromaticBloom::new);
+    public static final DeferredBlock<Block> CHROMA_FLOWER = BLOCKS.register("chroma_flower", () -> new ChromaFlowerBlock(
+            BlockBehaviour.Properties.of()
+                    .noCollission()
+                    .instabreak()
+                    .sound(SoundType.GRASS)
+                    .offsetType(BlockBehaviour.OffsetType.XZ)
+    ));
     public static final DeferredBlock<Block> SPINNING_JENNY = BLOCKS.register("spinning_jenny", SpinningJennyBlock::new);
     public static final DeferredBlock<Block> CLOTHCRAFTING_STATION = BLOCKS.register("clothcrafting_station", ClothcraftingStation::new);
     public static final DeferredBlock<Block> DYEMAKING_BLOCK = BLOCKS.register("dyemaking_block", DyemakingBlock::new);
     public static final DeferredBlock<Block> DYEING_BARREL_BLOCK = BLOCKS.register("dyeing_barrel", DyeingBarrelBlock::new);
-    public static final DeferredBlock<Block> COTTON_SPOOL_BLOCK = BLOCKS.register("cotton_spool_block", CottonSpoolBlock::new);
-    public static final DeferredBlock<Block> COTTON_CLOTH_BLOCK = BLOCKS.register("cotton_cloth_block", CottonClothBlock::new);
-    public static final DeferredBlock<Block> SILK_SPOOL_BLOCK = BLOCKS.register("silk_spool_block", SilkSpoolBlock::new);
-    public static final DeferredBlock<Block> SILK_CLOTH_BLOCK = BLOCKS.register("silk_cloth_block", SilkClothBlock::new);
-    public static final DeferredBlock<Block> WOOL_SPOOL_BLOCK = BLOCKS.register("wool_spool_block", WoolSpoolBlock::new);
-    public static final DeferredBlock<Block> WOOL_CLOTH_BLOCK = BLOCKS.register("wool_cloth_block", WoolClothBlock::new);
+    public static final DeferredBlock<Block> COTTON_SPOOL_BLOCK = BLOCKS.register("cotton_spool_block", SpoolBlock::new);
+    public static final DeferredBlock<Block> COTTON_CLOTH_BLOCK = BLOCKS.register("cotton_cloth_block", ClothBlock::new);
+    public static final DeferredBlock<Block> SILK_SPOOL_BLOCK = BLOCKS.register("silk_spool_block", SpoolBlock::new);
+    public static final DeferredBlock<Block> SILK_CLOTH_BLOCK = BLOCKS.register("silk_cloth_block", ClothBlock::new);
+    public static final DeferredBlock<Block> WOOL_SPOOL_BLOCK = BLOCKS.register("wool_spool_block", SpoolBlock::new);
+    public static final DeferredBlock<Block> WOOL_CLOTH_BLOCK = BLOCKS.register("wool_cloth_block", ClothBlock::new);
     public static final DeferredBlock<Block> WITCHROOT = BLOCKS.register("witchroot", () -> new CeilingPlantBlock(
             BlockBehaviour.Properties.of()
                     .noCollission()

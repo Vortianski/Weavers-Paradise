@@ -69,7 +69,26 @@ public class WeaversUtilities {
             "chromatic_aberration",
             "boykisser",
             "forcefield",
-            "hypnotic"
+            "hypnotic",
+            "pride_tie_dye",
+            "asexual_tie_dye",
+            "aromantic_tie_dye",
+            "aroace_tie_dye",
+            "agender_tie_dye",
+            "bisexual_tie_dye",
+            "demiboy_tie_dye",
+            "demigender_tie_dye",
+            "demigirl_tie_dye",
+            "gay_tie_dye",
+            "genderfluid_tie_dye",
+            "genderqueer_tie_dye",
+            "intersex_tie_dye",
+            "lesbian_tie_dye",
+            "nonbinary_tie_dye",
+            "pansexual_tie_dye",
+            "trans_tie_dye",
+            "transfeminine_tie_dye",
+            "transmasculine_tie_dye"
     );
     private static final EquipmentSlot[] ARMOR_SLOTS = {
             EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.BODY, EquipmentSlot.LEGS, EquipmentSlot.FEET

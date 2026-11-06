@@ -15,6 +15,7 @@ import xox.labvorty.weaversparadise.configs.ClientConfig;
 import xox.labvorty.weaversparadise.items.clothing.UshankaItem;
 import xox.labvorty.weaversparadise.model.UshankaModel;
 import xox.labvorty.weaversparadise.renderers.helpers.DoubleSidedClothingRenderingData;
+import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
 import xox.labvorty.weaversparadise.renderers.models.UshankaModelRenderer;
 import xox.labvorty.weaversparadise.utilities.WeaversUtilities;
 
@@ -81,9 +82,9 @@ public class UshankaCurioRenderer implements ICurioRenderer {
                             ushankaItem.getAdditionalData(itemStack)
                     ),
                     entity,
-                    1,
-                    1,
-                    1,
+                    RenderingUtils.getScale(),
+                    RenderingUtils.getScale(),
+                    RenderingUtils.getScale(),
                     0,
                     0,
                     0,

@@ -18,6 +18,7 @@ import xox.labvorty.weaversparadise.items.clothing.HandWarmersWoolItem;
 import xox.labvorty.weaversparadise.items.clothing.defined.HandWarmersInterface;
 import xox.labvorty.weaversparadise.model.HandWarmersModel;
 import xox.labvorty.weaversparadise.renderers.helpers.DoubleSidedClothingRenderingData;
+import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
 import xox.labvorty.weaversparadise.renderers.models.HandWarmersModelRenderer;
 import xox.labvorty.weaversparadise.utilities.WeaversUtilities;
 
@@ -98,9 +99,9 @@ public class HandWarmersCurioRenderer implements ICurioRenderer {
                             handWarmersInterface.getAdditionalData(itemStack)
                     ),
                     livingEntity,
-                    1,
-                    1,
-                    1,
+                    RenderingUtils.getScale(),
+                    RenderingUtils.getScale(),
+                    RenderingUtils.getScale(),
                     0,
                     0,
                     0,

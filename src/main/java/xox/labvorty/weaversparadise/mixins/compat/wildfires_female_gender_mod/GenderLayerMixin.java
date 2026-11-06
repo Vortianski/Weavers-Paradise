@@ -204,6 +204,32 @@ public abstract class GenderLayerMixin<T extends LivingEntity, M extends Humanoi
                 lightValueTwo = cottonCropTopLongSleevedItem.getItemLightValue(itemStack, 2);
                 shouldRender = true;
                 itemTexture = TextureRegistry.find(cottonCropTopLongSleevedItem.getFlag(itemStack) ? "crop_top_long_sleeved_sag" : "crop_top_long_sleeved", stensilType, material);
+            } else if (itemStack.getItem() instanceof HoodieInterface hoodieInterface) {
+                switch (itemStack.getItem()) {
+                    case CottonHoodieItem cottonHoodieItem -> {
+                        material = "cotton";
+                        type = UpperwearModelRenderer.Type.HOODIE;
+                    }
+                    case WoolHoodieItem woolHoodieItem -> {
+                        material = "wool";
+                        type = UpperwearModelRenderer.Type.HOODIE;
+                    }
+                    default -> {
+                        return;
+                    }
+                }
+
+                primaryColorOne = hoodieInterface.getItemMainColor(itemStack, 1);
+                secondaryColorOne = hoodieInterface.getItemSecondaryColor(itemStack, 1);
+                primaryColorTwo = hoodieInterface.getItemMainColor(itemStack, 2);
+                secondaryColorTwo = hoodieInterface.getItemSecondaryColor(itemStack, 2);
+                dyeTypeOne = hoodieInterface.getItemDyeType(itemStack, 1);
+                dyeTypeTwo = hoodieInterface.getItemDyeType(itemStack, 2);
+                stensilType = hoodieInterface.getStensilType(itemStack);
+                lightValueOne = hoodieInterface.getItemLightValue(itemStack, 1);
+                lightValueTwo = hoodieInterface.getItemLightValue(itemStack, 2);
+                shouldRender = true;
+                itemTexture = TextureRegistry.find(hoodieInterface.getFlag(itemStack) ? "hoodie_sag" : "hoodie", stensilType, material);
             } else {
                 return;
             }
@@ -320,6 +346,32 @@ public abstract class GenderLayerMixin<T extends LivingEntity, M extends Humanoi
                 lightValueTwo = cottonCropTopLongSleevedItem.getItemLightValue(armorStack, 2);
                 shouldRender = true;
                 itemTexture = TextureRegistry.find(cottonCropTopLongSleevedItem.getFlag(armorStack) ? "crop_top_long_sleeved_sag" : "crop_top_long_sleeved", stensilType, material);
+            } else if (armorStack.getItem() instanceof HoodieInterface hoodieInterface) {
+                switch (armorStack.getItem()) {
+                    case CottonHoodieItem cottonHoodieItem -> {
+                        material = "cotton";
+                        type = UpperwearModelRenderer.Type.HOODIE;
+                    }
+                    case WoolHoodieItem woolHoodieItem -> {
+                        material = "wool";
+                        type = UpperwearModelRenderer.Type.HOODIE;
+                    }
+                    default -> {
+                        return;
+                    }
+                }
+
+                primaryColorOne = hoodieInterface.getItemMainColor(armorStack, 1);
+                secondaryColorOne = hoodieInterface.getItemSecondaryColor(armorStack, 1);
+                primaryColorTwo = hoodieInterface.getItemMainColor(armorStack, 2);
+                secondaryColorTwo = hoodieInterface.getItemSecondaryColor(armorStack, 2);
+                dyeTypeOne = hoodieInterface.getItemDyeType(armorStack, 1);
+                dyeTypeTwo = hoodieInterface.getItemDyeType(armorStack, 2);
+                stensilType = hoodieInterface.getStensilType(armorStack);
+                lightValueOne = hoodieInterface.getItemLightValue(armorStack, 1);
+                lightValueTwo = hoodieInterface.getItemLightValue(armorStack, 2);
+                shouldRender = true;
+                itemTexture = TextureRegistry.find(hoodieInterface.getFlag(armorStack) ? "hoodie_sag" : "hoodie", stensilType, material);
             } else {
                 return;
             }
@@ -343,7 +395,6 @@ public abstract class GenderLayerMixin<T extends LivingEntity, M extends Humanoi
             }
 
             matrixStack.popPose();
-            ci.cancel();
         }
     }
 }

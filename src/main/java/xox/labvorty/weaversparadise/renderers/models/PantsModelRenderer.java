@@ -16,6 +16,8 @@ import xox.labvorty.weaversparadise.renderers.helpers.ColorHandlers;
 import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
 import xox.labvorty.weaversparadise.renderers.helpers.SingleSidedClothingRenderingData;
 
+import java.util.Locale;
+
 public class PantsModelRenderer {
     public static void renderModel(
             MultiBufferSource multiBufferSource,
@@ -35,7 +37,8 @@ public class PantsModelRenderer {
             float yRot,
             float zRot,
             PoseStack poseStack,
-            int packedLight
+            int packedLight,
+            Type type
     ) {
         RenderingUtils renderingUtils = new RenderingUtils();
         Minecraft minecraft = Minecraft.getInstance();
@@ -47,7 +50,7 @@ public class PantsModelRenderer {
         Pair<Integer, Integer> fCO = ColorHandlers.handle(renderingData.dTO(), renderingData.pCO(), renderingData.sCO(), renderingData.lVO(), livingEntity, packedLight, ticks);
         Pair<Integer, Integer> fCT = ColorHandlers.handle(renderingData.dTT(), renderingData.pCT(), renderingData.sCT(), renderingData.lVT(), livingEntity, packedLight, ticks);
 
-        ItemTexture texture = TextureRegistry.find("pants", renderingData.sT(), renderingData.mat());
+        ItemTexture texture = TextureRegistry.find(type.name().toLowerCase(Locale.ROOT), renderingData.sT(), renderingData.mat());
         boolean renderType = texture.getRenderType();
         ResourceLocation tex1 = texture.getTextureOne();
         ResourceLocation tex2 = texture.getTextureTwo();
@@ -70,7 +73,7 @@ public class PantsModelRenderer {
 
         poseStack.mulPose(Axis.ZP.rotationDegrees(zRot));
 
-        VertexConsumer vc1 = renderingUtils.parseVC(multiBufferSource, renderingData.dTO(), tex1, "pants", renderingData.glint(), renderingData.glintColor());
+        VertexConsumer vc1 = renderingUtils.parseVC(multiBufferSource, renderingData.dTO(), tex1, type.name().toLowerCase(Locale.ROOT), renderingData.glint(), renderingData.glintColor());
         model.renderToBuffer(
                 poseStack,
                 vc1,
@@ -80,7 +83,7 @@ public class PantsModelRenderer {
         );
 
         if (renderType) {
-            VertexConsumer vc2 = renderingUtils.parseVC(multiBufferSource, renderingData.dTT(), tex2, "pants", renderingData.glint(), renderingData.glintColor());
+            VertexConsumer vc2 = renderingUtils.parseVC(multiBufferSource, renderingData.dTT(), tex2, type.name().toLowerCase(Locale.ROOT), renderingData.glint(), renderingData.glintColor());
             model.renderToBuffer(
                     poseStack,
                     vc2,
@@ -91,5 +94,10 @@ public class PantsModelRenderer {
         }
 
         poseStack.popPose();
+    }
+
+    public enum Type {
+        PANTS,
+        OVERALLS
     }
 }

@@ -411,7 +411,54 @@ public class DyeingScreen extends AbstractContainerScreen<DyeingMenu> {
                     -modelYaw,
                     0,
                     poseStack,
-                    LightTexture.FULL_BRIGHT
+                    LightTexture.FULL_BRIGHT,
+                    PantsModelRenderer.Type.PANTS
+            );
+        } else if (itemStack.getItem() instanceof OverallsInterface overallsInterface) {
+            String material;
+
+            switch (itemStack.getItem()) {
+                case OverallsItem overallsItem -> material = "cotton";
+                default -> {
+                    return;
+                }
+            }
+
+            PantsModelRenderer.renderModel(
+                    multiBufferSource,
+                    pantsModel,
+                    new SingleSidedClothingRenderingData(
+                            overallsInterface.getFlag(itemStack),
+                            overallsInterface.getItemMainColor(itemStack, 1),
+                            overallsInterface.getItemSecondaryColor(itemStack, 1),
+                            overallsInterface.getItemMainColor(itemStack, 2),
+                            overallsInterface.getItemSecondaryColor(itemStack, 2),
+                            overallsInterface.getItemDyeType(itemStack, 1),
+                            overallsInterface.getItemDyeType(itemStack, 2),
+                            overallsInterface.getStensilType(itemStack),
+                            overallsInterface.getItemLightValue(itemStack, 1),
+                            overallsInterface.getItemLightValue(itemStack, 2),
+                            material,
+                            itemStack.isEnchanted(),
+                            overallsInterface.getGlintColor(itemStack),
+                            overallsInterface.getAdditionalData(itemStack)
+                    ),
+                    player,
+                    -36,
+                    36,
+                    36,
+                    0,
+                    0,
+                    0,
+                    this.leftPos + 88,
+                    this.topPos + 20,
+                    50,
+                    0,
+                    -modelYaw,
+                    0,
+                    poseStack,
+                    LightTexture.FULL_BRIGHT,
+                    PantsModelRenderer.Type.OVERALLS
             );
         } else if (itemStack.getItem() instanceof CapeInterface capeInterface) {
             String material;

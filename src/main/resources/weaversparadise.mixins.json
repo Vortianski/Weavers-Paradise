@@ -19,7 +19,15 @@
     "client.LivingRendererMixin",
     "client.HumanoidArmorLayerMixin",
     "client.GuiGraphicsMixin",
-    "compat.wildfires_female_gender_mod.GenderLayerMixin"
+    "compat.wildfires_female_gender_mod.GenderLayerMixin",
+    "compat.emotecraft.ClothingCurioRendererMixin",
+    "compat.emotecraft.ClothingLayerMixin",
+    "compat.emotecraft.HandWarmersModelMixin",
+    "compat.emotecraft.LivingEntityRendererMixin",
+    "compat.emotecraft.PantsModelMixin",
+    "compat.emotecraft.ThighHighsModelMixin",
+    "compat.emotecraft.UpperWearModelMixin",
+    "compat.emotecraft.UpperwearModelRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

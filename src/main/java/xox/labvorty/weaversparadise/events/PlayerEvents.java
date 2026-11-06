@@ -58,4 +58,18 @@ public class PlayerEvents {
             SculkPlayerListenerManager.attach(serverPlayer);
         }
     }
+
+    @SubscribeEvent
+    public static void onClone(PlayerEvent.Clone event) {
+        if (event.getOriginal() instanceof ServerPlayer serverPlayer) {
+            SculkPlayerListenerManager.detach(serverPlayer);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onRespawn(PlayerEvent.PlayerRespawnEvent event) {
+        if (event.getEntity() instanceof ServerPlayer serverPlayer) {
+            SculkPlayerListenerManager.attach(serverPlayer);
+        }
+    }
 }

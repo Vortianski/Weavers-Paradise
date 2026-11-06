@@ -1,0 +1,23 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    " b ",
+    "aca"
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:cotton_pant_leg"
+    },
+    "b": {
+      "item": "weaversparadise:cotton_upperwear_base"
+    },
+    "c": {
+      "item": "weaversparadise:needle_with_thread"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:overalls",
+    "count": 1
+  }
+}

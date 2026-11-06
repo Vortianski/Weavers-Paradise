@@ -15,6 +15,7 @@ import xox.labvorty.weaversparadise.configs.ClientConfig;
 import xox.labvorty.weaversparadise.items.clothing.SkirtCottonItem;
 import xox.labvorty.weaversparadise.model.CottonSkirtModel;
 import xox.labvorty.weaversparadise.renderers.helpers.DoubleSidedClothingRenderingData;
+import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
 import xox.labvorty.weaversparadise.renderers.models.CottonSkirtModelRenderer;
 import xox.labvorty.weaversparadise.utilities.WeaversUtilities;
 
@@ -83,9 +84,9 @@ public class CottonSkirtRenderLayer<T extends LivingEntity, M extends EntityMode
                             skirtCottonItem.getAdditionalData(itemStack)
                     ),
                     entity,
-                    1,
-                    1,
-                    1,
+                    RenderingUtils.getScale(),
+                    RenderingUtils.getScale(),
+                    RenderingUtils.getScale(),
                     0,
                     0,
                     0,

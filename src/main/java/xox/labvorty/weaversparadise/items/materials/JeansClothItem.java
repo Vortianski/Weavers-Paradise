@@ -7,6 +7,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.component.CustomData;
+import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.data.tooltip_components.QualityTooltipComponent;
 import xox.labvorty.weaversparadise.data.tooltip_components.helper.QualityTooltipData;
 
@@ -25,7 +26,7 @@ public class JeansClothItem extends Item {
     }
 
     @Override
-    public Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
+    public @NotNull Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
         CompoundTag data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
 
         return Optional.of(new QualityTooltipComponent(QualityTooltipData.getTooltipData(data.getInt("quality"))));

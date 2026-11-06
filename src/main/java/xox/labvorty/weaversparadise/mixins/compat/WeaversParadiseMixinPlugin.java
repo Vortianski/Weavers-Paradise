@@ -11,6 +11,7 @@ import java.util.Set;
 public class WeaversParadiseMixinPlugin implements IMixinConfigPlugin {
     private static final String PATCHOULI_MOD_ID = "patchouli";
     private static final String WILDFIRE_MOD_ID = "wildfire_gender";
+    private static final String PLAYERANIMATOR_MOD_ID = "playeranimator";
 
     @Override
     public void onLoad(String mixinPackage) {
@@ -29,6 +30,19 @@ public class WeaversParadiseMixinPlugin implements IMixinConfigPlugin {
 
         if (mixinClassName.endsWith("GenderLayerMixin")) {
             return isModLoaded(WILDFIRE_MOD_ID);
+        }
+
+        if (
+                mixinClassName.endsWith("ClothingCurioRendererMixin")
+                        || mixinClassName.endsWith("ClothingLayerMixin")
+                        || mixinClassName.endsWith("HandWarmersModelMixin")
+                        || mixinClassName.endsWith("LivingEntityRendererMixin")
+                        || mixinClassName.endsWith("PantsModelMixin")
+                        || mixinClassName.endsWith("ThighHighsModelMixin")
+                        || mixinClassName.endsWith("UpperWearModelMixin")
+                        || mixinClassName.endsWith("UpperwearModelRendererMixin")
+        ) {
+            return isModLoaded(PLAYERANIMATOR_MOD_ID);
         }
 
         return true;

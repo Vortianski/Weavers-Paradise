@@ -1,18 +1,24 @@
 package xox.labvorty.weaversparadise.items.armor;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import org.jetbrains.annotations.NotNull;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import xox.labvorty.vortylib.init.VortyLibRenderTypes;
 import xox.labvorty.weaversparadise.model.MikkelaModel;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public class MikkelaCosmeticItem extends Item implements ICurioItem, ModelReplacer {
@@ -179,5 +185,11 @@ public class MikkelaCosmeticItem extends Item implements ICurioItem, ModelReplac
     @Override
     public ResourceLocation getAdditionalTextureForSlot(EquipmentSlot equipmentSlot) {
         return ResourceLocation.fromNamespaceAndPath("weaversparadise", "textures/clothing/armor/mikkela.png");
+    }
+
+    @Override
+    public void appendHoverText(@NotNull ItemStack itemStack, @NotNull TooltipContext tooltipContext, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
+        super.appendHoverText(itemStack, tooltipContext, tooltipComponents, tooltipFlag);
+        tooltipComponents.add(Component.translatable("weaversparadise.tooltip.armor_cosmetics").withStyle(style -> style.withColor(ChatFormatting.GRAY)));
     }
 }

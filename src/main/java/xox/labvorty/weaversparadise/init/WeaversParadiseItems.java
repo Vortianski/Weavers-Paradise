@@ -47,10 +47,14 @@ public class WeaversParadiseItems {
     public static final DeferredItem<Item> TANK_TOP = ITEMS.register("tank_top", TankTopItem::new);
     public static final DeferredItem<Item> WOOL_VEST = ITEMS.register("wool_vest", WoolVestItem::new);
 
+    public static final DeferredItem<Item> COTTON_HOODIE = ITEMS.register("cotton_hoodie", CottonHoodieItem::new);
+    public static final DeferredItem<Item> WOOL_HOODIE = ITEMS.register("wool_hoodie", WoolHoodieItem::new);
+
     public static final DeferredItem<Item> PANTS_JEANS = ITEMS.register("pants_jeans", PantsJeansItem::new);
     public static final DeferredItem<Item> PANTS_COTTON = ITEMS.register("pants_cotton", PantsCottonItem::new);
     public static final DeferredItem<Item> PANTS_SILK = ITEMS.register("pants_silk", PantsSilkItem::new);
     public static final DeferredItem<Item> PANTS_WOOL = ITEMS.register("pants_wool", PantsWoolItem::new);
+    public static final DeferredItem<Item> OVERALLS = ITEMS.register("overalls", OverallsItem::new);
 
     public static final DeferredItem<Item> COTTON_SKIRT = ITEMS.register("skirt_cotton", SkirtCottonItem::new);
 
@@ -132,13 +136,14 @@ public class WeaversParadiseItems {
     public static final DeferredItem<Item> DYEING_BARREL_BLOCK = ITEMS.register(WeaversParadiseBlocks.DYEING_BARREL_BLOCK.getId().getPath(), () -> new BlockItem(WeaversParadiseBlocks.DYEING_BARREL_BLOCK.get(), new Item.Properties()));
     public static final DeferredItem<Item> COTTON_SEEDS = ITEMS.register("cotton_seeds", () -> new ItemNameBlockItem(WeaversParadiseBlocks.COTTON_BUSH.get(), new Item.Properties().stacksTo(64).rarity(Rarity.COMMON)));
     public static final DeferredItem<Item> COTTON_SPOOL_BLOCK = ITEMS.register(WeaversParadiseBlocks.COTTON_SPOOL_BLOCK.getId().getPath(), () -> new BlockItem(WeaversParadiseBlocks.COTTON_SPOOL_BLOCK.get(), new Item.Properties()));
-    public static final DeferredItem<Item> COTTON_CLOTH_BLOCK = ITEMS.register(WeaversParadiseBlocks.COTTON_CLOTH_BLOCK.getId().getPath(), () -> new BlockItem(WeaversParadiseBlocks.COTTON_CLOTH_BLOCK.get(), new Item.Properties()));
+    public static final DeferredItem<Item> COTTON_CLOTH_BLOCK = ITEMS.register(WeaversParadiseBlocks.COTTON_CLOTH_BLOCK.getId().getPath(), () -> new QualityBlockItem(WeaversParadiseBlocks.COTTON_CLOTH_BLOCK.get(), new Item.Properties()));
     public static final DeferredItem<Item> SILK_SPOOL_BLOCK = ITEMS.register(WeaversParadiseBlocks.SILK_SPOOL_BLOCK.getId().getPath(), () -> new BlockItem(WeaversParadiseBlocks.SILK_SPOOL_BLOCK.get(), new Item.Properties()));
-    public static final DeferredItem<Item> SILK_CLOTH_BLOCK = ITEMS.register(WeaversParadiseBlocks.SILK_CLOTH_BLOCK.getId().getPath(), () -> new BlockItem(WeaversParadiseBlocks.SILK_CLOTH_BLOCK.get(), new Item.Properties()));
+    public static final DeferredItem<Item> SILK_CLOTH_BLOCK = ITEMS.register(WeaversParadiseBlocks.SILK_CLOTH_BLOCK.getId().getPath(), () -> new QualityBlockItem(WeaversParadiseBlocks.SILK_CLOTH_BLOCK.get(), new Item.Properties()));
     public static final DeferredItem<Item> WOOL_SPOOL_BLOCK = ITEMS.register(WeaversParadiseBlocks.WOOL_SPOOL_BLOCK.getId().getPath(), () -> new BlockItem(WeaversParadiseBlocks.WOOL_SPOOL_BLOCK.get(), new Item.Properties()));
-    public static final DeferredItem<Item> WOOL_CLOTH_BLOCK = ITEMS.register(WeaversParadiseBlocks.WOOL_CLOTH_BLOCK.getId().getPath(), () -> new BlockItem(WeaversParadiseBlocks.WOOL_CLOTH_BLOCK.get(), new Item.Properties()));
+    public static final DeferredItem<Item> WOOL_CLOTH_BLOCK = ITEMS.register(WeaversParadiseBlocks.WOOL_CLOTH_BLOCK.getId().getPath(), () -> new QualityBlockItem(WeaversParadiseBlocks.WOOL_CLOTH_BLOCK.get(), new Item.Properties()));
     public static final DeferredItem<Item> WITCHROOT = ITEMS.register(WeaversParadiseBlocks.WITCHROOT.getId().getPath(), () -> new BlockItem(WeaversParadiseBlocks.WITCHROOT.get(), new Item.Properties().rarity(Rarity.RARE)));
     public static final DeferredItem<Item> STARBLOOM = ITEMS.register(WeaversParadiseBlocks.STARBLOOM.getId().getPath(), () -> new BlockItem(WeaversParadiseBlocks.STARBLOOM.get(), new Item.Properties().rarity(Rarity.RARE)));
+    public static final DeferredItem<Item> CHROMA_FLOWER = ITEMS.register(WeaversParadiseBlocks.CHROMA_FLOWER.getId().getPath(), () -> new BlockItem(WeaversParadiseBlocks.CHROMA_FLOWER.get(), new Item.Properties().rarity(Rarity.RARE)));
 
     //flags
     public static final DeferredItem<Item> FLAG_BASIC = ITEMS.register("flag_base", EmptyFlagItem::new);

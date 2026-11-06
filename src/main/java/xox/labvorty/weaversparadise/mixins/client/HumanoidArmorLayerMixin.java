@@ -22,6 +22,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 import xox.labvorty.vortylib.utilities.VortyLibCurioUtilities;
+import xox.labvorty.weaversparadise.utilities.WeaversModelCache;
 import xox.labvorty.weaversparadise.configs.ClientConfig;
 import xox.labvorty.weaversparadise.items.armor.ModelReplacer;
 import xox.labvorty.weaversparadise.items.armor.RenderingData;
@@ -83,8 +84,8 @@ public abstract class HumanoidArmorLayerMixin<T extends LivingEntity, M extends 
 
         if ((itemStack.getItem() instanceof ArmorItem armorItem && armorItem.getEquipmentSlot() == equipmentSlot) || ClientConfig.FULL_ARMOR.get()) {
             HumanoidModel<?> parentModel = ((HumanoidArmorLayer<T, M, A>)(Object)this).getParentModel();
-            HumanoidModel<?> humanoidModel = modelReplacer.getModelForSlot(livingEntity, equipmentSlot, parentModel);
-            HumanoidModel<?> additionalModel = modelReplacer.getAdditionalModelForSlot(livingEntity, equipmentSlot, parentModel);
+            HumanoidModel<?> humanoidModel = WeaversModelCache.model(modelReplacer, livingEntity, equipmentSlot, parentModel, () -> modelReplacer.getModelForSlot(livingEntity, equipmentSlot, parentModel));
+            HumanoidModel<?> additionalModel = WeaversModelCache.additionalModel(modelReplacer, livingEntity, equipmentSlot, parentModel, () -> modelReplacer.getAdditionalModelForSlot(livingEntity, equipmentSlot, parentModel));
             weaversparadise$copyAllProperties(parentModel, humanoidModel);
             ResourceLocation resourceLocation = modelReplacer.getTextureForSlot(equipmentSlot);
             ResourceLocation additionalResourceLocation = modelReplacer.getAdditionalTextureForSlot(equipmentSlot);

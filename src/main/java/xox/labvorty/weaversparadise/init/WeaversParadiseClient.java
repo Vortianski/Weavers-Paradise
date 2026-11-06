@@ -117,7 +117,9 @@ public class WeaversParadiseClient {
                 WeaversParadiseItems.LONG_SLEEVE_COTTON,
                 WeaversParadiseItems.SWEATER_WOOL,
                 WeaversParadiseItems.PONCHO,
-                WeaversParadiseItems.COTTON_CROP_TOP_LONG_SLEEVED
+                WeaversParadiseItems.COTTON_CROP_TOP_LONG_SLEEVED,
+                WeaversParadiseItems.COTTON_HOODIE,
+                WeaversParadiseItems.WOOL_HOODIE
         );
 
         event.registerItem(
@@ -281,6 +283,26 @@ public class WeaversParadiseClient {
                 WeaversParadiseItems.PANTS_COTTON,
                 WeaversParadiseItems.PANTS_SILK,
                 WeaversParadiseItems.PANTS_WOOL
+        );
+
+        event.registerItem(
+                new IClientItemExtensions() {
+                    @Override
+                    public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                        return new OverallsRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(),
+                                Minecraft.getInstance().getEntityModels());
+                    }
+
+                    @Override
+                    public boolean shouldBobAsEntity(@NotNull ItemStack itemStack) {
+                        if (itemStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("noBobbing")) {
+                            return false;
+                        }
+
+                        return IClientItemExtensions.super.shouldBobAsEntity(itemStack);
+                    }
+                },
+                WeaversParadiseItems.OVERALLS
         );
 
         event.registerItem(
@@ -580,6 +602,9 @@ public class WeaversParadiseClient {
         CuriosRendererRegistry.register(WeaversParadiseItems.LONG_SLEEVE_COTTON.get(), UpperwearCurioRenderer::new);
         CuriosRendererRegistry.register(WeaversParadiseItems.SWEATER_WOOL.get(), UpperwearCurioRenderer::new);
 
+        CuriosRendererRegistry.register(WeaversParadiseItems.COTTON_HOODIE.get(), UpperwearCurioRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.WOOL_HOODIE.get(), UpperwearCurioRenderer::new);
+
         CuriosRendererRegistry.register(WeaversParadiseItems.PONCHO.get(), UpperwearCurioRenderer::new);
 
         CuriosRendererRegistry.register(WeaversParadiseItems.COTTON_CROP_TOP_LONG_SLEEVED.get(), UpperwearCurioRenderer::new);
@@ -592,6 +617,7 @@ public class WeaversParadiseClient {
         CuriosRendererRegistry.register(WeaversParadiseItems.PANTS_COTTON.get(), PantsCurioRenderer::new);
         CuriosRendererRegistry.register(WeaversParadiseItems.PANTS_SILK.get(), PantsCurioRenderer::new);
         CuriosRendererRegistry.register(WeaversParadiseItems.PANTS_WOOL.get(), PantsCurioRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.OVERALLS.get(), PantsCurioRenderer::new);
 
         CuriosRendererRegistry.register(WeaversParadiseItems.COTTON_SKIRT.get(), CottonSkirtCurioRenderer::new);
     }

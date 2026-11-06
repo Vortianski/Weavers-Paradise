@@ -1,0 +1,18 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aaa",
+    "aaa"
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:wool_cloth"
+    }
+  },
+  "result": {
+    "id": "weaversparadise:wool_cloth_block",
+    "count": 1
+  }
+}

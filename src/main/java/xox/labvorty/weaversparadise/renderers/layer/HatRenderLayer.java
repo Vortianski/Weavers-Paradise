@@ -19,6 +19,7 @@ import xox.labvorty.weaversparadise.model.CapModel;
 import xox.labvorty.weaversparadise.model.PomponHatModel;
 import xox.labvorty.weaversparadise.model.UshankaModel;
 import xox.labvorty.weaversparadise.renderers.helpers.DoubleSidedClothingRenderingData;
+import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
 import xox.labvorty.weaversparadise.renderers.helpers.SingleSidedClothingRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.CapModelRenderer;
 import xox.labvorty.weaversparadise.renderers.models.PomponHatModelRenderer;
@@ -91,9 +92,9 @@ public class HatRenderLayer<T extends LivingEntity, M extends EntityModel<T>> ex
                             ushankaItem.getAdditionalData(itemStack)
                     ),
                     entity,
-                    1,
-                    1,
-                    1,
+                    RenderingUtils.getScale(),
+                    RenderingUtils.getScale(),
+                    RenderingUtils.getScale(),
                     0,
                     0,
                     0,

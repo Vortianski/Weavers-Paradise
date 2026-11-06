@@ -28,7 +28,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-
 public class ClothcraftingMenu extends AbstractContainerMenu implements Supplier<Map<Integer, Slot>> {
     public final static HashMap<String, Object> guistate = new HashMap<>();
     public final Level world;

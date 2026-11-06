@@ -60,6 +60,8 @@ public class UpperwearModelRenderer {
             itemTexture = TextureRegistry.find("shirt_open", renderingData.sT(), renderingData.mat());
         } else if (renderingData.flag() && type.getSerializedName().equals("crop_top_long_sleeved")) {
             itemTexture = TextureRegistry.find("crop_top_long_sleeved_sag", renderingData.sT(), renderingData.mat());
+        } else if (renderingData.flag() && type.getSerializedName().equals("hoodie")) {
+            itemTexture = TextureRegistry.find("hoodie_sag", renderingData.sT(), renderingData.mat());
         }
         ResourceLocation tex1 = itemTexture.getTextureOne();
         ResourceLocation tex2 = itemTexture.getTextureTwo();
@@ -188,7 +190,8 @@ public class UpperwearModelRenderer {
         SHIRT,
         PULLOVER,
         PONCHO,
-        CROP_TOP_LONG_SLEEVED;
+        CROP_TOP_LONG_SLEEVED,
+        HOODIE;
 
         @Override
         public @NotNull String getSerializedName() {
