@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexMultiConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.fml.ModList;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 import xox.labvorty.vortylib.init.VortyLibRenderTypes;
@@ -14,6 +15,10 @@ import xox.labvorty.weaversparadise.data.tooltip_components.helper.RenderData;
 public class RenderingUtils {
     public VertexConsumer parseVC(MultiBufferSource multiBufferSource, String dyeType, ResourceLocation texture, String clothingType) {
         return this.parseVC(multiBufferSource, dyeType, texture, clothingType, false, new Vector3f(1, 1, 1));
+    }
+
+    public static float getScale() {
+        return ModList.get().isLoaded("skinlayers3d") ? 1.05f : 1f;
     }
 
     public VertexConsumer parseVC(MultiBufferSource multiBufferSource, String dyeType, ResourceLocation texture, String clothingType, boolean glint, Vector3f glintColor) {

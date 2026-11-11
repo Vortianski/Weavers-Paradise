@@ -36,14 +36,21 @@ public class WeaversParadiseBlocks {
             .noCollission()
             .pushReaction(PushReaction.DESTROY)
     ));
+    public static final RegistryObject<Block> CHROMA_FLOWER = BLOCKS.register("chroma_flower", () -> new ChromaFlowerBlock(
+            BlockBehaviour.Properties.of()
+                    .noCollission()
+                    .instabreak()
+                    .sound(SoundType.GRASS)
+                    .offsetType(BlockBehaviour.OffsetType.XZ)
+    ));
     public static final RegistryObject<Block> WILD_COTTON_PLANT = BLOCKS.register("wild_cotton", WildCottonPlant::new);
     public static final RegistryObject<Block> CHROMATIC_BLOOM = BLOCKS.register("chromatic_bloom", ChromaticBloom::new);
     public static final RegistryObject<Block> COTTON_SPOOL_BLOCK = BLOCKS.register("cotton_spool_block", CottonSpoolBlock::new);
-    public static final RegistryObject<Block> COTTON_CLOTH_BLOCK = BLOCKS.register("cotton_cloth_block", CottonClothBlock::new);
+    public static final RegistryObject<Block> COTTON_CLOTH_BLOCK = BLOCKS.register("cotton_cloth_block", ClothBlock::new);
     public static final RegistryObject<Block> SILK_SPOOL_BLOCK = BLOCKS.register("silk_spool_block", SilkSpoolBlock::new);
-    public static final RegistryObject<Block> SILK_CLOTH_BLOCK = BLOCKS.register("silk_cloth_block", SilkClothBlock::new);
+    public static final RegistryObject<Block> SILK_CLOTH_BLOCK = BLOCKS.register("silk_cloth_block", ClothBlock::new);
     public static final RegistryObject<Block> WOOL_SPOOL_BLOCK = BLOCKS.register("wool_spool_block", WoolSpoolBlock::new);
-    public static final RegistryObject<Block> WOOL_CLOTH_BLOCK = BLOCKS.register("wool_cloth_block", WoolClothBlock::new);
+    public static final RegistryObject<Block> WOOL_CLOTH_BLOCK = BLOCKS.register("wool_cloth_block", ClothBlock::new);
     public static final RegistryObject<Block> PLUSHIE = BLOCKS.register("player_plushie", () -> new PlushieBlock(BlockBehaviour.Properties.of().sound(SoundType.WOOL).noOcclusion().strength(0.5f).noParticlesOnBreak()));
     public static final RegistryObject<Block> BLAHAJ = BLOCKS.register("blahaj", () -> new BlahajBlock(
             BlockBehaviour.Properties.of().sound(SoundType.WOOL).noOcclusion().strength(0.5f).noParticlesOnBreak()

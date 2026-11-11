@@ -3,6 +3,7 @@ package xox.labvorty.weaversparadise.items.clothing;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -11,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import xox.labvorty.weaversparadise.init.WeaversParadiseEnchantments;
 import xox.labvorty.weaversparadise.init.WeaversParadiseItems;
 import xox.labvorty.weaversparadise.items.clothing.defined.ShirtInterface;
+import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingArmorItem;
 import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingItem;
 import xox.labvorty.weaversparadise.items.clothing.defined.Upperwear;
 import xox.labvorty.weaversparadise.renderers.bewlr.UpperwearRenderer;
@@ -18,12 +20,13 @@ import xox.labvorty.weaversparadise.renderers.bewlr.UpperwearRenderer;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class ShirtCottonItem extends SingleSidedClothingItem implements ShirtInterface, Upperwear {
+public class ShirtCottonItem extends SingleSidedClothingArmorItem implements ShirtInterface, Upperwear {
     public ShirtCottonItem() {
         super(
                 new Properties()
                         .stacksTo(1)
-                        .defaultDurability(1)
+                        .defaultDurability(1),
+                EquipmentSlot.CHEST
         );
     }
 

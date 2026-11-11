@@ -14,6 +14,7 @@ import top.theillusivec4.curios.api.client.ICurioRenderer;
 import xox.labvorty.weaversparadise.configs.ClientConfig;
 import xox.labvorty.weaversparadise.items.clothing.PomponHatItem;
 import xox.labvorty.weaversparadise.model.PomponHatModel;
+import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
 import xox.labvorty.weaversparadise.renderers.helpers.SingleSidedClothingRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.PomponHatModelRenderer;
 import xox.labvorty.weaversparadise.utilities.WeaversUtilities;
@@ -75,9 +76,9 @@ public class PomponHatCurioRenderer implements ICurioRenderer {
                             pomponHatItem.getAdditionalData(itemStack)
                     ),
                     livingEntity,
-                    1,
-                    1,
-                    1,
+                    RenderingUtils.getScale(),
+                    RenderingUtils.getScale(),
+                    RenderingUtils.getScale(),
                     0,
                     0,
                     0,

@@ -2205,7 +2205,7 @@ public class BuiltInDyeTypes {
 
         DyeTypeRegistry.registerDyeType(
                 "chromatic_aberration",
-                new ItemDyeIcon(Items.RED_STAINED_GLASS),
+                new ItemDyeIcon(WeaversParadiseItems.CHROMA_FLOWER.get()),
                 Component.translatable("weaversparadise.dye_text.chromatic_aberration"),
                 (dyeData) -> {
                     return dyeData.getComponent().copy();
@@ -2287,5 +2287,7 @@ public class BuiltInDyeTypes {
                     );
                 }
         );
+
+        TieDyeBuiltInDyeTypes.init();
     }
 }

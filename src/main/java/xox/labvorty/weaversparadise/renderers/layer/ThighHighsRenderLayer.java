@@ -18,6 +18,7 @@ import xox.labvorty.weaversparadise.items.clothing.ThighHighsWoolItem;
 import xox.labvorty.weaversparadise.items.clothing.defined.ThighHighsInterface;
 import xox.labvorty.weaversparadise.model.ThighHighsModel;
 import xox.labvorty.weaversparadise.renderers.helpers.DoubleSidedClothingRenderingData;
+import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
 import xox.labvorty.weaversparadise.renderers.models.ThighHighsModelRenderer;
 import xox.labvorty.weaversparadise.utilities.WeaversUtilities;
 
@@ -96,9 +97,9 @@ public class ThighHighsRenderLayer<T extends LivingEntity, M extends EntityModel
                             thighHighsInterface.getAdditionalData(itemStack)
                     ),
                     entity,
-                    1,
-                    1,
-                    1,
+                    RenderingUtils.getScale(),
+                    RenderingUtils.getScale(),
+                    RenderingUtils.getScale(),
                     0,
                     0,
                     0,

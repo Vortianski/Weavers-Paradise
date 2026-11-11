@@ -1,15 +1,23 @@
 package xox.labvorty.weaversparadise.items.armor;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import xox.labvorty.weaversparadise.model.GiselleModel;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public class GiselleCosmeticItem extends Item implements ICurioItem, ModelReplacer {
@@ -118,5 +126,11 @@ public class GiselleCosmeticItem extends Item implements ICurioItem, ModelReplac
     @Override
     public ResourceLocation getMainTexture() {
         return ResourceLocation.fromNamespaceAndPath("weaversparadise", "textures/clothing/armor/giselle.png");
+    }
+
+    @Override
+    public void appendHoverText(@NotNull ItemStack itemStack, @Nullable Level level, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
+        super.appendHoverText(itemStack, level, tooltipComponents, tooltipFlag);
+        tooltipComponents.add(Component.translatable("weaversparadise.tooltip.armor_cosmetics").withStyle(style -> style.withColor(ChatFormatting.GRAY)));
     }
 }

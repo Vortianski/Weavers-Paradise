@@ -22,7 +22,8 @@
     "client.ItemEntityRendererMixin",
     "compat.ClientBookRegistryMixin",
     "client.LivingEntityRendererMixin",
-    "client.HumanoidArmorLayerMixin"
+    "client.HumanoidArmorLayerMixin",
+    "compat.wildfires_female_gender_mod.GenderLayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

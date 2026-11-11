@@ -38,13 +38,13 @@ public class ItemStackMixin {
 
     @Unique
     private void weaversparadise$initializeClothingInternal(ItemStack itemStack) {
-        if (itemStack.getOrCreateTag().contains("quality")) return;
-
         if (itemStack.getItem() instanceof SingleSidedClothingItem singleSidedClothingItem) {
-            itemStack.setTag(singleSidedClothingItem.obtainDefault());
-        }
+            if (itemStack.hasTag() && itemStack.getTag().contains("quality")) return;
 
-        if (itemStack.getItem() instanceof DoubleSidedClothingItem doubleSidedClothingItem) {
+            itemStack.setTag(singleSidedClothingItem.obtainDefault());
+        } else if (itemStack.getItem() instanceof DoubleSidedClothingItem doubleSidedClothingItem) {
+            if (itemStack.hasTag() && itemStack.getTag().contains("quality")) return;
+
             itemStack.setTag(doubleSidedClothingItem.obtainDefault());
         }
     }

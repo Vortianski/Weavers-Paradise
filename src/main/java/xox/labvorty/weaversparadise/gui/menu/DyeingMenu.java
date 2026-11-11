@@ -51,18 +51,6 @@ public class DyeingMenu extends AbstractContainerMenu implements Supplier<Map<In
     private Entity boundEntity = null;
     private BlockEntity boundBlockEntity = null;
 
-    private final List<Item> singleItems = List.of(
-            WeaversParadiseItems.SHIRT_COTTON.get(),
-            WeaversParadiseItems.SHIRT_SILK.get(),
-            WeaversParadiseItems.SWEATER_WOOL.get(),
-            WeaversParadiseItems.PANTS_COTTON.get(),
-            WeaversParadiseItems.PANTS_JEANS.get(),
-            WeaversParadiseItems.PANTS_SILK.get(),
-            WeaversParadiseItems.COTTON_CAPE.get(),
-            WeaversParadiseItems.SILK_CAPE.get(),
-            WeaversParadiseItems.WOOL_CAPE.get()
-    );
-
     public DyeingMenu(int id, Inventory inv, FriendlyByteBuf extraData) {
         super(WeaversParadiseMenus.DYEING_MENU.get(), id);
         this.entity = inv.player;

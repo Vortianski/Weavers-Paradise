@@ -51,4 +51,13 @@ public class WeaversParadiseBlockEntities {
                     WeaversParadiseBlocks.BLAHAJ.get()
             ).build(null)
     );
+    public static final RegistryObject<BlockEntityType<ClothBlockEntity>> CLOTH_BE = BLOCK_ENTITIES.register(
+            "cloth_be",
+            () -> BlockEntityType.Builder.of(
+                    ClothBlockEntity::new,
+                    WeaversParadiseBlocks.COTTON_CLOTH_BLOCK.get(),
+                    WeaversParadiseBlocks.SILK_CLOTH_BLOCK.get(),
+                    WeaversParadiseBlocks.WOOL_CLOTH_BLOCK.get()
+            ).build(null)
+    );
 }

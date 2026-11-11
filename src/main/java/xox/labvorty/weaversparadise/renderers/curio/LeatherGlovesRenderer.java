@@ -18,6 +18,7 @@ import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 import xox.labvorty.weaversparadise.configs.ClientConfig;
 import xox.labvorty.weaversparadise.model.HandWarmersModel;
+import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
 import xox.labvorty.weaversparadise.utilities.WeaversUtilities;
 
 public class LeatherGlovesRenderer implements ICurioRenderer {
@@ -58,6 +59,12 @@ public class LeatherGlovesRenderer implements ICurioRenderer {
             this.model.LeftArm.copyFrom(humanoidModel.leftArm);
         }
 
+        matrixStack.pushPose();
+
+        matrixStack.scale(RenderingUtils.getScale(), RenderingUtils.getScale(), RenderingUtils.getScale());
+
         this.model.renderToBuffer(matrixStack, vertexconsumer, light, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+
+        matrixStack.popPose();
     }
 }

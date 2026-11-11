@@ -13,11 +13,9 @@ import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 import xox.labvorty.weaversparadise.configs.ClientConfig;
 import xox.labvorty.weaversparadise.items.clothing.*;
-import xox.labvorty.weaversparadise.items.clothing.defined.PulloverInterface;
-import xox.labvorty.weaversparadise.items.clothing.defined.ShirtInterface;
-import xox.labvorty.weaversparadise.items.clothing.defined.SingleSidedClothingItem;
-import xox.labvorty.weaversparadise.items.clothing.defined.TopsInterface;
+import xox.labvorty.weaversparadise.items.clothing.defined.*;
 import xox.labvorty.weaversparadise.model.UpperWearModel;
+import xox.labvorty.weaversparadise.renderers.helpers.RenderingUtils;
 import xox.labvorty.weaversparadise.renderers.helpers.SingleSidedClothingRenderingData;
 import xox.labvorty.weaversparadise.renderers.models.UpperwearModelRenderer;
 import xox.labvorty.weaversparadise.utilities.WeaversUtilities;
@@ -153,6 +151,26 @@ public class UpperwearCurioRenderer implements ICurioRenderer {
             stensilType = cottonCropTopLongSleevedItem.getStensilType(itemStack);
             lightValueOne = cottonCropTopLongSleevedItem.getItemLightValue(itemStack, 1);
             lightValueTwo = cottonCropTopLongSleevedItem.getItemLightValue(itemStack, 2);
+        } else if (itemStack.getItem() instanceof HoodieInterface hoodieInterface) {
+            if (itemStack.getItem() instanceof CottonHoodieItem) {
+                material = "cotton";
+                type = UpperwearModelRenderer.Type.HOODIE;
+            } else if (itemStack.getItem() instanceof WoolHoodieItem) {
+                material = "wool";
+                type = UpperwearModelRenderer.Type.HOODIE;
+            } else {
+                return;
+            }
+
+            primaryColorOne = hoodieInterface.getItemMainColor(itemStack, 1);
+            secondaryColorOne = hoodieInterface.getItemSecondaryColor(itemStack, 1);
+            primaryColorTwo = hoodieInterface.getItemMainColor(itemStack, 2);
+            secondaryColorTwo = hoodieInterface.getItemSecondaryColor(itemStack, 2);
+            dyeTypeOne = hoodieInterface.getItemDyeType(itemStack, 1);
+            dyeTypeTwo = hoodieInterface.getItemDyeType(itemStack, 2);
+            stensilType = hoodieInterface.getStensilType(itemStack);
+            lightValueOne = hoodieInterface.getItemLightValue(itemStack, 1);
+            lightValueTwo = hoodieInterface.getItemLightValue(itemStack, 2);
         } else {
             return;
         }
@@ -186,9 +204,9 @@ public class UpperwearCurioRenderer implements ICurioRenderer {
                         singleSidedClothingItem.getAdditionalData(itemStack)
                 ),
                 livingEntity,
-                1,
-                1,
-                1,
+                RenderingUtils.getScale(),
+                RenderingUtils.getScale(),
+                RenderingUtils.getScale(),
                 0,
                 0,
                 0,

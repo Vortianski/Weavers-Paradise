@@ -133,12 +133,15 @@ public class WeaversParadiseCreativeTabs {
                     .addGroup("shirt_silk", new ItemStack(WeaversParadiseItems.SHIRT_SILK.get()), getVariantItem(WeaversParadiseItems.SHIRT_SILK.get(), WeaversUtilities.dyeTypes))
                     .addGroup("long_sleeve_cotton", new ItemStack(WeaversParadiseItems.LONG_SLEEVE_COTTON.get()), getVariantItem(WeaversParadiseItems.LONG_SLEEVE_COTTON.get(), WeaversUtilities.dyeTypes))
                     .addGroup("sweater_wool", new ItemStack(WeaversParadiseItems.SWEATER_WOOL.get()), getVariantItem(WeaversParadiseItems.SWEATER_WOOL.get(), WeaversUtilities.dyeTypes))
+                    .addGroup("cotton_hoodie", new ItemStack(WeaversParadiseItems.COTTON_HOODIE.get()), getVariantItem(WeaversParadiseItems.COTTON_HOODIE.get(), WeaversUtilities.dyeTypes))
+                    .addGroup("wool_hoodie", new ItemStack(WeaversParadiseItems.WOOL_HOODIE.get()), getVariantItem(WeaversParadiseItems.WOOL_HOODIE.get(), WeaversUtilities.dyeTypes))
                     .addGroup("poncho", new ItemStack(WeaversParadiseItems.PONCHO.get()), getVariantItem(WeaversParadiseItems.PONCHO.get(), WeaversUtilities.dyeTypes))
                     .addGroup("cotton_crop_top_long_sleeved", new ItemStack(WeaversParadiseItems.COTTON_CROP_TOP_LONG_SLEEVED.get()), getVariantItem(WeaversParadiseItems.COTTON_CROP_TOP_LONG_SLEEVED.get(), WeaversUtilities.dyeTypes))
                     .addGroup("pants_jeans", new ItemStack(WeaversParadiseItems.PANTS_JEANS.get()), getVariantItem(WeaversParadiseItems.PANTS_JEANS.get(), WeaversUtilities.dyeTypes))
                     .addGroup("pants_cotton", new ItemStack(WeaversParadiseItems.PANTS_COTTON.get()), getVariantItem(WeaversParadiseItems.PANTS_COTTON.get(), WeaversUtilities.dyeTypes))
                     .addGroup("pants_silk", new ItemStack(WeaversParadiseItems.PANTS_SILK.get()), getVariantItem(WeaversParadiseItems.PANTS_SILK.get(), WeaversUtilities.dyeTypes))
                     .addGroup("pants_wool", new ItemStack(WeaversParadiseItems.PANTS_WOOL.get()), getVariantItem(WeaversParadiseItems.PANTS_WOOL.get(), WeaversUtilities.dyeTypes))
+                    .addGroup("overalls", new ItemStack(WeaversParadiseItems.OVERALLS.get()), getVariantItem(WeaversParadiseItems.OVERALLS.get(), WeaversUtilities.dyeTypes))
                     .addGroup("skirt_cotton", new ItemStack(WeaversParadiseItems.COTTON_SKIRT.get()), getVariantItem(WeaversParadiseItems.COTTON_SKIRT.get(), WeaversUtilities.dyeTypes))
                     .addGroup("cape_cotton", new ItemStack(WeaversParadiseItems.COTTON_CAPE.get()), getVariantItem(WeaversParadiseItems.COTTON_CAPE.get(), WeaversUtilities.dyeTypes))
                     .addGroup("cape_silk", new ItemStack(WeaversParadiseItems.SILK_CAPE.get()), getVariantItem(WeaversParadiseItems.SILK_CAPE.get(), WeaversUtilities.dyeTypes))
@@ -198,6 +201,8 @@ public class WeaversParadiseCreativeTabs {
                                 WeaversParadiseItems.WITCHROOT_FRUIT.get(),
                                 WeaversParadiseItems.WITCHROOT_FRUIT_COOKED.get(),
                                 WeaversParadiseItems.STARBLOOM.get(),
+                                WeaversParadiseItems.CHROMA_FLOWER.get(),
+                                WeaversParadiseItems.WEAVERS_SHEARS.get(),
                                 WeaversParadiseItems.STARBLOOM_FRUIT.get(),
                                 WeaversParadiseItems.COTTON_SEEDS.get(),
                                 WeaversParadiseItems.KOZINAKI.get(),

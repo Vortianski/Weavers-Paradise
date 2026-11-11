@@ -113,7 +113,8 @@ public class PantsRenderer extends BlockEntityWithoutLevelRenderer {
                 additionalYrot,
                 additionalZrot,
                 poseStack,
-                packedLight
+                packedLight,
+                PantsModelRenderer.Type.PANTS
         );
     }
 }

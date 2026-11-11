@@ -178,11 +178,14 @@ public class WeaversParadiseClientRegistry {
         CuriosRendererRegistry.register(WeaversParadiseItems.T_SHIRT.get(), UpperwearCurioRenderer::new);
         CuriosRendererRegistry.register(WeaversParadiseItems.TANK_TOP.get(), UpperwearCurioRenderer::new);
         CuriosRendererRegistry.register(WeaversParadiseItems.WOOL_VEST.get(), UpperwearCurioRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.COTTON_HOODIE.get(), UpperwearCurioRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.WOOL_HOODIE.get(), UpperwearCurioRenderer::new);
 
         CuriosRendererRegistry.register(WeaversParadiseItems.PANTS_COTTON.get(), PantsCurioRenderer::new);
         CuriosRendererRegistry.register(WeaversParadiseItems.PANTS_SILK.get(), PantsCurioRenderer::new);
         CuriosRendererRegistry.register(WeaversParadiseItems.PANTS_JEANS.get(), PantsCurioRenderer::new);
         CuriosRendererRegistry.register(WeaversParadiseItems.PANTS_WOOL.get(), PantsCurioRenderer::new);
+        CuriosRendererRegistry.register(WeaversParadiseItems.OVERALLS.get(), PantsCurioRenderer::new);
 
         CuriosRendererRegistry.register(WeaversParadiseItems.COTTON_SKIRT.get(), CottonSkirtCurioRenderer::new);
 

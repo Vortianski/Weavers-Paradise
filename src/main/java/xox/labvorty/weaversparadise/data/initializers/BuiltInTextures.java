@@ -42,6 +42,8 @@ public class BuiltInTextures {
         Ushanka.register();
         ChokerTrinkets.register();
         Blahaj.register();
+        Hoodie.register();
+        Overalls.register();
     }
 
     private static class ThighHighs {
@@ -131,6 +133,92 @@ public class BuiltInTextures {
             TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, WOOL, BIG_LINES, BASE_PATH, VARIANT_PATH, "hand_warmers_wool_big_lines_1.png", "hand_warmers_wool_big_lines_2.png", true));
             TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, WOOL, CROSS, BASE_PATH, VARIANT_PATH, "hand_warmers_wool_cross_2.png", "hand_warmers_wool_cross_1.png", true));
             TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, WOOL, PAWS, BASE_PATH, VARIANT_PATH, "hand_warmers_wool_paws_1.png", "hand_warmers_wool_paws_2.png", true));
+        }
+    }
+
+    private static class Overalls {
+        private static final String TYPE = "overalls";
+        private static final String VARIANT_PATH = BASE_PATH + "variants/overalls/";
+
+        private static void register() {
+            base();
+            variants();
+        }
+
+        private static void base() {
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, COTTON, DEFAULT, BASE_PATH, VARIANT_PATH, "overalls.png", "overalls.png", false));
+        }
+
+        private static void variants() {
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, COTTON, HALF, BASE_PATH, VARIANT_PATH, "overalls_half_1.png", "overalls_half_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, COTTON, CHECKERS, BASE_PATH, VARIANT_PATH, "overalls_checkers_1.png", "overalls_checkers_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, COTTON, CHECKERS_SMALL, BASE_PATH, VARIANT_PATH, "overalls_checkers_small_1.png", "overalls_checkers_small_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, COTTON, VERTICAL_LINES, BASE_PATH, VARIANT_PATH, "overalls_vertical_lines_1.png", "overalls_vertical_lines_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, COTTON, SMALL_LINES, BASE_PATH, VARIANT_PATH, "overalls_small_lines_1.png", "overalls_small_lines_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, COTTON, BIG_LINES, BASE_PATH, VARIANT_PATH, "overalls_big_lines_1.png", "overalls_big_lines_2.png", true));
+        }
+    }
+
+    private static class Hoodie {
+        private static final String TYPE = "hoodie";
+        private static final String TYPE_SAG = "hoodie_sag";
+        private static final String VARIANT_PATH = BASE_PATH + "variants/hoodie/";
+
+        private static void register() {
+            sag();
+            normal();
+        }
+
+        private static void sag() {
+            sagDefault();
+            sagVariants();
+        }
+
+        private static void sagDefault() {
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE_SAG, COTTON, DEFAULT, BASE_PATH, VARIANT_PATH, "hoodie_sag.png", "hoodie_sag.png", false));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE_SAG, WOOL, DEFAULT, BASE_PATH, VARIANT_PATH, "wool_hoodie_sag.png", "wool_hoodie_sag.png", false));
+        }
+
+        private static void sagVariants() {
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE_SAG, COTTON, HALF, BASE_PATH, VARIANT_PATH, "sag/hoodie_half_1.png", "sag/hoodie_half_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE_SAG, COTTON, CHECKERS, BASE_PATH, VARIANT_PATH, "sag/hoodie_checkers_1.png", "sag/hoodie_checkers_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE_SAG, COTTON, CHECKERS_SMALL, BASE_PATH, VARIANT_PATH, "sag/hoodie_checkers_small_1.png", "sag/hoodie_checkers_small_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE_SAG, COTTON, VERTICAL_LINES, BASE_PATH, VARIANT_PATH, "sag/hoodie_vertical_lines_1.png", "sag/hoodie_vertical_lines_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE_SAG, COTTON, SMALL_LINES, BASE_PATH, VARIANT_PATH, "sag/hoodie_small_lines_1.png", "sag/hoodie_small_lines_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE_SAG, COTTON, BIG_LINES, BASE_PATH, VARIANT_PATH, "sag/hoodie_big_lines_1.png", "sag/hoodie_big_lines_2.png", true));
+
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE_SAG, WOOL, HALF, BASE_PATH, VARIANT_PATH, "sag/wool_hoodie_half_1.png", "sag/wool_hoodie_half_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE_SAG, WOOL, CHECKERS, BASE_PATH, VARIANT_PATH, "sag/wool_hoodie_checkers_1.png", "sag/wool_hoodie_checkers_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE_SAG, WOOL, CHECKERS_SMALL, BASE_PATH, VARIANT_PATH, "sag/wool_hoodie_checkers_small_1.png", "sag/wool_hoodie_checkers_small_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE_SAG, WOOL, VERTICAL_LINES, BASE_PATH, VARIANT_PATH, "sag/wool_hoodie_vertical_lines_1.png", "sag/wool_hoodie_vertical_lines_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE_SAG, WOOL, SMALL_LINES, BASE_PATH, VARIANT_PATH, "sag/wool_hoodie_small_lines_1.png", "sag/wool_hoodie_small_lines_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE_SAG, WOOL, BIG_LINES, BASE_PATH, VARIANT_PATH, "sag/wool_hoodie_big_lines_1.png", "sag/wool_hoodie_big_lines_2.png", true));
+        }
+
+        private static void normal() {
+            normalDefault();
+            normalVariants();
+        }
+
+        private static void normalDefault() {
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, COTTON, DEFAULT, BASE_PATH, VARIANT_PATH, "hoodie.png", "hoodie.png", false));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, WOOL, DEFAULT, BASE_PATH, VARIANT_PATH, "wool_hoodie.png", "wool_hoodie.png", false));
+        }
+
+        private static void normalVariants() {
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, COTTON, HALF, BASE_PATH, VARIANT_PATH, "hoodie_half_1.png", "hoodie_half_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, COTTON, CHECKERS, BASE_PATH, VARIANT_PATH, "hoodie_checkers_1.png", "hoodie_checkers_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, COTTON, CHECKERS_SMALL, BASE_PATH, VARIANT_PATH, "hoodie_checkers_small_1.png", "hoodie_checkers_small_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, COTTON, VERTICAL_LINES, BASE_PATH, VARIANT_PATH, "hoodie_vertical_lines_1.png", "hoodie_vertical_lines_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, COTTON, SMALL_LINES, BASE_PATH, VARIANT_PATH, "hoodie_small_lines_1.png", "hoodie_small_lines_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, COTTON, BIG_LINES, BASE_PATH, VARIANT_PATH, "hoodie_big_lines_1.png", "hoodie_big_lines_2.png", true));
+
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, WOOL, HALF, BASE_PATH, VARIANT_PATH, "wool_hoodie_half_1.png", "wool_hoodie_half_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, WOOL, CHECKERS, BASE_PATH, VARIANT_PATH, "wool_hoodie_checkers_1.png", "wool_hoodie_checkers_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, WOOL, CHECKERS_SMALL, BASE_PATH, VARIANT_PATH, "wool_hoodie_checkers_small_1.png", "wool_hoodie_checkers_small_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, WOOL, VERTICAL_LINES, BASE_PATH, VARIANT_PATH, "wool_hoodie_vertical_lines_1.png", "wool_hoodie_vertical_lines_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, WOOL, SMALL_LINES, BASE_PATH, VARIANT_PATH, "wool_hoodie_small_lines_1.png", "wool_hoodie_small_lines_2.png", true));
+            TexturesRegistrar.registerTexture(new TexturesRegistrar.Texture(MOD_ID, TYPE, WOOL, BIG_LINES, BASE_PATH, VARIANT_PATH, "wool_hoodie_big_lines_1.png", "wool_hoodie_big_lines_2.png", true));
         }
     }
 

@@ -1,0 +1,26 @@
+{
+  "type": "weaversparadise:quality_crafting",
+  "category": "misc",
+  "pattern": [
+    " cd",
+    "aba"
+  ],
+  "key":{
+    "a": {
+      "item": "weaversparadise:wool_sleeve_long"
+    },
+    "b": {
+      "item": "weaversparadise:wool_upperwear_base"
+    },
+    "c": {
+      "item": "weaversparadise:wool_cloth"
+    },
+    "d": {
+      "item": "weaversparadise:needle_with_thread"
+    }
+  },
+  "result": {
+    "item": "weaversparadise:wool_hoodie",
+    "count": 1
+  }
+}

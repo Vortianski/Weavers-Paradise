@@ -1,0 +1,11 @@
+{
+  "type": "weaversparadise:quality_shapeless_crafting",
+  "category": "misc",
+  "ingredients": [
+    { "item": "weaversparadise:silk_cloth_block" }
+  ],
+  "result": {
+    "item": "weaversparadise:silk_cloth",
+    "count": 9
+  }
+}
